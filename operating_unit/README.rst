@@ -25,6 +25,7 @@ Configuration
 =============
 
 To configure this module, you need to:
+
 * Assign *Multi Operating Unit* group to user.
 * Go to *Settings / Companies / Operating Units* and create Operating Units.
 
