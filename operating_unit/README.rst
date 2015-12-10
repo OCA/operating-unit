@@ -10,11 +10,11 @@ An operating unit (OU) is an organizational entity part of a company, with
 separate management ownership. Management by OU is aimed to introduce the
 following features:
 
-- Partition data from other OU's.
-- Define its own sequencing schemes.
-- Administer user access to the data for processing and reporting.
-- Is not product or customer specific.
-- Provides OU specific P&L and Balance sheet.
+* Data partitioning from other OU.
+* Own sequencing schemes.
+* User access administration for data processing and reporting.
+* Product and customer independence of OU.
+* OU specific P&L and Balance sheet.
 
 Installation
 ============
@@ -70,7 +70,7 @@ Maintainer
 
 .. image:: https://odoo-community.org/logo.png
    :alt: Odoo Community Association
-   :target: https://odoo-community.org
+   :target: http://odoo-community.org
 
 This module is maintained by the OCA.
 
