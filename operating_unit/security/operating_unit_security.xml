@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+    <record id="group_multi_operating_unit" model="res.groups">
+        <field name="name">Multi Operating Unit</field>
+        <field name="category_id" ref="base.module_category_usability"/>
+    </record>
+
+    <record id="operating_unit_comp_rule" model="ir.rule">
+        <field name="name">Operating Unit Entry</field>
+        <field name="model_id" ref="model_operating_unit"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+</data>
+</openerp>
