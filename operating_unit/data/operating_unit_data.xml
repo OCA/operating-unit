@@ -13,6 +13,8 @@
             <field name="default_operating_unit_id" ref="main_operating_unit"/>
             <field name="operating_unit_ids"
                    eval="[(4, ref('main_operating_unit'))]"/>
+            <field name="groups_id"
+                   eval="[(4,ref('operating_unit.group_multi_operating_unit'))]"/>
         </record>
 
     </data>
