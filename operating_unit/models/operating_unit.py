@@ -3,7 +3,6 @@
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import api, fields, models
-from openerp.osv import expression
 
 
 class OperatingUnit(models.Model):
@@ -34,7 +33,6 @@ class OperatingUnit(models.Model):
         temp = super(models.Model, self).name_search(
             name=name, args=args, operator=operator, limit=limit)
         # Make the other search
-        domain = []
         if name:
             domain = [('code', '=ilike', name + '%')]
             temp += self.search(domain, limit=limit).name_get()
