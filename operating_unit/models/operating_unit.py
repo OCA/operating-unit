@@ -30,20 +30,12 @@ class OperatingUnit(models.Model):
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         # Make a search with default criteria
-        temp = super(models.Model, self).name_search(
+        names1 = super(models.Model, self).name_search(
             name=name, args=args, operator=operator, limit=limit)
         # Make the other search
+        names2 = []
         if name:
             domain = [('code', '=ilike', name + '%')]
-            temp += self.search(domain, limit=limit).name_get()
+            names2 = self.search(domain, limit=limit).name_get()
         # Merge both results
-        res = []
-        keys = []
-        for val in temp:
-            if val[0] not in keys:
-                res.append(val)
-                keys.append(val[0])
-                if len(res) >= limit:
-                    break
-
-        return res
+        return list(set(names1) | set(names2))[:limit]
