@@ -3,6 +3,7 @@
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import api, fields, models
+from openerp.osv import expression
 
 
 class OperatingUnit(models.Model):
@@ -29,13 +30,23 @@ class OperatingUnit(models.Model):
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
-        if not args:
-            args = []
+        # Make a search with default criteria
+        temp = super(models.Model, self).name_search(
+            name=name, args=args, operator=operator, limit=limit)
+        # Make the other search
+        domain = []
         if name:
-            self = self.search([('code', operator, name)] + args, limit=limit)
-            if not self:
-                self = self.search([('name', operator, name)] + args,
-                                   limit=limit)
-        else:
-            self = self.search(args, limit=limit)
-        return self.name_get()
+            domain = [('code', '=ilike', name + '%')]
+            temp += self.search(domain, limit=limit).name_get()
+        # Merge both results
+        res = []
+        keys = []
+        for val in temp:
+            if val[0] not in keys:
+                res.append(val)
+                keys.append(val[0])
+                if len(res) >= limit:
+                    break
+
+        return res
+
