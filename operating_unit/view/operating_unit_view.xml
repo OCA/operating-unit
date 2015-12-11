@@ -34,9 +34,8 @@
             <field name="model">operating.unit</field>
             <field name="arch" type="xml">
                 <search string="Search Operating Unit">
-                    <field name="name"
-                           filter_domain="['|', ('name','ilike',self), ('code','ilike',self)]"
-                           string="Operating Unit"/>
+                    <field name="name" string="Operating Unit"/>
+                    <field name="code" string="Code"/>
                 </search>
             </field>
         </record>

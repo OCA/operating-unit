@@ -2,7 +2,7 @@
 # © 2015 Eficent - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import fields, models
+from openerp import api, fields, models
 
 
 class OperatingUnit(models.Model):
@@ -26,3 +26,16 @@ class OperatingUnit(models.Model):
          'The name of the operating unit must '
          'be unique per company!')
     ]
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        if not args:
+            args = []
+        if name:
+            self = self.search([('code', operator, name)] + args, limit=limit)
+            if not self:
+                self = self.search([('name', operator, name)] + args,
+                                   limit=limit)
+        else:
+            self = self.search(args, limit=limit)
+        return self.name_get()
