@@ -47,4 +47,3 @@ class OperatingUnit(models.Model):
                     break
 
         return res
-
