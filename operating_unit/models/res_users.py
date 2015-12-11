@@ -18,7 +18,7 @@ class ResUsers(models.Model):
             user.default_operating_unit_id.id
 
     @api.model
-    def _operating_unit_default_get(self):
+    def _get_operating_unit(self):
         return self.operating_unit_default_get(self._uid)
 
     @api.model
@@ -28,10 +28,10 @@ class ResUsers(models.Model):
             return [op_unit]
         return False
 
-    operating_unit_ids = fields.Many2many(
-            'operating.unit', 'operating_unit_users_rel',
-            'user_id', 'poid', 'Operating Units',
-            default=_get_operating_units)
-    default_operating_unit_id = fields.Many2one(
-            'operating.unit', 'Default Operating Unit',
-            default=_operating_unit_default_get)
+    operating_unit_ids = fields.Many2many('operating.unit',
+                                          'operating_unit_users_rel',
+                                          'user_id', 'poid', 'Operating Units',
+                                          default=_get_operating_units)
+    default_operating_unit_id = fields.Many2one('operating.unit',
+                                                'Default Operating Unit',
+                                                default=_get_operating_unit)
