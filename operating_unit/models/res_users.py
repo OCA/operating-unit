@@ -14,8 +14,7 @@ class ResUsers(models.Model):
         if not uid2:
             uid2 = self._uid
         user = self.env['res.users'].browse(uid2)
-        return user.default_operating_unit_id and \
-            user.default_operating_unit_id.id
+        return user.default_operating_unit_id
 
     @api.model
     def _get_operating_unit(self):
@@ -23,10 +22,7 @@ class ResUsers(models.Model):
 
     @api.model
     def _get_operating_units(self):
-        op_unit = self.operating_unit_default_get(self._uid)
-        if op_unit:
-            return [op_unit]
-        return False
+        return self._get_operating_unit()
 
     operating_unit_ids = fields.Many2many('operating.unit',
                                           'operating_unit_users_rel',
