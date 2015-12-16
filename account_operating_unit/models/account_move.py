@@ -27,7 +27,6 @@ class AccountMoveLine(models.Model):
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        return True
         if self.company_id and self.operating_unit_id and\
         self.company_id != self.operating_unit_id.company_id:
             raise UserError(_('Configuration error!\nThe Company in the\
