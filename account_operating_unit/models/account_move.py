@@ -18,17 +18,17 @@ class AccountMoveLine(models.Model):
         return super(AccountMoveLine, self)._query_get(domain)
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                        default=lambda self: self.env[
-                        'res.users'].operating_unit_default_get(
-                        self._uid))
+                                        default=lambda self:
+                                        self.env['res.users'].
+                                        operating_unit_default_get(self._uid))
     ou_cleared_line_id = fields.Many2one('account.move.line',
-                                              'Inter-OU Cleared move line')
+                                         'Inter-OU Cleared move line')
 
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        if self.company_id and self.operating_unit_id and\
-        self.company_id != self.operating_unit_id.company_id:
+        if self.company_id and self.operating_unit_id and \
+                self.company_id != self.operating_unit_id.company_id:
             raise UserError(_('Configuration error!\nThe Company in the\
             Move Line and in the Operating Unit must be the same.'))
 
@@ -102,8 +102,8 @@ class AccountMove(models.Model):
         cr = {}
         ou_ids = []
         for line in self.line_ids:
-            operating_unit_id = line.operating_unit_id and\
-                                line.operating_unit_id.id
+            operating_unit_id = line.operating_unit_id and \
+                line.operating_unit_id.id
             if operating_unit_id:
                 cl_acc = line.company_id.inter_ou_clearing_account_id
                 if not cl_acc:

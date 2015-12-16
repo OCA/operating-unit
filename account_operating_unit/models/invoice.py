@@ -10,7 +10,7 @@ class account_invoice(models.Model):
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
                                         default=lambda self:
-                                        self.env['res.users'].\
+                                        self.env['res.users'].
                                         operating_unit_default_get(self._uid))
 
     @api.multi
@@ -47,5 +47,6 @@ class account_invoice_line(models.Model):
     _inherit = 'account.invoice.line'
 
     operating_unit_id = fields.Many2one('operating.unit',
-            related='invoice_id.operating_unit_id', string='Operating Unit',
-            store=True, readonly=True)
+                                        related='invoice_id.operating_unit_id',
+                                        string='Operating Unit', store=True,
+                                        readonly=True)
