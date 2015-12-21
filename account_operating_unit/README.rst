@@ -28,6 +28,7 @@ To configure this module, you need to:
 * Create an account for "Inter-OU Clearing" of type Regular.
 * Go to *Settings / Companies / Companies* and configure "Inter-OU Clearing" account
 in "Inter-operating unit clearing account" field.
+* Assign Operating Unit in Accounts.
 
 Usage
 =====
