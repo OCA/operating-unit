@@ -5,7 +5,7 @@
 from openerp import fields, models
 
 
-class accounting_report(models.TransientModel):
+class AccountingReport(models.TransientModel):
 
     _inherit = "accounting.report"
 
@@ -14,7 +14,7 @@ class accounting_report(models.TransientModel):
                                           required=False)
 
     def _build_contexts(self, data):
-        result = super(accounting_report, self)._build_contexts(data)
+        result = super(AccountingReport, self)._build_contexts(data)
         data2 = {}
         data2['form'] = self.read(['operating_unit_ids'])[0]
         result['operating_unit_ids'] = 'operating_unit_ids' in data2['form']\
@@ -23,7 +23,7 @@ class accounting_report(models.TransientModel):
         return result
 
     def _build_comparison_context(self, data):
-        result = super(accounting_report, self)._build_comparison_context(data)
+        result = super(AccountingReport, self)._build_comparison_context(data)
         data['form'] = self.read(['operating_unit_ids'])[0]
         result['operating_unit_ids'] = 'operating_unit_ids' in data['form'] \
                                        and data['form']['operating_unit_ids'] \

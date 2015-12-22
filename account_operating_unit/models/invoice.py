@@ -5,7 +5,7 @@
 from openerp import api, fields, models
 
 
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
@@ -15,7 +15,7 @@ class account_invoice(models.Model):
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
-        move_lines = super(account_invoice,
+        move_lines = super(AccountInvoice,
                            self).finalize_invoice_move_lines(move_lines)
         new_move_lines = []
         for line_tuple in move_lines:
@@ -43,7 +43,7 @@ class account_invoice(models.Model):
                                     'company_id'])]
 
 
-class account_invoice_line(models.Model):
+class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
     operating_unit_id = fields.Many2one('operating.unit',

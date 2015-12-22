@@ -5,7 +5,7 @@
 from openerp import fields, models
 
 
-class account_common_report(models.TransientModel):
+class AccountCommonReport(models.TransientModel):
     _inherit = "account.common.report"
 
     operating_unit_ids = fields.Many2many('operating.unit',
@@ -13,7 +13,7 @@ class account_common_report(models.TransientModel):
                                           required=False)
 
     def _build_contexts(self, data):
-        result = super(account_common_report, self)._build_contexts(data)
+        result = super(AccountCommonReport, self)._build_contexts(data)
         data2 = {}
         data2['form'] = self.read(['operating_unit_ids'])[0]
         result['operating_unit_ids'] = \

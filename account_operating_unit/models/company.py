@@ -5,7 +5,7 @@
 from openerp import fields, models
 
 
-class res_company(models.Model):
+class ResCompany(models.Model):
     _inherit = 'res.company'
 
     inter_ou_clearing_account_id = fields.Many2one('account.account',

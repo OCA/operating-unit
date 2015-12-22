@@ -42,13 +42,6 @@ class AccountMove(models.Model):
         for move in self:
             # If all move lines point to the same operating unit, there's no
             # need to create a balancing move line
-#            ou_list_ids = [line.operating_unit_id and
-#                           line.operating_unit_id.id for line in
-#                           move.line_ids]
-#            ou_ids = list(set(ou_list_ids))
-#            if len(ou_ids) <= 1:
-#                continue
-
             ou_list_ids = ml_obj.read_group([('move_id', '=', move.id)],
                                             ['operating_unit_id'],
                                             ['operating_unit_id'])

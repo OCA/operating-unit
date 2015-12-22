@@ -14,8 +14,8 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         operating units, new cross-operating unit entries are created
         automatically whent the journal entry is posted, ensuring that each
         OU is self-balanced."""
-        #Create Journal Entries and check the balance of the account
-        #based on different operating units.
+        # Create Journal Entries and check the balance of the account
+        # based on different operating units.
         self.company.write({
             'inter_ou_clearing_account_id': self.inter_ou_account_id.id,
         })
