@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+      <!-- Shelf 2 stock location -->
+        <record id="stock.stock_location_14" model="stock.location">
+            <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+        </record>
+
+        <!-- Shelf 1 stock location -->
+        <record id="stock.stock_location_components" model="stock.location">
+            <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+        </record>
+
+
+        <!--  Multi Company -->
+
+        <!--        Child Company 1-->
+        <record id="stock.res_company_1" model="res.company">
+            <field name="inter_ou_clearing_account_id" ref="account_operating_unit.inter_ou"/>
+        </record>
+
+        <record id="operating_unit_shop0" model="operating.unit">
+            <field name="name">Chicago</field>
+            <field name="code">CH</field>
+            <field name="partner_id" ref="stock.res_partner_company_1"/>
+            <field name="company_id" ref="stock.res_company_1"/>
+        </record>
+
+        <!-- Chicago Warehouse -->
+        <record id="stock.stock_warehouse_shop0" model="stock.warehouse">
+            <field name="operating_unit_id" ref="stock_operating_unit.operating_unit_shop0"/>
+        </record>
+
+        <!-- Your Company, Chicago shop -->
+        <record id="stock.stock_location_shop0" model="stock.location">
+            <field name="operating_unit_id" ref="operating_unit_shop0"/>
+        </record>
+
+    </data>
+</openerp>
