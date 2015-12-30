@@ -53,7 +53,7 @@ class AccountMove(models.Model):
                 operating_unit = line.operating_unit_id
                 if operating_unit:
                     cl_acc = line.company_id.inter_ou_clearing_account_id
-                    if not cl_acc:
+                    if len(ou_list_ids) > 1 and not cl_acc:
                         raise UserError(_('Configuration error!\n\
                         You need to define an inter-operating unit clearing\
                         account in the company settings.'))
@@ -93,34 +93,47 @@ class AccountMove(models.Model):
     def _check_same_ou_dr_cr(self):
         dr = {}
         cr = {}
-        ou_ids = []
+        account_ids = []
+        ou_ids = [line.operating_unit_id.id for line in self.line_ids
+                  if line.operating_unit_id]
+        ou_ids = list(set(ou_ids))
+
         for line in self.line_ids:
+            account_ids.append(line.account_id.id)
+            if line.account_id.id not in dr:
+                dr[line.account_id.id] = {}
+            if line.account_id.id not in cr:
+                cr[line.account_id.id] = {}
             operating_unit_id = line.operating_unit_id and \
                 line.operating_unit_id.id
             if operating_unit_id:
                 cl_acc = line.company_id.inter_ou_clearing_account_id
-                if not cl_acc:
+                if len(ou_ids) > 1 and not cl_acc:
                     raise UserError(_('Configuration error!\n\
                     You need to define an inter-operating\
                     unit clearing account in the company settings.'))
-                ou_ids.append(operating_unit_id)
                 if not cl_acc:
-                    if operating_unit_id in dr:
-                        dr[operating_unit_id] += line.debit
+                    if operating_unit_id in dr[line.account_id.id]:
+                        dr[line.account_id.id][operating_unit_id] += line.debit
                     else:
-                        dr[operating_unit_id] = line.debit
+                        dr[line.account_id.id][operating_unit_id] = line.debit
 
-                    if operating_unit_id in cr:
-                        cr[operating_unit_id] += line.credit
+                    if operating_unit_id in cr[line.account_id.id]:
+                        cr[line.account_id.id][operating_unit_id] += \
+                            line.credit
                     else:
-                        cr[operating_unit_id] = line.credit
+                        cr[line.account_id.id][operating_unit_id] = line.credit
+        account_ids = list(set(account_ids))
         for ou_id in ou_ids:
-            if (
-                ou_id in dr and
-                ou_id in cr and
-                dr[ou_id] > 0 and
-                cr[ou_id] > 0
-            ):
-                raise UserError(_('Configuration error!\nThe same\
-                operating unit cannot exist in the debit and credit\
-                for the same account.'))
+            for account_id in account_ids:
+                if (
+                    account_id in dr and
+                    account_id in cr and
+                    ou_id in dr[account_id] and
+                    ou_id in cr[account_id] and
+                    dr[account_id][ou_id] > 0 and
+                    cr[account_id][ou_id] > 0
+                ):
+                    raise UserError(_('Configuration error!\nThe same\
+                    operating unit cannot exist in the debit and credit\
+                    for the same account.'))

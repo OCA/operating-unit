@@ -14,7 +14,7 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
         self.account_model = self.env['account.account']
         # company
         self.company = self.env.ref('base.main_company')
-        self.grp_acc_user = self.env.ref('account.group_account_invoice')
+        self.grp_acc_manager = self.env.ref('account.group_account_manager')
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2B Operating Unit
@@ -38,7 +38,7 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
                 'company_id': self.company.id,
                 'company_ids': [(4, self.company.id)],
                 'operating_unit_ids': [(4, self.b2b.id), (4, self.b2c.id)],
-                'groups_id': [(6, 0, [self.grp_acc_user.id])]
+                'groups_id': [(6, 0, [self.grp_acc_manager.id])]
             })
         # Create cash - test account
         user_type = self.env.ref('account.data_account_type_liquidity')
@@ -56,6 +56,9 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
             'user_type_id': user_type.id,
             'company_id': self.company.id
         })
+        # Assign the Inter-OU Clearing account to the company
+        self.company.inter_ou_clearing_account_id = self.inter_ou_account_id.id
+
         # Create user2
         self.user2_id =\
             self.res_users_model.with_context({'no_reset_password': True}).\
@@ -67,5 +70,5 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
                 'company_id': self.company.id,
                 'company_ids': [(4, self.company.id)],
                 'operating_unit_ids': [(4, self.b2c.id)],
-                'groups_id': [(6, 0, [self.grp_acc_user.id])]
+                'groups_id': [(6, 0, [self.grp_acc_manager.id])]
             })
