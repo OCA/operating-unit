@@ -23,8 +23,5 @@
         "wizard/account_report_common_view.xml",
         "wizard/account_financial_report_view.xml",
     ],
-    "demo": [
-        "demo/account_minimal.xml",
-    ],
     "installable": True,
 }
