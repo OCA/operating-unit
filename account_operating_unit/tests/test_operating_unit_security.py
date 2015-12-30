@@ -14,5 +14,5 @@ class TestOuSecurity(test_ou.TestAccountOperatingUnit):
         # Journal Entries from Operating Unit B2B.
         move_ids = self.aml_model.sudo(self.user2_id.id).\
             search([('operating_unit_id', '=', self.b2b.id)])
-        self.assertEqual(move_ids, [], 'user_2 should not have access to '
-                                       'OU %s' % self.b2b.name)
+        self.assertFalse(move_ids, 'user_2 should not have access to OU %s'
+                         % self.b2b.name)
