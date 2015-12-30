@@ -46,7 +46,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.invoice =\
             self.invoice_model.sudo(self.user_id.id).create(inv_vals)
         # Validate the invoice
-        self.invoice.signal_workflow('invoice_open')
+        self.invoice.sudo(self.user_id.id).signal_workflow('invoice_open')
         # Check Operating Units in journal entries
         all_op_units = all(move_line.operating_unit_id.id == self.b2b.id for
                            move_line in self.invoice.move_id.line_ids)
