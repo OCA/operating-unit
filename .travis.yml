@@ -16,6 +16,7 @@ env:
   - VERSION="9.0" LINT_CHECK="1"
   - VERSION="9.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
   - VERSION="9.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
+  - VERSION="9.0-account_operating_unit" ODOO_REPO="Eficent/operating-unit" LINT_CHECK="0"
 
   matrix:
   - LINT_CHECK="1"
