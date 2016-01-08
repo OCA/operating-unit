@@ -12,7 +12,7 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     @api.one
-    @api.constrains('operating_unit_id', 'purchase_line_id')
+    @api.constrains('purchase_line_id')
     def _check_purchase_order_operating_unit(self, cr, uid, ids, context=None):
         purchase = self.purchase_line_id.purchase_id
         if purchase and\
