@@ -22,8 +22,6 @@ class TestStockOperatingUnit(common.TestStockCommon):
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2C Operating Unit
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
-        # Partner
-        self.partner1 = self.env.ref('base.res_partner_1')
         # Products
         self.product1 = self.env.ref('product.product_product_7')
         self.product2 = self.env.ref('product.product_product_9')
@@ -33,7 +31,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
         b2c_wh.lot_stock_id.write({'operating_unit_id': self.b2c.id})
         self.location_b2c_id = b2c_wh.lot_stock_id.id
         self.b2c_type_in_id = b2c_wh.in_type_id.id
-        self.b2c_type_out_id = b2c_wh.out_type_id.id
+        self.b2c_type_int_id = b2c_wh.int_type_id.id
         # Create users
         self.user1_id = self._create_user('stock_user_1',
                                           [self.group_stock_manager],
@@ -45,7 +43,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
                                           [self.b2c])
         # Create Incoming Shipments
         self.picking_in1 = self._create_picking(self.user1_id,
-                                                self.b2c.id,
+                                                self.ou1.id,
                                                 self.b2c_type_in_id,
                                                 self.supplier_location,
                                                 self.stock_location)
@@ -57,7 +55,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
         # Create Internal Shipment
         self.picking_int = self._create_picking(self.user1_id,
                                                 self.b2c.id,
-                                                self.b2c_type_out_id,
+                                                self.b2c_type_int_id,
                                                 self.stock_location,
                                                 self.location_b2c_id)
 
@@ -81,7 +79,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
     def _create_picking(self, user_id, ou_id, picking_type, src_loc_id,
                         dest_loc_id):
         """Create a Picking."""
-        self.picking_in = self.PickingObj.sudo(user_id).create({
+        picking = self.PickingObj.sudo(user_id).create({
             'picking_type_id': picking_type,
             'location_id': src_loc_id,
             'location_dest_id': dest_loc_id,
@@ -92,8 +90,8 @@ class TestStockOperatingUnit(common.TestStockCommon):
             'product_id': self.productA.id,
             'product_uom_qty': 3.0,
             'product_uom': self.productA.uom_id.id,
-            'picking_id': self.picking_in.id,
+            'picking_id': picking.id,
             'location_id': src_loc_id,
             'location_dest_id': dest_loc_id,
         })
-        return self.picking_in
+        return picking
