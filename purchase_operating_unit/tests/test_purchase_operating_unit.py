@@ -13,8 +13,7 @@ class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
     def setUp(self):
         super(TestPurchaseOperatingUnit, self).setUp()
         self.ResUsers = self.env['res.users']
-        self.StockMove = self.env['stock.move']
-        self.StockPikcing = self.env['stock.picking']
+        self.StockPicking = self.env['stock.picking']
         # company
         self.company1 = self.env.ref('base.main_company')
         self.company2 = self.env.ref('stock.res_company_1')
