@@ -53,8 +53,8 @@
         </record>
 
        <menuitem action="action_operating_unit_tree"
-                 id="manu_action_operating_unit_tree"
+                 id="menu_action_operating_unit_tree"
                  parent="base.menu_users"
-                 groups="group_multi_operating_unit"/>
+                 groups="operating_unit.group_multi_operating_unit"/>
     </data>
 </openerp>

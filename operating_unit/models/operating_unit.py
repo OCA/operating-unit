@@ -11,8 +11,8 @@ class OperatingUnit(models.Model):
     _name = 'operating.unit'
     _description = 'Operating Unit'
 
-    name = fields.Char('Name', size=256, required=True)
-    code = fields.Char('Code', size=32, required=True)
+    name = fields.Char('Name', required=True)
+    code = fields.Char('Code', required=True)
     active = fields.Boolean('Active', default=True)
     company_id = fields.Many2one(
         'res.company', 'Company', required=True, default=lambda self:
