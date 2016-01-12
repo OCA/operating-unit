@@ -12,6 +12,15 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     @api.model
+    def create(self, vals):
+
+        if vals.get('move_id', False):
+            move = self.env['account.move'].browse(vals['move_id'])
+            if move.operating_unit_id:
+                vals['operating_unit_id'] = move.operating_unit_id.id
+        return super(AccountMoveLine, self).create(vals)
+
+    @api.model
     def _query_get(self, domain=None):
         if self._context.get('operating_unit_ids', False):
             domain.append(('operating_unit_id', 'in',
@@ -33,9 +42,25 @@ class AccountMoveLine(models.Model):
             raise UserError(_('Configuration error!\nThe Company in the\
             Move Line and in the Operating Unit must be the same.'))
 
+    @api.one
+    @api.constrains('operating_unit_id', 'move_id')
+    def _check_move_operating_unit(self):
+            if self.move_id and self.move_id.operating_unit_id and \
+                            self.operating_unit_id and \
+                            self.move_id.operating_unit_id != \
+                            self.operating_unit_id:
+                raise UserError(_('Configuration error!\nThe Operating Unit in the\
+             Move Line and in the Move must be the same.'))
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
+
+    operating_unit_id = fields.Many2one('operating.unit',
+                                             'Default Operating Unit',
+                                             help="This operating unit will "
+                                                  "be defaulted in the move "
+                                                  "lines.")
 
     @api.multi
     def post(self):
