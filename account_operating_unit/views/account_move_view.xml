@@ -9,7 +9,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
                     <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                    <field name="ou_cleared_line_id"/>
                 </xpath>
             </field>
         </record>
@@ -21,7 +20,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
                     <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                    <field name="ou_cleared_line_id"/>
                 </xpath>
             </field>
         </record>
@@ -33,7 +31,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
                     <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                    <field name="ou_cleared_line_id"/>
                 </xpath>
             </field>
         </record>
@@ -60,17 +57,9 @@
                 <field name="journal_id" position="after">
                     <field name="operating_unit_id"/>
                 </field>
-<!--
-                <xpath expr="//field[@name='line_ids']/form//field[@name='account_id']"
-                       position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                    <field name="ou_cleared_line_id"/>
-                </xpath>
--->
                 <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']"
                        position="after">
                     <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                    <field name="ou_cleared_line_id"/>
                 </xpath>
             </field>
         </record>
