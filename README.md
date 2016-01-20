@@ -14,6 +14,12 @@ This repository provides a suite of module to support the Operating Unit concept
 across all Odoo processes.
 
 [//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[operating_unit](operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+
 [//]: # (end addons)
 
 Translation Status
