@@ -1,6 +1,6 @@
-[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/213/9.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-operating-unit-213)
-[![Build Status](https://travis-ci.org/OCA/operating-unit.svg?branch=9.0)](https://travis-ci.org/OCA/operating-unit)
-[![Coverage Status](https://coveralls.io/repos/OCA/operating-unit/badge.svg?branch=9.0&service=github)](https://coveralls.io/github/OCA/operating-unit?branch=9.0)
+[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/213/8.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-operating-unit-213)
+[![Build Status](https://travis-ci.org/OCA/operating-unit.svg?branch=8.0)](https://travis-ci.org/OCA/operating-unit)
+[![Coverage Status](https://coveralls.io/repos/OCA/operating-unit/badge.svg?branch=8.0&service=github)](https://coveralls.io/github/OCA/operating-unit?branch=8.0)
 [![Code Climate](https://codeclimate.com/github/OCA/operating-unit/badges/gpa.svg)](https://codeclimate.com/github/OCA/operating-unit)
 
 # Operating Units
