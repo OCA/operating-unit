@@ -59,7 +59,7 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
         })
         # Assign the Inter-OU Clearing account to the company
         self.company.inter_ou_clearing_account_id = self.inter_ou_account_id.id
-        self.company.ou_is_self_balanced = self.ou_is_self_balanced.id
+        self.company.ou_is_self_balanced = True
 
         # Create user2
         self.user2_id =\

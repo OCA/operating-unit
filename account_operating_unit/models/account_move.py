@@ -42,10 +42,11 @@ class AccountMoveLine(models.Model):
     @api.one
     @api.constrains('operating_unit_id', 'move_id')
     def _check_move_operating_unit(self):
-            if self.move_id and self.move_id.operating_unit_id and \
-                            self.operating_unit_id and \
-                            self.move_id.operating_unit_id != \
-                            self.operating_unit_id:
+            if (
+                self.move_id and self.move_id.operating_unit_id and
+                self.operating_unit_id and
+                self.move_id.operating_unit_id != self.operating_unit_id
+            ):
                 raise UserError(_('Configuration error!\nThe Operating Unit in\
                 the Move Line and in the Move must be the same.'))
 
