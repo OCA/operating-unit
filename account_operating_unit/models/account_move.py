@@ -71,7 +71,6 @@ class AccountMove(models.Model):
             'name': 'OU-Balancing',
             'move_id': move.id,
             'journal_id': move.journal_id.id,
-            'period_id': move.period_id.id,
             'date': move.date,
             'operating_unit_id': ou_id,
             'account_id': move.company_id.inter_ou_clearing_account_id.id
