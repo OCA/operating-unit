@@ -117,7 +117,7 @@ class AccountMove(models.Model):
                 # Create a balancing move line in the operating unit
                 # clearing account
                 line_data = self._prepare_inter_ou_balancing_move_line(
-                        move, ou_id, ou_balances)
+                    move, ou_id, ou_balances)
                 if line_data:
                     amls.append(ml_obj.create(line_data))
             if amls:
