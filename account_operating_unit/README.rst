@@ -7,15 +7,23 @@ Accounting with Operating Units
 ===============================
 
 This module introduces the following features:
+
 * Adds the Operating Unit (OU) to the account move line.
+
 * Defines if the Operating Units are self-balanced and Inter-Operating Unit
-clearing account at company level.
+  clearing account at company level.
+
 * Journal entry with lines in different Operating Units are checked based on
-the "self-balanced" set up in OU. At the time of posting the journal entry,
-the corresponding lines in the Inter-Operating Unit clearing account are
-automatically created, making each OU self-balanced.
+  the "self-balanced" set up in OU.
+
+  At the time of posting the journal entry, the corresponding lines in the
+  Inter-Operating Unit clearing account are automatically created, making
+  each OU self-balanced.
+
 * The account financial reports include the option to filter by OU.
-* Adds the Operating Unit (OU) to the invoice
+
+* Adds the Operating Unit (OU) to the invoice.
+
 * Implements security rules in the invoice based on OU.
 
 Installation
@@ -31,23 +39,29 @@ Operating Unit you can specify at company level that Operating Units should
 be self-balanced, and then indicate a self-balancing clearing account.
 
 * Create an account for "Inter-OU Clearing" of type Regular.
+
 * Go to *Settings / Companies / Companies* and Set the "Operating Units are
-self-balanced" checkbox. Then Set the "Inter-OU Clearing"  account in
-"Inter-Operating Unit clearing account" field.
+  self-balanced" checkbox.
+
+  Then Set the "Inter-OU Clearing"  account in "Inter-Operating Unit
+  clearing account" field.
+
 * Assign Operating Unit in Accounts.
 
 
 Usage
 =====
 
-* Add the Operating Unit to invoices
+* Add the Operating Unit to invoices.
+
 * Add the Default Operating Unit to account move. Then all move lines will
-by default adopt this Operating Unit
-* Add Operating Units to the move lines. If they differ across lines of the
-same move, and the OU's are self-balanced, then additional move lines will
-be created so as to make the move self-balanced from OU perspective.
+  by default adopt this Operating Unit.
 
+* Add Operating Units to the move lines.
 
+  If they differ across lines of the same move, and the OU's are
+  self-balanced, then additional move lines will be created so as to make
+  the move self-balanced from OU perspective.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
