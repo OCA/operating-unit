@@ -109,6 +109,7 @@ class AccountMove(models.Model):
 
             # Create balancing entries for un-balanced OU's.
             ou_balances = self._check_ou_balance(move)
+            amls = []
             for ou_id in ou_balances.keys():
                 # If the OU is already balanced, then do not continue
                 if move.company_id.currency_id.is_zero(ou_balances[ou_id]):
@@ -118,8 +119,10 @@ class AccountMove(models.Model):
                 line_data = self._prepare_inter_ou_balancing_move_line(
                                     move, ou_id, ou_balances)
                 if line_data:
-                    lid = ml_obj.create(line_data)
-                    move.write({'line_ids': [(4, lid)]})
+                    amls.append(ml_obj.create(line_data))
+            if amls:
+                move.write({'line_ids': [(4, aml.id) for aml in amls]})
+
 
         return super(AccountMove, self).post()
 
