@@ -7,34 +7,33 @@ Accounting with Operating Units
 ===============================
 
 This module introduces the following features:
-* Adds the Operating Unit in the account move line.
-* Defines if the operating units are self-balanced and Inter-operating unit
+* Adds the Operating Unit (OU) to the account move line.
+* Defines if the Operating Units are self-balanced and Inter-Operating Unit
 clearing account at company level.
-* When users create a journal entry with lines in different operating units,
-if operating units have been defined to be self-balanced,
-at the time of posting the journal entry it automatically creates the
-corresponding lines in the Inter-operating unit clearing account,
-making each OU self-balanced.
+* Journal entry with lines in different Operating Units are checked based on
+the "self-balanced" set up in OU. At the time of posting the journal entry,
+the corresponding lines in the Inter-Operating Unit clearing account are
+automatically created, making each OU self-balanced.
 * The account financial reports include the option to filter by OU.
-* Adds the Operating Unit in the invoice
-* Implements security rules in the invoice
+* Adds the Operating Unit (OU) to the invoice
+* Implements security rules in the invoice based on OU.
 
 Installation
 ============
 
-No external library is used.
+No specific installation requirements.
 
 Configuration
 =============
 
 If your company is required to generate a balanced balance sheet by
-operating unit you can specify at company level that operating units should
+Operating Unit you can specify at company level that Operating Units should
 be self-balanced, and then indicate a self-balancing clearing account.
 
 * Create an account for "Inter-OU Clearing" of type Regular.
 * Go to *Settings / Companies / Companies* and Set the "Operating Units are
 self-balanced" checkbox. Then Set the "Inter-OU Clearing"  account in
-"Inter-operating unit clearing account" field.
+"Inter-Operating Unit clearing account" field.
 * Assign Operating Unit in Accounts.
 
 
@@ -85,7 +84,7 @@ Maintainer
 
 .. image:: https://odoo-community.org/logo.png
    :alt: Odoo Community Association
-   :target: http://odoo-community.org
+   :target: https://odoo-community.org
 
 This module is maintained by the OCA.
 
@@ -93,4 +92,4 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.
