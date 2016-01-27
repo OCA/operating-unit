@@ -37,8 +37,8 @@ class StockQuant(models.Model):
             move.operating_unit_id.id or move.operating_unit_dest_id.id
         return [(0, 0, debit_line_vals), (0, 0, credit_line_vals)]
 
-    @api.multi
-    def _create_product_valuation_moves(self, move):
+    @api.model
+    def _account_entry_move(self, quants, move):
         """
         Generate an accounting moves if the product being moved is subject
         to real_time valuation tracking,
@@ -46,7 +46,7 @@ class StockQuant(models.Model):
         a transit location or is outside of the company or the source or
         destination locations belong to different operating units.
         """
-        res = super(StockQuant, self)._create_product_valuation_moves(move)
+        res = super(StockQuant, self)._account_entry_move(quants, move)
 
         if move.product_id.valuation == 'real_time':
             # Inter-operating unit moves do not accept to
@@ -72,23 +72,34 @@ class StockQuant(models.Model):
                           'when both source  and destination locations are '
                           'internal.'))
                 src_company_ctx = dict(
-                    context, force_company=move.location_id.company_id.id)
-                company_ctx = dict(context, company_id=move.company_id.id)
+                    force_company=move.location_id.company_id.id
+                )
+                company_ctx = dict(company_id=move.company_id.id)
                 journal_id, acc_src, acc_dest, acc_valuation = \
-                    self._get_accounting_data_for_valuation(move,
-                                                            src_company_ctx)
-                reference_amount, reference_currency_id = \
-                    self._get_reference_accounting_values_for_valuation(
-                        move, src_company_ctx)
-                account_moves = []
-                account_moves += [(journal_id, self._create_account_move_line(
-                    move, acc_valuation, acc_valuation,
-                    reference_amount, reference_currency_id))]
-                move_obj = self.pool.get('account.move')
-                for j_id, move_lines in account_moves:
-                    move_obj.create({'journal_id': j_id,
-                                     'line_id': move_lines,
+                    self.with_context(src_company_ctx)._get_accounting_data_for_valuation(move)
+#                reference_amount, reference_currency_id = \
+#                    self._get_reference_accounting_values_for_valuation(
+#                        move, src_company_ctx)
+#                account_moves = []
+#                account_moves += [(journal_id, self._create_account_move_line(
+#                    move, acc_valuation, acc_valuation,
+#                    reference_amount, reference_currency_id))]
+                quant_cost_qty = {}
+                for quant in quants:
+                    if quant_cost_qty.get(quant.cost):
+                        quant_cost_qty[quant.cost] += quant.qty
+                    else:
+                        quant_cost_qty[quant.cost] = quant.qty
+                move_obj = self.env['account.move']
+                for cost, qty in quant_cost_qty.items():
+                    move_lines = self._prepare_account_move_line(move, qty,
+                                                                 cost,
+                                                                 acc_valuation,
+                                                                 acc_valuation)
+#                    for j_id, move_lines in account_moves:
+                    new_move = move_obj.with_context(company_ctx).create({'journal_id': journal_id,
+                                     'line_ids': move_lines,
                                      'company_id': move.company_id.id,
                                      'ref': move.picking_id and
-                                     move.picking_id.name},
-                                    context=company_ctx)
+                                     move.picking_id.name})
+                    new_move.post()
