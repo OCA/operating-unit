@@ -11,14 +11,9 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
     def setUp(self):
         super(TestStockAccountOperatingUnit, self).setUp()
         self.res_groups = self.env['res.groups']
-        self.partner_model = self.env['res.partner']
         self.res_users_model = self.env['res.users']
-        self.acc_move_model = self.env['account.move']
         self.aml_model = self.env['account.move.line']
         self.account_model = self.env['account.account']
-        self.invoice_model = self.env['account.invoice']
-        self.journal_model = self.env['account.journal']
-        self.res_company_model = self.env['res.company']
         self.product_model = self.env['product.product']
         self.product_cteg_model = self.env['product.category']
         self.inv_line_model = self.env['account.invoice.line']
@@ -27,82 +22,89 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         self.company_model = self.env['res.company']
         self.move_model = self.env['stock.move']
         self.picking_model = self.env['stock.picking']
-#        self.picking_partial_model = self.env['stock.partial.picking']
-        self.warehouse_model = self.env['stock.warehouse']
-        self.location_model = self.env['stock.location']
         self.ModelDataObj = self.env['ir.model.data']
-
         # company
         self.company = self.ModelDataObj.xmlid_to_res_id('base.main_company')
         # groups
-        self.group_stock_manager = self.ModelDataObj.xmlid_to_res_id('stock.group_stock_manager')
-        self.grp_acc_user = self.ModelDataObj.xmlid_to_res_id('account.group_account_invoice')
-        self.grp_stock_user = self.ModelDataObj.xmlid_to_res_id('stock.group_stock_user')
+        self.group_stock_manager =\
+            self.ModelDataObj.xmlid_to_res_id('stock.group_stock_manager')
+        self.grp_acc_user =\
+            self.ModelDataObj.xmlid_to_res_id('account.group_account_invoice')
+        self.grp_stock_user =\
+            self.ModelDataObj.xmlid_to_res_id('stock.group_stock_user')
         # Main Operating Unit
-        self.ou1 = self.ModelDataObj.xmlid_to_res_id('operating_unit.main_operating_unit')
+        self.ou1 = self.ModelDataObj.get_object('operating_unit',
+                                                'main_operating_unit')
         # B2B Operating Unit
-        self.b2b = self.ModelDataObj.xmlid_to_res_id('operating_unit.b2b_operating_unit')
+        self.b2b = self.ModelDataObj.get_object('operating_unit',
+                                                'b2b_operating_unit')
         # B2C Operating Unit
-        self.b2c = self.ModelDataObj.xmlid_to_res_id('operating_unit.b2c_operating_unit')
+        self.b2c = self.ModelDataObj.get_object('operating_unit',
+                                                'b2c_operating_unit')
         # Partner
         self.partner1 = self.ModelDataObj.xmlid_to_res_id('base.res_partner_1')
-        self.stock_location_stock = self.ModelDataObj.xmlid_to_res_id('stock.stock_location_stock')
+        self.stock_location_stock =\
+            self.ModelDataObj.xmlid_to_res_id('stock.stock_location_stock')
         self.supplier_location =\
             self.ModelDataObj.xmlid_to_res_id('stock.stock_location_suppliers')
-        self.location_b2c_id =\
-            self.ModelDataObj.xmlid_to_res_id('stock_operating_unit.stock_location_b2c')
+#        self.location_b2c_id =\
+#            self.ModelDataObj.\
+#                xmlid_to_res_id('stock_operating_unit.stock_location_b2c')
         # Create user1
         self.user1 =\
             self._create_user('stock_account_user_1',
                               [self.grp_stock_user, self.grp_acc_user,
                                self.group_stock_manager],
-                              self.company, [self.ou1, self.b2c])
-
+                              self.company, [self.ou1.id, self.b2c.id])
         # Create user2
         self.user2 =\
             self._create_user('stock_account_user_2',
                               [self.grp_stock_user, self.grp_acc_user,
                                self.group_stock_manager],
-                              self.company, [self.b2c])
-
+                              self.company, [self.b2c.id])
         # Create account for Goods Received Not Invoiced
         name = 'Goods Received Not Invoiced'
         code = 'grni'
         acc_type = self.env.ref('account.data_account_type_equity')
-        self.account_grni = self._create_account(acc_type, name, code, self.company)
+        self.account_grni = self._create_account(acc_type, name, code,
+                                                 self.company)
 #        # Create account for Cost of Goods Sold
         name = 'Cost of Goods Sold'
         code = 'cogs'
         acc_type = self.env.ref('account.data_account_type_expenses')
-        self.account_cogs_id = self._create_account(acc_type, name, code, self.company)
+        self.account_cogs_id = self._create_account(acc_type, name, code,
+                                                    self.company)
 #        # Create account for Inventory
         name = 'Inventory'
         code = 'inventory'
-        acc_type = self.env.ref('account.data_account_type_current_assets')
-        self.account_inventory = self._create_account(acc_type, name, code, self.company)
+        acc_type = self.env.ref('account.data_account_type_fixed_assets')
+        self.account_inventory = self._create_account(acc_type, name, code,
+                                                      self.company)
 #        # Create account for Inter-OU Clearing
         name = 'Inter-OU Clearing'
         code = 'inter_ou'
         acc_type = self.env.ref('account.data_account_type_equity')
-        self.account_inter_ou_clearing_id = self._create_account(acc_type, name, code, self.company)
-
+        self.account_inter_ou_clearing = self._create_account(acc_type,
+                                                              name, code,
+                                                              self.company)
         # Update company data
         company = self.env.ref('base.main_company')
-        company.write({'inter_ou_clearing_account_id': self.account_inter_ou_clearing_id.id,
+        company.write({'inter_ou_clearing_account_id':\
+                       self.account_inter_ou_clearing.id,
                                   'ou_is_self_balanced': True})
-
 #    Create Product
         self.product = self._create_product()
-
+#    Create incoming stock picking type
+        self.incoming_id = self.env.ref('stock.warehouse0').in_type_id.id
+#    Create incoming and internal stock picking types
         b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
-        b2c_wh.lot_stock_id.write({'operating_unit_id': self.b2c})
+        b2c_wh.lot_stock_id.write({'operating_unit_id': self.b2c.id})
         self.location_b2c_id = b2c_wh.lot_stock_id.id
         self.b2c_type_in_id = b2c_wh.in_type_id.id
         self.b2c_type_int_id = b2c_wh.int_type_id.id
 
     def _create_user(self, login, groups, company, operating_units):
         """Create a user."""
-        print "Create a user Create a user ((((((((((((((((((((((((((((((((("
         group_ids = [group for group in groups]
         user = self.res_users_model.create({
             'name': 'Test Stock Account User',
@@ -118,11 +120,9 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
 
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
-        print "data_account_type_equity *****************************", acc_type.ids and acc_type.ids[0]
         account = self.account_model.create({
             'name': name,
             'code': code,
-#            'type': 'other',
             'user_type_id': acc_type.ids and acc_type.ids[0],
             'company_id': company
         })
@@ -137,7 +137,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
             'property_stock_account_input_categ_id': self.account_grni.id,
             'property_stock_account_output_categ_id': self.account_cogs_id,
         })
-        print "product_cteg ####################", product_cteg
         product = self.product_model.create({
             'name': 'test_product',
             'categ_id': product_cteg.id,
@@ -145,7 +144,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
             'list_price': 1.0,
             'standard_price': 1.0
         })
-        print "product ####################", product
         return product
 
     def _create_picking(self, user_id, ou_id, picking_type,
@@ -157,7 +155,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
             'location_dest_id': dest_loc_id,
             'operating_unit_id': ou_id,
         })
-        print "Picking $$$$$$$$$$$$$$$$$$$$$$$$$", picking
         self.move_model.sudo(user_id).create({
             'name': 'a move',
             'product_id': self.product.id,
@@ -169,19 +166,20 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         })
         return picking
 
-    def _confirm_receive(self, user_id, picking):
+    def _confirm_receive(self, user_id, picking, picking_type=None):
+        if picking_type:
+            picking.action_confirm()
+            picking.force_assign()
         res = picking.sudo(user_id).do_new_transfer()
         validate_id = res['res_id']
         validate = self.env['stock.immediate.transfer'].browse(validate_id)
         validate.process()
-        print "state ********************************", picking.state
 
     def _check_account_balance(self, account_id, operating_unit=None,
                                expected_balance=0.0):
         """
         Check the balance of the account based on different operating units.
         """
-        print "Ckeck_balance 4444444444444444444444444444444444444444", operating_unit
         domain = [('account_id', '=', account_id)]
         if operating_unit:
             domain.extend([('operating_unit_id', '=', operating_unit.id)])
@@ -215,127 +213,114 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         """Test account balances during receiving stock into the main
         operating unit, then into b2c operating unit, and then transfer stock
         from main ou to b2c."""
-        # Main Operating Unit
-        self.ou1 = self.env['ir.model.data'].get_object('operating_unit', 'main_operating_unit')
-        # B2B Operating Unit
-        self.b2b = self.env['ir.model.data'].get_object('operating_unit', 'b2b_operating_unit')
-        # B2C Operating Unit
-        self.b2c = self.env['ir.model.data'].get_object('operating_unit', 'b2c_operating_unit')
         # Create Incoming Shipment 1
         self.picking =\
-            self._create_picking(self.user1.id, self.ou1.id, 'in',
+        self._create_picking(self.user1.id, self.ou1.id, self.incoming_id,
                                  self.supplier_location,
                                  self.stock_location_stock)
-#        # Receive it
-        self._confirm_receive(self.user1_id, self.picking)
-#        # GL account ‘Inventory’ has balance 1 irrespective of the OU
-#        expected_balance = 1.0
-#        self._check_account_balance(cr, uid, self.account_inventory_id,
-#                                    operating_unit=None,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
-#        expected_balance = 1.0
-#        self._check_account_balance(cr, uid, self.account_inventory_id,
-#                                    operating_unit=self.ou1,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
-#        expected_balance = 0.0
-#        self._check_account_balance(cr, uid, self.account_inventory_id,
-#                                    operating_unit=self.b2c,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Goods Received Not Invoiced’ has balance - 1
-#        # irrespective of the OU
-#        expected_balance = -1.0
-#        self._check_account_balance(cr, uid, self.account_grni_id,
-#                                    operating_unit=None,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
-#        expected_balance = -1.0
-#        self._check_account_balance(cr, uid, self.account_grni_id,
-#                                    operating_unit=self.ou1,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Goods Received Not Invoiced’ has balance 0 on OU b2c
-#        expected_balance = 0.0
-#        self._check_account_balance(cr, uid, self.account_grni_id,
-#                                    operating_unit=self.b2c,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#
-#        # Create Incoming Shipment 2
-#        self.picking =\
-#            self._create_picking(self.user2.id, self.b2c, self.b2c_type_in_id,
-#                                 self.supplier_location,
-#                                 self.location_b2c_id)
-#
-##        # Receive it
-#        self._confirm_receive(self.user2.id, self.picking)
-#
-##        # GL account ‘Inventory’ has balance 2 irrespective of the OU
-#        expected_balance = 2.0
-#        self._check_account_balance(self.account_inventory.id,
-#                                    operating_unit=None,
-#                                    expected_balance=expected_balance)
-##        # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
-#        expected_balance = 1.0
-#        self._check_account_balance(self.account_inventory.id,
-#                                    operating_unit=self.ou1,
-#                                    expected_balance=expected_balance)
-##        # GL account ‘Inventory’ has balance 1 on OU b2c
-#        expected_balance = 1.0
-#        self._check_account_balance(self.account_inventory.id,
-#                                    operating_unit=self.b2c,
-#                                    expected_balance=expected_balance)
-##        # GL account ‘Goods Received Not Invoiced’ has balance - 2
-##        # irrespective of the OU
-#        expected_balance = -2.0
-#        self._check_account_balance(self.account_grni.id,
-#                                    operating_unit=None,
-#                                    expected_balance=expected_balance)
-##        # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
-#        expected_balance = -1.0
-#        self._check_account_balance(self.account_grni.id,
-#                                    operating_unit=self.ou1,
-#                                    expected_balance=expected_balance)
-##        # GL account ‘Goods Received Not Invoiced’ has balance 0 on OU b2c
-#        expected_balance = -1.0
-#        self._check_account_balance(self.account_grni.id,
-#                                    operating_unit=self.b2c,
-#                                    expected_balance=expected_balance)
+        # Receive it
+        self._confirm_receive(self.user1.id, self.picking)
+        # GL account ‘Inventory’ has balance 1 irrespective of the OU
+        expected_balance = 1.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=None,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
+        expected_balance = 1.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=self.ou1,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
+        expected_balance = 0.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=self.b2c,
+                                    expected_balance=expected_balance)
+        # GL account ‘Goods Received Not Invoiced’ has balance - 1
+        # irrespective of the OU
+        expected_balance = -1.0
+        self._check_account_balance(self.account_grni.id,
+                                    operating_unit=None,
+                                    expected_balance=expected_balance)
+        # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
+        expected_balance = -1.0
+        self._check_account_balance(self.account_grni.id,
+                                    operating_unit=self.ou1,
+                                    expected_balance=expected_balance)
+        # GL account ‘Goods Received Not Invoiced’ has balance 0 on OU b2c
+        expected_balance = 0.0
+        self._check_account_balance(self.account_grni.id,
+                                    operating_unit=self.b2c,
+                                    expected_balance=expected_balance)
 
-#        # Create Internal Transfer
-#        picking_id =\
-#            self._create_picking(cr, uid, self.user1_id, self.b2c.id,
-#                                 self.b2c_type_int_id, self.stock_location_stock.id,
-#                                 self.location_b2c_id.id)
+        # Create Incoming Shipment 2
+        self.picking =\
+            self._create_picking(self.user2.id, self.b2c.id,
+                                 self.b2c_type_in_id,
+                                 self.supplier_location,
+                                 self.location_b2c_id)
+
 #        # Receive it
-#        self._confirm_receive(cr, self.user1_id, picking_id,
-#                              context=context)
-#        # GL account ‘Inventory’ has balance 2 irrespective of the OU
-#        expected_balance = 2.0
-#        self._check_account_balance(cr, uid, self.account_inventory_id,
-#                                    operating_unit=None,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
-#        expected_balance = 0.0
-#        self._check_account_balance(cr, uid, self.account_inventory_id,
-#                                    operating_unit=self.ou1,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Inventory’ has balance 2 on OU b2c
-#        expected_balance = 2.0
-#        self._check_account_balance(cr, uid, self.account_inventory_id,
-#                                    operating_unit=self.b2c,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
-#        # GL account ‘Inter-OU clearing’ has balance 0 irrespective of the OU
-#        expected_balance = 0.0
-#        self._check_account_balance(cr, uid, self.account_inter_ou_clearing_id,
-#                                    operating_unit=None,
-#                                    expected_balance=expected_balance,
-#                                    context=context)
+        self._confirm_receive(self.user2.id, self.picking)
+
+        # GL account ‘Inventory’ has balance 2 irrespective of the OU
+        expected_balance = 2.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=None,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
+        expected_balance = 1.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=self.ou1,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inventory’ has balance 1 on OU b2c
+        expected_balance = 1.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=self.b2c,
+                                    expected_balance=expected_balance)
+        # GL account ‘Goods Received Not Invoiced’ has balance - 2
+        # irrespective of the OU
+        expected_balance = -2.0
+        self._check_account_balance(self.account_grni.id,
+                                    operating_unit=None,
+                                    expected_balance=expected_balance)
+        # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
+        expected_balance = -1.0
+        self._check_account_balance(self.account_grni.id,
+                                    operating_unit=self.ou1,
+                                    expected_balance=expected_balance)
+        # GL account ‘Goods Received Not Invoiced’ has balance 0 on OU b2c
+        expected_balance = -1.0
+        self._check_account_balance(self.account_grni.id,
+                                    operating_unit=self.b2c,
+                                    expected_balance=expected_balance)
+
+        # Create Internal Transfer
+        self.picking =\
+            self._create_picking(self.user1.id, self.b2c.id,
+                                 self.b2c_type_int_id,
+                                 self.stock_location_stock,
+                                 self.location_b2c_id)
+        # Receive it
+        picking_type = 'internal'
+        self._confirm_receive(self.user1.id, self.picking,
+                              picking_type=picking_type)
+        # GL account ‘Inventory’ has balance 2 irrespective of the OU
+        expected_balance = 2.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=None,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
+        expected_balance = 0.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=self.ou1,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inventory’ has balance 2 on OU b2c
+        expected_balance = 2.0
+        self._check_account_balance(self.account_inventory.id,
+                                    operating_unit=self.b2c,
+                                    expected_balance=expected_balance)
+        # GL account ‘Inter-OU clearing’ has balance 0 irrespective of the OU
+        expected_balance = 0.0
+        self._check_account_balance(self.account_inter_ou_clearing.id,
+                                    operating_unit=None,
+                                    expected_balance=expected_balance)
