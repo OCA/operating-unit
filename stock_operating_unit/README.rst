@@ -1,4 +1,4 @@
-.. image:: https://img.shields.io/badge/license-LGPLv3-blue.svg
+.. image:: https://img.shields.io/badge/license-AGPLv3-blue.svg
    :target: https://www.gnu.org/licenses/lgpl.html
    :alt: License: LGPL-3
 
