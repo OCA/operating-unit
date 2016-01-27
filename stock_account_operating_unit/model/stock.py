@@ -8,18 +8,15 @@ from openerp.tools.translate import _
 from openerp.exceptions import UserError
 
 
-class StockMove(models.Model):
-    _inherit = 'stock.move'
+class StockQuant(models.Model):
+    _inherit = 'stock.quant'
 
-    @api.multi
-    def _create_account_move_line(self, move, src_account_id,
-                                     dest_account_id, reference_amount,
-                                     reference_currency_id):
-#        if context is None:
-#            context = {}
-        res = super(StockMove, self)._create_account_move_line(
-            move, src_account_id, dest_account_id, reference_amount,
-            reference_currency_id)
+    @api.model
+    def _prepare_account_move_line(self, move, qty, cost, credit_account_id,
+                                       debit_account_id):
+        res = super(StockQuant, self).\
+            _prepare_account_move_line(move, qty, cost, credit_account_id,
+                                       debit_account_id)
 
         debit_line_vals = res[0][2]
         credit_line_vals = res[1][2]
@@ -38,7 +35,6 @@ class StockMove(models.Model):
             move.operating_unit_dest_id.id or move.operating_unit_id.id
         credit_line_vals['operating_unit_id'] = \
             move.operating_unit_id.id or move.operating_unit_dest_id.id
-
         return [(0, 0, debit_line_vals), (0, 0, credit_line_vals)]
 
     @api.multi
@@ -50,7 +46,7 @@ class StockMove(models.Model):
         a transit location or is outside of the company or the source or
         destination locations belong to different operating units.
         """
-        res = super(StockMove, self)._create_product_valuation_moves(move)
+        res = super(StockQuant, self)._create_product_valuation_moves(move)
 
         if move.product_id.valuation == 'real_time':
             # Inter-operating unit moves do not accept to
@@ -71,9 +67,10 @@ class StockMove(models.Model):
                         and move.location_dest_id.usage != 'internal':
                     err = True
                 if err:
-                    raise UserError(_('Transfers between locations of different operating '
-                          'unit locations is only allowed when both source '
-                          'and destination locations are internal.'))
+                    raise UserError(_('Transfers between locations of '
+                          'different operating unit locations is only allowed '
+                          'when both source  and destination locations are '
+                          'internal.'))
                 src_company_ctx = dict(
                     context, force_company=move.location_id.company_id.id)
                 company_ctx = dict(context, company_id=move.company_id.id)

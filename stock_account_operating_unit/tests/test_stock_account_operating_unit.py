@@ -167,6 +167,9 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         return picking
 
     def _confirm_receive(self, user_id, picking, picking_type=None):
+        """
+        Checks the stock availability and validates the stock picking.
+        """
         if picking_type:
             picking.action_confirm()
             picking.force_assign()
@@ -175,7 +178,7 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         validate = self.env['stock.immediate.transfer'].browse(validate_id)
         validate.process()
 
-    def _check_account_balance(self, account_id, operating_unit=None,
+    def _check_account_balance(self, user_id, account_id, operating_unit=None,
                                expected_balance=0.0):
         """
         Check the balance of the account based on different operating units.
@@ -184,7 +187,7 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         if operating_unit:
             domain.extend([('operating_unit_id', '=', operating_unit.id)])
 
-        balance = self._get_balance(domain)
+        balance = self._get_balance(user_id, domain)
         if operating_unit:
             self.assertEqual(
                     balance, expected_balance,
@@ -197,7 +200,7 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
                     % str(expected_balance)) \
 
 
-    def _get_balance(self, domain):
+    def _get_balance(self, user_id, domain):
         """
         Call read_group method and return the balance of particular account.
         """
@@ -222,33 +225,33 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         self._confirm_receive(self.user1.id, self.picking)
         # GL account ‘Inventory’ has balance 1 irrespective of the OU
         expected_balance = 1.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user1.id, self.account_inventory.id,
                                     operating_unit=None,
                                     expected_balance=expected_balance)
         # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
         expected_balance = 1.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user1.id, self.account_inventory.id,
                                     operating_unit=self.ou1,
                                     expected_balance=expected_balance)
         # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
         expected_balance = 0.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user1.id, self.account_inventory.id,
                                     operating_unit=self.b2c,
                                     expected_balance=expected_balance)
         # GL account ‘Goods Received Not Invoiced’ has balance - 1
         # irrespective of the OU
         expected_balance = -1.0
-        self._check_account_balance(self.account_grni.id,
+        self._check_account_balance(self.user1.id, self.account_grni.id,
                                     operating_unit=None,
                                     expected_balance=expected_balance)
         # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
         expected_balance = -1.0
-        self._check_account_balance(self.account_grni.id,
+        self._check_account_balance(self.user1.id, self.account_grni.id,
                                     operating_unit=self.ou1,
                                     expected_balance=expected_balance)
         # GL account ‘Goods Received Not Invoiced’ has balance 0 on OU b2c
         expected_balance = 0.0
-        self._check_account_balance(self.account_grni.id,
+        self._check_account_balance(self.user1.id, self.account_grni.id,
                                     operating_unit=self.b2c,
                                     expected_balance=expected_balance)
 
@@ -264,33 +267,33 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
 
         # GL account ‘Inventory’ has balance 2 irrespective of the OU
         expected_balance = 2.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user2.id, self.account_inventory.id,
                                     operating_unit=None,
                                     expected_balance=expected_balance)
         # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
         expected_balance = 1.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user2.id, self.account_inventory.id,
                                     operating_unit=self.ou1,
                                     expected_balance=expected_balance)
         # GL account ‘Inventory’ has balance 1 on OU b2c
         expected_balance = 1.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user2.id, self.account_inventory.id,
                                     operating_unit=self.b2c,
                                     expected_balance=expected_balance)
         # GL account ‘Goods Received Not Invoiced’ has balance - 2
         # irrespective of the OU
         expected_balance = -2.0
-        self._check_account_balance(self.account_grni.id,
+        self._check_account_balance(self.user2.id, self.account_grni.id,
                                     operating_unit=None,
                                     expected_balance=expected_balance)
         # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
         expected_balance = -1.0
-        self._check_account_balance(self.account_grni.id,
+        self._check_account_balance(self.user2.id, self.account_grni.id,
                                     operating_unit=self.ou1,
                                     expected_balance=expected_balance)
         # GL account ‘Goods Received Not Invoiced’ has balance 0 on OU b2c
         expected_balance = -1.0
-        self._check_account_balance(self.account_grni.id,
+        self._check_account_balance(self.user2.id, self.account_grni.id,
                                     operating_unit=self.b2c,
                                     expected_balance=expected_balance)
 
@@ -306,21 +309,21 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
                               picking_type=picking_type)
         # GL account ‘Inventory’ has balance 2 irrespective of the OU
         expected_balance = 2.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user1.id, self.account_inventory.id,
                                     operating_unit=None,
                                     expected_balance=expected_balance)
         # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
         expected_balance = 0.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user1.id, self.account_inventory.id,
                                     operating_unit=self.ou1,
                                     expected_balance=expected_balance)
         # GL account ‘Inventory’ has balance 2 on OU b2c
         expected_balance = 2.0
-        self._check_account_balance(self.account_inventory.id,
+        self._check_account_balance(self.user1.id, self.account_inventory.id,
                                     operating_unit=self.b2c,
                                     expected_balance=expected_balance)
         # GL account ‘Inter-OU clearing’ has balance 0 irrespective of the OU
         expected_balance = 0.0
-        self._check_account_balance(self.account_inter_ou_clearing.id,
+        self._check_account_balance(self.user1.id, self.account_inter_ou_clearing.id,
                                     operating_unit=None,
                                     expected_balance=expected_balance)
