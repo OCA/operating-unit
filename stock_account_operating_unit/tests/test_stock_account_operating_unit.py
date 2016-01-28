@@ -47,9 +47,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
             self.ModelDataObj.xmlid_to_res_id('stock.stock_location_stock')
         self.supplier_location =\
             self.ModelDataObj.xmlid_to_res_id('stock.stock_location_suppliers')
-#        self.location_b2c_id =\
-#            self.ModelDataObj.\
-#                xmlid_to_res_id('stock_operating_unit.stock_location_b2c')
         # Create user1
         self.user1 =\
             self._create_user('stock_account_user_1',
@@ -129,7 +126,7 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         return account
 
     def _create_product(self):
-        """Create a Product."""
+        """Create a Product with inventory valuation set to auto."""
         product_cteg = self.product_cteg_model.create({
             'name': 'test_product_ctg',
             'property_valuation': 'real_time',
@@ -168,7 +165,7 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
 
     def _confirm_receive(self, user_id, picking, picking_type=None):
         """
-        Checks the stock availability and validates the stock picking.
+        Checks the stock availability, validates and process the stock picking.
         """
         if picking_type:
             picking.action_confirm()
@@ -207,7 +204,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         aml_rec = self.aml_model.read_group(domain,
                                             ['debit', 'credit', 'account_id'],
                                             ['account_id'])
-        print "\n\n #########################", aml_rec
         if aml_rec:
             return aml_rec[0].get('debit', 0) - aml_rec[0].get('credit', 0)
         else:

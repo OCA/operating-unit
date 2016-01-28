@@ -47,7 +47,6 @@ class StockQuant(models.Model):
         destination locations belong to different operating units.
         """
         res = super(StockQuant, self)._account_entry_move(quants, move)
-
         if move.product_id.valuation == 'real_time':
             # Inter-operating unit moves do not accept to
             # from/to non-internal location
@@ -76,14 +75,8 @@ class StockQuant(models.Model):
                 )
                 company_ctx = dict(company_id=move.company_id.id)
                 journal_id, acc_src, acc_dest, acc_valuation = \
-                    self.with_context(src_company_ctx)._get_accounting_data_for_valuation(move)
-#                reference_amount, reference_currency_id = \
-#                    self._get_reference_accounting_values_for_valuation(
-#                        move, src_company_ctx)
-#                account_moves = []
-#                account_moves += [(journal_id, self._create_account_move_line(
-#                    move, acc_valuation, acc_valuation,
-#                    reference_amount, reference_currency_id))]
+                    self.with_context(src_company_ctx).\
+                    _get_accounting_data_for_valuation(move)
                 quant_cost_qty = {}
                 for quant in quants:
                     if quant_cost_qty.get(quant.cost):
@@ -96,10 +89,11 @@ class StockQuant(models.Model):
                                                                  cost,
                                                                  acc_valuation,
                                                                  acc_valuation)
-#                    for j_id, move_lines in account_moves:
-                    new_move = move_obj.with_context(company_ctx).create({'journal_id': journal_id,
-                                     'line_ids': move_lines,
-                                     'company_id': move.company_id.id,
-                                     'ref': move.picking_id and
-                                     move.picking_id.name})
-                    new_move.post()
+                    move_obj.with_context(company_ctx).create({
+                        'journal_id': journal_id,
+                        'line_ids': move_lines,
+                        'company_id': move.company_id.id,
+                        'ref': move.picking_id and
+                            move.picking_id.name,
+                    })
+        return res
