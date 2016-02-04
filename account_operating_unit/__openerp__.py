@@ -22,6 +22,7 @@
         "views/account_account_view.xml",
         "views/company_view.xml",
         "views/invoice_view.xml",
+        "views/account_invoice_report_view.xml",
         "wizard/account_report_common_view.xml",
         "wizard/account_financial_report_view.xml",
     ],
