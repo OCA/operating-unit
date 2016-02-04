@@ -54,7 +54,7 @@
 
        <menuitem action="action_operating_unit_tree"
                  id="menu_action_operating_unit_tree"
-                 parent="base.menu_users"
+                 parent="base.menu_res_company_global"
                  groups="operating_unit.group_multi_operating_unit"/>
     </data>
 </openerp>
