@@ -6,8 +6,8 @@
 
 {
     "name": "Operating Unit in Stock Management with Real-Time Valuation",
-    "summary": "An operating unit (OU) is an organizational entity part of a\
-        company",
+    "summary": "Create journal entries in moves between internal locations "
+               "with different operating units.",
     "version": "8.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent Business and IT Consulting Services S.L., "

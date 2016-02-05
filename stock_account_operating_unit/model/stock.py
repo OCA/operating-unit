@@ -26,9 +26,9 @@ class StockQuant(models.Model):
             debit_line_vals['account_id'] != credit_line_vals['account_id']
         ):
             raise Warning(_('You cannot create stock moves involving '
-                                   'separate source and destination accounts '
-                                   'and different source and destination '
-                                   'operating units.'))
+                            'separate source and destination accounts '
+                            'and different source and destination '
+                            'operating units.'))
 
         debit_line_vals['operating_unit_id'] = \
             move.operating_unit_dest_id.id or move.operating_unit_id.id
@@ -66,16 +66,16 @@ class StockQuant(models.Model):
                     err = True
                 if err:
                     raise Warning(_('Transfers between locations of '
-                          'different operating unit locations is only allowed '
-                          'when both source  and destination locations are '
-                          'internal.'))
+                                    'different operating unit locations is '
+                                    'only allowed when both source and '
+                                    'destination locations are internal.'))
                 src_company_ctx = dict(
                     force_company=move.location_id.company_id.id
                 )
                 company_ctx = dict(company_id=move.company_id.id)
                 journal_id, acc_src, acc_dest, acc_valuation = \
                     self.with_context(src_company_ctx).\
-                    _get_accounting_data_for_valuation(move)
+                        _get_accounting_data_for_valuation(move)
                 quant_cost_qty = {}
                 for quant in quants:
                     if quant_cost_qty.get(quant.cost):
@@ -92,7 +92,6 @@ class StockQuant(models.Model):
                         'journal_id': journal_id,
                         'line_id': move_lines,
                         'company_id': move.company_id.id,
-                        'ref': move.picking_id and
-                            move.picking_id.name,
+                        'ref': move.picking_id and move.picking_id.name,
                     })
         return res
