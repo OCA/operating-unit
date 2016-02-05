@@ -69,7 +69,7 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         name = 'Cost of Goods Sold'
         code = 'cogs'
         acc_type = 'expense'
-        self.account_cogs_id = self._create_account(acc_type, name, code,
+        self.account_cogs = self._create_account(acc_type, name, code,
                                                     self.company)
 #        # Create account for Inventory
         name = 'Inventory'
@@ -129,19 +129,19 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
 
     def _create_product(self):
         """Create a Product with inventory valuation set to auto."""
-        product_cteg = self.product_cteg_model.create({
+        product_ctg = self.product_cteg_model.create({
             'name': 'test_product_ctg',
-            'property_valuation': 'real_time',
-            'property_stock_valuation_account_id': self.account_inventory.id,
-            'property_stock_account_input_categ_id': self.account_grni.id,
-            'property_stock_account_output_categ_id': self.account_cogs_id,
+            'property_stock_valuation_account_id': self.account_inventory.id
         })
         product = self.product_model.create({
             'name': 'test_product',
-            'categ_id': product_cteg.id,
+            'categ_id': product_ctg.id,
             'type': 'product',
+            'standard_price': 1.0,
             'list_price': 1.0,
-            'standard_price': 1.0
+            'valuation': 'real_time',
+            'property_stock_account_input': self.account_grni.id,
+            'property_stock_account_output': self.account_cogs.id,
         })
         return product
 
@@ -206,7 +206,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         aml_rec = self.aml_model.read_group(domain,
                                             ['debit', 'credit', 'account_id'],
                                             ['account_id'])
-        print "aml_rec ############################", aml_rec
         if aml_rec:
             return aml_rec[0].get('debit', 0) - aml_rec[0].get('credit', 0)
         else:
