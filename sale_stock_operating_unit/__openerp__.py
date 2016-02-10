@@ -6,28 +6,23 @@
 
 {
     "name": "Operating Unit in Sales Stock",
-    "version": "7.0.1.0.0",
-    "author": "Eficent, Odoo Community Association (OCA)",
+    "summary": "An operating unit (OU) is an organizational entity part of a "
+               "company",
+    "version": "8.0.1.0.0",
+    "author": "Eficent, Serpent Consulting Services Pvt. Ltd., "
+              "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
-    "category": "Purchase Management",
-    "depends": ["sale_stock",
-                "sale_operating_unit",
-                "stock_operating_unit"],
+    "category": "Sales Management",
+    "depends": [
+        "sale_stock",
+        "sale_operating_unit",
+        "stock_operating_unit",
+    ],
     "description": """
 Operating Unit in Sales Stock
 =============================
 This module prevents a user from selecting a Warehouse in the Sale Shop
 that does not belong to the same operating unit.
-
-
-Credits
-=======
-
-Contributors
-------------
-
-* Jordi Ballester <jordi.ballester@eficent.com>
-
     """,
     "data": [],
     'installable': True,
