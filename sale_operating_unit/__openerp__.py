@@ -6,15 +6,15 @@
 {
     "name": "Operating Unit in Sales",
     "version": "8.0.1.0.0",
-    "summary": "An operating unit (OU) is an organizational entity part of a\
-        company",
+    "summary": "An operating unit (OU) is an organizational entity part of a "
+               "company",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "http://www.eficent.com",
-    "category": "Purchase Management",
-    "depends": ["sale", "operating_unit"],
+    "category": "Sales Management",
+    "depends": ["sale", "operating_unit", "stock_operating_unit"],
     "data": [
         "views/sale_view.xml",
         "security/sale_security.xml",
