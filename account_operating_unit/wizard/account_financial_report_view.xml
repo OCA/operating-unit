@@ -7,7 +7,7 @@
             <field name="model">accounting.report</field>
             <field name="inherit_id" ref="account.accounting_report_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//notebook/page[@name='comparison']" position="after">
+                <xpath expr="//notebook/page[@string='Filters']" position="after">
                     <page string="Operating Units" name="operating_units" groups="operating_unit.group_multi_operating_unit">
                         <field name="operating_unit_ids"/>
                     </page>

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
+# © 2015 Eficent Business and IT Consulting Services S.L. -
+# Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp.tools.translate import _
 from openerp import api, fields, models
-from openerp.exceptions import UserError
+from openerp.exceptions import Warning
 
 
 class AccountMoveLine(models.Model):
@@ -25,18 +25,20 @@ class AccountMoveLine(models.Model):
         return super(AccountMoveLine, self).create(vals)
 
     @api.model
-    def _query_get(self, domain=None):
+    def _query_get(self, obj='l'):
+        query = super(AccountMoveLine, self)._query_get(obj=obj)
         if self._context.get('operating_unit_ids', False):
-            domain.append(('operating_unit_id', 'in',
-                           self._context.get('operating_unit_ids')))
-        return super(AccountMoveLine, self)._query_get(domain)
+            operating_unit_ids = self._context.get('operating_unit_ids')
+            query += 'AND ' + obj + '.operating_unit_id in (%s)' % (
+                ','.join(map(str, operating_unit_ids)))
+        return query
 
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         if self.company_id and self.operating_unit_id and \
                 self.company_id != self.operating_unit_id.company_id:
-            raise UserError(_('Configuration error!\nThe Company in the\
+            raise Warning(_('Configuration error!\nThe Company in the\
             Move Line and in the Operating Unit must be the same.'))
 
     @api.one
@@ -46,7 +48,7 @@ class AccountMoveLine(models.Model):
                             self.operating_unit_id and \
                             self.move_id.operating_unit_id != \
                             self.operating_unit_id:
-                raise UserError(_('Configuration error!\nThe Operating Unit in\
+                raise Warning(_('Configuration error!\nThe Operating Unit in\
                 the Move Line and in the Move must be the same.'))
 
 
@@ -63,7 +65,7 @@ class AccountMove(models.Model):
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id,
                                               ou_balances):
         if not move.company_id.inter_ou_clearing_account_id:
-            raise UserError(_('Error!\nYou need to define an inter-operating\
+            raise Warning(_('Error!\nYou need to define an inter-operating\
                 unit clearing account in the company settings'))
 
         res = {
@@ -87,7 +89,7 @@ class AccountMove(models.Model):
     def _check_ou_balance(self, move):
         # Look for the balance of each OU
         ou_balance = {}
-        for line in move.line_ids:
+        for line in move.line_id:
             if line.operating_unit_id.id not in ou_balance:
                 ou_balance[line.operating_unit_id.id] = 0.0
             ou_balance[line.operating_unit_id.id] += (line.debit - line.credit)
@@ -104,7 +106,7 @@ class AccountMove(models.Model):
             # need to create a balancing move line
             ou_list_ids = [line.operating_unit_id and
                            line.operating_unit_id.id for line in
-                           move.line_ids if line.operating_unit_id]
+                           move.line_id if line.operating_unit_id]
             if len(ou_list_ids) <= 1:
                 continue
 
@@ -120,18 +122,18 @@ class AccountMove(models.Model):
                                     move, ou_id, ou_balances)
                 if line_data:
                     lid = ml_obj.create(line_data)
-                    move.write({'line_ids': [(4, lid)]})
+                    move.write({'line_id': [(4, lid)]})
 
         return super(AccountMove, self).post()
 
     @api.one
-    @api.constrains('line_ids')
+    @api.constrains('line_id')
     def _check_ou(self):
         for move in self:
             if not move.company_id.ou_is_self_balanced:
                 continue
-            for line in move.line_ids:
+            for line in move.line_id:
                 if not line.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThe operating\
+                    raise Warning(_('Configuration error!\nThe operating\
                     unit must be completed for each line if the operating\
                     unit has been defined as self-balanced at company level.'))

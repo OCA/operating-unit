@@ -57,7 +57,7 @@
                 <field name="journal_id" position="after">
                     <field name="operating_unit_id"/>
                 </field>
-                <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']"
+                <xpath expr="//field[@name='line_id']/tree//field[@name='account_id']"
                        position="after">
                     <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
                 </xpath>
