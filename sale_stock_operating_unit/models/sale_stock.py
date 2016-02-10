@@ -19,6 +19,6 @@ class StockMove(models.Model):
         if sale_line:
             values.update({
                 'operating_unit_id': sale_line.order_id and
-                    sale_line.order_id.operating_unit_id.id
+                sale_line.order_id.operating_unit_id.id
             })
         return values
