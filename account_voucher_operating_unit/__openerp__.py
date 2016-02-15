@@ -6,6 +6,7 @@
 
 {
     'name': 'Vouchers with Operating Units',
+    'summary': 'Introduces the operating unit to vouchers',
     'version': '1.0',
     'category': 'Generic Modules/Sales & Purchases',
     "author": "Eficent Business and IT Consulting Services S.L., "

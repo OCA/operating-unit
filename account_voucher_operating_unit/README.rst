@@ -6,6 +6,47 @@
 Account Voucher Operating Unit
 ==============================
 
+This module introduces Operating Units to the Account Voucher model. It also
+introduces security rules to manage access control only to users that can
+operate on the OU of the voucher.
+
+Customer or Supplier Payments
+-----------------------------
+
+* The Operating Unit that drives the Voucher is the one assigned to the
+default GL account of the Journal.
+
+* The payment lines of the journal entries are assigned to this OU, and the
+Accounts Receivable or Accounts Payable lines that are created will belong
+to the OU of the AR / AP journal item that is being reconciled.
+
+* Operating Unit A can thus pay invoices posted by Operating Units B and C.
+
+Customer or Supplier Receipts
+-----------------------------
+
+* The Operating Unit is assigned to the voucher, and then to the journal
+items when the voucher is posted.
+
+
+Configuration
+=============
+
+To configure this module, you need to:
+
+* For each bank/cash GL account that you intend to use in customer or supplier
+  payments you have to define the default Operating Unit that the payment
+  will be posted to. Go to *Invoicing / Configuration / Accounts / Accounts*
+  and search for your bank/cash accounts. Then add the default Operating Unit.
+
+
+Installation
+============
+
+You will need to install also the module 'Account Voucher Move Line Create
+Hooks' that is available in the `OCA/account-payment <https://github
+.com/OCA/operating_unit/issues>`_ repository.
+
 
 Usage
 =====
@@ -38,8 +79,8 @@ Images
 Contributors
 ------------
 
-* Ecosoft Co., Ltd. <info@ecosoft.co.th>
 * Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+* Ecosoft Co., Ltd. <info@ecosoft.co.th>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Xpansa Group <hello@xpansa.com>
 
