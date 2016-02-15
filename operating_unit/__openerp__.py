@@ -13,7 +13,7 @@
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
-    "category": "Generic",
+    "category": "Accounting and finance",
     "depends": ["base"],
     "license": "AGPL-3",
     "data": [

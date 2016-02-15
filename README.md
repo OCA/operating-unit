@@ -19,7 +19,7 @@ This part will be replaced when running the oca-gen-addons-table script from OCA
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/projects/p/OCA-operating-unit-9-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-operating-unit-9-0)
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-operating-unit-8-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-operating-unit-8-0)
 
 ----
 

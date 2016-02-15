@@ -21,10 +21,10 @@ class OperatingUnit(models.Model):
 
     _sql_constraints = [
         ('code_company_uniq', 'unique (code,company_id)',
-         'The code of the operating unit must '
+         'The code of the Operating Unit must '
          'be unique per company!'),
         ('name_company_uniq', 'unique (name,company_id)',
-         'The name of the operating unit must '
+         'The name of the Operating Unit must '
          'be unique per company!')
     ]
 
