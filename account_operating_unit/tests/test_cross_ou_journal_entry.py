@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
+# © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp.addons.account_operating_unit.tests import\
     test_account_operating_unit as test_ou
@@ -45,7 +45,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         ]
         move_vals.update({
             'journal_id': journal_ids and journal_ids.id,
-            'line_ids': lines,
+            'line_id': lines,
         })
         move = self.acc_move_model.sudo(self.user_id.id).create(move_vals)
         # Post journal entries

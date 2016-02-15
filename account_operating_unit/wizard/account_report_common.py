@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
+# © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import fields, models
+from openerp import api, fields, models
 
 
 class AccountCommonReport(models.TransientModel):
@@ -13,6 +13,7 @@ class AccountCommonReport(models.TransientModel):
                                           string='Operating Units',
                                           required=False)
 
+    @api.multi
     def _build_contexts(self, data):
         result = super(AccountCommonReport, self)._build_contexts(data)
         data2 = {}

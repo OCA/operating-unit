@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
+# © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp.addons.account.tests import account_test_classes
+from openerp.tests import common
 
 
-class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
+class TestAccountOperatingUnit(common.TransactionCase):
 
     def setUp(self):
         super(TestAccountOperatingUnit, self).setUp()
         self.res_users_model = self.env['res.users']
         self.aml_model = self.env['account.move.line']
         self.account_model = self.env['account.account']
+        self.acc_type_model = self.env['account.account.type']
         # company
         self.company = self.env.ref('base.main_company')
         self.grp_acc_manager = self.env.ref('account.group_account_manager')
@@ -42,24 +43,26 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
                 'groups_id': [(6, 0, [self.grp_acc_manager.id])]
             })
         # Create cash - test account
-        user_type = self.env.ref('account.data_account_type_liquidity')
+        user_types = self.acc_type_model.search([('code', '=', 'cash')])
         self.cash_account_id = self.account_model.create({
             'name': 'Cash - Test',
             'code': 'test_cash',
-            'user_type_id': user_type.id,
+            'type': 'liquidity',
+            'user_type': user_types and user_types[0].id or False,
             'company_id': self.company.id,
         })
         # Create Inter-OU Clearing - test account
-        user_type = self.env.ref('account.data_account_type_equity')
+        user_types = self.acc_type_model.search([('code', '=', 'equity')])
         self.inter_ou_account_id = self.account_model.create({
             'name': 'Inter-OU Clearing',
             'code': 'test_inter_ou',
-            'user_type_id': user_type.id,
+            'type': 'other',
+            'user_type': user_types and user_types[0].id or False,
             'company_id': self.company.id,
         })
         # Assign the Inter-OU Clearing account to the company
         self.company.inter_ou_clearing_account_id = self.inter_ou_account_id.id
-        self.company.ou_is_self_balanced = self.ou_is_self_balanced.id
+        self.company.ou_is_self_balanced = True
 
         # Create user2
         self.user2_id =\

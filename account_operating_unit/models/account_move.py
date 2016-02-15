@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
+# © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp.tools.translate import _
 from openerp import api, fields, models
@@ -27,8 +27,8 @@ class AccountMoveLine(models.Model):
     @api.model
     def _query_get(self, obj='l'):
         query = super(AccountMoveLine, self)._query_get(obj=obj)
-        if self._context.get('operating_unit_ids', False):
-            operating_unit_ids = self._context.get('operating_unit_ids')
+        if self.env.context.get('operating_unit_ids', False):
+            operating_unit_ids = self.env.context.get('operating_unit_ids')
             query += 'AND ' + obj + '.operating_unit_id in (%s)' % (
                 ','.join(map(str, operating_unit_ids)))
         return query
@@ -44,10 +44,11 @@ class AccountMoveLine(models.Model):
     @api.one
     @api.constrains('operating_unit_id', 'move_id')
     def _check_move_operating_unit(self):
-            if self.move_id and self.move_id.operating_unit_id and \
-                            self.operating_unit_id and \
-                            self.move_id.operating_unit_id != \
-                            self.operating_unit_id:
+            if (
+                self.move_id and self.move_id.operating_unit_id and
+                self.operating_unit_id and
+                self.move_id.operating_unit_id != self.operating_unit_id
+            ):
                 raise Warning(_('Configuration error!\nThe Operating Unit in\
                 the Move Line and in the Move must be the same.'))
 
@@ -56,10 +57,9 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                             'Default Operating Unit',
-                                             help="This operating unit will "
-                                                  "be defaulted in the move "
-                                                  "lines.")
+                                        'Default Operating Unit',
+                                        help="This operating unit will "
+                                             "be defaulted in the move lines.")
 
     @api.multi
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id,
@@ -112,6 +112,7 @@ class AccountMove(models.Model):
 
             # Create balancing entries for un-balanced OU's.
             ou_balances = self._check_ou_balance(move)
+            amls = []
             for ou_id in ou_balances.keys():
                 # If the OU is already balanced, then do not continue
                 if move.company_id.currency_id.is_zero(ou_balances[ou_id]):
@@ -119,11 +120,11 @@ class AccountMove(models.Model):
                 # Create a balancing move line in the operating unit
                 # clearing account
                 line_data = self._prepare_inter_ou_balancing_move_line(
-                                    move, ou_id, ou_balances)
+                    move, ou_id, ou_balances)
                 if line_data:
-                    lid = ml_obj.create(line_data)
-                    move.write({'line_id': [(4, lid)]})
-
+                    amls.append(ml_obj.create(line_data))
+            if amls:
+                move.write({'line_id': [(4, aml.id) for aml in amls]})
         return super(AccountMove, self).post()
 
     @api.one
@@ -134,6 +135,7 @@ class AccountMove(models.Model):
                 continue
             for line in move.line_id:
                 if not line.operating_unit_id:
-                    raise Warning(_('Configuration error!\nThe operating\
-                    unit must be completed for each line if the operating\
-                    unit has been defined as self-balanced at company level.'))
+                    raise Warning(_('Configuration error!\nThe operating '
+                                    'unit must be completed for each line if '
+                                    'the operating unit has been defined as '
+                                    'self-balanced at company level.'))
