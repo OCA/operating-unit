@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
+# © 2015 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp.addons.stock_operating_unit.tests import\
@@ -59,8 +59,14 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         move_ids =\
             self.MoveObj.sudo(self.user2_id).\
             search([('picking_id', '=', self.picking_in1.id)]).ids
+<<<<<<< HEAD
         self.assertNotEqual(move_ids, [], 'User 2 should not be able to list'
                             'the stock moves assigned to picking 1.')
+=======
+        self.assertEqual(move_ids, [], 'User 2 should not be able to list '
+                                       'the stock moves assigned to '
+                                       'picking 1.')
+>>>>>>> 1b0d4a66142133d4ef5932ba0eba14a16dea5eed
         # User 2 cannot list the pickings 1
         picking_ids =\
             self.PickingObj.sudo(self.user2_id).\
