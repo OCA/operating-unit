@@ -11,19 +11,43 @@ from openerp.exceptions import Warning
 class AccountVoucher(models.Model):
     _inherit = "account.voucher"
 
+    @api.multi
+    def _get_default_operating_unit(self):
+        journal = self._get_journal()
+        ttype = self.env.context.get('type', False)
+        if ttype in ('payment', 'receipt'):
+            return journal.default_debit_account_id.operating_unit_id.id
+
+    @api.v7
+    def onchange_journal(self, cr, uid, ids, journal_id, line_ids, tax_id,
+                         partner_id, date, amount, ttype, company_id,
+                         context=None):
+        res = super(AccountVoucher, self).onchange_journal(cr, uid, ids,
+            journal_id, line_ids, tax_id, partner_id, date, amount, ttype,
+            company_id, context=context)
+        if journal_id and ttype in ('payment', 'receipt'):
+            journal = self.pool['account.journal'].browse(cr, uid,
+                                                          journal_id,
+                                                          context=context)
+            res['value']['operating_unit_id'] = \
+                journal.default_debit_account_id.operating_unit_id.id
+            res['value']['writeoff_operating_unit_id'] = \
+                journal.default_debit_account_id.operating_unit_id.id
+        return res
+
     operating_unit_id = fields.Many2one(
         'operating.unit',
         string='Operating Unit',
-        default=lambda self: self.env['res.users'].
-        operating_unit_default_get(self._uid),
+        default=_get_default_operating_unit,
     )
     writeoff_operating_unit_id = fields.Many2one(
         'operating.unit',
         string='Write-off Operating Unit',
-        default=lambda self: self.env['res.users'].
-        operating_unit_default_get(self._uid),
+        default=_get_default_operating_unit,
         required=False,
     )
+
+
 
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
