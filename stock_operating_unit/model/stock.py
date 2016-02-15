@@ -49,14 +49,15 @@ class StockLocation(models.Model):
                 assigned to a warehouse that belongs to a different\
                 operating unit.'))
 
-    def _check_required_operating_unit(self, cr, uid, ids, context=None):
-        return True
-        for l in self.browse(cr, uid, ids, context=context):
-            if l.usage == 'internal' and not l.operating_unit_id:
-                return False
-            if l.usage != 'internal' and l.operating_unit_id:
-                return False
-        return True
+    @api.one
+    @api.constrains('operating_unit_id')
+    def _check_required_operating_unit(self):
+        if self.usage == 'internal' and not self.operating_unit_id:
+            raise Warning(_('Configuration error!\nThe operating unit\
+            should be assigned to internal locations and to non other.'))
+        if self.usage != 'internal' and self.operating_unit_id:
+            raise Warning(_('Configuration error!\nThe operating unit\
+            should be assigned to internal locations and to non other.'))
 
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
@@ -74,11 +75,6 @@ class StockLocation(models.Model):
                 self.location_id.operating_unit_id):
                 raise Warning(_('Configuration error!\nThe Parent\
                 Stock Location must belong to the same Operating Unit.'))
-
-    _constraints = [
-        (_check_required_operating_unit,
-         'The operating unit should be assigned to internal locations, '
-         'and to non other.', ['operating_unit_id'])]
 
 
 class StockPicking(models.Model):
@@ -118,13 +114,6 @@ class StockPicking(models.Model):
                 raise Warning(_('Configuration error!\nThe Stock moves\
                 must be related to a location (source or destination)\
                 that belongs to the requesting Operating Unit.'))
-
-    _constraints = [
-        (_check_stock_move_operating_unit,
-         'The Stock moves must be related to a location (source or '
-         'destination) that belongs to the requesting Operating Unit.',
-         ['operating_unit_id', 'move_lines'])
-    ]
 
 
 class StockMove(models.Model):

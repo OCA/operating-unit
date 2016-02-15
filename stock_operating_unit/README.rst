@@ -63,7 +63,6 @@ Contributors
 * Xpansa Group <hello@xpansa.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
-
 Maintainer
 ----------
 
