@@ -33,7 +33,6 @@ class AccountMoveLine(models.Model):
                 ','.join(map(str, operating_unit_ids)))
         return query
 
-
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
@@ -126,7 +125,6 @@ class AccountMove(models.Model):
                     amls.append(ml_obj.create(line_data))
             if amls:
                 move.write({'line_id': [(4, aml.id) for aml in amls]})
-
         return super(AccountMove, self).post()
 
     @api.one

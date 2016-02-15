@@ -14,7 +14,6 @@ class ResCompany(models.Model):
     inter_ou_clearing_account_id = fields.Many2one('account.account',
                                                    'Inter-operating unit\
                                                    clearing account')
-
     ou_is_self_balanced = fields.Boolean('Operating Units are self-balanced',
                                          help="Activate if your company is "
                                               "required to generate a balanced"

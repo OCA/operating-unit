@@ -12,6 +12,7 @@ class AccountCommonReport(models.TransientModel):
     operating_unit_ids = fields.Many2many('operating.unit',
                                           string='Operating Units',
                                           required=False)
+
     @api.multi
     def _build_contexts(self, data):
         result = super(AccountCommonReport, self)._build_contexts(data)
