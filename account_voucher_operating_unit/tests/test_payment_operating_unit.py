@@ -34,5 +34,3 @@ class TestPaymentOU(test_ou.TestAccountVoucherOperatingUnit):
             amount, rate, partner_id, journal_id, currency_id, ttype, date,
             payment_rate_currency_id, company_id)
         self.assertEqual(len(res['value']['line_cr_ids']), 1)
-        #print res
-        # save payment, and validate
