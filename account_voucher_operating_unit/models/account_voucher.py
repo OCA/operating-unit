@@ -14,22 +14,20 @@ class AccountVoucher(models.Model):
     @api.multi
     def _get_default_operating_unit(self):
         journal = self._get_journal()
+        if isinstance(journal, int):
+            journal = self.env['account.journal'].browse(journal)
         ttype = self.env.context.get('type', False)
         if ttype in ('payment', 'receipt'):
             return journal.default_debit_account_id.operating_unit_id.id
 
-    @api.v7
-    def onchange_journal(self, cr, uid, ids, journal_id, line_ids, tax_id,
-                         partner_id, date, amount, ttype, company_id,
-                         context=None):
+    @api.multi
+    def onchange_journal(self, journal_id, line_ids, tax_id,
+                         partner_id, date, amount, ttype, company_id):
         res = super(AccountVoucher, self).onchange_journal(
-            cr, uid, ids,
             journal_id, line_ids, tax_id, partner_id, date, amount, ttype,
-            company_id, context=context)
+            company_id)
         if journal_id and ttype in ('payment', 'receipt'):
-            journal = self.pool['account.journal'].browse(cr, uid,
-                                                          journal_id,
-                                                          context=context)
+            journal = self.env['account.journal'].browse(journal_id)
             res['value']['operating_unit_id'] = \
                 journal.default_debit_account_id.operating_unit_id.id
             res['value']['writeoff_operating_unit_id'] = \
