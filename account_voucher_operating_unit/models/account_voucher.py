@@ -22,7 +22,8 @@ class AccountVoucher(models.Model):
     def onchange_journal(self, cr, uid, ids, journal_id, line_ids, tax_id,
                          partner_id, date, amount, ttype, company_id,
                          context=None):
-        res = super(AccountVoucher, self).onchange_journal(cr, uid, ids,
+        res = super(AccountVoucher, self).onchange_journal(
+            cr, uid, ids,
             journal_id, line_ids, tax_id, partner_id, date, amount, ttype,
             company_id, context=context)
         if journal_id and ttype in ('payment', 'receipt'):
@@ -46,8 +47,6 @@ class AccountVoucher(models.Model):
         default=_get_default_operating_unit,
         required=False,
     )
-
-
 
     @api.one
     @api.constrains('operating_unit_id', 'company_id')
