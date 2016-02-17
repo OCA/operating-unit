@@ -13,7 +13,7 @@ following features:
 * Data partitioning from other OU.
 * Own sequencing schemes.
 * User access administration for data processing and reporting.
-* Product and customer independence of OU.
+* Product and customer are independent of OU.
 * OU specific P&L and Balance sheet.
 
 Installation
