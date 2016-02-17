@@ -13,12 +13,12 @@ operate on the OU of the voucher.
 Customer or Supplier Payments
 -----------------------------
 
-* The Operating Unit that drives the Voucher is the one assigned to the
-default GL account of the Journal.
+* The Operating Unit that drives the Voucher is the one assigned to
+  the default GL account of the Journal.
 
 * The payment lines of the journal entries are assigned to this OU, and the
-Accounts Receivable or Accounts Payable lines that are created will belong
-to the OU of the AR / AP journal item that is being reconciled.
+  Accounts Receivable or Accounts Payable lines that are created will belong
+  to the OU of the AR / AP journal item that is being reconciled.
 
 * Operating Unit A can thus pay invoices posted by Operating Units B and C.
 
@@ -26,7 +26,7 @@ Customer or Supplier Receipts
 -----------------------------
 
 * The Operating Unit is assigned to the voucher, and then to the journal
-items when the voucher is posted.
+  items when the voucher is posted.
 
 
 Configuration
