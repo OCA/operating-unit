@@ -13,10 +13,10 @@ class ProcurementOrder(models.Model):
 
     @api.one
     @api.constrains('purchase_line_id')
-    def _check_purchase_order_operating_unit(self, cr, uid, ids, context=None):
+    def _check_purchase_order_operating_unit(self):
         purchase = self.purchase_line_id.purchase_id
-        if purchase and\
-                self.purchase.operating_unit_id !=\
+        if purchase and \
+                purchase.operating_unit_id !=\
                 self.location_id.operating_unit_id:
             raise UserError(_('Configuration error!\nThe Quotation / Purchase\
             Order and the Procurement Order must belong to the\
