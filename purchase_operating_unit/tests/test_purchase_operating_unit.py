@@ -30,6 +30,8 @@ class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
         self.product1 = self.env.ref('product.product_product_7')
         self.product2 = self.env.ref('product.product_product_9')
         self.product3 = self.env.ref('product.product_product_11')
+        # Account
+        self.account = self.env.ref('l10n_generic_coa.conf_a_pay')
         # Create users
         self.user1_id = self._create_user('user_1',
                                           [self.group_purchase_user,
@@ -46,6 +48,7 @@ class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
                             (self.product2, 500),
                             (self.product3, 800)])
         self.purchase1.sudo(self.user1_id).button_confirm()
+        self._create_invoice(self.purchase1, self.partner1, self.account)
 
     def _create_user(self, login, groups, company, operating_units):
         """ Create a user."""
@@ -79,10 +82,28 @@ class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
                 'date_planned': time.strftime(DEFAULT_SERVER_DATETIME_FORMAT),
             }
             lines.append((0, 0, line_values))
-        return self.PurchaseOrder.sudo(user_id).create({
+        purchase = self.PurchaseOrder.sudo(user_id).create({
             'operating_unit_id': self.ou1.id,
             'requesting_operating_unit_id': self.ou1.id,
             'partner_id': self.partner1.id,
             'order_line': lines,
             'company_id': self.company1.id,
         })
+        return purchase
+
+    def _create_invoice(self, purchase, partner, account):
+        """ Create a vendor invoice for the purchase order."""
+        invoice_vals = {
+            'purchase_id': purchase.id,
+            'partner_id': partner.id,
+            'account_id': account.id,
+            'type': 'in_invoice',
+        }
+        purchase_context = {
+            'active_id': purchase.id,
+            'active_ids': purchase.ids,
+            'active_model': 'purchase.order',
+        }
+        self.env['account.invoice'].with_context(purchase_context).\
+            create(invoice_vals)
+        return True
