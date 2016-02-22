@@ -9,7 +9,8 @@
     "summary": "An operating unit (OU) is an organizational entity part of a\
         company",
     "version": "9.0.1.0.0",
-    "author": "Eficent, Serpent Consulting Services Pvt. Ltd.,"
+    "author": "Eficent Business and IT Consulting Services S.L., "
+              "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Purchase Management",
