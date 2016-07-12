@@ -1,3 +1,4 @@
+language: python
 sudo: false
 cache: pip
 
@@ -12,9 +13,7 @@ addons:
 
 env:
   global:
-  - VERSION="8.0" LINT_CHECK="1"
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
-  - VERSION="8.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
+  - VERSION="8.0" LINT_CHECK="0" TESTS="0" TRANSIFEX="0"
 
   matrix:
   - LINT_CHECK="1"
