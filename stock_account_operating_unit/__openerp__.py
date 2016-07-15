@@ -16,7 +16,11 @@
     "website": "http://www.eficent.com",
     "license": "AGPL-3",
     "website": "http://www.eficent.com",
-    "depends": ['stock_operating_unit', 'account_operating_unit'],
+    "depends": [
+        'stock_operating_unit',
+        'account_operating_unit',
+        "stock_account"
+    ],
     "data": [],
     "installable": True,
 }
