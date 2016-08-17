@@ -38,15 +38,15 @@ If your company is required to generate a balanced balance sheet by
 Operating Unit you can specify at company level that Operating Units should
 be self-balanced, and then indicate a self-balancing clearing account.
 
-* Create an account for "Inter-OU Clearing" of type Regular.
+1. Create an account for "Inter-OU Clearing" of type Non-current assets.
 
-* Go to *Settings / Companies / Companies* and Set the "Operating Units are
-  self-balanced" checkbox.
+2. Go to *Settings / Companies / Configuration* and Set the "Operating Units
+   are self-balanced" checkbox.
 
-  Then Set the "Inter-OU Clearing"  account in "Inter-Operating Unit
-  clearing account" field.
+   Then set the "Inter-OU Clearing"  account in "Inter-Operating Unit
+   clearing account" field.
 
-* Assign Operating Unit in Accounts.
+3. Assign Operating Unit in Accounts.
 
 
 Usage
