@@ -4,6 +4,8 @@
 # © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import api, fields, models
+from openerp.exceptions import ValidationError
+from openerp.tools.translate import _
 
 
 class AccountInvoice(models.Model):
@@ -27,22 +29,17 @@ class AccountInvoice(models.Model):
         return new_move_lines
 
     @api.multi
+    @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        for pr in self.browse():
+        for pr in self:
             if (
                 pr.company_id and
                 pr.operating_unit_id and
                 pr.company_id != pr.operating_unit_id.company_id
             ):
-                return False
+                raise ValidationError(_('The Company in the Invoice and in '
+                                        'Operating Unit must be the same.'))
         return True
-
-    _constraints = [
-        (_check_company_operating_unit,
-         'The Company in the Invoice and in the Operating '
-         'Unit must be the same.', ['operating_unit_id',
-                                    'company_id'])]
-
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
