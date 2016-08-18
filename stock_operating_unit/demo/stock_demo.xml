@@ -15,7 +15,7 @@
         <!-- Multi Company -->
         <!-- Child Company 1-->
         <record id="stock.res_company_1" model="res.company">
-            <field name="inter_ou_clearing_account_id" ref="account_operating_unit.inter_ou"/>
+            <field name="name">Your company child</field>
         </record>
 
         <record id="operating_unit_shop0" model="operating.unit">
