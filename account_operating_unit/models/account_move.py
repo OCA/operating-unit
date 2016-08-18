@@ -37,8 +37,8 @@ class AccountMoveLine(models.Model):
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for rec in self:
-            if rec.company_id and rec.operating_unit_id and rec.company_id !=\
-                rec.operating_unit_id.company_id:
+            if (rec.company_id and rec.operating_unit_id and rec.company_id !=
+                    rec.operating_unit_id.company_id):
                 raise UserError(_('Configuration error!\nThe Company in the'
                                   ' Move Line and in the Operating Unit must '
                                   'be the same.'))
@@ -48,8 +48,8 @@ class AccountMoveLine(models.Model):
     def _check_move_operating_unit(self):
         for rec in self:
             if (rec.move_id and rec.move_id.operating_unit_id and
-                rec.operating_unit_id and
-                rec.move_id.operating_unit_id != self.operating_unit_id):
+                rec.operating_unit_id and rec.move_id.operating_unit_id !=
+                    self.operating_unit_id):
                 raise UserError(_('Configuration error!\nThe Operating Unit in'
                                   ' the Move Line and in the Move must be the'
                                   ' same.'))
