@@ -22,10 +22,11 @@ class ResCompany(models.Model):
                                               "operating unit.",
                                          default=True)
 
-    @api.one
+    @api.multi
     @api.constrains('ou_is_self_balanced')
     def _inter_ou_clearing_acc_required(self):
-        if self.ou_is_self_balanced and not \
-                self.inter_ou_clearing_account_id:
-            raise UserError(_('Configuration error!\nPlease indicate an\
-            Inter-operating unit clearing account.'))
+        for rec in self:
+            if rec.ou_is_self_balanced and not \
+                    rec.inter_ou_clearing_account_id:
+                raise UserError(_('Configuration error!\nPlease indicate an\
+                Inter-operating unit clearing account.'))
