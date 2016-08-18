@@ -41,6 +41,7 @@ class AccountInvoice(models.Model):
                                         'Operating Unit must be the same.'))
         return True
 
+
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
