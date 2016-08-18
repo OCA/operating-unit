@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Operating Unit in Stock Management with Real-Time Valuation",
+    "name": "Stock account moves with Operating Unit",
     "summary": "Create journal entries in moves between internal locations "
                "with different operating units.",
     "version": "8.0.1.0.0",
@@ -21,6 +21,5 @@
         'account_operating_unit',
         "stock_account"
     ],
-    "data": [],
     "installable": True,
 }

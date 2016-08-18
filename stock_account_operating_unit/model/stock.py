@@ -27,8 +27,7 @@ class StockQuant(models.Model):
         ):
             raise Warning(_('You cannot create stock moves involving '
                             'separate source and destination accounts '
-                            'and different source and destination '
-                            'operating units.'))
+                            'related to different operating units.'))
 
         debit_line_vals['operating_unit_id'] = \
             move.operating_unit_dest_id.id or move.operating_unit_id.id
