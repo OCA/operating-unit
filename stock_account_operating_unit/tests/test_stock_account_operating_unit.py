@@ -167,9 +167,8 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         """
         Checks the stock availability, validates and process the stock picking.
         """
-        if picking_type:
-            picking.action_confirm()
-            picking.force_assign()
+        picking.action_confirm()
+        picking.force_assign()
         res = picking.sudo(user_id).do_new_transfer()
         validate_id = res['res_id']
         validate = self.env['stock.immediate.transfer'].browse(validate_id)

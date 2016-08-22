@@ -90,7 +90,7 @@ class StockQuant(models.Model):
                                                                  acc_valuation)
                     move_obj.with_context(company_ctx).create({
                         'journal_id': journal_id,
-                        'line_id': move_lines,
+                        'line_ids': move_lines,
                         'company_id': move.company_id.id,
                         'ref': move.picking_id and move.picking_id.name,
                     })

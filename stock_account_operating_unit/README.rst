@@ -35,7 +35,7 @@ Usage
 =====
 
 Create stock moves between internal locations within the same company, but
-different OU’s. The journal entries are created adn they are self-balanced
+different OU’s. The journal entries are created and they are self-balanced
 within the OU when the journal entries are posted
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
