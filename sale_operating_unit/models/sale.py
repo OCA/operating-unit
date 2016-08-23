@@ -1,49 +1,66 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
+# © 2015 Eficent Business and IT Consulting Services S.L.
+# - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import api, fields, models
-from openerp.exceptions import Warning
-from openerp.tools.translate import _
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from openerp import _, api, fields, models
+from openerp.exceptions import ValidationError
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
+    @api.model
+    def _default_operating_unit(self):
+        if self._defaults['team_id'](self):
+            return self.env['crm.team'].browse(self._defaults['team_id'](
+                self)).operating_unit_id
+        else:
+            return self.env.user.default_operating_unit_id
 
-    @api.one
+    operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Operating Unit',
+        default=_default_operating_unit
+    )
+
+    @api.onchange('team_id')
+    @api.depends('team_id')
+    def onchange_team_id(self):
+        self.operating_unit_id = self.team_id.operating_unit_id
+
+    @api.multi
+    @api.constrains('team_id', 'operating_unit_id')
+    def _check_team_operating_unit(self):
+        for rec in self:
+            if (rec.team_id and
+                    rec.team_id.operating_unit_id != rec.operating_unit_id):
+                raise ValidationError(_('Configuration error\n'
+                                        'The Operating Unit of the sales team '
+                                        'must match with that of the '
+                                        'quote/sales order'))
+
+    @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        if self.company_id and self.operating_unit_id and\
-                self.company_id != self.operating_unit_id.company_id:
-            raise Warning(_('Configuration error!\nThe Company in the\
-            Sales Order and in the Operating Unit must be the same.'))
+        for rec in self:
+            if (rec.company_id and rec.operating_unit_id and
+                    rec.company_id != rec.operating_unit_id.company_id):
+                raise ValidationError(_('Configuration error\nThe Company in'
+                                        ' the Sales Order and in the Operating'
+                                        ' Unit must be the same.'))
 
-    @api.one
-    @api.constrains('operating_unit_id', 'warehouse_id')
-    def _check_wh_operating_unit(self):
-        if self.operating_unit_id and\
-                self.operating_unit_id != self.warehouse_id.operating_unit_id:
-            raise Warning(_('Configuration error!\nThe Operating Unit \
-            in the Sales Order and in the Warehouse must be the same.'))
-
-    @api.model
-    def _make_invoice(self, order, lines):
-        inv_id = super(SaleOrder, self)._make_invoice(order, lines)
-        invoice = self.env['account.invoice'].browse(inv_id)
-        invoice.write({'operating_unit_id': order.operating_unit_id.id})
-        return inv_id
+    @api.multi
+    def _prepare_invoice(self):
+        self.ensure_one()
+        invoice_vals = super(SaleOrder, self)._prepare_invoice()
+        invoice_vals['operating_unit_id'] = self.operating_unit_id.id
+        return invoice_vals
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    operating_unit_id = fields.Many2one('operating.unit',
-                                        related='order_id.operating_unit_id',
+    operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
                                         string='Operating Unit',
                                         readonly=True)
