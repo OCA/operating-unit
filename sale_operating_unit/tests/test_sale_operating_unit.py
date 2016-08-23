@@ -3,7 +3,6 @@
 # Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import netsvc
 from openerp.tests import common
 
 
@@ -15,7 +14,8 @@ class TestSaleOperatingUnit(common.TransactionCase):
         self.partner_model = self.env['res.partner']
         self.res_users_model = self.env['res.users']
         self.sale_model = self.env['sale.order']
-        self.sale_order_model = self.env['sale.order.line']
+        self.sale_line_model = self.env['sale.order.line']
+        self.sale_team_model = self.registry('crm.team')
         self.acc_move_model = self.env['account.move']
         self.acc_invoice_model = self.env['account.invoice']
         self.res_company_model = self.env['res.company']
@@ -42,7 +42,9 @@ class TestSaleOperatingUnit(common.TransactionCase):
         # Partner
         self.partner1 = self.env.ref('base.res_partner_1')
         # Products
-        self.product1 = self.env.ref('product.product_product_7')
+        self.product1 = self.env.ref(
+            'product.product_product_7')
+        self.product1.write({'invoice_policy': 'order'})
         # Create user1
         self.user1 = self._create_user('user_1', [self.grp_sale_user,
                                                   self.grp_acc_user],
@@ -51,17 +53,23 @@ class TestSaleOperatingUnit(common.TransactionCase):
         self.user2 = self._create_user('user_2', [self.grp_sale_user,
                                                   self.grp_acc_user],
                                        self.company, [self.b2c])
+
+        # Create sales team OU1
+        self.sale_team_ou1 = self._create_sale_team(self.user1.id, self.ou1)
+
+        # Create sales team OU2
+        self.sale_team_b2c = self._create_sale_team(self.user2.id, self.b2c)
+
         # Create Sale Order1
         self.sale1 = self._create_sale_order(self.user1.id, self.customer,
                                              self.product1, self.pricelist,
-                                             self.ou1)
+                                             self.sale_team_ou1)
         # Create Sale Order2
         self.sale2 = self._create_sale_order(self.user2.id, self.customer,
                                              self.product1, self.pricelist,
-                                             self.b2c)
+                                             self.sale_team_b2c)
 
-    def _create_user(self, login, groups, company, operating_units,
-                     context=None):
+    def _create_user(self, login, groups, company, operating_units):
         """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create({
@@ -76,17 +84,27 @@ class TestSaleOperatingUnit(common.TransactionCase):
         })
         return user
 
-    def _create_sale_order(self, uid, customer, product, pricelist,
-                           operating_unit):
+    def _create_sale_team(self, uid, operating_unit):
+        """Create a sale team."""
+        context = {'mail_create_nosubscribe': True}
+        team_id = self.sale_team_model.create(self.cr, uid, {
+            'name': operating_unit.name,
+            'operating_unit_id': operating_unit.id
+        }, context=context)
+        return self.sale_team_model.browse(self.cr, uid, team_id,
+                                           context=context)
+
+    def _create_sale_order(self, uid, customer, product, pricelist, team):
         """Create a sale order."""
         sale = self.sale_model.sudo(uid).create({
             'partner_id': customer.id,
             'partner_invoice_id': customer.id,
             'partner_shipping_id': customer.id,
             'pricelist_id': pricelist.id,
-            'operating_unit_id': operating_unit.id
+            'team_id': team.id,
+            'operating_unit_id': team.operating_unit_id.id
         })
-        self.sale_order_model.sudo(uid).create({
+        self.sale_line_model.sudo(uid).create({
             'order_id': sale.id,
             'product_id': product.id,
             'name': 'Sale Order Line'
@@ -94,7 +112,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         return sale
 
     def _confirm_sale(self, sale):
-        sale.action_button_confirm()
+        sale.action_confirm()
         payment = self.payment_model.create({
             'advance_payment_method': 'all'
         })
@@ -113,9 +131,8 @@ class TestSaleOperatingUnit(common.TransactionCase):
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Sales order from Main Operating Unit.
         sale = self.sale_model.sudo(self.user2.id).search(
-                                          [('id', '=', self.sale1.id),
-                                           ('operating_unit_id', '=',
-                                           self.ou1.id)])
+            [('id', '=', self.sale1.id),
+             ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(sale.ids, [], 'User 2 should not have access to '
                                        'OU %s' % self.ou1.name)
         # Confirm Sale1
@@ -124,7 +141,25 @@ class TestSaleOperatingUnit(common.TransactionCase):
         b2c_invoice_id = self._confirm_sale(self.sale2)
         # Checks that invoice has OU b2c
         b2c = self.acc_invoice_model.sudo(self.user2.id).search(
-                                         [('id', '=', b2c_invoice_id),
-                                          ('operating_unit_id', '=',
-                                           self.b2c.id)])
+            [('id', '=', b2c_invoice_id),
+             ('operating_unit_id', '=', self.b2c.id)])
         self.assertNotEqual(b2c.ids, [], 'Invoice should have b2c OU')
+
+    def test_security_2(self):
+        """Test Sale Operating Unit"""
+        # User 2 is only assigned to Operating Unit B2C, and cannot
+        # Access Sales order from Main Operating Unit.
+        sale = self.sale_model.sudo(self.user2.id).search(
+            [('id', '=', self.sale1.id),
+             ('operating_unit_id', '=',
+              self.ou1.id)])
+        self.assertEqual(sale.ids, [], 'User 2 should not have access to '
+                                       'OU %s' % self.ou1.name)
+
+        sale = self.sale_model.sudo(self.user2.id).search(
+            [('id', '=', self.sale2.id),
+             ('operating_unit_id', '=',
+              self.b2c.id)])
+
+        self.assertEqual(len(sale.ids), 1, 'User 1 should have access to '
+                                           'OU %s' % self.b2c.name)
