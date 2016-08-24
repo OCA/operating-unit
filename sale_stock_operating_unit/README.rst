@@ -1,6 +1,6 @@
-.. image:: https://img.shields.io/badge/license-AGPLv3-blue.svg
-   :target: https://www.gnu.org/licenses/agpl.html
-   :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/license-LGPLv3-blue.svg
+   :target: https://www.gnu.org/licenses/lgpl.html
+   :alt: License: LGPL-3
 
 ===============================
 Operating Unit in Sales
@@ -11,10 +11,6 @@ This module introduces the operating unit to the Sales Order.
 Security rules are defined to ensure that users can only display the
 Sales Orders in which they are allowed access to.
 
-Installation
-============
-
-No additional installation instructions are required.
 
 Configuration
 =============
@@ -33,13 +29,10 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/sale_stock_operating_unit/issues>`_. In case of trouble, please
+<https://github.com/OCA/operating-unit/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
-help us smashing it by providing a detailed and welcomed `feedback
-<https://github.com/OCA/
-sale_stock_operating_unit/issues/new?body=module:%20
-sale_stock_operating_unit%0Aversion:%20
-7.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+help us smashing it by providing a detailed and welcomed feedback.
+
 
 Credits
 =======
