@@ -29,6 +29,10 @@ class TestSaleOperatingUnit(common.TransactionCase):
         self.grp_acc_user = self.env.ref('account.group_account_invoice')
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
+        # Main warehouse
+        self.wh1 = self.env.ref('stock.warehouse0')
+        # b2c warehouse
+        self.wh2 = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
         # B2B Operating Unit
         self.b2b = self.env.ref('operating_unit.b2b_operating_unit')
         # B2C Operating Unit
@@ -54,11 +58,11 @@ class TestSaleOperatingUnit(common.TransactionCase):
         # Create Sale Order1
         self.sale1 = self._create_sale_order(self.user1.id, self.customer,
                                              self.product1, self.pricelist,
-                                             self.ou1)
+                                             self.wh1, self.ou1)
         # Create Sale Order2
         self.sale2 = self._create_sale_order(self.user2.id, self.customer,
                                              self.product1, self.pricelist,
-                                             self.b2c)
+                                             self.wh2, self.b2c)
 
     def _create_user(self, login, groups, company, operating_units,
                      context=None):
@@ -76,17 +80,18 @@ class TestSaleOperatingUnit(common.TransactionCase):
         })
         return user
 
-    def _create_sale_order(self, uid, customer, product, pricelist,
+    def _create_sale_order(self, uid, customer, product, pricelist, warehouse,
                            operating_unit):
         """Create a sale order."""
-        sale = self.sale_model.sudo(uid).create({
+        sale = self.sale_model.create({
             'partner_id': customer.id,
             'partner_invoice_id': customer.id,
             'partner_shipping_id': customer.id,
             'pricelist_id': pricelist.id,
-            'operating_unit_id': operating_unit.id
+            'operating_unit_id': operating_unit.id,
+            'warehouse_id': warehouse.id
         })
-        self.sale_order_model.sudo(uid).create({
+        self.sale_order_model.create({
             'order_id': sale.id,
             'product_id': product.id,
             'name': 'Sale Order Line'
