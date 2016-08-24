@@ -2,8 +2,8 @@
 # © 2015 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import netsvc
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from openerp.addons.sale_operating_unit.tests import test_sale_operating_unit
 
 
@@ -14,7 +14,7 @@ class TestSaleStockOperatingUnit(test_sale_operating_unit.
         super(TestSaleStockOperatingUnit, self).setUp()
 
     def _confirm_sale(self, sale):
-        sale.action_button_confirm()
+        sale.action_confirm()
         return True
 
     def test_security(self):
