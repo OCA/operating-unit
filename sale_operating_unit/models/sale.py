@@ -25,9 +25,9 @@ class SaleOrder(models.Model):
     )
 
     @api.onchange('team_id')
-    @api.depends('team_id')
     def onchange_team_id(self):
-        self.operating_unit_id = self.team_id.operating_unit_id
+        if self.team_id:
+            self.operating_unit_id = self.team_id.operating_unit_id
 
     @api.multi
     @api.constrains('team_id', 'operating_unit_id')
