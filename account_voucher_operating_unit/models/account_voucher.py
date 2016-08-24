@@ -2,7 +2,7 @@
 # © 2015 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
 # © 2015 Ecosoft Co. Ltd. - Kitti Upariphutthiphong
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from openerp import api, fields, models, _
 from openerp.exceptions import Warning
