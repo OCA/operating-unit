@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, fields, models, _
-from openerp.exceptions import Warning
+from openerp.exceptions import ValidationError
 
 
 class AccountVoucher(models.Model):
@@ -46,37 +46,40 @@ class AccountVoucher(models.Model):
         required=False,
     )
 
-    @api.one
+    @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        if self.company_id and self.operating_unit_id and \
-                self.company_id != self.operating_unit_id.company_id:
-            raise Warning(_('The Company in the Move Line and in the '
-                            'Operating Unit must be the same.'))
+        for rec in self:
+            if rec.company_id and rec.operating_unit_id and \
+                    rec.company_id != rec.operating_unit_id.company_id:
+                raise ValidationError(_('The Company in the Move Line and in the '
+                                'Operating Unit must be the same.'))
 
-    @api.one
+    @api.multi
     @api.constrains('operating_unit_id', 'journal_id', 'type')
     def _check_journal_account_operating_unit(self):
-        if self.type not in ('payment', 'receipt'):
+        for rec in self:
+            if rec.type not in ('payment', 'receipt'):
+                return True
+            if (
+                rec.journal_id and rec.operating_unit_id and
+                rec.journal_id.default_debit_account_id and
+                rec.journal_id.default_debit_account_id.operating_unit_id and
+                rec.journal_id.default_debit_account_id.operating_unit_id.id !=
+                    rec.operating_unit_id.id
+            ) or (
+                rec.journal_id and rec.operating_unit_id and
+                rec.journal_id.default_credit_account_id and
+                rec.journal_id.default_credit_account_id.operating_unit_id and
+                rec.journal_id.default_credit_account_id.operating_unit_id.id !=
+                    rec.operating_unit_id.id
+            ):
+                raise ValidationError(_('The Default Debit and Credit Accounts'
+                                        ' defined in the Journal must have the'
+                                        ' same Operating Unit as the one'
+                                        ' indicated in the payment or '
+                                        'receipt.'))
             return True
-        if (
-            self.journal_id and self.operating_unit_id and
-            self.journal_id.default_debit_account_id and
-            self.journal_id.default_debit_account_id.operating_unit_id and
-            self.journal_id.default_debit_account_id.operating_unit_id.id !=
-                self.operating_unit_id.id
-        ) or (
-            self.journal_id and self.operating_unit_id and
-            self.journal_id.default_credit_account_id and
-            self.journal_id.default_credit_account_id.operating_unit_id and
-            self.journal_id.default_credit_account_id.operating_unit_id.id !=
-                self.operating_unit_id.id
-        ):
-            raise Warning(_('The Default Debit and Credit Accounts '
-                            'defined in the Journal must have the same '
-                            'Operating Unit as the one indicated in the '
-                            'payment or receipt.'))
-        return True
 
     @api.model
     def first_move_line_get(self, voucher_id, move_id,
@@ -91,7 +94,7 @@ class AccountVoucher(models.Model):
                 res['operating_unit_id'] = \
                     voucher.account_id.operating_unit_id.id
             else:
-                raise Warning(_('Account %s - %s does not have a '
+                raise ValidationError(_('Account %s - %s does not have a '
                                 'default operating unit. \n '
                                 'Payment Method %s default Debit and '
                                 'Credit accounts should have a '
@@ -103,14 +106,13 @@ class AccountVoucher(models.Model):
             if voucher.operating_unit_id:
                 res['operating_unit_id'] = voucher.operating_unit_id.id
             else:
-                raise Warning(_('The Voucher must have an Operating '
+                raise ValidationError(_('The Voucher must have an Operating '
                                 'Unit.'))
         return res
 
     @api.model
-    def _voucher_move_line_prepare(self, voucher_id, line_total,
-                                   move_id, company_currency, current_currency,
-                                   voucher_line_id, ):
+    def _voucher_move_line_prepare(self, voucher_id, move_id, company_currency,
+                                   voucher_line_id):
         res = super(AccountVoucher, self)._voucher_move_line_prepare(
             voucher_id, line_total, move_id, company_currency,
             current_currency, voucher_line_id)
@@ -126,8 +128,7 @@ class AccountVoucher(models.Model):
     @api.model
     def _voucher_move_line_foreign_currency_prepare(
             self, voucher_id, line_total, move_id,
-            company_currency, current_currency, voucher_line_id,
-            foreign_currency_diff):
+            company_currency, voucher_line_id, foreign_currency_diff):
 
         res = super(AccountVoucher, self)._voucher_move_line_prepare(
             voucher_id, line_total, move_id, company_currency,
@@ -149,7 +150,7 @@ class AccountVoucher(models.Model):
             if (voucher.payment_option == 'with_writeoff' or
                     voucher.partner_id):
                 if not voucher.writeoff_operating_unit_id:
-                    raise Warning(_('Please indicate a write-off Operating '
+                    raise ValidationError(_('Please indicate a write-off Operating '
                                     'Unit.'))
                 else:
                     res['operating_unit_id'] = \
@@ -157,7 +158,7 @@ class AccountVoucher(models.Model):
             else:
                 if not voucher.writeoff_operating_unit_id:
                     if not voucher.account_id.operating_unit_id:
-                        raise Warning(_('Please indicate a write-off '
+                        raise ValidationError(_('Please indicate a write-off '
                                         'Operating Unit or a default '
                                         'Operating Unit for account %s') %
                                       voucher.account_id.code)
