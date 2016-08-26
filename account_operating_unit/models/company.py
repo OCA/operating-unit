@@ -20,7 +20,7 @@ class ResCompany(models.Model):
                                               "required to generate a balanced"
                                               " balance sheet for each "
                                               "operating unit.",
-                                         default=True)
+                                         default=False)
 
     @api.multi
     @api.constrains('ou_is_self_balanced')
