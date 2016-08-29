@@ -6,6 +6,7 @@
 
 from openerp import fields, models
 
+
 class HrContract(models.Model):
 
     _inherit = 'hr.contract'

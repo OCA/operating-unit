@@ -7,15 +7,13 @@
 {
     "name": "HR Contract Operating Unit",
     "version": "9.0.1.0.0",
-    "license": 'AGPL-3',
-    "author": "Eficent",
+    "license": "LGPL-3",
+    "author": "Eficent Business and IT Consulting Services S.L., "
+              "Serpent Consulting Services Pvt. Ltd.,"
+              "Odoo Community Association (OCA)",
+    "website": "http://www.eficent.com",
     "category": "Generic Modules/Human Resources",
     "depends": ["hr_contract", "operating_unit"],
-    "description": """
-HR Contract Operating Unit
-=========================
-Adds a the operating unit to the HR Contract.
-    """,
     "data": [
         "views/hr_contract_view.xml",
         "security/hr_contract_security.xml"
