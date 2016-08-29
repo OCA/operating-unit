@@ -12,13 +12,8 @@
               "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "http://www.eficent.com",
-    "category": "Purchase Management",
+    "category": "Sales",
     "depends": ["crm", "operating_unit"],
-    "description": """
-Operating Unit in CRM
-=====================
-This module introduces the operating unit to CRM
-    """,
     "data": [
         "views/crm_lead_view.xml",
         "security/crm_security.xml",
