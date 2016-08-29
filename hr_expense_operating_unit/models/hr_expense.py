@@ -15,3 +15,10 @@ class HrExpenseExpense(models.Model):
                                         default=lambda self:
                                         self.env['res.users'].
                                         operating_unit_default_get(self._uid))
+
+    @api.multi
+    def action_move_create(self):
+        res = super(HrExpenseExpense, self).action_move_create()
+        self.account_move_id.write({'operating_unit_id':
+                                    self.operating_unit_id.id})
+        return res
