@@ -8,16 +8,13 @@ Purchase Requisition with Operating Units
 
 This module introduces the following features:
 
-* Adds Operating Unit (OU) to the account moves and its lines created by the payslip, based on the Operating Unit (OU) defined in the Employee's Contract.
-
 * Security rules are defined to ensure that users can only see the Purchase Requisition of that Operating Units in which they are allowed access to.
 
-When the user creates a purchase order (PO) from the purchase requisition the
-operating unit is copied to the PO.
+* Ensures that Operating Unit in Purchase Requisition and the Warehouse of picking type belongs to the same Operating Unit.
 
-Will set by default the Picking type which haves Operating Unit in Warehouse that of the User.
+* When the user creates a Purchase Order (PO) from the purchase requisition the operating unit is copied to that PO.
 
-Warehouse of picking type
+* Sets default Picking type having Operating Unit (OU) in Warehouse that of the User.
 
 
 Installation
