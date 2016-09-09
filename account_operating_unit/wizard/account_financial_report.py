@@ -30,3 +30,8 @@ class AccountingReport(models.TransientModel):
                                        and data['form']['operating_unit_ids'] \
                                        or False
         return result
+
+    def _print_report(self, data):
+        operating_units = ', '.join([ou.name for ou in self.operating_unit_ids])
+        data['form'].update({'operating_units': operating_units})
+        return super(AccountingReport, self)._print_report(data)
