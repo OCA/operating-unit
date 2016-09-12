@@ -3,8 +3,7 @@
 # - Jordi Ballester Alomar
 # © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.addons.account_operating_unit.tests import\
-    test_account_operating_unit as test_ou
+from . import test_account_operating_unit as test_ou
 
 
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
