@@ -13,6 +13,7 @@
               "Odoo Community Association (OCA)",
     "category": "Generic Modules/Human Resources",
     "website": "http://www.eficent.com",
-    "depends": ["hr_payroll_account", "hr_contract_operating_unit", "account_operating_unit"],
+    "depends": ["hr_payroll_account", "hr_contract_operating_unit",
+                "account_operating_unit"],
     'installable': True,
 }
