@@ -24,14 +24,6 @@ class SaleOrder(models.Model):
             raise Warning(_('Configuration error!\nThe Company in the\
             Sales Order and in the Operating Unit must be the same.'))
 
-    @api.one
-    @api.constrains('operating_unit_id', 'warehouse_id')
-    def _check_wh_operating_unit(self):
-        if self.operating_unit_id and\
-                self.operating_unit_id != self.warehouse_id.operating_unit_id:
-            raise Warning(_('Configuration error!\nThe Operating Unit \
-            in the Sales Order and in the Warehouse must be the same.'))
-
     @api.model
     def _make_invoice(self, order, lines):
         inv_id = super(SaleOrder, self)._make_invoice(order, lines)
