@@ -12,7 +12,8 @@ class AccountPayment(models.Model):
     def _compute_operating_unit_id(self):
         for payment in self:
             if payment.journal_id:
-                payment.operating_unit_id = payment.journal_id.operating_unit_id
+                payment.operating_unit_id = \
+                    payment.journal_id.operating_unit_id
 
     operating_unit_id = fields.Many2one(
         'operating.unit', string='Operating Unit',
@@ -29,7 +30,8 @@ class AccountPayment(models.Model):
 
     def _get_liquidity_move_line_vals(self, amount):
         res = super(AccountPayment, self)._get_liquidity_move_line_vals(amount)
-        res['operating_unit_id'] = self.journal_id.operating_unit_id.id or False
+        res['operating_unit_id'] = self.journal_id.operating_unit_id.id \
+            or False
         return res
 
     def _get_dst_liquidity_aml_dict_vals(self):
@@ -89,7 +91,8 @@ class AccountPayment(models.Model):
 
         transfer_debit_aml_dict = self._get_shared_move_line_vals(
             credit, debit, 0, dst_move.id)
-        transfer_debit_aml_dict.update(self._get_transfer_debit_aml_dict_vals())
+        transfer_debit_aml_dict.update(
+            self._get_transfer_debit_aml_dict_vals())
         transfer_debit_aml = aml_obj.create(transfer_debit_aml_dict)
         dst_move.post()
         return transfer_debit_aml
