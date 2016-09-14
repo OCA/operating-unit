@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
-
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 Serpent Consulting Services Pvt. Ltd.
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import fields, models
 
 
