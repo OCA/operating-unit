@@ -66,6 +66,9 @@ Usage
 
 * Add the Operating Unit to invoices.
 
+* Report invoices by Operating Unit in *Accounting / Reporting*
+  *Business Intelligence / Invoices*
+
 * Add the Default Operating Unit to account move. Then all move lines will
   by default adopt this Operating Unit.
 
