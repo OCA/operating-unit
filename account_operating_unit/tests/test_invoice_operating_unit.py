@@ -13,38 +13,10 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         Test that when an invoice is created, the operating unit is
         passed to the accounting journal items.
         """
-        line_products = [(self.product1, 1000),
-                         (self.product2, 500),
-                         (self.product3, 800)]
-        self.invoice_model = self.env['account.invoice']
-        self.journal_model = self.env['account.journal']
-        self.product_model = self.env['product.product']
-        self.inv_line_model = self.env['account.invoice.line']
-        # Prepare invoice lines
-        lines = []
-        acc_type = self.env.ref('account.data_account_type_expenses')
-        for product, qty in line_products:
-            line_values = {
-                'name': product.name,
-                'product_id': product.id,
-                'quantity': qty,
-                'price_unit': 50,
-                'account_id': self.env['account.account'].
-                search([('user_type_id', '=', acc_type.id)], limit=1).id,
-            }
-            lines.append((0, 0, line_values))
-        inv_vals = {
-            'partner_id': self.partner1.id,
-            'account_id': self.partner1.property_account_payable_id.id,
-            'operating_unit_id': self.b2b.id,
-            'name': "Test Supplier Invoice",
-            'reference_type': "none",
-            'type': 'in_invoice',
-            'invoice_line_ids': lines,
-        }
         # Create invoice
         self.invoice =\
-            self.invoice_model.sudo(self.user_id.id).create(inv_vals)
+            self.invoice_model.sudo(self.user_id.id).create(
+                self._prepare_invoice(self.b2b.id))
         # Validate the invoice
         self.invoice.sudo(self.user_id.id).signal_workflow('invoice_open')
         # Check Operating Units in journal entries
