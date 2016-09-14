@@ -51,7 +51,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
 
     def _create_crm_lead(self, uid, operating_unit):
         """Create a sale order."""
-        crm = self.crm_lead_model.create({
+        crm = self.crm_lead_model.sudo(uid).create({
             'name': 'CRM LEAD',
             'operating_unit_id': operating_unit.id,
         })
@@ -65,4 +65,4 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
                 search([('id', '=', self.lead1.id),
                         ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(lead.ids, [], 'User 2 should not have access to '
-                                       'OU %s' % self.ou1.name)
+                         '%s' % self.ou1.name)
