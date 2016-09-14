@@ -8,7 +8,9 @@
             <field name="inherit_id" ref="account.view_move_line_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id"
+                           options="{'no_create': True}"
+                           groups="operating_unit.group_multi_operating_unit"/>
                 </xpath>
             </field>
         </record>
@@ -19,7 +21,9 @@
             <field name="inherit_id" ref="account.view_move_line_form2"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id"
+                           options="{'no_create': True}"
+                           groups="operating_unit.group_multi_operating_unit"/>
                 </xpath>
             </field>
         </record>
@@ -30,7 +34,9 @@
             <field name="inherit_id" ref="account.view_move_line_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='account_id']" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id"
+                           options="{'no_create': True}"
+                           groups="operating_unit.group_multi_operating_unit"/>
                 </xpath>
             </field>
         </record>
@@ -59,7 +65,9 @@
                 </field>
                 <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']"
                        position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id"
+                           options="{'no_create': True}"
+                           groups="operating_unit.group_multi_operating_unit"/>
                 </xpath>
             </field>
         </record>

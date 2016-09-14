@@ -6,25 +6,35 @@
 Accounting with Operating Units
 ===============================
 
-This module introduces the following features:
+This module allows a company to manage the accounting based on Operating
+Units (OU's).
 
-* Adds the Operating Unit (OU) to the account move line.
+* The financial reports (Trial Balance, P&L, Balance Sheet), allow to report
+  the balances of one or more OU's.
 
-* Defines if the Operating Units are self-balanced and Inter-Operating Unit
-  clearing account at company level.
+* If a company wishes to report Balance Sheet and P&L accounts based on
+  OU's, they should indicate at company level that the OU's are
+  self-balanced, and the corresponding Inter-Operating Unit clearing account.
+  The Chart of Accounts will always be balanced, for each Operating Unit.
 
-* Journal entry with lines in different Operating Units are checked based on
-  the "self-balanced" set up in OU.
+* A company considering Operating Unit as applicable to report only profits
+  and losses will not need to set the OU's as self-balanced.
 
-  At the time of posting the journal entry, the corresponding lines in the
-  Inter-Operating Unit clearing account are automatically created, making
-  each OU self-balanced.
+* The self-balancing of Operating Unit is ensured at the time of posting a
+  journal entry. In case that the journal involves posting of items in
+  separate Operating Units, new journal items will be created, using the
+  Inter-Operating Unit clearing account, to ensure that each OU is going to
+  be self-balanced for that journal entry.
 
-* The account financial reports include the option to filter by OU.
+* Adds the Operating Unit (OU) to the invoice. A user can choose what OU to
+  create the invoice for.
 
-* Adds the Operating Unit (OU) to the invoice.
+* Adds the Operating Unit (OU) to payments and payment methods. The operating
+  unit of a payment will be that of the payment method choosen.
 
-* Implements security rules in the invoice based on OU.
+* Implements security rules at OU level to invoices, payments and journal
+  items.
+
 
 Installation
 ============
@@ -46,7 +56,9 @@ be self-balanced, and then indicate a self-balancing clearing account.
    Then set the "Inter-OU Clearing"  account in "Inter-Operating Unit
    clearing account" field.
 
-3. Assign Operating Unit in Accounts.
+3. Go to *Accounting / Configuration / Accounting / Journals* and define, for
+   each Payment Method (journals of type cash or bank), the Operating Unit
+   that will be used in payments.
 
 
 Usage
@@ -63,9 +75,23 @@ Usage
   self-balanced, then additional move lines will be created so as to make
   the move self-balanced from OU perspective.
 
+* In the menu *Accounting / Reporting / PDF Reports*, you can indicate the
+  Operating Units to report on, for the *Trial Balance*, *Balance Sheet*,
+  *Profit and Loss*, and *Financial Reports*.
+
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/213/9.0
+
+Known issues / Roadmap
+======================
+
+* The *General Ledger*, *Aged Partner Balance* reports do not support the
+  filter by Operating Unit. Basically due to lack of proper hooks in the
+  standard methods used by these reports, to introduce the ability to filter
+  by Operating Unit.
+
 
 Bug Tracker
 ===========
@@ -87,6 +113,8 @@ Contributors
 ------------
 
 * Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Aarón Henríquez <ahenriquez@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainer

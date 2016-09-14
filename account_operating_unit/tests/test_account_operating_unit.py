@@ -12,7 +12,14 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
         super(TestAccountOperatingUnit, self).setUp()
         self.res_users_model = self.env['res.users']
         self.aml_model = self.env['account.move.line']
+        self.invoice_model = self.env['account.invoice']
+        self.inv_line_model = self.env['account.invoice.line']
         self.account_model = self.env['account.account']
+        self.journal_model = self.env['account.journal']
+        self.product_model = self.env['product.product']
+        self.payment_model = self.env['account.payment']
+        self.register_payments_model = self.env['account.register.payments']
+
         # company
         self.company = self.env.ref('base.main_company')
         self.grp_acc_manager = self.env.ref('account.group_account_manager')
@@ -28,6 +35,11 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
         self.product1 = self.env.ref('product.product_product_7')
         self.product2 = self.env.ref('product.product_product_9')
         self.product3 = self.env.ref('product.product_product_11')
+
+        # Payment methods
+        self.payment_method_manual_in = self.env.ref(
+            "account.account_payment_method_manual_in")
+
         # Create user1
         self.user_id =\
             self.res_users_model.with_context({'no_reset_password': True}).\
@@ -42,10 +54,10 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
                 'groups_id': [(6, 0, [self.grp_acc_manager.id])]
             })
         # Create cash - test account
-        user_type = self.env.ref('account.data_account_type_liquidity')
-        self.cash_account_id = self.account_model.create({
-            'name': 'Cash - Test',
-            'code': 'test_cash',
+        user_type = self.env.ref('account.data_account_type_current_assets')
+        self.current_asset_account_id = self.account_model.create({
+            'name': 'Current asset - Test',
+            'code': 'test_current_asset',
             'user_type_id': user_type.id,
             'company_id': self.company.id,
         })
@@ -74,3 +86,74 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
                 'operating_unit_ids': [(4, self.b2c.id)],
                 'groups_id': [(6, 0, [self.grp_acc_manager.id])]
             })
+
+        # Create a cash account 1
+        user_type = self.env.ref('account.data_account_type_liquidity')
+        self.cash1_account_id = self.account_model.create({
+            'name': 'Cash 1 - Test',
+            'code': 'test_cash_1',
+            'user_type_id': user_type.id,
+            'company_id': self.company.id,
+        })
+
+        # Create a journal for cash account 1, associated to the main
+        # operating unit
+        self.cash_journal_ou1 = self.journal_model.create({
+            'name': 'Cash Journal 1 - Test',
+            'code': 'test_cash_1',
+            'type': 'cash',
+            'company_id': self.company.id,
+            'default_debit_account_id': self.cash1_account_id.id,
+            'default_credit_account_id': self.cash1_account_id.id,
+            'operating_unit_id': self.ou1.id
+        })
+
+
+        # Create a cash account 2
+        user_type = self.env.ref('account.data_account_type_liquidity')
+        self.cash2_account_id = self.account_model.create({
+            'name': 'Cash 2 - Test',
+            'code': 'test_cash_2',
+            'user_type_id': user_type.id,
+            'company_id': self.company.id,
+        })
+
+        # Create a journal for cash account 2, associated to the operating
+        # unit B2B
+        self.cash2_journal_b2b = self.journal_model.create({
+            'name': 'Cash Journal 2 - Test',
+            'code': 'test_cash_2',
+            'type': 'cash',
+            'company_id': self.company.id,
+            'default_debit_account_id': self.cash2_account_id.id,
+            'default_credit_account_id': self.cash2_account_id.id,
+            'operating_unit_id': self.b2b.id
+        })
+
+    def _prepare_invoice(self, operating_unit_id):
+        line_products = [(self.product1, 1000),
+                         (self.product2, 500),
+                         (self.product3, 800)]
+        # Prepare invoice lines
+        lines = []
+        acc_type = self.env.ref('account.data_account_type_expenses')
+        for product, qty in line_products:
+            line_values = {
+                'name': product.name,
+                'product_id': product.id,
+                'quantity': qty,
+                'price_unit': 50,
+                'account_id': self.env['account.account'].
+                    search([('user_type_id', '=', acc_type.id)], limit=1).id,
+            }
+            lines.append((0, 0, line_values))
+        inv_vals = {
+            'partner_id': self.partner1.id,
+            'account_id': self.partner1.property_account_payable_id.id,
+            'operating_unit_id': operating_unit_id,
+            'name': "Test Supplier Invoice",
+            'reference_type': "none",
+            'type': 'in_invoice',
+            'invoice_line_ids': lines,
+        }
+        return inv_vals

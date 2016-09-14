@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2016 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
-# © 2016 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import api, fields, models
 from openerp.exceptions import ValidationError
