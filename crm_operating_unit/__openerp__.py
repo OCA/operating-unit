@@ -19,5 +19,4 @@
         "security/crm_security.xml",
     ],
     'installable': True,
-    'active': False,
 }
