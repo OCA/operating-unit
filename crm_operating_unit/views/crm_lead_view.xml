@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!-- Copyright 2015 Eficent Business and IT Consulting Services S.L.
+     Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <openerp>
     <data>
 
@@ -9,7 +12,7 @@
         <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
         <field name="arch" type="xml">
             <field name="probability" position="before">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" options="{'no_create': True}"/>
             </field>
         </field>
         </record>
@@ -45,7 +48,7 @@
             <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
                 <field name="referred" position="before">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" options="{'no_create': True}"/>
                 </field>
             </field>
         </record>
