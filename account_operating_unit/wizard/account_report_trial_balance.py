@@ -18,12 +18,14 @@ class AccountBalanceReport(models.TransientModel):
         result = super(AccountBalanceReport, self)._build_contexts(data)
         data2 = {}
         data2['form'] = self.read(['operating_unit_ids'])[0]
-        result['operating_unit_ids'] = 'operating_unit_ids' in data2['form'] \
-                                       and data2['form']['operating_unit_ids'] \
+        result['operating_unit_ids'] = 'operating_unit_ids' \
+                                       in data2['form'] and \
+                                       data2['form']['operating_unit_ids'] \
                                        or False
         return result
 
     def _print_report(self, data):
-        operating_units = ', '.join([ou.name for ou in self.operating_unit_ids])
+        operating_units = ', '.join([ou.name for ou in
+                                     self.operating_unit_ids])
         data['form'].update({'operating_units': operating_units})
         return super(AccountBalanceReport, self)._print_report(data)
