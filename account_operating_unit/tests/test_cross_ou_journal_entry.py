@@ -29,14 +29,14 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         lines = [
             (0, 0, {
                 'name': 'Test',
-                'account_id': self.cash_account_id.id,
+                'account_id': self.current_asset_account_id.id,
                 'debit': 0,
                 'credit': 100,
                 'operating_unit_id': self.b2b.id,
                 }),
             (0, 0, {
                 'name': 'Test',
-                'account_id': self.cash_account_id.id,
+                'account_id': self.current_asset_account_id.id,
                 'debit': 100,
                 'credit': 0,
                 'operating_unit_id': self.b2c.id,
@@ -50,7 +50,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         # Post journal entries
         move.post()
         # Check the balance of the account
-        self._check_balance(self.cash_account_id.id, acc_type='cash')
+        self._check_balance(self.current_asset_account_id.id, acc_type='other')
         clearing_account_id = self.company.inter_ou_clearing_account_id.id
         self._check_balance(clearing_account_id, acc_type='clearing')
 
@@ -63,7 +63,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         domain = [('account_id', '=', account_id),
                   ('operating_unit_id', '=', self.b2b.id)]
         balance = self._get_balance(domain)
-        if acc_type == 'cash':
+        if acc_type == 'other':
             self.assertEqual(balance, -100,
                              'Balance is -100 for Operating Unit B2B.')
         else:
@@ -73,7 +73,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         domain = [('account_id', '=', account_id),
                   ('operating_unit_id', '=', self.b2c.id)]
         balance = self._get_balance(domain)
-        if acc_type == 'cash':
+        if acc_type == 'other':
             self.assertEqual(balance, 100.0,
                              'Balance is 100 for Operating Unit B2C.')
         else:
