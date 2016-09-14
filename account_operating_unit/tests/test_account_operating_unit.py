@@ -142,8 +142,8 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
                 'product_id': product.id,
                 'quantity': qty,
                 'price_unit': 50,
-                'account_id': self.env['account.account'].
-                    search([('user_type_id', '=', acc_type.id)], limit=1).id,
+                'account_id': self.env['account.account'].search(
+                    [('user_type_id', '=', acc_type.id)], limit=1).id
             }
             lines.append((0, 0, line_values))
         inv_vals = {
