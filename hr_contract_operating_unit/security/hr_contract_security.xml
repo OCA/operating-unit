@@ -2,7 +2,7 @@
 <!-- Copyright 2015 Eficent Business and IT Consulting Services S.L.
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
-<openerp>
+<odoo>
 <data noupdate="0">
 
     <record id="ir_rule_hr_contract_allowed_operating_units"
@@ -18,4 +18,4 @@
     </record>
 
 </data>
-</openerp>
+</odoo>
