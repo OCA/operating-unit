@@ -14,17 +14,6 @@ This module introduces the following features:
 
 * Adds Operating Unit (OU) to the account moves while generating accounting entries from the expense.
 
-
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 
