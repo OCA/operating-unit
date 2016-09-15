@@ -4,8 +4,8 @@
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.tools.translate import _
-from openerp import models, fields, api
-from openerp.exceptions import Warning
+from openerp import models, api
+from openerp.exceptions import Warning as UserError
 
 
 class HrPayslip(models.Model):
@@ -31,7 +31,7 @@ class HrPayslip(models.Model):
             # that belong to the same OU.
             if OU:
                 if slip.contract_id.operating_unit_id.id != OU:
-                    raise Warning(_('Configuration error!\nThe Contracts must\
+                    raise UserError(_('Configuration error!\nThe Contracts must\
                     refer the same Operating Unit.'))
             OU = slip.contract_id.operating_unit_id.id
         # Add to context the OU of the employee contract
