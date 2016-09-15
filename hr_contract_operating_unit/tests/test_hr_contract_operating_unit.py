@@ -76,8 +76,7 @@ class TestHrContractOperatingUnit(common.TransactionCase):
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Hr Contract records of Main Operating Unit.
         record = self.hr_contract_model.sudo(self.user2.id).search(
-                                          [('id', '=', self.hr_contract1.id),
-                                           ('operating_unit_id', '=',
-                                            self.ou1.id)])
+            [('id', '=', self.hr_contract1.id),
+             ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(record.ids, [], 'User 2 should not have access to '
                          'OU %s' % self.ou1.name)
