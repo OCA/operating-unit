@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
 
       <!-- Shelf 2 stock location -->
         <record id="stock.stock_location_14" model="stock.location">
