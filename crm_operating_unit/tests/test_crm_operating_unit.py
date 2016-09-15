@@ -61,8 +61,8 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access CRM leads for Main Operating Unit.
 
-        lead = self.crm_lead_model.sudo(self.user2.id).\
-                search([('id', '=', self.lead1.id),
-                        ('operating_unit_id', '=', self.ou1.id)])
+        lead = self.crm_lead_model.sudo(self.user2.id).search(
+            [('id', '=', self.lead1.id),
+             ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(lead.ids, [], 'User 2 should not have access to '
                          '%s' % self.ou1.name)
