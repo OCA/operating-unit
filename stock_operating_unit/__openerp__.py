@@ -12,6 +12,7 @@
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent, Serpent Consulting Services Pvt. Ltd., "
               "Odoo Community Association (OCA)",
+    "license": "LGPL-3",
     "website": "http://www.eficent.com",
     "depends": ["stock", "account_operating_unit"],
     "data": [

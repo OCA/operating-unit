@@ -3,8 +3,7 @@
 # - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.addons.stock_operating_unit.tests import\
-    test_stock_operating_unit as test_stock_ou
+from . import test_stock_operating_unit as test_stock_ou
 
 
 class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
@@ -60,7 +59,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
             self.MoveObj.sudo(self.user2_id).\
             search([('picking_id', '=', self.picking_in1.id)]).ids
         self.assertEqual(move_ids, [], 'User 2 should not be able to list'
-                            'the stock moves assigned to picking 1.')
+                        'the stock moves assigned to picking 1.')
         # User 2 cannot list the pickings 1
         picking_ids =\
             self.PickingObj.sudo(self.user2_id).\
