@@ -12,7 +12,7 @@
         <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
         <field name="arch" type="xml">
             <field name="company_id" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" options="{'no_create': True}"/>
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" domain = "[('company_id','=', company_id)]" options="{'no_create': True}"/>
             </field>
         </field>
         </record>
