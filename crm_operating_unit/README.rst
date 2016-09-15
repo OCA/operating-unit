@@ -15,16 +15,6 @@ This module introduces the following features:
 * Security rules are defined to ensure that users can only see the Opportunity / Lead of that Operating Units in which they are allowed access to.
 
 
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 
