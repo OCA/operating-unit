@@ -5,7 +5,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.tools.translate import _
 from openerp import api, fields, models
-from openerp.exceptions import Warning
+from openerp.exceptions import  Warning as UserError
 
 
 class StockWarehouse(models.Model):
@@ -17,14 +17,13 @@ class StockWarehouse(models.Model):
                                         self.env['res.users'].
                                         operating_unit_default_get(self._uid))
 
-
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for rec in self:
-            if rec.company_id and rec.operating_unit_id and \
-                            rec.company_id != rec.operating_unit_id.company_id:
-                raise Warning(_('Configuration error!\nThe Company in the\
+            if rec.company_id and rec.operating_unit_id and rec.company_id \
+                    != rec.operating_unit_id.company_id:
+                raise UserError(_('Configuration error!\nThe Company in the\
                 Stock Warehouse and in the Operating Unit must be the same.'))
 
 
@@ -43,20 +42,20 @@ class StockLocation(models.Model):
                                                rec.ids)])
             for w in warehouse:
                 if rec.operating_unit_id != w.operating_unit_id:
-                    raise Warning(_('Configuration error!\nThis location is\
+                    raise UserError(_('Configuration error!\nThis location is\
                                     assigned to a warehouse that belongs to a\
                                     different operating unit.'))
             warehouse = warehouse_obj.search([('lot_stock_id', 'in', rec.ids)])
             for w in warehouse:
                 if self.operating_unit_id != w.operating_unit_id:
-                    raise Warning(_('Configuration error!\nThis location is\
+                    raise UserError(_('Configuration error!\nThis location is\
                                     assigned to a warehouse that belongs to a\
                                     different operating unit.'))
             warehouse = warehouse_obj.search([('wh_output_stock_loc_id', 'in',
                                                rec.ids)])
             for w in warehouse:
                 if rec.operating_unit_id != w.operating_unit_id:
-                    raise Warning(_('Configuration error!\nThis location is\
+                    raise UserError(_('Configuration error!\nThis location is\
                     assigned to a warehouse that belongs to a different\
                     operating unit.'))
 
@@ -65,10 +64,10 @@ class StockLocation(models.Model):
     def _check_required_operating_unit(self):
         for rec in self:
             if rec.usage == 'internal' and not rec.operating_unit_id:
-                raise Warning(_('Configuration error!\nThe operating unit\
+                raise UserError(_('Configuration error!\nThe operating unit\
                 should be assigned to internal locations and to non other.'))
             if rec.usage != 'internal' and rec.operating_unit_id:
-                raise Warning(_('Configuration error!\nThe operating unit\
+                raise UserError(_('Configuration error!\nThe operating unit\
                 should be assigned to internal locations and to non other.'))
 
     @api.multi
@@ -77,7 +76,7 @@ class StockLocation(models.Model):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and\
                     rec.company_id != rec.operating_unit_id.company_id:
-                raise Warning(_('Configuration error!\nThe Company in the\
+                raise UserError(_('Configuration error!\nThe Company in the\
                 Stock Location and in the Operating Unit must be the same.'))
 
     @api.multi
@@ -85,9 +84,9 @@ class StockLocation(models.Model):
     def _check_parent_operating_unit(self):
         for rec in self:
             if (rec.location_id and rec.location_id.usage == 'internal'
-                and rec.operating_unit_id and rec.operating_unit_id !=
-                    rec.location_id.operating_unit_id):
-                    raise Warning(_('Configuration error!\nThe Parent\
+                and rec.operating_unit_id and rec.operating_unit_id
+                != rec.location_id.operating_unit_id):
+                    raise UserError(_('Configuration error!\nThe Parent\
                     Stock Location must belong to the same Operating Unit.'))
 
 
@@ -106,7 +105,7 @@ class StockPicking(models.Model):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and \
                     rec.company_id != rec.operating_unit_id.company_id:
-                raise Warning(_('Configuration error!\nThe Company in the\
+                raise UserError(_('Configuration error!\nThe Company in the\
                 Stock Picking and in the Operating Unit must be the same.'))
 
     @api.multi
@@ -127,7 +126,7 @@ class StockPicking(models.Model):
                     operating_unit !=
                         sm.location_dest_id.operating_unit_id
                 ):
-                    raise Warning(_('Configuration error!\nThe Stock moves\
+                    raise UserError(_('Configuration error!\nThe Stock moves\
                     must be related to a location (source or destination)\
                     that belongs to the requesting Operating Unit.'))
 
