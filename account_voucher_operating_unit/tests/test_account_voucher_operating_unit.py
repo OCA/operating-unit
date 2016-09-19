@@ -13,20 +13,23 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
     # Setup 2 invoices,  1st invoice is created for Main OU
     #                    2nd invoice is created for B2C
     # Validate invoices
-    # In Customer Payment,
+    # In Customer receipt,
     #    user_all that have access to both OU, will get 2 line.
     #    user_b2c that have access to B2C will get 1 line.
-    # Use user_1 to make payment
+    # Use user_1 to make receipt
     # Check journal enteries
 
     def setUp(self):
         super(TestAccountVoucherOperatingUnit, self).setUp()
         self.ResUsers = self.env['res.users']
-        self.Invoice = self.env['account.invoice']
-        self.InvoiceLine = self.env['account.invoice.line']
+        self.Move = self.env['account.move']
         self.Account = self.env['account.account']
         self.AccountType = self.env['account.account.type']
         self.Voucher = self.env['account.voucher']
+        self.VoucherLine = self.env['account.voucher.line']
+        self.AccountJournal = self.env['account.journal']
+        self.AccountAccount = self.env['account.account']
+        self.OU = self.env['operating.unit']
         # company
         self.company1 = self.env.ref('base.main_company')
         # groups
@@ -39,11 +42,19 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
         self.partner1 = self.env.ref('base.res_partner_1')
         # Products
         self.product1 = self.env.ref('product.product_product_7')
-        self.product2 = self.env.ref('product.product_product_9')
-        self.product3 = self.env.ref('product.product_product_11')
-        # Payment journal
-        self.payment_journal = self.env.ref('account.bank_journal')
-        self.payment_account = self.env.ref('account.bnk')
+        # receipt journal
+        self.account1 = self._create_account(self.company1.id,
+                                                     self.ou1)
+        self.account2 = self._create_account(self.company1.id,
+                                                     self.b2c)
+        self.journal1 = self._create_journal(self.company1.id,
+                                             self.account1,
+                                             self.account1,
+                                             self.ou1)
+        self.journal2 = self._create_journal(self.company1.id,
+                                             self.account2,
+                                             self.account2,
+                                             self.b2c)
         # Create users
         self.user_all_id = self._create_user('user_all',
                                              [self.group_account_user],
@@ -53,14 +64,12 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
                                              [self.group_account_user],
                                              self.company1,
                                              [self.b2c])
-        # Create Invoice with Main Operating Unit
-        self.invoice_ou = self._create_invoice(self.ou1.id)
-        # Create Invoice with B2C
-        self.invoice_b2c = self._create_invoice(self.b2c.id)
 
-        # user_b2c to create Customer Payment
-        self.payment = self._create_customer_payment(
-            self.user_all_id, self.ou1.id, self.partner1.id)
+        # user_b2c to create Customer receipt
+        self.receipt1 = self._create_customer_receipt(self.ou1, self.journal1)
+        self.receipt2 = self._create_customer_receipt(self.b2c, self.journal2)
+        self._create_receipt_line(self.receipt1.id)
+        self._create_receipt_line(self.receipt2.id)
 
     def _create_user(self, login, groups, company, operating_units):
         """ Create a user."""
@@ -79,53 +88,55 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
             })
         return user.id
 
-    def _create_invoice(self, operating_unit_id):
-        """Create & Validate the invoice."""
-        line_products = [(self.product1, 2)]
-        # Prepare invoice lines
-        lines = []
-        user_types = self.AccountType.search([('code', '=', 'expense')])
-        user_type_id = user_types and user_types[0].id or False
-        for product, qty in line_products:
-            line_values = {
-                'name': product.name,
-                'product_id': product.id,
-                'quantity': qty,
-                'price_unit': 100,
-                'account_id': self.Account.search(
-                    [('user_type', '=', user_type_id)], limit=1).id,
-            }
-            lines.append((0, 0, line_values))
-        inv_vals = {
-            'partner_id': self.partner1.id,
-            'account_id': self.partner1.property_account_payable.id,
-            'operating_unit_id': operating_unit_id,
-            'name': "Customer Invoice (Main OU)",
-            'reference_type': "none",
-            'type': 'out_invoice',
-            'invoice_line': lines,
-        }
-        # Create invoice
-        self.invoice =\
-            self.Invoice.sudo(self.user_all_id).create(inv_vals)
-        # Validate the invoice
-        self.invoice.sudo(self.user_all_id).signal_workflow('invoice_open')
-        return self.invoice
+    def _create_journal(self, company, accdeb, acccre, operating_unit):
 
-    def _create_customer_payment(self, user_id, operating_unit_id, partner_id):
-        """Create & Validate the invoice."""
-        pay_vals = {
-            'type': 'payment',
-            'account_id': self.payment_account.id,
-            'amount': 0.0,
+        journal = self.AccountJournal.create({
+                'name': 'sales journal',
+                'type': 'sale',
+                'company_id': company,
+                'code': 'SM' + operating_unit.name,
+                'default_debit_account_id': accdeb,
+                'default_credit_account_id': acccre,
+            })
+        return journal.id
+
+    def _create_account(self, company, operating_unit):
+
+        account = self.AccountJournal.create({
+                'name': 'sales account',
+                'type': 'sale',
+                'company_id': company,
+                'code': 'SM' + operating_unit.name,
+                'operating_unit_id': operating_unit.id,
+            })
+        return account.id
+
+    def _create_customer_receipt(self, operating_unit, journal):
+        """Create receipt"""
+        rec_vals = {
+            'voucher_type': 'sale',
+            'account_id': self.receipt_account,
             'company_id': self.company1.id,
-            'journal_id': self.payment_journal.id,
-            'name': 'Customer Payment: B2C',
+            'journal_id': journal,
+            'name': 'Customer receipt: %s' % operating_unit.name,
             'partner_id': self.partner1.id,
             'date': date.today(),
-            'operating_unit_id': operating_unit_id,
+            'operating_unit_id': operating_unit.id,
         }
-        # Create invoice
-        self.payment =\
-            self.Voucher.sudo(user_id).create(pay_vals)
-        return self.payment
+        # Create receipt
+        receipt = self.Voucher.create(rec_vals)
+        return receipt
+
+    def _create_receipt_line(self, voucher_id):
+        """Create receipt"""
+        rec_vals = {
+            'product_id': self.product1.id,
+            'voucher_id': voucher_id,
+            'name': self.product1.name,
+            'quantity': 100,
+            'price_unit': 100,
+            'account_id': 17
+        }
+        # Create receipt
+        line = self.VoucherLine.create(rec_vals)
+        return line

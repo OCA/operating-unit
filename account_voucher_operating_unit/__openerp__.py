@@ -13,10 +13,8 @@
               "Ecosoft Co. Ltd.,"
               "Odoo Community Association (OCA)",
     'website': 'http://www.eficent.com',
-    'depends': ['account_voucher_move_line_create_hooks',
-                'account_operating_unit', 'operating_unit'],
+    'depends': ['account_operating_unit', 'account_voucher'],
     'data': [
-        'views/account_voucher_payment_receipt_view.xml',
         'views/account_voucher_sales_purchase_view.xml',
         'security/account_voucher_security.xml'
     ],
