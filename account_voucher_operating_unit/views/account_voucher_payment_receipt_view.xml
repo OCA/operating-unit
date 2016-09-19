@@ -10,29 +10,12 @@
             <field name="name">account.voucher.payment.form</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id"
-                   ref="account_voucher.view_vendor_payment_form"/>
+                   ref="account_voucher.view_purchase_receipt_form"/>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                </field>
-                <field name="writeoff_acc_id" position="after">
-                    <field name="writeoff_operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                </field>
-            </field>
-        </record>
-
-        <!-- Register Payment Form (old Pay Invoice wizard) -->
-        <record model="ir.ui.view" id="view_vendor_receipt_dialog_form">
-            <field name="name">account.voucher.receipt.dialog.form</field>
-            <field name="model">account.voucher</field>
-            <field name="inherit_id"
-                   ref="account_voucher.view_vendor_receipt_dialog_form"/>
-            <field name="arch" type="xml">
-                <field name="journal_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                </field>
-                <field name="writeoff_acc_id" position="after">
-                    <field name="writeoff_operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]"
+                           options="{'no_create': True}"
+                           groups="operating_unit.group_multi_operating_unit"/>
                 </field>
             </field>
         </record>
@@ -42,13 +25,12 @@
             <field name="name">account.voucher.receipt.form</field>
             <field name="model">account.voucher</field>
             <field name="inherit_id"
-                   ref="account_voucher.view_vendor_receipt_form"/>
+                   ref="account_voucher.view_sale_receipt_form"/>
             <field name="arch" type="xml">
                 <field name="journal_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                </field>
-                <field name="writeoff_acc_id" position="after">
-                    <field name="writeoff_operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]"
+                           options="{'no_create': True}"
+                           groups="operating_unit.group_multi_operating_unit"/>
                 </field>
             </field>
         </record>
