@@ -29,6 +29,7 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
         self.VoucherLine = self.env['account.voucher.line']
         self.AccountJournal = self.env['account.journal']
         self.AccountAccount = self.env['account.account']
+        self.AccountType = self.env['account.account.type']
         self.OU = self.env['operating.unit']
         # company
         self.company1 = self.env.ref('base.main_company')
@@ -43,18 +44,19 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
         # Products
         self.product1 = self.env.ref('product.product_product_7')
         # receipt journal
+        self.utype = self.AccountType.search([('name', '=', 'Income')])
+        self.account_rec = self.AccountAccount.search([('name', '=',
+                                                  'Account Receivable')])
         self.account1 = self._create_account(self.company1.id,
-                                                     self.ou1)
+                                             self.utype.id, 'code1')
         self.account2 = self._create_account(self.company1.id,
-                                                     self.b2c)
+                                             self.utype.id, 'code2')
         self.journal1 = self._create_journal(self.company1.id,
                                              self.account1,
-                                             self.account1,
-                                             self.ou1)
+                                             self.account1, 'code1')
         self.journal2 = self._create_journal(self.company1.id,
                                              self.account2,
-                                             self.account2,
-                                             self.b2c)
+                                             self.account2, 'code2')
         # Create users
         self.user_all_id = self._create_user('user_all',
                                              [self.group_account_user],
@@ -88,26 +90,25 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
             })
         return user.id
 
-    def _create_journal(self, company, accdeb, acccre, operating_unit):
+    def _create_journal(self, company, accdeb, acccre, code):
 
         journal = self.AccountJournal.create({
                 'name': 'sales journal',
                 'type': 'sale',
                 'company_id': company,
-                'code': 'SM' + operating_unit.name,
+                'code': code,
                 'default_debit_account_id': accdeb,
                 'default_credit_account_id': acccre,
             })
         return journal.id
 
-    def _create_account(self, company, operating_unit):
+    def _create_account(self, company, utype, code):
 
-        account = self.AccountJournal.create({
+        account = self.AccountAccount.create({
                 'name': 'sales account',
-                'type': 'sale',
+                'user_type_id': utype,
                 'company_id': company,
-                'code': 'SM' + operating_unit.name,
-                'operating_unit_id': operating_unit.id,
+                'code': code
             })
         return account.id
 
@@ -115,7 +116,7 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
         """Create receipt"""
         rec_vals = {
             'voucher_type': 'sale',
-            'account_id': self.receipt_account,
+            'account_id': self.account_rec.id,
             'company_id': self.company1.id,
             'journal_id': journal,
             'name': 'Customer receipt: %s' % operating_unit.name,
