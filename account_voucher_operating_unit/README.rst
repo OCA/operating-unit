@@ -16,26 +16,6 @@ Customer or Supplier Receipts
 * The Operating Unit is assigned to the voucher, and then to the journal
   items when the voucher is posted.
 
-
-Configuration
-=============
-
-To configure this module, you need to:
-
-* For each bank/cash GL account that you intend to use in customer or supplier
-  payments you have to define the default Operating Unit that the payment
-  will be posted to. Go to *Invoicing / Configuration / Accounts / Accounts*
-  and search for your bank/cash accounts. Then add the default Operating Unit.
-
-
-Installation
-============
-
-You will need to install also the module 'Account Voucher Move Line Create
-Hooks' that is available in the `OCA/account-payment <https://github
-.com/OCA/operating_unit/issues>`_ repository.
-
-
 Usage
 =====
 
