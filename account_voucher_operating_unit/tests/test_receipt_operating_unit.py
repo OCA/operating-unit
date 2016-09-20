@@ -4,8 +4,7 @@
 # © 2015 Ecosoft Co. Ltd. - Kitti Upariphutthiphong
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp.addons.account_voucher_operating_unit.tests import\
-    test_account_voucher_operating_unit as test_ou
+from . import test_account_voucher_operating_unit as test_ou
 
 
 class TestReceiptOU(test_ou.TestAccountVoucherOperatingUnit):
@@ -44,5 +43,6 @@ class TestReceiptOU(test_ou.TestAccountVoucherOperatingUnit):
 
         # user_b2c will see only B2C invoices (1 records)
         res = self.Move.sudo(self.user_b2c_id).search(
-            [('id', 'in', [move1.id, move2.id])])
+            [('id', 'in', [move1.id, move2.id]),
+              ('operating_unit_id', '=', self.b2c.id)])
         self.assertEqual(len(res), 1)
