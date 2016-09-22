@@ -15,22 +15,6 @@
     "category": "Manufacturing",
     "depends": ["mrp",
                 "procurement_operating_unit"],
-    "description": """
-Operating Unit in MRP
-=======================================
-This module implements global security rules on manufacturing orders so that
-a user can only read manufacturing orders where the location is linked to an
-operating unit that the user has access to.
-
-Credits
-=======
-
-Contributors
-------------
-
-* Jordi Ballester <jordi.ballester@eficent.com>
-
-    """,
     "data": [
         "security/mrp_security.xml",
         "views/mrp_view.xml"
