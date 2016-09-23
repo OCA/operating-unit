@@ -13,19 +13,8 @@ class TestProcurement(common.TransactionCase):
         self.res_users_model = self.env['res.users']
         self.procurement_order_model = self.env['procurement.order']
         self.procurement_rule_model = self.env['procurement.rule']
-        self.mrp_line_model = self.env['mrp.bom.line']
         self.bom_model = self.env['mrp.bom']
-        self.property_model = self.env['mrp.property']
-        self.product_model = self.env['product.product']
-        self.product_template_model = self.env['product.template']
-        self.product_category_model = self.env['product.category']
-        self.product_category = self.env.ref('product.product_category_2')
         self.warehouse = self.env.ref('stock.warehouse0')
-        self.product_unit = self.env.ref('product.product_uom_unit')
-        self.property = self.env.ref('mrp.mrp_property_0')
-        self.line = self.env.ref('mrp.mrp_property_0')
-        self.group = self.env.ref('mrp.mrp_property_group_1')
-        self.company = self.env.ref('base.main_company')
 
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
