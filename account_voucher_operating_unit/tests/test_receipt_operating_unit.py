@@ -20,12 +20,14 @@ class TestReceiptOU(test_ou.TestAccountVoucherOperatingUnit):
         self.receipt1.proforma_voucher()
         self.receipt2.proforma_voucher()
         # Check Operating Units in journal entries
-        all_op_units1 = all(move_line.operating_unit_id.id ==
-                           self.receipt1.operating_unit_id.id
-                           for move_line in self.receipt1.move_id.line_ids)
-        all_op_units2 = all(move_line2.operating_unit_id.id ==
-                           self.receipt2.operating_unit_id.id
-                           for move_line2 in self.receipt2.move_id.line_ids)
+        all_op_units1 = all(
+            move_line.operating_unit_id.id ==
+            self.receipt1.operating_unit_id.id
+            for move_line in self.receipt1.move_id.line_ids)
+        all_op_units2 = all(
+            move_line2.operating_unit_id.id ==
+            self.receipt2.operating_unit_id.id
+            for move_line2 in self.receipt2.move_id.line_ids)
         # Assert if journal entries of the receipt
         # have different operating units
         self.assertNotEqual(all_op_units1, False, 'Journal Entries have\
@@ -40,9 +42,8 @@ class TestReceiptOU(test_ou.TestAccountVoucherOperatingUnit):
         res = self.Move.sudo(self.user_all_id).search(
             [('id', 'in', [move1.id, move2.id])])
         self.assertEqual(len(res), 2)
-
         # user_b2c will see only B2C invoices (1 records)
         res = self.Move.sudo(self.user_b2c_id).search(
             [('id', 'in', [move1.id, move2.id]),
-              ('operating_unit_id', '=', self.b2c.id)])
+             ('operating_unit_id', '=', self.b2c.id)])
         self.assertEqual(len(res), 1)
