@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.addons.stock.tests import common
 
@@ -16,7 +15,6 @@ class TestStockOperatingUnit(common.TestStockCommon):
         # company
         self.company1 = self.env.ref('base.main_company')
         # groups
-        self.group_purchase_user = self.env.ref('purchase.group_purchase_user')
         self.group_stock_manager = self.env.ref('stock.group_stock_manager')
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
