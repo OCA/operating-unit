@@ -46,7 +46,7 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
         # receipt journal
         self.utype = self.AccountType.search([('name', '=', 'Income')])
         self.account_rec = self.AccountAccount.search(
-            [('name', '=','Account Receivable')])
+            [('name', '=', 'Account Receivable')])
         self.account1 = self._create_account(self.company1.id,
                                              self.utype.id, 'code1')
         self.account2 = self._create_account(self.company1.id,
