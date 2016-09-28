@@ -45,8 +45,8 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
         self.product1 = self.env.ref('product.product_product_7')
         # receipt journal
         self.utype = self.AccountType.search([('name', '=', 'Income')])
-        self.account_rec = self.AccountAccount.search([('name', '=',
-                                                  'Account Receivable')])
+        self.account_rec = self.AccountAccount.search(
+            [('name', '=','Account Receivable')])
         self.account1 = self._create_account(self.company1.id,
                                              self.utype.id, 'code1')
         self.account2 = self._create_account(self.company1.id,
@@ -93,23 +93,21 @@ class TestAccountVoucherOperatingUnit(common.TransactionCase):
     def _create_journal(self, company, accdeb, acccre, code):
 
         journal = self.AccountJournal.create({
-                'name': 'sales journal',
-                'type': 'sale',
-                'company_id': company,
-                'code': code,
-                'default_debit_account_id': accdeb,
-                'default_credit_account_id': acccre,
-            })
+            'name': 'sales journal',
+            'type': 'sale',
+            'company_id': company,
+            'code': code,
+            'default_debit_account_id': accdeb,
+            'default_credit_account_id': acccre})
         return journal.id
 
     def _create_account(self, company, utype, code):
 
         account = self.AccountAccount.create({
-                'name': 'sales account',
-                'user_type_id': utype,
-                'company_id': company,
-                'code': code
-            })
+            'name': 'sales account',
+            'user_type_id': utype,
+            'company_id': company,
+            'code': code})
         return account.id
 
     def _create_customer_receipt(self, operating_unit, journal):
