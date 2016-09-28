@@ -82,9 +82,13 @@ class StockLocation(models.Model):
     @api.constrains('operating_unit_id', 'location_id')
     def _check_parent_operating_unit(self):
         for rec in self:
-            if (rec.location_id and rec.location_id.usage == 'internal'
-                and rec.operating_unit_id and rec.operating_unit_id !=
-                    rec.location_id.operating_unit_id):
+            if (
+                rec.location_id
+                and rec.location_id.usage == 'internal'
+                and rec.operating_unit_id
+                and rec.operating_unit_id !=
+                    rec.location_id.operating_unit_id
+            ):
                     raise UserError(_('Configuration error!\nThe Parent\
                     Stock Location must belong to the same Operating Unit.'))
 
