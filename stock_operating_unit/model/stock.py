@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.tools.translate import _
 from openerp import api, fields, models
-from openerp.exceptions import  Warning as UserError
+from openerp.exceptions import Warning as UserError
 
 
 class StockWarehouse(models.Model):
@@ -84,8 +83,8 @@ class StockLocation(models.Model):
     def _check_parent_operating_unit(self):
         for rec in self:
             if (rec.location_id and rec.location_id.usage == 'internal'
-                and rec.operating_unit_id and rec.operating_unit_id
-                != rec.location_id.operating_unit_id):
+                and rec.operating_unit_id and rec.operating_unit_id !=
+                    rec.location_id.operating_unit_id):
                     raise UserError(_('Configuration error!\nThe Parent\
                     Stock Location must belong to the same Operating Unit.'))
 
