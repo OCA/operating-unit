@@ -12,6 +12,7 @@
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Ecosoft Co. Ltd.,"
               "Odoo Community Association (OCA)",
+    "license": "LGPL-3",
     'website': 'http://www.eficent.com',
     'depends': ['account_operating_unit', 'account_voucher'],
     'data': [

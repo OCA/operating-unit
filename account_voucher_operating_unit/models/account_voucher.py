@@ -35,7 +35,7 @@ class AccountVoucher(models.Model):
     @api.multi
     def account_move_get(self):
         self.ensure_one()
-        move= super(AccountVoucher, self).account_move_get()
+        move = super(AccountVoucher, self).account_move_get()
         if not self.operating_unit_id:
             return move
         else:
@@ -58,10 +58,8 @@ class AccountVoucher(models.Model):
                 res['operating_unit_id'] = self.operating_unit_id.id
             else:
                 raise ValidationError(_('The Voucher must have an Operating '
-                                'Unit.'))
+                                        'Unit.'))
         return res
-
-
 
 
 class AccountVoucherLine(models.Model):
@@ -76,8 +74,8 @@ class AccountVoucherLine(models.Model):
 
     @api.model
     def create(self, vals):
-        if not 'operating_unit_id' in vals:
-            voucher= self.env['account.voucher'].browse(vals['voucher_id'])
+        if 'operating_unit_id' not in vals:
+            voucher = self.env['account.voucher'].browse(vals['voucher_id'])
             if voucher.operating_unit_id:
                 vals['operating_unit_id'] = voucher.operating_unit_id.id
         return super(AccountVoucherLine, self).create(vals)
