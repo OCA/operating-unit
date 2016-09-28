@@ -107,7 +107,6 @@ class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
             'operating_unit_id': self.ou1.id
         })
 
-
         # Create a cash account 2
         user_type = self.env.ref('account.data_account_type_liquidity')
         self.cash2_account_id = self.account_model.create({
