@@ -14,11 +14,6 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
         self.res_users_model = self.env['res.users']
         self.crm_lead_model = self.env['crm.lead']
         self.sale_model = self.env['sale.order']
-        # Groups
-        self.grp_sale_mngr = self.env.ref('base.group_sale_manager')
-        self.grp_user = self.env.ref('base.group_user')
-        # Company
-        self.company = self.env.ref('base.main_company')
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2C Operating Unit
@@ -27,7 +22,6 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
         self.partner = self.env.ref('base.partner_root')
 
         # Create CRM Leads
-#         self.lead1 = self._create_crm_lead(self.user1.id, self.ou1)
         self.lead2 = self._create_crm_lead(self.b2c)
 
     def _create_crm_lead(self, operating_unit):
@@ -46,10 +40,9 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
                                   'team_id':crm.team_id.id})
         return crm
 
-    def test_crm_lead(self):
+    def test_sale_crm(self):
         # Assert that Operating Unit of Opportunity
         # matches to the Sale Order OU.
-
         self.assertEqual(self.sale.operating_unit_id,
                          self.sale.opportunity_id.operating_unit_id,
                          'Operating Unit of Opportunity should match to '
