@@ -38,7 +38,7 @@ class AccountPayment(models.Model):
         dst_liquidity_aml_dict = {
             'name': _('Transfer from %s') % self.journal_id.name,
             'account_id':
-                self.destination_journal_id.default_credit_account_id.id,
+            self.destination_journal_id.default_credit_account_id.id,
             'currency_id': self.destination_journal_id.currency_id.id,
             'payment_id': self.id,
             'journal_id': self.destination_journal_id.id,
@@ -50,9 +50,9 @@ class AccountPayment(models.Model):
                 'amount_currency': -self.amount,
             })
 
-        dst_liquidity_aml_dict.update({
-            'operating_unit_id':
-                self.destination_journal_id.operating_unit_id.id or False})
+        dst_liquidity_aml_dict.\
+            update({'operating_unit_id':
+                    self.destination_journal_id.operating_unit_id.id or False})
         return dst_liquidity_aml_dict
 
     def _get_transfer_debit_aml_dict_vals(self):
@@ -62,10 +62,10 @@ class AccountPayment(models.Model):
             'account_id': self.company_id.transfer_account_id.id,
             'journal_id': self.destination_journal_id.id
         }
-        transfer_debit_aml_dict.update({
-            'operating_unit_id':
-                self.journal_id.operating_unit_id.id or False
-        })
+        transfer_debit_aml_dict.\
+            update({'operating_unit_id':
+                    self.journal_id.operating_unit_id.id or False
+                    })
         return transfer_debit_aml_dict
 
     def _create_transfer_entry(self, amount):
