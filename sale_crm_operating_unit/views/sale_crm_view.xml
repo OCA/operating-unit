@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="crm_case_form_view_oppor_extended">
+            <field name="name">Opportunities - Quote OU</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                    <button name='%(sale_crm.sale_action_quotations_new)d' position='attributes'>
+                        <attribute name="context">{
+                            'search_default_partner_id': partner_id,
+                            'default_partner_id': partner_id,
+                            'default_team_id': team_id,
+                            'default_operating_unit_id': operating_unit_id,
+                            }
+                       </attribute>
+                    </button>
+            </field>
+        </record>
+
+    </data>
+</openerp>
