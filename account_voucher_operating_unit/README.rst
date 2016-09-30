@@ -38,13 +38,14 @@ Credits
 Images
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
 
 Contributors
 ------------
 
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
-* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Aaron Henriquez <aheficent@eficent.com>
+* Sudhir Arya <sudhir.arya@serpentcs.com>
 
 Maintainer
 ----------
