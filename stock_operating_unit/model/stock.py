@@ -37,26 +37,23 @@ class StockLocation(models.Model):
     def _check_warehouse_operating_unit(self):
         for rec in self:
             warehouse_obj = self.env['stock.warehouse']
-            warehouse = warehouse_obj.search([('wh_input_stock_loc_id', 'in',
-                                               rec.ids)])
-            for w in warehouse:
+            warehouses = warehouse_obj.search(
+                ['|','|',('wh_input_stock_loc_id','=',rec.ids[0]),
+                 ('lot_stock_id', 'in', rec.ids),
+                 ('wh_output_stock_loc_id', 'in', rec.ids)])
+            for w in warehouses:
                 if rec.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThis location is\
-                                    assigned to a warehouse that belongs to a\
-                                    different operating unit.'))
-            warehouse = warehouse_obj.search([('lot_stock_id', 'in', rec.ids)])
-            for w in warehouse:
+                    raise UserError(_('Configuration error!\nThis location is '
+                                      'assigned to a warehouse that belongs to'
+                                      ' a different operating unit.'))
                 if self.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThis location is\
-                                    assigned to a warehouse that belongs to a\
-                                    different operating unit.'))
-            warehouse = warehouse_obj.search([('wh_output_stock_loc_id', 'in',
-                                               rec.ids)])
-            for w in warehouse:
+                    raise UserError(_('Configuration error!\nThis location is '
+                                      'assigned to a warehouse that belongs to'
+                                      ' a different operating unit.'))
                 if rec.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThis location is\
-                    assigned to a warehouse that belongs to a different\
-                    operating unit.'))
+                    raise UserError(_('Configuration error!\nThis location is'
+                                      ' assigned to a warehouse that belongs'
+                                      ' to a different operating unit.'))
 
     @api.multi
     @api.constrains('operating_unit_id')
@@ -110,28 +107,6 @@ class StockPicking(models.Model):
                 raise UserError(_('Configuration error!\nThe Company in the\
                 Stock Picking and in the Operating Unit must be the same.'))
 
-    @api.multi
-    @api.constrains('operating_unit_id', 'move_lines')
-    def _check_stock_move_operating_unit(self):
-        for rec in self:
-            if not rec.operating_unit_id:
-                return True
-            operating_unit = rec.operating_unit_id
-            for sm in rec.move_lines:
-                if (
-                    sm.location_id and
-                    sm.location_id.operating_unit_id and
-                    operating_unit != sm.location_id.operating_unit_id
-                ) and (
-                    sm.location_dest_id and
-                    sm.location_dest_id.operating_unit_id and
-                    operating_unit !=
-                        sm.location_dest_id.operating_unit_id
-                ):
-                    raise UserError(_('Configuration error!\nThe Stock moves\
-                    must be related to a location (source or destination)\
-                    that belongs to the requesting Operating Unit.'))
-
 
 class StockMove(models.Model):
     _inherit = 'stock.move'
@@ -144,3 +119,27 @@ class StockMove(models.Model):
         fields.Many2one('operating.unit',
                         related='location_dest_id.operating_unit_id',
                         string='Dest. Location Operating Unit', readonly=True)
+
+
+    @api.multi
+    @api.constrains('operating_unit_id', 'location_id',
+                    'operating_unit_dest_id', 'location_dest_id')
+    def _check_stock_move_operating_unit(self):
+        for stock_move in self:
+            if not stock_move.operating_unit_id:
+                return True
+            operating_unit = stock_move.operating_unit_id
+            if (
+                            stock_move.location_id and
+                            stock_move.location_id.operating_unit_id and
+                            operating_unit != stock_move.location_id.
+                            operating_unit_id
+            ) and (
+                            stock_move.location_dest_id and
+                            stock_move.location_dest_id.operating_unit_id and
+                            operating_unit !=
+                            stock_move.location_dest_id.operating_unit_id
+            ):
+                raise UserError(_('Configuration error!\nThe Stock moves\
+                must be related to a location (source or destination)\
+                that belongs to the requesting Operating Unit.'))
