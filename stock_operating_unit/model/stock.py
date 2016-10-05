@@ -38,7 +38,7 @@ class StockLocation(models.Model):
         for rec in self:
             warehouse_obj = self.env['stock.warehouse']
             warehouses = warehouse_obj.search(
-                ['|','|',('wh_input_stock_loc_id','=',rec.ids[0]),
+                ['|', '|', ('wh_input_stock_loc_id', '=', rec.ids[0]),
                  ('lot_stock_id', 'in', rec.ids),
                  ('wh_output_stock_loc_id', 'in', rec.ids)])
             for w in warehouses:
@@ -93,10 +93,20 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                        'Requesting Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
+                                        'Requesting Operating Unit')
+
+    @api.v7
+    def onchange_picking_type(self, cr, uid, ids, picking_type_id, partner_id,
+                              context=None):
+        res = super(StockPicking, self).onchange_picking_type(
+            cr, uid, ids, picking_type_id, partner_id, context=context)
+        if picking_type_id:
+            picking_type = self.pool.get('stock.picking.type').browse(
+                cr, uid, picking_type_id, context=context) or None
+            res['value']['operating_unit_id'] = \
+                picking_type.warehouse_id.operating_unit_id and \
+                picking_type.warehouse_id.operating_unit_id.id or False
+        return res
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
@@ -106,6 +116,17 @@ class StockPicking(models.Model):
                     rec.company_id != rec.operating_unit_id.company_id:
                 raise UserError(_('Configuration error!\nThe Company in the\
                 Stock Picking and in the Operating Unit must be the same.'))
+
+    @api.multi
+    @api.constrains('operating_unit_id', 'picking_type_id')
+    def _check_picking_type_operating_unit(self):
+        for rec in self:
+            if rec.picking_type_id and rec.operating_unit_id and \
+                    rec.picking_type_id.warehouse_id.operating_unit_id != \
+                    rec.operating_unit_id:
+                raise UserError(_('Configuration error!\nThe Operating Unit '
+                                  'of the picking must be the same as that '
+                                  'of the warehouse of the Picking Type.'))
 
 
 class StockMove(models.Model):
@@ -119,7 +140,6 @@ class StockMove(models.Model):
         fields.Many2one('operating.unit',
                         related='location_dest_id.operating_unit_id',
                         string='Dest. Location Operating Unit', readonly=True)
-
 
     @api.multi
     @api.constrains('operating_unit_id', 'location_id', 'picking_id',
