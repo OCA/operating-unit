@@ -151,17 +151,17 @@ class StockMove(models.Model):
             operating_unit = stock_move.operating_unit_id
             operating_unit_dest = stock_move.operating_unit_dest_id
             if (
-                            stock_move.location_id and
-                            stock_move.location_id.operating_unit_id and
-                            stock_move.picking_id and
+                stock_move.location_id and
+                    stock_move.location_id.operating_unit_id and
+                        stock_move.picking_id and
                             operating_unit != stock_move.picking_id.
-                            operating_unit_id
+                                operating_unit_id
             ) and (
-                            stock_move.location_dest_id and
-                            stock_move.location_dest_id.operating_unit_id and
+                    stock_move.location_dest_id and
+                        stock_move.location_dest_id.operating_unit_id and
                             stock_move.picking_id and
-                            operating_unit_dest !=
-                            stock_move.picking_id.operating_unit_id
+                                operating_unit_dest !=
+                                    stock_move.picking_id.operating_unit_id
             ):
                 raise UserError(_('Configuration error!\nThe Stock moves\
                 must be related to a location (source or destination)\
