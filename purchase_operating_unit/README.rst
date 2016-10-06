@@ -12,11 +12,6 @@ This module introduces the following features:
 - The operating unit is copied to the stock picking.
 - It implements user's security rules.
 
-
-Configuration
-=============
-
-
 Usage
 =====
 
