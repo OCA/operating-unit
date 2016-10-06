@@ -18,5 +18,5 @@
         "views/crm_lead_view.xml",
         "security/crm_security.xml",
     ],
-    'installable': True,
+    'installable': False,
 }
