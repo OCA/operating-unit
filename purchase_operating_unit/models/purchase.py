@@ -3,8 +3,8 @@
 # - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import _, api, exceptions, fields, models
-from openerp.exceptions import Warning
+from openerp import _, api, fields, models
+from openerp.exceptions import ValidationError, UserError
 
 
 class PurchaseOrder(models.Model):
@@ -15,7 +15,8 @@ class PurchaseOrder(models.Model):
         res = super(PurchaseOrder, self)._default_picking_type()
         type_obj = self.env['stock.picking.type']
         operating_unit = self.env['res.users'].operating_unit_default_get(
-                self._uid)
+            self.env.uid
+        )
         types = type_obj.search([('code', '=', 'incoming'),
                                  ('warehouse_id.operating_unit_id', '=',
                                   operating_unit.id)])
@@ -23,48 +24,57 @@ class PurchaseOrder(models.Model):
             res = types[:1].id
         return res
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
-    requesting_operating_unit_id =\
-        fields.Many2one('operating.unit', 'Requesting Operating Unit',
-                        default=lambda self:
-                        self.env['res.users'].
-                        operating_unit_default_get(self._uid))
+    operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Operating Unit',
+        default=lambda self: (self.env['res.users'].
+                              operating_unit_default_get(self.env.uid))
+    )
+    requesting_operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Requesting Operating Unit',
+        default=lambda self: (self.env['res.users'].
+                              operating_unit_default_get(self.env.uid))
+    )
 
-    picking_type_id = fields.Many2one('stock.picking.type', 'Deliver To',
-                                      help="This will determine picking type "
-                                           "of incoming shipment",
-                                      required=True,
-                                      states={'confirmed':
-                                              [('readonly', True)],
-                                              'approved': [('readonly', True)],
-                                              'done': [('readonly', True)]},
-                                      default=_default_picking_type)
+    picking_type_id = fields.Many2one(
+        comodel_name='stock.picking.type',
+        string='Deliver To',
+        help="This will determine picking type of incoming shipment",
+        required=True,
+        states={'confirmed': [('readonly', True)],
+                'approved': [('readonly', True)],
+                'done': [('readonly', True)]},
+        default=lambda self: self._default_picking_type(),
+    )
 
-    @api.one
     @api.constrains('operating_unit_id', 'picking_type_id')
     def _check_warehouse_operating_unit(self):
-        picking_type = self.picking_type_id
-        if picking_type:
-            if picking_type.warehouse_id and\
-                    picking_type.warehouse_id.operating_unit_id\
-                    and self.operating_unit_id and\
-                    picking_type.warehouse_id.operating_unit_id !=\
-                    self.operating_unit_id:
-                raise Warning(_('Configuration error!\nThe\
-                Quotation / Purchase Order and the Warehouse of picking type\
-                must belong to the same Operating Unit.'))
+        for record in self:
+            picking_type = record.picking_type_id
+            if not record.picking_type_id:
+                continue
+            warehouse = picking_type.warehouse_id
+            if (picking_type.warehouse_id and
+                    picking_type.warehouse_id.operating_unit_id and
+                    record.operating_unit_id and
+                    warehouse.operating_unit_id != record.operating_unit_id):
+                raise ValidationError(
+                    _('Configuration error\nThe Quotation / Purchase Order '
+                      'and the Warehouse of picking type must belong to the '
+                      'same Operating Unit.')
+                )
 
-    @api.one
     @api.constrains('operating_unit_id', 'requesting_operating_unit_id',
                     'company_id')
     def _check_company_operating_unit(self):
-        if self.company_id and self.operating_unit_id and\
-                self.company_id != self.operating_unit_id.company_id:
-            raise Warning(_('Configuration error!\nThe Company in the\
-            Purchase Order and in the Operating Unit must be the same.'))
+        for record in self:
+            if (record.company_id and record.operating_unit_id and
+                    record.company_id != record.operating_unit_id.company_id):
+                raise ValidationError(
+                    _('Configuration error\nThe Company in the Purchase Order '
+                      'and in the Operating Unit must be the same.')
+                )
 
     @api.onchange('operating_unit_id')
     def _onchange_operating_unit_id(self):
@@ -76,43 +86,42 @@ class PurchaseOrder(models.Model):
             if types:
                 self.picking_type_id = types[:1]
             else:
-                raise exceptions.Warning(_("No Warehouse found with the "
-                                           "Operating Unit indicated in the "
-                                           "Purchase Order!"))
+                raise UserError(
+                    _("No Warehouse found with the Operating Unit indicated "
+                      "in the Purchase Order")
+                )
 
     @api.model
     def _prepare_picking(self):
         picking_vals = super(PurchaseOrder, self)._prepare_picking()
-        picking_vals['operating_unit_id'] = self.operating_unit_id and\
-            self.operating_unit_id.id
+        picking_vals['operating_unit_id'] = self.operating_unit_id.id
         return picking_vals
 
-    @api.one
-    @api.constrains('invoice_ids')
+    @api.constrains('invoice_ids', 'operating_unit_id')
     def _check_invoice_ou(self):
         for po in self:
             for invoice in po.invoice_ids:
                 if invoice.operating_unit_id != po.operating_unit_id:
-                    raise Warning(_('The operating unit of the purchase order '
-                                    'must be the same as in the '
-                                    'associated invoices.'))
+                    raise ValidationError(
+                        _('The operating unit of the purchase order must '
+                          'be the same as in the associated invoices.')
+                    )
 
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    operating_unit_id = fields.Many2one('operating.unit',
-                                        related='order_id.operating_unit_id',
+    operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
                                         string='Operating Unit', readonly=True)
 
-    @api.one
-    @api.constrains('invoice_lines')
+    @api.constrains('operating_unit_id', 'invoice_lines')
     def _check_invoice_ou(self):
         for line in self:
             for inv_line in line.invoice_lines:
-                if inv_line.invoice_id and \
-                    inv_line.invoice_id.operating_unit_id != \
-                        line.operating_unit_id:
-                    raise Warning(_('The operating unit of the purchase order '
-                                    'must be the same as in the '
-                                    'associated invoices.'))
+                invoice_operating_unit = inv_line.invoice_id.operating_unit_id
+                if (inv_line.invoice_id and
+                        invoice_operating_unit != line.operating_unit_id):
+                    raise ValidationError(
+                        _('The operating unit of the purchase order must '
+                          'be the same as in the associated invoices.')
+                    )
