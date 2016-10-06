@@ -28,5 +28,5 @@
         "wizard/account_financial_report_view.xml",
         "wizard/account_report_trial_balance_view.xml",
     ],
-    "installable": True,
+    'installable': False,
 }
