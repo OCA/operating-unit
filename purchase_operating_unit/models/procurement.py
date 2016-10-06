@@ -3,9 +3,8 @@
 # - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, models
-from openerp.tools.translate import _
-from openerp.exceptions import UserError
+from openerp import _, api, models
+from openerp.exceptions import ValidationError
 
 
 class ProcurementOrder(models.Model):
@@ -14,13 +13,15 @@ class ProcurementOrder(models.Model):
     @api.one
     @api.constrains('purchase_line_id')
     def _check_purchase_order_operating_unit(self):
-        purchase = self.purchase_line_id.purchase_id
-        if purchase and \
-                purchase.operating_unit_id !=\
-                self.location_id.operating_unit_id:
-            raise UserError(_('Configuration error!\nThe Quotation / Purchase\
-            Order and the Procurement Order must belong to the\
-            same Operating Unit.'))
+        purchase = self.purchase_line_id.order_id
+        location = self.location_id
+        if (purchase and
+                purchase.operating_unit_id != location.operating_unit_id):
+            raise ValidationError(
+                _('Configuration error\nThe Quotation / Purchase Order and '
+                  'the Procurement Order must belong to the same '
+                  'Operating Unit.')
+                )
 
     @api.multi
     def _prepare_purchase_order(self, partner):
