@@ -3,7 +3,7 @@
 # - Jordi Ballester Alomar
 # © 2015 Ecosoft Co. Ltd. - Kitti Upariphutthiphong
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from datetime import date
 from openerp.tests import common
@@ -36,13 +36,11 @@ class TestBudgetOperatingUnit(common.TransactionCase):
         # Create Main OU budget
         self.budget_ou1 = self._create_budget(self.user1_id,
                                               self.ou1.id,
-                                              'Budget Main OU',
-                                              'BG-MOU')
+                                              'Budget Main OU')
         # Create B2C budget
         self.budget_b2c = self._create_budget(self.user2_id,
                                               self.b2c.id,
-                                              'Budget B2C',
-                                              'BG-B2C')
+                                              'Budget B2C')
 
     def _create_user(self, login, groups, company, operating_units):
         """ Create a user."""
@@ -61,7 +59,7 @@ class TestBudgetOperatingUnit(common.TransactionCase):
             })
         return user.id
 
-    def _create_budget(self, user_id, ou_id, name, code):
+    def _create_budget(self, user_id, ou_id, name):
         """Create a Budget."""
         budget = self.BudgetObj.sudo(user_id).create({
             'name': name,
