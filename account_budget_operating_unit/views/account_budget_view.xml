@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- Budget -->
+        <record model="ir.ui.view" id="crossovered_budget_view_form">
+            <field name="name">crossovered.budget.form</field>
+            <field name="model">crossovered.budget</field>
+            <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+            <field name="arch" type="xml">
+                <field name="creating_user_id" position="after"><!-- date_from -->
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
