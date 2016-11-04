@@ -2,8 +2,7 @@
 # © 2015 Eficent Business and IT Consulting Services S.L.
 # © 2015 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, fields, models, _
-from openerp.exceptions import UserError
+from openerp import api, fields, models
 
 
 class CRMLead(models.Model):
@@ -20,5 +19,5 @@ class CRMLead(models.Model):
             return self.env['res.users'].operating_unit_default_get(self._uid)
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        related = 'team_id.opearting_unit_id',
+                                        related='team_id.opearting_unit_id',
                                         default=_get_default_operating_unit)

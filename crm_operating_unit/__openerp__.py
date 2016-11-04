@@ -12,7 +12,7 @@
     "license": "LGPL-3",
     "website": "http://www.eficent.com",
     "category": "Sales",
-    "depends": ["crm_lead", "sales_team_operating_unit"],
+    "depends": ["crm", "sales_team_operating_unit"],
     "data": [
         "views/crm_lead_view.xml",
         "security/crm_security.xml",
