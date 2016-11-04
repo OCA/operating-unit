@@ -41,7 +41,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
                                           [self.b2c])
         # Create Incoming Shipments
         self.picking_in1 = self._create_picking(self.user1_id,
-                                                self.ou1.id,
+                                                self.b2c.id,
                                                 self.b2c_type_in_id,
                                                 self.supplier_location,
                                                 self.stock_location)
