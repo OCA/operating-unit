@@ -59,9 +59,9 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
             search([('picking_id', '=', self.picking_in1.id)]).ids
         self.assertEqual(move_ids, [], 'User 2 should not be able to list the '
                                        'stock moves assigned to picking 1.')
-        # User 2 cannot list the pickings 1
+        # User 2 can list the picking 1
         picking_ids =\
             self.PickingObj.sudo(self.user2_id).\
             search([('id', '=', self.picking_in1.id)]).ids
-        self.assertEqual(picking_ids, [], 'User 2 should not be able to list'
+        self.assertEqual(len(picking_ids), 1, 'User 2 should be able to list'
                          'the picking 1.')
