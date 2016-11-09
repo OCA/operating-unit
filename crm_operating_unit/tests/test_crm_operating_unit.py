@@ -19,7 +19,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         # Create User 1 with Main OU
         self.user1 = self._create_user('user_1', [self.group_sale_manager,
                                                   self.group_user],
-                                       self.company, [self.ou1])
+                                       self.company, [self.main_OU])
         # Create User 2 with B2C OU
         self.user2 = self._create_user('user_2', [self.group_sale_manager,
                                                   self.group_user],

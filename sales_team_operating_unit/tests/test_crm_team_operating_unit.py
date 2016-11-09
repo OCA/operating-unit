@@ -62,8 +62,8 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access CRM teams for Main Operating Unit.
 
-        team = self.crm_team_model.search(self.cr, self.user2.id,
-            [('id', '=', self.team1),
-             ('operating_unit_id', '=', self.ou1.id)])
+        team = self.crm_team_model.search(
+            self.cr, self.user2.id, [('id', '=', self.team1),
+                                     ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(team, [], 'User 2 should not have access to '
                          '%s' % self.ou1.name)
