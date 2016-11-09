@@ -10,7 +10,7 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
     def setUp(self):
         super(TestSaleTeamOperatingUnit, self).setUp()
         self.res_users_model = self.env['res.users']
-        self.crm_team_model = self.env['crm.team']
+        self.crm_team_model = self.registry('crm.team')
         # Groups
         self.grp_sale_mngr = self.env.ref('base.group_sale_manager')
         self.grp_user = self.env.ref('base.group_user')
@@ -50,18 +50,20 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
 
     def _create_crm_team(self, uid, operating_unit):
         """Create a sale order."""
-        crm = self.crm_team_model.sudo(uid).create({
-            'name': 'CRM team',
-            'operating_unit_id': operating_unit.id,
-        })
+        context = {'mail_create_nosubscribe': True}
+        crm = self.crm_team_model.create(self.cr, uid,
+                                         {'name': 'CRM team',
+                                          'operating_unit_id':
+                                              operating_unit.id},
+                                         context=context)
         return crm
 
     def test_crm_team(self):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access CRM teams for Main Operating Unit.
 
-        team = self.crm_team_model.sudo(self.user2.id).search(
-            [('id', '=', self.team1.id),
+        team = self.crm_team_model.search(self.cr, self.user2.id,
+            [('id', '=', self.team1),
              ('operating_unit_id', '=', self.ou1.id)])
-        self.assertEqual(team.ids, [], 'User 2 should not have access to '
+        self.assertEqual(team, [], 'User 2 should not have access to '
                          '%s' % self.ou1.name)
