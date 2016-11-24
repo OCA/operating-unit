@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import fields, models, api
 from openerp.tools.translate import _
@@ -38,27 +37,29 @@ class PurchaseRequisition(models.Model):
                                       required=True,
                                       default=_get_picking_in)
 
-    @api.one
+    @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        if self.company_id and self.operating_unit_id and \
-                self.company_id != self.operating_unit_id.company_id:
-            raise Warning(_('The Company in the Purchase Requisition and in '
-                            'the Operating Unit must be the same.'))
+        for rec in self:
+            if rec.company_id and rec.operating_unit_id and \
+                            rec.company_id != rec.operating_unit_id.company_id:
+                raise Warning(_('The Company in the Purchase Requisition and '
+                                'in the Operating Unit must be the same.'))
 
-    @api.one
+    @api.multi
     @api.constrains('operating_unit_id', 'picking_type_id')
     def _check_warehouse_operating_unit(self):
-        picking_type = self.picking_type_id
-        if picking_type:
-            if picking_type.warehouse_id and\
-                    picking_type.warehouse_id.operating_unit_id\
-                    and self.operating_unit_id and\
-                    picking_type.warehouse_id.operating_unit_id !=\
-                    self.operating_unit_id:
-                raise Warning(_('Configuration error!\nThe Operating Unit in\
-                Purchase Requisition and the Warehouse of picking type\
-                must belong to the same Operating Unit.'))
+        for rec in self:
+            picking_type = rec.picking_type_id
+            if picking_type:
+                if picking_type.warehouse_id and\
+                        picking_type.warehouse_id.operating_unit_id\
+                        and rec.operating_unit_id and\
+                        picking_type.warehouse_id.operating_unit_id != \
+                                rec.operating_unit_id:
+                    raise Warning(_('Configuration error!\nThe Operating Unit in\
+                    Purchase Requisition and the Warehouse of picking type\
+                    must belong to the same Operating Unit.'))
 
     @api.onchange('operating_unit_id')
     def _onchange_operating_unit_id(self):
