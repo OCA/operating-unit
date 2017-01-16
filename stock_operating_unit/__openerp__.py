@@ -23,4 +23,5 @@
         "demo/stock_demo.xml",
     ],
     "installable": True,
+    "post_init_hook": "update_operating_unit_location",
 }
