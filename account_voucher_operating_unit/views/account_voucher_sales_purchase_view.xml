@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2015 Eficent Business and IT Consulting Services S.L.
+     Ecosoft Co. Ltd. - Kitti Upariphutthiphong
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<openerp>
+    <data>
+
+        <record id="view_voucher_filter_vendor" model="ir.ui.view">
+            <field name="name">account.voucher.purchase.select</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id"
+                   ref="account_voucher.view_voucher_filter_vendor"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]"
+                           options="{'no_create': True}" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_voucher_filter_sale" model="ir.ui.view">
+            <field name="name">account.voucher.sale.select</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id"
+                   ref="account_voucher.view_voucher_filter_sale"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]"
+                           options="{'no_create': True}" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_receipt_form">
+            <field name="name">account.voucher.sale.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id"
+                   ref="account_voucher.view_sale_receipt_form"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]"
+                           options="{'no_create': True}" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_purchase_receipt_form">
+            <field name="name">account.voucher.purchase.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id"
+                   ref="account_voucher.view_purchase_receipt_form"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]"
+                           options="{'no_create': True}" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
