@@ -30,10 +30,12 @@ class TestCrmOperatingUnit(common.TransactionCase):
         self.team2 = self._create_crm_team(self.user2.id, self.b2c_OU)
 
         # Create CRM Leads
-        self.lead1 = self._create_crm_lead(self.user1.id, self.main_OU,
+        self.lead1 = self._create_crm_lead(self.user1.id, self.main_OU.id,
                                            self.team1)
-        self.lead2 = self._create_crm_lead(self.user2.id, self.b2c_OU,
+        self.lead2 = self._create_crm_lead(self.user2.id, self.b2c_OU.id,
                                            self.team2)
+
+        self.lead3 = self._create_crm_lead(self.user2.id, None, self.team2)
 
     def _create_user(self, login, groups, company, operating_units,
                      context=None):
@@ -54,18 +56,16 @@ class TestCrmOperatingUnit(common.TransactionCase):
     def _create_crm_team(self, uid, operating_unit):
         """Create a sale order."""
         context = {'mail_create_nosubscribe': True}
-        crm = self.crm_team_model.create(self.cr, uid,
-                                         {'name': 'CRM team',
-                                          'operating_unit_id':
-                                              operating_unit.id},
-                                         context=context)
+        crm = self.crm_team_model.create(self.cr, uid, {
+            'name': 'CRM team',
+            'operating_unit_id': operating_unit.id}, context=context)
         return crm
 
     def _create_crm_lead(self, uid, operating_unit, team):
         """Create a sale order."""
         crm = self.crm_lead_model.sudo(uid).create({
             'name': 'CRM LEAD',
-            'operating_unit_id': operating_unit.id,
+            'operating_unit_id': operating_unit,
             'team_id': team
         })
         return crm
@@ -79,3 +79,8 @@ class TestCrmOperatingUnit(common.TransactionCase):
              ('operating_unit_id', '=', self.main_OU.id)])
         self.assertEqual(lead.ids, [], 'User 2 should not have access to '
                          '%s' % self.main_OU.name)
+
+    def test_team_ou(self):
+        self.assertEqual(
+            self.lead3.operating_unit_id, self.b2c_OU,
+            'User 2 lead should have %s as operating unit' % self.b2c_OU.name)
