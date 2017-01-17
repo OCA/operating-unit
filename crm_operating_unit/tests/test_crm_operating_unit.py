@@ -33,12 +33,11 @@ class TestCrmOperatingUnit(common.TransactionCase):
         self.lead1 = self._create_crm_lead(self.user1.id, self.team1)
         self.lead2 = self._create_crm_lead(self.user2.id, self.team2)
 
-    def _create_user(self, login, groups, company, operating_units,
-                     context=None):
+    def _create_user(self, login, groups, company, operating_units):
         """ Create a user. """
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create({
-            'name': 'Test User',
+            'name': login,
             'login': login,
             'password': 'demo',
             'email': 'test@yourcompany.com',
@@ -54,13 +53,18 @@ class TestCrmOperatingUnit(common.TransactionCase):
         context = {'mail_create_nosubscribe': True}
         crm = self.crm_team_model.create(self.cr, uid, {
             'name': 'CRM team',
-            'operating_unit_id': operating_unit.id}, context=context)
+            'operating_unit_id': operating_unit.id,
+            'user_id': uid}, context=context)
         return crm
 
     def _create_crm_lead(self, uid, team):
         """Create a sale order."""
-        crm = self.crm_lead_model.sudo(uid).create({
+        operating_unit_id = self.crm_lead_model.sudo(uid).\
+            _get_default_operating_unit()
+        crm = self.crm_lead_model.create({
             'name': 'CRM LEAD',
+            'user_id': uid,
+            'operating_unit_id': operating_unit_id.id,
             'team_id': team
         })
         return crm

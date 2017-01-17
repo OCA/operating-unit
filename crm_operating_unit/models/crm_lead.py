@@ -11,9 +11,9 @@ class CRMLead(models.Model):
 
     @api.model
     def _get_default_operating_unit(self):
-        if 'default_team_id' in self.env.context:
-            team_id = self.env.context['default_team_id']
-            team = self.env['crm.team'].browse(team_id)
+        team_id = self.env['crm.team']._get_default_team_id()
+        team = self.env['crm.team'].sudo().browse(team_id)
+        if team.operating_unit_id:
             return team.operating_unit_id
         else:
             return self.env['res.users'].operating_unit_default_get(self._uid)
