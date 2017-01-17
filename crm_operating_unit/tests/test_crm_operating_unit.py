@@ -30,12 +30,8 @@ class TestCrmOperatingUnit(common.TransactionCase):
         self.team2 = self._create_crm_team(self.user2.id, self.b2c_OU)
 
         # Create CRM Leads
-        self.lead1 = self._create_crm_lead(self.user1.id, self.main_OU.id,
-                                           self.team1)
-        self.lead2 = self._create_crm_lead(self.user2.id, self.b2c_OU.id,
-                                           self.team2)
-
-        self.lead3 = self._create_crm_lead(self.user2.id, None, self.team2)
+        self.lead1 = self._create_crm_lead(self.user1.id, self.team1)
+        self.lead2 = self._create_crm_lead(self.user2.id, self.team2)
 
     def _create_user(self, login, groups, company, operating_units,
                      context=None):
@@ -61,11 +57,10 @@ class TestCrmOperatingUnit(common.TransactionCase):
             'operating_unit_id': operating_unit.id}, context=context)
         return crm
 
-    def _create_crm_lead(self, uid, operating_unit, team):
+    def _create_crm_lead(self, uid, team):
         """Create a sale order."""
         crm = self.crm_lead_model.sudo(uid).create({
             'name': 'CRM LEAD',
-            'operating_unit_id': operating_unit,
             'team_id': team
         })
         return crm
@@ -81,6 +76,7 @@ class TestCrmOperatingUnit(common.TransactionCase):
                          '%s' % self.main_OU.name)
 
     def test_team_ou(self):
+        new_lead = self._create_crm_lead(self.user2.id, self.team2)
         self.assertEqual(
-            self.lead3.operating_unit_id, self.b2c_OU,
+            new_lead.operating_unit_id, self.b2c_OU,
             'User 2 lead should have %s as operating unit' % self.b2c_OU.name)
