@@ -93,7 +93,8 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                        'Requesting Operating Unit')
+                                        'Requesting Operating Unit',
+                                        readonly=1)
 
     @api.v7
     def onchange_picking_type(self, cr, uid, ids, picking_type_id, partner_id,
