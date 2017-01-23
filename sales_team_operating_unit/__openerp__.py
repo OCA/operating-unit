@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# © 2015 Serpent Consulting Services Pvt. Ltd.
+# © 2016 Eficent Business and IT Consulting Services S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
-    "name": "Operating Unit in CRM",
+    "name": "Sales Team Operating Unit",
     "version": "9.0.1.0.0",
-    "author": "Eficent Business and IT Consulting Services S.L., "
+    "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "http://www.eficent.com",
     "category": "Sales",
-    "depends": ["crm", "sales_team_operating_unit"],
+    "depends": ["sales_team", "operating_unit"],
     "data": [
-        "views/crm_lead_view.xml",
+        "views/crm_team_view.xml",
         "security/crm_security.xml",
     ],
     'installable': True,

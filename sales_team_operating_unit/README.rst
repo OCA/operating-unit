@@ -3,16 +3,18 @@
    :alt: License: LGPL-3
 
 =========================
-CRM with Operating Units
+Sales Team Operating Unit
 =========================
 
 This module introduces the following features:
 
-* Adds the Operating Unit (OU) to the Lead.
+* Adds the Operating Unit (OU) to the Sales Team.
 
-* The user's default Operating Unit (OU) is proposed at the time of creating the Lead / Opportunity.
+* The user's default Operating Unit (OU) is proposed at the time of creating
+  the Sales Team.
 
-* Security rules are defined to ensure that users can only see the Opportunity / Lead of that Operating Units in which they are allowed access to.
+* Security rules are defined to ensure that users can only see the Sales Team
+  of that Operating Units in which they are allowed access to.
 
 
 Usage
@@ -41,8 +43,7 @@ Images
 Contributors
 ------------
 
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
-* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* Jordi Ballester Alomar <jordi.ballester@eficent.com>
 
 Maintainer
 ----------
