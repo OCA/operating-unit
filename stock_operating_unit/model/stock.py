@@ -2,28 +2,30 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tools.translate import _
-from openerp import api, fields, models
-from openerp.exceptions import Warning as UserError
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 
 class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
-    operating_unit_id = fields.Many2one('operating.unit',
-                                        'Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
+    operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Operating Unit',
+        default=lambda self: (self.env['res.users'].
+                              operating_unit_default_get(self.env.uid))
+    )
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for rec in self:
-            if rec.company_id and rec.operating_unit_id and rec.company_id \
-                    != rec.operating_unit_id.company_id:
-                raise UserError(_('Configuration error!\nThe Company in the\
-                Stock Warehouse and in the Operating Unit must be the same.'))
+            if (rec.company_id and rec.operating_unit_id and
+                    rec.company_id != rec.operating_unit_id.company_id):
+                raise UserError(
+                    _('Configuration error\nThe Company in the Stock Warehouse'
+                      ' and in the Operating Unit must be the same.')
+                )
 
 
 class StockLocation(models.Model):
@@ -43,15 +45,15 @@ class StockLocation(models.Model):
                  ('wh_output_stock_loc_id', 'in', rec.ids)])
             for w in warehouses:
                 if rec.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThis location is '
+                    raise UserError(_('Configuration error\nThis location is '
                                       'assigned to a warehouse that belongs to'
                                       ' a different operating unit.'))
                 if self.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThis location is '
+                    raise UserError(_('Configuration error\nThis location is '
                                       'assigned to a warehouse that belongs to'
                                       ' a different operating unit.'))
                 if rec.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThis location is'
+                    raise UserError(_('Configuration error\nThis location is'
                                       ' assigned to a warehouse that belongs'
                                       ' to a different operating unit.'))
 
@@ -60,20 +62,25 @@ class StockLocation(models.Model):
     def _check_required_operating_unit(self):
         for rec in self:
             if rec.usage == 'internal' and not rec.operating_unit_id:
-                raise UserError(_('Configuration error!\nThe operating unit\
-                should be assigned to internal locations and to non other.'))
+                raise UserError(
+                    _('Configuration error\nThe operating unit should be '
+                      'assigned to internal locations and to non other.')
+                )
             if rec.usage != 'internal' and rec.operating_unit_id:
-                raise UserError(_('Configuration error!\nThe operating unit\
-                should be assigned to internal locations and to non other.'))
+                raise UserError(
+                    _('Configuration error\nThe operating unit should be '
+                      'assigned to internal locations and to non other.')
+                )
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for rec in self:
-            if rec.company_id and rec.operating_unit_id and\
-                    rec.company_id != rec.operating_unit_id.company_id:
-                raise UserError(_('Configuration error!\nThe Company in the\
-                Stock Location and in the Operating Unit must be the same.'))
+            if (rec.company_id and rec.operating_unit_id and
+                    rec.company_id != rec.operating_unit_id.company_id):
+                raise UserError(
+                    _('Configuration error\nThe Company in the Stock Location '
+                      'and in the Operating Unit must be the same.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'location_id')
@@ -85,8 +92,10 @@ class StockLocation(models.Model):
                 rec.operating_unit_id and
                 rec.operating_unit_id != rec.location_id.operating_unit_id
             ):
-                    raise UserError(_('Configuration error!\nThe Parent\
-                    Stock Location must belong to the same Operating Unit.'))
+                raise UserError(
+                    _('Configuration error\nThe Parent Stock Location '
+                      'must belong to the same Operating Unit.')
+                )
 
 
 class StockPicking(models.Model):
@@ -102,45 +111,51 @@ class StockPicking(models.Model):
         res = super(StockPicking, self).onchange_picking_type(
             cr, uid, ids, picking_type_id, partner_id, context=context)
         if picking_type_id:
-            picking_type = self.pool.get('stock.picking.type').browse(
+            picking_type = self.pool['stock.picking.type'].browse(
                 cr, uid, picking_type_id, context=context) or None
-            res['value']['operating_unit_id'] = \
-                picking_type.warehouse_id.operating_unit_id and \
-                picking_type.warehouse_id.operating_unit_id.id or False
+            unit = picking_type.warehouse_id.operating_unit_id
+            if unit:
+                res['value']['operating_unit_id'] = unit.id
         return res
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for rec in self:
-            if rec.company_id and rec.operating_unit_id and \
-                    rec.company_id != rec.operating_unit_id.company_id:
-                raise UserError(_('Configuration error!\nThe Company in the\
-                Stock Picking and in the Operating Unit must be the same.'))
+            if (rec.company_id and rec.operating_unit_id and
+                    rec.company_id != rec.operating_unit_id.company_id):
+                raise UserError(
+                    _('Configuration error\nThe Company in the Stock Picking '
+                      'and in the Operating Unit must be the same.')
+                )
 
     @api.multi
     @api.constrains('operating_unit_id', 'picking_type_id')
     def _check_picking_type_operating_unit(self):
         for rec in self:
-            if rec.picking_type_id and rec.operating_unit_id and \
-                    rec.picking_type_id.warehouse_id.operating_unit_id != \
-                    rec.operating_unit_id:
-                raise UserError(_('Configuration error!\nThe Operating Unit '
-                                  'of the picking must be the same as that '
-                                  'of the warehouse of the Picking Type.'))
+            warehouse = rec.picking_type_id.warehouse_id
+            if (rec.picking_type_id and rec.operating_unit_id and
+                    warehouse.operating_unit_id != rec.operating_unit_id):
+                raise UserError(
+                    _('Configuration error\nThe Operating Unit of the picking '
+                      'must be the same as that of the warehouse of the '
+                      'Picking Type.')
+                )
 
 
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    operating_unit_id =\
-        fields.Many2one('operating.unit',
-                        related='location_id.operating_unit_id',
-                        string='Source Location Operating Unit', readonly=True)
-    operating_unit_dest_id =\
-        fields.Many2one('operating.unit',
-                        related='location_dest_id.operating_unit_id',
-                        string='Dest. Location Operating Unit', readonly=True)
+    operating_unit_id = fields.Many2one(
+        related='location_id.operating_unit_id',
+        string='Source Location Operating Unit',
+        readonly=True,
+    )
+    operating_unit_dest_id = fields.Many2one(
+        related='location_dest_id.operating_unit_id',
+        string='Dest. Location Operating Unit',
+        readonly=True,
+    )
 
     @api.multi
     @api.constrains('operating_unit_id', 'location_id', 'picking_id',
@@ -151,19 +166,18 @@ class StockMove(models.Model):
                 return True
             operating_unit = stock_move.operating_unit_id
             operating_unit_dest = stock_move.operating_unit_dest_id
-            if (
-                stock_move.location_id and
+            if (stock_move.location_id and
                 stock_move.location_id.operating_unit_id and
                 stock_move.picking_id and
-                operating_unit !=
-                stock_move.picking_id.operating_unit_id
-            ) and (
-                    stock_move.location_dest_id and
-                    stock_move.location_dest_id.operating_unit_id and
-                    stock_move.picking_id and
-                    operating_unit_dest !=
-                    stock_move.picking_id.operating_unit_id
+                operating_unit != stock_move.picking_id.operating_unit_id
+                ) and (
+                stock_move.location_dest_id and
+                stock_move.location_dest_id.operating_unit_id and
+                stock_move.picking_id and
+                operating_unit_dest != stock_move.picking_id.operating_unit_id
             ):
-                raise UserError(_('Configuration error!\nThe Stock moves\
-                must be related to a location (source or destination)\
-                that belongs to the requesting Operating Unit.'))
+                raise UserError(
+                    _('Configuration error\nThe Stock moves must '
+                      'be related to a location (source or destination) '
+                      'that belongs to the requesting Operating Unit.')
+                )
