@@ -22,6 +22,9 @@ addon | version | summary
 [account_voucher_operating_unit](account_voucher_operating_unit/) | 9.0.1.0.0 | Introduces the operating unit to vouchers
 [crm_operating_unit](crm_operating_unit/) | 9.0.1.0.0 | Operating Unit in CRM
 [operating_unit](operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+[procurement_operating_unit](procurement_operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+[sales_team_operating_unit](sales_team_operating_unit/) | 9.0.1.0.0 | Sales Team Operating Unit
+[stock_operating_unit](stock_operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 
 [//]: # (end addons)
 
