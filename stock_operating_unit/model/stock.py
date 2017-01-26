@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# © 2016-2017 Eficent Business and IT Consulting Services S.L.
+# © 2016-2017 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import _, api, fields, models
 from openerp.exceptions import UserError
@@ -9,11 +9,20 @@ from openerp.exceptions import UserError
 class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
+    def _default_operating_unit(self):
+        if self.company_id:
+            company = self.company_id
+        else:
+            company = self.env['res.company']._company_default_get(
+                'stock.inventory')
+        for ou in self.env.user.operating_unit_ids:
+            if company == self.company_id:
+                self.operating_unit_id = ou
+
     operating_unit_id = fields.Many2one(
         comodel_name='operating.unit',
         string='Operating Unit',
-        default=lambda self: (self.env['res.users'].
-                              operating_unit_default_get(self.env.uid))
+        default=_default_operating_unit
     )
 
     @api.multi
@@ -105,17 +114,16 @@ class StockPicking(models.Model):
                                         'Requesting Operating Unit',
                                         readonly=1)
 
-    @api.v7
-    def onchange_picking_type(self, cr, uid, ids, picking_type_id, partner_id,
-                              context=None):
-        res = super(StockPicking, self).onchange_picking_type(
-            cr, uid, ids, picking_type_id, partner_id, context=context)
-        if picking_type_id:
-            picking_type = self.pool['stock.picking.type'].browse(
-                cr, uid, picking_type_id, context=context) or None
-            unit = picking_type.warehouse_id.operating_unit_id
-            if unit:
-                res['value']['operating_unit_id'] = unit.id
+    @api.onchange('picking_type_id', 'partner_id')
+    def onchange_picking_type(self):
+        res = super(StockPicking, self).onchange_picking_type()
+        if self.picking_type_id:
+            picking_type = self.env['stock.picking.type'].browse(
+                self.picking_type_id.id) or None
+            if picking_type:
+                unit = picking_type.warehouse_id.operating_unit_id
+                if unit:
+                    res['value']['operating_unit_id'] = unit.id
         return res
 
     @api.multi
