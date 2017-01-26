@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2015 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2015-17 Eficent Business and IT Consulting Services S.L.
      Ecosoft Co. Ltd. - Kitti Upariphutthiphong
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
-<openerp>
-<data noupdate="0">
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo noupdate="0">
 
     <record id="ir_rule_voucher_allowed_operating_units"
             model="ir.rule">
@@ -30,5 +29,4 @@
         <field eval="0" name="perm_create"/>
     </record>
 
-</data>
-</openerp>
+</odoo>
