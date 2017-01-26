@@ -6,10 +6,12 @@
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_form" />
         <field name="arch" type="xml">
-            <group name="account_grp" position="inside">
-                <field name="ou_is_self_balanced"/>
-                <field name="inter_ou_clearing_account_id" />
-            </group>
+            <xpath expr="//notebook/page/group" position="after">
+                <group string="Operating Units">
+                    <field name="ou_is_self_balanced"/>
+                    <field name="inter_ou_clearing_account_id" />
+                </group>
+            </xpath>
         </field>
     </record>
 
