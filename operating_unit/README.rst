@@ -1,6 +1,6 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/license-LGPLv3-blue.svg
+   :target: https://www.gnu.org/licenses/lgpl.html
+   :alt: License: LGPL-3
 
 ==============
 Operating Unit
@@ -39,9 +39,6 @@ Other modules extend the standard Odoo apps with the OU.
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/213/9.0
 
-.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "10.0" for example
-
 Known issues / Roadmap
 ======================
 
@@ -57,7 +54,7 @@ help us smashing it by providing a detailed and welcomed `feedback
 <https://github.com/OCA/
 213/issues/new?body=module:%20
 operating_unit%0Aversion:%20
-9.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+10.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Credits
 =======
@@ -70,7 +67,7 @@ Images
 Contributors
 ------------
 
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+* Eficent <contact@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainer
