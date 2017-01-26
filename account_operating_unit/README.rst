@@ -30,7 +30,7 @@ Units (OU's).
   create the invoice for.
 
 * Adds the Operating Unit (OU) to payments and payment methods. The operating
-  unit of a payment will be that of the payment method choosen.
+  unit of a payment will be that of the payment method chosen.
 
 * Implements security rules at OU level to invoices, payments and journal
   items.
@@ -85,7 +85,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/9.0
+   :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 Known issues / Roadmap
 ======================
