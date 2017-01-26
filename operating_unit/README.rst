@@ -1,6 +1,6 @@
-.. image:: https://img.shields.io/badge/license-LGPLv3-blue.svg
-   :target: https://www.gnu.org/licenses/lgpl.html
-   :alt: License: LGPL-3
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
 ==============
 Operating Unit
@@ -38,6 +38,14 @@ Other modules extend the standard Odoo apps with the OU.
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/213/9.0
+
+.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
+.. branch is "10.0" for example
+
+Known issues / Roadmap
+======================
+
+* ...
 
 Bug Tracker
 ===========
