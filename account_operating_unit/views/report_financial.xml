@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <template id="report_financial_operating_units"
               inherit_id="account.report_financial">
         <xpath expr="//div[@class='row mt32 mb32']" position="inside">
@@ -9,4 +10,5 @@
             </div>
         </xpath>
     </template>
+
 </odoo>
