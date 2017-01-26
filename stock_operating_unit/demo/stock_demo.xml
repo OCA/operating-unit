@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016-2017 Eficent Business and IT Consulting Services S.L.
+     Copyright 2016-2017 Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo noupdate="1">
 
     <!-- Shelf 2 stock location -->
@@ -26,7 +29,7 @@
 
     <!-- Chicago Warehouse -->
     <record id="stock.stock_warehouse_shop0" model="stock.warehouse">
-        <field name="operating_unit_id" ref="stock_operating_unit.operating_unit_shop0"/>
+        <field name="operating_unit_id" ref="operating_unit_shop0"/>
     </record>
 
     <!-- Your Company, Chicago shop -->
