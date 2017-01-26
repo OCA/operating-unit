@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="1">
-
         <!-- Basic Operating Unit  -->
         <record id="main_operating_unit" model="operating.unit">
             <field name="name">Main Operating Unit</field>
@@ -18,4 +17,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>
