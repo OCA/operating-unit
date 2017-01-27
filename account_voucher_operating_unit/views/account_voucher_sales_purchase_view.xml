@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2015-17 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2015-17 Eficent
      Ecosoft Co. Ltd. - Kitti Upariphutthiphong
      License AGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
-
     <record id="view_voucher_filter_vendor" model="ir.ui.view">
         <field name="name">account.voucher.purchase.select</field>
         <field name="model">account.voucher</field>
@@ -16,7 +15,6 @@
             </field>
         </field>
     </record>
-
     <record id="view_voucher_filter_sale" model="ir.ui.view">
         <field name="name">account.voucher.sale.select</field>
         <field name="model">account.voucher</field>
@@ -29,7 +27,6 @@
             </field>
         </field>
     </record>
-
     <record model="ir.ui.view" id="view_sale_receipt_form">
         <field name="name">account.voucher.sale.form</field>
         <field name="model">account.voucher</field>
@@ -42,7 +39,6 @@
             </field>
         </field>
     </record>
-
     <record model="ir.ui.view" id="view_purchase_receipt_form">
         <field name="name">account.voucher.purchase.form</field>
         <field name="model">account.voucher</field>
@@ -55,5 +51,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

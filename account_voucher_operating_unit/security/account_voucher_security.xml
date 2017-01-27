@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2015-17 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2015-17 Eficent
      Ecosoft Co. Ltd. - Kitti Upariphutthiphong
      License AGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo noupdate="0">
-
     <record id="ir_rule_voucher_allowed_operating_units"
             model="ir.rule">
         <field name="model_id" ref="account_voucher.model_account_voucher"/>
@@ -15,7 +14,6 @@
         <field eval="1" name="perm_read"/>
         <field eval="0" name="perm_create"/>
     </record>
-
     <record id="ir_rule_voucher_line_allowed_operating_units"
             model="ir.rule">
         <field name="model_id"
@@ -28,5 +26,4 @@
         <field eval="1" name="perm_read"/>
         <field eval="0" name="perm_create"/>
     </record>
-
 </odoo>
