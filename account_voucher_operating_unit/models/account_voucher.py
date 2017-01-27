@@ -19,7 +19,8 @@ class AccountVoucher(models.Model):
     operating_unit_id = fields.Many2one(
         'operating.unit',
         string='Operating Unit',
-        default=_get_default_operating_unit,
+        default=lambda self: self.env['res.users'].operating_unit_default_get(
+            self._uid),
     )
 
     @api.multi
@@ -28,8 +29,8 @@ class AccountVoucher(models.Model):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and \
                     rec.company_id != rec.operating_unit_id.company_id:
-                raise ValidationError(_('The Company in the Move Line and in '
-                                        'the Operating Unit must be the same.'
+                raise ValidationError(_('The Company in the voucher and in the'
+                                        'Operating Unit must be the same.'
                                         ))
 
     @api.multi
