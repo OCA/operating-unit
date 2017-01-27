@@ -2,10 +2,10 @@
 # © 2016-17 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.addons.account.tests import account_test_classes
 
 
-class TestAccountOperatingUnit(AccountingTestCase):
+class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
 
     def setUp(self):
         super(TestAccountOperatingUnit, self).setUp()
