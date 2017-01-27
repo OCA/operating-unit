@@ -5,7 +5,7 @@
 from odoo.addons.account.tests import account_test_classes
 
 
-class TestAccountOperatingUnit(account_test_classes.AccountingTestCase):
+class TestAccountOperatingUnit(AccountingTestCase):
 
     def setUp(self):
         super(TestAccountOperatingUnit, self).setUp()
