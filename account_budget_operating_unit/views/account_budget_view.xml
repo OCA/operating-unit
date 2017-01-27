@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2015-2017 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2015-2017 Eficent
      Copyright 2015-2017 Ecosoft Co. Ltd. - Kitti Upariphutthiphong
      Copyright 2015-2017 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
-    <data>
-
         <!-- Budget -->
         <record model="ir.ui.view" id="crossovered_budget_view_form">
             <field name="name">crossovered.budget.form</field>
@@ -17,6 +15,4 @@
                 </field>
             </field>
         </record>
-
-    </data>
 </odoo>

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L.
+# © 2015-17 Eficent
 # - Jordi Ballester Alomar
 # © 2015-17 Ecosoft Co. Ltd. - Kitti Upariphutthiphong
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, fields, models, _
-from openerp.exceptions import Warning
+from odoo import api, fields, models, _
+from odoo.exceptions import Warning
 
 
 class CrossoveredBudget(models.Model):
@@ -19,13 +19,14 @@ class CrossoveredBudget(models.Model):
         operating_unit_default_get(self._uid),
     )
 
-    @api.one
+    @api.multi
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
-        if self.company_id and self.operating_unit_id and \
-                self.company_id != self.operating_unit_id.company_id:
-            raise Warning(_('The Company in the Move Line and in the '
-                            'Operating Unit must be the same.'))
+        for rec in self:
+            if rec.company_id and rec.operating_unit_id and \
+                    rec.company_id != rec.operating_unit_id.company_id:
+                raise Warning(_('The Company in the Move Line and in the '
+                                'Operating Unit must be the same.'))
 
 
 class CrossoveredBudgetLines(models.Model):

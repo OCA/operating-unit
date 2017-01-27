@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L.
+# © 2015-17 Eficent
 # - Jordi Ballester Alomar
 # © 2015-17 Ecosoft Co. Ltd. - Kitti Upariphutthiphong
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya

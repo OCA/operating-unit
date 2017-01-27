@@ -13,7 +13,6 @@ This module introduces the following features:
 * Security rules are defined to ensure that users can only display the
   budget in which they are allowed access to.
 
-
 Usage
 =====
 
@@ -41,7 +40,7 @@ Contributors
 ------------
 
 * Ecosoft Co., Ltd. <info@ecosoft.co.th>
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+* Eficent <contact@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Xpansa Group <hello@xpansa.com>
 
