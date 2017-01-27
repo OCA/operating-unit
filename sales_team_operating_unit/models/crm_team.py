@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L.
-# © 2015 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
-class CRMTeam(models.Model):
+class CrmTeam(models.Model):
 
     _inherit = 'crm.team'
 
@@ -13,3 +16,13 @@ class CRMTeam(models.Model):
                                         default=lambda self:
                                         self.env['res.users'].
                                         operating_unit_default_get(self._uid))
+
+    @api.multi
+    @api.constrains('operating_unit_id', 'company_id')
+    def _check_company_operating_unit(self):
+        for team in self:
+            if team.company_id and \
+                    team.operating_unit_id and \
+                    team.company_id != team.operating_unit_id.company_id:
+                raise UserError(_('Configuration error!\n\nThe Company in the\
+                Sales Team and in the Operating Unit must be the same.'))
