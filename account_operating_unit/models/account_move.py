@@ -2,9 +2,9 @@
 # © 2016-17 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tools.translate import _
-from openerp import api, fields, models
-from openerp.exceptions import UserError
+from odoo.tools.translate import _
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountMoveLine(models.Model):
@@ -21,7 +21,8 @@ class AccountMoveLine(models.Model):
             move = self.env['account.move'].browse(vals['move_id'])
             if move.operating_unit_id:
                 vals['operating_unit_id'] = move.operating_unit_id.id
-        return super(AccountMoveLine, self).create(vals)
+        _super = super(AccountMoveLine, self)
+        return _super.create(vals)
 
     @api.model
     def _query_get(self, domain=None):
