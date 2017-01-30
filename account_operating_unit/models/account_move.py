@@ -16,13 +16,13 @@ class AccountMoveLine(models.Model):
                                         operating_unit_default_get(self._uid))
 
     @api.model
-    def create(self, vals, apply_taxes=False):
+    def create(self, vals):
         if vals.get('move_id', False):
             move = self.env['account.move'].browse(vals['move_id'])
             if move.operating_unit_id:
                 vals['operating_unit_id'] = move.operating_unit_id.id
         _super = super(AccountMoveLine, self)
-        return _super.create(vals, apply_taxes=apply_taxes)
+        return _super.create(vals)
 
     @api.model
     def _query_get(self, domain=None):
