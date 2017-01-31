@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
+# © 2015-17 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import _, api, fields, models
-from openerp.exceptions import ValidationError
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class SaleOrder(models.Model):
@@ -12,9 +12,9 @@ class SaleOrder(models.Model):
 
     @api.model
     def _default_operating_unit(self):
-        if self._defaults['team_id'](self):
-            return self.env['crm.team'].browse(self._defaults['team_id'](
-                self)).operating_unit_id
+        team = self.env['crm.team']._get_default_team_id()
+        if team.operating_unit_id:
+            return team.operating_unit_id
         else:
             return self.env.user.default_operating_unit_id
 
@@ -25,9 +25,15 @@ class SaleOrder(models.Model):
     )
 
     @api.onchange('team_id')
-    @api.depends('team_id')
     def onchange_team_id(self):
-        self.operating_unit_id = self.team_id.operating_unit_id
+        if self.team_id:
+            self.operating_unit_id = self.team_id.operating_unit_id
+
+    @api.onchange('operating_unit_id')
+    def onchange_operating_unit_id(self):
+        if self.team_id and self.team_id.operating_unit_id != \
+                self.operating_unit_id:
+            self.team_id = False
 
     @api.multi
     @api.constrains('team_id', 'operating_unit_id')
