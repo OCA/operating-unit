@@ -11,18 +11,9 @@ This module introduces the operating unit to the Sales Order.
 Security rules are defined to ensure that users can only display the
 Sales Orders in which they are allowed access to.
 
-Installation
-============
-
-No additional installation instructions are required.
-
-
-Usage
-=====
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/9.0
+   :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 Bug Tracker
 ===========
@@ -44,9 +35,12 @@ Images
 Contributors
 ------------
 
-Jordi Ballester Alomar <jordi.ballester@eficent.com>
-Aaron Henriquez <aheficent@eficent.com>
-Sudhir Arya <sudhir.arya@serpentcs.com>
+* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Aaron Henriquez <aheficent@eficent.com>
+* Lois Rilo <lois.rilo@eficent.com>
+* Miquel Raich <miquel.raich@eficent.com>
+* Sudhir Arya <sudhir.arya@serpentcs.com>
+* Darshan Patel <darshan.patel.serpencs@gmail.com>
 
 Maintainer
 ----------
