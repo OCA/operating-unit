@@ -1,28 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
+# © 2015-17 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, models, _
-from openerp.exceptions import ValidationError
-
-
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    @api.model
-    def _prepare_picking_assign(self, move):
-        """
-        Override to add Operating Units to Picking.
-        """
-        values = super(StockMove, self)._prepare_picking_assign(move)
-        sale_line = move.procurement_id and move.procurement_id.sale_line_id
-        if sale_line:
-            values.update({
-                'operating_unit_id': sale_line.order_id and
-                sale_line.order_id.operating_unit_id.id
-            })
-        return values
+from odoo import api, models, _
+from odoo.exceptions import ValidationError
 
 
 class SaleOrder(models.Model):
@@ -46,9 +28,6 @@ class SaleOrder(models.Model):
                   self.operating_unit_id.id)])
             if warehouses:
                 self.warehouse_id = warehouses[0]
-            if self.team_id and self.team_id.operating_unit_id != \
-                    self.operating_unit_id:
-                self.team_id = False
 
     @api.onchange('warehouse_id')
     def onchange_warehouse_id(self):
