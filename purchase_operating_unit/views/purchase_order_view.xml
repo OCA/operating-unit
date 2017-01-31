@@ -19,17 +19,12 @@
         <field name="arch" type="xml">
             <field name="partner_ref" position="after">
                 <field name="requesting_operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-<!--                          on_change="onchange_operating_unit_id(requesting_operating_unit_id,operating_unit_id)"/> -->
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-<!--                          on_change="onchange_operating_unit_id(requesting_operating_unit_id,operating_unit_id)"/> -->
             </field>
             <xpath expr="//field[@name='order_line']"
                  position="attributes">
                 <attribute name="context">{'operating_unit_id': operating_unit_id}</attribute>
             </xpath>
-<!--                 <field name="warehouse_id" position="attributes"> -->
-<!--                     <attribute name="on_change">onchange_warehouse_id(warehouse_id,requesting_operating_unit_id,operating_unit_id)</attribute> -->
-<!--                 </field> -->
         </field>
     </record>
 
