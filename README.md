@@ -19,7 +19,9 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_operating_unit](account_operating_unit/) | 10.0.1.0.0 | Introduces Operating Unit fields in invoices and Accounting Entries with clearing account
+[account_voucher_operating_unit](account_voucher_operating_unit/) | 10.0.1.0.0 | Introduces the operating unit to vouchers
 [operating_unit](operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+[sales_team_operating_unit](sales_team_operating_unit/) | 10.0.1.0.0 | Sales Team Operating Unit
 
 Unported addons
 ---------------
