@@ -2,15 +2,13 @@
    :target: https://www.gnu.org/licenses/lgpl.html
    :alt: License: LGPL-3
 
-===============================
-Operating Unit in Sales
-===============================
+=============================
+Operating Unit in Sales Stock
+=============================
 
-This module was written to extend the Sales capabilities of Odoo.
-This module introduces the operating unit to the Sales Order.
-Security rules are defined to ensure that users can only display the
-Sales Orders in which they are allowed access to.
-
+This module was written to extend the Sales and the Stock capabilities of Odoo.
+This module introduces some new operating unit (OU) capabilities in order to
+enhance the performance of already existing OU features for Sales and Stock.
 
 Configuration
 =============
@@ -23,7 +21,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/7.0
+   :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 Bug Tracker
 ===========
