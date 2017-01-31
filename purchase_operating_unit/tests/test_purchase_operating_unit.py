@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
+# © 2015-17 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 import time
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.addons.purchase.tests import test_purchase_order
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo.addons.purchase.tests import test_purchase_order
 
 
 class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
