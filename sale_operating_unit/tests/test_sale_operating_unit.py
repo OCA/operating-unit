@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
+# © 2015-17 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp.tests import common
+from odoo.tests import common
 
 
 class TestSaleOperatingUnit(common.TransactionCase):
@@ -15,7 +15,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         self.res_users_model = self.env['res.users']
         self.sale_model = self.env['sale.order']
         self.sale_line_model = self.env['sale.order.line']
-        self.sale_team_model = self.registry('crm.team')
+        self.sale_team_model = self.env['crm.team']
         self.acc_move_model = self.env['account.move']
         self.acc_invoice_model = self.env['account.invoice']
         self.res_company_model = self.env['res.company']
@@ -25,7 +25,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         self.payment_model = self.env['sale.advance.payment.inv']
         # Company
         self.company = self.env.ref('base.main_company')
-        self.grp_sale_user = self.env.ref('base.group_sale_manager')
+        self.grp_sale_user = self.env.ref('sales_team.group_sale_manager')
         self.grp_acc_user = self.env.ref('account.group_account_invoice')
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
@@ -86,13 +86,12 @@ class TestSaleOperatingUnit(common.TransactionCase):
 
     def _create_sale_team(self, uid, operating_unit):
         """Create a sale team."""
-        context = {'mail_create_nosubscribe': True}
-        team_id = self.sale_team_model.create(self.cr, uid, {
-            'name': operating_unit.name,
-            'operating_unit_id': operating_unit.id
-        }, context=context)
-        return self.sale_team_model.browse(self.cr, uid, team_id,
-                                           context=context)
+        team = self.sale_team_model.sudo(uid).with_context(
+            mail_create_nosubscribe=True).create({
+                'name': operating_unit.name,
+                'operating_unit_id': operating_unit.id
+                })
+        return team
 
     def _create_sale_order(self, uid, customer, product, pricelist, team):
         """Create a sale order."""
