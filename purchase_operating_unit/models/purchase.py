@@ -97,16 +97,6 @@ class PurchaseOrder(models.Model):
         picking_vals['operating_unit_id'] = self.operating_unit_id.id
         return picking_vals
 
-    @api.constrains('invoice_ids', 'operating_unit_id')
-    def _check_invoice_ou(self):
-        for po in self:
-            for invoice in po.invoice_ids:
-                if invoice.operating_unit_id != po.operating_unit_id:
-                    raise ValidationError(
-                        _('The operating unit of the purchase order must '
-                          'be the same as in the associated invoices.')
-                    )
-
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
