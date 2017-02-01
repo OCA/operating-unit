@@ -4,7 +4,7 @@
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.tests import common
-from openerp.exceptions import AccessError, ValidationError, UserError
+from openerp.exceptions import ValidationError
 
 
 class TestSaleCrmOperatingUnit(common.TransactionCase):
@@ -33,11 +33,10 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
             'type': 'opportunity'
         })
         self.sale = self.sale_model.\
-            with_context({'default_operating_unit_id':
-                          crm.operating_unit_id.id,
+            with_context({'default_operating_unit_id': crm.operating_unit_id.id,
                           'default_opportunity_id': crm.id}).\
-                          create({'partner_id':crm.partner_id.id,
-                                  'team_id':crm.team_id.id})
+                            create({'partner_id': crm.partner_id.id,
+                                    'team_id': crm.team_id.id})
         return crm
 
     def test_sale_crm(self):
@@ -48,7 +47,7 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
                          'Operating Unit of Opportunity should match to '
                          'the Sale Order Operating Unit.')
 
-        # Checks that it raises the Warning if user tries to change 
+        # Checks that it raises the Warning if user tries to change
         # the Operating Unit
         with self.assertRaises(ValidationError):
             self.sale.operating_unit_id = self.ou1
