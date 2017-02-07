@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tests import common
+
+from odoo.tests import common
 
 
 class TestHrContractOperatingUnit(common.TransactionCase):
@@ -17,7 +19,7 @@ class TestHrContractOperatingUnit(common.TransactionCase):
 
         self.company = self.env.ref('base.main_company')
         self.contract_type = self.env.ref('hr_contract.hr_contract_type_emp')
-        self.grp_hr_manager = self.env.ref('base.group_hr_manager')
+        self.grp_hr_manager = self.env.ref('hr.group_hr_manager')
 
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
