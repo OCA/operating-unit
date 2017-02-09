@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.addons.hr_contract_operating_unit.tests\
+
+from odoo.addons.hr_contract_operating_unit.tests\
     import test_hr_contract_operating_unit
 
 
@@ -36,8 +38,8 @@ class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
             'struct_id': self.hr_payroll_struct.id,
             'journal_id': self.journal.id
         })
-        payslip.hr_verify_sheet()
-        payslip.process_sheet()
+        payslip.compute_sheet()
+        payslip.action_payslip_done()
         return payslip
 
     def test_hr_payroll_account_ou(self):
@@ -52,3 +54,13 @@ class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
                          self.payslip2.contract_id.operating_unit_id,
                          'Operating Unit (OU) of contract in Payslip should '
                          'match with Accounting Entries OU')
+        self.assertEqual(self.payslip1.move_id.line_ids.
+                         mapped('operating_unit_id'),
+                         self.payslip1.contract_id.operating_unit_id,
+                         'Operating Unit (OU) of contract in Payslip should '
+                         'match with that of OU in Move lines')
+        self.assertEqual(self.payslip2.move_id.line_ids.
+                         mapped('operating_unit_id'),
+                         self.payslip2.contract_id.operating_unit_id,
+                         'Operating Unit (OU) of contract in Payslip should '
+                         'match with that of OU in Move lines')
