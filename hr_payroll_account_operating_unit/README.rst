@@ -11,22 +11,12 @@ This module introduces the following features:
 * Adds Operating Unit (OU) to the account moves and its lines created by the payslip, based on the Operating Unit (OU) defined in the Employee's Contract.
 
 
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/9.0
+   :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 Bug Tracker
 ===========
