@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tools.translate import _
-from openerp import models, api
-from openerp.exceptions import Warning as UserError
+
+from odoo.tools.translate import _
+from odoo import api, models
+from odoo.exceptions import UserError
 
 
 class HrPayslip(models.Model):
@@ -20,13 +22,16 @@ class HrPayslip(models.Model):
                 if slip.contract_id and slip.contract_id.operating_unit_id:
                     slip.move_id.write({'operating_unit_id':
                                         slip.contract_id.operating_unit_id.id})
+                    if slip.move_id.line_ids:
+                        slip.move_id.line_ids.\
+                            write({'operating_unit_id':
+                                   slip.contract_id.operating_unit_id.id})
         return res
 
-    @api.cr_uid_ids_context
-    def process_sheet(self, cr, uid, ids, context=None):
+    @api.multi
+    def action_payslip_done(self):
         OU = None
-        payslip = self.browse(cr, uid, ids, context=context)
-        for slip in payslip:
+        for slip in self:
             # Check that all slips are related to contracts
             # that belong to the same OU.
             if OU:
@@ -34,8 +39,4 @@ class HrPayslip(models.Model):
                     raise UserError(_('Configuration error!\nThe Contracts must\
                     refer the same Operating Unit.'))
             OU = slip.contract_id.operating_unit_id.id
-        # Add to context the OU of the employee contract
-        new_context = context.copy()
-        new_context.update(force_operating_unit=OU)
-        return super(HrPayslip, self).process_sheet(cr, uid, payslip.ids,
-                                                    new_context)
+        return super(HrPayslip, self).action_payslip_done()
