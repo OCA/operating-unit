@@ -30,7 +30,7 @@
         </field>
     </record>
 
-    <record id="invoice_supplier_form" model="ir.ui.view">
+    <record id="invoice_supplier_form_ou" model="ir.ui.view">
         <field name="name">account.invoice.supplier.form</field>
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_supplier_form" />
@@ -40,6 +40,22 @@
                        options="{'no_create': True}"
                        widget="selection" groups="operating_unit.group_multi_operating_unit"/>
             </field>
+            <xpath  expr="//field[@name='invoice_line_ids']"
+                    position="attributes">
+                <attribute name="context">{'type': type, 'journal_id': journal_id, 'operating_unit': operating_unit_id}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']"
+                   position="attributes">
+                <attribute name="domain">[('company_id', '=', parent.company_id), '|', ('operating_unit_ids', 'in', [operating_unit]), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
+            <xpath  expr="//field[@name='tax_line_ids']"
+                    position="attributes">
+                <attribute name="context">{'operating_unit': operating_unit_id}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='account_analytic_id']"
+                   position="attributes">
+                <attribute name="domain">[('company_id', '=', parent.company_id), '|', ('operating_unit_ids', 'in', [operating_unit]), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
         </field>
     </record>
 
@@ -53,6 +69,14 @@
                        options="{'no_create': True}"
                        widget="selection" groups="operating_unit.group_multi_operating_unit"/>
             </field>
+            <xpath  expr="//field[@name='invoice_line_ids']"
+                    position="attributes">
+                <attribute name="context">{'type': type, 'journal_id': journal_id, 'default_invoice_id': id, 'operating_unit': operating_unit_id}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']"
+                   position="attributes">
+                <attribute name="domain">[('company_id', '=', parent.company_id), '|', ('operating_unit_ids', 'in', [operating_unit]), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
         </field>
     </record>
 
