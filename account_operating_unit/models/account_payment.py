@@ -2,7 +2,7 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, fields, models, _
+from openerp import _, api, exceptions, fields, models
 
 
 class AccountPayment(models.Model):
@@ -23,15 +23,25 @@ class AccountPayment(models.Model):
         res = super(AccountPayment,
                     self)._get_counterpart_move_line_vals(invoice=invoice)
         if invoice:
-            res['operating_unit_id'] = invoice.operating_unit_id.id or False
+            operating_units = []
+            for inv in invoice:
+                operating_units.append(inv.operating_unit_id.id)
+            if len(set(operating_units)) > 1:
+                raise exceptions.ValidationError(
+                    _('The payment must be of invoices of the same'
+                        ' Operating Units.'))
+            res['operating_unit_id'] = operating_units[0] or False
         else:
             res['operating_unit_id'] = self.operating_unit_id.id or False
         return res
 
     def _get_liquidity_move_line_vals(self, amount):
         res = super(AccountPayment, self)._get_liquidity_move_line_vals(amount)
-        res['operating_unit_id'] = self.journal_id.operating_unit_id.id \
-            or False
+        if not self.journal_id.operating_unit_id:
+            raise exceptions.ValidationError(
+                _("Error! \n You must configure an operating"
+                    " unit in the journal. \n Please Check."))
+        res['operating_unit_id'] = self.journal_id.operating_unit_id.id
         return res
 
     def _get_dst_liquidity_aml_dict_vals(self):
@@ -47,7 +57,7 @@ class AccountPayment(models.Model):
         if self.currency_id != self.company_id.currency_id:
             dst_liquidity_aml_dict.update({
                 'currency_id': self.currency_id.id,
-                'amount_currency': -self.amount,
+                'amount_currency': self.amount,
             })
 
         dst_liquidity_aml_dict.update({
@@ -60,8 +70,13 @@ class AccountPayment(models.Model):
             'name': self.name,
             'payment_id': self.id,
             'account_id': self.company_id.transfer_account_id.id,
-            'journal_id': self.destination_journal_id.id
+            'journal_id': self.destination_journal_id.id,
         }
+        if self.currency_id != self.company_id.currency_id:
+            transfer_debit_aml_dict.update({
+                'currency_id': self.currency_id.id,
+                'amount_currency': -self.amount,
+            })
         transfer_debit_aml_dict.update({
             'operating_unit_id':
                 self.journal_id.operating_unit_id.id or False
