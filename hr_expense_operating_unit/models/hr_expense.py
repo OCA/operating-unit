@@ -4,7 +4,7 @@
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, fields, models
+from openerp import _, api, fields, models
 from openerp.exceptions import UserError
 
 
