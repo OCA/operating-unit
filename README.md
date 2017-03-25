@@ -14,6 +14,7 @@ This repository provides a suite of module to support the Operating Unit concept
 across all Odoo processes.
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
