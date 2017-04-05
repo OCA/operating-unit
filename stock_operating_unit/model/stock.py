@@ -57,7 +57,7 @@ class StockLocation(models.Model):
                     raise UserError(_('Configuration error\nThis location is '
                                       'assigned to a warehouse that belongs to'
                                       ' a different operating unit.'))
-                if self.operating_unit_id != w.operating_unit_id:
+                if rec.operating_unit_id != w.operating_unit_id:
                     raise UserError(_('Configuration error\nThis location is '
                                       'assigned to a warehouse that belongs to'
                                       ' a different operating unit.'))
@@ -118,12 +118,8 @@ class StockPicking(models.Model):
     def onchange_picking_type(self):
         res = super(StockPicking, self).onchange_picking_type()
         if self.picking_type_id:
-            picking_type = self.env['stock.picking.type'].browse(
-                self.picking_type_id.id) or None
-            if picking_type:
-                unit = picking_type.warehouse_id.operating_unit_id
-                if unit:
-                    res['value']['operating_unit_id'] = unit.id
+            unit = self.picking_type_id.warehouse_id.operating_unit_id
+            self.operating_unit_id = unit
         return res
 
     @api.multi
