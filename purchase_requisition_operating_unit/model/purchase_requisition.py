@@ -4,7 +4,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp import fields, models, api
 from openerp.tools.translate import _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
 
 
 class PurchaseRequisition(models.Model):
@@ -15,8 +15,8 @@ class PurchaseRequisition(models.Model):
     def _get_picking_in(self):
         res = super(PurchaseRequisition, self)._get_picking_in()
         type_obj = self.env['stock.picking.type']
-        operating_unit = self.env['res.users'].operating_unit_default_get(
-                self._uid)
+        operating_unit = self.env['res.users'].\
+            operating_unit_default_get(self._uid)
         types = type_obj.search([('code', '=', 'incoming'),
                                  ('warehouse_id.operating_unit_id', '=',
                                   operating_unit.id)])
@@ -42,9 +42,9 @@ class PurchaseRequisition(models.Model):
     def _check_company_operating_unit(self):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and \
-                            rec.company_id != rec.operating_unit_id.company_id:
-                raise Warning(_('The Company in the Purchase Requisition and '
-                                'in the Operating Unit must be the same.'))
+                    rec.company_id != rec.operating_unit_id.company_id:
+                raise UserError(_('The Company in the Purchase Requisition and'
+                                  ' in the Operating Unit must be the same.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'picking_type_id')
@@ -53,13 +53,13 @@ class PurchaseRequisition(models.Model):
             picking_type = rec.picking_type_id
             if picking_type:
                 if picking_type.warehouse_id and\
-                        picking_type.warehouse_id.operating_unit_id\
-                        and rec.operating_unit_id and\
-                        picking_type.warehouse_id.operating_unit_id != \
-                                rec.operating_unit_id:
-                    raise Warning(_('Configuration error!\nThe Operating Unit in\
-                    Purchase Requisition and the Warehouse of picking type\
-                    must belong to the same Operating Unit.'))
+                    picking_type.warehouse_id.operating_unit_id\
+                    and rec.operating_unit_id and\
+                    picking_type.warehouse_id.operating_unit_id !=\
+                        rec.operating_unit_id:
+                    raise UserError(_('Configuration error!\nThe Operating \
+                    Unit in Purchase Requisition and the Warehouse of picking \
+                    type must belong to the same Operating Unit.'))
 
     @api.onchange('operating_unit_id')
     def _onchange_operating_unit_id(self):
@@ -71,9 +71,9 @@ class PurchaseRequisition(models.Model):
             if types:
                 self.picking_type_id = types[:1]
             else:
-                raise Warning(_("No Warehouse found with the "
-                                "Operating Unit indicated in the "
-                                "Purchase Requisition!"))
+                raise UserError(_("No Warehouse found with the "
+                                  "Operating Unit indicated in the "
+                                  "Purchase Requisition!"))
 
     @api.model
     def _prepare_purchase_order(self, requisition, supplier):
