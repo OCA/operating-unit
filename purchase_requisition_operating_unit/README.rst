@@ -17,16 +17,6 @@ This module introduces the following features:
 * Sets default Picking type whoes Operating Unit (OU) in Warehouse matches to that of the User.
 
 
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 
