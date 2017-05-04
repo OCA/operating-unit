@@ -8,10 +8,10 @@
         <field name="domain_force">['|',('operating_unit_ids','=',False),('operating_unit_ids','in',[g.id for g in user.operating_unit_ids])]</field>
         <field name="name">MIS Reports from allowed operating units</field>
         <field name="global" eval="True"/>
-        <field eval="0" name="perm_unlink"/>
-        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
         <field eval="1" name="perm_read"/>
-        <field eval="0" name="perm_create"/>
+        <field eval="1" name="perm_create"/>
     </record>
 
 </data>
