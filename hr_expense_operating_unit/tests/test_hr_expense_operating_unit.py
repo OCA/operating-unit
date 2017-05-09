@@ -4,6 +4,7 @@
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.tests import common
+from openerp.exceptions import AccessError
 
 
 class TestHrExpenseOperatingUnit(common.TransactionCase):
@@ -103,6 +104,10 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
              ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(record.ids, [], 'User 2 should not have access to %s'
                          % self.ou1.name)
+        with self.assertRaises(AccessError):
+            self.hr_expense1.sudo(self.user2.id).unlink()
+        with self.assertRaises(AccessError):
+            self.hr_expense1.sudo(self.user2.id).write({'name': 'new name'})
 
         # Expense OU should have same OU of its accounting entries
         self.assertEqual(self.hr_expense1.operating_unit_id.id,
