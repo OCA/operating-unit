@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
+# © 2015-17 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from openerp.tests import common
 from openerp.exceptions import ValidationError
@@ -33,10 +33,11 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
             'type': 'opportunity'
         })
         self.sale = self.sale_model.\
-            with_context({'default_operating_unit_id': crm.operating_unit_id.id,
+            with_context({'default_operating_unit_id':
+                          crm.operating_unit_id.id,
                           'default_opportunity_id': crm.id}).\
-                            create({'partner_id': crm.partner_id.id,
-                                    'team_id': crm.team_id.id})
+            create({'partner_id': crm.partner_id.id,
+                    'team_id': crm.team_id.id})
         return crm
 
     def test_sale_crm(self):

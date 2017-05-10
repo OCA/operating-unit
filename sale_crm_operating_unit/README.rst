@@ -10,17 +10,6 @@ This module introduces the following features:
 
 * Passes the Operating Unit (OU) from Opportunity to Quotation.
 
-
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
+# © 2015-17 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
@@ -11,7 +11,7 @@
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     "website": "https://odoo-community.org/",
-    "category": "Hidden",
+    "category": "Sales",
     "depends": ["sale_crm",
                 "crm_operating_unit",
                 "sale_operating_unit"],
