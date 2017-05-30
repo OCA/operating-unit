@@ -123,7 +123,7 @@ class StockPicking(models.Model):
             if picking_type:
                 unit = picking_type.warehouse_id.operating_unit_id
                 if unit:
-                    res['value']['operating_unit_id'] = unit.id
+                    self.operating_unit_id = unit.id
         return res
 
     @api.multi
