@@ -12,7 +12,8 @@
               'Serpent Consulting Services Pvt. Ltd.,'
               'Odoo Community Association (OCA)',
     'website': 'https://odoo-community.org/',
-    'depends': ['purchase_request_operating_unit'],
+    'depends': ['purchase_request_operating_unit',
+                'report_qweb_operating_unit'],
     'data': [
         'views/report_purchase_request_qweb.xml',
     ],
