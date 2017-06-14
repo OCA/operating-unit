@@ -27,6 +27,11 @@ addon | version | summary
 [operating_unit](operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [procurement_operating_unit](procurement_operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+[purchase_request_operating_unit](purchase_request_operating_unit/) | 9.0.1.0.0 | Operating Unit in Purchase Requests
+[purchase_request_procurement_operating_unit](purchase_request_procurement_operating_unit/) | 9.0.1.0.0 | Purchase Request Procurement with Operating Units
+[purchase_request_to_requisition_operating_unit](purchase_request_to_requisition_operating_unit/) | 9.0.1.0.0 | Purchase Request to Call for Bids with Operating Units
+[purchase_request_to_rfq_operating_unit](purchase_request_to_rfq_operating_unit/) | 9.0.1.0.0 | Purchase Request to RFQ with Operating Units
+[purchase_requisition_operating_unit](purchase_requisition_operating_unit/) | 9.0.1.0.0 | Operating Unit in Purchase Requisitions
 [sale_operating_unit](sale_operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [sale_stock_operating_unit](sale_stock_operating_unit/) | 9.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 9.0.1.0.0 | Sales Team Operating Unit
