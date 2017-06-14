@@ -5,6 +5,7 @@
             <field name="name">Merger Partner Invoice OU</field>
             <field name="model">invoice.merge</field>
             <field name="inherit_id" ref="account_invoice_merge.view_invoice_merge"/>
+            <field name="priority" eval="16"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/group/p[1]" position="replace">
                     <p>
