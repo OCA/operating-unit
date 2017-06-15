@@ -6,7 +6,7 @@
 Account Invoice Merge Operating Units
 =====================================
 
-This module adds operating unit to the new invoice if the merging invoices are belonging to the same Operating Unit.
+This module adds Operating Unit to the new invoice ensuring that the invoices that are merged belongs to the same Operating Unit.
 
 
 Usage
