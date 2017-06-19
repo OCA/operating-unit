@@ -48,14 +48,6 @@ class StockLocation(models.Model):
                     raise UserError(_('Configuration error\nThis location is '
                                       'assigned to a warehouse that belongs to'
                                       ' a different operating unit.'))
-                if self.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error\nThis location is '
-                                      'assigned to a warehouse that belongs to'
-                                      ' a different operating unit.'))
-                if rec.operating_unit_id != w.operating_unit_id:
-                    raise UserError(_('Configuration error\nThis location is'
-                                      ' assigned to a warehouse that belongs'
-                                      ' to a different operating unit.'))
 
     @api.multi
     @api.constrains('operating_unit_id')
@@ -102,8 +94,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                        'Requesting Operating Unit',
-                                        readonly=1)
+                                        'Requesting Operating Unit')
 
     @api.v7
     def onchange_picking_type(self, cr, uid, ids, picking_type_id, partner_id,
