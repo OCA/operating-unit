@@ -24,15 +24,24 @@ class PurchaseOrder(models.Model):
             res = types[:1].id
         return res
 
+    READONLY_STATES = {
+        'purchase': [('readonly', True)],
+        'done': [('readonly', True)],
+        'cancel': [('readonly', True)],
+    }
+
     operating_unit_id = fields.Many2one(
         comodel_name='operating.unit',
         string='Operating Unit',
+        states=READONLY_STATES,
         default=lambda self: (self.env['res.users'].
                               operating_unit_default_get(self.env.uid))
     )
+
     requesting_operating_unit_id = fields.Many2one(
         comodel_name='operating.unit',
         string='Requesting Operating Unit',
+        states=READONLY_STATES,
         default=lambda self: (self.env['res.users'].
                               operating_unit_default_get(self.env.uid))
     )
