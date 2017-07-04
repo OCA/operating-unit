@@ -6,7 +6,7 @@
     "name": 'Accounting with Operating Units',
     "summary": "Introduces Operating Unit fields in invoices and "
                "Accounting Entries with clearing account",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
