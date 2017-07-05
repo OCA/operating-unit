@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tests import common
+
+from odoo.tests import common
 
 
 class TestProcurement(common.TransactionCase):
@@ -12,7 +15,7 @@ class TestProcurement(common.TransactionCase):
         self.res_users_model = self.env['res.users']
         self.procurement_order_model = self.env['procurement.order']
         self.procurement_rule_model = self.env['procurement.rule']
-        self.warehouse = self.env.ref('stock.warehouse0')
+        self.warehouse_id = self.env.ref('stock.warehouse0')
 
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
@@ -35,33 +38,33 @@ class TestProcurement(common.TransactionCase):
         rule = self.procurement_rule_model.\
             create({'name': 'Procurement rule',
                     'action': 'buy',
-                    'picking_type_id': self.picking_type.id
+                    'picking_type_id': self.picking_type.id,
                     })
         return rule
 
     def _create_procurement_order(self):
         # On change for warehouse_id
         new_line = self.procurement_order_model.new()
-        res = new_line.change_warehouse_id(self.warehouse.id)
-        if res.get('value') and res.get('value').get('location_id'):
-            location_id = res.get('value').get('location_id')
+        new_line.warehouse_id = self.warehouse_id
+        new_line.onchange_warehouse_id()
+        location_id = new_line.location_id
         # On change for product_id
         new_line = self.procurement_order_model.new()
-        res = new_line.onchange_product_id(self.product1.id)
-        if res.get('value') and res.get('value').get('product_uom'):
-            product_uom = res.get('value').get('product_uom')
-        proc = self.procurement_order_model.\
+        new_line.product_id = self.product1.id
+        new_line.onchange_product_id()
+        product_uom = new_line.product_uom
+        procurement = self.procurement_order_model.\
             create({'product_id': self.product1.id,
-                    'product_uom': product_uom,
+                    'product_uom': product_uom.id,
                     'product_qty': '10',
                     'name': 'Procurement Order',
-                    'warehouse_id': self.warehouse.id,
+                    'warehouse_id': self.warehouse_id.id,
                     'rule_id': self.rule.id,
-                    'location_id': location_id
+                    'location_id': location_id.id,
                     })
-        proc.check()
-        proc.run()
-        return proc
+        procurement.run()
+        procurement.check()
+        return procurement
 
     def test_security(self):
         self.assertEqual(self.procurement_order.location_id.operating_unit_id,
