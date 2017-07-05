@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, fields, models, _
+from odoo import fields, models, api, _
 
 
 class PurchaseRequest(models.Model):
@@ -23,8 +25,8 @@ class PurchaseRequest(models.Model):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and \
                     rec.company_id != rec.operating_unit_id.company_id:
-                raise Warning(_("The Company in the Purchase Request and in "
-                                "the Operating Unit must be the same."))
+                raise Warning(_('The Company in the Purchase Request and in '
+                                'the Operating Unit must be the same.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'picking_type_id')
@@ -37,9 +39,9 @@ class PurchaseRequest(models.Model):
                         and rec.operating_unit_id and\
                         picking_type.warehouse_id.operating_unit_id !=\
                         rec.operating_unit_id:
-                    raise Warning(_("Configuration error! The Purchase Request"
-                                    " and the Warehouse of picking type must"
-                                    " belong to the same Operating Unit."))
+                    raise Warning(_('Configuration error!\nThe\
+                    Purchase Request and the Warehouse of picking type\
+                    must belong to the same Operating Unit.'))
 
 
 class PurchaseRequestLine(models.Model):
