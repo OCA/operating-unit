@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp.tests import common
+from odoo.tests import common
 
 
 class TestPurchaseRequestOperatingUnit(common.TransactionCase):
@@ -34,10 +36,13 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self.picking_type = self.env.ref('stock.picking_type_in')
 
         # Creates Users and Purchase request
-        self.user1 = self._create_user(
-            'user_1', [], self.company, [self.ou1])
-        self.user2 = self._create_user(
-            'user_2', self.grp_pr_mngr, self.company, [self.b2c])
+        self.user1 = self._create_user('user_1', [],
+                                       self.company,
+                                       [self.ou1])
+        self.user2 = self._create_user('user_2',
+                                       self.grp_pr_mngr,
+                                       self.company,
+                                       [self.b2c])
         self.request1 = self._create_purchase_request(self.ou1)
         self._purchase_line(self.request1)
         self.request2 = self._create_purchase_request(self.b2c,
