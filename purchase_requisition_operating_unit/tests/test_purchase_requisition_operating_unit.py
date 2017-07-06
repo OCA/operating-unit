@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tests import common
-from openerp.exceptions import ValidationError
+
+from odoo.tests import common
+from odoo.exceptions import ValidationError, Warning as UserError
 
 
 class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
@@ -42,10 +45,10 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
             line_values = {
                 'product_id': product.id,
                 'product_qty': qty,
+                'product_uom_id': product.uom_id.id,
             }
             lines.append((0, 0, line_values))
         pr_vals = {
-            'exclusive': 'exclusive',
             'operating_unit_id': self.ou1.id,
             'line_ids': lines,
         }
@@ -68,14 +71,26 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
         # Now OU and Picking Type should be in line as b2c
         self.pr.picking_type_id = picktype
         # Confirm Call
-        self.pr.sudo().signal_workflow('sent_suppliers')
+        self.pr.sudo().action_in_progress()
         self.assertEqual(self.pr.state, 'in_progress',
                          'State not changed to Confirmed')
         # Create PO
-        pr_po = self.pr.make_purchase_order(self.partner1.id)
-        po_id = pr_po.get(self.pr.id)
-        self.po = self.po_model.browse(po_id)
-        self.assertEqual(self.po.operating_unit_id, self.pr.operating_unit_id,
+        new_line = self.po_model.new()
+        new_line.requisition_id = self.pr.id
+        new_line._onchange_requisition_id()
+        new_line.button_confirm()
+        po_ou = new_line.operating_unit_id
+        po_pt = new_line.picking_type_id
+        self.assertEqual(po_ou, self.pr.operating_unit_id,
                          'Operating Unit is not correctly passed to PO')
-        self.assertEqual(self.po.picking_type_id, self.pr.picking_type_id,
+        self.assertEqual(po_pt, self.pr.picking_type_id,
                          'Picking Type is not correctly passed to PO')
+        with self.assertRaises(UserError):
+            self.pr.picking_type_id.warehouse_id.operating_unit_id = None
+            self.pr._onchange_operating_unit_id()
+        with self.assertRaises(ValidationError):
+            self.company_2 = self.env['res.company'].create({
+                'name': 'Company 2',
+            })
+            self.ou1.write({'company_id': self.company_2.id})
+            self._create_pr()

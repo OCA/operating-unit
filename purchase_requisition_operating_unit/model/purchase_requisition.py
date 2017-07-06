@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import fields, models, api
-from openerp.tools.translate import _
-from openerp.exceptions import Warning as UserError
+
+from odoo import api, fields, models
+from odoo.tools.translate import _
+from odoo.exceptions import Warning as UserError
 
 
 class PurchaseRequisition(models.Model):
@@ -24,18 +27,22 @@ class PurchaseRequisition(models.Model):
             res = types[:1].id
         return res
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        readonly=True,
-                                        states={'draft': [('readonly',
-                                                           False)]},
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid))
+    operating_unit_id = fields.Many2one(
+        'operating.unit',
+        'Operating Unit',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        default=lambda self:
+        self.env['res.users'].operating_unit_default_get(self._uid)
+    )
 
-    picking_type_id = fields.Many2one('stock.picking.type', 'Picking Type',
-                                      domain=[('code', '=', 'incoming')],
-                                      required=True,
-                                      default=_get_picking_in)
+    picking_type_id = fields.Many2one(
+        'stock.picking.type',
+        'Picking Type',
+        domain=[('code', '=', 'incoming')],
+        required=True,
+        default=_get_picking_in
+    )
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
@@ -57,9 +64,10 @@ class PurchaseRequisition(models.Model):
                     and rec.operating_unit_id and\
                     picking_type.warehouse_id.operating_unit_id !=\
                         rec.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThe Operating \
-                    Unit in Purchase Requisition and the Warehouse of picking \
-                    type must belong to the same Operating Unit.'))
+                    raise UserError(_('Configuration error. The Operating '
+                                      'Unit in Purchase Requisition and the '
+                                      'Warehouse of picking type must belong '
+                                      'to the same Operating Unit.'))
 
     @api.onchange('operating_unit_id')
     def _onchange_operating_unit_id(self):
@@ -73,20 +81,26 @@ class PurchaseRequisition(models.Model):
             else:
                 raise UserError(_("No Warehouse found with the "
                                   "Operating Unit indicated in the "
-                                  "Purchase Requisition!"))
+                                  "Purchase Requisition."))
 
-    @api.model
-    def _prepare_purchase_order(self, requisition, supplier):
-        res = super(PurchaseRequisition, self).\
-            _prepare_purchase_order(requisition, supplier)
-        res.update({'operating_unit_id': requisition.operating_unit_id.id})
+
+class PurchaseOrder(models.Model):
+    _inherit = 'purchase.order'
+
+    @api.onchange('requisition_id')
+    def _onchange_requisition_id(self):
+        res = super(PurchaseOrder, self)._onchange_requisition_id()
+        self.operating_unit_id = self.requisition_id.operating_unit_id.id
         return res
 
 
 class PurchaseRequisitionLine(models.Model):
     _inherit = 'purchase.requisition.line'
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        related='requisition_id.'
-                                        'operating_unit_id',
-                                        readonly=True, store=True)
+    operating_unit_id = fields.Many2one(
+        'operating.unit',
+        'Operating Unit',
+        related='requisition_id.operating_unit_id',
+        readonly=True,
+        store=True
+    )
