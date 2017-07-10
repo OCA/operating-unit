@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tests import common
-from openerp.tools import SUPERUSER_ID
+
+from odoo.tests import common
+from odoo.tools import SUPERUSER_ID
 
 
 class TestPurchaseRequestToRequisition(common.TransactionCase):
@@ -14,8 +17,6 @@ class TestPurchaseRequestToRequisition(common.TransactionCase):
         self.purchase_request_line_obj = self.env['purchase.request.line']
         self.wiz =\
             self.env['purchase.request.line.make.purchase.requisition']
-        self.purchase_requisition_partner_model =\
-            self.env['purchase.requisition.partner']
         self.purchase_order = self.env['purchase.order']
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')

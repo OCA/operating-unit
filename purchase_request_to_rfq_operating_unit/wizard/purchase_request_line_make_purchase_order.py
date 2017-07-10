@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
-# © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+#   (http://www.eficent.com)
+# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp import fields, models, api, _
-from openerp.exceptions import except_orm
+from odoo import api, fields, models, _
+from odoo.exceptions import except_orm
 
 
 class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
