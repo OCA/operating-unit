@@ -7,6 +7,7 @@
 
 from odoo.addons.hr_contract_operating_unit.tests\
     import test_hr_contract_operating_unit
+from odoo.exceptions import UserError
 
 
 class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
@@ -19,6 +20,13 @@ class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
         self.acc_journal_model = self.env['account.journal']
 
         self.hr_payroll_struct = self.env.ref('hr_payroll.structure_base')
+        cash_account = self.env['account.account'].\
+            search([('user_type_id', '=',
+                     self.env.ref('account.data_account_type_liquidity').id)],
+                   limit=1).id
+        for line in self.hr_payroll_struct.rule_ids:
+            line.account_debit = cash_account
+            line.account_credit = cash_account
         # Add Payroll Salary Structure to Contract
         contracts = self.hr_contract1 + self.hr_contract2
         contracts.write({'struct_id': self.hr_payroll_struct.id})
@@ -44,6 +52,10 @@ class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
 
     def test_hr_payroll_account_ou(self):
         """Test Payroll Account Operating Unit"""
+        with self.assertRaises(UserError):
+            payslip = self.payslip1 + self.payslip2
+            payslip.action_payslip_done()
+
         # Operating Unit (OU) of contract in Payslip should
         # match with OU of Accounting Entries of that Payslip
         self.assertEqual(self.payslip1.move_id.operating_unit_id,
