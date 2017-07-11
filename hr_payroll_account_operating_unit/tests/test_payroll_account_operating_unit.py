@@ -19,6 +19,13 @@ class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
         self.acc_journal_model = self.env['account.journal']
 
         self.hr_payroll_struct = self.env.ref('hr_payroll.structure_base')
+        cash_account = self.env['account.account'].\
+            search([('user_type_id', '=',
+                     self.env.ref('account.data_account_type_liquidity').id)],
+                   limit=1).id
+        for line in self.hr_payroll_struct.rule_ids:
+            line.account_debit = cash_account
+            line.account_credit = cash_account
         # Add Payroll Salary Structure to Contract
         contracts = self.hr_contract1 + self.hr_contract2
         contracts.write({'struct_id': self.hr_payroll_struct.id})
