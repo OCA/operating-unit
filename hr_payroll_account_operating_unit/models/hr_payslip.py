@@ -30,14 +30,9 @@ class HrPayslip(models.Model):
 
     @api.multi
     def action_payslip_done(self):
-        OU = None
-        for slip in self:
-            # Check that all slips are related to contracts
-            # that belong to the same OU.
-            if OU:
-                if slip.contract_id.operating_unit_id.id != OU:
-                    raise UserError(_('Configuration error! '
-                                      'The Contracts must refer the same '
-                                      'Operating Unit.'))
-            OU = slip.contract_id.operating_unit_id.id
+        OU = self.mapped('contract_id.operating_unit_id').ids
+        if len(OU) > 1:
+            raise UserError(_('Configuration error! '
+                              'The Contracts must refer the same '
+                              'Operating Unit.'))
         return super(HrPayslip, self).action_payslip_done()
