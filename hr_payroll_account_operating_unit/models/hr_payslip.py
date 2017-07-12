@@ -17,7 +17,7 @@ class HrPayslip(models.Model):
     @api.multi
     def write(self, vals):
         res = super(HrPayslip, self).write(vals)
-        if 'move_id' in vals and vals['move_id']:
+        if 'move_id' in vals and vals.get('move_id', False):
             for slip in self:
                 if slip.contract_id and slip.contract_id.operating_unit_id:
                     slip.move_id.write({'operating_unit_id':
@@ -36,7 +36,8 @@ class HrPayslip(models.Model):
             # that belong to the same OU.
             if OU:
                 if slip.contract_id.operating_unit_id.id != OU:
-                    raise UserError(_('Configuration error!\nThe Contracts must\
-                    refer the same Operating Unit.'))
+                    raise UserError(_('Configuration error! '
+                                      'The Contracts must refer the same '
+                                      'Operating Unit.'))
             OU = slip.contract_id.operating_unit_id.id
         return super(HrPayslip, self).action_payslip_done()
