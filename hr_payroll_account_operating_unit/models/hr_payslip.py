@@ -17,7 +17,7 @@ class HrPayslip(models.Model):
     @api.multi
     def write(self, vals):
         res = super(HrPayslip, self).write(vals)
-        if 'move_id' in vals and vals.get('move_id', False):
+        if vals.get('move_id', False):
             for slip in self:
                 if slip.contract_id and slip.contract_id.operating_unit_id:
                     slip.move_id.write({'operating_unit_id':
