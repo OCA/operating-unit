@@ -13,22 +13,12 @@ This module introduces the following features:
 * This module implements global security rules on manufacturing orders so that a user can only read manufacturing orders where the location is linked to an
   operating unit that the user has access to.
 
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/9.0
+   :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 Bug Tracker
 ===========
