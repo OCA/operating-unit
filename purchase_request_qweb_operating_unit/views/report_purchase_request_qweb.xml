@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     Copyright 2017 Serpent Consulting Services Pvt. Ltd.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
 
     <template id="report_purchaserequests_inherit" inherit_id="purchase_request.report_purchaserequests">
         <xpath expr="//t[@t-call='report.external_layout']" position="attributes">
@@ -17,5 +19,4 @@
         </xpath>
     </template>
 
-    </data>
- </openerp>
+</odoo>
