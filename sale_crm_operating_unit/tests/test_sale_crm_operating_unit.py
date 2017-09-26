@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L. -
+# Copyright 2015-17 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tests import common
-from openerp.exceptions import ValidationError
+from odoo.tests import common
+from odoo.exceptions import ValidationError
 
 
 class TestSaleCrmOperatingUnit(common.TransactionCase):
@@ -22,7 +22,7 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
         self.partner = self.env.ref('base.partner_root')
 
         # Create CRM Leads
-        self.lead2 = self._create_crm_lead(self.b2c)
+        self.lead2 = self._create_crm_lead(self.ou1)
 
     def _create_crm_lead(self, operating_unit):
         """Create a sale order."""
@@ -32,15 +32,15 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
             'operating_unit_id': operating_unit.id,
             'type': 'opportunity'
         })
-        self.sale = self.sale_model.\
-            with_context({'default_operating_unit_id':
-                          crm.operating_unit_id.id,
-                          'default_opportunity_id': crm.id}).\
-            create({'partner_id': crm.partner_id.id,
-                    'team_id': crm.team_id.id})
         return crm
 
     def test_sale_crm(self):
+        self.sale = self.sale_model.\
+            with_context({'default_operating_unit_id':
+                          self.lead2.operating_unit_id.id,
+                          'default_opportunity_id': self.lead2.id}).\
+            create({'partner_id': self.lead2.partner_id.id,
+                    'team_id': self.lead2.team_id.id})
         # Assert that Operating Unit of Opportunity
         # matches to the Sale Order OU.
         self.assertEqual(self.sale.operating_unit_id,
@@ -51,4 +51,4 @@ class TestSaleCrmOperatingUnit(common.TransactionCase):
         # Checks that it raises the Warning if user tries to change
         # the Operating Unit
         with self.assertRaises(ValidationError):
-            self.sale.operating_unit_id = self.ou1
+            self.sale.operating_unit_id = self.b2c
