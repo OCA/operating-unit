@@ -15,6 +15,23 @@
                         }
                    </attribute>
                 </button>
+                <button name='%(sale_crm.sale_action_quotations)d' position='attributes'>
+                    <attribute name="context">{
+                        'search_default_draft': 1,
+                        'default_partner_id': partner_id,
+                        'default_operating_unit_id': operating_unit_id,
+                        }
+                   </attribute>
+                </button>
+                <button name='%(sale_crm.sale_action_quotations)d' position='attributes'>
+                    <attribute name="context">{
+                        'search_default_partner_id': partner_id,
+                        'default_partner_id': partner_id,
+                        'search_default_sales': 1,
+                        'default_operating_unit_id': operating_unit_id,
+                        }
+                   </attribute>
+                </button>
         </field>
     </record>
 
