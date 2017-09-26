@@ -16,5 +16,5 @@ class SaleOrder(models.Model):
         if self.opportunity_id and self.opportunity_id.operating_unit_id and\
                 self.opportunity_id.\
                 operating_unit_id != self.operating_unit_id:
-            raise ValidationError(_('''Configuration error! The Operating Unit
-                of Sales Order should be same that of Opportunity.'''))
+            raise ValidationError(_('''The Operating Unit of Sales Order does
+                not match to that of the Opportunity.'''))
