@@ -26,8 +26,9 @@ class PurchaseRequest(models.Model):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and \
                     rec.company_id != rec.operating_unit_id.company_id:
-                raise ValidationError(_('The Company in the Purchase Request and in '
-                                'the Operating Unit must be the same.'))
+                raise ValidationError(_('The Company in the Purchase Request '
+                                        'and in the Operating Unit must be'
+                                        'the same.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'picking_type_id')

@@ -30,9 +30,9 @@ class Procurement(models.Model):
                     procurement.location_id.operating_unit_id and\
                     procurement.request_id.operating_unit_id !=\
                     procurement.location_id.operating_unit_id:
-                raise ValidationError(_('The Purchase Request and the Procurement '
-                                'Order must belong to the same'
-                                'Operating Unit.'))
+                raise ValidationError(_('The Purchase Request and the '
+                                        'Procurement Order must belong to '
+                                        'the same Operating Unit.'))
 
     @api.multi
     @api.constrains('location_id', 'warehouse_id')
@@ -42,5 +42,6 @@ class Procurement(models.Model):
                     procurement.location_id.operating_unit_id and \
                     procurement.warehouse_id.operating_unit_id != \
                     procurement.location_id.operating_unit_id:
-                raise ValidationError(_('Warehouse and location of procurement order '
-                                'must belong to the same Operating Unit.'))
+                raise ValidationError(_('Warehouse and location of procurement '
+                                        'order must belong to the same'
+                                        'Operating Unit.'))
