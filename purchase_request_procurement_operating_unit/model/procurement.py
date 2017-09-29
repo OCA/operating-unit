@@ -42,6 +42,6 @@ class Procurement(models.Model):
                     procurement.location_id.operating_unit_id and \
                     procurement.warehouse_id.operating_unit_id != \
                     procurement.location_id.operating_unit_id:
-                raise ValidationError(_('Warehouse and location of procurement '
-                                        'order must belong to the same'
-                                        'Operating Unit.'))
+                raise ValidationError(_('Warehouse and location of '
+                                        'procurement  order must belong to '
+                                        'the same Operating Unit.'))
