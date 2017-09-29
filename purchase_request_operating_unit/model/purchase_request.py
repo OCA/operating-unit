@@ -6,6 +6,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 
 class PurchaseRequest(models.Model):
@@ -25,7 +26,7 @@ class PurchaseRequest(models.Model):
         for rec in self:
             if rec.company_id and rec.operating_unit_id and \
                     rec.company_id != rec.operating_unit_id.company_id:
-                raise Warning(_('The Company in the Purchase Request and in '
+                raise ValidationError(_('The Company in the Purchase Request and in '
                                 'the Operating Unit must be the same.'))
 
     @api.multi
@@ -39,7 +40,7 @@ class PurchaseRequest(models.Model):
                         and rec.operating_unit_id and\
                         picking_type.warehouse_id.operating_unit_id !=\
                         rec.operating_unit_id:
-                    raise Warning(_('Configuration error!\nThe\
+                    raise ValidationError(_('Configuration error!\nThe\
                     Purchase Request and the Warehouse of picking type\
                     must belong to the same Operating Unit.'))
 

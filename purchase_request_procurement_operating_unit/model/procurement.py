@@ -6,6 +6,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import models, api, _
+from odoo.exceptions import ValidationError
 
 
 class Procurement(models.Model):
@@ -29,7 +30,7 @@ class Procurement(models.Model):
                     procurement.location_id.operating_unit_id and\
                     procurement.request_id.operating_unit_id !=\
                     procurement.location_id.operating_unit_id:
-                raise Warning(_('The Purchase Request and the Procurement '
+                raise ValidationError(_('The Purchase Request and the Procurement '
                                 'Order must belong to the same'
                                 'Operating Unit.'))
 
@@ -41,5 +42,5 @@ class Procurement(models.Model):
                     procurement.location_id.operating_unit_id and \
                     procurement.warehouse_id.operating_unit_id != \
                     procurement.location_id.operating_unit_id:
-                raise Warning(_('Warehouse and location of procurement order '
+                raise ValidationError(_('Warehouse and location of procurement order '
                                 'must belong to the same Operating Unit.'))
