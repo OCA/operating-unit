@@ -3,8 +3,8 @@
 # Copyright 2017 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp.tests import common
-from openerp.exceptions import UserError
+from odoo.tests import common
+from odoo.exceptions import UserError
 
 
 class TestInvoiceMergeOperatingUnit(common.TransactionCase):
@@ -13,6 +13,8 @@ class TestInvoiceMergeOperatingUnit(common.TransactionCase):
         super(TestInvoiceMergeOperatingUnit, self).setUp()
         self.res_users_model = self.env['res.users']
         self.invoice_model = self.env['account.invoice']
+        self.account_model = self.env['account.account']
+        self.inv_merge_model = self.env['invoice.merge']
 
         # company
         self.company = self.env.ref('base.main_company')
@@ -29,40 +31,40 @@ class TestInvoiceMergeOperatingUnit(common.TransactionCase):
         self.product1 = self.env.ref('product.product_product_7')
 
 #         Create user1
-        self.user_id =\
-            self.res_users_model.with_context({'no_reset_password': True}).\
-            create({
-                'name': 'Test Account User',
-                'login': 'user_1',
-                'password': 'demo',
-                'email': 'example@yourcompany.com',
-                'company_id': self.company.id,
-                'company_ids': [(4, self.company.id)],
-                'operating_unit_ids': [(4, self.b2b.id), (4, self.b2c.id)],
-                'groups_id': [(6, 0, [self.grp_acc_manager.id])]
-            })
+        self.user_id = self.res_users_model.with_context({
+            'no_reset_password': True
+        }).create({'name': 'Test Account User',
+                   'login': 'user_1',
+                   'password': 'demo',
+                   'email': 'example@yourcompany.com',
+                   'company_id': self.company.id,
+                   'company_ids': [(4, self.company.id)],
+                   'operating_unit_ids': [(4, self.b2b.id), (4, self.b2c.id)],
+                   'groups_id': [(6, 0, [self.grp_acc_manager.id])]
+                   })
 
     def _prepare_invoice(self, operating_unit_id, qty):
         line_products = [(self.product1, qty)]
         # Prepare invoice lines
         lines = []
         acc_type = self.env.ref('account.data_account_type_revenue')
+        account_id = self.account_model.search([('user_type_id', '=',
+                                                 acc_type.id)], limit=1)
         for product, qty in line_products:
             line_values = {
                 'name': product.name,
                 'product_id': product.id,
                 'quantity': qty,
                 'price_unit': 50,
-                'account_id': self.env['account.account'].search(
-                    [('user_type_id', '=', acc_type.id)], limit=1).id
+                'account_id': account_id.id
             }
             lines.append((0, 0, line_values))
         inv_vals = {
             'partner_id': self.partner1.id,
             'account_id': self.partner1.property_account_receivable_id.id,
             'operating_unit_id': operating_unit_id,
-            'name': "Test Supplier Invoice",
-            'reference_type': "none",
+            'name': 'Test Supplier Invoice',
+            'reference_type': 'none',
             'type': 'out_invoice',
             'invoice_line_ids': lines,
         }
@@ -73,23 +75,22 @@ class TestInvoiceMergeOperatingUnit(common.TransactionCase):
         Operating Unit in the new Invoice.
         """
         # Create invoice
-        self.invoice =\
-            self.invoice_model.sudo(self.user_id.id).create(
-                self._prepare_invoice(self.b2b.id, 10))
+        self.invoice = self.invoice_model.sudo(self.user_id.id).\
+            create(self._prepare_invoice(self.b2b.id, 10))
 
         # Create second invoice with different quantity
-        self.invoice2 =\
-            self.invoice_model.sudo(self.user_id.id).create(
-                self._prepare_invoice(self.b2b.id, 20))
+        self.invoice2 = self.invoice_model.sudo(self.user_id.id).\
+            create(self._prepare_invoice(self.b2b.id, 20))
 
-        wiz_invoice_merge = self.env['invoice.merge'].\
-            with_context({'active_ids': [self.invoice.id, self.invoice2.id],
-                          'active_model': 'account.invoice'})
+        wiz_invoice_merge = self.inv_merge_model.with_context({
+            'active_ids': [self.invoice.id, self.invoice2.id],
+            'active_model': 'account.invoice'
+        })
 
-        action = wiz_invoice_merge.create({'keep_references': True}).\
-            merge_invoices()
-
-        invoices = self.env['account.invoice'].browse(action['domain'][0][2])
+        action = wiz_invoice_merge.create({
+            'keep_references': True
+        }).merge_invoices()
+        invoices = self.invoice_model.browse(action['domain'][0][2])
         self.assertEqual(invoices[1].operating_unit_id,
                          invoices[2].operating_unit_id,
                          'Invoice should have Operating Unit')
@@ -100,21 +101,25 @@ class TestInvoiceMergeOperatingUnit(common.TransactionCase):
         raise an exception.
         """
         # Create invoice
-        self.invoice =\
-            self.invoice_model.sudo(self.user_id.id).create(
-                self._prepare_invoice(self.b2b.id, 10))
+        self.invoice = self.invoice_model.sudo(self.user_id.id).\
+            create(self._prepare_invoice(self.b2b.id, 10))
         # Create second invoice with different quantity
-        self.invoice2 =\
-            self.invoice_model.sudo(self.user_id.id).create(
-                self._prepare_invoice(self.b2c.id, 20))
+        self.invoice2 = self.invoice_model.sudo(self.user_id.id).\
+            create(self._prepare_invoice(self.b2c.id, 20))
 
         # dirty check to assert similar Operating Unit in invoices
 
-        wiz_invoice_merge = self.env['invoice.merge'].\
-            with_context({'active_ids': [self.invoice.id,
-                                         self.invoice2.id],
-                          'active_model': 'account.invoice'})
+        wiz_invoice_merge = self.inv_merge_model.with_context({
+            'active_ids': [self.invoice.id, self.invoice2.id],
+            'active_model': 'account.invoice'
+        })
 
         with self.assertRaises(UserError):
 
             wiz_invoice_merge.create({'keep_references': True})._dirty_check()
+
+        wiz_invoice_merge_dif = self.inv_merge_model.with_context({
+            'active_ids': [self.invoice.id, self.invoice2.id],
+            'active_model': 'invoice.merge'
+        })
+        wiz_invoice_merge_dif.create({'keep_references': True})._dirty_check()

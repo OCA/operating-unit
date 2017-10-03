@@ -5,11 +5,12 @@
 
 {
     'name': "Account Invoice Merge Operating Unit",
-    'author': "Eficent Business and IT Consulting Services, S.L.,"
+    'author': "Eficent Business and IT Consulting Services S.L., "
+              "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     'website': "http://www.eficent.com",
     'category': 'Finance',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
         'account_invoice_merge',
