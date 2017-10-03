@@ -3,8 +3,8 @@
 # Copyright 2017 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models, _
-from openerp.exceptions import Warning as UserError
+from odoo import api, models, _
+from odoo.exceptions import UserError
 
 
 class InvoiceMerge(models.TransientModel):
@@ -15,10 +15,9 @@ class InvoiceMerge(models.TransientModel):
         res = super(InvoiceMerge, self)._dirty_check()
         if self.env.context.get('active_model', '') == 'account.invoice':
             ids = self.env.context['active_ids']
-
             invs = self.env['account.invoice'].browse(ids)
             for d in invs:
                 if d['operating_unit_id'] != invs[0]['operating_unit_id']:
-                    raise UserError(
-                        _('Not all invoices are at the same Operating Unit!'))
+                    raise UserError(_('Not all invoices are at the same '
+                                      'Operating Unit!'))
         return res

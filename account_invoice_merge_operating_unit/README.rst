@@ -1,12 +1,13 @@
 .. image:: https://img.shields.io/badge/license-LGPLv3-blue.svg
-   :target: https://www.gnu.org/licenses/lgpl.html
-   :alt: License: LGPL-3
+   :target: https://www.gnu.org/licenses/agpl.html
+   :alt: License: AGPL-3
 
 =====================================
 Account Invoice Merge Operating Units
 =====================================
 
-This module adds Operating Unit to the new invoice ensuring that the invoices that are merged belongs to the same Operating Unit.
+This module adds Operating Unit to the new invoice ensuring that the invoices
+that are merged belongs to the same Operating Unit.
 
 
 Usage
@@ -14,7 +15,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/9.0
+   :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 Bug Tracker
 ===========
