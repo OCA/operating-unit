@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
-    "name": "HR Employee Operating Unit",
+    "name": "Employee Operating Unit",
     "author": "Matiar Rahman, "
               "Genweb2 Limited,"
               "Odoo Community Association (OCA)",
