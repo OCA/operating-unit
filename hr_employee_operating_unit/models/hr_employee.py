@@ -4,7 +4,6 @@
 
 from odoo import api, fields, models
 
-
 class HREmployee(models.Model):
 
     _inherit = 'hr.employee'
@@ -22,4 +21,3 @@ class HREmployee(models.Model):
     def _onchange_user(self):
         super(HREmployee, self)._onchange_user()
         self.operating_unit_id = self.user_id.default_operating_unit_id
-
