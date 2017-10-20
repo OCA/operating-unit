@@ -28,7 +28,6 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         # Create Partner 2 with B2C OU
         self.partner2 = self._create_partner('Test Partner 2', self.b2c)
 
-
     def _create_partner(self, name, operating_unit, context=None):
         """ Create a partner. """
         partner = self.res_partner_model.create({
@@ -36,7 +35,6 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
             'operating_unit_id': operating_unit.id,
         })
         return partner
-
 
     def _create_user(self, login, company, operating_units,
                      context=None):
@@ -51,7 +49,6 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
             'operating_unit_ids': [(4, ou.id) for ou in operating_units],
         })
         return user
-
 
     def test_res_partner(self):
         # User 2 is only assigned to B2C Operating Unit, and cannot
