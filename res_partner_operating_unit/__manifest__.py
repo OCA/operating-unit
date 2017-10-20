@@ -10,7 +10,7 @@
               "Odoo Community Association (OCA)",
     "website": "https://www.niagasolution.com",
     "category": "Generic",
-    "depends": ["base"],
+    "depends": ["operating_unit"],
     "license": "LGPL-3",
     "data": [
         "security/res_partner_security.xml",
