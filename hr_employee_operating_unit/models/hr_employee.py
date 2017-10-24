@@ -30,23 +30,18 @@ class HREmployee(models.Model):
                                           'operating_unit_emp_rel',
                                           'emp_id', 'ou_id', 'Operating Units',
                                           default=_get_operating_units)
-    default_operating_unit_id = fields.Many2one('operating.unit',
-                                                'Default Operating Unit',
-                                                default=_get_operating_unit)
 
     @api.onchange('user_id')
     def _onchange_user(self):
         super(HREmployee, self)._onchange_user()
         if self.user_id:
-            self.default_operating_unit_id = self.user_id.\
-                default_operating_unit_id
 
             if self.operating_unit_ids:
                 ou_ids = self.operating_unit_ids.ids
             else:
                 ou_ids = []
 
-            if self.default_operating_unit_id.id not in ou_ids:
-                ou_ids.append(self.default_operating_unit_id.id)
+            if self.user_id.default_operating_unit_id.id not in ou_ids:
+                ou_ids.append(self.user_id.default_operating_unit_id.id)
 
             self.operating_unit_ids = [(6, 0, ou_ids)]
