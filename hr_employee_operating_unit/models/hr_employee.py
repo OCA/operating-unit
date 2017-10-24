@@ -38,7 +38,8 @@ class HREmployee(models.Model):
     def _onchange_user(self):
         super(HREmployee, self)._onchange_user()
         if self.user_id:
-            self.default_operating_unit_id = self.user_id.default_operating_unit_id
+            self.default_operating_unit_id = self.user_id.\
+                default_operating_unit_id
 
             if self.operating_unit_ids:
                 ou_ids = self.operating_unit_ids.ids
@@ -48,4 +49,4 @@ class HREmployee(models.Model):
             if self.default_operating_unit_id.id not in ou_ids:
                 ou_ids.append(self.default_operating_unit_id.id)
 
-            self.operating_unit_ids = [(6,0,ou_ids)]
+            self.operating_unit_ids = [(6, 0, ou_ids)]
