@@ -54,7 +54,7 @@ class TestEmployeeOperatingUnit(common.TransactionCase):
         employee = self.hr_employee_model.create({
             'name': 'Employee',
             'user_id': uid,
-            'operating_unit_id': operating_unit_id.id
+            'operating_unit_ids': [(4, operating_unit_id.id)]
         })
         return employee
 
@@ -64,6 +64,6 @@ class TestEmployeeOperatingUnit(common.TransactionCase):
 
         emp = self.hr_employee_model.sudo(self.user2.id).search(
             [('id', '=', self.emp1.id),
-             ('operating_unit_id', '=', self.main_OU.id)])
+             ('operating_unit_ids', '=', self.main_OU.id)])
         self.assertEqual(emp.ids, [], 'User 2 should not have access to '
                          '%s' % self.main_OU.name)
