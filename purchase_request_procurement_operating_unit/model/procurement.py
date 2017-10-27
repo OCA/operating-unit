@@ -12,13 +12,12 @@ from odoo.exceptions import ValidationError
 class Procurement(models.Model):
     _inherit = 'procurement.order'
 
-    @api.model
-    def _prepare_purchase_request(self, procurement):
-        res = super(Procurement, self)._prepare_purchase_request(procurement)
-        if procurement.location_id.operating_unit_id:
+    @api.multi
+    def _prepare_purchase_request(self):
+        res = super(Procurement, self)._prepare_purchase_request()
+        if self.location_id.operating_unit_id:
             res.update({
-                'operating_unit_id': procurement.location_id.
-                operating_unit_id.id
+                'operating_unit_id': self.location_id.operating_unit_id.id
             })
         return res
 
