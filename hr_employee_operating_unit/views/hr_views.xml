@@ -14,7 +14,8 @@
                     <xpath expr="//field[@name='company_id']" position="after">
                         <field name="operating_unit_ids"
                                domain="[('company_id', '=', company_id)]"
-                               widget="many2many_tags"/>
+                               widget="many2many_tags"
+                               options="{'no_create': True}" />
                     </xpath>
                 </data>
             </field>
