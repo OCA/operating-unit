@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<openerp>
-    <data>
-        <!-- Employee -->
+<odoo>
 
         <!-- Inherited Form view-->
         <record id="hr_emp_view_form" model="ir.ui.view">
@@ -21,7 +19,4 @@
             </field>
         </record>
 
-        <!-- Employee -->
-
-    </data>
-</openerp>
+</odoo>
