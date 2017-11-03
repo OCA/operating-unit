@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
@@ -11,7 +10,8 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
 
     def setUp(self):
         super(TestSaleTeamOperatingUnit, self).setUp()
-        self.res_users_model = self.env['res.users']
+        self.res_users_model = self.env['res.users'].with_context(
+            tracking_disable=True, no_reset_password=True)
         self.crm_team_model = self.env['crm.team']
         # Groups
         self.grp_sale_mngr = self.env.ref('sales_team.group_sale_manager')
