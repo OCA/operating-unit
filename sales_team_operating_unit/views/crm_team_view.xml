@@ -7,8 +7,7 @@
     <record id="crm_team_salesteams_search" model="ir.ui.view">
         <field name="name">Case Teams - Search</field>
         <field name="model">crm.team</field>
-        <field name="inherit_id"
-               ref="sales_team.crm_team_salesteams_search"/>
+        <field name="inherit_id" ref="sales_team.crm_team_salesteams_search"/>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
@@ -21,12 +20,10 @@
         <field name="model">crm.team</field>
         <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
         <field name="arch" type="xml">
-            <page name="more_info" position="inside">
-                <group string="Operating Unit" name="group_operating_unit"
-                       groups="operating_unit.group_multi_operating_unit">
-                    <field name="operating_unit_id" domain = "[('company_id','=', company_id)]" options="{'no_create': True}"/>
-                </group>
-            </page>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                       domain="[('company_id','=', company_id)]" options="{'no_create': True}"/>
+            </xpath>
         </field>
     </record>
 
