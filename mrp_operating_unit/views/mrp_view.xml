@@ -3,7 +3,6 @@
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <openerp>
-    <data>
 
         <record id="mrp_production_tree_view" model="ir.ui.view">
             <field name="name">mrp.production.tree</field>
@@ -42,5 +41,4 @@
             </field>
         </record>
 
-    </data>
 </openerp>

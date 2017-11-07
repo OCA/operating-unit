@@ -28,21 +28,20 @@ class TestProcurement(common.TransactionCase):
         self.mrp_bom_method = self._create_bom()
         self.procurement_order = self._create_procurement_order()
 
-
     def _create_procurement_rule(self):
         rule = self.procurement_rule_model.create({
-                'name': 'Procurement rule',
-                'action': 'manufacture'
-                })
+            'name': 'Procurement rule',
+            'action': 'manufacture',
+        })
         return rule
 
     def _create_bom(self):
         bom = self.bom_model.create({
-                'product_tmpl_id': self.product1.product_tmpl_id.id,
-                'product_id': self.product1.id,
-                'product_qty': '1',
-                'type': 'normal',
-                'product_efficiency': '1.00',
+            'product_tmpl_id': self.product1.product_tmpl_id.id,
+            'product_id': self.product1.id,
+            'product_qty': '1',
+            'type': 'normal',
+            'product_efficiency': '1.00',
         })
         return bom
 
@@ -58,19 +57,20 @@ class TestProcurement(common.TransactionCase):
         if res.get('value') and res.get('value').get('product_uom'):
             product_uom = res.get('value').get('product_uom')
         order = self.procurement_order_model.create({
-                'product_id': self.product1.id,
-                'product_uom': product_uom,
-                'product_qty': '10',
-                'name': 'Procurement Order',
-                'warehouse_id': self.warehouse.id,
-                'bom_id': self.mrp_bom_method.id,
-                'rule_id': self.rule.id,
-                'location_id': location_id,
+            'product_id': self.product1.id,
+            'product_uom': product_uom,
+            'product_qty': '10',
+            'name': 'Procurement Order',
+            'warehouse_id': self.warehouse.id,
+            'bom_id': self.mrp_bom_method.id,
+            'rule_id': self.rule.id,
+            'location_id': location_id,
         })
         return order
 
     def test_security(self):
-        self.assertEqual(self.procurement_order.location_id.operating_unit_id,
-                         self.procurement_order.production_id.operating_unit_id,
-                         'The Operating Unit in Procurement Order Location'
-                         'does not match to Manufacturing Order OU.')
+        self.assertEqual(
+            self.procurement_order.location_id.operating_unit_id,
+            self.procurement_order.production_id.operating_unit_id,
+            'The Operating Unit in Procurement Order Location '
+            'does not match to Manufacturing Order OU.')

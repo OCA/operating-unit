@@ -6,7 +6,7 @@
 
 from openerp import api, fields, models
 from openerp.tools.translate import _
-from openerp.exceptions import Warning
+from openerp.exceptions import UserError
 
 
 class MrpProduction(models.Model):
@@ -26,21 +26,24 @@ class MrpProduction(models.Model):
                 (mo.location_src_id.operating_unit_id or
                  mo.location_dest_id.operating_unit_id)
             ):
-                raise Warning(_('The Operating Unit of the Manufacturing Order\
-                                 must match with that of the Raw Materials and\
-                                  Finished Product Locations.'))
+                raise UserError(
+                    _('The Operating Unit of the Manufacturing Order '
+                      'must match with that of the Raw Materials and '
+                      'Finished Product Locations.'))
             if (
                 mo.operating_unit_id and
                 mo.operating_unit_id != mo.location_src_id.operating_unit_id
             ):
-                raise Warning(_('The Operating Unit of the Manufacturing Order\
-                                 must match with that of the Raw Materials and\
-                                  Finished Product Locations.'))
+                raise UserError(
+                    _('The Operating Unit of the Manufacturing Order '
+                      'must match with that of the Raw Materials and '
+                      'Finished Product Locations.'))
             if (
                 mo.operating_unit_id and
                 mo.operating_unit_id != mo.location_dest_id.operating_unit_id
             ):
-                raise Warning(_('The Operating Unit of the Manufacturing Order\
-                                 must match with that of the Raw Materials and\
-                                  Finished Product Locations.'))
+                raise UserError(
+                    _('The Operating Unit of the Manufacturing Order '
+                      'must match with that of the Raw Materials and '
+                      'Finished Product Locations.'))
         return True

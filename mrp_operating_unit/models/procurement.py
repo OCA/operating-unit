@@ -3,9 +3,9 @@
 # Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, fields, models
+from openerp import api, models
 from openerp.tools.translate import _
-from openerp.exceptions import Warning
+from openerp.exceptions import UserError
 
 
 class ProcurementOrder(models.Model):
@@ -21,8 +21,9 @@ class ProcurementOrder(models.Model):
                 pr.production_id.operating_unit_id !=
                     pr.location_id.operating_unit_id
             ):
-                raise Warning(_('The Production Order and the Procurement\
-                 Order must belong to the same Operating Unit.'))
+                raise UserError(
+                    _('The Production Order and the Procurement '
+                      'Order must belong to the same Operating Unit.'))
         return True
 
     @api.model

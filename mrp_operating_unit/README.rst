@@ -13,16 +13,6 @@ This module introduces the following features:
 * This module implements global security rules on manufacturing orders so that a user can only read manufacturing orders where the location is linked to an
   operating unit that the user has access to.
 
-Installation
-============
-
-No specific installation requirements.
-
-Configuration
-=============
-
-No configuration is required. 
-
 Usage
 =====
 
