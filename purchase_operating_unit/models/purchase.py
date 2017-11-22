@@ -113,7 +113,7 @@ class PurchaseOrderLine(models.Model):
     operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
                                         string='Operating Unit', readonly=True)
 
-    @api.constrains('operating_unit_id', 'invoice_lines')
+    @api.constrains('order_id.operating_unit_id', 'invoice_lines')
     def _check_invoice_ou(self):
         for line in self:
             for inv_line in line.invoice_lines:
