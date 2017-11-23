@@ -11,19 +11,17 @@ class ProcurementOrder(models.Model):
     _inherit = 'procurement.order'
 
     @api.multi
-    @api.constrains('purchase_line_id')
+    @api.constrains('purchase_line_id', 'location_id')
     def _check_purchase_order_operating_unit(self):
         for proc in self:
-            purchase_ou = proc.purchase_line_id.order_id.operating_unit_id
-            location_ou = proc.location_id.operating_unit_id
-            usage = proc.location_id.usage
-            if usage not in ('supplier', 'customer'):
-                if purchase_ou != location_ou:
-                    raise ValidationError(
-                        _('Configuration error. The Quotation / Purchase Order'
-                          ' and the Procurement Order must belong to the same '
-                          'Operating Unit.')
-                        )
+            if proc.location_id.usage not in ('supplier', 'customer') and \
+                (proc.purchase_line_id.order_id.operating_unit_id !=
+                    proc.location_id.operating_unit_id):
+                raise ValidationError(
+                    _('Configuration error. The Quotation / Purchase Order '
+                      'and the Procurement Order must belong to the same '
+                      'Operating Unit.')
+                    )
 
     @api.multi
     def _prepare_purchase_order(self, partner):
