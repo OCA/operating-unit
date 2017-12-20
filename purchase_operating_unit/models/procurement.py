@@ -15,8 +15,9 @@ class ProcurementOrder(models.Model):
     def _check_purchase_order_operating_unit(self):
         for proc in self:
             if proc.location_id.usage not in ('supplier', 'customer') and \
-                (proc.purchase_line_id.order_id.operating_unit_id !=
-                    proc.location_id.operating_unit_id):
+                proc.purchase_line_id.order_id and \
+                    (proc.purchase_line_id.order_id.operating_unit_id !=
+                        proc.location_id.operating_unit_id):
                 raise ValidationError(
                     _('Configuration error. The Quotation / Purchase Order '
                       'and the Procurement Order must belong to the same '
