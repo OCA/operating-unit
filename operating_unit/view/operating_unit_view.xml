@@ -4,8 +4,8 @@
         <field name="name">operating.unit.form</field>
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
-            <form string="Operating Unit" version="7.0">
-                <group>
+            <form string="Operating Unit" >
+                <group name="main_group">
                     <field name="name"/>
                     <field name="code"/>
                     <field name="active"/>
