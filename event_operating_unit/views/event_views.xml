@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_event_form_inherit_ou">
+        <field name="name">event.event.form</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_event_tree_inherit_ou">
+        <field name="name">event.event.tree</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_tree" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_event_search">
+        <field name="name">event.event.search</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_search" />
+        <field name="arch" type="xml">
+            <search>
+                <field name="operating_unit_id" string="Operating Unit" groups="operating_unit.group_multi_operating_unit" />
+                   <filter name="my_ou" string="My Operating Unit" domain="[('operating_unit_user_ids', 'in', [uid])]" />
+            </search>
+            <xpath expr="//group[1]">
+                <filter string="Operating Unit" context="{'group_by': 'operating_unit_id'}"/>
+
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="event.action_event_view">
+        <field name="context">
+            {
+                "search_default_upcoming":1,
+                "search_default_my_ou":1,
+            }
+        </field>
+   </record>
+
+</odoo>
