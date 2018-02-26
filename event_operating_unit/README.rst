@@ -7,7 +7,7 @@ Event Operating Units
 =====================
 
 This module introduces the operating unit on the Event and adds a related field to the auxillary Types of an event (registration, tracks, sponsors).
-Also it adds default filters to the list views.
+Also it is shipped with the proper record rules.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

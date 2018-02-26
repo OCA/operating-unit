@@ -17,6 +17,7 @@ class TestOperatiingUnitUserId(SavepointCase):
             tracking_disable=True).create({
                 'name': 'User 1',
                 'login': 'user1',
+                'email': 'user1@myhopefullynonexistingdomain.com',
                 'operating_unit_ids': [(4, cls.ou1.id)]
             })
 
@@ -25,6 +26,7 @@ class TestOperatiingUnitUserId(SavepointCase):
             tracking_disable=True).create({
                 'name': 'User 2',
                 'login': 'user2',
+                'email': 'user2@myhopefullynonexistingdomain.com',
                 'operating_unit_ids': [(4, cls.ou2.id)]
             })
 
@@ -50,38 +52,11 @@ class TestOperatiingUnitUserId(SavepointCase):
             'date_end': '2018-03-01 11:00:00'
         })
 
-    def test_compute(self):
-        users = self.event1.operating_unit_user_ids
-        # The demo user is in all ous so we have 3 instead of 2
-        self.assertEqual(len(users), 3)
-        # We should find user1 which is only in ou 1 and user3
-        # which is in both.
-        self.assertIn(self.user1, users)
-        self.assertIn(self.user3, users)
-        # But user2 doesn't belong to our orgunit
-        self.assertNotIn(self.user2, users)
+    def test_permission(self):
+        events_user1 = self.env['event.event'].sudo(self.user1.id).search([])
 
-        users = self.event2.operating_unit_user_ids
-        # The demo user is in all ous so we have 3 instead of 2
-        self.assertEqual(len(users), 3)
-
-        # In ou2 we have user2 & user3
-        self.assertIn(self.user2, users)
-        self.assertIn(self.user3, users)
-        # But we don't have user1
-        self.assertNotIn(self.user1, users)
-
-    def test_search(self):
-        events_user1 = self.env['event.event'].search(
-            [('operating_unit_user_ids', 'in', self.user1.ids)]
-        )
-
-        events_user2 = self.env['event.event'].search(
-            [('operating_unit_user_ids', 'in', self.user2.ids)]
-        )
-        events_user3 = self.env['event.event'].search(
-            [('operating_unit_user_ids', 'in', self.user3.ids)]
-        )
+        events_user2 = self.env['event.event'].sudo(self.user2.id).search([])
+        events_user3 = self.env['event.event'].sudo(self.user3.id).search([])
 
         # we have one event in each ou.
         # user1 & user2 are assigned to one ou each
@@ -91,7 +66,29 @@ class TestOperatiingUnitUserId(SavepointCase):
         self.assertEqual(len(events_user3), 2)
 
         # make sure we got the right one.
-        self.assertEqual(events_user1[0], self.event1)
-        self.assertEqual(events_user2[0], self.event2)
+        self.assertEqual(events_user1, self.event1)
+        self.assertEqual(events_user2, self.event2)
         self.assertIn(self.event1, events_user3)
         self.assertIn(self.event2, events_user3)
+
+    def test_create_correct_ou(self):
+        testevent = self.env['event.event'].sudo(self.user1.id).create({
+            'name': 'Another Testevent',
+            'operating_unit_id': self.ou1.id,
+            'date_begin': '2018-03-01 10:00:00',
+            'date_end': '2018-03-01 11:00:00'
+        })
+        self.assertEqual(len(testevent), 1)
+        self.assertEqual(testevent.operating_unit_id, self.ou1)
+
+    def test_change_ou(self):
+        self.event1.sudo(self.user3.id).write(
+            {'operating_unit_id': self.ou2.id}
+        )
+        self.assertEqual(self.event1.operating_unit_id, self.ou2)
+
+    def test_drop_event(self):
+        id_ = self.event1.id
+        self.event1.sudo(self.user1.id).unlink()
+        my_events = self.env['event.event'].search([('id', '=', id_)])
+        self.assertEqual(len(my_events), 0)

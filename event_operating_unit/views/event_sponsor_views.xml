@@ -5,9 +5,9 @@
         <field name="model">event.sponsor</field>
         <field name="inherit_id" ref="website_event_track.view_event_sponsor_tree" />
         <field name="arch" type="xml">
-            <tree>
+            <field name="sponsor_type_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" />
-            </tree>
+            </field>
         </field>
     </record>
 
@@ -18,7 +18,6 @@
         <field name="arch" type="xml">
             <search>
                 <field name="operating_unit_id" string="Operating Unit" groups="operating_unit.group_multi_operating_unit" />
-                <filter name="my_ou" string="My Operating Unit" domain="[('operating_unit_user_ids', 'in', [uid])]" />
             </search>
         </field>
     </record>

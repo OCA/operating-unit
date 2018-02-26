@@ -5,11 +5,9 @@
         <field name="model">event.track</field>
         <field name="inherit_id" ref="website_event_track.view_event_track_tree" />            
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="active" invisible="1"/>
+            <field name="event_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" />
-            </tree>
+            </field>
         </field>
     </record>
 
@@ -20,16 +18,11 @@
         <field name="arch" type="xml">
             <search>
                 <field name="operating_unit_id" string="Operating Unit" groups="operating_unit.group_multi_operating_unit" />
-                <filter name="my_ou" string="My Operating Unit" domain="[('operating_unit_user_ids', 'in', [uid])]" />
             </search>
-            <xpath expr="//group[1]">
-                <filter string="Operating Unit" context="{'group_by': 'operating_unit_id'}"/>
+            <xpath expr="//filter[@context=&quot;{'group_by':'event_id'}&quot;]" position="after">
+                <filter string="Operating Unit" context="{'group_by': 'operating_unit_id'}" groups="operating_unit.group_multi_operating_unit" />
 
             </xpath>
         </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="website_event_track.action_event_track">
-        <field name="context">{"search_default_my_ou":1,}</field>
     </record>
 </odoo>

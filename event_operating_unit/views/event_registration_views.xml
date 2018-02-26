@@ -18,15 +18,10 @@
         <field name="arch" type="xml">
             <search>
                 <field name="operating_unit_id" string="Operating Unit" groups="operating_unit.group_multi_operating_unit" />
-                <filter name="my_ou" string="My Operating Unit" domain="[('operating_unit_user_ids', 'in', [uid])]" />
             </search>
-            <xpath expr="//group[1]">
-                <filter string="Operating Unit" context="{'group_by': 'operating_unit_id'}"/>
+            <xpath expr="//filter[@context=&quot;{'group_by':'event_id'}&quot;]" position="after">
+                <filter string="Operating Unit" context="{'group_by': 'operating_unit_id'}" groups="operating_unit.group_multi_operating_unit" />
             </xpath>
         </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="event.action_registration">
-        <field name="context">{"search_default_my_ou":1}</field>
     </record>
 </odoo>
