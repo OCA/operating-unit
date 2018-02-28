@@ -14,10 +14,12 @@ class ProcurementOrder(models.Model):
     @api.constrains('purchase_line_id', 'location_id')
     def _check_purchase_order_operating_unit(self):
         for proc in self:
-            if proc.location_id.usage not in ('supplier', 'customer') and \
-                proc.purchase_line_id.order_id and \
-                    (proc.purchase_line_id.order_id.operating_unit_id !=
-                        proc.location_id.operating_unit_id):
+            if not proc.purchase_line_id:
+                continue
+            ou = proc.location_id.operating_unit_id
+            order_ou = proc.purchase_line_id.operating_unit_id
+            if (ou != order_ou and
+                    proc.location_id.usage not in ('supplier', 'customer')):
                 raise ValidationError(
                     _('Configuration error. The Quotation / Purchase Order '
                       'and the Procurement Order must belong to the same '
