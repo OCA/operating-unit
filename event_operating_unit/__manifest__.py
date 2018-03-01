@@ -1,10 +1,10 @@
 # Copyright 2018 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
     'name': 'Event Operating Unit',
     'version': '11.0.1.0.0',
     'category': 'others',
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'author': 'camptocamp, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/operating_unit',
     'depends': [
