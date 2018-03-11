@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>
+<odoo>
+
         <record model="ir.ui.view" id="mis_report_instance_view_tree">
             <field name="name">mis.report.instance.view.tree</field>
             <field name="model">mis.report.instance</field>
@@ -27,5 +27,4 @@
             </field>
         </record>
 
-  </data>
-</openerp>
+</odoo>
