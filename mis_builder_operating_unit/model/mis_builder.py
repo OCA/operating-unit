@@ -20,13 +20,18 @@ class MisReportInstancePeriod(models.Model):
 
     _inherit = 'mis.report.instance.period'
 
+    operating_unit_ids = fields.Many2many('operating.unit',
+                                          string='Operating Unit',
+                                          required=False)
+
     @api.multi
     def _get_additional_move_line_filter(self):
-        aml_domain = super(
-            MisReportInstancePeriod, self)._get_additional_move_line_filter()
+        aml_domain = super(MisReportInstancePeriod, self).\
+            _get_additional_move_line_filter()
         if self.report_instance_id.operating_unit_ids:
-            operating_unit_ids = [op.id for op in
-                                  self.report_instance_id.operating_unit_ids]
             aml_domain.append(('operating_unit_id', 'in',
-                               tuple(operating_unit_ids)))
+                               self.report_instance_id.operating_unit_ids.ids))
+        if self.operating_unit_ids:
+            aml_domain.append(('operating_unit_id', 'in',
+                               self.operating_unit_ids.ids))
         return aml_domain
