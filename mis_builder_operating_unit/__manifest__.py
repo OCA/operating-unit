@@ -10,6 +10,7 @@
     'category': 'Reporting',
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Serpent Consulting Services Pvt. Ltd.,"
+              "ACSONE SA/NV,"
               "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     'website': 'http://www.eficent.com',
