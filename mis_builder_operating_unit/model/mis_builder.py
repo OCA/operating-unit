@@ -29,10 +29,20 @@ class MisReportInstancePeriod(models.Model):
     def _get_additional_move_line_filter(self):
         aml_domain = super(MisReportInstancePeriod, self).\
             _get_additional_move_line_filter()
-        if self.report_instance_id.operating_unit_ids:
-            aml_domain.append(('operating_unit_id', 'in',
-                               self.report_instance_id.operating_unit_ids.ids))
-        if self.operating_unit_ids:
-            aml_domain.append(('operating_unit_id', 'in',
-                               self.operating_unit_ids.ids))
+        # we need sudo because, imagine a user having access
+        # to operating unit A, viewing a report with 3 columns
+        # for OU A, B, C: in columns B and C, self.operating_unit_ids
+        # would be empty for him, and the query on a.m.l would be only
+        # restricted by the record rules (ie showing move lines
+        # for OU A only). So the report would display values
+        # for OU A in all 3 columns.
+        sudoself = self.sudo()
+        if sudoself.report_instance_id.operating_unit_ids:
+            aml_domain.append(
+                ('operating_unit_id', 'in',
+                 sudoself.report_instance_id.operating_unit_ids.ids))
+        if sudoself.operating_unit_ids:
+            aml_domain.append(
+                ('operating_unit_id', 'in',
+                 sudoself.operating_unit_ids.ids))
         return aml_domain
