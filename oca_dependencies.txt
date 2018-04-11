@@ -1,3 +1,4 @@
 account-financial-reporting
 account-invoicing
 purchase-workflow
+operating-unit https://github.com/nikul-serpentcs/operating-unit 10-report_qweb_operating_unit
