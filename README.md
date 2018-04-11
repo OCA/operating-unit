@@ -29,6 +29,7 @@ addon | version | summary
 [sale_operating_unit](sale_operating_unit/) | 10.0.1.1.0 | An operating unit (OU) is an organizational entity part of a company
 [sale_stock_operating_unit](sale_stock_operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 10.0.1.0.0 | Sales Team Operating Unit
+[stock_account_operating_unit](stock_account_operating_unit/) | 10.0.1.0.0 | Create journal entries in moves between internal locations with different operating units.
 [stock_operating_unit](stock_operating_unit/) | 10.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
 
 [//]: # (end addons)
