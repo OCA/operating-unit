@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="ir_rule_account_journal_allowed_operating_units"
+            model="ir.rule">
+        <field name="model_id" ref="account.model_account_journal"/>
+        <field name="domain_force">['|', ('operating_unit_id','=',False), ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Journals from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="ir_rule_invoice_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="account.model_account_invoice"/>
+        <field name="domain_force">['|', ('operating_unit_id','=',False), ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Invoices from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="ir_rule_invoice_line_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="account.model_account_invoice_line"/>
+        <field name="domain_force">['|', ('operating_unit_id','=',False), ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Invoice lines from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="ir_rule_move_line_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="account.model_account_move_line"/>
+        <field name="domain_force">['|', ('operating_unit_id','=',False), ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Move lines from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="ir_rule_account_payment_allowed_operating_units"
+            model="ir.rule">
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="domain_force">['|', ('operating_unit_id','=',False), ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Payments from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+
+    <record id="ir_rule_invoice_report_allowed_operating_units"
+            model="ir.rule">
+        <field name="model_id" ref="account.model_account_invoice_report"/>
+        <field name="domain_force">['|', ('operating_unit_id','=',False), ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Invoice Report from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+</odoo>

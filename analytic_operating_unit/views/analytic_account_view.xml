@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="view_account_analytic_account_form" model="ir.ui.view">
+        <field name="name">analytic.analytic.account.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id"
+               ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="operating_unit_ids" widget="many2many_tags" groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
