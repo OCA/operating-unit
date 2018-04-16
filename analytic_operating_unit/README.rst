@@ -14,7 +14,7 @@ units indicated in an analytic account will have the rights to use it.
 Usage
 =====
 
-* Go to 'Accountung / Configuration / Analytic Accounting / Analytic
+* Go to 'Accounting / Configuration / Analytic Accounting / Analytic
   Accounts' and add the accepted Operating Units to each analytic account.
 
 Analytic accounts with no Operating Unit assigned to them will be accessible
@@ -22,7 +22,7 @@ by all users with access to analytic accounts.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/10.0
+   :target: https://runbot.odoo-community.org/runbot/213/11.0
 
 Bug Tracker
 ===========
@@ -44,6 +44,8 @@ Contributors
 ------------
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* WilldooIT Pty Ltd <info@willdooit.com>
+* Michael Villamar <michael.villamar@willdooit.com>
 
 Maintainer
 ----------

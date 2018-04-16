@@ -5,8 +5,8 @@
     "name": "Analytic Operating Unit",
     "version": "11.0.1.0.0",
     "author": "Eficent, "
+              "WilldooIT Pty Ltd,"
               "Odoo Community Association (OCA)",
-    "contributors": ["Michael Villamar <michael.villamar@willdooit.com>"],
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Sales",

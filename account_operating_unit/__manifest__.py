@@ -8,8 +8,8 @@
     "version": "11.0.1.0.0",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
+              "WilldooIT Pty Ltd,"
               "Odoo Community Association (OCA)",
-    "contributors": ["Michael Villamar <michael.villamar@willdooit.com>"],
     "website": "https://github.com/OCA/operating-unit",
     "category": "Accounting & Finance",
     "depends": ['account', 'operating_unit', 'analytic_operating_unit'],
