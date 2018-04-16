@@ -33,4 +33,3 @@ class AccountingReport(models.TransientModel):
                                      self.operating_unit_ids])
         data['form'].update({'operating_units': operating_units})
         return super(AccountingReport, self)._print_report(data)
-

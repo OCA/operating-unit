@@ -49,4 +49,3 @@ class AccountInvoiceLine(models.Model):
                                         related='invoice_id.operating_unit_id',
                                         string='Operating Unit', store=True,
                                         readonly=True)
-

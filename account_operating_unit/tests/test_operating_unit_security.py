@@ -13,4 +13,3 @@ class TestOuSecurity(test_ou.TestAccountOperatingUnit):
             search([('operating_unit_id', '=', self.b2b.id)])
         self.assertFalse(move_ids, 'user_2 should not have access to OU %s'
                          % self.b2b.name)
-

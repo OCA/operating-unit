@@ -27,4 +27,3 @@ class ResCompany(models.Model):
                     rec.inter_ou_clearing_account_id:
                 raise UserError(_('Configuration error!\nPlease indicate an\
                 Inter-operating unit clearing account.'))
-

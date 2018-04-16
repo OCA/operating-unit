@@ -153,4 +153,3 @@ class TestAccountOperatingUnit(AccountingTestCase):
             'invoice_line_ids': lines,
         }
         return inv_vals
-

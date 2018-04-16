@@ -87,4 +87,3 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
                                                              'account_id'],
                                                             ['account_id'])[0]
         return aml_rec.get('debit', 0) - aml_rec.get('credit', 0)
-

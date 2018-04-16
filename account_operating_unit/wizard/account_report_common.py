@@ -18,4 +18,3 @@ class AccountCommonReport(models.TransientModel):
             'operating_unit_ids' in data2['form'] \
             and data2['form']['operating_unit_ids'] or False
         return result
-

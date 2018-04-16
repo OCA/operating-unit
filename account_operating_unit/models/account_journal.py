@@ -24,4 +24,3 @@ class AccountJournal(models.Model):
                                   'must be indicated in bank journals, '
                                   'if it has been defined as self-balanced '
                                   'at company level.'))
-

@@ -29,4 +29,3 @@ class AccountInvoiceReport(models.Model):
             ,ai.operating_unit_id
         """
         return group_by_str
-

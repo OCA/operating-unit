@@ -145,4 +145,3 @@ class AccountMove(models.Model):
                     raise UserError(_('Configuration error!\nThe operating\
                     unit must be completed for each line if the operating\
                     unit has been defined as self-balanced at company level.'))
-
