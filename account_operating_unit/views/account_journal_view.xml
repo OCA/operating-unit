@@ -9,8 +9,7 @@
             <field name="company_id" position="after">
                 <field name="operating_unit_id"
                        options="{'no_create': True}"
-                       groups="operating_unit.group_multi_operating_unit"
-                       attrs="{'invisible':[('type','not in', ['bank', 'cash'])]}"/>
+                       groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
     </record>
