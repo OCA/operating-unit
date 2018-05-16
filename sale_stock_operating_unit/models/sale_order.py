@@ -3,12 +3,27 @@
 # Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import api, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
+
+    @api.model
+    def _default_warehouse_id(self):
+        res = super(SaleOrder, self)._default_warehouse_id()
+        team = self._get_default_team()
+        warehouses = self.env['stock.warehouse'].search(
+            [('operating_unit_id', '=', team.sudo().operating_unit_id.id)],
+            limit=1)
+        if warehouses:
+            return warehouses
+        return res
+
+    warehouse_id = fields.Many2one(
+        comodel_name='stock.warehouse',
+        default=_default_warehouse_id)
 
     @api.onchange('team_id')
     def onchange_team_id(self):
