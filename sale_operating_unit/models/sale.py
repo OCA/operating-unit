@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
 
     @api.model
     def _default_operating_unit(self):
-        team = self.env['crm.team']._get_default_team_id()
+        team = self.sudo().env['crm.team']._get_default_team_id()
         if team.operating_unit_id:
             return team.operating_unit_id
         else:
