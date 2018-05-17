@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo10-addon-account_voucher_operating_unit',
         'odoo10-addon-analytic_operating_unit',
         'odoo10-addon-crm_operating_unit',
+        'odoo10-addon-mis_builder_operating_unit',
         'odoo10-addon-operating_unit',
         'odoo10-addon-procurement_operating_unit',
         'odoo10-addon-purchase_operating_unit',
