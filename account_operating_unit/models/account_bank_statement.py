@@ -9,12 +9,21 @@ from odoo import api, fields, models, _
 class AccountBankStatementLine(models.Model):
     _inherit = 'account.bank.statement.line'
 
+    def _prepare_reconciliation_move_line(self, move, amount):
+        res = super(AccountBankStatementLine, self)._prepare_reconciliation_move_line(move, amount)
+        res['operating_unit_id'] = self.statement_id.journal_id.operating_unit_id.id
+        return res
+
     @api.multi
     def process_reconciliations(self, data):
         AccountMoveLine = self.env['account.move.line']
         for st_line, datum in zip(self, data):
             for aml_dict in datum.get('counterpart_aml_dicts', []):
                 aml_dict['move_line'] = AccountMoveLine.browse(aml_dict['counterpart_aml_id'])
-                aml_dict['operating_unit_id'] = (
-                    aml_dict['move_line'].operating_unit_id.id)
+                aml_dict['operating_unit_id'] = aml_dict['move_line'].operating_unit_id.id
         return super(AccountBankStatementLine, self).process_reconciliations(data)
+
+class AccountReconcileModel(models.Model):
+    _inherit = "account.reconcile.model"
+
+    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit' )
