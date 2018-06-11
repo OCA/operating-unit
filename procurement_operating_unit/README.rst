@@ -9,8 +9,8 @@ Procurement Operating Unit
 This module introduces the following features:
 
 - Implements global security rules on procurement orders so that a user can
-only read procurement orders where the location is linked to an operating unit
-that the user has access to.
+  only read procurement orders where the location is linked to an operating unit
+  that the user has access to.
 
 Usage
 =====
