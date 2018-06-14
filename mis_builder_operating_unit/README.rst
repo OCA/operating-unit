@@ -3,20 +3,15 @@
    :alt: License: LGPL-3
 
 ==========================
-Procurement Operating Unit
+MIS Builder Operating Unit
 ==========================
 
-This module introduces the following features:
-
-- Implements global security rules on procurement orders so that a user can
-  only read procurement orders where the location is linked to an operating unit
-  that the user has access to.
+Introduces the operating unit to MIS Builder report instances.
 
 Usage
 =====
 
-This module defines the operating unit entity and the user's security rules.
-Other modules extend the standard Odoo apps with the OU.
+Set the operating unit in a MIS Builder instance.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -33,16 +28,10 @@ help us smashing it by providing a detailed and welcomed feedback.
 Credits
 =======
 
-Images
+Author
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
-
-Contributors
-------------
-
-* Eficent <contact@eficent.com>
-* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* Stéphane Bidoul <stephane.bidoul@acsone.eu>
 
 Maintainer
 ----------
