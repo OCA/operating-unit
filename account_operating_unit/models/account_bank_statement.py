@@ -11,7 +11,7 @@ class AccountBankStatementLine(models.Model):
 
     def _prepare_reconciliation_move_line(self, move, amount):
         res = super(AccountBankStatementLine, self)._prepare_reconciliation_move_line(move, amount)
-        res['operating_unit_id'] = self.statement_id.journal_id.operating_unit_id.id
+        res['operating_unit_id'] = self.journal_id.operating_unit_id.id
         return res
 
     @api.multi
