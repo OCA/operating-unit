@@ -17,6 +17,9 @@ class AccountInvoice(models.Model):
                                         readonly=True,
                                         states={'draft': [('readonly',
                                                            False)]})
+    def _get_refund_common_fields(self):
+        res = super(AccountInvoice, self)._get_refund_common_fields()
+        return res+['operating_unit_id']
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
