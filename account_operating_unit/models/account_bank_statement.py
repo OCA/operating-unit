@@ -31,6 +31,6 @@ class AccountReconcileModel(models.Model):
     @api.onchange('journal_id')
     def onchange_operating_units(self):
         if self.journal_id:
-            self.operating_unit_id = self.journal_id.operating_unit_id.id
+            self.operating_unit_id = self.journal_id.operating_unit_id and self.journal_id.operating_unit_id.id
         else:
             self.operating_unit_id = False
