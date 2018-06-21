@@ -16,7 +16,8 @@ odoo.define('account_operating_unit.reconciliation', function (require) {
                 index: 0, // position in the form
                 corresponding_property: "operating_unit_id", // a account.move.line field name
                 label: _t("Operating Unit"),
-                required: true,
+                required: false,
+                group:"operating_unit.group_multi_operating_unit",
                 constructor: FieldMany2One,
                 field_properties: {
                     relation: "operating.unit",
@@ -29,6 +30,7 @@ odoo.define('account_operating_unit.reconciliation', function (require) {
     })
 
     reconciliation.abstractReconciliationLine.include({
+
         prepareCreatedMoveLinesForPersisting: function(lines) {
             lines = _.filter(lines, function(line) { return !line.is_tax_line });
             return _.collect(lines, function(line) {
@@ -41,12 +43,20 @@ odoo.define('account_operating_unit.reconciliation', function (require) {
                 var amount = line.tax_id ? line.amount_before_tax: line.amount;
                 dict['credit'] = (amount > 0 ? amount : 0);
                 dict['debit'] = (amount < 0 ? -1 * amount : 0);
-                dict['operating_unit_id'] = line.operating_unit_id;
+                if (typeof line.operating_unit_id !== 'undefined') {
+                    dict['operating_unit_id'] = line.operating_unit_id;
+                }
                 if (line.tax_id) dict['tax_ids'] = [[4, line.tax_id, null]];
                 if (line.analytic_account_id) dict['analytic_account_id'] = line.analytic_account_id;
                 return dict;
             });
+        },
 
+        initializeCreateForm: function(){
+            this._super();
+            if (typeof this.operating_unit_id_field !== 'undefined') {
+                this.operating_unit_id_field.set("value", this.st_line['operating_unit_id']);
+            }
         }
     })
 
