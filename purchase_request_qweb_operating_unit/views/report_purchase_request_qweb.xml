@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     Copyright 2017 Serpent Consulting Services Pvt. Ltd.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <template id="report_purchaserequests_inherit" inherit_id="purchase_request.report_purchaserequests">
+        <xpath expr="//t[@t-call='report.external_layout']" position="attributes">
+            <attribute name="t-call">report_qweb_operating_unit.external_layout_ou</attribute>
+        </xpath>
+        <xpath expr="//div[@class='oe_structure']" position="after">
+            <br/>
+        </xpath>
+        <xpath expr="//div[@class='row mt32 mb32']/div[7]" position="after">
+            <div class="col-xs-3">
+                <strong>Operating Unit:</strong><br/>
+                <span t-field="o.operating_unit_id"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
