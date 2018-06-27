@@ -7,30 +7,54 @@
         <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
                 <button name='%(sale_crm.sale_action_quotations_new)d' position='attributes'>
-                    <attribute name="context">{
-                        'search_default_partner_id': partner_id,
-                        'default_partner_id': partner_id,
-                        'default_team_id': team_id,
-                        'default_operating_unit_id': operating_unit_id,
-                        }
-                   </attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_team_id">team_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_operating_unit_id">operating_unit_id</attribute>
                 </button>
                 <button name='%(sale_crm.sale_action_quotations)d' position='attributes'>
-                    <attribute name="context">{
-                        'search_default_draft': 1,
-                        'default_partner_id': partner_id,
-                        'default_operating_unit_id': operating_unit_id,
-                        }
-                   </attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_draft">1</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_operating_unit_id">operating_unit_id</attribute>
                 </button>
                 <button name='%(sale_crm.sale_action_quotations)d' position='attributes'>
-                    <attribute name="context">{
-                        'search_default_partner_id': partner_id,
-                        'default_partner_id': partner_id,
-                        'search_default_sales': 1,
-                        'default_operating_unit_id': operating_unit_id,
-                        }
-                   </attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_sales">1</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_operating_unit_id">operating_unit_id</attribute>
                 </button>
         </field>
     </record>
