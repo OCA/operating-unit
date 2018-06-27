@@ -15,7 +15,8 @@
     "depends": [
         "sale_crm",
         "crm_operating_unit",
-        "sale_operating_unit"
+        "sale_operating_unit",
+        "base_view_inheritance_extension",
     ],
     "data": [
         'views/sale_crm_view.xml'
