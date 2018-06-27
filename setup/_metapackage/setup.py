@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo10-addon-operating_unit',
         'odoo10-addon-procurement_operating_unit',
         'odoo10-addon-purchase_operating_unit',
+        'odoo10-addon-report_qweb_operating_unit',
         'odoo10-addon-sale_operating_unit',
         'odoo10-addon-sale_stock_operating_unit',
         'odoo10-addon-sales_team_operating_unit',
