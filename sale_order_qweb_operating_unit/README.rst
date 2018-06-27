@@ -7,7 +7,7 @@ Sale Order Qweb Report With Operating Unit
 ==========================================
 
 * This module sale report by a Qweb report and also adds
-the Operating Unit information to it.
+  the Operating Unit information to it.
 
 
 Usage
