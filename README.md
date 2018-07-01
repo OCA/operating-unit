@@ -14,7 +14,6 @@ This repository provides a suite of module to support the Operating Unit concept
 across all Odoo processes.
 
 [//]: # (addons)
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
 [//]: # (end addons)
 
 Translation Status
