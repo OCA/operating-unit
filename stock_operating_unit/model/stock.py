@@ -70,14 +70,15 @@ class StockLocation(models.Model):
     @api.constrains('operating_unit_id')
     def _check_required_operating_unit(self):
         for rec in self:
-            if rec.usage == 'internal' and not rec.operating_unit_id:
+            if (rec.usage not in ('supplier', 'customer') and not
+                    rec.operating_unit_id):
                 raise UserError(
-                    _('Configuration error\nThe operating unit should be '
+                    _('Configuration error. The operating unit should be '
                       'assigned to internal locations and to non other.')
                 )
-            if rec.usage != 'internal' and rec.operating_unit_id:
+            if rec.usage in ('supplier', 'customer') and rec.operating_unit_id:
                 raise UserError(
-                    _('Configuration error\nThe operating unit should be '
+                    _('Configuration error. The operating unit should be '
                       'assigned to internal locations and to non other.')
                 )
 
@@ -161,8 +162,9 @@ class StockMove(models.Model):
     )
 
     @api.multi
-    @api.constrains('operating_unit_id', 'location_id', 'picking_id',
-                    'operating_unit_dest_id', 'location_dest_id')
+    @api.constrains('location_id.operating_unit_id', 'picking_id',
+                    'location_id', 'location_dest_id.operating_unit_id',
+                    'location_dest_id')
     def _check_stock_move_operating_unit(self):
         for stock_move in self:
             if not stock_move.operating_unit_id:

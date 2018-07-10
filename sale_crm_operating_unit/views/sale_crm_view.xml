@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="crm_case_form_view_oppor_extended">
+        <field name="name">Opportunities - Quote OU</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+                <button name='%(sale_crm.sale_action_quotations_new)d' position='attributes'>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_team_id">team_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_operating_unit_id">operating_unit_id</attribute>
+                </button>
+                <button name='%(sale_crm.sale_action_quotations)d' position='attributes'>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_draft">1</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_operating_unit_id">operating_unit_id</attribute>
+                </button>
+                <button name='%(sale_crm.sale_action_quotations)d' position='attributes'>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_partner_id">partner_id</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="search_default_sales">1</attribute>
+                    <attribute
+                        name="context"
+                        operation="python_dict"
+                        key="default_operating_unit_id">operating_unit_id</attribute>
+                </button>
+        </field>
+    </record>
+
+</odoo>

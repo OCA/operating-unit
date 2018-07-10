@@ -2,3 +2,4 @@ account-financial-reporting
 account-invoicing
 purchase-workflow
 mis-builder
+server-tools

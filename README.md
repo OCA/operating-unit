@@ -19,14 +19,21 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_invoice_merge_operating_unit](account_invoice_merge_operating_unit/) | 10.0.1.0.0 | Account Invoice Merge Operating Unit
 [account_operating_unit](account_operating_unit/) | 10.0.1.1.0 | Introduces Operating Unit fields in invoices and Accounting Entries with clearing account
 [account_voucher_operating_unit](account_voucher_operating_unit/) | 10.0.1.0.0 | Introduces the operating unit to vouchers
 [analytic_operating_unit](analytic_operating_unit/) | 10.0.1.0.0 | Analytic Operating Unit
 [crm_operating_unit](crm_operating_unit/) | 10.0.1.0.0 | Operating Unit in CRM
+[hr_contract_operating_unit](hr_contract_operating_unit/) | 10.0.1.0.0 | HR Contract Operating Unit
+[hr_expense_operating_unit](hr_expense_operating_unit/) | 10.0.1.0.0 | HR Expense Operating Unit
+[hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 10.0.1.0.0 | HR Payroll Account Operating Unit
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 10.0.1.0.0 | MIS Builder with Operating Unit
+[mrp_operating_unit](mrp_operating_unit/) | 10.0.1.0.0 | Operating Unit in MRP
 [operating_unit](operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [procurement_operating_unit](procurement_operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 10.0.1.1.1 | An operating unit (OU) is an organizational entity part of a company
+[report_qweb_operating_unit](report_qweb_operating_unit/) | 10.0.1.0.0 | Qweb Report With Operating Unit
+[sale_crm_operating_unit](sale_crm_operating_unit/) | 10.0.1.0.0 | Sale CRM Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 10.0.1.1.0 | An operating unit (OU) is an organizational entity part of a company
 [sale_stock_operating_unit](sale_stock_operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 10.0.1.0.0 | Sales Team Operating Unit
