@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016-2017 Eficent Business and IT Consulting Services S.L.
 # © 2016-2017 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
@@ -7,7 +6,7 @@
     "name": "Stock with Operating Units",
     "summary": "An operating unit (OU) is an organizational entity part of a "
                "company",
-    "version": "10.0.1.0.1",
+    "version": "11.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd., "

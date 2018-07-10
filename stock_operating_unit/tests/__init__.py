@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016-2017 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
 # © 2016-2017 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
