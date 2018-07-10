@@ -111,7 +111,7 @@ class AccountMove(models.Model):
             ou_list_ids = []
             for line in move.line_ids:
                 if line.operating_unit_id:
-                    ou_list_ids += line.operating_unit_id and line.operating_unit_id.id
+                    ou_list_ids.append(line.operating_unit_id and line.operating_unit_id.id)
                 else:
                     raise UserError(_('Configuration error!\nThe operating\
                                     unit must be completed for each line if the operating\
