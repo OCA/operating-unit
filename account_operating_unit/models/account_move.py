@@ -105,9 +105,17 @@ class AccountMove(models.Model):
 
             # If all move lines point to the same operating unit, there's no
             # need to create a balancing move line
-            ou_list_ids = [line.operating_unit_id and
-                           line.operating_unit_id.id for line in
-                           move.line_ids if line.operating_unit_id]
+            # check at the same time again without any additional cost if _check_ou()
+            # still holds. Only a check at write/create is a bit too thin for such a
+            # sensitive matter
+            ou_list_ids = []
+            for line in move.line_ids:
+                if line.operating_unit_id:
+                    ou_list_ids += line.operating_unit_id and line.operating_unit_id.id
+                else:
+                    raise UserError(_('Configuration error!\nThe operating\
+                                    unit must be completed for each line if the operating\
+                                    unit has been defined as self-balanced at company level.'))
             if len(ou_list_ids) <= 1:
                 continue
 
