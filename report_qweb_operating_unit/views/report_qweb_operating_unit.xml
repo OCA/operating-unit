@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     Copyright 2017 Serpent Consulting Services Pvt. Ltd.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <template id="external_layout_ou">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+
+        <t t-call="report_qweb_operating_unit.external_layout_header_ou" />
+        <t t-raw="0" />
+        <t t-call="report_qweb_operating_unit.external_layout_footer_ou" />
+    </template>
+
+    <template id="external_layout_header_ou">
+            <div class="header">
+                <div class="row">
+                    <img t-if="o.operating_unit_id.partner_id.parent_id.image" class="col-xs-2" t-att-src="'data:image/png;base64,%s' % o.operating_unit_id.partner_id.parent_id.image" style="max-height: 45px; margin-bottom: 4px;"/>
+                </div>
+                <div class="row">
+                    <img t-if="not o.operating_unit_id.partner_id.parent_id.image" class="col-xs-2" t-att-src="'data:image/png;base64,%s' % o.operating_unit_id.partner_id.image" style="max-height: 45px; margin-bottom: 4px;"/>
+                </div>
+                <div class="row zero_min_height">
+                    <div class="col-xs-12">
+                        <div style="border-bottom: 1px solid black;"></div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-xs-3" name="ou_address">
+                        <t t-if="o.operating_unit_id.partner_id.parent_id">
+                            <div t-field="o.operating_unit_id.partner_id.parent_id"
+                             t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' 
+                             style="border-bottom: 1px solid black;"/>
+                        </t>
+                        <t t-if="not o.operating_unit_id.partner_id.parent_id">
+                            <div t-field="o.operating_unit_id.partner_id"
+                             t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' 
+                             style="border-bottom: 1px solid black;"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+    </template>
+
+    <template id="external_layout_footer_ou">
+        <div class="footer">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline">
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.phone">Phone: <span t-field="o.operating_unit_id.partner_id.parent_id.phone"/></li>
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.phone">Phone: <span t-field="o.operating_unit_id.partner_id.phone"/></li>
+
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.fax and o.operating_unit_id.partner_id.parent_id.phone">&amp;bull;</li>
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.fax">Fax: <span t-field="o.operating_unit_id.partner_id.parent_id.fax"/></li>
+
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.fax and not o.operating_unit_id.partner_id.parent_id.phone">&amp;bull;</li>
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.fax">Fax: <span t-field="o.operating_unit_id.partner_id.fax"/></li>
+
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.email and o.operating_unit_id.partner_id.parent_id.fax or o.operating_unit_id.partner_id.parent_id.email and o.operating_unit_id.partner_id.parent_id.phone">&amp;bull;</li>
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.email">Email: <span t-field="o.operating_unit_id.partner_id.parent_id.email"/></li>
+
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.email and not o.operating_unit_id.partner_id.parent_id.fax or not o.operating_unit_id.partner_id.parent_id.email and not o.operating_unit_id.partner_id.parent_id.phone">&amp;bull;</li>
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.email">Email: <span t-field="o.operating_unit_id.partner_id.email"/></li>
+
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.website and o.operating_unit_id.partner_id.parent_id.email or o.operating_unit_id.partner_id.parent_id.website and o.operating_unit_id.partner_id.parent_id.fax or o.operating_unit_id.partner_id.parent_id.website and o.operating_unit_id.partner_id.parent_id.phone">&amp;bull;</li>
+                    <li t-if="o.operating_unit_id.partner_id.parent_id.website">Website: <span t-field="o.operating_unit_id.partner_id.parent_id.website"/></li>
+
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.website and not o.operating_unit_id.partner_id.parent_id.email or not o.operating_unit_id.partner_id.parent_id.website and not o.operating_unit_id.partner_id.parent_id.fax or not o.operating_unit_id.partner_id.parent_id.website and not o.operating_unit_id.partner_id.parent_id.phone">&amp;bull;</li>
+                    <li t-if="not o.operating_unit_id.partner_id.parent_id.website">Website: <span t-field="o.operating_unit_id.partner_id.website"/></li>
+                </ul>
+
+                <ul class="list-inline">
+                    <li>Page:</li>
+                    <li><span class="page"/></li>
+                    <li>/</li>
+                    <li><span class="topage"/></li>
+                </ul>
+
+            </div>
+        </div>
+    </template>
+
+</odoo>
