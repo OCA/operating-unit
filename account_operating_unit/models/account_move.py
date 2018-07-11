@@ -59,7 +59,7 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                        'Default operating unit',
+                                        'Default operating unit', states={'posted': [('readonly', True)]},
                                         help="This operating unit will "
                                              "be defaulted in the move lines.")
 
@@ -113,7 +113,7 @@ class AccountMove(models.Model):
                 if line.operating_unit_id:
                     ou_list_ids.append(line.operating_unit_id and line.operating_unit_id.id)
                 else:
-                    raise UserError(_('Configuration error!\nThe operating\
+                    raise UserError(_('Configuration error!\nDuring move posting:\nThe operating\
                                     unit must be completed for each line if the operating\
                                     unit has been defined as self-balanced at company level.'))
             if len(ou_list_ids) <= 1:
