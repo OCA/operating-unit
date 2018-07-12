@@ -39,12 +39,10 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
         return res
 
     @api.model
-    def _prepare_purchase_order(self, picking_type, location, company_id):
+    def _prepare_purchase_order(self, picking_type, company_id):
         data = super(PurchaseRequestLineMakePurchaseOrder, self).\
-            _prepare_purchase_order(picking_type, location, company_id)
+            _prepare_purchase_order(picking_type, company_id)
         if self.operating_unit_id:
-            data['requesting_operating_unit_id'] = \
-                self.operating_unit_id.id
-            data['operating_unit_id'] = \
-                self.operating_unit_id.id
+            data['requesting_operating_unit_id'] = self.operating_unit_id.id
+            data['operating_unit_id'] = self.operating_unit_id.id
         return data

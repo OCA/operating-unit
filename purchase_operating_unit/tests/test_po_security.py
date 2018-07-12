@@ -3,8 +3,7 @@
 # - Jordi Ballester Alomar
 # © 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.addons.purchase_operating_unit.tests import\
-    test_purchase_operating_unit as test_po_ou
+from ..tests import test_purchase_operating_unit as test_po_ou
 
 
 class TestPoSecurity(test_po_ou.TestPurchaseOperatingUnit):
