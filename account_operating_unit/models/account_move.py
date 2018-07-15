@@ -24,6 +24,13 @@ class AccountMoveLine(models.Model):
         _super = super(AccountMoveLine, self)
         return _super.create(vals)
 
+    @api.multi
+    def write(self, vals):
+        result = super(AccountMoveLine, self).write(vals)
+        if 'operating_unit_id' in vals:
+            self._update_check()
+        return result
+
     @api.model
     def _query_get(self, domain=None):
         if domain is None:
