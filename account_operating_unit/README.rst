@@ -85,7 +85,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/10.0
+   :target: https://runbot.odoo-community.org/runbot/213/11.0
 
 Known issues / Roadmap
 ======================
@@ -119,6 +119,8 @@ Contributors
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Aarón Henríquez <ahenriquez@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* WilldooIT Pty Ltd <info@willdooit.com>
+* Michael Villamar <michael.villamar@willdooit.com>
 
 Maintainer
 ----------

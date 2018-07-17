@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # © 2016-17 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.addons.account_operating_unit.tests import (
+
+from odoo.addons.account_operating_unit.tests import\
     test_account_operating_unit as test_ou
-    )  # noqa
 import time
 
 
@@ -29,9 +28,9 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
                 'payment_method_id': self.payment_method_manual_in.id
             })
 
-        register_payments.create_payment()
+        register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
 
-        self.assertAlmostEquals(payment.amount, 115000)
+        self.assertAlmostEqual(payment.amount, 115000)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.invoice.state, 'paid')
