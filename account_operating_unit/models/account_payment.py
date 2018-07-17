@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # © 2016-17 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo import api, fields, models, _
 
 
@@ -47,7 +47,7 @@ class AccountPayment(models.Model):
         if self.currency_id != self.company_id.currency_id:
             dst_liquidity_aml_dict.update({
                 'currency_id': self.currency_id.id,
-                'amount_currency': self.amount,
+                'amount_currency': -self.amount,
             })
 
         dst_liquidity_aml_dict.update({
@@ -62,11 +62,6 @@ class AccountPayment(models.Model):
             'account_id': self.company_id.transfer_account_id.id,
             'journal_id': self.destination_journal_id.id
         }
-        if self.currency_id != self.company_id.currency_id:
-            transfer_debit_aml_dict.update({
-                'currency_id': self.currency_id.id,
-                'amount_currency': -self.amount,
-            })
         transfer_debit_aml_dict.update({
             'operating_unit_id':
                 self.journal_id.operating_unit_id.id or False
