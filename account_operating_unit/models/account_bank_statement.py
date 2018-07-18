@@ -19,8 +19,11 @@ class AccountBankStatementLine(models.Model):
         AccountMoveLine = self.env['account.move.line']
         for st_line, datum in zip(self, data):
             for aml_dict in datum.get('counterpart_aml_dicts', []):
-                aml_dict['move_line'] = AccountMoveLine.browse(aml_dict['counterpart_aml_id'])
-                aml_dict['operating_unit_id'] = aml_dict['move_line'].operating_unit_id.id
+                if 'counterpart_aml_id' in aml_dict:
+                    aml_dict['move_line'] = AccountMoveLine.browse(aml_dict['counterpart_aml_id'])
+                    aml_dict['operating_unit_id'] = aml_dict['move_line'].operating_unit_id.id
+                elif 'move_line' in aml_dict:
+                    aml_dict['operating_unit_id'] = aml_dict['move_line'].operating_unit_id.id
         return super(AccountBankStatementLine, self).process_reconciliations(data)
 
     def get_statement_line_for_reconciliation_widget(self):
