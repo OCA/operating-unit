@@ -32,6 +32,9 @@ addon | version | summary
 [operating_unit](operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [procurement_operating_unit](procurement_operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 10.0.1.1.1 | An operating unit (OU) is an organizational entity part of a company
+[purchase_request_operating_unit](purchase_request_operating_unit/) | 10.0.1.0.0 | Operating Unit in Purchase Requests
+[purchase_request_procurement_operating_unit](purchase_request_procurement_operating_unit/) | 10.0.1.0.0 | Purchase Request Procurement with Operating Units
+[purchase_request_to_rfq_operating_unit](purchase_request_to_rfq_operating_unit/) | 10.0.1.0.0 | Purchase Request to RFQ with Operating Units
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 10.0.1.0.0 | Qweb Report With Operating Unit
 [sale_crm_operating_unit](sale_crm_operating_unit/) | 10.0.1.0.0 | Sale CRM Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 10.0.1.1.0 | An operating unit (OU) is an organizational entity part of a company
