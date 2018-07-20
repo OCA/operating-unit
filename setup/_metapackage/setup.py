@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo10-addon-account_invoice_merge_operating_unit',
+        'odoo10-addon-account_invoice_qweb_operating_unit',
         'odoo10-addon-account_operating_unit',
         'odoo10-addon-account_voucher_operating_unit',
         'odoo10-addon-analytic_operating_unit',
