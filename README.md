@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_invoice_merge_operating_unit](account_invoice_merge_operating_unit/) | 10.0.1.0.0 | Account Invoice Merge Operating Unit
+[account_invoice_qweb_operating_unit](account_invoice_qweb_operating_unit/) | 10.0.1.0.0 | Account Invoice Qweb Report With Operating Unit
 [account_operating_unit](account_operating_unit/) | 10.0.1.1.0 | Introduces Operating Unit fields in invoices and Accounting Entries with clearing account
 [account_voucher_operating_unit](account_voucher_operating_unit/) | 10.0.1.0.0 | Introduces the operating unit to vouchers
 [analytic_operating_unit](analytic_operating_unit/) | 10.0.1.0.0 | Analytic Operating Unit
