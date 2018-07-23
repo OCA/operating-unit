@@ -37,6 +37,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('operating_unit_id')
     def onchange_operating_unit_id(self):
+        super(SaleOrder, self).onchange_operating_unit_id()
         if self.operating_unit_id:
             warehouses = self.env['stock.warehouse'].search(
                 [('operating_unit_id', '=',
