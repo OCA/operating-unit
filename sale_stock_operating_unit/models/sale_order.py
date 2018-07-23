@@ -28,10 +28,10 @@ class SaleOrder(models.Model):
     @api.onchange('team_id')
     def onchange_team_id(self):
         super(SaleOrder, self).onchange_team_id()
-        if self.team_id and self.sudo().team_id.operating_unit_id:
+        if self.team_id and self.team_id.operating_unit_id:
             warehouses = self.env['stock.warehouse'].search(
                 [('operating_unit_id', '=',
-                  self.sudo().team_id.operating_unit_id.id)])
+                  self.team_id.operating_unit_id.id)])
             if warehouses:
                 self.warehouse_id = warehouses[0]
 
@@ -48,7 +48,7 @@ class SaleOrder(models.Model):
     def onchange_warehouse_id(self):
         if self.warehouse_id:
             self.operating_unit_id = self.warehouse_id.operating_unit_id
-            if self.team_id and self.sudo().team_id.operating_unit_id != \
+            if self.team_id and self.team_id.operating_unit_id != \
                     self.operating_unit_id:
                 self.team_id = False
 

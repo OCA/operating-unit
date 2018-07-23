@@ -30,11 +30,11 @@ class SaleOrder(models.Model):
     @api.onchange('team_id')
     def onchange_team_id(self):
         if self.team_id:
-            self.operating_unit_id = self.sudo().team_id.operating_unit_id
+            self.operating_unit_id = self.team_id.operating_unit_id
 
     @api.onchange('operating_unit_id')
     def onchange_operating_unit_id(self):
-        if self.team_id and self.sudo().team_id.operating_unit_id != \
+        if self.team_id and self.team_id.operating_unit_id != \
                 self.operating_unit_id:
             self.team_id = False
 
@@ -42,7 +42,8 @@ class SaleOrder(models.Model):
     @api.constrains('team_id', 'operating_unit_id')
     def _check_team_operating_unit(self):
         for rec in self:
-            if (rec.sudo().team_id.operating_unit_id != rec.operating_unit_id):
+            if (rec.team_id and
+                    rec.team_id.operating_unit_id != rec.operating_unit_id):
                 raise ValidationError(_('Configuration error\n'
                                         'The Operating Unit of the sales team '
                                         'must match with that of the '
