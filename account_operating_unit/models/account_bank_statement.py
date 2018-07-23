@@ -26,12 +26,11 @@ class AccountBankStatementLine(models.Model):
                     aml_dict['operating_unit_id'] = aml_dict['move_line'].operating_unit_id.id
         return super(AccountBankStatementLine, self).process_reconciliations(data)
 
-    #commented throughing some mismatch values for operating unit in js file
-    # def get_statement_line_for_reconciliation_widget(self):
-    #     data = super(AccountBankStatementLine, self).get_statement_line_for_reconciliation_widget()
-    #     if self.journal_id and self.journal_id.operating_unit_id:
-    #         data['operating_unit_id'] = self.journal_id.operating_unit_id.id
-    #     return data
+    def get_statement_line_for_reconciliation_widget(self):
+        data = super(AccountBankStatementLine, self).get_statement_line_for_reconciliation_widget()
+        if self.journal_id and self.journal_id.operating_unit_id:
+            data['operating_unit_id'] = self.journal_id.operating_unit_id.id
+        return data
 
 class AccountReconcileModel(models.Model):
     _inherit = "account.reconcile.model"
