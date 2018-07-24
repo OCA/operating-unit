@@ -28,7 +28,6 @@ class AccountBankStatementLine(models.Model):
 
     def get_statement_line_for_reconciliation_widget(self):
         data = super(AccountBankStatementLine, self).get_statement_line_for_reconciliation_widget()
-
         if self.journal_id and self.journal_id.operating_unit_id:
             data['operating_unit_id'] = self.journal_id.operating_unit_id.id
         return data
@@ -44,3 +43,15 @@ class AccountReconcileModel(models.Model):
             self.operating_unit_id = self.journal_id.operating_unit_id and self.journal_id.operating_unit_id.id
         else:
             self.operating_unit_id = False
+
+    @api.multi
+    def get_operating_unit(self):
+        operating_unit_id = self.journal_id.operating_unit_id.id if self.journal_id.operating_unit_id else False
+        if self.journal_id and not self.analytic_account_id and not self.operating_unit_id:
+            operating_unit_id = self.journal_id.operating_unit_id and self.journal_id.operating_unit_id.id
+        elif self.analytic_account_id and self.analytic_account_id.linked_operating_unit:
+            operating_unit_id = self.analytic_account_id.operating_unit_ids[0].id
+        elif self.operating_unit_id:
+            operating_unit_id = self.operating_unit_id.id
+        return {'operating_unit_id':operating_unit_id}
+
