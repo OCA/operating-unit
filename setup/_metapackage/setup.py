@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo10-addon-sales_team_operating_unit',
         'odoo10-addon-stock_account_operating_unit',
         'odoo10-addon-stock_operating_unit',
+        'odoo10-addon-stock_picking_qweb_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
