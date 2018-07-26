@@ -162,8 +162,8 @@ class StockMove(models.Model):
     )
 
     @api.multi
-    @api.constrains('location_id.operating_unit_id', 'picking_id',
-                    'location_id', 'location_dest_id.operating_unit_id',
+    @api.constrains('operating_unit_id', 'picking_id',
+                    'location_id', 'operating_unit_dest_id',
                     'location_dest_id')
     def _check_stock_move_operating_unit(self):
         for stock_move in self:
