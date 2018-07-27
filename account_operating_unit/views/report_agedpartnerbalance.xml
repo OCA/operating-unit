@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_agedpartnerbalance_operating_units"
+              inherit_id="account.report_agedpartnerbalance">
+        <xpath expr="//div[hasclass('row', 'mt32')]" position="inside">
+            <div class="col-xs-3" t-if="data['operating_units']">
+                <strong>Operating Units:</strong>
+                  <p t-esc="data['operating_units']"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
