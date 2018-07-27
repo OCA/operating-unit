@@ -42,12 +42,6 @@ class AccountPayment(models.Model):
             'journal_id': self.destination_journal_id.id,
         }
 
-        if self.currency_id != self.company_id.currency_id:
-            dst_liquidity_aml_dict.update({
-                'currency_id': self.currency_id.id,
-                'amount_currency': self.amount,
-            })
-
         dst_liquidity_aml_dict.update({
             'operating_unit_id':
                 self.destination_journal_id.operating_unit_id.id or False})
