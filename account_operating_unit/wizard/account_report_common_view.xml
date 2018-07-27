@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="account_common_report_view" model="ir.ui.view">
+            <field name="name">Common Report</field>
+            <field name="model">account.common.report</field>
+            <field name="inherit_id" ref="account.account_common_report_view"/>
+            <field name="arch" type="xml">
+                <field name="journal_ids" position="after">
+                    <field name="operating_unit_ids" widget="many2many_tags"
+                           options="{'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+
+</odoo>
