@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_invoice_merge_operating_unit](account_invoice_merge_operating_unit/) | 10.0.1.0.0 | Account Invoice Merge Operating Unit
+[account_invoice_qweb_operating_unit](account_invoice_qweb_operating_unit/) | 10.0.1.0.0 | Account Invoice Qweb Report With Operating Unit
 [account_operating_unit](account_operating_unit/) | 10.0.1.1.0 | Introduces Operating Unit fields in invoices and Accounting Entries with clearing account
 [account_voucher_operating_unit](account_voucher_operating_unit/) | 10.0.1.0.0 | Introduces the operating unit to vouchers
 [analytic_operating_unit](analytic_operating_unit/) | 10.0.1.0.0 | Analytic Operating Unit
@@ -32,6 +33,9 @@ addon | version | summary
 [operating_unit](operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [procurement_operating_unit](procurement_operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 10.0.1.1.1 | An operating unit (OU) is an organizational entity part of a company
+[purchase_request_operating_unit](purchase_request_operating_unit/) | 10.0.1.0.0 | Operating Unit in Purchase Requests
+[purchase_request_procurement_operating_unit](purchase_request_procurement_operating_unit/) | 10.0.1.0.0 | Purchase Request Procurement with Operating Units
+[purchase_request_to_rfq_operating_unit](purchase_request_to_rfq_operating_unit/) | 10.0.1.0.0 | Purchase Request to RFQ with Operating Units
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 10.0.1.0.0 | Qweb Report With Operating Unit
 [sale_crm_operating_unit](sale_crm_operating_unit/) | 10.0.1.0.0 | Sale CRM Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 10.0.1.1.0 | An operating unit (OU) is an organizational entity part of a company
@@ -39,6 +43,7 @@ addon | version | summary
 [sales_team_operating_unit](sales_team_operating_unit/) | 10.0.1.0.0 | Sales Team Operating Unit
 [stock_account_operating_unit](stock_account_operating_unit/) | 10.0.1.0.0 | Create journal entries in moves between internal locations with different operating units.
 [stock_operating_unit](stock_operating_unit/) | 10.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
+[stock_picking_qweb_operating_unit](stock_picking_qweb_operating_unit/) | 10.0.1.0.0 | Stock Picking Qweb Report With Operating Unit
 
 [//]: # (end addons)
 
