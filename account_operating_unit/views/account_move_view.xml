@@ -79,6 +79,9 @@
             <field name="company_id" position="after">
                 <field name="operating_unit_id"/>
             </field>
+            <field name="second_journal_id" position="after">
+                <field name="second_operating_unit_id"/>
+            </field>
         </field>
     </record>
 
