@@ -38,7 +38,7 @@ odoo.define('account_operating_unit.reconciliation', function (require) {
                 _(data).each(function(datum){
                     var operating_unit = datum.journal_id.operating_unit_id
                     self.model_presets.call("get_operating_unit", [datum['id']]).then(function(result){
-                        operating_unit = result['operating_unit_id']
+                        operating_unit = result['operating_unit_id']                        
                         var preset = {
                             id: datum.id,
                             name: datum.name,
@@ -55,6 +55,7 @@ odoo.define('account_operating_unit.reconciliation', function (require) {
                             }]
                         };
                         if (datum.has_second_line) {
+                            var second_operating_unit = result['second_operating_unit_id']
                             preset.lines.push({
                                 account_id: datum.second_account_id,
                                 journal_id: datum.second_journal_id,
@@ -63,7 +64,7 @@ odoo.define('account_operating_unit.reconciliation', function (require) {
                                 amount: datum.second_amount,
                                 tax_id: datum.second_tax_id,
                                 analytic_account_id: datum.second_analytic_account_id,
-                                operating_unit_id:operating_unit,
+                                operating_unit_id:second_operating_unit,
                             });
                         }
                         self.presets[datum.id] = preset;

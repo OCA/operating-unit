@@ -36,6 +36,7 @@ class AccountReconcileModel(models.Model):
     _inherit = "account.reconcile.model"
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit')
+    second_operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit')
 
     @api.onchange('journal_id')
     def onchange_operating_units(self):
@@ -46,12 +47,19 @@ class AccountReconcileModel(models.Model):
 
     @api.multi
     def get_operating_unit(self):
+        res = {}
         operating_unit_id = self.journal_id.operating_unit_id.id if self.journal_id.operating_unit_id else False
-        if self.journal_id and not self.analytic_account_id and not self.operating_unit_id:
-            operating_unit_id = self.journal_id.operating_unit_id and self.journal_id.operating_unit_id.id
-        elif self.analytic_account_id and self.analytic_account_id.linked_operating_unit:
+        if self.analytic_account_id and self.analytic_account_id.linked_operating_unit:
             operating_unit_id = self.analytic_account_id.operating_unit_ids[0].id
         elif self.operating_unit_id:
             operating_unit_id = self.operating_unit_id.id
-        return {'operating_unit_id':operating_unit_id}
+        res['operating_unit_id'] = operating_unit_id
+        if self.has_second_line:
+            second_operating_unit_id = self.second_journal_id.operating_unit_id.id if self.second_journal_id.operating_unit_id else False
+            if self.second_analytic_account_id and self.second_analytic_account_id.linked_operating_unit:
+                second_operating_unit_id = self.second_analytic_account_id.operating_unit_ids[0].id
+            elif self.second_operating_unit_id:
+                second_operating_unit_id = self.second_operating_unit_id.id
+            res['second_operating_unit_id'] = second_operating_unit_id
+        return res
 
