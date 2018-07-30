@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//t[@t-call='report.external_layout']" position="attributes">
+            <attribute name="t-call">report_qweb_operating_unit.external_layout_ou</attribute>
+        </xpath>
+        <xpath expr="//th[@name='td_sched_date_h']" position="after">
+            <th name="th_ou"><strong>Operating Unit</strong></th>
+        </xpath>
+        <xpath expr="//td[@name='td_sched_date']" position="after">
+            <td name="td_ou">
+               <span t-field="o.operating_unit_id"/>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>

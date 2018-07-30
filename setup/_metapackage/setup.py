@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo10-addon-account_invoice_merge_operating_unit',
+        'odoo10-addon-account_invoice_qweb_operating_unit',
         'odoo10-addon-account_operating_unit',
         'odoo10-addon-account_voucher_operating_unit',
         'odoo10-addon-analytic_operating_unit',
@@ -21,6 +22,9 @@ setuptools.setup(
         'odoo10-addon-operating_unit',
         'odoo10-addon-procurement_operating_unit',
         'odoo10-addon-purchase_operating_unit',
+        'odoo10-addon-purchase_request_operating_unit',
+        'odoo10-addon-purchase_request_procurement_operating_unit',
+        'odoo10-addon-purchase_request_to_rfq_operating_unit',
         'odoo10-addon-report_qweb_operating_unit',
         'odoo10-addon-sale_crm_operating_unit',
         'odoo10-addon-sale_operating_unit',
@@ -28,6 +32,7 @@ setuptools.setup(
         'odoo10-addon-sales_team_operating_unit',
         'odoo10-addon-stock_account_operating_unit',
         'odoo10-addon-stock_operating_unit',
+        'odoo10-addon-stock_picking_qweb_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
