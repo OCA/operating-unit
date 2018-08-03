@@ -22,7 +22,15 @@ class AccountMoveLine(models.Model):
             if move.operating_unit_id:
                 vals['operating_unit_id'] = move.operating_unit_id.id
         _super = super(AccountMoveLine, self)
-        return _super.create(vals)
+        movObj = _super.create(vals)
+        if 'apply_taxes' in self.env.context:
+            if movObj.tax_ids and movObj.operating_unit_id:
+                objmove = movObj.move_id.line_ids.search([('tax_line_id','in',movObj.tax_ids.ids),('operating_unit_id','=',False)])
+                objmove.write({'operating_unit_id':movObj.operating_unit_id.id})
+            elif movObj.tax_line_id and not movObj.operating_unit_id :
+                objmove = movObj.move_id.line_ids.search([('tax_ids', '=', movObj.tax_line_id.id),('operating_unit_id', '!=', False)],limit=1)
+                movObj.write({'operating_unit_id': objmove.operating_unit_id.id})
+        return movObj
 
     @api.multi
     def write(self, vals):
