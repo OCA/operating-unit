@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2013-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# © 2018 Magnus (Willem Hulshof <w.hulshof@magnus.nl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+<!-- Form view for lines -->
+<record id="account_cutoff_line_form" model="ir.ui.view">
+    <field name="name">account.cutoff.line.form</field>
+    <field name="model">account.cutoff.line</field>
+    <field name="inherit_id" ref="account_cutoff_base.account_cutoff_line_form"/>
+    <field name="arch" type="xml">
+            <field name="cutoff_account_id" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+    </field>
+</record>
+
+<!-- Tree view for lines -->
+<record id="account_cutoff_line_tree" model="ir.ui.view">
+    <field name="name">account.cutoff.line.tree</field>
+    <field name="model">account.cutoff.line</field>
+    <field name="inherit_id" ref="account_cutoff_base.account_cutoff_line_tree"/>
+    <field name="arch" type="xml">
+            <field name="cutoff_account_code" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+    </field>
+</record>
+
+<!-- Form view for tax lines -->
+<record id="account_cutoff_tax_line_form" model="ir.ui.view">
+    <field name="name">account.cutoff.tax.line.form</field>
+    <field name="model">account.cutoff.tax.line</field>
+    <field name="inherit_id" ref="account_cutoff_base.account_cutoff_tax_line_form"/>
+    <field name="arch" type="xml">
+            <field name="cutoff_account_id" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+    </field>
+</record>
+
+<!-- Tree view for tax lines -->
+<record id="account_cutoff_tax_line_tree" model="ir.ui.view">
+    <field name="name">account.cutoff.tax.line.tree</field>
+    <field name="model">account.cutoff.tax.line</field>
+    <field name="inherit_id" ref="account_cutoff_base.account_cutoff_tax_line_tree"/>
+    <field name="arch" type="xml">
+            <field name="cutoff_account_id" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+    </field>
+</record>
+
+</odoo>
