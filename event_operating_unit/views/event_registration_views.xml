@@ -5,9 +5,9 @@
         <field name="model">event.registration</field>
         <field name="inherit_id" ref="event.view_event_registration_tree" />
         <field name="arch" type="xml">
-            <xpath expr="field[@name='state']" position="after">
+            <field name="state" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" />
-            </xpath>
+            </field>
         </field>
     </record>
 

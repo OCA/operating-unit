@@ -13,11 +13,11 @@
         'website_event_track',
     ],
     'data': [
+        'security/event_operating_security.xml',
         'views/event_views.xml',
         'views/event_track_views.xml',
         'views/event_registration_views.xml',
         'views/event_sponsor_views.xml',
-        'security/event_operating_security.xml',
     ],
     'installable': True,
 }
