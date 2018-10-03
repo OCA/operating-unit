@@ -2,8 +2,7 @@
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tools.translate import _
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -21,8 +20,7 @@ class AccountMoveLine(models.Model):
             move = self.env['account.move'].browse(vals['move_id'])
             if move.operating_unit_id:
                 vals['operating_unit_id'] = move.operating_unit_id.id
-        _super = super(AccountMoveLine, self)
-        return _super.create(vals)
+        return super(AccountMoveLine, self).create(vals)
 
     @api.model
     def _query_get(self, domain=None):
@@ -81,7 +79,6 @@ class AccountMove(models.Model):
 
         if ou_balances[ou_id] < 0.0:
             res['debit'] = abs(ou_balances[ou_id])
-
         else:
             res['credit'] = ou_balances[ou_id]
         return res
