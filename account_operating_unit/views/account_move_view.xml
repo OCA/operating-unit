@@ -62,6 +62,9 @@
             <field name="journal_id" position="after">
                 <field name="operating_unit_id"/>
             </field>
+            <field name="line_ids" position="attributes">
+                <attribute name="context">{'line_ids': line_ids, 'journal_id': journal_id, 'default_operating_unit_id': operating_unit_id}</attribute>
+            </field>
             <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']"
                    position="after">
                 <field name="operating_unit_id"
