@@ -39,3 +39,10 @@ class OperatingUnit(models.Model):
             names2 = self.search(domain, limit=limit).name_get()
         # Merge both results
         return list(set(names1) | set(names2))[:limit]
+
+    @api.model
+    def create(self, values):
+        res = super(OperatingUnit, self).create(values)
+        self.env.user.write({'operating_unit_ids': [(4, res.id)]})
+
+        return res
