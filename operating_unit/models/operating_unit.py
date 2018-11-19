@@ -1,6 +1,6 @@
-# Copyright 2015-2017 Eficent
+# Copyright 2015-TODAY Eficent
 # - Jordi Ballester Alomar
-# Copyright 2015-2017 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2015-TODAY Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
 
@@ -39,3 +39,10 @@ class OperatingUnit(models.Model):
             names2 = self.search(domain, limit=limit).name_get()
         # Merge both results
         return list(set(names1) | set(names2))[:limit]
+
+    @api.model
+    def create(self, values):
+        res = super(OperatingUnit, self).create(values)
+        self.env.user.write({'operating_unit_ids': [(4, res.id)]})
+
+        return res
