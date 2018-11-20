@@ -15,7 +15,7 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
         self.crm_team_model = self.env['crm.team']
         # Groups
         self.grp_sale_mngr = self.env.ref('sales_team.group_sale_manager')
-        self.grp_user = self.env.ref('base.group_user')
+        self.grp_user = self.env.ref('operating_unit.group_multi_operating_unit')
         # Company
         self.company = self.env.ref('base.main_company')
         # Main Operating Unit
