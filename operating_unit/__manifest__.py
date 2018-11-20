@@ -1,6 +1,6 @@
-# Copyright 2015-2017 Eficent
+# Copyright 2015-TODAY Eficent
 # - Jordi Ballester Alomar
-# Copyright 2015-2017 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2015-TODAY Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License: LGPL-3 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Operating Unit",
@@ -26,4 +26,3 @@
     ],
     'installable': True,
 }
-

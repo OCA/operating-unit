@@ -1,4 +1,4 @@
-# © 2017 Eficent Business and IT Consulting Services S.L.
+# © 2017-TODAY Eficent Business and IT Consulting Services S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
 from odoo.tests import common
@@ -12,7 +12,7 @@ class TestOperatingUnit(common.TransactionCase):
         self.res_users_model = self.env['res.users'].with_context(
             tracking_disable=True, no_reset_password=True)
 
-        #Groups
+        # Groups
         self.grp_ou_mngr = self.env.ref(
             'operating_unit.group_manager_operating_unit')
         self.grp_ou_multi = self.env.ref(
@@ -67,7 +67,8 @@ class TestOperatingUnit(common.TransactionCase):
         # Write
         self.b2b.sudo(self.user1.id).write({'code': 'B2B_changed'})
         # Read list of OU available by User 1
-        operating_unit_list_1 = self.env['operating.unit'].sudo(self.user1.id).\
+        operating_unit_list_1 = self.env[
+            'operating.unit'].sudo(self.user1.id).\
             search([]).mapped('code')
         self.assertEqual(len(operating_unit_list_1), 4,
                          'User 1 should have access to all the OU')
@@ -80,7 +81,8 @@ class TestOperatingUnit(common.TransactionCase):
             self.b2b.sudo(self.user2.id).write({'code': 'B2B_changed'})
 
         # Read list of OU available by User 2
-        operating_unit_list_2 = self.env['operating.unit'].sudo(self.user2.id).\
+        operating_unit_list_2 = self.env[
+            'operating.unit'].sudo(self.user2.id).\
             search([]).mapped('code')
         self.assertEqual(len(operating_unit_list_2), 1,
                          'User 2 should have access to one OU')
