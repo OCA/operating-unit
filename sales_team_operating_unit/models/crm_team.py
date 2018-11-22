@@ -22,6 +22,6 @@ class CrmTeam(models.Model):
         for team in self:
             if (team.company_id and team.operating_unit_id and
                     team.company_id != team.operating_unit_id.company_id):
-                raise UserError(_('Configuration error!\n\n'
+                raise UserError(_('Configuration error, '
                                   'The Company in the Sales Team and in the '
                                   'Operating Unit must be the same.'))
