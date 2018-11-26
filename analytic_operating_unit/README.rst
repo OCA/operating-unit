@@ -22,7 +22,7 @@ by all users with access to analytic accounts.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/213/11.0
+   :target: https://runbot.odoo-community.org/runbot/213/12.0
 
 Bug Tracker
 ===========
@@ -44,6 +44,7 @@ Contributors
 ------------
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Sudhir Arya <sudhir@erpharbor.com>
 
 Maintainer
 ----------
