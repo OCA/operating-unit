@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class AccountAnalyticAccount(models.Model):
-
     _inherit = 'account.analytic.account'
 
     operating_unit_ids = fields.Many2many(
