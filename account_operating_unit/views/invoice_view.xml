@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--© 2016-17 Eficent Business and IT Consulting Services S.L.-->
+<!--© 2016 Serpent Consulting Services Pvt. Ltd.-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
 <odoo>
 
     <record id="invoice_tree" model="ir.ui.view">
@@ -23,7 +26,7 @@
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
             <filter name="group_by_partner_id" position="after">
-                <filter string="Operating Unit" icon="terp-folder-orange"
+                <filter string="Operating Unit" name="operating_unit_grouped" icon="terp-folder-orange"
                       domain="[]" groups="operating_unit.group_multi_operating_unit"
                       context="{'group_by':'operating_unit_id'}"/>
             </filter>
@@ -40,22 +43,36 @@
                        options="{'no_create': True}"
                        widget="selection" groups="operating_unit.group_multi_operating_unit"/>
             </field>
-            <xpath  expr="//field[@name='invoice_line_ids']"
-                    position="attributes">
-                <attribute name="context">{'type': type, 'journal_id': journal_id, 'operating_unit': operating_unit_id}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']"
-                   position="attributes">
-                <attribute name="domain">[('company_id', '=', parent.company_id), '|', ('operating_unit_ids', '=', context.get('operating_unit', False)), ('operating_unit_ids', '=', False)]</attribute>
-            </xpath>
-            <xpath  expr="//field[@name='tax_line_ids']"
-                    position="attributes">
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context">{
+                    'type': type,
+                    'journal_id': journal_id,
+                    'operating_unit': operating_unit_id}
+                </attribute>
+            </field>
+            <field name="invoice_line_ids">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">
+                        [('company_id', '=', parent.company_id),
+                        '|',
+                        ('operating_unit_ids', '=', context.get('operating_unit', False)),
+                        ('operating_unit_ids', '=', False)]
+                    </attribute>
+                </field>
+            </field>
+            <field name="tax_line_ids" position="attributes">
                 <attribute name="context">{'operating_unit': operating_unit_id}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='tax_line_ids']/tree/field[@name='account_analytic_id']"
-                   position="attributes">
-                <attribute name="domain">[('company_id', '=', parent.company_id), '|', ('operating_unit_ids', '=', context.get('operating_unit', False)), ('operating_unit_ids', '=', False)]</attribute>
-            </xpath>
+            </field>
+            <field name="tax_line_ids">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">
+                        [('company_id', '=', parent.company_id),
+                        '|',
+                        ('operating_unit_ids', '=', context.get('operating_unit', False)),
+                        ('operating_unit_ids', '=', False)]
+                    </attribute>
+                </field>
+            </field>
         </field>
     </record>
 
@@ -69,14 +86,24 @@
                        options="{'no_create': True}"
                        widget="selection" groups="operating_unit.group_multi_operating_unit"/>
             </field>
-            <xpath  expr="//field[@name='invoice_line_ids']"
-                    position="attributes">
-                <attribute name="context">{'type': type, 'journal_id': journal_id, 'default_invoice_id': id, 'operating_unit': operating_unit_id}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']"
-                   position="attributes">
-                <attribute name="domain">[('company_id', '=', parent.company_id), '|', ('operating_unit_ids', '=', context.get('operating_unit', False)), ('operating_unit_ids', '=', False)]</attribute>
-            </xpath>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context">{
+                    'type': type,
+                    'journal_id': journal_id,
+                    'default_invoice_id': id,
+                    'operating_unit': operating_unit_id}
+                </attribute>
+            </field>
+            <field name="invoice_line_ids">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">
+                        [('company_id', '=', parent.company_id),
+                        '|',
+                        ('operating_unit_ids', '=', context.get('operating_unit', False)),
+                        ('operating_unit_ids', '=', False)]
+                    </attribute>
+                </field>
+            </field>
         </field>
     </record>
 
