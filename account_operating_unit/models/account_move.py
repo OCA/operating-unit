@@ -1,5 +1,5 @@
-# © 2016-17 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models, _
@@ -9,7 +9,8 @@ from odoo.exceptions import UserError
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit')
+    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
+                                        domain="[('user_ids', '=', uid)]",)
 
     @api.model
     def create(self, vals):
@@ -34,7 +35,7 @@ class AccountMoveLine(models.Model):
         for rec in self:
             if (rec.company_id and rec.operating_unit_id and rec.company_id !=
                     rec.operating_unit_id.company_id):
-                raise UserError(_('Configuration error!\nThe Company in the'
+                raise UserError(_('Configuration error. The Company in the'
                                   ' Move Line and in the Operating Unit must '
                                   'be the same.'))
 
@@ -45,7 +46,7 @@ class AccountMoveLine(models.Model):
             if (rec.move_id and rec.move_id.operating_unit_id and
                 rec.operating_unit_id and rec.move_id.operating_unit_id !=
                     rec.operating_unit_id):
-                raise UserError(_('Configuration error!\nThe Operating Unit in'
+                raise UserError(_('Configuration error. The Operating Unit in'
                                   ' the Move Line and in the Move must be the'
                                   ' same.'))
 
@@ -55,6 +56,7 @@ class AccountMove(models.Model):
 
     operating_unit_id = fields.Many2one('operating.unit',
                                         'Default operating unit',
+                                        domain="[('user_ids', '=', uid)]",
                                         help="This operating unit will "
                                              "be defaulted in the move lines.")
 
@@ -62,8 +64,8 @@ class AccountMove(models.Model):
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id,
                                               ou_balances):
         if not move.company_id.inter_ou_clearing_account_id:
-            raise UserError(_('Error!\nYou need to define an inter-operating\
-                unit clearing account in the company settings'))
+            raise UserError(_('Configuration error. You need to define an \
+            inter-operating unit clearing account in the company settings'))
 
         res = {
             'name': 'OU-Balancing',
@@ -91,7 +93,7 @@ class AccountMove(models.Model):
         return ou_balance
 
     @api.multi
-    def post(self):
+    def post(self, invoice=False):
         ml_obj = self.env['account.move.line']
         for move in self:
             if not move.company_id.ou_is_self_balanced:
@@ -123,7 +125,7 @@ class AccountMove(models.Model):
                 move.with_context(wip=False).\
                     write({'line_ids': [(4, aml.id) for aml in amls]})
 
-        return super(AccountMove, self).post()
+        return super(AccountMove, self).post(invoice)
 
     def assert_balanced(self):
         if self.env.context.get('wip'):
@@ -138,6 +140,6 @@ class AccountMove(models.Model):
                 continue
             for line in move.line_ids:
                 if not line.operating_unit_id:
-                    raise UserError(_('Configuration error!\nThe operating\
-                    unit must be completed for each line if the operating\
+                    raise UserError(_('Configuration error. The operating\
+                    unit is mandatory for each line as the operating\
                     unit has been defined as self-balanced at company level.'))

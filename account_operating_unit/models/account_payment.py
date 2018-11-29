@@ -1,5 +1,5 @@
-# © 2016-17 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models, _
@@ -17,7 +17,8 @@ class AccountPayment(models.Model):
 
     operating_unit_id = fields.Many2one(
         'operating.unit', string='Operating Unit',
-        compute='_compute_operating_unit_id', readonly=True, store=True)
+        domain="[('user_ids', '=', uid)]",
+        compute='_compute_operating_unit_id', store=True)
 
     def _get_counterpart_move_line_vals(self, invoice=False):
         res = super(AccountPayment,
