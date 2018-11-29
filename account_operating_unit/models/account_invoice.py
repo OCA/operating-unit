@@ -1,5 +1,5 @@
-# © 2016-17 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models
@@ -14,6 +14,7 @@ class AccountInvoice(models.Model):
                                         default=lambda self:
                                         self.env['res.users'].
                                         operating_unit_default_get(self._uid),
+                                        domain="[('user_ids', '=', uid)]",
                                         readonly=True,
                                         states={'draft': [('readonly',
                                                            False)]})
@@ -43,11 +44,23 @@ class AccountInvoice(models.Model):
                                         'Operating Unit must be the same.'))
         return True
 
+    @api.multi
+    @api.constrains('operating_unit_id', 'journal_id')
+    def _check_journal_operating_unit(self):
+        for ai in self:
+            if (
+                ai.journal_id.operating_unit_id and
+                ai.operating_unit_id and
+                ai.operating_unit_id != ai.journal_id.operating_unit_id
+            ):
+                raise ValidationError(_('The OU in the Invoice and in '
+                                        'Journal must be the same.'))
+        return True
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
     operating_unit_id = fields.Many2one('operating.unit',
                                         related='invoice_id.operating_unit_id',
-                                        string='Operating Unit', store=True,
-                                        readonly=True)
+                                        string='Operating Unit', store=True)

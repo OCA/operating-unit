@@ -1,5 +1,5 @@
-# © 2016-17 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models, _
@@ -11,6 +11,7 @@ class AccountJournal(models.Model):
 
     operating_unit_id = fields.Many2one(comodel_name='operating.unit',
                                         string='Operating Unit',
+                                        domain="[('user_ids', '=', uid)]",
                                         help="Operating Unit that will be "
                                              "used in payments, when this "
                                              "journal is used.")
@@ -22,7 +23,7 @@ class AccountJournal(models.Model):
             if journal.type in ('bank', 'cash') \
                     and journal.company_id.ou_is_self_balanced \
                     and not journal.operating_unit_id:
-                raise UserError(_('Configuration error!\nThe operating unit '
-                                  'must be indicated in bank journals, '
-                                  'if it has been defined as self-balanced '
-                                  'at company level.'))
+                raise UserError(_('Configuration error. If defined as '
+                                  'self-balanced at company level, the '
+                                  'operating unit is mandatory in bank '
+                                  'journal.'))
