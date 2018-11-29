@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--© 2016-17 Eficent Business and IT Consulting Services S.L.-->
+<!--© 2016 Serpent Consulting Services Pvt. Ltd.-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
 <odoo>
 
     <record id="view_account_payment_tree" model="ir.ui.view">
@@ -36,7 +39,7 @@
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
             <field name="journal_id" position="after">
-                <filter string="Operating Unit" domain="[]"
+                <filter string="Operating Unit" name="operating_unit_grouped" domain="[]"
                         context="{'group_by': 'operating_unit_id'}"
                         groups="operating_unit.group_multi_operating_unit"/>
             </field>

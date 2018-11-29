@@ -1,11 +1,11 @@
-# © 2016-17 Eficent Business and IT Consulting Services S.L.
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": 'Accounting with Operating Units',
-    "summary": "Introduces Operating Unit fields in invoices and "
+    "summary": "Introduces Operating Unit (OU) in invoices and "
                "Accounting Entries with clearing account",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "WilldooIT Pty Ltd,"
@@ -22,11 +22,5 @@
         "views/invoice_view.xml",
         "views/account_payment_view.xml",
         "views/account_invoice_report_view.xml",
-        "views/report_financial.xml",
-        "views/report_trialbalance.xml",
-        "wizard/account_report_common_view.xml",
-        "wizard/account_financial_report_view.xml",
-        "wizard/account_report_trial_balance_view.xml",
     ],
-    'installable': True,
 }
