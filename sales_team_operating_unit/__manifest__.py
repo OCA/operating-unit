@@ -5,7 +5,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Sales Team Operating Unit",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.1.0",
     "author": "Eficent, "
               "SerpentCS,"
               "Odoo Community Association (OCA)",
