@@ -18,6 +18,10 @@ class OperatingUnit(models.Model):
         'res.company', 'Company', required=True, default=lambda self:
         self.env['res.company']._company_default_get('account.account'))
     partner_id = fields.Many2one('res.partner', 'Partner', required=True)
+    user_ids = fields.Many2many(
+        'res.users', 'operating_unit_users_rel', 'poid', 'user_id',
+        'Users Allowed',
+    )
 
     _sql_constraints = [
         ('code_company_uniq', 'unique (code,company_id)',
