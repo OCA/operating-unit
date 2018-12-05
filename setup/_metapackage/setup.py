@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-operating-unit Odoo addons",
     version=version,
     install_requires=[
+        'odoo12-addon-analytic_operating_unit',
         'odoo12-addon-operating_unit',
         'odoo12-addon-sales_team_operating_unit',
     ],
