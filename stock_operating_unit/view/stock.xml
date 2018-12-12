@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016-2017 Eficent Business and IT Consulting Services S.L.
-     Copyright 2016-2017 Serpent Consulting Services Pvt. Ltd.
+<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
+     Copyright 2019 Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
+
     <record id="view_warehouse" model="ir.ui.view">
         <field name="name">stock.warehouse</field>
         <field name="model">stock.warehouse</field>
         <field name="inherit_id" ref="stock.view_warehouse"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='company_id']" position="after">
-                <field name="operating_unit_id" options="{'no_create': True}" domain = "[('company_id','=', company_id)]"
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" options="{'no_create': True}"
+                       domain = "[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            </field>
         </field>
     </record>
 
@@ -20,9 +23,12 @@
         <field name="model">stock.warehouse</field>
         <field name="inherit_id" ref="stock.view_warehouse_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="partner_id" position="after">
+                <field name="operating_unit_id"
+                       domain = "[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
         </field>
     </record>
 
@@ -31,10 +37,12 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='company_id']" position="after">
-                <field name="operating_unit_id" options="{'no_create': True}" domain = "[('company_id','=', company_id)]"
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" options="{'no_create': True}"
+                       domain = "[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            </field>
         </field>
     </record>
 
@@ -43,9 +51,11 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_tree2"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='usage']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="usage" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
@@ -54,9 +64,11 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_search"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location_id']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="location_id" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
@@ -65,9 +77,11 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.vpicktree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='origin']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="origin" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
@@ -76,10 +90,15 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='company_id']" position="after">
-                <field name="operating_unit_id" options="{'no_create': True}" domain = "[('company_id','=', company_id)]"
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" options="{'no_create': True}"
+                       domain = "[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            </field>
+            <field name="picking_type_id" position="attributes">
+                <attribute name="domain">[('warehouse_id.operating_unit_id.user_ids', 'in', uid)]</attribute>
+            </field>
         </field>
     </record>
 
@@ -89,12 +108,15 @@
         <field name="inherit_id" ref="stock.view_picking_internal_search"/>
         <field name="arch" type="xml">
             <field name="product_id" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
             </field>
-            <xpath expr="//filter[@name='picking_type']" position="before">
-                <filter string="Operating Unit" domain="[]" context="{'group_by':'operating_unit_id'}"
+            <filter name="picking_type" position="before">
+                <filter string="Operating Unit" name="operating_unit_grouped"
+                        domain="[('user_ids', 'in', uid)]" context="{'group_by':'operating_unit_id'}"
                         groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            </filter>
         </field>
     </record>
 
@@ -103,12 +125,16 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location_id']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
-            <xpath expr="//field[@name='location_dest_id']" position="after">
-                <field name="operating_unit_dest_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="location_id" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="operating_unit_dest_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
@@ -117,12 +143,34 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_picking_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location_id']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
-            <xpath expr="//field[@name='location_dest_id']" position="after">
-                <field name="operating_unit_dest_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="location_id" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="operating_unit_dest_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_picking_form" model="ir.ui.view">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="operating_unit_dest_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
@@ -132,12 +180,16 @@
         <field name="field_parent">move_history_ids</field>
         <field name="inherit_id" ref="stock.stock_move_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location_id']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
-            <xpath expr="//field[@name='location_dest_id']" position="after">
-                <field name="operating_unit_dest_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="location_id" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="operating_unit_dest_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
@@ -146,12 +198,16 @@
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location_id']" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
-            <xpath expr="//field[@name='location_dest_id']" position="after">
-                <field name="operating_unit_dest_id" groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            <field name="location_id" position="after">
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="location_dest_id" position="after">
+                <field name="operating_unit_dest_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
         </field>
     </record>
 
