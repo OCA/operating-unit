@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# © 2016-2017 Eficent Business and IT Consulting Services S.L.
-# © 2016-2017 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import SUPERUSER_ID
-from openerp.api import Environment
+from odoo import SUPERUSER_ID
+from odoo.api import Environment
 
 
 def update_operating_unit_location(cr, registry):
@@ -15,7 +14,9 @@ def update_operating_unit_location(cr, registry):
         locations = env['stock.location'].search(
             [('id', 'child_of', [parent_location.id]),
              ('usage', '=', 'internal')])
-        for location in locations:
-            if operating_unit:
-                location.write({'operating_unit_id': operating_unit.id})
+        if operating_unit:
+            query = '''update stock_location set operating_unit_id = %s where
+            location_id in %s or id in %s'''
+            cr.execute(query, (operating_unit.id, tuple(locations.ids),
+                               tuple(locations.ids)))
     return True

@@ -1,19 +1,17 @@
-# -*- coding: utf-8 -*-
-# © 2016-2017 Eficent Business and IT Consulting Services S.L.
-# © 2016-2017 Serpent Consulting Services Pvt. Ltd.
+# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Stock with Operating Units",
-    "summary": "An operating unit (OU) is an organizational entity part of a "
-               "company",
-    "version": "10.0.1.0.1",
+    "summary": "Adds the concept of operating unit (OU) in stock management",
+    "version": "12.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd., "
               "Odoo Community Association (OCA)",
     "license": "LGPL-3",
-    "website": "http://www.eficent.com",
+    "website": "https://github.com/OCA/operating-unit",
     "depends": ["stock", "account_operating_unit"],
     "data": [
         "security/stock_security.xml",
