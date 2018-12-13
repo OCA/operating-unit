@@ -9,7 +9,10 @@ class SaleReport(models.Model):
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit')
 
-    def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
-        fields['operating_unit_id'] = ", s.operating_unit_id as operating_unit_id"
+    def _query(self, with_clause='', fields={},  # noqa
+               groupby='', from_clause=''):
+        fields['operating_unit_id'] = \
+            ", s.operating_unit_id as operating_unit_id"
         groupby += ', s.operating_unit_id'
-        return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
+        return super(SaleReport, self)._query(with_clause, fields,
+                                              groupby, from_clause)

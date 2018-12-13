@@ -1,6 +1,6 @@
-# © 2015-17 Eficent Business and IT Consulting Services S.L.
+# © 2019 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -43,10 +43,9 @@ class SaleOrder(models.Model):
         for rec in self:
             if (rec.team_id and
                     rec.team_id.operating_unit_id != rec.operating_unit_id):
-                raise ValidationError(_('Configuration error. '
-                                        'The Operating Unit of the sales team '
-                                        'must match with that of the '
-                                        'quote/sales order'))
+                raise ValidationError(_('Configuration error. The Operating '
+                                        'Unit of the sales team must match '
+                                        'with that of the quote/sales order.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')

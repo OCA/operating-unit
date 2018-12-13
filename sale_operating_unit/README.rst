@@ -25,11 +25,9 @@ Operating Unit in Sales
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-
-This module was written to extend the Sales capabilities of Odoo.
-This module introduces the operating unit to the Sales Order.
-Security rules are defined to ensure that users can only display the
-Sales Orders in which they are allowed access to.
+This module extends the Sales capabilities of Odoo and introduces the operating
+unit to the Sales Order. Security rules are defined to ensure that users can
+only display the Sales Orders in which they are allowed access to.
 
 **Table of contents**
 
@@ -38,7 +36,6 @@ Sales Orders in which they are allowed access to.
 
 Usage
 =====
-
 
 Follow these steps:
 
@@ -66,7 +63,6 @@ Authors
 
 Contributors
 ~~~~~~~~~~~~
-
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Aaron Henriquez <aheficent@eficent.com>

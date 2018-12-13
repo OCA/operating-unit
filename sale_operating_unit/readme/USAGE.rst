@@ -1,4 +1,3 @@
-
 Follow these steps:
 
 #. Create a Sale Order.
