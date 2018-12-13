@@ -10,12 +10,14 @@
             <field name="date" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
-            <xpath expr="//filter[1]" position="after">
+            <!--<xpath expr="//filter[1]" position="after">-->
+            <filter name="year" position="after">
                 <filter name='group_by_operating_unit'
                         string="Operating Unit"
                         context="{'group_by':'operating_unit_id'}"
                         groups="operating_unit.group_multi_operating_unit"/>
-            </xpath>
+            </filter>
+            <!--</xpath>-->
         </field>
     </record>
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015-17 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
@@ -44,7 +43,7 @@ class SaleOrder(models.Model):
         for rec in self:
             if (rec.team_id and
                     rec.team_id.operating_unit_id != rec.operating_unit_id):
-                raise ValidationError(_('Configuration error\n'
+                raise ValidationError(_('Configuration error. '
                                         'The Operating Unit of the sales team '
                                         'must match with that of the '
                                         'quote/sales order'))
@@ -55,9 +54,9 @@ class SaleOrder(models.Model):
         for rec in self:
             if (rec.company_id and rec.operating_unit_id and
                     rec.company_id != rec.operating_unit_id.company_id):
-                raise ValidationError(_('Configuration error\nThe Company in'
-                                        ' the Sales Order and in the Operating'
-                                        ' Unit must be the same.'))
+                raise ValidationError(_('Configuration error. The Company in '
+                                        'the Sales Order and in the Operating '
+                                        'Unit must be the same.'))
 
     @api.multi
     def _prepare_invoice(self):
@@ -71,5 +70,4 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
-                                        string='Operating Unit',
-                                        readonly=True)
+                                        string='Operating Unit')
