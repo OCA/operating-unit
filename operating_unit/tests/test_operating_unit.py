@@ -70,7 +70,8 @@ class TestOperatingUnit(common.TransactionCase):
         operating_unit_list_1 = self.env[
             'operating.unit'].sudo(self.user1.id).\
             search([]).mapped('code')
-        self.assertEqual(len(operating_unit_list_1), 4,
+        nou = self.env['operating.unit'].search([])
+        self.assertEqual(len(operating_unit_list_1), len(nou),
                          'User 1 should have access to all the OU')
 
         # User 2 tries to create and modify an OU
