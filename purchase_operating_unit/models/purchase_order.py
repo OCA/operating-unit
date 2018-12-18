@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2015-17 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
@@ -69,19 +68,18 @@ class PurchaseOrder(models.Model):
                     record.operating_unit_id and
                     warehouse.operating_unit_id != record.operating_unit_id):
                 raise ValidationError(
-                    _('Configuration error\nThe Quotation / Purchase Order '
+                    _('Configuration error. The Quotation / Purchase Order '
                       'and the Warehouse of picking type must belong to the '
                       'same Operating Unit.')
                 )
 
-    @api.constrains('operating_unit_id', 'requesting_operating_unit_id',
-                    'company_id')
+    @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for record in self:
             if (record.company_id and record.operating_unit_id and
                     record.company_id != record.operating_unit_id.company_id):
                 raise ValidationError(
-                    _('Configuration error\nThe Company in the Purchase Order '
+                    _('Configuration error. The Company in the Purchase Order '
                       'and in the Operating Unit must be the same.')
                 )
 
@@ -111,16 +109,4 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
-                                        string='Operating Unit', readonly=True)
-
-    @api.constrains('order_id.operating_unit_id', 'invoice_lines')
-    def _check_invoice_ou(self):
-        for line in self:
-            for inv_line in line.invoice_lines:
-                invoice_operating_unit = inv_line.invoice_id.operating_unit_id
-                if (inv_line.invoice_id and
-                        invoice_operating_unit != line.operating_unit_id):
-                    raise ValidationError(
-                        _('The operating unit of the purchase order must '
-                          'be the same as in the associated invoices.')
-                    )
+                                        string='Operating Unit')
