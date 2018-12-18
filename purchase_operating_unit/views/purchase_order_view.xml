@@ -7,7 +7,9 @@
         <field name="inherit_id" ref="purchase.purchase_order_tree" />
         <field name="arch" type="xml">
             <field name="origin" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
     </record>
@@ -18,13 +20,16 @@
         <field name="inherit_id" ref="purchase.purchase_order_form" />
         <field name="arch" type="xml">
             <field name="partner_ref" position="after">
-                <field name="requesting_operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                <field name="requesting_operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+                <field name="operating_unit_id"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
             </field>
-            <xpath expr="//field[@name='order_line']"
-                 position="attributes">
+            <field name="order_line" position="attributes">
                 <attribute name="context">{'operating_unit_id': operating_unit_id}</attribute>
-            </xpath>
+            </field>
         </field>
     </record>
 
@@ -34,10 +39,14 @@
         <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
         <field name="arch" type="xml">
             <xpath expr="//group[@expand='0']" position="after">
-                <filter string="Operating Unit" context="{'group_by':'operating_unit_id'}" groups="operating_unit.group_multi_operating_unit"/>
+                <filter string="Operating Unit"
+                        name="operating_unit_grouped"
+                        context="{'group_by': 'operating_unit_id'}"
+                        groups="operating_unit.group_multi_operating_unit"/>
             </xpath>
             <field name="partner_id" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                <field name="operating_unit_id"
+                       groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
     </record>
