@@ -1,19 +1,20 @@
-# -*- coding: utf-8 -*-
 # © 2015-17 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 import time
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.addons.purchase.tests import test_purchase_order
+from odoo.tests import common
 
 
-class TestPurchaseOperatingUnit(test_purchase_order.TestPurchaseOrder):
+class TestPurchaseOperatingUnit(common.TransactionCase):
 
     def setUp(self):
         super(TestPurchaseOperatingUnit, self).setUp()
         self.ResUsers = self.env['res.users']
         self.StockPicking = self.env['stock.picking']
+        self.PurchaseOrder = self.env['purchase.order']
+        self.AccountInvoice = self.env['account.invoice']
         # company
         self.company1 = self.env.ref('base.main_company')
         self.company2 = self.env.ref('stock.res_company_1')
