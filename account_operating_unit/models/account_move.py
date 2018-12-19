@@ -22,7 +22,22 @@ class AccountMoveLine(models.Model):
             if move.operating_unit_id:
                 vals['operating_unit_id'] = move.operating_unit_id.id
         _super = super(AccountMoveLine, self)
-        return _super.create(vals)
+        movObj = _super.create(vals)
+        if 'apply_taxes' in self.env.context:
+            if movObj.tax_ids and movObj.operating_unit_id:
+                objmove = movObj.move_id.line_ids.search([('tax_line_id','in',movObj.tax_ids.ids),('operating_unit_id','=',False)])
+                objmove.write({'operating_unit_id':movObj.operating_unit_id.id})
+            elif movObj.tax_line_id and not movObj.operating_unit_id :
+                objmove = movObj.move_id.line_ids.search([('tax_ids', '=', movObj.tax_line_id.id),('operating_unit_id', '!=', False)],limit=1)
+                movObj.write({'operating_unit_id': objmove.operating_unit_id.id})
+        return movObj
+
+    @api.multi
+    def write(self, vals):
+        result = super(AccountMoveLine, self).write(vals)
+        if 'operating_unit_id' in vals:
+            self._update_check()
+        return result
 
     @api.model
     def _query_get(self, domain=None):
@@ -59,7 +74,7 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     operating_unit_id = fields.Many2one('operating.unit',
-                                        'Default operating unit',
+                                        'Default operating unit', states={'posted': [('readonly', True)]},
                                         help="This operating unit will "
                                              "be defaulted in the move lines.")
 
@@ -105,9 +120,17 @@ class AccountMove(models.Model):
 
             # If all move lines point to the same operating unit, there's no
             # need to create a balancing move line
-            ou_list_ids = [line.operating_unit_id and
-                           line.operating_unit_id.id for line in
-                           move.line_ids if line.operating_unit_id]
+            # check at the same time again without any additional cost if _check_ou()
+            # still holds. Only a check at write/create is a bit too thin for such a
+            # sensitive matter
+            ou_list_ids = []
+            for line in move.line_ids:
+                if line.operating_unit_id:
+                    ou_list_ids.append(line.operating_unit_id and line.operating_unit_id.id)
+                else:
+                    raise UserError(_('Configuration error!\nDuring move posting:\nThe operating\
+                                    unit must be completed for each line if the operating\
+                                    unit has been defined as self-balanced at company level.'))
             if len(ou_list_ids) <= 1:
                 continue
 

@@ -16,6 +16,7 @@
     "license": "LGPL-3",
     "data": [
         "security/account_security.xml",
+        "views/account.xml",
         "views/account_move_view.xml",
         "views/account_journal_view.xml",
         "views/company_view.xml",

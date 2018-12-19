@@ -71,4 +71,41 @@
         </field>
     </record>
 
+    <record id="view_account_reconcile_model_form_ou" model="ir.ui.view">
+        <field name="name">account.reconcile.model.form.ou</field>
+        <field name="model">account.reconcile.model</field>
+        <field name="inherit_id" ref="account.view_account_reconcile_model_form"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+            <field name="second_journal_id" position="after">
+                <field name="second_operating_unit_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_reconcile_model_tree_ou" model="ir.ui.view">
+        <field name="name">account.reconcile.model.tree.ou</field>
+        <field name="model">account.reconcile.model</field>
+        <field name="inherit_id" ref="account.view_account_reconcile_model_tree"/>
+        <field name="arch" type="xml">
+            <field name="journal_id" position="before">
+                <field name="operating_unit_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!--record id="view_account_reconcile_model_search" model="ir.ui.view">
+        <field name="name">account.reconcile.model.search</field>
+        <field name="model">account.reconcile.model</field>
+        <field name="arch" type="xml">
+            <search string="Bank Reconciliation Move preset">
+                    <filter string="With tax" domain="[('tax_id','!=',False)]"/>
+                    <field name="amount_type"/>
+                    <field name="journal_id"/>
+            </search>
+        </field>
+    </record-->
+
 </odoo>
