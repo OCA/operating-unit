@@ -1,5 +1,5 @@
-# Copyright 2015-17 Eficent Business and IT Consulting Services S.L.
-# Copyright 2015-17 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2019 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
 from odoo.tools.translate import _
@@ -47,21 +47,3 @@ class MrpProduction(models.Model):
                     'with that of the Raw Materials and Finished Product '
                     'Locations.'))
         return True
-
-
-class StockRule(models.Model):
-
-    _inherit = 'stock.rule'
-
-    operating_unit_id = fields.Many2one(
-        comodel_name='operating.unit',
-        related='warehouse_id.operating_unit_id')
-
-    @api.multi
-    def _prepare_mo_vals(self, product_id, product_qty, product_uom,
-                         location_id, name, origin, values, bom):
-        mo_vals = super(StockRule, self)._prepare_mo_vals(
-            product_id, product_qty, product_uom, location_id, name, origin,
-            values, bom)
-        mo_vals['operating_unit_id'] = self.operating_unit_id.id
-        return mo_vals
