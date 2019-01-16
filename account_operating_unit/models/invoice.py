@@ -43,6 +43,19 @@ class AccountInvoice(models.Model):
                                         'Operating Unit must be the same.'))
         return True
 
+    @api.multi
+    @api.constrains('operating_unit_id', 'journal_id')
+    def _check_journal_operating_unit(self):
+        for ai in self:
+            if (
+                ai.journal_id.operating_unit_id and
+                ai.operating_unit_id and
+                ai.operating_unit_id != ai.journal_id.operating_unit_id
+            ):
+                raise ValidationError(_('The OU in the Invoice and in '
+                                        'Journal must be the same.'))
+        return True
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
