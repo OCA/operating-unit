@@ -47,6 +47,5 @@ class OperatingUnit(models.Model):
     @api.model
     def create(self, values):
         res = super(OperatingUnit, self).create(values)
-        self.env.user.write({'operating_unit_ids': [(4, res.id)]})
-
+        res.user_ids += self.env.user
         return res
