@@ -11,7 +11,7 @@
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
-    "website": "http://www.eficent.com",
+    "website": "https://github.com/OCA/operating-unit",
     "category": "Generic Modules/Human Resources",
     "depends": ["hr_contract", "operating_unit"],
     "data": [
