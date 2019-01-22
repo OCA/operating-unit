@@ -14,8 +14,7 @@ class CRMLead(models.Model):
         team = self.env['crm.team']._get_default_team_id()
         if team.operating_unit_id:
             return team.operating_unit_id
-        else:
-            return self.env['res.users'].operating_unit_default_get(self._uid)
+        return self.env['res.users'].operating_unit_default_get(self._uid)
 
     operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
                                         related='team_id.operating_unit_id',

@@ -3,7 +3,6 @@
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
-    <data>
 
         <!-- CRM Lead Form View  -->
         <record model="ir.ui.view" id="crm_case_form_view_leads">
@@ -82,6 +81,5 @@
                 </field>
             </field>
         </record>
-
-    </data>
+    
 </odoo>
