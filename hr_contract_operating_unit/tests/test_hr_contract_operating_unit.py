@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
@@ -19,7 +18,9 @@ class TestHrContractOperatingUnit(common.TransactionCase):
 
         self.company = self.env.ref('base.main_company')
         self.contract_type = self.env.ref('hr_contract.hr_contract_type_emp')
-        self.grp_hr_manager = self.env.ref('hr.group_hr_manager')
+        self.grp_hr_contract_manager = self.env.ref(
+            'hr_contract.group_hr_contract_manager')
+        self.group_user = self.env.ref('base.group_user')
 
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
@@ -27,10 +28,12 @@ class TestHrContractOperatingUnit(common.TransactionCase):
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
 
         # Create Users
-        self.user1 = self._create_user('User_1', self.grp_hr_manager,
-                                       self.company, [self.ou1, self.b2c])
-        self.user2 = self._create_user('User_2', self.grp_hr_manager,
-                                       self.company, [self.b2c])
+        self.user1 = self._create_user(
+            'User_1', [self.grp_hr_contract_manager, self.group_user],
+            self.company, [self.ou1, self.b2c])
+        self.user2 = self._create_user(
+            'User_2', [self.grp_hr_contract_manager, self.group_user],
+            self.company, [self.b2c])
 
         # Create Employee
         self.emp = self._create_hr_employee()
