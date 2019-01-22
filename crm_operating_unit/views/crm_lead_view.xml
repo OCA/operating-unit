@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<!-- Copyright 2015 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
-<openerp>
-    <data>
+<odoo>
 
         <!-- CRM Lead Form View  -->
         <record model="ir.ui.view" id="crm_case_form_view_leads">
@@ -12,7 +11,8 @@
         <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
         <field name="arch" type="xml">
             <field name="company_id" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" domain = "[('company_id','=', company_id)]" options="{'no_create': True}"/>
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                       domain = "[('company_id','=', company_id), ('user_ids', 'in', uid)]" options="{'no_create': True}"/>
             </field>
         </field>
         </record>
@@ -24,7 +24,8 @@
             <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
             <field name="arch" type="xml">
                 <field name="medium_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                           domain = "[('user_ids', 'in', uid)]"/>
                 </field>
             </field>
         </record>
@@ -36,7 +37,8 @@
             <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
             <field name="arch" type="xml">
                 <field name="country_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                           domain = "[('user_ids', 'in', uid)]"/>
                 </field>
             </field>
         </record>
@@ -48,7 +50,8 @@
             <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="arch" type="xml">
                 <field name="referred" position="before">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" options="{'no_create': True}"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                           domain = "[('user_ids', 'in', uid)]" options="{'no_create': True}"/>
                 </field>
             </field>
         </record>
@@ -60,7 +63,8 @@
             <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
             <field name="arch" type="xml">
                 <field name="stage_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                           domain = "[('user_ids', 'in', uid)]"/>
                 </field>
             </field>
         </record>
@@ -72,10 +76,10 @@
             <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                           domain = "[('user_ids', 'in', uid)]"/>
                 </field>
             </field>
         </record>
-
-    </data>
-</openerp>
+    
+</odoo>
