@@ -48,4 +48,10 @@ class OperatingUnit(models.Model):
     def create(self, values):
         res = super(OperatingUnit, self).create(values)
         res.user_ids += self.env.user
+        self.clear_caches()
         return res
+
+    @api.multi
+    def write(self, vals):
+        self.clear_caches()
+        return super(OperatingUnit, self).write(vals)
