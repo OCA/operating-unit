@@ -14,7 +14,8 @@ class OperatingUnit(models.Model):
     code = fields.Char('Code', required=True)
     active = fields.Boolean('Active', default=True)
     company_id = fields.Many2one(
-        'res.company', 'Company', required=True, default=lambda self:
+        'res.company', 'Company', required=True, readonly=True,
+        default=lambda self:
         self.env['res.company']._company_default_get('account.account'))
     partner_id = fields.Many2one('res.partner', 'Partner', required=True)
     user_ids = fields.Many2many(
