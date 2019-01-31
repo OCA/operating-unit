@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L. -
+# © 2019 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 
