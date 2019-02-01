@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from . import test_account_operating_unit as test_ou
+from odoo.exceptions import ValidationError
 
 
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
@@ -25,3 +26,18 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         # have different operating units
         self.assertNotEqual(all_op_units, False, 'Journal Entries have\
                             different Operating Units.')
+
+    def test_check_journal_operating_unit(self):
+        """
+        Test that when an invoice is created with different operating unit in
+        the journal and in the invoice, the ValidationError raises
+        """
+        # Try to create an invoice with a different operating unit in the
+        # journal and in the invoice
+        with self.assertRaises(ValidationError):
+            self.invoice2 = self.invoice_model.sudo(self.user_id.id).create(
+                self._prepare_invoice(self.ou1.id)
+            )
+            self.invoice2.sudo(self.user_id.id).write({
+                'journal_id': self.cash2_journal_b2b
+            })
