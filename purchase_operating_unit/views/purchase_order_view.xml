@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <odoo>
-
+<!--Copyright 2019 Eficent Business and IT Consulting Services S.L.-->
+<!-- - Jordi Ballester Alomar-->
+<!--Copyright 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
     <record id="purchase_order_tree" model="ir.ui.view">
         <field name="name">purchase_order_tree</field>
         <field name="model">purchase.order</field>
@@ -21,10 +24,9 @@
                 <field name="requesting_operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
-            <xpath expr="//field[@name='order_line']"
-                 position="attributes">
+            <field name="order_line" position="attributes">
                 <attribute name="context">{'operating_unit_id': operating_unit_id}</attribute>
-            </xpath>
+            </field>
         </field>
     </record>
 
