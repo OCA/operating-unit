@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Operating Unit in Purchase Orders",
     "summary": "An operating unit (OU) is an organizational entity part of a "
                "company",
-    "version": "10.0.1.1.1",
+    "version": "11.0.1.1.1",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
-    "website": "http://www.eficent.com",
+    "website": "https://www.github.com/oca/operating-unit",
     "category": "Purchase Management",
-    "depends": ["purchase", "procurement_operating_unit"],
+    "depends": ["stock_operating_unit", "purchase"],
     "license": "LGPL-3",
     "data": [
         "security/purchase_security.xml",

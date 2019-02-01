@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <odoo>
-
+<!--Copyright 2019 Eficent Business and IT Consulting Services S.L.-->
+<!-- - Jordi Ballester Alomar-->
+<!--Copyright 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
     <record id="purchase_order_line_tree" model="ir.ui.view">
         <field name="name">purchase_order_line_tree</field>
         <field name="model">purchase.order.line</field>
@@ -28,10 +31,11 @@
         <field name="model">purchase.order.line</field>
         <field name="inherit_id" ref="purchase.purchase_order_line_search" />
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='groupby_supplier']" position="after">
-                <filter string="Operating Unit" groups="operating_unit.group_multi_operating_unit"
-                      context="{'group_by':'operating_unit_id'}"/>
-            </xpath>
+            <filter name="groupby_supplier" position="after">
+                <filter name="operating_unit_grouped" string="Operating Unit"
+                        groups="operating_unit.group_multi_operating_unit"
+                        context="{'group_by':'operating_unit_id'}"/>
+            </filter>
             <field name="partner_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>

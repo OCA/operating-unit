@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # - Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import api, models
+from odoo import api, models, _
+from odoo.exceptions import ValidationError
 
 
 class AccountInvoice(models.Model):
@@ -30,3 +30,17 @@ class AccountInvoice(models.Model):
         result['domain']['purchase_id'] += [('operating_unit_id', '=',
                                              self.operating_unit_id.id)]
         return result
+
+
+class AccountInvoiceLines(models.Model):
+    _inherit = 'account.invoice.line'
+
+    @api.constrains('operating_unit_id', 'purchase_line_id')
+    def _check_invoice_ou(self):
+        for line in self:
+            if (line.purchase_line_id and line.operating_unit_id !=
+                    line.purchase_line_id.operating_unit_id):
+                raise ValidationError(
+                    _('The operating unit of the purchase order must '
+                      'be the same as in the associated invoices.')
+                )
