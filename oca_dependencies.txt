@@ -1,0 +1,5 @@
+# list the OCA project dependencies, one per line
+# add a github url if you need a forked version
+crm-operating-unit https://github.com/eficent/operating-unit 11.0-mig-crm_operating_unit
+sale-operating-unit https://github.com/eficent/operating-unit 11.0-mig-sale_operating_unit
+server-tools
