@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <odoo>
-
+<!--Copyright 2015-19 Eficent Business and IT Consulting Services S.L.-->
+<!-- - Jordi Ballester Alomar-->
+<!--Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
     <record model="ir.ui.view" id="crm_case_form_view_oppor_extended">
         <field name="name">Opportunities - Quote OU</field>
         <field name="model">crm.lead</field>
