@@ -1,29 +1,30 @@
-# -*- coding: utf-8 -*-
-# Copyright 2015 Eficent Business and IT Consulting Services S.L. -
+# Copyright 2015-19 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# Copyright 2015 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
-# Copyright 2018 ACSONE SA/NV
+# Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2018-19 ACSONE SA/NV
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class MisReportInstance(models.Model):
 
     _inherit = 'mis.report.instance'
 
-    operating_unit_ids = fields.Many2many('operating.unit',
-                                          string='Operating Unit',
-                                          required=False)
+    operating_unit_ids = fields.Many2many(
+        'operating.unit',
+        string='Operating Unit',
+    )
 
 
 class MisReportInstancePeriod(models.Model):
 
     _inherit = 'mis.report.instance.period'
 
-    operating_unit_ids = fields.Many2many('operating.unit',
-                                          string='Operating Unit',
-                                          required=False)
+    operating_unit_ids = fields.Many2many(
+        'operating.unit',
+        string='Operating Unit',
+    )
 
     @api.multi
     def _get_additional_move_line_filter(self):
