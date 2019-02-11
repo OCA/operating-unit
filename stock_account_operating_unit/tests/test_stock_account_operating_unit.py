@@ -76,7 +76,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
                                                               name, code,
                                                               self.company)
         # Update company data
-
         self.company.write({
             'inter_ou_clearing_account_id': self.account_inter_ou_clearing.id,
             'ou_is_self_balanced': True})
