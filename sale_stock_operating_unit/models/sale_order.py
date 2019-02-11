@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# © 2015-17 Eficent Business and IT Consulting Services S.L. -
+# Copyright 2015-19 Eficent Business and IT Consulting Services S.L. -
 # Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
@@ -31,7 +30,8 @@ class SaleOrder(models.Model):
         if self.team_id and self.team_id.operating_unit_id:
             warehouses = self.env['stock.warehouse'].search(
                 [('operating_unit_id', '=',
-                  self.team_id.operating_unit_id.id)])
+                  self.team_id.operating_unit_id.id)],
+                limit=1)
             if warehouses:
                 self.warehouse_id = warehouses[0]
 
@@ -40,7 +40,8 @@ class SaleOrder(models.Model):
         if self.operating_unit_id:
             warehouses = self.env['stock.warehouse'].search(
                 [('operating_unit_id', '=',
-                  self.operating_unit_id.id)])
+                  self.operating_unit_id.id)],
+                limit=1)
             if warehouses:
                 self.warehouse_id = warehouses[0]
 
