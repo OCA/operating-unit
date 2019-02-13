@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
-# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
@@ -15,6 +14,9 @@ class PurchaseRequest(models.Model):
     operating_unit_id = fields.Many2one(
         'operating.unit',
         string='Operating Unit',
+        states={'to_approve': [('readonly', True)],
+                'approved': [('readonly', True)],
+                'done': [('readonly', True)]},
         default=lambda self:
         self.env['res.users'].
         operating_unit_default_get(self._uid),
@@ -41,9 +43,19 @@ class PurchaseRequest(models.Model):
                         and rec.operating_unit_id and\
                         picking_type.warehouse_id.operating_unit_id !=\
                         rec.operating_unit_id:
-                    raise ValidationError(_('Configuration error!\nThe\
+                    raise ValidationError(_('Configuration error. The\
                     Purchase Request and the Warehouse of picking type\
                     must belong to the same Operating Unit.'))
+
+    @api.constrains('operating_unit_id')
+    def _check_approver_operating_unit(self):
+        for rec in self:
+            if rec.assigned_to and rec.operating_unit_id and \
+                    rec.operating_unit_id not in \
+                    rec.assigned_to.operating_unit_ids:
+                raise ValidationError(_('Configuration error. The '
+                                        'approver has not the indicated '
+                                        'Operating Unit'))
 
 
 class PurchaseRequestLine(models.Model):
@@ -52,6 +64,6 @@ class PurchaseRequestLine(models.Model):
     operating_unit_id = fields.Many2one(
         'operating.unit',
         related='request_id.operating_unit_id',
-        string='Operating Unit', readonly=True,
+        string='Operating Unit',
         store=True,
     )
