@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
-# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
@@ -24,7 +23,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
         # Product
         self.product1 = self.env.ref('product.product_product_7')
-        self.product_uom = self.env.ref('product.product_uom_unit')
+        self.product_uom = self.env.ref('uom.product_uom_unit')
         # User
         self.user_root = self.env.ref('base.user_root')
         # Groups
