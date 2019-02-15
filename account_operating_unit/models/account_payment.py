@@ -64,7 +64,7 @@ class AccountPayment(models.Model):
             })
         transfer_debit_aml_dict.update({
             'operating_unit_id':
-                self.journal_id.operating_unit_id.id or False
+                self.destination_journal_id.operating_unit_id.id or False
         })
         return transfer_debit_aml_dict
 
