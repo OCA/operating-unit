@@ -2,8 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.addons.account_operating_unit.tests import\
-    test_account_operating_unit as test_ou
+from .import test_account_operating_unit as test_ou
 import time
 
 
