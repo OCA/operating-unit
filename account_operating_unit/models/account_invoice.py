@@ -19,6 +19,29 @@ class AccountInvoice(models.Model):
                                         states={'draft': [('readonly',
                                                            False)]})
 
+    @api.onchange('operating_unit_id')
+    def _onchange_operating_unit(self):
+        if self.operating_unit_id and (
+                not self.journal_id or
+                self.journal_id.operating_unit_id != self.operating_unit_id):
+            journal = self.env['account.journal'].search(
+                [('type', '=', self.journal_id.type)])
+            jf = journal.filtered(
+                lambda aj: aj.operating_unit_id == self.operating_unit_id)
+            if not jf:
+                self.journal_id = journal[0]
+            else:
+                self.journal_id = jf[0]
+
+    @api.onchange('journal_id')
+    def _onchange_journal(self):
+        if self.journal_id and self.journal_id.operating_unit_id and \
+                self.journal_id.operating_unit_id != self.operating_unit_id:
+            ou = self.env['operating.unit'].search(
+                [('id', '=', self.journal_id.operating_unit_id.id)], limit=1
+            )
+            self.operating_unit_id = ou
+
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
         move_lines = super(AccountInvoice,
