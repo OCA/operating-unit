@@ -138,7 +138,7 @@ class StockPicking(models.Model):
     def _check_picking_type_operating_unit(self):
         for rec in self:
             warehouse = rec.picking_type_id.warehouse_id
-            if (rec.picking_type_id and rec.operating_unit_id and
+            if (rec.picking_type_id and rec.operating_unit_id and warehouse and
                     warehouse.operating_unit_id != rec.operating_unit_id):
                 raise UserError(
                     _('Configuration error\nThe Operating Unit of the picking '
