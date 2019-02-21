@@ -20,6 +20,13 @@ Usage
    :target: https://runbot.odoo-community.org/runbot/213/10.0
 
 
+Known Issues
+============
+
+Make sure that all Picking Types have assigned a Warehouse, otherwise the OU
+will not be propagated correctly to the Purchase Request.
+
+
 Bug Tracker
 ===========
 
