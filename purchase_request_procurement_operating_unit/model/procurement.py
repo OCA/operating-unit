@@ -15,10 +15,15 @@ class Procurement(models.Model):
     @api.multi
     def _prepare_purchase_request(self):
         res = super(Procurement, self)._prepare_purchase_request()
-        if self.location_id.operating_unit_id:
+
+        if self.warehouse_id.operating_unit_id:
             res.update({
-                'operating_unit_id': self.location_id.operating_unit_id.id
+                'operating_unit_id': self.warehouse_id.operating_unit_id.id
             })
+        res.update({
+            'warehouse_id': self.warehouse_id.id,
+            'location_id': self.location_id.id
+        })
         return res
 
     @api.multi
