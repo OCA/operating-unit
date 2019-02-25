@@ -5,7 +5,7 @@
 
 from odoo.tools.translate import _
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class HrExpenseExpense(models.Model):
@@ -23,9 +23,9 @@ class HrExpenseExpense(models.Model):
         for rec in self:
             if (rec.company_id and rec.operating_unit_id and rec.company_id !=
                     rec.operating_unit_id.company_id):
-                raise UserError(_('Configuration error. The Company in the '
-                                  'Expense and in the Operating Unit '
-                                  'must be the same.'))
+                raise ValidationError(_('Configuration error. The Company in '
+                                        'the Expense and in the Operating '
+                                        'Unit must be the same.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'sheet_id')
@@ -34,18 +34,18 @@ class HrExpenseExpense(models.Model):
             if (rec.sheet_id and rec.sheet_id.operating_unit_id and
                 rec.operating_unit_id and rec.sheet_id.operating_unit_id !=
                     rec.operating_unit_id):
-                raise UserError(_('Configuration error. The Operating Unit in'
-                                  ' the Expense sheet and in the Expense must '
-                                  'be the same.'))
+                raise ValidationError(_('Configuration error. The Operating '
+                                        'Unit in the Expense sheet and in the '
+                                        'Expense must be the same.'))
 
     @api.multi
     def submit_expenses(self):
         res = super(HrExpenseExpense, self).submit_expenses()
         if len(self.mapped('operating_unit_id')) != 1 or\
                 any(not expense.operating_unit_id for expense in self):
-            raise UserError(_('You cannot submit the Expenses having'
-                              ' different Operating Units or with'
-                              ' no Operating Unit!'))
+            raise ValidationError(_('You cannot submit the Expenses having'
+                                    ' different Operating Units or with'
+                                    ' no Operating Unit!'))
         if res.get('context'):
             res.get('context').\
                 update({'default_operating_unit_id':
@@ -73,6 +73,6 @@ class HrExpenseSheet(models.Model):
         for rec in self:
             if (rec.company_id and rec.operating_unit_id and rec.company_id !=
                     rec.operating_unit_id.company_id):
-                raise UserError(_('Configuration error. The Company in the '
-                                  'Expense sheet and in the Operating Unit '
-                                  'must be the same.'))
+                raise ValidationError(_('Configuration error. The Company in '
+                                        'the Expense sheet and in the'
+                                        'Operating Unit must be the same.'))
