@@ -4,7 +4,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.tests import common
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import ValidationError
 
 
 class TestHrExpenseOperatingUnit(common.TransactionCase):
@@ -145,7 +145,7 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
             self.hr_expense1.expense_line_ids.write({'company_id':
                                                      company_id.id})
 
-        with self.assertRaises(UserError):
+        with self.assertRaises(ValidationError):
             self.hr_expense1.expense_line_ids.write({
                 'state': 'draft',
                 'operating_unit_id': False
