@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.tools.translate import _
@@ -45,7 +44,7 @@ class HrExpenseExpense(models.Model):
                 any(not expense.operating_unit_id for expense in self):
             raise ValidationError(_('You cannot submit the Expenses having'
                                     ' different Operating Units or with'
-                                    ' no Operating Unit!'))
+                                    ' no Operating Unit'))
         if res.get('context'):
             res.get('context').\
                 update({'default_operating_unit_id':

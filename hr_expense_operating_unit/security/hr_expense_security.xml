@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-     Serpent Consulting Services Pvt. Ltd.
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<!-- Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
+     Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
 <odoo>
 
     <record id="ir_rule_hr_expense_allowed_operating_units"
