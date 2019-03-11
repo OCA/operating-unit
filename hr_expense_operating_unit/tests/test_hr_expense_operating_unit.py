@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
-# Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.tests import common
@@ -52,9 +51,6 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
         self.hr_expense2 = self._create_hr_expense(
             self.b2c, self.emp)
 
-        self._post_journal_entries(self.hr_expense1)
-        self._post_journal_entries(self.hr_expense2)
-
     def _create_user(self, name, login, pwd, groups, company, operating_units,
                      context=None):
         """Creates a user."""
@@ -81,21 +77,15 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
 
     def _create_hr_expense(self, operating_unit, emp):
         """Creates Expense for employee."""
-        expense_sheet = self.hr_expense_sheet_model.create({
-            'name': "Traveling Expense",
-            'employee_id': emp.id,
-            'operating_unit_id': operating_unit.id
-            })
-        self.hr_expense_model.create({
+        hr_expense = self.hr_expense_model.create({
             'name': "Traveling Expense",
             'product_id': self.product1.id,
             'operating_unit_id': operating_unit.id,
             'unit_amount': '10.0',
             'quantity': '5',
-            'employee_id': emp.id,
-            'sheet_id': expense_sheet.id
+            'employee_id': emp.id
             })
-        return expense_sheet
+        return hr_expense
 
     def _post_journal_entries(self, expense_sheet):
         """Approves the Expense and creates accounting entries."""
@@ -114,25 +104,51 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
              ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(record.ids, [], 'User 2 should not have access to %s'
                          % self.ou1.name)
-
+        # Create the expense sheet
+        hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
+        self.hr_expense_sheet1 = self.hr_expense_sheet_model.create({
+            'name': hr_expense_dict1['context']
+            ['default_name'],
+            'employee_id': hr_expense_dict1['context']
+            ['default_employee_id'],
+            'expense_line_ids': [(4,
+                                  hr_expense_dict1['context']
+                                  ['default_expense_line_ids'][0])],
+            'operating_unit_id': hr_expense_dict1['context']
+            ['default_operating_unit_id']
+        })
+        self.hr_expense1.write({
+            'sheet_id': self.hr_expense_sheet1.id
+        })
+        self._post_journal_entries(self.hr_expense_sheet1)
         # Expense OU should have same OU of its accounting entries
-        self.assertEqual(self.hr_expense1.expense_line_ids.operating_unit_id,
-                         self.hr_expense1.account_move_id.line_ids.
-                         mapped('operating_unit_id'),
-                         "Expense OU should match with accounting entries OU")
-        self.assertEqual(self.hr_expense2.expense_line_ids.operating_unit_id,
-                         self.hr_expense2.account_move_id.line_ids.
-                         mapped('operating_unit_id'),
-                         "Expense OU should match with accounting entries OU")
+        self.assertEqual(
+            self.hr_expense_sheet1.expense_line_ids.operating_unit_id,
+            self.hr_expense_sheet1.account_move_id.line_ids.mapped(
+                'operating_unit_id'),
+            "Expense OU should match with accounting entries OU")
 
     def test_constrains_error(self):
         with self.assertRaises(ValidationError):
-            self.hr_expense1.write({'operating_unit_id': self.ou1.id})
-            self.hr_expense1.expense_line_ids.write({'operating_unit_id':
-                                                     self.b2c.id})
+            hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
+            self.hr_expense_sheet1 = self.hr_expense_sheet_model.create({
+                'name': hr_expense_dict1['context']
+                ['default_name'],
+                'employee_id': hr_expense_dict1['context']
+                ['default_employee_id'],
+                'expense_line_ids': [(4,
+                                      hr_expense_dict1['context']
+                                      ['default_expense_line_ids'][0])],
+                'operating_unit_id': hr_expense_dict1['context']
+                ['default_operating_unit_id']
 
-        self.hr_expense1.expense_line_ids.write({'state': 'draft'})
-        self.hr_expense1.expense_line_ids.submit_expenses()
+            })
+            self.hr_expense1.write({
+                'sheet_id': self.hr_expense_sheet1.id
+            })
+            self.hr_expense_sheet1.expense_line_ids.write({
+                'operating_unit_id': self.b2c.id
+            })
 
         company_id = self.env['res.company'].create({
             'name': 'My Company',
@@ -142,15 +158,28 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
         })
 
         with self.assertRaises(ValidationError):
-            self.hr_expense1.expense_line_ids.write({'company_id':
-                                                     company_id.id})
-
-        with self.assertRaises(ValidationError):
-            self.hr_expense1.expense_line_ids.write({
-                'state': 'draft',
-                'operating_unit_id': False
+            hr_expense_dict2 = self.hr_expense2.action_submit_expenses()
+            self.hr_expense_sheet2 = self.hr_expense_sheet_model.create({
+                'name': hr_expense_dict2['context']['default_name'],
+                'employee_id': hr_expense_dict2['context']
+                ['default_employee_id'],
+                'expense_line_ids': [(4,
+                                      hr_expense_dict2['context']
+                                      ['default_expense_line_ids'][0])],
+                'operating_unit_id': hr_expense_dict2['context']
+                ['default_operating_unit_id'],
             })
-            self.hr_expense1.expense_line_ids.submit_expenses()
+            self.hr_expense_sheet2.expense_line_ids.write({
+                'company_id': company_id.id})
 
         with self.assertRaises(ValidationError):
-            self.hr_expense1.write({'company_id': company_id.id})
+            self.hr_expense3 = self.hr_expense_model.create({
+                'name': "Traveling Expense",
+                'product_id': self.product1.id,
+                'unit_amount': '10.0',
+                'quantity': '5',
+                'operating_unit_id': False,
+                'employee_id': self.emp.id,
+            })
+
+            self.hr_expense3.action_submit_expenses()
