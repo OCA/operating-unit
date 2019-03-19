@@ -4,7 +4,7 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class CrmTeam(models.Model):
@@ -32,6 +32,6 @@ class CrmTeam(models.Model):
         for rec in self.member_ids:
             if (rec and self.operating_unit_id and
                     self.operating_unit_id not in rec.operating_unit_ids):
-                    raise UserError(_('Configuration error. The user %s has '
-                                      'not assigned the same Operating unit.'
-                                      % rec.name))
+                    raise ValidationError(_('Configuration error. The user %s '
+                                            'has not assigned the same '
+                                            'Operating unit.' % rec.name))
