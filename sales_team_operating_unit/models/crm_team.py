@@ -5,7 +5,7 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class CrmTeam(models.Model):
@@ -26,3 +26,13 @@ class CrmTeam(models.Model):
                     team.company_id != team.operating_unit_id.company_id:
                 raise UserError(_('Configuration error!\n\nThe Company in the\
                 Sales Team and in the Operating Unit must be the same.'))
+
+    @api.multi
+    @api.constrains('operating_unit_id', 'member_ids')
+    def _check_member_operating_unit(self):
+        for rec in self.member_ids:
+            if (rec and self.operating_unit_id and
+                    self.operating_unit_id not in rec.operating_unit_ids):
+                    raise ValidationError(_('Configuration error. The user %s '
+                                            'has not assigned the same '
+                                            'Operating unit.' % rec.name))
