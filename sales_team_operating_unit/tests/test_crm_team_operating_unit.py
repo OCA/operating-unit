@@ -5,6 +5,7 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo.tests import common
+from odoo import exceptions
 
 
 class TestSaleTeamOperatingUnit(common.TransactionCase):
@@ -65,3 +66,13 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
                     ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(team.ids, [], 'User 2 should not have access to '
                          '%s' % self.ou1.name)
+
+    def test_member_operating_unit(self):
+        # User 2 is assigned to B2C Operating Unit and cannot be a member of
+        # a team with the Operating Unit OU1
+        with self.assertRaises(exceptions.ValidationError):
+            self.crm_team_model.sudo().create({
+                'name': 'Test Team',
+                'operating_unit_id': self.ou1.id,
+                'member_ids': [(4, self.user2.id)]
+            })
