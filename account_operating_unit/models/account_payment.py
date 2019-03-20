@@ -13,7 +13,7 @@ class AccountPayment(models.Model):
         for payment in self:
             if payment.journal_id:
                 payment.operating_unit_id = \
-                    payment.journal_id.operating_unit_id
+                    payment.journal_id.operating_unit_id or self.env.user.default_operating_unit_id or False
 
     operating_unit_id = fields.Many2one(
         'operating.unit', string='Operating Unit',
