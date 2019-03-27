@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--© 2015-17 Eficent Business and IT Consulting Services S.L.-->
+<!-- - Jordi Ballester Alomar-->
+<!--© 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo noupdate="1">
+
+    <record id="ir_rule_purchase_order_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="domain_force">['|',('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]</field>
+        <field name="name">PO's from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+    <record id="ir_rule_purchase_order_line_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="purchase.model_purchase_order_line"/>
+        <field name="domain_force">['|',('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]</field>
+        <field name="name">PO lines from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+</odoo>
