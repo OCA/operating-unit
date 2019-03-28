@@ -2,11 +2,10 @@
 # Copyright (C) 2019 Open Source Integrators
 # Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-
 {
     "name": "Operating Unit in Products",
     "summary": "Adds the concept of operating unit (OU) in products",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "brain-tec AG, "
               "Open Source Integrators, "
               "Serpent Consulting Services Pvt. Ltd.,"
@@ -15,7 +14,6 @@
     "category": "Product",
     "depends": [
         "product",
-        "stock",
         "operating_unit"
     ],
     "license": "LGPL-3",
@@ -24,6 +22,4 @@
         "views/product_template_view.xml",
         "views/product_category_view.xml",
     ],
-    "installable": True,
-    "pre_init_hook": "pre_init_hook",
 }
