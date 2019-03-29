@@ -19,8 +19,5 @@
         "security/product_template_security.xml",
         "views/product_template_view.xml",
     ],
-    "demo": [
-        #"demo/purchase_order_demo.xml",
-    ],
     "installable": True,
 }
