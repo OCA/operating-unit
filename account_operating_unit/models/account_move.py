@@ -65,6 +65,67 @@ class AccountMoveLine(models.Model):
                     )
                 )
 
+    @api.multi
+    def _prepare_writeoff_first_line_values(self, values):
+        res = super(
+            AccountMoveLine, self)._prepare_writeoff_first_line_values(values)
+        if not res.get('operating_unit_id', False):
+            res['operating_unit_id'] = self.operating_unit_id.id
+        return res
+
+    @api.multi
+    def _prepare_writeoff_second_line_values(self, values):
+        res = super(
+            AccountMoveLine, self)._prepare_writeoff_second_line_values(values)
+        if not res.get('operating_unit_id', False):
+            res['operating_unit_id'] = self.operating_unit_id.id
+        return res
+
+    @api.multi
+    def _prepare_inter_ou_balancing_partial_reconcile(
+            self, move, ou_id, debit, credit):
+        if not move.company_id.inter_ou_clearing_account_id:
+            raise UserError(_('Error!\nYou need to define an inter-operating\
+                unit clearing account in the company settings'))
+
+        res = {
+            'name': 'OU-Balancing',
+            'move_id': move.id,
+            'journal_id': move.journal_id.id,
+            'date': move.date,
+            'operating_unit_id': ou_id,
+            'account_id': move.company_id.inter_ou_clearing_account_id.id,
+            'debit': debit,
+            'credit': credit
+        }
+        return res
+
+    def _get_move_vals(self):
+        """ Return dict to create the payment move
+        """
+        journal = self.journal_id
+        name = self.name
+        return {
+            'name': name + 'OU Balance',
+            'date': self.date,
+            'ref': self.ref or '/',
+            'company_id': self.company_id.id,
+            'journal_id': journal.id,
+        }
+
+    @api.multi
+    def reconcile(self, writeoff_acc_id=False, writeoff_journal_id=False):
+        res = super(AccountMoveLine, self).reconcile(
+            writeoff_acc_id, writeoff_journal_id)
+        if (not len(self.mapped('operating_unit_id')) == 1 and
+                not self.env.context.get('reversal', False)):
+            partial = self.env['account.partial.reconcile'].search(
+                [('debit_move_id', 'in', self.ids),
+                 ('credit_move_id', 'in', self.ids),
+                 ('bal_move_id', '=', False)])
+            partial.assign_balance_to_partial_reconcile()
+        return res
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
@@ -164,7 +225,8 @@ class AccountMove(models.Model):
         for move in self:
             if not move.company_id.ou_is_self_balanced:
                 continue
-
+            if self.env.context.get('reconciling'):
+                continue
             # If all move lines point to the same operating unit, there's no
             # need to create a balancing move line
             ou_list_ids = {
