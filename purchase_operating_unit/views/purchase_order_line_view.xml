@@ -28,10 +28,6 @@
         <field name="model">purchase.order.line</field>
         <field name="inherit_id" ref="purchase.purchase_order_line_search" />
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='groupby_supplier']" position="after">
-                <filter string="Operating Unit" groups="operating_unit.group_multi_operating_unit"
-                      context="{'group_by':'operating_unit_id'}"/>
-            </xpath>
             <field name="partner_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
