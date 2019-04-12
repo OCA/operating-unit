@@ -16,6 +16,8 @@
     "depends": ["operating_unit", "mail"],
     "license": "LGPL-3",
     "data": [
+        "security/mail_alias_security.xml",
+        "security/mail_template_security.xml",
         "views/operating_unit_views_ext.xml",
         "views/mail_alias_views_ext.xml",
         "views/mail_template_views_ext.xml",
