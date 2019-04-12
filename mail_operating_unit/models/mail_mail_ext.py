@@ -22,31 +22,20 @@ class MailMailExt(models.Model):
 
                 model = mail.mail_message_id.model
                 res_id = mail.mail_message_id.res_id
-                record = self.env[model].sudo().browse(res_id)
+                record = self.env[model].browse(res_id)
 
-                sender_email_address = False
-                if record.operating_unit_id and \
-                        record.operating_unit_id.catchall_alias and \
-                        record.operating_unit_id.catchall_domain:
-                    sender_email_address = \
-                        record.operating_unit_id.catchall_alias + '@' + \
-                        record.operating_unit_id.catchall_domain
-
-                outgoing_mail_server_id = False
                 if record.operating_unit_id:
-                    outgoing_mail_server_id = \
-                        record.operating_unit_id.outgoing_mail_server_id
-
-                if sender_email_address:
-                    email_name = False
-                    if record.operating_unit_id:
+                    if record.operating_unit_id.catchall_alias and \
+                            record.operating_unit_id.catchall_domain:
+                        sender_email_address = \
+                            record.operating_unit_id.catchall_alias + '@' + \
+                            record.operating_unit_id.catchall_domain
                         email_name = record.operating_unit_id.partner_id.name
-
-                    mail.email_from = \
-                        formataddr((email_name, sender_email_address))
-                    mail.reply_to = mail.email_from
-
-                if outgoing_mail_server_id:
-                    mail.mail_server_id = outgoing_mail_server_id.id
+                        mail.email_from = \
+                            formataddr((email_name, sender_email_address))
+                        mail.reply_to = mail.email_from
+                    if record.operating_unit_id.outgoing_mail_server_id:
+                        mail.mail_server_id =\
+                            record.operating_unit_id.outgoing_mail_server_id.id
 
         return mails

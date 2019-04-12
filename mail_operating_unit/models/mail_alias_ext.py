@@ -19,4 +19,3 @@ class MailAliasExt(models.Model):
         for record in self:
             if record.operating_unit_id:
                 record.alias_domain = record.operating_unit_id.catchall_domain
-
