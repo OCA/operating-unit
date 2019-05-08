@@ -1,6 +1,7 @@
 # Copyright 2015-TODAY Eficent
 # - Jordi Ballester Alomar
 # Copyright 2015-TODAY Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2019 XOE Corp. SAS (David Arnold)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
 
@@ -10,25 +11,28 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
 
     @api.model
-    def operating_unit_default_get(self, uid2=False):
-        if not uid2:
-            uid2 = self._uid
-        user = self.env['res.users'].browse(uid2)
-        return user.default_operating_unit_id
+    def operating_unit_default_get(self):
+        """ Returns a single operating unit for a given user. Use for
+        transactional data that belongs to only one operating unit.
+        """
+        return self.current_operating_unit_id
 
     @api.model
-    def _default_operating_unit(self):
-        return self.operating_unit_default_get()
+    def operating_units_default_get(self):
+        """ Returns a set of operating units for a given user. Use for
+        metadata data that possibly belongs to several operating units.
+        """
 
-    @api.model
-    def _default_operating_units(self):
-        return self._default_operating_unit()
+        # TODO: Implement when Odoo's company multi selection
+        # implementation becomes known.
+        # see: https://git.io/fjc25, notably: https://git.io/fjc29
+        return self.current_operating_unit_id
 
-    operating_unit_ids = fields.Many2many(
+    allowed_operating_unit_ids = fields.Many2many(
         'operating.unit', 'operating_unit_users_rel', 'user_id', 'poid',
-        'Operating Units', default=lambda self: self._default_operating_units()
+        'Allowed Operating Units'
     )
-    default_operating_unit_id = fields.Many2one(
-        'operating.unit', 'Default Operating Unit',
-        default=lambda self: self._default_operating_unit()
+    current_operating_unit_id = fields.Many2one(
+        'operating.unit', 'Current Operating Unit',
+        domain="[('id', 'in', 'allowed_operating_unit_ids')]"
     )

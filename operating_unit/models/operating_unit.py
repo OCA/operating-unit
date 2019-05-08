@@ -12,11 +12,12 @@ class OperatingUnit(models.Model):
 
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True)
+    color = fields.Integer("Color Index", default=0)  # Yeah 🤩!
     active = fields.Boolean('Active', default=True)
     company_id = fields.Many2one(
         'res.company', 'Company', required=True, readonly=True,
         default=lambda self:
-        self.env['res.company']._company_default_get('account.account'))
+        self.env['res.company']._company_default_get())
     partner_id = fields.Many2one('res.partner', 'Partner', required=True)
     user_ids = fields.Many2many(
         'res.users', 'operating_unit_users_rel', 'poid', 'user_id',
