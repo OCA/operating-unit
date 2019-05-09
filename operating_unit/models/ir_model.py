@@ -23,9 +23,10 @@ AUTOMATED_VIEW_TYPES = [
 
 VIEW_TEMPLATE = """
 <data>
-    <xpath expr="//field[@name='company_id']" position="after">
+    <xpath expr="{xpath}" position="after">
         <field  name="{field}"
                 widget="{widget}"
+                invisible="{inivisble}"
                 <!-- domain is infered from python code -->
                 groups="operating_unit.group_multi_operating_unit"
                 options="{'no_create': True, 'color_field': 'color'}"/>
@@ -124,7 +125,8 @@ class OperatingUnitIrModel(models.model):
             if existing:
                 existing.toggle_active()
                 continue
-
+            inivisble = 0  # TODO: lxml analyze inherited view ocurrence
+            xpath = "//field[@name='company_id']"  # TODO: same for xpath, I guess.
             new_view.arch = VIEW_TEMPLATE.format(**locals())
             new_view.name = VIEW_NAME_TEMPLATE.format(**locals())
 
