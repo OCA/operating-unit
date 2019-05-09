@@ -20,6 +20,12 @@ ITX  = 'operating.unit.independent.transaction.mixin'
 DTX  = 'operating.unit.dependent.transaction.mixin'
 
 def emit_operating_unit(func):
+    """ Context sentinel payload emitted on "outgoing" transitions.
+    This is catched by the create method of subsequent transactional
+    records created during the current server transaction.
+
+    Multiple values trigger a user facing dalogue to resolve the confilct. """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         if not args[0].operating_unit_id:
