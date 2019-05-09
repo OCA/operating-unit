@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_model_form_inherited" model="ir.ui.view">
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form" />
+        <field name="arch" type="xml">
+            <field name="transient" position="after">
+                <field name="operating_unit_enabled" attrs="{'invisible': [('has_company_id', '!=', True)]}" groups="base.group_no_one"/>
+                <!-- Or is this bad UX ? -->
+                <div attrs="{'invisible': [('has_company_id', '!=', True)]}" groups="base.group_no_one">
+                    <p><button name="toggle_operating_unit" type="object" string="Toggle operating unit on this model" class="oe_link"/></p>
+                </div>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -51,14 +51,30 @@ class Container(object):
 class OperatingUnitIrModel(models.model):
     _inherit = 'ir.model.model'
 
+    def _compute_has_company_id(self):
+        for model in self:
+            model.has_company_id = bool(
+                model.field_id.filtered(lambda f: f.name == 'company_id'))
+
+    has_company_id = fields.Boolean(
+        compute='_compute_has_company_id',
+        help="For client side view rendering")
+
     operating_unit_enabled = fields.Boolean(
+        readonly = True,
+        default = False,
         help="Denotes if operating units are enabled on this model. This means "
              "Access Rules are in place and inheriting views exposing the "
              "respective fields are active."
     )
 
-    def _toggle_operating_unit_ir_rule(self, model_name):
-        model = self.env[model_name]
+    def toggle_operating_unit(self):
+        self._toggle_operating_unit_ir_rule(not self.operating_unit_enabled)
+        self._toggle_operating_unit_ir_ui_view(not self.operating_unit_enabled)
+        self.operating_unit_enabled = not self.operating_unit_enabled
+
+    def _toggle_operating_unit_ir_rule(self, active=True):
+        model = self.env[self.name]
         if getattr(model, '_ou_metadata', None):
             field = 'operating_unit_ids'
         elif getattr(model, '_ou_transaction', None):
@@ -72,7 +88,8 @@ class OperatingUnitIrModel(models.model):
 
         existing = self.env.ref(xmlid, raise_if_not_found=False)
         if existing:
-            existing.toggle_active()
+            if existing.active != active:
+                existing.toggle_active()
             return
 
         new_rule.domain = DOMAIN_TEMPLATE.format(**locals())
@@ -85,7 +102,7 @@ class OperatingUnitIrModel(models.model):
             'domain_force' : new_rule.domain,
             'name'         : new_rule.name,
             'global'       : True,
-            'active'       : True,
+            'active'       : active,
             'perm_unlink'  : True,
             'perm_write'   : True,
             'perm_read'    : True,
@@ -98,8 +115,8 @@ class OperatingUnitIrModel(models.model):
         }])
 
 
-    def _toggle_operating_unit_ir_ui_view(self, model_name):
-        model = self.env[model_name]
+    def _toggle_operating_unit_ir_ui_view(self, active=True):
+        model = self.env[self.name]
 
         if getattr(model, '_ou_metadata', None):
             field = 'operating_unit_ids'
@@ -123,8 +140,10 @@ class OperatingUnitIrModel(models.model):
 
             existing = self.env.ref(new_view.xmlid, raise_if_not_found=False)
             if existing:
-                existing.toggle_active()
-                continue
+                if existing.active != active:
+                    existing.toggle_active()
+                return
+
             inivisble = 0  # TODO: lxml analyze inherited view ocurrence
             xpath = "//field[@name='company_id']"  # TODO: same for xpath, I guess.
             new_view.arch = VIEW_TEMPLATE.format(**locals())
@@ -138,7 +157,7 @@ class OperatingUnitIrModel(models.model):
                 'type'       : view.type,
                 'inherit_id' : view.id,
                 'mode'       : 'extension',
-                'active'     : True,
+                'active'     : active,
                 'group_id'   : view.group_id,  # TODO: Enforce group at this level?
                 # fmt: on
             }).ensure_one()

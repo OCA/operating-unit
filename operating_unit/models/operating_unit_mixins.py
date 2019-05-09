@@ -150,6 +150,10 @@ class OperatingUnitMetadataMixin(models.AbstractModel, OperatingUnitRealmEnsurer
             "The field 'company_id' needs to be present on the model for "
             "the OperatingUnitMetadataMixin")
 
+        # In case user_id is not present remove the
+        # onchange function alltogether
+        if 'user_id' not in self._fields:
+            del(self._onchange_user_operating_units)
 
 
     operating_unit_ids = fields.Many2many(
@@ -163,7 +167,11 @@ class OperatingUnitMetadataMixin(models.AbstractModel, OperatingUnitRealmEnsurer
         """ units (sic!). Infer the default operating units through
         the assigned user or, as a fall back, the current user. """
         if getattr(self, 'user_id', None):
-            return self.user_id.user.operating_units_default_get()
+            # It might be the secretary recording a document for a sales person
+            # take the default from the document "owner" (user_id)
+            defaults = self.sudo(self.user_id).env['ir.default'].get_model_defaults(self._name)
+            if 'operating_unit_ids' in defaults:
+                return defaults.get('operating_unit_ids')
         return self.env.user.operating_units_default_get()
 
     @api.multi
@@ -192,6 +200,17 @@ class OperatingUnitMetadataMixin(models.AbstractModel, OperatingUnitRealmEnsurer
         if not self.company_id and self.operating_unit_ids:
             # We reset the operating units.
             self.operating_unit_ids = False
+
+
+    # Will emit a WARNING log, if no `user_id` is present on the cls
+    # otherwise it will just get ignored. Wait no: see _init_()
+    @api.onchange('user_id')
+    def _onchange_user_operating_units(self):
+        """ Ensures a user change triggers the defaulting logic on
+        transactional models. """
+        self.ensure_one()
+        self.operating_unit_id = self._operating_units_default_get()
+
 
 class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUnitRealmEnsurer):
     """ Operating Unit Mixin for independent transactional data, which is not
@@ -231,7 +250,11 @@ class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUni
         """ unit (sic!). Infer the single default operating unit through
         the assigned user or, as a fall back, the current user. """
         if getattr(self, 'user_id', None):
-            return self.user_id.operating_unit_default_get()
+            # It might be the secretary recording a document for a sales person
+            # take the default from the document "owner" (user_id)
+            defaults = self.sudo(self.user_id).env['ir.default'].get_model_defaults(self._name)
+            if 'operating_unit_id' in defaults:
+                return defaults.get('operating_unit_id')
         return self.env.user.operating_unit_default_get()
 
     @api.multi

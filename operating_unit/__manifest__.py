@@ -20,6 +20,7 @@
         "data/operating_unit_data.xml",
         "view/operating_unit_view.xml",
         "view/res_users_view.xml",
+        "view/ir_model_views.xml",
     ],
     'demo': [
         "demo/operating_unit_demo.xml"
