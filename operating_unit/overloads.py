@@ -10,9 +10,14 @@ with the provided mixins. The graph override ensures this module is loaded last.
 """
 from functools import wraps
 
-from ._models import ModelBuildingEvictor
+from ._models import ModelBuildingEvictor as MBE
 
 from odoo import models
+
+# fmt: off
+META = 'operating.unit.metadata.mixin'
+ITX  = 'operating.unit.independent.transaction.mixin'
+DTX  = 'operating.unit.dependent.transaction.mixin'
 
 def emit_operating_unit(func):
     @wraps(func)
@@ -21,8 +26,8 @@ def emit_operating_unit(func):
             return func(*args, **kwargs)
 
         if 'operating_units' in args[0].env.context:
-            operating_units = args[0].env.context['operating_units']
-            operating_units |= args[0].operating_unit_id
+            operating_units   = args[0].env.context['operating_units']
+            operating_units  |= args[0].operating_unit_id
             args[0] = args[0].with_context(operating_units=operating_units)
         return func(*args, **kwargs)
     return wrapper
@@ -33,41 +38,17 @@ def emit_operating_unit(func):
 ##############################
 
 # Metadata
-class AccountAccountOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.account', 'operating.unit.metadata.mixin']
-
-
-class AccountTaxOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.tax', 'operating.unit.metadata.mixin']
-
-
-class AccountTaxOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.journal', 'operating.unit.metadata.mixin']
-
-
+class AccountAccount(    models.Model, MBE): _inherit = [META,'account.account'      ];
+class AccountTax(        models.Model, MBE): _inherit = [META,'account.tax'          ];
+class AccountTax(        models.Model, MBE): _inherit = [META,'account.journal'      ];
 # account.move -> account.move.line
-class AccountMoveOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.move', 'operating.unit.independent.transaction.mixin']
-
-
-class AccountMoveLineOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.move.line', 'operating.unit.dependent.transaction.mixin']
-    _ou_follows = 'move_id'
-
-
+class AccountMove(       models.Model, MBE): _inherit = [ITX, 'account.move'         ];
+class AccountMoveLine(   models.Model, MBE): _inherit = [DTX, 'account.move.line'    ]; _ou_follows = 'move_id';
 # account.invoice -> account.invoice.line
 # account.invoice -> account.invoice.tax
-class AccountInvoiceOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.invoice', 'operating.unit.independent.transaction.mixin']
+class AccountInvoice(    models.Model, MBE): _inherit = [ITX, 'account.invoice'      ];
+AccountInvoice.action_move_create = emit_operating_unit(lambda self: super(type(self), self).action_move_create)
+class AccountInvoiceLine(models.Model, MBE): _inherit = [DTX, 'account.invoice.line' ]; _ou_follows = 'invoice_id';
+class AccountInvoiceTax( models.Model, MBE): _inherit = [DTX, 'account.invoice.tax'  ]; _ou_follows = 'invoice_id';
 
-    action_move_create = emit_operating_unit(action_move_create)
-
-
-class AccountInvoiceLineOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.invoice.line', 'operating.unit.dependent.transaction.mixin']
-    _ou_follows = 'invoice_id'
-
-
-class AccountInvoiceTaxOperatingUnit(models.Model, ModelBuildingEvictor):
-    _inherit = ['account.invoice.tax', 'operating.unit.dependent.transaction.mixin']
-    _ou_follows = 'invoice_id'
+# fmt: on
