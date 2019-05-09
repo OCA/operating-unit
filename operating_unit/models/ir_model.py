@@ -60,9 +60,9 @@ class OperatingUnitIrModel(models.model):
     def _toggle_operating_unit_ir_rule(self, model_name):
         model = self.env[model_name]
         if getattr(model, '_ou_metadata', None):
-            field = 'operating_unit_id'
-        elif getattr(model, '_ou_transaction', None):
             field = 'operating_unit_ids'
+        elif getattr(model, '_ou_transaction', None):
+            field = 'operating_unit_id'
         else:
             # We should never reach to this point (by design)
             raise "This should be only called on OU enabled models"
@@ -102,11 +102,11 @@ class OperatingUnitIrModel(models.model):
         model = self.env[model_name]
 
         if getattr(model, '_ou_metadata', None):
-            field = 'operating_unit_id'
-            widget = ''
-        elif getattr(model, '_ou_transaction', None):
             field = 'operating_unit_ids'
             widget = 'many2many_tags'
+        elif getattr(model, '_ou_transaction', None):
+            field = 'operating_unit_id'
+            widget = ''
         else:
             # We should never reach to this point (by design)
             raise "This should be only called on OU enabled models"
