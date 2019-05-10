@@ -49,12 +49,15 @@ class AccountTax(        models.Model, MBE): _inherit = [META,'account.tax'     
 class AccountTax(        models.Model, MBE): _inherit = [META,'account.journal'      ];
 # account.move -> account.move.line
 class AccountMove(       models.Model, MBE): _inherit = [ITX, 'account.move'         ];
-class AccountMoveLine(   models.Model, MBE): _inherit = [DTX, 'account.move.line'    ]; _ou_follows = 'move_id';
+class AccountMoveLine(   models.Model, MBE): _inherit = [DTX, 'account.move.line'    ];
+AccountMoveLine.set_operating_unit_related('move_id')
 # account.invoice -> account.invoice.line
 # account.invoice -> account.invoice.tax
 class AccountInvoice(    models.Model, MBE): _inherit = [ITX, 'account.invoice'      ];
 AccountInvoice.action_move_create = emit_operating_unit(lambda self: super(type(self), self).action_move_create)
-class AccountInvoiceLine(models.Model, MBE): _inherit = [DTX, 'account.invoice.line' ]; _ou_follows = 'invoice_id';
-class AccountInvoiceTax( models.Model, MBE): _inherit = [DTX, 'account.invoice.tax'  ]; _ou_follows = 'invoice_id';
+class AccountInvoiceLine(models.Model, MBE): _inherit = [DTX, 'account.invoice.line' ];
+AccountMoveLine.set_operating_unit_related('invoice_id')
+class AccountInvoiceTax( models.Model, MBE): _inherit = [DTX, 'account.invoice.tax'  ];
+AccountMoveLine.set_operating_unit_related('invoice_id')
 
 # fmt: on

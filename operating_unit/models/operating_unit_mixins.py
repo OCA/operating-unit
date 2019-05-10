@@ -320,16 +320,15 @@ class OperatingUnitDependentTansactionMixin(models.AbstractModel):
 
     # Set through which field this model adopt another model's operating unit
     _ou_transaction = True
-    _ou_follows = 'journal_id'
 
-    def _get_ou_related(self):
-        return [self._ou_follows, "operating_unit_id"]
-
-
-    operating_unit_id = fields.Many2one(
-        'operating.unit',
-        string="Operating Unit",
-        related=_get_ou_related,  # related inferred by metadata
-        store=True  # For reporting, speed
-        # Defaults to readonly, which is intended.
-    )
+    def set_operating_unit_related(cls, follows_field):
+        operating_unit_id = fields.Many2one(
+            'operating.unit',
+            string="Operating Unit",
+            # we need to set this at class instanciation time,
+            # but on inherited classes. Therefore this indirection.
+            related=follows_field,
+            store=True  # For reporting, speed
+            # Defaults to readonly, which is intended.
+        )
+        setattr(cls, 'operating_unit_id', operating_unit_id)
