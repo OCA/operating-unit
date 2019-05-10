@@ -48,8 +48,8 @@ class Container(object):
 
 # TODO: Also reconcile on installing new modules to ensure consistent state!
 
-class OperatingUnitIrModel(models.model):
-    _inherit = 'ir.model.model'
+class OperatingUnitIrModel(models.Model):
+    _inherit = 'ir.model'
 
     def _compute_has_company_id(self):
         for model in self:

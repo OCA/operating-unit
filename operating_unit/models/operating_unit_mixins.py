@@ -1,7 +1,7 @@
 # Copyright 2019 XOE Corp. SAS (XOE Solutions)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields, models, _
+from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -160,7 +160,7 @@ class OperatingUnitMetadataMixin(models.AbstractModel, OperatingUnitRealmEnsurer
         'operating.unit',
         string='Operating Units',
         domain=VIEW_DOMAIN,
-        default=self._operating_units_default_get()
+        default=lambda self: self._operating_units_default_get()
     )
 
     def _operating_units_default_get(self):
@@ -243,7 +243,7 @@ class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUni
         'operating.unit',
         string="Operating Unit",
         domain=VIEW_DOMAIN,
-        default=self._operating_unit_default_get()
+        default=lambda self: self._operating_unit_default_get()
     )
 
     def _operating_unit_default_get(self):
@@ -322,16 +322,14 @@ class OperatingUnitDependentTansactionMixin(models.AbstractModel):
     _ou_transaction = True
     _ou_follows = 'journal_id'
 
-    @api.model
     def _get_ou_related(self):
-        related_field = self._ou_follows
-        return "{related_field}.operating_unit_id".format(**locals())
+        return [self._ou_follows, "operating_unit_id"]
 
 
     operating_unit_id = fields.Many2one(
         'operating.unit',
         string="Operating Unit",
-        related=self._get_ou_related(),  # related inferred by metadata
+        related=_get_ou_related,  # related inferred by metadata
         store=True  # For reporting, speed
         # Defaults to readonly, which is intended.
     )
