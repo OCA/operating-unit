@@ -38,7 +38,6 @@ def _add_depends_on_all(self, cr, modules, force):
     # modules already in the graph (=self, a dict object)
     info['depends'] = set(self.keys())
     node = self.add_node(module, info)
-    self.add
     for kind in ('init', 'demo', 'update'):
         if module in tools.config[kind] or 'all' in tools.config[kind] or kind in force:
             setattr(node, kind, True)

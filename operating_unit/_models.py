@@ -4,6 +4,9 @@
 
 from odoo import tools
 
+class Container(object):
+    pass
+
 class ModelBuildingEvictor(object):
     """ Evict Odoo's model building in a given registry if the inherited model
     is not present in that registry. Cooperative pattern with the
@@ -18,5 +21,9 @@ class ModelBuildingEvictor(object):
         parents = cls._inherit
         parents = [parents] if isinstance(parents, tools.pycompat.string_types) else (parents or [])
         if any(model not in pool for model in parents):
-            return
-        super()._build_model(pool, cr)
+            c = Container()
+            # registry.descendants uses an OrderedSet. Yeah!
+            # So we dummy assign one that's always there.
+            c._name = 'ir.model'
+            return c
+        return super()._build_model(pool, cr)

@@ -310,25 +310,3 @@ class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUni
             vals['operating_unit_id'] = operating_units[0].id
             return super().create(vals)
 
-
-
-class OperatingUnitDependentTansactionMixin(models.AbstractModel):
-    """ Operating Unit Mixin for dependent transactional data which is
-    guaranteed to always adopt the operating unit of another transaction. """
-    _name = 'operating.unit.dependent.transaction.mixin'
-    _description = "Operating Unit Mixin for Dependent Transactions"
-
-    # Set through which field this model adopt another model's operating unit
-    _ou_transaction = True
-
-    def set_operating_unit_related(cls, follows_field):
-        operating_unit_id = fields.Many2one(
-            'operating.unit',
-            string="Operating Unit",
-            # we need to set this at class instanciation time,
-            # but on inherited classes. Therefore this indirection.
-            related=follows_field,
-            store=True  # For reporting, speed
-            # Defaults to readonly, which is intended.
-        )
-        setattr(cls, 'operating_unit_id', operating_unit_id)
