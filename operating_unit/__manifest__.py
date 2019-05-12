@@ -13,7 +13,10 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Generic",
-    "depends": ["base"],
+    "depends": ["base_transversal_module"],
+    # Enabled by module 'base_transversal_module'
+    # Makes this module dependent on all installed modules ("stack last")
+    "graph": "transversal",
     "license": "LGPL-3",
     "data": [
         "security/operating_unit_security.xml",

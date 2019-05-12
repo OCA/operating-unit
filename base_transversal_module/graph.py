@@ -11,7 +11,20 @@ import odoo
 from odoo import tools
 from odoo.modules.module import load_information_from_description_file
 
-TO_STACK_LAST = 'operating_unit'
+def _get_stacked_modules(module_list):
+    transversal = []
+    for module in module_list:
+        info = load_information_from_description_file(module)
+        if 'graph' in info and info['graph'] == 'transversal':
+            transversal.append(module)
+    return transversal
+
+def _clean_tree_from_multi(module_list, modules):
+    removed_tree = []
+    for module in modules:
+        module_list, _removed_tree = _clean_tree_from(module_list, module)
+        removed_tree.extend(_removed_tree)
+    return module_list, removed_tree
 
 def _clean_tree_from(module_list, module):
     """ Take out the module tree which is to be stacked last.
@@ -23,7 +36,7 @@ def _clean_tree_from(module_list, module):
     module_list.remove(module)
     for remaining_module in module_list.copy():
         info = load_information_from_description_file(remaining_module)
-        if any(dep for dep in info['depends'] if dep == module):
+        if 'depends' in info and module in info['depends']:
             removed_tree.append(remaining_module)
             module_list.remove(remaining_module)
 
@@ -50,7 +63,8 @@ def _add_depends_on_all(self, cr, modules, force):
 class Graph(odoo.modules.graph.Graph):
 
     def add_modules(self, cr, module_list, force=None):
-        module_list, removed_tree = _clean_tree_from(module_list, TO_STACK_LAST)
+        transversal = _get_stacked_modules(module_list)
+        module_list, removed_tree = _clean_tree_from_multi(module_list, transversal)
         res = super().add_modules(cr, module_list, force=force)
         if not removed_tree:
             return res

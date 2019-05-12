@@ -10,7 +10,7 @@ with the provided mixins. The graph override ensures this module is loaded last.
 """
 from functools import wraps
 
-from ._models import ModelBuildingEvictor as MBE
+from odoo.addons.base_transversal_module import ModelBuildingEvictor as MBE
 
 from odoo import models, fields
 
