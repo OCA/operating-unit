@@ -23,7 +23,7 @@ def _clean_tree_from(module_list, module):
     module_list.remove(module)
     for remaining_module in module_list.copy():
         info = load_information_from_description_file(remaining_module)
-        if any(dep for deb in info['depends'] if dep == module):
+        if any(dep for dep in info['depends'] if dep == module):
             removed_tree.append(remaining_module)
             module_list.remove(remaining_module)
 

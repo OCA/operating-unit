@@ -299,6 +299,9 @@ class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUni
 
         assert isinstance(operating_units, models.BaseModel), "We asked for a RecordSet, dude!"
 
+        # For single operating units, we don't check if OUs are enabled on this model
+        # domains are enforced by rules, so if disabled, we just produce unused metadata
+        # However, this metadata can become useful, evn though hidden, in the future.
         if len(operating_units) == 1:
             vals['operating_unit_id'] = operating_units[0].id
             return super().create(vals)

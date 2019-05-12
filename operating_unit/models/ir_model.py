@@ -73,7 +73,7 @@ class OperatingUnitIrModel(models.Model):
         self.operating_unit_enabled = not self.operating_unit_enabled
 
     def _toggle_operating_unit_ir_rule(self, active=True):
-        model = self.env[self.name]
+        model = self.env[self.model]
         if getattr(model, '_ou_metadata', None):
             field = 'operating_unit_ids'
         elif getattr(model, '_ou_transaction', None):
@@ -115,7 +115,7 @@ class OperatingUnitIrModel(models.Model):
 
 
     def _toggle_operating_unit_ir_ui_view(self, active=True):
-        model = self.env[self.name]
+        model = self.env[self.model]
 
         if getattr(model, '_ou_metadata', None):
             field = 'operating_unit_ids'

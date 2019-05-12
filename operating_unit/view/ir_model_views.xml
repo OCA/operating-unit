@@ -6,6 +6,7 @@
         <field name="inherit_id" ref="base.view_model_form" />
         <field name="arch" type="xml">
             <field name="transient" position="after">
+                <field name="has_company_id" invisible="1" />
                 <field name="operating_unit_enabled" attrs="{'invisible': [('has_company_id', '!=', True)]}" groups="base.group_no_one"/>
                 <!-- Or is this bad UX ? -->
                 <div attrs="{'invisible': [('has_company_id', '!=', True)]}" groups="base.group_no_one">
