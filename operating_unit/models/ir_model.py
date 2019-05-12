@@ -1,7 +1,9 @@
 # Copyright 2019 XOE Corp. SAS (XOE Solutions)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from lxml import etree
 from odoo import api, fields, models, _
+
 
 DOMAIN_TEMPLATE = (
     "['|',"
@@ -72,6 +74,12 @@ class OperatingUnitIrModel(models.Model):
         self._toggle_operating_unit_ir_rule(not self.operating_unit_enabled)
         self._toggle_operating_unit_ir_ui_view(not self.operating_unit_enabled)
         self.operating_unit_enabled = not self.operating_unit_enabled
+        # reload the client; open the first available root menu
+        # menu = env['ir.ui.menu'].search([('parent_id', '=', False)])[:1]
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
 
     def _toggle_operating_unit_ir_rule(self, active=True):
         model = self.env[self.model]
@@ -117,6 +125,8 @@ class OperatingUnitIrModel(models.Model):
 
     def _toggle_operating_unit_ir_ui_view(self, active=True):
         model = self.env[self.model]
+        # Exclude nested view definitions
+        xpath = "//field[@name='company_id'][not(ancestor::field)]"
 
         if getattr(model, '_ou_metadata', None):
             field = 'operating_unit_ids'
@@ -131,6 +141,9 @@ class OperatingUnitIrModel(models.Model):
         model_id = self.env['ir.model'].search([('model', '=', model._name)])
         for view in model_id.view_ids.filtered(
             lambda v: v.type in AUTOMATED_VIEW_TYPES and v.mode == 'primary'):
+            et = etree.fromstring(view.arch.encode('utf-8'))
+            if not et.xpath(xpath):
+                continue
             inherited_view = Container()
             inherited_view.name = view.name
             inherited_view.xmlid = view.get_external_id()[view.id]
@@ -145,7 +158,6 @@ class OperatingUnitIrModel(models.Model):
                 return
 
             inivisble = 0  # TODO: lxml analyze inherited view ocurrence
-            xpath = "//field[@name='company_id']"  # TODO: same for xpath, I guess.
             new_view.arch = VIEW_TEMPLATE.format(**locals())
             new_view.name = VIEW_NAME_TEMPLATE.format(**locals())
 

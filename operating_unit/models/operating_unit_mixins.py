@@ -5,7 +5,7 @@ from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 
-VIEW_DOMAIN = "[('company_id', '=', company_id)]"
+VIEW_DOMAIN = "[('user_ids', 'in', uid),('company_id', '=', company_id)]"
 WITHOUT_COMPANY_ERROR = (
     "An Operating Unit can only be set on records that also "
     "have a company set (strict company namespacing)."

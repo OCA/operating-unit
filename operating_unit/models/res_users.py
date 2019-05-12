@@ -29,7 +29,7 @@ class ResUsers(models.Model):
         return self.current_operating_unit_id
 
     allowed_operating_unit_ids = fields.Many2many(
-        'operating.unit', 'operating_unit_users_rel', 'user_id', 'poid',
+        'operating.unit', 'operating_unit_users_rel', 'user_id', 'operating_unit_id',
         'Allowed Operating Units'
     )
     current_operating_unit_id = fields.Many2one(

@@ -20,7 +20,7 @@ class OperatingUnit(models.Model):
         self.env['res.company']._company_default_get())
     partner_id = fields.Many2one('res.partner', 'Partner', required=True)
     user_ids = fields.Many2many(
-        'res.users', 'operating_unit_users_rel', 'poid', 'user_id',
+        'res.users', 'operating_unit_users_rel', 'operating_unit_id', 'user_id',
         'Users Allowed',
     )
 
