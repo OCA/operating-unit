@@ -14,9 +14,9 @@ class TestOperatingUnit(common.TransactionCase):
 
         # Groups
         self.grp_ou_mngr = self.env.ref(
-            'operating_unit.group_manager_operating_unit')
-        self.grp_ou_multi = self.env.ref(
-            'operating_unit.group_multi_operating_unit')
+            'operating_unit.group_operating_unit_manager')
+        self.grp_ou_user = self.env.ref(
+            'operating_unit.group_operating_unit_user')
         # Company
         self.company = self.env.ref('base.main_company')
         # Main Operating Unit
@@ -32,7 +32,7 @@ class TestOperatingUnit(common.TransactionCase):
                                        self.ou1)
         # Create User 2 with B2C OU
         self.user2 = self._create_user('user_2',
-                                       self.grp_ou_multi,
+                                       self.grp_ou_user,
                                        self.company,
                                        self.b2c)
 

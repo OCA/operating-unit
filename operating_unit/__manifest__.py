@@ -9,6 +9,7 @@
     "version": "12.0.1.2.0",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
+              "XOE Corp. SAS,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Generic",

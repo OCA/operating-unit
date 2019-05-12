@@ -28,7 +28,6 @@ VIEW_TEMPLATE = """
                 widget="{widget}"
                 invisible="{inivisble}"
                 <!-- domain is infered from python code -->
-                groups="operating_unit.group_multi_operating_unit"
                 options="{'no_create': True, 'color_field': 'color'}"/>
     </xpath>
 </data>

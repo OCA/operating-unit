@@ -8,7 +8,7 @@
             <xpath expr="//page[@name='access_rights']/group[1]" position="after">
                 <group string="Allowed Operating Units">
                     <field name="current_operating_unit_id"/>
-                    <field name="operating_unit_ids" groups="operating_unit.group_multi_operating_unit"
+                    <field name="allowed_operating_unit_ids" groups="operating_unit.group_operating_unit_manager"
                            widget="many2many_tags"/>
                 </group>
             </xpath>
