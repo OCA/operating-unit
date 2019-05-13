@@ -16,4 +16,15 @@
         </field>
     </record>
 
+    <record id="view_model_search_inherited" model="ir.ui.view">
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_search" />
+        <field name="arch" type="xml">
+            <filter name="transient" position="after">
+                <filter string="Operating Unit Candiates" name="has_company_id" domain="[('has_company_id', '=', True), ('operating_unit_enabled', '!=', True)]"/>
+                <filter string="Operating Unit set" name="operating_unit_enabled" domain="[('operating_unit_enabled', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
 </odoo>

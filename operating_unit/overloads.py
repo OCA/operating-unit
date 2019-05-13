@@ -98,7 +98,7 @@ def _meta(inh):
 
 
 ##############################
-# account
+# account & friends
 ##############################
 _meta('account.account')
 _meta('account.tax')
@@ -108,6 +108,150 @@ _deTX('account.move.line', 'move_id')
 _inTX('account.invoice', ['action_move_create'])
 _deTX('account.invoice.line', 'invoice_id')
 _deTX('account.invoice.tax', 'invoice_id')
+_meta('account.analytic.account')
+_meta('account.analytic.group')
+_inTX('account.analytic.line')
+_meta('account.asset.category')
+_inTX('account.asset.asset')
+_inTX('account.bank.statement')
+_deTX('account.bank.statement.line', 'statement_id')
+_inTX('account.voucher')
+_deTX('account.voucher.line', 'voucher_id')
+_meta('account.fiscal.position')
+_inTX('account.payment')
+_meta('account.payment.term')
+_meta('account.reconcile.model')
+_meta('account.budget.post')
+_inTX('crossovered.budget')
+_deTX('crossovered.budget.lines', 'crossovered_budget_id')
+# account.abstract.payment
+# account.analytic.tag
+# account.financial.html.report
+# account.fiscal.year
+# account.invoice.report
+# account.online.provider
+# account.partial.reconcile - probably never: allow reconciliation between OUs
+# account.report.manager
+# asset.asset.report
+
+
+##############################
+# partner & products
+##############################
+_meta('res.partner')
+_meta('product.product')
+_meta('product.template')
+_meta('product.pricelist')
+# product.price.history
+# product.pricelist.item
+# product.supplierinfo
+
+
+##############################
+# sale, purchase & friends
+##############################
+_inTX('sale.order')
+_deTX('sale.order.line', 'order_id')
+# sale.report
+_inTX('pruchase.order')
+_deTX('purchase.order.line', 'order_id')
+# purchase.bill.union
+# purchase.report
+_meta('crm.team')
+_inTX('crm.lead')
+# crm.activity.report
+
+
+##############################
+# hr
+##############################
+_meta('hr.employee')
+_meta('hr.department')  # At times departments overlap with operating units
+_meta('hr.job')
+_meta('hr.leave.type')
+_meta('hr.payroll.structure')
+_meta('hr.salary.rule')
+_meta('hr.salary.rule.category')
+_inTX('hr.applicant')
+_inTX('hr.contract')
+_inTX('hr.payslip')
+_deTX('hr.payslip.line', 'slip_id')
+# hr.expense
+# hr.expense.sheet - How to? coerce to hr.expense once assigned -> readonly
+# hr.contribution.register - Necesary to place under operating units? -> meta
+
+
+##############################
+# stock
+##############################
+_meta('stock.location')
+_meta('stock.warehouse')
+_inTX('stock.inventory')
+_deTX('stock.inventory.line', 'inventory_id')
+_inTX('stock.landed.cost')
+_inTX('stock.picking')
+# TODO: stock.move mostly has pickings, but some don't. Check!
+_deTX('stock.move', 'picking_id')
+# stock.quant - Does it make sense? Already heavily namespaced by locations
+# stock.quant.package - Same here.
+# stock.location.route
+# stock.report
+# stock.rule
+# stock.warehouse.orderpoint - Does it make sense? Controlled by cron. New dependent meta required?
+
+
+##############################
+# mrp & friends
+##############################
+_meta('mrp.bom')
+_meta('mrp.workcenter')
+_meta('mrp.routing')
+_inTX('mrp.production')
+# mrp.document
+# mrp.eco
+# mrp.routing.workcenter
+
+_meta('maintenance.team')
+_inTX('maintenance.request')
+# maintenance.equipment
+# maintenance.equipment.category
+
+_meta('quality.alert.team')
+# quality.alert
+# quality.check
+# quality.point
+
+
+##############################
+# project
+##############################
+
+_meta('project.project')
+_inTX('project.task')
+
+# delivery.carrier
+# digest.digest
+# fleet.vehicle
+# iap.account
+# payment.acquirer
+# pos.config
+# pos.order
+# pos.order.line
+# report.all.channels.sales
+# report.pos.order
+# report.project.task.user
+# report.stock.forecast
+# res.currency.rate
+# res.partner.bank
+# res.users
+# resource.calendar
+# resource.calendar.leaves
+# resource.mixin
+# resource.resource
+# resource.test
+# snailmail.letter
+# website
+
 
 # Is it true that ...
 _deTX('thirsty.camels.rock', 'invoice_ids')

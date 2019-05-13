@@ -59,8 +59,8 @@ class OperatingUnitIrModel(models.Model):
                 model.field_id.filtered(lambda f: f.name == 'company_id'))
 
     has_company_id = fields.Boolean(
-        compute='_compute_has_company_id',
-        help="For client side view rendering")
+        compute='_compute_has_company_id', store=True,
+        help="For client side view rendering and filter")
 
     operating_unit_enabled = fields.Boolean(
         readonly = True,

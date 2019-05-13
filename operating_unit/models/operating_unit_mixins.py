@@ -59,6 +59,8 @@ class OperatingUnitRealmEnsurer(object):
         TODO: Ensure through SQL queries that transactions that would be
         expulsed are shown with a warning + confirmation (with the possibility
         for the user to make them unbound)
+        TODO: Same can occur for metadata which is not linked through One2many
+        inverse field
         """
 
         # In the context of a transaction ...
@@ -118,16 +120,18 @@ class OperatingUnitRealmEnsurer(object):
             )
         }
 
-    @api.model
-    def create(self, vals):
-        res = super(OperatingUnitRealmEnsurer, self).create(vals)
-        res._ensure_operating_unit_realm()
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super(OperatingUnitRealmEnsurer, self).create(vals_list)
+        for rec in res:
+            rec._ensure_operating_unit_realm()
         return res
 
     @api.multi
     def write(self, vals):
         res = super(OperatingUnitRealmEnsurer, self).write(vals)
-        self._ensure_operating_unit_realm()
+        for rec in self:
+            rec._ensure_operating_unit_realm()
         return res
 
 
@@ -293,7 +297,7 @@ class OperatingUnitIndependentTansactionMixin(OperatingUnitRealmEnsurer, models.
         self.ensure_one()
         self.operating_unit_id = self._operating_unit_default_get()
 
-
+    @api.model_create_single
     def create(self, vals):
         if not 'operating_units' in self.env.context or not self.env.context['operating_units']:
             return super(OperatingUnitIndependentTansactionMixin, self).create(vals)
