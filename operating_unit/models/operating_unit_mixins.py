@@ -19,13 +19,15 @@ NOT_SAME_COMPANY_ERROR = (
 )
 TRANSACTION_REALM_BOUNDARIES_ERROR = (
     "All bound metadata must share the operating unit of this transaction. "
-    "The record '{rec.display_name}' related on field '{field.string}' doesn't "
-    "share the operating unit of this transaction ({self.display_name})."
+    "The record '{rec.display_name}' related on field '{field.string}' is "
+    "bound and doesn't share the operating unit of this transaction "
+    "({self.display_name})."
 )
 METADATA_NO_SHARED_REALM = (
     "Linked and bound metadata must share at least one operating unit."
-    "The record '{rec.display_name}' related on field '{field.string}' doesn't "
-    "share an operating unit with this metadata ({self.display_name})."
+    "The record '{rec.display_name}' related on field '{field.string}' is "
+    "bound and doesn't share an operating unit with this metadata "
+    "({self.display_name})."
 )
 
 
