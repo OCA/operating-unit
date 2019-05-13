@@ -75,9 +75,6 @@ class OperatingUnitRealmEnsurer(object):
         elif getattr(self, '_ou_metadata', None):
             # If no operating_unit_ids is set, it's an unbound metadata.
             # Don't enforce realms on unbound metadata!
-            # TODO: check with different user context
-            # Even a user who doesn't have access to a particular
-            # Record might see it here by their id, display_name.
             if not self.operating_unit_ids:
                 return
             operating_units = self.operating_unit_ids
@@ -101,8 +98,6 @@ class OperatingUnitRealmEnsurer(object):
         sudo_self = self.sudo()
         for fieldname, field in self._get_rel_metadata_field_names():
             rec = getattr(sudo_self, fieldname)
-            # TODO: Check with differnt user context
-            # rec.operating_unit_ids might be an empty recordset for some users
             if not rec or not rec.operating_unit_ids:
                 # An unbound record, not elibile for realm enforcement
                 continue
