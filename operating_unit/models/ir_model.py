@@ -30,7 +30,7 @@ VIEW_TEMPLATE = """
         <!-- domain is infered from python code -->
         <field  name="{field}"
                 widget="{widget}"
-                invisible="{inivisble}"
+                invisible="{invisible}"
                 options="{{'no_create': True, 'color_field': 'color'}}"/>
     </xpath>
 </data>
@@ -143,8 +143,10 @@ class OperatingUnitIrModel(models.Model):
             lambda v: v.type in AUTOMATED_VIEW_TYPES and v.mode == 'primary'):
             et = etree.fromstring(view.arch.encode('utf-8'))
             # Don't do anything that would break anything...
-            if not et.xpath(xpath):
+            elem = et.xpath(xpath)[0] if et.xpath(xpath) else None
+            if elem is None:
                 continue
+            invisible = elem.attrib['invisible'] if'invisible' in elem.attrib else 0
             inherited_view = Container()
             inherited_view.name = view.name
             inherited_view.xmlid = view.get_external_id()[view.id]
@@ -158,7 +160,6 @@ class OperatingUnitIrModel(models.Model):
                     existing.toggle_active()
                 return
 
-            inivisble = 0  # TODO: lxml analyze inherited view ocurrence
             new_view.arch = VIEW_TEMPLATE.format(**locals())
             new_view.name = VIEW_NAME_TEMPLATE.format(**locals())
 

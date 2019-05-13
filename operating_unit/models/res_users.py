@@ -34,5 +34,5 @@ class ResUsers(models.Model):
     )
     current_operating_unit_id = fields.Many2one(
         'operating.unit', 'Current Operating Unit',
-        domain="[('id', 'in', 'allowed_operating_unit_ids')]"
+        domain="[('id', 'in', allowed_operating_unit_ids)]"
     )
