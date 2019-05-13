@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!--- Operating unit views -->
+  <record id="view_attendance_tree" model="ir.ui.view">
+    <field name="name">hr.attendance_tree</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.view_attendance_tree" />
+    <field name="arch" type="xml">
+      <field name="employee_id" position="before">
+        <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+      </field>
+    </field>
+  </record>
+
+  <record id="view_attendance_kanban" model="ir.ui.view">
+    <field name="name">hr.attendance_kanban</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.view_hr_attendance_kanban" />
+    <field name="arch" type="xml">
+      <field name="employee_id" position="before">
+        <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" />
+      </field>
+    </field>
+  </record>
+
+  <record id="hr_attendance_view_form" model="ir.ui.view">
+    <field name="name">hr.attendance_form</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form" />
+    <field name="arch" type="xml">
+      <field name="employee_id" position="before">
+        <field name="operating_unit_id"
+               domain="[('user_ids', 'in', uid)]"
+               options="{'no_create': True}" 
+               groups="operating_unit.group_multi_operating_unit" />
+      </field>
+    </field>
+  </record>
+
+  <record id="hr_attendance_view_filter" model="ir.ui.view">
+    <field name="name">hr.attendance_filter</field>
+    <field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter" />
+    <field name="arch" type="xml">
+      <field name="department_id" position="before">
+        <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+        <filter name="group_default_operating_unit" string="Default Operating Unit" context="{'group_by':'operating_unit_id'}"/>
+      </field>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_rule_hr_attendance_operating_units" model="ir.rule">
+        <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+        <field name="domain_force">['|',('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]</field>
+        <field name="name">Allowed Operating Units In Employee Attendances</field>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+        <field name="global" eval="True"/>
+    </record>
+
+</odoo>
