@@ -153,7 +153,7 @@ _meta('product.pricelist')
 _inTX('sale.order')
 _deTX('sale.order.line', 'order_id')
 # sale.report
-_inTX('pruchase.order')
+_inTX('purchase.order')
 _deTX('purchase.order.line', 'order_id')
 # purchase.bill.union
 # purchase.report
