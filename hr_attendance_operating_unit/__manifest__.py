@@ -7,7 +7,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Human Resources",
-    "depends": ["hr", "operating_unit", "hr_operating_unit"],
+    "depends": ["hr", "hr_attendance", "operating_unit", "hr_operating_unit"],
     "data": [
         "security/security.xml",
         "views/hr_attendance.xml",
