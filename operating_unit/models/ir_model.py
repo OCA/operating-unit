@@ -142,6 +142,7 @@ class OperatingUnitIrModel(models.Model):
         for view in model_id.view_ids.filtered(
             lambda v: v.type in AUTOMATED_VIEW_TYPES and v.mode == 'primary'):
             et = etree.fromstring(view.arch.encode('utf-8'))
+            # Don't do anything that would break anything...
             if not et.xpath(xpath):
                 continue
             inherited_view = Container()

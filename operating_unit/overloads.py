@@ -23,26 +23,26 @@ ITX  = 'operating.unit.independent.transaction.mixin'
 #### Wrappers to overload function             ####
 #### ========================================= ####
 
-def emit_operating_unit(func):
+def emit_operating_unit(func_getter):
     """ Context sentinel payload emitted on "outgoing" transitions.
     This is catched by the create method of subsequent transactional
     records created during the current server transaction.
 
     Multiple values trigger a user facing dialogue to resolve the confilct. """
 
-    @wraps(func)
+    @wraps(func_getter)
     def wrapper(*args, **kwargs):
         if not args[0].operating_unit_id:
-            return func(*args, **kwargs)
+            return func_getter(args[0])(*args[1:], **kwargs)
 
         if 'operating_units' in args[0].env.context:
             operating_units   = args[0].env.context['operating_units']
             operating_units  |= args[0].operating_unit_id
-            args[0] = args[0].with_context(operating_units=operating_units)
         else:
-            args[0] = args[0].with_context(operating_units=args[0].operating_unit_id)
-
-        return func(*args, **kwargs)
+            operating_units   = args[0].operating_unit_id
+        args = list(args)
+        args[0] = args[0].with_context(operating_units=operating_units)
+        return func_getter(args[0])(*args[1:], **kwargs)
     return wrapper
 
 
@@ -77,12 +77,8 @@ def _inTX(inh, emitting_method_names=tuple()):
     klass = type(name, (MBE, models.Model), {
         '__module__': __name__, '_inherit': [ITX, inh], '_name': inh})
     for method in emitting_method_names:
-        setattr(
-            klass, method,
-            emit_operating_unit(
-                lambda self: getattr(
-                    super(type(self), self),
-                    method)))
+        func_getter = lambda self: getattr(super(klass, self), method)
+        setattr(klass, method, emit_operating_unit(func_getter))
     return klass
 
 # Dependent Transaction

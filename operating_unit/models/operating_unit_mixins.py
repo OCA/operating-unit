@@ -9,22 +9,22 @@ VIEW_DOMAIN = "[('user_ids', 'in', uid),('company_id', '=', company_id)]"
 WITHOUT_COMPANY_ERROR = (
     "An Operating Unit can only be set on records that also "
     "have a company set (strict company namespacing)."
-    "Record {rec.display_name} has no company set."
+    "Record '{rec.display_name}' has no company set."
 )
 NOT_SAME_COMPANY_ERROR = (
     "The Operating Unit must be of the same company as the "
-    "record (company namespacing). Record {rec.display_name} has company "
-    "{rec.company_id.display_name} but it's operating unit {unit.display_name} "
-    "belongs to company {unit.company_id.display_name}."
+    "record (company namespacing). Record '{rec.display_name}' has company "
+    "'{rec.company_id.display_name}' but it's operating unit "
+    "'{unit.display_name}' belongs to company '{unit.company_id.display_name}'."
 )
 TRANSACTION_REALM_BOUNDARIES_ERROR = (
     "All bound metadata must share the operating unit of this transaction. "
-    "The record {rec.display_name} related on field {field.string} doesn't "
+    "The record '{rec.display_name}' related on field '{field.string}' doesn't "
     "share the operating unit of this transaction ({self.display_name})."
 )
 METADATA_NO_SHARED_REALM = (
     "Linked and bound metadata must share at least one operating unit."
-    "The record {rec.display_name} related on field {field.string} doesn't "
+    "The record '{rec.display_name}' related on field '{field.string}' doesn't "
     "share an operating unit with this metadata ({self.display_name})."
 )
 
@@ -73,6 +73,9 @@ class OperatingUnitRealmEnsurer(object):
         elif getattr(self, '_ou_metadata', None):
             # If no operating_unit_ids is set, it's an unbound metadata.
             # Don't enforce realms on unbound metadata!
+            # TODO: check with different user context
+            # Even a user who doesn't have access to a particular
+            # Record might see it here by their id, display_name.
             if not self.operating_unit_ids:
                 return
             operating_units = self.operating_unit_ids
@@ -81,14 +84,23 @@ class OperatingUnitRealmEnsurer(object):
         else:
             raise "This class was wrongly inherited."
 
-        _rel_metadata_field_names = self._get_rel_metadata_field_names()
-
         # Check that all related metadata record (if any) shares at least one
         # operating unit with this record or otherwise is an unbound
         # metadata record with no operating unit set at all (which is
         # bypassed for the check)
-        for fieldname, field in _rel_metadata_field_names:
-            rec = getattr(self, fieldname)
+
+        # sudo: user might not have access to related records checking their
+        # operating_unit_ids field. We don't break the logic if we compare
+        # the operating_units of this record against an enlarged superset (cause
+        # sudo), as the limiting set is operating_unit.
+        # Note: operating_unit also exposes operating units the user would not
+        # have access to through their id + display_name. Therefore subsequent
+        # writes to this record do not alter this check regardless of OU access.
+        sudo_self = self.sudo()
+        for fieldname, field in self._get_rel_metadata_field_names():
+            rec = getattr(sudo_self, fieldname)
+            # TODO: Check with differnt user context
+            # rec.operating_unit_ids might be an empty recordset for some users
             if not rec or not rec.operating_unit_ids:
                 # An unbound record, not elibile for realm enforcement
                 continue
@@ -111,24 +123,18 @@ class OperatingUnitRealmEnsurer(object):
 
     @api.model
     def create(self, vals):
-        self._ensure_operating_unit_realm()
-        # TODO: Check if this style super call selects the right object in the MRO
-        return super().write(vals)
+        res = super(OperatingUnitRealmEnsurer, self).create(vals)
+        res._ensure_operating_unit_realm()
+        return res
 
     @api.multi
     def write(self, vals):
-        # Only check if some "suspect" field is written on.
-        # Evicting a whole class access errors if a user modifies a record
-        # but hasn't read access to the metadata as long as no metadata is
-        # modified. Just some improvable heuristics...
-        field_names = {n for (n, f) in self._get_rel_metadata_field_names()}
-        if any(k for k in vals.keys() if k in field_names):
-            self._ensure_operating_unit_realm()
-        # TODO: Check if this style super call selects the right object in the MRO
-        return super().write(vals)
+        res = super(OperatingUnitRealmEnsurer, self).write(vals)
+        self._ensure_operating_unit_realm()
+        return res
 
 
-class OperatingUnitMetadataMixin(models.AbstractModel, OperatingUnitRealmEnsurer):
+class OperatingUnitMetadataMixin(OperatingUnitRealmEnsurer, models.AbstractModel):
     """
     Operating Unit Mixin for metadata. Metadata can be configured
     transversal and belong to multiple operating units.
@@ -212,7 +218,7 @@ class OperatingUnitMetadataMixin(models.AbstractModel, OperatingUnitRealmEnsurer
         self.operating_unit_id = self._operating_units_default_get()
 
 
-class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUnitRealmEnsurer):
+class OperatingUnitIndependentTansactionMixin(OperatingUnitRealmEnsurer, models.AbstractModel):
     """ Operating Unit Mixin for independent transactional data, which is not
     guaranteed to always adopt the operating unit of another transaction.
 
@@ -293,7 +299,7 @@ class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUni
 
     def create(self, vals):
         if not 'operating_units' in self.env.context or not self.env.context['operating_units']:
-            return super().create(vals)
+            return super(OperatingUnitIndependentTansactionMixin, self).create(vals)
 
         operating_units = self.env.context['operating_units']
 
@@ -304,12 +310,12 @@ class OperatingUnitIndependentTansactionMixin(models.AbstractModel, OperatingUni
         # However, this metadata can become useful, evn though hidden, in the future.
         if len(operating_units) == 1:
             vals['operating_unit_id'] = operating_units[0].id
-            return super().create(vals)
+            return super(OperatingUnitIndependentTansactionMixin, self).create(vals)
         else:
             if getattr(therading.current_thread(), 'type', None) == 'cron':
-                return super().create(vals)
+                return super(OperatingUnitIndependentTansactionMixin, self).create(vals)
             # TODO: Implement a js dialog to manually select the target Operating Unit
             # For now: dummy assign the first one passed
             vals['operating_unit_id'] = operating_units[0].id
-            return super().create(vals)
+            return super(OperatingUnitIndependentTansactionMixin, self).create(vals)
 
