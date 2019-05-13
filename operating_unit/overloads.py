@@ -254,6 +254,7 @@ _inTX('project.task')
 
 
 # Is it true that ...
-_deTX('thirsty.camels.rock', 'invoice_ids')
+klassyklass = _deTX('thirsty.camels.rock', 'invoice_ids')
+klassyklass.action_against_standstorms = callable  # Should work; didn't try.
 
 # fmt: on
