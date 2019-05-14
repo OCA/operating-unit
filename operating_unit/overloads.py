@@ -128,11 +128,11 @@ _deTX('crossovered.budget.lines', 'crossovered_budget_id')
 # account.analytic.tag
 # account.financial.html.report
 # account.fiscal.year
-# account.invoice.report
+# account.invoice.report - db view
 # account.online.provider
 # account.partial.reconcile - probably never: allow reconciliation between OUs
 # account.report.manager
-# asset.asset.report
+# asset.asset.report - db view
 
 
 ##############################
@@ -152,14 +152,14 @@ _meta('product.pricelist')
 ##############################
 _inTX('sale.order')
 _deTX('sale.order.line', 'order_id')
-# sale.report
+# sale.report - db view
 _inTX('purchase.order')
 _deTX('purchase.order.line', 'order_id')
-# purchase.bill.union
-# purchase.report
+# purchase.bill.union - db view
+# purchase.report - db view
 _meta('crm.team')
 _inTX('crm.lead')
-# crm.activity.report
+# crm.activity.report - db view
 
 
 ##############################
@@ -195,7 +195,7 @@ _deTX('stock.move', 'picking_id')
 # stock.quant - Does it make sense? Already heavily namespaced by locations
 # stock.quant.package - Same here.
 # stock.location.route
-# stock.report
+# stock.report - db view
 # stock.rule
 # stock.warehouse.orderpoint - Does it make sense? Controlled by cron. New dependent meta required?
 
@@ -237,10 +237,10 @@ _inTX('project.task')
 # pos.config
 # pos.order
 # pos.order.line
-# report.all.channels.sales
-# report.pos.order
-# report.project.task.user
-# report.stock.forecast
+# report.all.channels.sales - db view
+# report.pos.order - db view
+# report.project.task.user - db view
+# report.stock.forecast - db view
 # res.currency.rate
 # res.partner.bank
 # res.users
