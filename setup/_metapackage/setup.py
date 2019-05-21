@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo11-addon-account_operating_unit',
         'odoo11-addon-analytic_operating_unit',
         'odoo11-addon-operating_unit',
+        'odoo11-addon-sale_operating_unit',
         'odoo11-addon-sales_team_operating_unit',
     ],
     classifiers=[
