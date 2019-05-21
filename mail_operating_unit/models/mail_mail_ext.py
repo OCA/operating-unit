@@ -24,7 +24,7 @@ class MailMailExt(models.Model):
                 res_id = mail.mail_message_id.res_id
                 record = self.env[model].browse(res_id)
 
-                if record.operating_unit_id:
+                if getattr(record, 'operating_unit_id', False):
                     if record.operating_unit_id.catchall_alias and \
                             record.operating_unit_id.catchall_domain:
                         sender_email_address = \
