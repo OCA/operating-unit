@@ -75,7 +75,7 @@ class AccountPayment(models.Model):
         aml_obj = self.env['account.move.line'].with_context(
             check_move_validity=False)
         debit, credit, amount_currency, dummy = aml_obj.with_context(
-            date=self.payment_date).compute_amount_fields(
+            date=self.payment_date)._compute_amount_fields(
             amount, self.currency_id, self.company_id.currency_id)
         amount_currency = self.destination_journal_id.currency_id \
             and self.currency_id.with_context(date=self.payment_date).compute(
