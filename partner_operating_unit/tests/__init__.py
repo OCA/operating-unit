@@ -5,4 +5,5 @@
 #
 ##############################################################################
 
+from . import test_res_partner_category_operating_unit
 from . import test_res_partner_operating_unit
