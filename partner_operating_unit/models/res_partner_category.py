@@ -25,14 +25,3 @@ class ResPartnerCategory(models.Model):
         string='Operating Unit',
         default=_default_operating_unit_ids
     )
-
-    @api.constrains('operating_unit_ids', 'company_id')
-    def _check_company_operating_unit(self):
-        for record in self:
-            if record.company_id and record.operating_unit_ids:
-                for operating_unit in record.operating_unit_ids:
-                    if record.company_id != operating_unit.company_id:
-                        raise ValidationError(
-                            _('Configuration error. The Company in the Contact'
-                              ' Tag and in the Operating Unit must be the '
-                              ' same.'))
