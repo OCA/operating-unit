@@ -60,6 +60,8 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
             'login': login,
             'password': 'demo',
             'email': '{0}@yourcompany.com'.format(login),
+            # 'company_id': company.id,
+            # 'company_ids': [(4, company.id)],
             'operating_unit_ids': [(4, ou.id) for ou in operating_units],
             'groups_id': [(6, 0, groups.ids)],
         })

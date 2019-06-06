@@ -31,4 +31,15 @@
         </field>
     </record>
 
+    <record id="view_partner_category_filter" model="ir.ui.view">
+        <field name="name">Contact Tags Filter</field>
+        <field name="model">res.partner.category</field>
+        <field name="arch" type="xml">
+            <search string="Contact Tags">
+               <field name="name"/>
+               <field name="operating_unit_ids"/>
+            </search>
+        </field>
+    </record>
+
 </odoo>
