@@ -14,9 +14,6 @@ class TestProductOperatingUnit(common.TransactionCase):
         super(TestProductOperatingUnit, self).setUp()
         self.ResUsers = self.env['res.users']
         self.ProductTemplate = self.env['product.template']
-        # company
-        self.company1 = self.env.ref('base.main_company')
-        self.company2 = self.env.ref('stock.res_company_1')
         # groups
         self.group_stock_user = self.env.ref('stock.group_stock_user')
         # Main Operating Unit
@@ -33,17 +30,15 @@ class TestProductOperatingUnit(common.TransactionCase):
         # Create users
         self.user1_id = self._create_user('user_1',
                                           [self.group_stock_user],
-                                          self.company1,
                                           [self.ou1])
         self.user2_id = self._create_user('user_2',
                                           [self.group_stock_user],
-                                          self.company2,
                                           [self.b2b])
         self.product1.operating_unit_ids = [(6, 0, [self.ou1.id])]
         self.product2.operating_unit_ids = [(6, 0, [self.b2b.id])]
         self.product3.operating_unit_ids = [(6, 0, [self.ou1.id, self.b2b.id])]
 
-    def _create_user(self, login, groups, company, operating_units):
+    def _create_user(self, login, groups, operating_units):
         """ Create a user."""
         group_ids = [group.id for group in groups]
         user =\
@@ -53,8 +48,6 @@ class TestProductOperatingUnit(common.TransactionCase):
                 'login': login,
                 'password': 'demo',
                 'email': 'chicago@yourcompany.com',
-                'company_id': company.id,
-                'company_ids': [(4, company.id)],
                 'operating_unit_ids': [(4, ou.id) for ou in operating_units],
                 'groups_id': [(6, 0, group_ids)]
             })

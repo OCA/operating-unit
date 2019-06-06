@@ -1,0 +1,45 @@
+<!--
+    Copyright (c) 2019 brain-tec AG (http://www.braintec-group.com)
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+-->
+<odoo>
+
+    <record id="view_partner_category_list" model="ir.ui.view">
+        <field name="name">Contact Tags</field>
+        <field name="model">res.partner.category</field>
+        <field name="inherit_id" ref="base.view_partner_category_list" />
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="operating_unit_ids"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_category_form" model="ir.ui.view">
+        <field name="name">Contact Tags</field>
+        <field name="model">res.partner.category</field>
+        <field name="inherit_id" ref="base.view_partner_category_form" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="operating_unit_ids"
+                       domain="[('user_ids', 'in', uid)]"
+                       groups="operating_unit.group_multi_operating_unit"
+                       widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_category_filter" model="ir.ui.view">
+        <field name="name">Contact Tags Filter</field>
+        <field name="model">res.partner.category</field>
+        <field name="arch" type="xml">
+            <search string="Contact Tags">
+               <field name="name"/>
+               <field name="operating_unit_ids"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>
