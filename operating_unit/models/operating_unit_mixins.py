@@ -100,10 +100,10 @@ class OperatingUnitRealmEnsurer(object):
         sudo_self = self.sudo()
         for fieldname, field in self._get_rel_metadata_field_names():
             rec = getattr(sudo_self, fieldname)
-            if not rec or not rec.operating_unit_ids:
+            if not rec or not rec.mapped('operating_unit_ids'):
                 # An unbound record, not elibile for realm enforcement
                 continue
-            if not (operating_units & rec.operating_unit_ids):
+            if not (operating_units & rec.mapped('operating_unit_ids')):
                 raise ValidationError(_(ERROR_MSG).format(
                     rec=rec, field=field, self=self))
 
