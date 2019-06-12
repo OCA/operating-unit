@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class StockRule(models.Model):
@@ -15,12 +16,21 @@ class StockRule(models.Model):
             res.update({'operating_unit_id': operating_unit_id,
                         'requesting_operating_unit_id': operating_unit_id})
 
-            type_obj = self.env['stock.picking.type']
-            types = type_obj.search([('code', '=', 'incoming'),
-                                     ('warehouse_id.operating_unit_id', '=',
-                                      operating_unit_id)])
-            if types:
-                types = types[:1].id
-                res.update({'picking_type_id': types})
+            if 'picking_type_id' in res:
+                type_obj = self.env['stock.picking.type']
+                picking_type = type_obj.browse(res['picking_type_id'])
+                if picking_type.code != 'incoming' or \
+                    picking_type.warehouse_id.operating_unit_id.id != operating_unit_id:
+
+                    # Code copied from _onchange_operating_unit_id in purchase_order.py
+                    types = type_obj.search([('code', '=', 'incoming'),
+                                             ('warehouse_id.operating_unit_id', '=', operating_unit_id)])
+                    if types:
+                        res.update({'picking_type_id': types[:1].id})
+                    else:
+                        raise UserError(
+                            _("No Warehouse found with the Operating Unit indicated "
+                              "in the Purchase Order")
+                        )
 
         return res
