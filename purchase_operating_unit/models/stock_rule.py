@@ -10,21 +10,25 @@ class StockRule(models.Model):
         res = super(StockRule, self). _prepare_purchase_order(product_id, product_qty, product_uom, origin,
                                 values, partner)
         if origin and 'SO' in origin:
-            operating_unit_id = self.env['sale.order'].search(
-                [('name', '=', origin)]).warehouse_id.operating_unit_id.id
+            operating_unit = self.env['sale.order'].search(
+                [('name', '=', origin)]).warehouse_id.operating_unit_id
 
-            res.update({'operating_unit_id': operating_unit_id,
-                        'requesting_operating_unit_id': operating_unit_id})
+            res.update({'operating_unit_id': operating_unit.id,
+                        'requesting_operating_unit_id': operating_unit.id
+            })
+
+            if hasattr(operating_unit, 'purchase_note'):
+                res.update({'purchase_note': operating_unit.purchase_note})
 
             if 'picking_type_id' in res:
                 type_obj = self.env['stock.picking.type']
                 picking_type = type_obj.browse(res['picking_type_id'])
                 if picking_type.code != 'incoming' or \
-                    picking_type.warehouse_id.operating_unit_id.id != operating_unit_id:
+                    picking_type.warehouse_id.operating_unit_id.id != operating_unit.id:
 
                     # Code copied from _onchange_operating_unit_id in purchase_order.py
                     types = type_obj.search([('code', '=', 'incoming'),
-                                             ('warehouse_id.operating_unit_id', '=', operating_unit_id)])
+                                             ('warehouse_id.operating_unit_id', '=', operating_unit.id)])
                     if types:
                         res.update({'picking_type_id': types[:1].id})
                     else:
