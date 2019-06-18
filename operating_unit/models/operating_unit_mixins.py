@@ -19,15 +19,15 @@ NOT_SAME_COMPANY_ERROR = (
 )
 TRANSACTION_REALM_BOUNDARIES_ERROR = (
     "All bound metadata must share the operating unit of this transaction. "
-    "The record '{rec.display_name}' related on field '{field.string}' is "
-    "bound and doesn't share the operating unit of this transaction "
-    "({self.display_name})."
+    "The record(s) '{rec_names}' related on field '{field.string}' is (are) "
+    "bound and doesn't share the operating unit of this "
+    "transaction ({self.display_name})."
 )
 METADATA_NO_SHARED_REALM = (
     "Linked and bound metadata must share at least one operating unit."
-    "The record '{rec.display_name}' related on field '{field.string}' is "
-    "bound and doesn't share an operating unit with this metadata "
-    "({self.display_name})."
+    "The record(s) '{rec_names}' related on field '{field.string}' is (are) "
+    "bound and doesn't share an operating unit with this "
+    "metadata ({self.display_name})."
 )
 
 
@@ -101,11 +101,11 @@ class OperatingUnitRealmEnsurer(object):
         for fieldname, field in self._get_rel_metadata_field_names():
             rec = getattr(sudo_self, fieldname)
             if not rec or not rec.mapped('operating_unit_ids'):
-                # An unbound record, not elibile for realm enforcement
+                # An unbound record, not eligibile for realm enforcement
                 continue
             if not (operating_units & rec.mapped('operating_unit_ids')):
                 raise ValidationError(_(ERROR_MSG).format(
-                    rec=rec, field=field, self=self))
+                    rec_names=rec.mapped('display_name'), field=field, self=self))
 
     def _get_rel_metadata_field_names(self):
         """ Get all fields that relate to a model, which has operating units.
@@ -117,6 +117,13 @@ class OperatingUnitRealmEnsurer(object):
             if (
                 f.relational and
                 getattr(self.env[f.comodel_name], '_ou_metadata', None)
+                # While parent-child relationships designate hierarchy
+                # a many2many with self tends to infer some kind of a "realm"
+                # concept. We don't double up on this subtle semantic.
+                and not (
+                    self.env[f.comodel_name]._name == self._name and
+                    f.type == 'many2many'
+                )
             )
         }
 
