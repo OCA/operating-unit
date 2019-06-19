@@ -180,6 +180,11 @@ class OperatingUnitMetadataMixin(OperatingUnitRealmEnsurer, models.AbstractModel
     def _operating_units_default_get(self):
         """ units (sic!). Infer the default operating units through
         the assigned user or, as a fall back, the current user. """
+
+        # Don't set defaults when OUs disabled. They would trigger realm checks.
+        if not self.sudo().env['ir.model'].search(
+            [('model', '=', self._name)]).operating_unit_enabled:
+            return False
         if getattr(self, 'user_id', None):
             # It might be the secretary recording a document for a sales person
             # take the default from the document "owner" (user_id)
@@ -263,6 +268,11 @@ class OperatingUnitIndependentTansactionMixin(OperatingUnitRealmEnsurer, models.
     def _operating_unit_default_get(self):
         """ unit (sic!). Infer the single default operating unit through
         the assigned user or, as a fall back, the current user. """
+
+        # Don't set defaults when OUs disabled. They would trigger realm checks.
+        if not self.sudo().env['ir.model'].search(
+            [('model', '=', self._name)]).operating_unit_enabled:
+            return False
         if getattr(self, 'user_id', None):
             # It might be the secretary recording a document for a sales person
             # take the default from the document "owner" (user_id)
