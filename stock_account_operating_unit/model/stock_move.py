@@ -55,6 +55,8 @@ class StockMove(models.Model):
                 if (
                         move.location_id.company_id ==
                         move.location_dest_id.company_id and
+                        move.operating_unit_id and
+                        move.operating_unit_dest_id and
                         move.operating_unit_id != move.operating_unit_dest_id
                 ):
                     src_company_ctx = dict(
