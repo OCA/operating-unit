@@ -20,6 +20,6 @@ class MailComposeMessageExt(models.TransientModel):
         res_id = result.get('res_id', False)
         if model and res_id:
             model_object = self.env[model].browse(res_id)
-            if model_object.operating_unit_id:
+            if hasattr(model_object, 'operating_unit_id'):
                 result['operating_unit_id'] = model_object.operating_unit_id.id
         return result
