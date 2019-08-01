@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--© 2015-17 Eficent Business and IT Consulting Services S.L.-->
+<!-- - Jordi Ballester Alomar-->
+<!--© 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+
+    <record id="purchase.purchase_order_1" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+    <record id="purchase.purchase_order_2" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+    <record id="purchase.purchase_order_3" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+    <record id="purchase.purchase_order_4" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+    <record id="purchase.purchase_order_5" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+    <record id="purchase.purchase_order_6" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+    <record id="purchase.purchase_order_7" model="purchase.order">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit"/>
+    </record>
+
+</odoo>

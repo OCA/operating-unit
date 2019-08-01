@@ -1,0 +1,13 @@
+<odoo>
+    <record id='view_stock_landed_cost_form' model='ir.ui.view'>
+        <field name="name">stock.landed.cost.form.ext</field>
+        <field name="model">stock.landed.cost</field>
+        <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+        <field name="arch" type="xml">
+            <field name="account_move_id" position="after">
+                <field name="show_operating_unit" invisible="1"/>
+                <field name="operating_unit_id" attrs="{'invisible': [('show_operating_unit', '=', False)], 'readonly':[('state', '=', 'done')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

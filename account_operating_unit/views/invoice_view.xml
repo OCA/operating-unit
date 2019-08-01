@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--© 2016-17 Eficent Business and IT Consulting Services S.L.-->
+<!--© 2016 Serpent Consulting Services Pvt. Ltd.-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+
+    <record id="invoice_tree" model="ir.ui.view">
+        <field name="name">account.invoice.tree</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field name="operating_unit_id"
+                       options="{'no_create': True}"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+      </field>
+    </record>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.invoice.select</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <filter name="group_by_partner_id" position="after">
+                <filter string="Operating Unit" name="operating_unit_grouped" icon="terp-folder-orange"
+                      domain="[]" groups="operating_unit.group_multi_operating_unit"
+                      context="{'group_by':'operating_unit_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="invoice_supplier_form_ou" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form" />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="before">
+                <field name="operating_unit_id"
+                       options="{'no_create': True}"
+                       widget="selection" groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context">{
+                    'type': type,
+                    'journal_id': journal_id,
+                    'operating_unit': operating_unit_id}
+                </attribute>
+            </field>
+            <field name="invoice_line_ids">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">
+                        [('company_id', '=', parent.company_id),
+                        '|',
+                        ('operating_unit_ids', '=', context.get('operating_unit', False)),
+                        ('operating_unit_ids', '=', False)]
+                    </attribute>
+                </field>
+            </field>
+            <field name="tax_line_ids" position="attributes">
+                <attribute name="context">{'operating_unit': operating_unit_id}</attribute>
+            </field>
+            <field name="tax_line_ids">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">
+                        [('company_id', '=', parent.company_id),
+                        '|',
+                        ('operating_unit_ids', '=', context.get('operating_unit', False)),
+                        ('operating_unit_ids', '=', False)]
+                    </attribute>
+                </field>
+            </field>
+        </field>
+    </record>
+
+    <record id="invoice_form" model="ir.ui.view">
+        <field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form" />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="before">
+                <field name="operating_unit_id"
+                       options="{'no_create': True}"
+                       widget="selection" groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context">{
+                    'type': type,
+                    'journal_id': journal_id,
+                    'default_invoice_id': id,
+                    'operating_unit': operating_unit_id}
+                </attribute>
+            </field>
+            <field name="invoice_line_ids">
+                <field name="account_analytic_id" position="attributes">
+                    <attribute name="domain">
+                        [('company_id', '=', parent.company_id),
+                        '|',
+                        ('operating_unit_ids', '=', context.get('operating_unit', False)),
+                        ('operating_unit_ids', '=', False)]
+                    </attribute>
+                </field>
+            </field>
+        </field>
+    </record>
+
+</odoo>
