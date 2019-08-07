@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_operating_unit_form_mail" model="ir.ui.view">
+        <field name="name">operating.unit.form.mail</field>
+        <field name="model">operating.unit</field>
+        <field name="inherit_id" ref="operating_unit.view_operating_unit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main_group']" position="after">
+                <group name="mail_group">
+                    <field name="catchall_alias"/>
+                    <field name="catchall_domain"/>
+                    <field name="outgoing_mail_server_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_operating_unit_tree_mail" model="ir.ui.view">
+        <field name="name">operating.unit.tree.mail</field>
+        <field name="model">operating.unit</field>
+        <field name="inherit_id" ref="operating_unit.view_operating_unit_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="catchall_alias"/>
+                <field name="catchall_domain"/>
+                <field name="outgoing_mail_server_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
