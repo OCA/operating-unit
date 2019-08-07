@@ -18,7 +18,7 @@ Open OCA PRs merged
 
 New BT Modules
 - (https://github.com/OCA/operating-unit/pull/188) product_operating_unit
-- () mail_operating_unit
+- (https://github.com/OCA/operating-unit/pull/199) mail_operating_unit
 - () stock_landed_cost_operating_unit
 - () partner_operating_unit
 
