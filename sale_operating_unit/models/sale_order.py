@@ -62,6 +62,12 @@ class SaleOrder(models.Model):
         self.ensure_one()
         invoice_vals = super(SaleOrder, self)._prepare_invoice()
         invoice_vals['operating_unit_id'] = self.operating_unit_id.id
+
+        new_invoice = self.env['account.invoice'].new({'operating_unit_id': invoice_vals['operating_unit_id'],
+                                                       'journal_id': invoice_vals['journal_id']})
+        new_invoice._onchange_operating_unit()
+        invoice_vals['journal_id'] = new_invoice.journal_id.id
+
         return invoice_vals
 
 
