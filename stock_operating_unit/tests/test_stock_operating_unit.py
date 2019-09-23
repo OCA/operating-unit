@@ -11,6 +11,8 @@ class TestStockOperatingUnit(common.TestStockCommon):
         self.ResUsers = self.env['res.users']
         self.WarehouseObj = self.env['stock.warehouse']
         self.LocationObj = self.env['stock.location']
+        self.ProductCategObj = self.env['product.category']
+        self.ProductProductObj = self.env['product.product']
         # company
         self.company1 = self.env.ref('base.main_company')
         # groups
@@ -19,10 +21,20 @@ class TestStockOperatingUnit(common.TestStockCommon):
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2C Operating Unit
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
-        # Products
-        self.product1 = self.env.ref('product.product_product_7')
-        self.product2 = self.env.ref('product.product_product_9')
-        self.product3 = self.env.ref('product.product_product_11')
+
+        # Products. Other modules set an operating unit on the product
+        # taking it from the operating unit of the user. We don't want to
+        # depend on those other modules, thus we work-around that feature
+        # by setting (for a moment) the default operating unit of the user
+        # to be empty while creating the product.
+        self.product_categ = self.ProductCategObj.create({
+            'name': 'Test Category stock_operating_unit'})
+        user_original_ou = self.env.user.default_operating_unit_id
+        self.env.user.default_operating_unit_id = False
+        self.product_stock_ou = self._create_product(
+            'Test Prod 1', self.product_categ)
+        self.env.user.default_operating_unit_id = user_original_ou
+
         # Locations
         b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
         b2c_wh.lot_stock_id.write({'operating_unit_id': self.b2c.id})
@@ -84,11 +96,19 @@ class TestStockOperatingUnit(common.TestStockCommon):
         })
         self.MoveObj.sudo(user_id).create({
             'name': 'a move',
-            'product_id': self.productA.id,
+            'product_id': self.product_stock_ou.id,
             'product_uom_qty': 3.0,
-            'product_uom': self.productA.uom_id.id,
+            'product_uom': self.product_stock_ou.uom_id.id,
             'picking_id': picking.id,
             'location_id': src_loc_id,
             'location_dest_id': dest_loc_id,
         })
         return picking
+
+    def _create_product(self, name, category):
+        product = self.ProductProductObj.create({
+            'name': name,
+            'categ_id': category.id,
+            'type': 'product',
+        })
+        return product

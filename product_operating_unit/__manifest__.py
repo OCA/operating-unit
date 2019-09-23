@@ -8,7 +8,7 @@
 {
     "name": "Operating Unit in Products",
     "summary": "Adds the concept of operating unit (OU) in products",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "brain-tec AG, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
@@ -18,6 +18,7 @@
     "data": [
         "security/product_template_security.xml",
         "views/product_template_view.xml",
+        "data/product_operating_unit_data.xml",
     ],
     "installable": True,
 }

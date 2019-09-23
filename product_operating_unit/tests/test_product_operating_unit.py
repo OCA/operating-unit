@@ -17,7 +17,8 @@ class TestProductOperatingUnit(common.TransactionCase):
         # groups
         self.group_stock_user = self.env.ref('stock.group_stock_user')
         # Main Operating Unit
-        self.ou1 = self.env.ref('operating_unit.main_operating_unit')
+        self.ou1 = self.env.ref('product_operating_unit.'
+                                'main_product_operating_unit')
         # B2B Operating Unit
         self.b2b = self.env.ref('operating_unit.b2b_operating_unit')
         # Products
