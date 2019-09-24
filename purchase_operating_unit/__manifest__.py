@@ -7,13 +7,13 @@
     "name": "Operating Unit in Purchase Orders",
     "summary": "Adds the concecpt of operating unit (OU) in purchase order "
                "management",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Purchase Management",
-    "depends": ["stock_operating_unit", "purchase_stock"],
+    "depends": ["stock_operating_unit", "purchase_stock", "account"],
     "license": "LGPL-3",
     "data": [
         "security/purchase_security.xml",
