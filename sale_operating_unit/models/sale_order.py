@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
         if team.operating_unit_id:
             return team.operating_unit_id
         else:
-            return self.env.user.default_operating_unit_id
+            return self.env.user.operating_unit_default_id
 
     operating_unit_id = fields.Many2one(
         comodel_name='operating.unit',

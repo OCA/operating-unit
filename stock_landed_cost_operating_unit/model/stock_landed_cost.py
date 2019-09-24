@@ -15,7 +15,7 @@ class StockLandedCost(models.Model):
 
     @api.model
     def _default_operating_unit(self):
-        return self.env.user.default_operating_unit_id
+        return self.env.user.operating_unit_default_id
 
     @api.model
     def _default_show_operating_unit(self):
