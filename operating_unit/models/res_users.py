@@ -30,5 +30,6 @@ class ResUsers(models.Model):
     )
     operating_unit_default_id = fields.Many2one(
         'operating.unit', 'Default Operating Unit',
+        oldname='default_operating_unit_id',
         default=lambda self: self._default_operating_unit()
     )
