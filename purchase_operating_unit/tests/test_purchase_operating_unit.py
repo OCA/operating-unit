@@ -25,6 +25,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2B Operating Unit
         self.b2b = self.env.ref('operating_unit.b2b_operating_unit')
+        self.b2b.company_id = self.company2
         # Partner
         self.partner1 = self.env.ref('base.res_partner_1')
         # Products
@@ -32,7 +33,13 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.product2 = self.env.ref('product.product_product_9')
         self.product3 = self.env.ref('product.product_product_11')
         # Account
-        self.account = self.env.ref('l10n_generic_coa.conf_a_pay')
+        # self.account = self.env.ref('l10n_generic_coa.conf_a_pay')
+        self.account = self.env['account.account'].create({
+            'name': 'test_purchase_operating_unit',
+            'code': 'TPOUA',
+            'user_type_id': self.env.ref('account.data_account_type_fixed_assets').id,
+        })
+
         # Create users
         self.user1_id = self._create_user('user_1',
                                           [self.group_purchase_user,
@@ -54,6 +61,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
     def _create_user(self, login, groups, company, operating_units):
         """ Create a user."""
         group_ids = [group.id for group in groups]
+        default_ou_id = False if not operating_units else operating_units[0].id
         user =\
             self.ResUsers.with_context({'no_reset_password': True}).\
             create({
@@ -64,6 +72,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
                 'company_id': company.id,
                 'company_ids': [(4, company.id)],
                 'operating_unit_ids': [(4, ou.id) for ou in operating_units],
+                'operating_unit_default_id': default_ou_id,
                 'groups_id': [(6, 0, group_ids)]
             })
         return user.id

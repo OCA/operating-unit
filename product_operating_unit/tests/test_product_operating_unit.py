@@ -37,6 +37,8 @@ class TestProductOperatingUnit(common.TransactionCase):
         self.product1.operating_unit_ids = [(6, 0, [self.ou1.id])]
         self.product2.operating_unit_ids = [(6, 0, [self.b2b.id])]
         self.product3.operating_unit_ids = [(6, 0, [self.ou1.id, self.b2b.id])]
+        self.testing_products_ids = [
+            self.product1.id, self.product2.id, self.product3.id]
 
     def _create_user(self, login, groups, operating_units):
         """ Create a user."""
@@ -60,28 +62,32 @@ class TestProductOperatingUnit(common.TransactionCase):
         # products having Operating Unit 1.
         product_ids = \
             self.ProductTemplate.sudo(self.user1_id).search(
-                [('operating_unit_ids', 'in', self.ou1.id)]).ids
-        self.assertEqual(set(product_ids), set([self.product1.id,
-                                                self.product3.id]))
+                [('operating_unit_ids', 'in', self.ou1.id),
+                 ('id', 'in', self.testing_products_ids)]).ids
+        self.assertEqual(set(product_ids), {self.product1.id,
+                                            self.product3.id})
 
         # User 2 is only assigned to Operating Unit 2, so cannot see products
         # having Operating Unit 1, expect those also having Operating Unit b2b
         product_ids = \
             self.ProductTemplate.sudo(self.user2_id).search(
-                [('operating_unit_ids', 'in', self.ou1.id)]).ids
+                [('operating_unit_ids', 'in', self.ou1.id),
+                 ('id', 'in', self.testing_products_ids)]).ids
         self.assertEqual(product_ids, [self.product3.id])
 
         # User 2 is only assigned to Operating Unit 2, and can see all
         # products having Operating Unit b2b.
         product_ids = \
             self.ProductTemplate.sudo(self.user2_id).search(
-                [('operating_unit_ids', 'in', self.b2b.id)]).ids
+                [('operating_unit_ids', 'in', self.b2b.id),
+                 ('id', 'in', self.testing_products_ids)]).ids
         self.assertEqual(set(product_ids),
-                         set([self.product2.id, self.product3.id]))
+                         {self.product2.id, self.product3.id})
 
         # User 1 is only assigned to Operating Unit 1, so cannot see products
         # having Operating Unit b2b, expect those also having Operating Unit 1
         product_ids = \
             self.ProductTemplate.sudo(self.user1_id).search(
-                [('operating_unit_ids', 'in', self.b2b.id)]).ids
+                [('operating_unit_ids', 'in', self.b2b.id),
+                 ('id', 'in', self.testing_products_ids)]).ids
         self.assertEqual(product_ids, [self.product3.id])

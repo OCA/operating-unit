@@ -21,8 +21,6 @@ class TestStockOperatingUnit(common.TestStockCommon):
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
         # Products
         self.product1 = self.env.ref('product.product_product_7')
-        self.product2 = self.env.ref('product.product_product_9')
-        self.product3 = self.env.ref('product.product_product_11')
         # Locations
         b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
         b2c_wh.lot_stock_id.write({'operating_unit_id': self.b2c.id})
@@ -84,9 +82,9 @@ class TestStockOperatingUnit(common.TestStockCommon):
         })
         self.MoveObj.sudo(user_id).create({
             'name': 'a move',
-            'product_id': self.productA.id,
+            'product_id': self.product1.id,
             'product_uom_qty': 3.0,
-            'product_uom': self.productA.uom_id.id,
+            'product_uom': self.product1.uom_id.id,
             'picking_id': picking.id,
             'location_id': src_loc_id,
             'location_dest_id': dest_loc_id,
