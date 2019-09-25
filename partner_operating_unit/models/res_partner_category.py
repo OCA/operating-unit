@@ -5,15 +5,15 @@
 #
 ##############################################################################
 
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import fields, models
 
 
 class ResPartnerCategory(models.Model):
     _inherit = 'res.partner.category'
 
     def _default_operating_unit_ids(self):
-        operating_unit = self.env['res.users'].operating_unit_default_get(self.env.uid)
+        operating_unit = self.env['res.users'].operating_unit_default_get(
+            self.env.uid)
         if operating_unit:
             return [(6, 0, [operating_unit.id])]
         else:

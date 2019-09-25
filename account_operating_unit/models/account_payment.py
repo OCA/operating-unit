@@ -102,7 +102,6 @@ class AccountPayment(models.Model):
         dst_move.post()
         return transfer_debit_aml
 
-
     @api.model_cr
     def _register_hook(self):
         super(AccountPayment, self)._register_hook()
@@ -134,10 +133,10 @@ class AccountPayment(models.Model):
                 writeoff_line = self._get_shared_move_line_vals(
                     0, 0, 0, move.id, False)
                 debit_wo, credit_wo, amount_currency_wo, currency_id = \
-                    aml_obj.with_context(date=self.payment_date).\
-                        _compute_amount_fields(self.payment_difference,
-                                               self.currency_id,
-                                               self.company_id.currency_id)
+                    aml_obj.with_context(
+                        date=self.payment_date)._compute_amount_fields(
+                        self.payment_difference, self.currency_id,
+                        self.company_id.currency_id)
                 writeoff_line['name'] = self.writeoff_label
                 writeoff_line['account_id'] = self.writeoff_account_id.id
                 writeoff_line['debit'] = debit_wo
@@ -147,11 +146,11 @@ class AccountPayment(models.Model):
                 writeoff_line['operating_unit_id'] = \
                     counterpart_aml_dict['operating_unit_id']
                 writeoff_line = aml_obj.create(writeoff_line)
-                if (counterpart_aml['debit'] or (writeoff_line['credit']
-                   and not counterpart_aml['credit'])):
+                if ((counterpart_aml['debit'] or (writeoff_line['credit']
+                     and not counterpart_aml['credit']))):
                     counterpart_aml['debit'] += credit_wo - debit_wo
-                if (counterpart_aml['credit'] or (writeoff_line['debit']
-                   and not counterpart_aml['debit'])):
+                if ((counterpart_aml['credit'] or (writeoff_line['debit'] and
+                     not counterpart_aml['debit']))):
                     counterpart_aml['credit'] += debit_wo - credit_wo
                 counterpart_aml['amount_currency'] -= amount_currency_wo
 
@@ -169,7 +168,7 @@ class AccountPayment(models.Model):
             if not self.journal_id.post_at_bank_rec:
                 move.post()
 
-            #r econcile the invoice receivable/payable line(s) with the payment
+            # reconcile the invoice receivable/payable line(s) with the payment
             if self.invoice_ids:
                 self.invoice_ids.register_payment(counterpart_aml)
 

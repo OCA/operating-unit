@@ -38,7 +38,8 @@ class TestPurchaseOperatingUnit(OperatingUnitsTransactionCase):
         self.account = self.env['account.account'].create({
             'name': 'test_purchase_operating_unit',
             'code': 'TPOUA',
-            'user_type_id': self.env.ref('account.data_account_type_fixed_assets').id,
+            'user_type_id': self.env.ref(
+                'account.data_account_type_fixed_assets').id,
         })
 
         # Create users

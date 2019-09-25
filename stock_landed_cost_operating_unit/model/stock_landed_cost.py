@@ -77,23 +77,23 @@ class StockLandedCost(models.Model):
                 for line in cost.valuation_adjustment_lines.filtered(
                         lambda line: line.move_id):
                     # Prorate the value at what's still in stock
-                    cost_to_add = (line.move_id.remaining_qty /
-                                   line.move_id.product_qty) * \
-                                  line.additional_landed_cost
+                    cost_to_add = ((line.move_id.remaining_qty /
+                                   line.move_id.product_qty) *
+                                   line.additional_landed_cost)
 
                     new_landed_cost_value = line.move_id.landed_cost_value + \
-                                            line.additional_landed_cost
+                        line.additional_landed_cost
                     ##########################################################
                     # hack by mara1 - Adding operating unit
                     line.move_id.write({
                         'landed_cost_value': new_landed_cost_value,
-                        'value': line.move_id.value +
-                                 line.additional_landed_cost,
-                        'remaining_value': line.move_id.remaining_value +
-                                           cost_to_add,
-                        'price_unit': (line.move_id.value +
+                        'value': (line.move_id.value +
+                                  line.additional_landed_cost),
+                        'remaining_value': (line.move_id.remaining_value +
+                                            cost_to_add),
+                        'price_unit': ((line.move_id.value +
                                        line.additional_landed_cost) /
-                                      line.move_id.product_qty,
+                                       line.move_id.product_qty),
                         'operating_unit_id': cost.operating_unit_id.id,
                     })
                     ###########################################################
@@ -101,8 +101,8 @@ class StockLandedCost(models.Model):
                     # delivered proudcts that were not in stock.
                     qty_out = 0
                     if line.move_id._is_in():
-                        qty_out = line.move_id.product_qty - \
-                                  line.move_id.remaining_qty
+                        qty_out = (line.move_id.product_qty -
+                                   line.move_id.remaining_qty)
                     elif line.move_id._is_out():
                         qty_out = line.move_id.product_qty
                     move_vals['line_ids'] += line._create_accounting_entries(

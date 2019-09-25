@@ -10,7 +10,6 @@ class OperatingUnitsTransactionCase(common.TransactionCase):
 
     def _create_user(self, login, groups, company, operating_units):
         group_ids = [group.id for group in groups]
-        sel_groups_13_14_id = False if not group_ids else group_ids[0]
         default_ou_id = False if not operating_units else operating_units[0].id
         user = self.env['res.users'].\
             with_context({'no_reset_password': True}).create({

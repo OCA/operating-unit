@@ -42,10 +42,12 @@ class TestResPartnerCategoryOperatingUnit(OperatingUnitsTransactionCase):
         self.partner_categ3 = self._create_partner_category('Categ. #3')
 
         # Sets the operating-units for each partner category.
-        self.partner_categ1.operating_unit_ids = [(6, False, [self.opunit1.id])]
-        self.partner_categ2.operating_unit_ids = [(6, False, [self.opunit2.id])]
-        self.partner_categ3.operating_unit_ids = [(6, False, [self.opunit1.id,
-                                                              self.opunit2.id])]
+        self.partner_categ1.operating_unit_ids = [
+            (6, False, [self.opunit1.id])]
+        self.partner_categ2.operating_unit_ids = [
+            (6, False, [self.opunit2.id])]
+        self.partner_categ3.operating_unit_ids = [
+            (6, False, [self.opunit1.id, self.opunit2.id])]
 
         # Users.
         self.user1_id = self._create_user('user_1', self.group_partner_manager,

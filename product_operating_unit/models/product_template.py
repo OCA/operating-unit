@@ -13,7 +13,8 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     def _default_operating_unit_ids(self):
-        operating_unit = self.env['res.users'].operating_unit_default_get(self.env.uid)
+        operating_unit = self.env['res.users'].operating_unit_default_get(
+            self.env.uid)
         if operating_unit:
             return [(6, 0, [operating_unit.id])]
         else:

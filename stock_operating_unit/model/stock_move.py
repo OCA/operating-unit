@@ -8,11 +8,13 @@ from odoo.exceptions import UserError
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    operating_unit_id = fields.Many2one('operating.unit',
+    operating_unit_id = fields.Many2one(
+        'operating.unit',
         compute="_compute_operating_unit_id", store=True,
         string='Source Location Operating Unit',
     )
-    operating_unit_dest_id = fields.Many2one('operating.unit',
+    operating_unit_dest_id = fields.Many2one(
+        'operating.unit',
         compute="_compute_operating_unit_dest_id",
         string='Dest. Location Operating Unit',
     )
