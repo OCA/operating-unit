@@ -7,7 +7,7 @@
                 <div style="color: #999999">
                     <t t-esc="record.operating_unit_id.partner_id.phone"/>
                     <t t-if="record.operating_unit_id.partner_id.email"> |
-                        <a t-att-href="'mailto:%s' % record.operating_unit_id.partner_id.email" style="text-decoration:none; color: #999999;"><t t-esc="company.email"/></a>
+                        <a t-att-href="'mailto:%s' % record.operating_unit_id.partner_id.email" style="text-decoration:none; color: #999999;"><t t-esc="record.operating_unit_id.partner_id.email"/></a>
                     </t>
                     <t t-if="record.operating_unit_id.partner_id.website"> |
                         <a t-att-href="'%s' % record.operating_unit_id.partner_id.website" style="text-decoration:none; color: #999999;">
