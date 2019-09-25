@@ -18,22 +18,25 @@ class StockMove(models.Model):
     )
 
     @api.multi
-    @api.depends('location_id', 'location_id.operating_unit_id', 'picking_type_id', 'picking_type_id.warehouse_id',
+    @api.depends('location_id', 'location_id.operating_unit_id',
+                 'picking_type_id', 'picking_type_id.warehouse_id',
                  'picking_type_id.warehouse_id.operating_unit_id')
     def _compute_operating_unit_id(self):
         for item in self:
             # For dropshipping
-            item.operating_unit_id = item.location_id.operating_unit_id or \
-                                     item.picking_type_id.warehouse_id.operating_unit_id
+            item.operating_unit_id = \
+                item.location_id.operating_unit_id or \
+                item.picking_type_id.warehouse_id.operating_unit_id
 
     @api.multi
-    @api.depends('location_id', 'location_id.operating_unit_id', 'picking_type_id', 'picking_type_id.warehouse_id',
+    @api.depends('location_id', 'location_id.operating_unit_id',
+                 'picking_type_id', 'picking_type_id.warehouse_id',
                  'picking_type_id.warehouse_id.operating_unit_id')
     def _compute_operating_unit_dest_id(self):
         for item in self:
-            item.operating_unit_dest_id = item.location_dest_id.operating_unit_id or \
-                                          item.picking_type_id.warehouse_id.operating_unit_id
-
+            item.operating_unit_dest_id = \
+                item.location_dest_id.operating_unit_id or \
+                item.picking_type_id.warehouse_id.operating_unit_id
 
     @api.multi
     @api.constrains('picking_id', 'location_id', 'location_dest_id')

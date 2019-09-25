@@ -138,7 +138,6 @@ class TestHrExpenseOperatingUnit(OperatingUnitsTransactionCase):
         company_id = self.env['res.company'].create({
             'name': 'My Company',
             'partner_id': self.partner1.id,
-            'rml_header1': 'My Company',
             'currency_id': self.env.ref('base.EUR').id
         })
 

@@ -22,7 +22,6 @@ class OperatingUnitsTransactionCase(common.TransactionCase):
                 'company_ids': [(4, company.id)],
                 'operating_unit_ids': [(4, ou.id) for ou in operating_units],
                 'operating_unit_default_id': default_ou_id,
-                'sel_groups_13_14': sel_groups_13_14_id,
                 'groups_id': [(6, 0, group_ids)],
             })
         return user
