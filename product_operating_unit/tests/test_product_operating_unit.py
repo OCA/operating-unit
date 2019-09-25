@@ -5,10 +5,11 @@
 #
 ##############################################################################
 
-from odoo.tests import common
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 
 
-class TestProductOperatingUnit(common.TransactionCase):
+class TestProductOperatingUnit(OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestProductOperatingUnit, self).setUp()
@@ -28,33 +29,22 @@ class TestProductOperatingUnit(common.TransactionCase):
             'product.product_product_9_product_template')
         self.product3 = self.env.ref(
             'product.product_product_11_product_template')
+        # Companies.
+        self.company = self.env.ref('base.main_company')
         # Create users
         self.user1_id = self._create_user('user_1',
                                           [self.group_stock_user],
-                                          [self.ou1])
+                                          self.company,
+                                          [self.ou1]).id
         self.user2_id = self._create_user('user_2',
                                           [self.group_stock_user],
-                                          [self.b2b])
+                                          self.company,
+                                          [self.b2b]).id
         self.product1.operating_unit_ids = [(6, 0, [self.ou1.id])]
         self.product2.operating_unit_ids = [(6, 0, [self.b2b.id])]
         self.product3.operating_unit_ids = [(6, 0, [self.ou1.id, self.b2b.id])]
         self.testing_products_ids = [
             self.product1.id, self.product2.id, self.product3.id]
-
-    def _create_user(self, login, groups, operating_units):
-        """ Create a user."""
-        group_ids = [group.id for group in groups]
-        user =\
-            self.ResUsers.with_context({'no_reset_password': True}).\
-            create({
-                'name': 'Chicago Purchase User',
-                'login': login,
-                'password': 'demo',
-                'email': 'chicago@yourcompany.com',
-                'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-                'groups_id': [(6, 0, group_ids)]
-            })
-        return user.id
 
     def test_po_ou_security(self):
         """Test Security of Product Operating Unit"""

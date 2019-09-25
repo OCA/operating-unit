@@ -28,6 +28,13 @@ class ResPartner(models.Model):
 
     @api.constrains('operating_unit_ids', 'company_id')
     def _check_company_operating_unit(self):
+        # operating_unit_ids is defined also on the res.partner, and
+        # having two fields named equally on the 3rd type of inheritance
+        # doesn't propagate the values. We do propagate manually, but the
+        # constraint is checked before we can do the propagation, when the
+        # partner is firstly created. Thus we skip the check in that case.
+        if 'copy_ou_to_partner' in self.env.context:
+            return True
         for record in self:
             if record.company_id and record.operating_unit_ids:
                 for operating_unit in record.operating_unit_ids:

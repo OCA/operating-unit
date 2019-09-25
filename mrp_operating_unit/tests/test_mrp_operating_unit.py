@@ -1,11 +1,13 @@
 # Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.tests import common
+
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 from odoo.exceptions import ValidationError
 
 
-class TestMrpOperatingUnit(common.TransactionCase):
+class TestMrpOperatingUnit(OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestMrpOperatingUnit, self).setUp()
@@ -40,22 +42,6 @@ class TestMrpOperatingUnit(common.TransactionCase):
         self.mrp_record1 = self._create_mrp('Manufacturing Order 1', self.ou1)
         self.mrp_record2 = self._create_mrp('Manufacturing Order 2',
                                             self.chicago, self.stock_location)
-
-    def _create_user(self, login, groups, company, operating_units,
-                     context=None):
-        """Create a user."""
-        group_ids = [group.id for group in groups]
-        user = self.res_users_model.create({
-            'name': 'Test HR Contrac User',
-            'login': login,
-            'password': 'demo',
-            'email': 'example@yourcompany.com',
-            'company_id': company.id,
-            'company_ids': [(4, company.id)],
-            'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-            'groups_id': [(6, 0, group_ids)]
-        })
-        return user
 
     def _create_mrp(self, name, operating_unit, stock_location=False):
         if operating_unit == self.ou1:

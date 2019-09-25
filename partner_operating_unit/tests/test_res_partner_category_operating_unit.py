@@ -5,10 +5,11 @@
 #
 ##############################################################################
 
-from odoo.tests import common
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 
 
-class TestResPartnerCategoryOperatingUnit(common.TransactionCase):
+class TestResPartnerCategoryOperatingUnit(OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestResPartnerCategoryOperatingUnit, self).setUp()
@@ -48,9 +49,9 @@ class TestResPartnerCategoryOperatingUnit(common.TransactionCase):
 
         # Users.
         self.user1_id = self._create_user('user_1', self.group_partner_manager,
-                                          [self.opunit1])
+                                          self.company, self.opunit1).id
         self.user2_id = self._create_user('user_2', self.group_partner_manager,
-                                          [self.opunit2])
+                                          self.company, self.opunit2).id
 
     def _create_partner_category(self, name):
         """ Create a partner category.
@@ -59,19 +60,6 @@ class TestResPartnerCategoryOperatingUnit(common.TransactionCase):
             'name': name,
             'active': True,
         })
-
-    def _create_user(self, login, groups, operating_units):
-        """ Create a user.
-        """
-        user = self.ResUsers.with_context({'no_reset_password': True}).create({
-            'name': 'Demo User',
-            'login': login,
-            'password': 'demo',
-            'email': '{0}@yourcompany.com'.format(login),
-            'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-            'groups_id': [(6, 0, groups.ids)],
-        })
-        return user.id
 
     def test_operating_units_for_partner_categories(self):
         """ Test Security of Partner's Category Operating Unit

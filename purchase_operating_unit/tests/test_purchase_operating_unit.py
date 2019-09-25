@@ -4,10 +4,11 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 import time
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.tests import common
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 
 
-class TestPurchaseOperatingUnit(common.TransactionCase):
+class TestPurchaseOperatingUnit(OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestPurchaseOperatingUnit, self).setUp()
@@ -45,37 +46,18 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
                                           [self.group_purchase_user,
                                            self.group_stock_user],
                                           self.company1,
-                                          [self.ou1])
+                                          self.ou1)
         self.user2_id = self._create_user('user_2',
                                           [self.group_purchase_user,
                                            self.group_stock_user],
                                           self.company2,
-                                          [self.b2b])
+                                          self.b2b)
         self.purchase1 = self._create_purchase(
             self.user1_id, [(self.product1, 1000),
                             (self.product2, 500),
                             (self.product3, 800)])
         self.purchase1.sudo(self.user1_id).button_confirm()
         self._create_invoice(self.purchase1, self.partner1, self.account)
-
-    def _create_user(self, login, groups, company, operating_units):
-        """ Create a user."""
-        group_ids = [group.id for group in groups]
-        default_ou_id = False if not operating_units else operating_units[0].id
-        user =\
-            self.ResUsers.with_context({'no_reset_password': True}).\
-            create({
-                'name': 'Chicago Purchase User',
-                'login': login,
-                'password': 'demo',
-                'email': 'chicago@yourcompany.com',
-                'company_id': company.id,
-                'company_ids': [(4, company.id)],
-                'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-                'operating_unit_default_id': default_ou_id,
-                'groups_id': [(6, 0, group_ids)]
-            })
-        return user.id
 
     def _create_purchase(self, user_id, line_products):
         """ Create a purchase order.

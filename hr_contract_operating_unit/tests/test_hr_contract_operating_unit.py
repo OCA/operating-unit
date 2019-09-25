@@ -4,10 +4,11 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests import common
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 
 
-class TestHrContractOperatingUnit(common.TransactionCase):
+class TestHrContractOperatingUnit(OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestHrContractOperatingUnit, self).setUp()
@@ -41,22 +42,6 @@ class TestHrContractOperatingUnit(common.TransactionCase):
         # Create Contracts
         self.hr_contract1 = self._create_hr_contract(self.user1, self.ou1)
         self.hr_contract2 = self._create_hr_contract(self.user2, self.b2c)
-
-    def _create_user(self, login, groups, company, operating_units,
-                     context=None):
-        """Creates a user."""
-        group_ids = [group.id for group in groups]
-        user = self.res_users_model.create({
-            'name': 'Test HR Contract User',
-            'login': login,
-            'password': 'demo',
-            'email': 'example@yourcompany.com',
-            'company_id': company.id,
-            'company_ids': [(4, company.id)],
-            'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-            'groups_id': [(6, 0, group_ids)]
-        })
-        return user
 
     def _create_hr_employee(self):
         """Creates an employee."""

@@ -3,9 +3,12 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo.addons.stock.tests import common
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 
 
-class TestStockAccountOperatingUnit(common.TestStockCommon):
+class TestStockAccountOperatingUnit(common.TestStockCommon,
+                                    OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestStockAccountOperatingUnit, self).setUp()
@@ -81,7 +84,18 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
             'ou_is_self_balanced': True})
 
         # Create Product
-        self.product = self._create_product()
+        self.product = self.env.ref('product.product_product_7')
+        self.product.categ_id.write({
+            'property_valuation': 'real_time',
+            'property_stock_valuation_account_id': self.account_inventory.id,
+            'property_stock_account_input_categ_id': self.account_grni.id,
+            'property_stock_account_output_categ_id': self.account_cogs_id,
+        })
+        self.product.write({
+            'list_price': 1.0,
+            'standard_price': 1.0
+        })
+
         # Create incoming stock picking type
         self.incoming_id = self.env.ref('stock.warehouse0').in_type_id
         # Create incoming and internal stock picking types
@@ -90,21 +104,6 @@ class TestStockAccountOperatingUnit(common.TestStockCommon):
         self.location_b2c_id = b2c_wh.lot_stock_id
         self.b2c_type_in_id = b2c_wh.in_type_id
         self.b2c_type_int_id = b2c_wh.int_type_id
-
-    def _create_user(self, login, groups, company, operating_units):
-        """Create a user."""
-        group_ids = [group.id for group in groups]
-        user = self.res_users_model.create({
-            'name': 'Test Stock Account User',
-            'login': login,
-            'password': 'demo',
-            'email': 'example@yourcompany.com',
-            'company_id': company.id,
-            'company_ids': [(4, company.id)],
-            'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-            'groups_id': [(6, 0, group_ids)]
-        })
-        return user
 
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""

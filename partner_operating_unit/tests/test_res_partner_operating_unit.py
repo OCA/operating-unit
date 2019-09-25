@@ -5,10 +5,11 @@
 #
 ##############################################################################
 
-from odoo.tests import common
+from odoo.addons.operating_unit.tests.OperatingUnitsTransactionCase import \
+    OperatingUnitsTransactionCase
 
 
-class TestResPartnerOperatingUnit(common.TransactionCase):
+class TestResPartnerOperatingUnit(OperatingUnitsTransactionCase):
 
     def setUp(self):
         super(TestResPartnerOperatingUnit, self).setUp()
@@ -39,6 +40,8 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         self.partner1 = self.env.ref('base.res_partner_1')
         self.partner2 = self.env.ref('base.res_partner_2')
         self.partner3 = self.env.ref('base.res_partner_3')
+        self.partner_ids = [
+            self.partner1.id, self.partner2.id, self.partner3.id]
 
         # Sets the operating-units for each partner.
         self.partner1.operating_unit_ids = [(6, False, [self.opunit1.id])]
@@ -48,24 +51,9 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
 
         # Users.
         self.user1_id = self._create_user('user_1', self.group_partner_manager,
-                                          [self.opunit1])
+                                          self.company, self.opunit1).id
         self.user2_id = self._create_user('user_2', self.group_partner_manager,
-                                          [self.opunit2])
-
-    def _create_user(self, login, groups, operating_units):
-        """ Create a user.
-        """
-        user = self.ResUsers.with_context({'no_reset_password': True}).create({
-            'name': 'Demo User',
-            'login': login,
-            'password': 'demo',
-            'email': '{0}@yourcompany.com'.format(login),
-            # 'company_id': company.id,
-            # 'company_ids': [(4, company.id)],
-            'operating_unit_ids': [(4, ou.id) for ou in operating_units],
-            'groups_id': [(6, 0, groups.ids)],
-        })
-        return user.id
+                                          self.company, self.opunit2).id
 
     def test_operating_units_for_partners(self):
         """ Test Security of Partner Operating Unit
@@ -74,6 +62,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         # contacts having Operating Unit 1.
         partners = self.ResPartner.sudo(self.user1_id).search([
             ('operating_unit_ids', 'in', self.opunit1.id),
+            ('id', 'in', self.partner_ids),
         ])
         self.assertEqual(set(partners), {self.partner1, self.partner3})
 
@@ -81,6 +70,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         # having Operating Unit 1, except those also having Operating Unit 2.
         partners = self.ResPartner.sudo(self.user2_id).search([
             ('operating_unit_ids', 'in', self.opunit1.id),
+            ('id', 'in', self.partner_ids),
         ])
         self.assertEqual(set(partners), {self.partner3})
 
@@ -88,6 +78,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         # contacts having Operating Unit Operating Unit 2.
         partners = self.ResPartner.sudo(self.user2_id).search([
             ('operating_unit_ids', 'in', self.opunit2.id),
+            ('id', 'in', self.partner_ids),
         ])
         self.assertEqual(set(partners), {self.partner2, self.partner3})
 
@@ -95,5 +86,6 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         # having Operating Unit 2, except those also having Operating Unit 1.
         partners = self.ResPartner.sudo(self.user1_id).search([
             ('operating_unit_ids', 'in', self.opunit2.id),
+            ('id', 'in', self.partner_ids),
         ])
         self.assertEqual(set(partners), {self.partner3})
