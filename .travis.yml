@@ -10,19 +10,15 @@ addons:
   apt:
     packages:
       - expect-dev  # provides unbuffer utility
-      - python-lxml  # because pip installation is slow
 
 env:
   global:
-  - VERSION="12.0" LINT_CHECK="1"
-  - VERSION="12.0" ODOO_REPO="OCA/OCB" LINT_CHECK="0"
-  - VERSION="12.0" ODOO_REPO="odoo/odoo" LINT_CHECK="0"
+  - VERSION="12.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
 
   matrix:
   - LINT_CHECK="1"
-  - TRANSIFEX="0"
   - TESTS="1" ODOO_REPO="OCA/OCB"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1"
 
 
 install:
