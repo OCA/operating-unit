@@ -40,6 +40,6 @@ class ResUsers(models.Model):
         res = super(ResUsers, self.with_context(
             copy_ou_to_partner=True)).write(vals)
         if 'operating_unit_ids' in vals:
-            res.partner_id.operating_unit_ids = [
-                (6, False, res.operating_unit_ids.ids)]
+            self.partner_id.operating_unit_ids = [
+                (6, False, self.operating_unit_ids.ids)]
         return res
