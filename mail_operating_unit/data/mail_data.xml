@@ -1,0 +1,21 @@
+<odoo>
+    <template id="mail_notification_paynow" inherit_id="mail.mail_notification_paynow">
+        <xpath expr="//td[child::b[@t-esc='company.name']]" position="replace">
+            <td style="padding: 0; font-size:11px;">
+                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 32px 0px 4px 0px;"/>
+                <b t-esc="record.operating_unit_id.partner_id.name"/><br/>
+                <div style="color: #999999">
+                    <t t-esc="record.operating_unit_id.partner_id.phone"/>
+                    <t t-if="record.operating_unit_id.partner_id.email"> |
+                        <a t-att-href="'mailto:%s' % record.operating_unit_id.partner_id.email" style="text-decoration:none; color: #999999;"><t t-esc="record.operating_unit_id.partner_id.email"/></a>
+                    </t>
+                    <t t-if="record.operating_unit_id.partner_id.website"> |
+                        <a t-att-href="'%s' % record.operating_unit_id.partner_id.website" style="text-decoration:none; color: #999999;">
+                            <t t-esc="record.operating_unit_id.partner_id.website"/>
+                        </a>
+                    </t>
+                </div>
+            </td>
+        </xpath>
+    </template>
+</odoo>

@@ -3,6 +3,29 @@
 [![Coverage Status](https://coveralls.io/repos/OCA/operating-unit/badge.svg?branch=12.0&service=github)](https://coveralls.io/github/OCA/operating-unit?branch=12.0)
 [![Code Climate](https://codeclimate.com/github/OCA/operating-unit/badges/gpa.svg)](https://codeclimate.com/github/OCA/operating-unit)
 
+# BT Customizations
+Open OCA PRs merged
+- (https://github.com/OCA/operating-unit/pull/184) hr_expense_operating_unit
+- (https://github.com/OCA/operating-unit/pull/175) purchase_request_operating_unit
+- (https://github.com/OCA/operating-unit/pull/174) sale_stock_operating_unit
+- (https://github.com/OCA/operating-unit/pull/173) stock_account_operating_unit
+- (https://github.com/OCA/operating-unit/pull/156) mrp_operating_unit
+- (https://github.com/OCA/operating-unit/pull/152) purchase_operating_unit
+- (https://github.com/OCA/operating-unit/pull/151) sale_operating_unit
+- (https://github.com/OCA/operating-unit/pull/150) stock_operating_unit
+- (https://github.com/OCA/operating-unit/pull/160) crm_operating_unit
+- (https://github.com/OCA/operating-unit/pull/149) account_operating_unit
+
+New BT Modules
+- (https://github.com/OCA/operating-unit/pull/188) product_operating_unit
+- (https://github.com/OCA/operating-unit/pull/199) mail_operating_unit
+- () stock_landed_cost_operating_unit
+- () partner_operating_unit
+
+Bugfixes
+- () stock_account_operating_unit
+- () operating_unit
+
 # Operating Units
 
 An Operating Unit (OU) is an organizational entity part of a company, 

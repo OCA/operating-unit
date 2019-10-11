@@ -14,7 +14,7 @@ class ResUsers(models.Model):
         if not uid2:
             uid2 = self._uid
         user = self.env['res.users'].browse(uid2)
-        return user.default_operating_unit_id
+        return user.operating_unit_default_id
 
     @api.model
     def _default_operating_unit(self):
@@ -28,7 +28,8 @@ class ResUsers(models.Model):
         'operating.unit', 'operating_unit_users_rel', 'user_id', 'poid',
         'Operating Units', default=lambda self: self._default_operating_units()
     )
-    default_operating_unit_id = fields.Many2one(
+    operating_unit_default_id = fields.Many2one(
         'operating.unit', 'Default Operating Unit',
+        oldname='default_operating_unit_id',
         default=lambda self: self._default_operating_unit()
     )
