@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_ids']" position="after">
+                <field name="operating_unit_for_mails_id" groups="operating_unit.group_multi_operating_unit"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

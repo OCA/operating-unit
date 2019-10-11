@@ -5,6 +5,7 @@
 #
 ##############################################################################
 
+from . import res_users
 from . import mail_alias_ext
 from . import mail_mail_ext
 from . import mail_template_ext

@@ -8,12 +8,12 @@
 {
     "name": "Mail Operating Unit",
     "summary": "Adds the concept of operating unit (OU) according mail",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.0.2",
     "author": "brain-tec AG, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Purchase Management",
-    "depends": ["operating_unit", "mail"],
+    "depends": ["operating_unit", "mail", "base"],
     "license": "LGPL-3",
     "data": [
         "data/mail_data.xml",
@@ -22,6 +22,7 @@
         "views/operating_unit_views_ext.xml",
         "views/mail_alias_views_ext.xml",
         "views/mail_template_views_ext.xml",
+        "views/res_users_view.xml",
         "wizard/mail_compose_message_view_ext.xml",
     ],
     "installable": True,
