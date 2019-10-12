@@ -5,9 +5,9 @@
 
 # Operating Units
 
-An Operating Unit (OU) is an organizational entity part of a company, 
-but that operates as an independent unit. Organizationally, an Operating Unit 
-divides a company from a Business/Divisional axis, while Departments divide a 
+An Operating Unit (OU) is an organizational entity part of a company,
+but that operates as an independent unit. Organizationally, an Operating Unit
+divides a company from a Business/Divisional axis, while Departments divide a
 company from a functional axis perspective.
 
 This repository provides a suite of module to support the Operating Unit concept
