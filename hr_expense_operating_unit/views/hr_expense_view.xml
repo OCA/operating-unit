@@ -21,7 +21,9 @@
             <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
             <field name="arch" type="xml">
                 <field name="employee_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" options="{'no_create': True}"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                       domain="[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]" options="{'no_create': True}"/>
                 </field>
             </field>
         </record>
@@ -43,7 +45,9 @@
             <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
             <field name="arch" type="xml">
                 <field name="employee_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit" options="{'no_create': True}"/>
+                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
+                       domain="[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]" options="{'no_create': True}"/>
                 </field>
             </field>
         </record>
