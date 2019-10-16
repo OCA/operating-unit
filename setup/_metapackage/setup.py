@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo12-addon-hr_expense_operating_unit',
         'odoo12-addon-operating_unit',
         'odoo12-addon-sales_team_operating_unit',
+        'odoo12-addon-stock_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
