@@ -4,7 +4,7 @@
 
 {
     'name': 'Qweb Report With Operating Unit',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'Reports/Qweb',
     'license': 'LGPL-3',
     'author': 'Eficent Business and IT Consulting Services S.L., '
