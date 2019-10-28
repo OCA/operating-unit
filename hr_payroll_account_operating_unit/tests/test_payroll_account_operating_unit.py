@@ -1,17 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.addons.hr_contract_operating_unit.tests\
-    import test_hr_contract_operating_unit
+from odoo.addons.hr_contract_operating_unit.tests.\
+    test_hr_contract_operating_unit import TestHrContractOperatingUnit
 from odoo.exceptions import ValidationError
 
 
-class TestPayrollAccountOperatingUnit(test_hr_contract_operating_unit.
-                                      TestHrContractOperatingUnit):
+class TestPayrollAccountOperatingUnit(TestHrContractOperatingUnit):
 
     def setUp(self):
         super(TestPayrollAccountOperatingUnit, self).setUp()
