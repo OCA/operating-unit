@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record model="ir.ui.view" id="mis_report_instance_view_tree">
+            <field name="name">mis.report.instance.view.tree</field>
+            <field name="model">mis.report.instance</field>
+            <field name="inherit_id"
+                   ref="mis_builder.mis_report_instance_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="target_move" position="after">
+                    <field name="operating_unit_ids" widget="many2many_tags" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mis_report_instance_view_form">
+            <field name="name">mis.report.instance.view.form</field>
+            <field name="model">mis.report.instance</field>
+            <field name="inherit_id"
+                   ref="mis_builder.mis_report_instance_view_form"/>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <field name="target_move" position="after">
+                    <field name="operating_unit_ids" widget="many2many_tags" groups="operating_unit.group_multi_operating_unit"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mis_report_instance_period_view_form">
+            <field name="name">mis.report.instance.period.view.form</field>
+            <field name="model">mis.report.instance.period</field>
+            <field name="inherit_id"
+                   ref="mis_builder.mis_report_instance_period_view_form"/>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='source_data']" position="inside">
+                  <field name="operating_unit_ids" widget="many2many_tags" groups="operating_unit.group_multi_operating_unit"
+                        attrs="{'invisible': [('source', 'not in', ('actuals', 'actuals_alt'))]}"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
