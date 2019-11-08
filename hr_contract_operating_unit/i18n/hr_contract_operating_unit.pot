@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: hr_contract_operating_unit
 #: model:ir.model,name:hr_contract_operating_unit.model_hr_contract
-msgid "Contract"
+msgid "Employee Contract"
 msgstr ""
 
 #. module: hr_contract_operating_unit
