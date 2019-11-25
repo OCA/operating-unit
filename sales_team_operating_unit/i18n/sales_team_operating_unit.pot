@@ -26,6 +26,6 @@ msgstr ""
 
 #. module: sales_team_operating_unit
 #: model:ir.model,name:sales_team_operating_unit.model_crm_team
-msgid "Sales Team"
+msgid "Sales Channels"
 msgstr ""
 
