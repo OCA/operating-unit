@@ -11,7 +11,7 @@
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="operating_unit_id"
-                       domain="[('user_ids', 'in', user_id)]"
+                       domain="[('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
@@ -24,7 +24,7 @@
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="operating_unit_id"
-                       domain="[('user_ids', 'in', user_id)]"
+                       domain="[('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
@@ -37,7 +37,7 @@
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="operating_unit_id" widget="selection"
-                       domain="[('user_ids', 'in', user_id)]"
+                       domain="[('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
@@ -49,8 +49,9 @@
         <field name="inherit_id" ref="sale.view_sales_order_filter"/>
         <field name="arch" type="xml">
             <filter name="my_sale_orders_filter" position="after">
-                <filter name="group_by_operating_unit" string="Department" domain="[]"
-                        groups="operating_unit.group_multi_operating_unit" context="{'group_by':'operating_unit_id'}"/>
+                <filter string="Operating Unit" name="operating_unit_grouped"
+                        groups="operating_unit.group_multi_operating_unit"
+                        context="{'group_by':'operating_unit_id'}"/>
             </filter>
             <field name="partner_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
