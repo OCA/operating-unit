@@ -10,14 +10,14 @@ from odoo.tools.translate import _
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        default=lambda self:
-                                        self.env['res.users'].
-                                        operating_unit_default_get(self._uid),
-                                        domain="[('user_ids', '=', uid)]",
-                                        readonly=True,
-                                        states={'draft': [('readonly',
-                                                           False)]})
+    operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Operating Unit',
+        default=lambda self: self.env['res.users'].operating_unit_default_get(
+            self._uid),
+        domain="[('user_ids', '=', uid)]",
+        readonly=True,
+        states={'draft': [('readonly', False)]})
 
     @api.onchange('operating_unit_id')
     def _onchange_operating_unit(self):
