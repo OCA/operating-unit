@@ -46,7 +46,7 @@ class StockWarehouseOrderPoint(models.Model):
             if (rec.warehouse_id and rec.location_id and
                     rec.warehouse_id.operating_unit_id !=
                     rec.location_id.operating_unit_id):
-                    raise UserError(
-                        _('Configuration Error. The Operating Unit of the '
-                          'Warehouse and the Location must be the same. ')
-                    )
+                raise UserError(
+                    _('Configuration Error. The Operating Unit of the '
+                      'Warehouse and the Location must be the same. ')
+                )
