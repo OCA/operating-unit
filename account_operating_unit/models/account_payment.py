@@ -23,7 +23,7 @@ class AccountPayment(models.Model):
     def _get_counterpart_move_line_vals(self, invoice=False):
         res = super(AccountPayment,
                     self)._get_counterpart_move_line_vals(invoice=invoice)
-        if len(invoice) == 1:
+        if invoice and len(invoice) == 1:
             res['operating_unit_id'] = invoice.operating_unit_id.id or False
         else:
             res['operating_unit_id'] = self.operating_unit_id.id or False
