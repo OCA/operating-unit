@@ -9,8 +9,10 @@ from odoo.exceptions import UserError
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit',
-                                        domain="[('user_ids', '=', uid)]",)
+    operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Operating Unit',
+        domain="[('user_ids', '=', uid)]",)
 
     @api.model
     def create(self, vals):
@@ -54,11 +56,12 @@ class AccountMoveLine(models.Model):
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    operating_unit_id = fields.Many2one('operating.unit',
-                                        'Default operating unit',
-                                        domain="[('user_ids', '=', uid)]",
-                                        help="This operating unit will "
-                                             "be defaulted in the move lines.")
+    operating_unit_id = fields.Many2one(
+        comodel_name='operating.unit',
+        string='Default operating unit',
+        domain="[('user_ids', '=', uid)]",
+        help="This operating unit will be "
+             "defaulted in the move lines.")
 
     @api.multi
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id,
