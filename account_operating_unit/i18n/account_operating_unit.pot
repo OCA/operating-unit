@@ -36,25 +36,25 @@ msgid "Configuration error. Please provide an                Inter-operating uni
 msgstr ""
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:38
+#: code:addons/account_operating_unit/models/account_move.py:40
 #, python-format
 msgid "Configuration error. The Company in the Move Line and in the Operating Unit must be the same."
 msgstr ""
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:49
+#: code:addons/account_operating_unit/models/account_move.py:51
 #, python-format
 msgid "Configuration error. The Operating Unit in the Move Line and in the Move must be the same."
 msgstr ""
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:143
+#: code:addons/account_operating_unit/models/account_move.py:146
 #, python-format
 msgid "Configuration error. The operating                    unit is mandatory for each line as the operating                    unit has been defined as self-balanced at company level."
 msgstr ""
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:67
+#: code:addons/account_operating_unit/models/account_move.py:70
 #, python-format
 msgid "Configuration error. You need to define an             inter-operating unit clearing account in the company settings"
 msgstr ""
