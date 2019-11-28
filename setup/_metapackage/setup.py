@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo12-addon-purchase_request_operating_unit',
         'odoo12-addon-sale_operating_unit',
         'odoo12-addon-sales_team_operating_unit',
+        'odoo12-addon-stock_account_operating_unit',
         'odoo12-addon-stock_operating_unit',
     ],
     classifiers=[
