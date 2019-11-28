@@ -3,7 +3,7 @@
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import _, api, exceptions, models
+from odoo import _, api, exceptions, models
 
 
 class StockMove(models.Model):
@@ -17,6 +17,10 @@ class StockMove(models.Model):
         if res:
             debit_line_vals = res[0][2]
             credit_line_vals = res[1][2]
+            if len(res) == 3:
+                price_diff_line = res[2][2]
+            else:
+                price_diff_line = {}
 
             if (
                 self.operating_unit_id and self.operating_unit_dest_id and
@@ -28,12 +32,23 @@ class StockMove(models.Model):
                       ' and destination accounts related to different '
                       'operating units.')
                 )
+            if (not self.operating_unit_dest_id
+                    and not self.operating_unit_id.id):
+                ou_id = self.picking_id.picking_type_id.warehouse_id.\
+                    operating_unit_id.id
+            else:
+                ou_id = False
 
-            debit_line_vals['operating_unit_id'] = (
+            debit_line_vals['operating_unit_id'] = ou_id or \
                 self.operating_unit_dest_id.id or self.operating_unit_id.id
-            )
-            credit_line_vals['operating_unit_id'] = (
+            credit_line_vals['operating_unit_id'] = ou_id or \
                 self.operating_unit_id.id or self.operating_unit_dest_id.id
-            )
-            return [(0, 0, debit_line_vals), (0, 0, credit_line_vals)]
+
+            rslt = [(0, 0, debit_line_vals), (0, 0, credit_line_vals)]
+            if price_diff_line:
+                price_diff_line['operating_unit_id'] = ou_id \
+                    or self.operating_unit_id.id or \
+                    self.operating_unit_dest_id.id
+                rslt.extend([(0, 0, price_diff_line)])
+            return rslt
         return res
