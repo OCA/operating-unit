@@ -20,20 +20,13 @@ msgid "Configuration error. It is not possible to change this team. There are sa
 msgstr ""
 
 #. module: sale_operating_unit
-#: code:addons/sale_operating_unit/models/sale.py:55
-#: code:addons/sale_operating_unit/models/sale_order.py:56
+#: code:addons/sale_operating_unit/models/sale_order.py:55
 #, python-format
 msgid "Configuration error. The Company in the Sales Order and in the Operating Unit must be the same."
 msgstr ""
 
 #. module: sale_operating_unit
-#: code:addons/sale_operating_unit/models/sale.py:45
-#, python-format
-msgid "Configuration error. The Operating Unit of the sales team must match with that of the quote/sales order"
-msgstr ""
-
-#. module: sale_operating_unit
-#: code:addons/sale_operating_unit/models/sale_order.py:46
+#: code:addons/sale_operating_unit/models/sale_order.py:45
 #, python-format
 msgid "Configuration error. The Operating Unit of the sales team must match with that of the quote/sales order."
 msgstr ""
