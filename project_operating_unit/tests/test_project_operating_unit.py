@@ -65,7 +65,7 @@ class TestProject(common.TransactionCase):
         return project
 
     def _create_task(self, uid, project):
-        task = self.task_obj.sudo(uid).create({
+        task = self.task_obj.create({
             'name': 'Test Task',
             'user_id': uid.id,
             'project_id': project.id
