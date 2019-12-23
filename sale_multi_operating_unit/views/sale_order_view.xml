@@ -9,15 +9,11 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook/page[@name='other_information']" position="after">
-                <page string="Internal Quote Requests">
+                <page string="Internal Quotes">
                     <field name="quote_ids" context="{'active_id': active_id}">
                         <tree>
                             <field name="operating_unit_id"/>
-                            <field name="lead_id" attrs="{'invisible': [('lead_id', '=', False)]}"/>
-                            <button name="action_send" type="object" string="Send" class="oe_highlight" attrs="{'invisible': [('lead_id', '!=', False)]}"/>
-                            <field name="notes"/>
-                            <field name="expected_date"/>
-                            <field name="assigned_to"/>
+                            <field name="lead_id"/>
                         </tree>
                         <form string="Sale Multiple Operating Unit">
                             <header>
