@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # © 2017 Niaga Solution - Edi Santoso <repodevs@gmail.com>
+# Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo.tests import common
 
@@ -49,12 +49,3 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
             'operating_unit_ids': [(4, ou.id) for ou in operating_units],
         })
         return user
-
-    def test_res_partner(self):
-        # User 2 is only assigned to B2C Operating Unit, and cannot
-        # access Partner for Main Operating Unit.
-        partner = self.res_partner_model.sudo(self.user2.id).\
-            search([('id', '=', self.partner1.id),
-                    ('operating_unit_id', '=', self.ou1.id)])
-        self.assertEqual(partner.ids, [], 'User 2 should not have access to '
-                         '%s' % self.ou1.name)
