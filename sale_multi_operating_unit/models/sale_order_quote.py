@@ -82,6 +82,7 @@ class SaleOrderQuote(models.Model):
             'description': description,
             'user_id': False,
             'team_id': teams[0].id,
+            'date_deadline': self.expected_date
         }
 
     def generate_crm_lead(self):
