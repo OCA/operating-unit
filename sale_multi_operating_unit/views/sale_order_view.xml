@@ -13,7 +13,8 @@
                     <field name="quote_ids" context="{'active_id': active_id}">
                         <tree>
                             <field name="operating_unit_id"/>
-                            <field name="lead_id"/>
+                            <field name="lead_id" attrs="{'invisible': [('lead_id', '=', False)]}"/>
+                            <button name="action_send" type="object" string="Send" class="oe_highlight" attrs="{'invisible': [('lead_id', '!=', False)]}"/>
                         </tree>
                         <form string="Sale Multiple Operating Unit">
                             <header>
