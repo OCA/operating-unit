@@ -1,7 +1,7 @@
 # Copyright (C) 2019 Open Source Integrators
 # Copyright (C) 2019 Serpent Consulting Services
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class SaleOrderQuoteLine(models.Model):
