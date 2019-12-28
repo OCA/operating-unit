@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-hr_payroll_account_operating_unit',
         'odoo12-addon-mrp_operating_unit',
         'odoo12-addon-operating_unit',
+        'odoo12-addon-project_operating_unit',
         'odoo12-addon-purchase_operating_unit',
         'odoo12-addon-purchase_request_operating_unit',
         'odoo12-addon-report_qweb_operating_unit',
