@@ -13,11 +13,9 @@ class CrmTeam(models.Model):
 
     operating_unit_id = fields.Many2one(
         "operating.unit",
-        "Operating Unit",
         default=lambda self: self.env["res.users"].operating_unit_default_get(),
     )
 
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for team in self:
