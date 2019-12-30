@@ -45,10 +45,6 @@
                                     </group>
                                 </form>
                                 <tree editable="bottom">
-                                    <control>
-                                        <create string="Add a product"/>
-                                        <create string="Add Description"/>
-                                    </control>
                                     <field name="product_id"/>
                                     <field name="name"/>
                                     <field name="uom_id" groups="uom.group_uom"/>

@@ -10,4 +10,3 @@ As a user in the other OUs
 * The description contains the delivery address and the list of products and quantity to quote
 * Create a sale order from the lead, add your products, quantity and price
 * Send the quote to the internal customer
-
