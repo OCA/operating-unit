@@ -7,13 +7,13 @@ from odoo import api, fields, models
 
 class ResUsers(models.Model):
 
-    _inherit = 'res.users'
+    _inherit = "res.users"
 
     @api.model
     def operating_unit_default_get(self, uid2=False):
         if not uid2:
             uid2 = self._uid
-        user = self.env['res.users'].browse(uid2)
+        user = self.env["res.users"].browse(uid2)
         return user.default_operating_unit_id
 
     @api.model
@@ -25,10 +25,15 @@ class ResUsers(models.Model):
         return self._default_operating_unit()
 
     operating_unit_ids = fields.Many2many(
-        'operating.unit', 'operating_unit_users_rel', 'user_id', 'poid',
-        'Operating Units', default=lambda self: self._default_operating_units()
+        "operating.unit",
+        "operating_unit_users_rel",
+        "user_id",
+        "poid",
+        "Operating Units",
+        default=lambda self: self._default_operating_units(),
     )
     default_operating_unit_id = fields.Many2one(
-        'operating.unit', 'Default Operating Unit',
-        default=lambda self: self._default_operating_unit()
+        "operating.unit",
+        "Default Operating Unit",
+        default=lambda self: self._default_operating_unit(),
     )
