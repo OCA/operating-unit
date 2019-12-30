@@ -28,7 +28,7 @@ class ResUsers(models.Model):
         "operating.unit",
         "operating_unit_users_rel",
         "user_id",
-        "poid",
+        "operating_unit_id",
         "Operating Units",
         default=lambda self: self._default_operating_units(),
     )

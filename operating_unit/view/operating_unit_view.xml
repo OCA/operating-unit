@@ -41,7 +41,6 @@
     <record id="action_operating_unit_tree" model="ir.actions.act_window">
         <field name="name">Operating Units</field>
         <field name="res_model">operating.unit</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">
