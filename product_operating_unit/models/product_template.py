@@ -13,10 +13,16 @@ class ProductTemplate(models.Model):
     def _default_operating_unit_ids(self):
         if self.categ_id and self.categ_id.operating_unit_ids:
             return [(6, 0, self.categ_id.operating_unit_ids.ids)]
+<<<<<<< HEAD
         if self.env.user.default_operating_unit_id:
             return [(6, 0,
                      [self.env['res.users'].operating_unit_default_get(
                          self.env.uid).id])]
+=======
+        return [(6, 0,
+                 [self.env['res.users'].operating_unit_default_get(
+                     self.env.uid).id])]
+>>>>>>> [ADD] Added a product_operating_unit v12
 
     operating_unit_ids = fields.Many2many(
         'operating.unit',
@@ -39,6 +45,7 @@ class ProductTemplate(models.Model):
     @api.onchange('categ_id')
     def onchange_operating_unit_ids(self):
         for record in self:
+<<<<<<< HEAD
             if record.categ_id.operating_unit_ids:
                 record.operating_unit_ids = \
                     [(6, 0, record.categ_id.operating_unit_ids.ids)]
@@ -69,3 +76,7 @@ class ProductTemplate(models.Model):
         'product.category', 'Product Category',
         change_default=True, default=_get_default_category_id,
         required=True, help="Select category for the current product")
+=======
+            record.operating_unit_ids = \
+                [(6, 0, record.categ_id.operating_unit_ids.ids)]
+>>>>>>> [ADD] Added a product_operating_unit v12
