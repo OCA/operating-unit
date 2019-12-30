@@ -10,21 +10,22 @@ class OperatingUnit(models.Model):
     _name = "operating.unit"
     _description = "Operating Unit"
 
-    name = fields.Char("Name", required=True)
-    code = fields.Char("Code", required=True)
-    active = fields.Boolean("Active", default=True)
+    name = fields.Char(required=True)
+    code = fields.Char(required=True)
+    active = fields.Boolean(default=True)
     company_id = fields.Many2one(
         "res.company",
-        "Company",
         required=True,
         readonly=True,
-        default=lambda self: self.env["res.company"]._company_default_get(
-            "account.account"
-        ),
+        default=lambda self: self.env.company,
     )
     partner_id = fields.Many2one("res.partner", "Partner", required=True)
     user_ids = fields.Many2many(
-        "res.users", "operating_unit_users_rel", "poid", "user_id", "Users Allowed"
+        "res.users",
+        "operating_unit_users_rel",
+        "operating_unit_id",
+        "user_id",
+        "Users Allowed",
     )
 
     _sql_constraints = [
@@ -61,7 +62,6 @@ class OperatingUnit(models.Model):
         self.clear_caches()
         return res
 
-    @api.multi
     def write(self, vals):
         self.clear_caches()
         return super(OperatingUnit, self).write(vals)
