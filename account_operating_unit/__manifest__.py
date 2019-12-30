@@ -5,7 +5,7 @@
     "name": 'Accounting with Operating Units',
     "summary": "Introduces Operating Unit (OU) in invoices and "
                "Accounting Entries with clearing account",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd.,"
               "WilldooIT Pty Ltd,"
