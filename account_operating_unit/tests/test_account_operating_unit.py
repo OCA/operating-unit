@@ -150,7 +150,6 @@ class TestAccountOperatingUnit(AccountingTestCase):
             'account_id': self.partner1.property_account_payable_id.id,
             'operating_unit_id': operating_unit_id,
             'name': "Test Supplier Invoice",
-            'reference_type': "none",
             'type': 'in_invoice',
             'invoice_line_ids': lines,
         }
