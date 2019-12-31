@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record id="b2b_operating_unit" model="operating.unit">
+        <field name="name">B2B</field>
+        <field name="code">B2B</field>
+        <field name="partner_id" ref="base.main_partner"/>
+    </record>
+
+
+    <record id="b2c_operating_unit" model="operating.unit">
+        <field name="name">B2C</field>
+        <field name="code">B2C</field>
+        <field name="partner_id" ref="base.main_partner"/>
+    </record>
+
+    <record model="res.users" id="base.user_demo">
+        <field name="default_operating_unit_id"
+               ref="main_operating_unit"/>
+        <field name="operating_unit_ids"
+               eval="[(4, ref('main_operating_unit')),(4, ref('b2b_operating_unit')),(4, ref('b2b_operating_unit')),(4, ref('b2c_operating_unit'))]"/>
+        <field name="groups_id"
+               eval="[(4,ref('operating_unit.group_multi_operating_unit'))]"/>
+    </record>
+</odoo>

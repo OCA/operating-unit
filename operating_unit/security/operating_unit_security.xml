@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record model="ir.module.category" id="module_operating_units">
+        <field name="name">Operating Units Group</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="group_multi_operating_unit" model="res.groups">
+        <field name="name">Multiple Operating Unit</field>
+        <field name="category_id" ref="module_operating_units"/>
+    </record>
+
+    <record id="group_manager_operating_unit" model="res.groups">
+        <field name="name">Manager of Operating Units</field>
+        <field name="implied_ids" eval="[(4, ref('group_multi_operating_unit'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="category_id" ref="module_operating_units"/>
+    </record>
+
+    <record id="operating_unit_comp_rule" model="ir.rule">
+        <field name="name">Operating Unit Entry</field>
+        <field name="model_id" ref="model_operating_unit"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+    <record id="ir_rule_operating_unit_allowed_operating_units"
+            model="ir.rule">
+        <field name="model_id" ref="model_operating_unit"/>
+        <field name="domain_force">[('id','in',user.operating_unit_ids.ids)]</field>
+        <field name="name">Allowed operating units</field>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+        <field name="groups" eval="[(4, ref('group_multi_operating_unit'))]"/>
+    </record>
+
+    <record id="rule_operating_unit_manager" model="ir.rule">
+        <field name="name">Operating Unit Manager</field>
+        <field name="model_id" ref="model_operating_unit"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="groups" eval="[(4, ref('group_manager_operating_unit'))]"/>
+    </record>
+
+</odoo>
