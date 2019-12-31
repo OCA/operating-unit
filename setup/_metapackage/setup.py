@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-account_operating_unit',
         'odoo12-addon-analytic_operating_unit',
         'odoo12-addon-crm_operating_unit',
+        'odoo12-addon-fieldservice_operating_unit',
         'odoo12-addon-hr_contract_operating_unit',
         'odoo12-addon-hr_expense_operating_unit',
         'odoo12-addon-hr_payroll_account_operating_unit',
