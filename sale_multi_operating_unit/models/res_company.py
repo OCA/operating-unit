@@ -9,7 +9,10 @@ class ResCompany(models.Model):
 
     @api.model
     def _get_default_lead_description_template(self):
-        return """Delivery Address:
+        return """Notes:
+${object.notes}
+
+Delivery Address:
 ${object.sale_id.partner_shipping_id.name}
 ${object.sale_id.partner_shipping_id.street}
 ${object.sale_id.partner_shipping_id.street2}
