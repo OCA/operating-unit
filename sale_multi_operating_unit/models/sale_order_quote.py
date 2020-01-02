@@ -57,6 +57,14 @@ class SaleOrderQuote(models.Model):
                     browse(self._context.get('params')['id'])
             self.name = sale_id.name + ' - ' + self.operating_unit_id.code
 
+    def generate_lead_description(self):
+        Template = self.env["mail.template"]
+        description = Template.with_context()._render_template(
+            self.env.company_id.lead_description_template,
+            "sale.order.quote", self.id)
+        return description
+
+
     def prepare_crm_lead_values(self):
         teams = self.env['crm.team'].sudo().search([
             ('operating_unit_id', '=', self.operating_unit_id.id)
@@ -64,11 +72,13 @@ class SaleOrderQuote(models.Model):
         if not teams:
             raise UserError(_("This operating unit has no sales team! Please "
                               "consider creating one."))
+        description = self.generate_lead_description()
         return {
             'name':
                 self.sale_id.name + ' - ' + self.operating_unit_id.code,
             'partner_id': self.env.user.partner_id.id,
             'type': 'opportunity',
+            'description': description,
             'user_id': False,
             'team_id': teams[0].id,
         }
