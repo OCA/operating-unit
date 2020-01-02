@@ -3,4 +3,5 @@ from . import (
     sale_order_quote_line,
     sale_order_quote,
     sale_order,
+    res_company,
 )
