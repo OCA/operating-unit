@@ -9,9 +9,7 @@ class ResCompany(models.Model):
 
     @api.model
     def _get_default_lead_description_template(self):
-        return
-        """
-Delivery Address:
+        return """Delivery Address:
 ${object.sale_id.partner_shipping_id.name}
 ${object.sale_id.partner_shipping_id.street}
 ${object.sale_id.partner_shipping_id.street2}
@@ -23,8 +21,7 @@ ${object.sale_id.partner_shipping_id.country_id.name}
 Products:
 %for line in object.line_ids
 - ${line.name}: ${line.qty} ${line.uom_id.name}
-%endfor
-        """
+%endfor"""
 
     lead_description_template = fields.Text(
         string='Lead Description Template',
