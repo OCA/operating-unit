@@ -5,7 +5,6 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
-
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -20,3 +19,11 @@ class SaleOrder(models.Model):
         if result:
             raise ValidationError(_(
                 """The Operating Unit must be unique per sale order!"""))
+
+    @api.model
+    def create(self, vals):
+        res = super().create(vals)
+        if res.quote_ids:
+            for quote in res.quote_ids:
+                quote.name = quote.sale_id.name
+        return res
