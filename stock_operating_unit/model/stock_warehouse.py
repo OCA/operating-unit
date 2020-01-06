@@ -12,41 +12,50 @@ class StockWarehouse(models.Model):
         if self.company_id:
             company = self.company_id
         else:
-            company = self.env['res.company']._company_default_get(
-                'stock.inventory')
+            company = self.env["res.company"]._company_default_get("stock.inventory")
         for ou in self.env.user.operating_unit_ids:
             if company == self.company_id:
                 self.operating_unit_id = ou
 
     operating_unit_id = fields.Many2one(
-        comodel_name='operating.unit',
-        string='Operating Unit',
-        default=_default_operating_unit
+        comodel_name="operating.unit",
+        string="Operating Unit",
+        default=_default_operating_unit,
     )
 
     @api.multi
-    @api.constrains('operating_unit_id', 'company_id')
+    @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
-            if (rec.company_id and rec.operating_unit_id and
-                    rec.company_id != rec.operating_unit_id.company_id):
+            if (
+                rec.company_id
+                and rec.operating_unit_id
+                and rec.company_id != rec.operating_unit_id.company_id
+            ):
                 raise UserError(
-                    _('Configuration error. The Company in the Stock Warehouse'
-                      ' and in the Operating Unit must be the same.')
+                    _(
+                        "Configuration error. The Company in the Stock Warehouse"
+                        " and in the Operating Unit must be the same."
+                    )
                 )
 
 
 class StockWarehouseOrderPoint(models.Model):
-    _inherit = 'stock.warehouse.orderpoint'
+    _inherit = "stock.warehouse.orderpoint"
 
     @api.multi
-    @api.constrains('operating_unit_id', 'warehouse_id', 'location_id')
+    @api.constrains("operating_unit_id", "warehouse_id", "location_id")
     def _check_location(self):
         for rec in self:
-            if (rec.warehouse_id and rec.location_id and
-                    rec.warehouse_id.operating_unit_id !=
-                    rec.location_id.operating_unit_id):
+            if (
+                rec.warehouse_id
+                and rec.location_id
+                and rec.warehouse_id.operating_unit_id
+                != rec.location_id.operating_unit_id
+            ):
                 raise UserError(
-                    _('Configuration Error. The Operating Unit of the '
-                      'Warehouse and the Location must be the same. ')
+                    _(
+                        "Configuration Error. The Operating Unit of the "
+                        "Warehouse and the Location must be the same. "
+                    )
                 )
