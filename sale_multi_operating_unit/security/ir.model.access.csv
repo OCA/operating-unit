@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order_quote_user,sale.order.quote.user,model_sale_order_quote,sales_team.group_sale_salesman,1,1,1,1
+access_sale_order_quote_line_user,sale.order.quote.line.user,model_sale_order_quote_line,sales_team.group_sale_salesman,1,1,1,1
