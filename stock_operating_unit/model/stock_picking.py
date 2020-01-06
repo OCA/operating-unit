@@ -6,15 +6,16 @@ from odoo.exceptions import UserError
 
 
 class StockPicking(models.Model):
-    _inherit = 'stock.picking'
+    _inherit = "stock.picking"
 
     operating_unit_id = fields.Many2one(
-        'operating.unit',
-        'Requesting Operating Unit',
+        "operating.unit",
+        "Requesting Operating Unit",
         readonly=True,
-        states={'draft': [('readonly', False)]})
+        states={"draft": [("readonly", False)]},
+    )
 
-    @api.onchange('picking_type_id', 'partner_id')
+    @api.onchange("picking_type_id", "partner_id")
     def onchange_picking_type(self):
         res = super(StockPicking, self).onchange_picking_type()
         if self.picking_type_id:
@@ -23,25 +24,35 @@ class StockPicking(models.Model):
         return res
 
     @api.multi
-    @api.constrains('operating_unit_id', 'company_id')
+    @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
-            if (rec.company_id and rec.operating_unit_id and
-                    rec.company_id != rec.operating_unit_id.company_id):
+            if (
+                rec.company_id
+                and rec.operating_unit_id
+                and rec.company_id != rec.operating_unit_id.company_id
+            ):
                 raise UserError(
-                    _('Configuration error. The Company in the Stock Picking '
-                      'and in the Operating Unit must be the same.')
+                    _(
+                        "Configuration error. The Company in the Stock Picking "
+                        "and in the Operating Unit must be the same."
+                    )
                 )
 
     @api.multi
-    @api.constrains('operating_unit_id', 'picking_type_id')
+    @api.constrains("operating_unit_id", "picking_type_id")
     def _check_picking_type_operating_unit(self):
         for rec in self:
             warehouse = rec.picking_type_id.warehouse_id
-            if (rec.picking_type_id and rec.operating_unit_id and
-                    warehouse.operating_unit_id != rec.operating_unit_id):
+            if (
+                rec.picking_type_id
+                and rec.operating_unit_id
+                and warehouse.operating_unit_id != rec.operating_unit_id
+            ):
                 raise UserError(
-                    _('Configuration error. The Operating Unit of the picking '
-                      'must be the same as that of the warehouse of the '
-                      'Picking Type.')
+                    _(
+                        "Configuration error. The Operating Unit of the picking "
+                        "must be the same as that of the warehouse of the "
+                        "Picking Type."
+                    )
                 )

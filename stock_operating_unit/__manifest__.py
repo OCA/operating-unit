@@ -8,19 +8,13 @@
     "version": "12.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent, "
-              "Serpent Consulting Services Pvt. Ltd., "
-              "Odoo Community Association (OCA)",
+    "Serpent Consulting Services Pvt. Ltd., "
+    "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "depends": ["stock", "account_operating_unit"],
-    "data": [
-        "security/stock_security.xml",
-        "data/stock_data.xml",
-        "view/stock.xml",
-    ],
-    "demo": [
-        "demo/stock_demo.xml",
-    ],
+    "data": ["security/stock_security.xml", "data/stock_data.xml", "view/stock.xml"],
+    "demo": ["demo/stock_demo.xml"],
     "installable": True,
     "post_init_hook": "update_operating_unit_location",
 }
