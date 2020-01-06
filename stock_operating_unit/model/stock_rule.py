@@ -6,9 +6,10 @@ from odoo import fields, models
 
 
 class StockRule(models.Model):
-    _inherit = 'stock.rule'
+    _inherit = "stock.rule"
 
     operating_unit_id = fields.Many2one(
-        'operating.unit',
-        related='warehouse_id.operating_unit_id',
-        domain="[('user_ids', '=', uid)]")
+        "operating.unit",
+        related="warehouse_id.operating_unit_id",
+        domain="[('user_ids', '=', uid)]",
+    )
