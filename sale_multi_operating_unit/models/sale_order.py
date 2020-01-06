@@ -9,3 +9,11 @@ class SaleOrder(models.Model):
 
     quote_ids = fields.One2many(
         'sale.order.quote', 'sale_id', string='Internal Quotes')
+
+    @api.model
+    def create(self, vals):
+        res = super().create(vals)
+        if res.quote_ids:
+            for quote in res.quote_ids:
+                quote.name = quote.sale_id.name
+        return res
