@@ -6,10 +6,10 @@ from odoo import _, api, exceptions, models
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = "account.invoice"
 
     # Load all unsold PO lines
-    @api.onchange('purchase_id')
+    @api.onchange("purchase_id")
     def purchase_order_change(self):
         """
         Override to add Operating Unit from Purchase Order to Invoice.
@@ -19,27 +19,32 @@ class AccountInvoice(models.Model):
             self.operating_unit_id = self.purchase_id.operating_unit_id.id
         return super(AccountInvoice, self).purchase_order_change()
 
-    @api.onchange('operating_unit_id')
+    @api.onchange("operating_unit_id")
     def _onchange_allowed_purchase_ids(self):
-        '''
+        """
         Show only the purchase orders that have the same operating unit
-        '''
+        """
         result = super(AccountInvoice, self)._onchange_allowed_purchase_ids()
 
-        result['domain']['purchase_id'] += [('operating_unit_id', '=',
-                                             self.operating_unit_id.id)]
+        result["domain"]["purchase_id"] += [
+            ("operating_unit_id", "=", self.operating_unit_id.id)
+        ]
         return result
 
 
 class AccountInvoiceLines(models.Model):
-    _inherit = 'account.invoice.line'
+    _inherit = "account.invoice.line"
 
-    @api.constrains('operating_unit_id', 'purchase_line_id')
+    @api.constrains("operating_unit_id", "purchase_line_id")
     def _check_invoice_ou(self):
         for line in self:
-            if (line.purchase_line_id and line.operating_unit_id !=
-                    line.purchase_line_id.operating_unit_id):
+            if (
+                line.purchase_line_id
+                and line.operating_unit_id != line.purchase_line_id.operating_unit_id
+            ):
                 raise exceptions.ValidationError(
-                    _('The operating unit of the purchase order must '
-                      'be the same as in the associated invoices.')
+                    _(
+                        "The operating unit of the purchase order must "
+                        "be the same as in the associated invoices."
+                    )
                 )
