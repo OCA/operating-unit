@@ -7,7 +7,7 @@
     "name": "Operating Unit in Purchase Orders",
     "summary": "Adds the concecpt of operating unit (OU) in purchase order "
     "management",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "author": "Eficent, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
