@@ -5,6 +5,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.tests import common
+from odoo import fields
 
 
 class TestPurchaseRequestOperatingUnit(common.TransactionCase):
@@ -23,6 +24,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
         # Product
         self.product1 = self.env.ref('product.product_product_7')
+        self.product1.purchase_request = True
         self.product_uom = self.env.ref('uom.product_uom_unit')
         # User
         self.user_root = self.env.ref('base.user_root')
@@ -30,7 +32,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self.grp_pr_mngr = self.env.\
             ref('purchase_request.group_purchase_request_manager')
         # Picking Type
-        b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
+        self.b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
         self.b2c_type_in_id = b2c_wh.in_type_id.id
         self.picking_type = self.env.ref('stock.picking_type_in')
 
@@ -94,3 +96,22 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
                     ('operating_unit_id', '=', self.ou1.id)])
         self.assertEqual(record.ids, [], 'User 2 should not have access to '
                          'OU %s' % self.ou1.name)
+
+    def procurement_group_run(self, name, product, qty):
+        values = {
+            'date_planned': fields.Datetime.now(),
+            'warehouse_id': self.b2c_wh,
+            'route_ids': self.env.ref('purchase_stock.route_warehouse0_buy'),
+            'company_id': self.env.ref('base.main_company'),
+        }
+        return self.env['procurement.group'].run(
+            product, qty,
+            product.uom_id, self.b2c_wh.lot_stock_id,
+            name, 'Test Purchase Request Procurement', values)
+
+    def test_procure_purchase_request(self):
+        self.procurement_group_run(
+            'Test Purchase Request Procurement', self.product1, 10)
+        pr = self.env['purchase.request'].search(
+            [('origin', '=', 'Test Purchase Request Procurement')])
+        self.assertEquals(pr.operating_unit_id, self.b2c)
