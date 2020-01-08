@@ -62,3 +62,29 @@ class SaleOrder(models.Model):
                 raise ValidationError(_('Configuration error!\nThe Operating'
                                         'Unit in the Sales Order and in the'
                                         ' Warehouse must be the same.'))
+
+
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    @api.multi
+    def _prepare_procurement_values(self, group_id=False):
+        res = super(SaleOrderLine, self).\
+            _prepare_procurement_values(group_id)
+        res.update({
+            'operating_unit_id':
+                self.order_id.operating_unit_id.id,
+        })
+        return res
+
+    @api.multi
+    def _purchase_service_prepare_line_values(self, purchase_order,
+                                              quantity=False):
+        res = super(SaleOrderLine, self).\
+            _purchase_service_prepare_line_values(
+                purchase_order=purchase_order, quantity=quantity)
+        res.update({
+            'operating_unit_id':
+                self.order_id.operating_unit_id.id,
+        })
+        return res

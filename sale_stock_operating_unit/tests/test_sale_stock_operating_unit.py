@@ -30,9 +30,11 @@ class TestSaleStockOperatingUnit(common.TransactionCase):
         # Price list
         self.pricelist = self.env.ref('product.list0')
         # Products
-        self.product1 = self.env.ref(
-            'product.product_product_7')
-        self.product1.write({'invoice_policy': 'order'})
+        self.product1 = self.env['product.product'].create({
+            'name': 'XX',
+            'type': 'product',
+            'invoice_policy': 'order'
+        })
         # Create user1
         self.user1 = self._create_user('user_1', [self.grp_sale_user,
                                                   self.grp_acc_user],
@@ -51,6 +53,7 @@ class TestSaleStockOperatingUnit(common.TransactionCase):
         # Warehouses
         self.ou1_wh = self.env.ref('stock.warehouse0')
         self.b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
+        self.mto_route = self.b2c_wh.mto_pull_id.route_id
         # Locations
         self.b2c_wh.lot_stock_id.write({'company_id': self.company.id,
                                         'operating_unit_id': self.b2c.id})

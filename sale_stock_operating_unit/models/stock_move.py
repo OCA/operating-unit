@@ -19,3 +19,12 @@ class StockMove(models.Model):
         })
 
         return values
+
+    def _prepare_procurement_values(self):
+        res = super(StockMove, self).\
+            _prepare_procurement_values()
+        res.update({
+            'operating_unit_id':
+                self.group_id.sale_id.operating_unit_id.id,
+        })
+        return res
