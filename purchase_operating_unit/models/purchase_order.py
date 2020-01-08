@@ -49,16 +49,12 @@ class PurchaseOrder(models.Model):
     )
 
     picking_type_id = fields.Many2one(
-        comodel_name="stock.picking.type",
-        string="Deliver To",
-        help="This will determine picking type of incoming shipment",
-        required=True,
         states={
             "confirmed": [("readonly", True)],
             "approved": [("readonly", True)],
             "done": [("readonly", True)],
         },
-        default=lambda self: self._default_picking_type(),
+        default=_default_picking_type,
     )
 
     @api.constrains("operating_unit_id", "picking_type_id")
