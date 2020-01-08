@@ -52,10 +52,8 @@ class SaleOrderQuote(models.Model):
         if self.operating_unit_id:
             sale_id = self.env['sale.order'].browse(
                 self._context.get('active_id'))
-            if not sale_id:
-                sale_id = self.env['sale.order']. \
-                    browse(self._context.get('params')['id'])
-            self.name = sale_id.name + ' - ' + self.operating_unit_id.code
+            self.name = sale_id.name or 'New' + ' - ' + self.\
+                operating_unit_id.code
 
     def generate_lead_description(self):
         Template = self.env["mail.template"]
