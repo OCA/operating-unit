@@ -38,6 +38,8 @@ class SaleOrderQuote(models.Model):
            "sale order!")),
     ]
 
+    notes = fields.Text('Notes')
+
     @api.multi
     @api.constrains('operating_unit_id')
     def _check_operating_unit_id(self):
