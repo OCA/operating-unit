@@ -5,6 +5,7 @@
 import time
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from odoo.tests import common
+from odoo import fields
 
 
 class TestPurchaseOperatingUnit(common.TransactionCase):
@@ -25,6 +26,9 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2B Operating Unit
         self.b2b = self.env.ref('operating_unit.b2b_operating_unit')
+        # B2C Operating Unit
+        self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
+        self.b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
         # Partner
         self.partner1 = self.env.ref('base.res_partner_1')
         # Products
@@ -108,3 +112,22 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.env['account.invoice'].with_context(purchase_context).\
             create(invoice_vals)
         return True
+
+    def procurement_group_run(self, name, product, qty):
+        values = {
+            'date_planned': fields.Datetime.now(),
+            'warehouse_id': self.b2c_wh,
+            'route_ids': self.env.ref('purchase_stock.route_warehouse0_buy'),
+            'company_id': self.env.ref('base.main_company'),
+        }
+        return self.env['procurement.group'].run(
+            product, qty,
+            product.uom_id, self.b2c_wh.lot_stock_id,
+            name, 'Test Purchase Order Procurement', values)
+
+    def test_procure_purchase_order(self):
+        self.procurement_group_run(
+            'Test Purchase Order Procurement', self.product1, 10)
+        pr = self.env['purchase.order'].search(
+            [('origin', '=', 'Test Purchase Order Procurement')])
+        self.assertEquals(pr.operating_unit_id, self.b2c)

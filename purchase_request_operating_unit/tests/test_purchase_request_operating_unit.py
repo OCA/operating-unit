@@ -33,7 +33,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
             ref('purchase_request.group_purchase_request_manager')
         # Picking Type
         self.b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
-        self.b2c_type_in_id = b2c_wh.in_type_id.id
+        self.b2c_type_in_id = self.b2c_wh.in_type_id.id
         self.picking_type = self.env.ref('stock.picking_type_in')
 
         # Creates Users and Purchase request
