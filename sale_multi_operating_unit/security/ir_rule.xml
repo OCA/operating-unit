@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="operating_unit_sale_user" model="ir.rule">
+        <field name="name">Sales user can read all operating units</field>
+        <field name="model_id" ref="operating_unit.model_operating_unit"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="global" eval="False"/>
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+</odoo>
