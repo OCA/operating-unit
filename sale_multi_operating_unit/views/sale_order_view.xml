@@ -29,6 +29,9 @@
                                     <field name="lead_id" force_save="1"/>
                                 </group>
                             </group>
+                            <group string="Notes">
+                                <field name="notes" nolabel="1"/>
+                            </group>
                             <field name="line_ids" widget="section_and_note_one2many" mode="tree,kanban">
                                 <form>
                                     <group>
