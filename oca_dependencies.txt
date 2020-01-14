@@ -1,3 +1,5 @@
 contract
 field-service
 purchase-workflow
+field-service
+partner-contact
