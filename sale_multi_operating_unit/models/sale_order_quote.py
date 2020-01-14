@@ -38,6 +38,12 @@ class SaleOrderQuote(models.Model):
            "sale order!")),
     ]
 
+    notes = fields.Text('Notes')
+
+    expected_date = fields.Date(related='lead_id.date_deadline')
+    assigned_to = fields.Many2one('res.users', related='lead_id.user_id')
+
+
     @api.multi
     @api.constrains('operating_unit_id')
     def _check_operating_unit_id(self):

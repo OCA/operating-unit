@@ -9,11 +9,14 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook/page[@name='other_information']" position="after">
-                <page string="Internal Quotes">
+                <page string="Internal Quote Requests">
                     <field name="quote_ids" context="{'active_id': active_id}">
                         <tree>
                             <field name="operating_unit_id"/>
                             <field name="lead_id"/>
+                            <field name="notes"/>
+                            <field name="expected_date"/>
+                            <field name="assigned_to"/>
                         </tree>
                         <form string="Sale Multiple Operating Unit">
                             <header>
@@ -24,9 +27,11 @@
                                     <field name="operating_unit_id"/>
                                     <field name="name"/>
                                     <field name="sale_id" context="{'default_sale_id': active_id}" invisible="1"/>
+                                    <field name="expected_date"/>
                                 </group>
                                 <group>
                                     <field name="lead_id" force_save="1"/>
+                                    <field name="assigned_to"/>
                                 </group>
                             </group>
                             <field name="line_ids" widget="section_and_note_one2many" mode="tree,kanban">
