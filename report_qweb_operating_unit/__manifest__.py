@@ -12,7 +12,8 @@
               'Odoo Community Association (OCA)',
     'website': 'https://odoo-community.org/',
     'depends': [
-        'operating_unit'
+        'operating_unit',
+        'partner_fax',
     ],
     'data': [
         'views/report_qweb_operating_unit.xml',
