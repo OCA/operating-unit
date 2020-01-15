@@ -1,0 +1,19 @@
+<odoo noupdate="1">
+
+    <!-- Copyright 2017 Niaga Solution - Edi Santoso <repodevs@gmail.com>
+    Copyright (C) 2019 Serpent Consulting Services
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+
+    <record id="ir_rule_res_partner_allowed_operating_units"
+            model="ir.rule">
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">['|',('operating_unit_ids','=',False),('operating_unit_ids','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Partner from allowed operating units</field>
+        <field name="global" eval="True"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
+
+</odoo>
