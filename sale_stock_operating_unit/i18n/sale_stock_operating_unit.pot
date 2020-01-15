@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_stock_operating_unit
-#: code:addons/sale_stock_operating_unit/models/sale_order.py:62
+#: code:addons/sale_stock_operating_unit/models/sale_order.py:64
 #, python-format
 msgid "Configuration error!\n"
 "The OperatingUnit in the Sales Order and in the Warehouse must be the same."
