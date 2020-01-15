@@ -57,8 +57,10 @@ class SaleOrder(models.Model):
     @api.constrains('operating_unit_id', 'warehouse_id')
     def _check_wh_operating_unit(self):
         for rec in self:
-            if rec.operating_unit_id and rec.operating_unit_id != \
-                    rec.warehouse_id.operating_unit_id:
+            if (rec.warehouse_id.operating_unit_id and
+                    rec.operating_unit_id and
+                    rec.operating_unit_id !=
+                    rec.warehouse_id.operating_unit_id):
                 raise ValidationError(_('Configuration error!\nThe Operating'
                                         'Unit in the Sales Order and in the'
                                         ' Warehouse must be the same.'))
