@@ -47,7 +47,8 @@
                 <attribute name="context">{
                     'type': type,
                     'journal_id': journal_id,
-                    'operating_unit': operating_unit_id}
+                    'operating_unit': operating_unit_id,
+                    'default_company_id': company_id}
                 </attribute>
             </field>
             <field name="invoice_line_ids">
