@@ -30,7 +30,7 @@ class ResUsers(models.Model):
     def check_partner_operating_unit(self):
         if self.partner_id.operating_unit_ids and \
                 self.default_operating_unit_id.id not in \
-                self.partner_id.operating_unit_ids:
+                self.partner_id.operating_unit_ids.ids:
             raise UserError(_(
                 "The operating units of the partner must include the default "
                 "one of the user."))
