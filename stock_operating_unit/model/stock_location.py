@@ -24,7 +24,7 @@ class StockLocation(models.Model):
                 ]
             )
             for w in warehouses:
-                if rec.operating_unit_id != w.operating_unit_id:
+                if w.operating_unit_id and rec.operating_unit_id != w.operating_unit_id:
                     raise UserError(
                         _(
                             "Configuration error. This location is "

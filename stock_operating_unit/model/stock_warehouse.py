@@ -27,7 +27,8 @@ class StockWarehouse(models.Model):
     def _check_company_operating_unit(self):
         for rec in self:
             if (
-                rec.company_id
+                rec.operating_unit_id
+                and rec.company_id
                 and rec.operating_unit_id
                 and rec.company_id != rec.operating_unit_id.company_id
             ):
@@ -46,7 +47,8 @@ class StockWarehouseOrderPoint(models.Model):
     def _check_location(self):
         for rec in self:
             if (
-                rec.warehouse_id
+                rec.warehouse_id.operating_unit_id
+                and rec.warehouse_id
                 and rec.location_id
                 and rec.warehouse_id.operating_unit_id
                 != rec.location_id.operating_unit_id

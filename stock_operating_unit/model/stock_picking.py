@@ -43,7 +43,8 @@ class StockPicking(models.Model):
         for rec in self:
             warehouse = rec.picking_type_id.warehouse_id
             if (
-                rec.picking_type_id
+                warehouse.operating_unit_id
+                and rec.picking_type_id
                 and rec.operating_unit_id
                 and warehouse.operating_unit_id != rec.operating_unit_id
             ):
