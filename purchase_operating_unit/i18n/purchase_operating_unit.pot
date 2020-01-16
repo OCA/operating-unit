@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: purchase_operating_unit
-#: code:addons/purchase_operating_unit/models/purchase_order.py:82
+#: code:addons/purchase_operating_unit/models/purchase_order.py:84
 #, python-format
 msgid "Configuration error. The Company in the Purchase Order and in the Operating Unit must be the same."
 msgstr ""
 
 #. module: purchase_operating_unit
-#: code:addons/purchase_operating_unit/models/purchase_order.py:71
+#: code:addons/purchase_operating_unit/models/purchase_order.py:73
 #, python-format
 msgid "Configuration error. The Quotation / Purchase Order and the Warehouse of picking type must belong to the same Operating Unit."
 msgstr ""
@@ -41,7 +41,7 @@ msgid "Invoice Line"
 msgstr ""
 
 #. module: purchase_operating_unit
-#: code:addons/purchase_operating_unit/models/purchase_order.py:97
+#: code:addons/purchase_operating_unit/models/purchase_order.py:99
 #, python-format
 msgid "No Warehouse found with the Operating Unit indicated in the Purchase Order"
 msgstr ""
