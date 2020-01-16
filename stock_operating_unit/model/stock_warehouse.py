@@ -28,7 +28,8 @@ class StockWarehouse(models.Model):
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
         for rec in self:
-            if (rec.company_id and rec.operating_unit_id and
+            if (rec.operating_unit_id and rec.company_id and
+                    rec.operating_unit_id and
                     rec.company_id != rec.operating_unit_id.company_id):
                 raise UserError(
                     _('Configuration error. The Company in the Stock Warehouse'
@@ -43,7 +44,8 @@ class StockWarehouseOrderPoint(models.Model):
     @api.constrains('operating_unit_id', 'warehouse_id', 'location_id')
     def _check_location(self):
         for rec in self:
-            if (rec.warehouse_id and rec.location_id and
+            if (rec.warehouse_id.operating_unit_id and
+                    rec.warehouse_id and rec.location_id and
                     rec.warehouse_id.operating_unit_id !=
                     rec.location_id.operating_unit_id):
                 raise UserError(
