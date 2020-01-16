@@ -1,0 +1,48 @@
+<odoo>
+    <!-- Copyright 2017 Niaga Solution - Edi Santoso <repodevs@gmail.com>
+    Copyright (C) 2019 Serpent Consulting Services
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+
+    <!-- Partner Form View  -->
+    <record model="ir.ui.view" id="view_partner_form">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="operating_unit_ids"
+                       groups="operating_unit.group_multi_operating_unit"
+                       domain="[('company_id','=', company_id)]"
+                       options="{'no_create': True}"
+                       widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Partner Tree View -->
+    <record model="ir.ui.view" id="view_partner_tree">
+        <field name="name">res.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="operating_unit_ids"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Partner Search View -->
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="operating_unit_ids"
+                       groups="operating_unit.group_multi_operating_unit"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
