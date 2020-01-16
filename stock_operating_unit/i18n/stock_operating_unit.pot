@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_warehouse.py:50
+#: code:addons/stock_operating_unit/model/stock_warehouse.py:52
 #, python-format
 msgid "Configuration Error. The Operating Unit of the Warehouse and the Location must be the same. "
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:51
+#: code:addons/stock_operating_unit/model/stock_location.py:52
 #, python-format
 msgid "Configuration error. The Company in the Stock Location and in the Operating Unit must be the same."
 msgstr ""
@@ -32,19 +32,19 @@ msgid "Configuration error. The Company in the Stock Picking and in the Operatin
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_warehouse.py:34
+#: code:addons/stock_operating_unit/model/stock_warehouse.py:35
 #, python-format
 msgid "Configuration error. The Company in the Stock Warehouse and in the Operating Unit must be the same."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_picking.py:44
+#: code:addons/stock_operating_unit/model/stock_picking.py:45
 #, python-format
 msgid "Configuration error. The Operating Unit of the picking must be the same as that of the warehouse of the Picking Type."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:65
+#: code:addons/stock_operating_unit/model/stock_location.py:66
 #, python-format
 msgid "Configuration error. The Parent Stock Location must belong to the same Operating Unit."
 msgstr ""
@@ -56,14 +56,14 @@ msgid "Configuration error. The Stock moves must be related to a location (sourc
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:35
-#: code:addons/stock_operating_unit/model/stock_location.py:40
+#: code:addons/stock_operating_unit/model/stock_location.py:36
+#: code:addons/stock_operating_unit/model/stock_location.py:41
 #, python-format
 msgid "Configuration error. The operating unit should be assigned to internal locations only."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:24
+#: code:addons/stock_operating_unit/model/stock_location.py:25
 #, python-format
 msgid "Configuration error. This location is assigned to a warehouse that belongs to a different operating unit."
 msgstr ""
