@@ -13,10 +13,11 @@
                     <field name="quote_ids" context="{'active_id': active_id}">
                         <tree>
                             <field name="operating_unit_id"/>
-                            <field name="lead_id"/>
                             <field name="notes"/>
                             <field name="expected_date"/>
                             <field name="assigned_to"/>
+                            <field name="lead_id" attrs="{'invisible': [('lead_id', '=', False)]}"/>
+                            <button name="action_send" type="object" string="Send" class="oe_highlight" attrs="{'invisible': [('lead_id', '!=', False)]}"/>
                         </tree>
                         <form string="Sale Multiple Operating Unit">
                             <header>
@@ -30,11 +31,14 @@
                                     <field name="expected_date"/>
                                 </group>
                                 <group>
-                                    <field name="lead_id" force_save="1"/>
                                     <field name="assigned_to"/>
+                                    <field name="lead_id" force_save="1" attrs="{'invisible': [('lead_id', '=', False)]}"/>
                                 </group>
                             </group>
-                            <field name="line_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                            <group string="Notes">
+                                <field name="notes" nolabel="1"/>
+                            </group>
+                            <field name="line_ids">
                                 <form>
                                     <group>
                                         <field name="product_id"/>

@@ -5,6 +5,7 @@
 * Send the internal quote
 
 As a user in the other OUs
+
 * Go to CRM
 * A new lead has been created for the internal customer
 * The description contains the delivery address and the list of products and quantity to quote
