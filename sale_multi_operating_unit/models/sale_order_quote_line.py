@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class SaleOrderQuoteLine(models.Model):
     _name = 'sale.order.quote.line'
+    _description = 'Internal Quote Line'
 
     name = fields.Char(string='Description', required=True)
     quote_id = fields.Many2one(
