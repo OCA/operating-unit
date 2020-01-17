@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 
 class SaleOrderQuote(models.Model):
     _name = 'sale.order.quote'
+    _description = 'Internal Quote'
 
     name = fields.Char(string='Name')
     operating_unit_id = fields.Many2one(
