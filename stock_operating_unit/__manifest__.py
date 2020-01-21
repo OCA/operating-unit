@@ -5,7 +5,7 @@
 {
     "name": "Stock with Operating Units",
     "summary": "Adds the concept of operating unit (OU) in stock management",
-    "version": "12.0.1.0.1",
+    "version": "12.0.1.1.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent, "
               "Serpent Consulting Services Pvt. Ltd., "
