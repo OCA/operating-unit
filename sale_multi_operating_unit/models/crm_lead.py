@@ -11,7 +11,8 @@ class CRMLead(models.Model):
     @api.onchange('date_deadline')
     def onchange_date_deadline(self):
         if self.date_deadline:
-            quote_ids = self.env['sale.order.quote'].search([('lead_id', '=', self.name)])
+            quote_ids = self.env['sale.order.quote'].\
+                search([('lead_id', '=', self.name)])
             if quote_ids:
                 for quote_id in quote_ids:
                     quote_id.write({'expected_date': self.date_deadline})
