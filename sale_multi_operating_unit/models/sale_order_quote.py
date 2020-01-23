@@ -107,7 +107,7 @@ class SaleOrderQuote(models.Model):
     @api.multi
     def write(self, vals):
         res = super().write(vals)
-        if vals.get('expected_date', False and self.lead_id):
+        if vals.get('expected_date', False) and self.lead_id:
             self.lead_id.date_deadline = vals.get('expected_date')
         if vals.get('state', False) == 'sent':
             for rec in self:
