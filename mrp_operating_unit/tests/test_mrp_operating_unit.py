@@ -88,7 +88,7 @@ class TestMrpOperatingUnit(common.TransactionCase):
         return mrp
 
     def test_mrp_ou(self):
-        record = self.mrp_production_model.sudo(self.user2.id).search(
+        record = self.mrp_production_model.with_user(self.user2.id).search(
             [("id", "=", self.mrp_record1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
