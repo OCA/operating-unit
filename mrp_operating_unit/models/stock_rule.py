@@ -6,13 +6,22 @@ from odoo import api, models
 
 class StockRule(models.Model):
 
-    _inherit = 'stock.rule'
+    _inherit = "stock.rule"
 
     @api.multi
-    def _prepare_mo_vals(self, product_id, product_qty, product_uom,
-                         location_id, name, origin, values, bom):
+    def _prepare_mo_vals(
+        self,
+        product_id,
+        product_qty,
+        product_uom,
+        location_id,
+        name,
+        origin,
+        values,
+        bom,
+    ):
         mo_vals = super(StockRule, self)._prepare_mo_vals(
-            product_id, product_qty, product_uom, location_id, name, origin,
-            values, bom)
-        mo_vals['operating_unit_id'] = self.operating_unit_id.id
+            product_id, product_qty, product_uom, location_id, name, origin, values, bom
+        )
+        mo_vals["operating_unit_id"] = self.operating_unit_id.id
         return mo_vals
