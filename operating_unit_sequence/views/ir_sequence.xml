@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ir_sequence_operating_unit_form" model="ir.ui.view">
+        <field name="name">ir.sequence.operating.unit.form</field>
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" ref="base.sequence_view"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_ir_sequence_operating_unit_tree" model="ir.ui.view">
+        <field name="name">ir.sequence.operating.unit.tree</field>
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" ref="base.sequence_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>
