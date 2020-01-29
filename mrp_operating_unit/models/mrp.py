@@ -23,32 +23,18 @@ class MrpProduction(models.Model):
     @api.constrains("operating_unit_id", "location_src_id", "location_dest_id")
     def _check_location_operating_unit(self):
         for mo in self:
-            if not mo.operating_unit_id and (
+            # no operating unit on mo but on locations
+            no_mo_ou = not mo.operating_unit_id and (
                 mo.location_src_id.operating_unit_id
                 or mo.location_dest_id.operating_unit_id
-            ):
-                raise ValidationError(
-                    _(
-                        "The Operating Unit of the Manufacturing Order must match "
-                        "with that of the Raw Materials and Finished Product "
-                        "Locations."
-                    )
-                )
-            if (
-                mo.operating_unit_id
-                and mo.operating_unit_id != mo.location_src_id.operating_unit_id
-            ):
-                raise ValidationError(
-                    _(
-                        "The Operating Unit of the Manufacturing Order must match "
-                        "with that of the Raw Materials and Finished Product "
-                        "Locations."
-                    )
-                )
-            if (
-                mo.operating_unit_id
-                and mo.operating_unit_id != mo.location_dest_id.operating_unit_id
-            ):
+            )
+            # operating unit on mo but not on locations
+            different_ou = mo.operating_unit_id and (
+                mo.operating_unit_id != mo.location_src_id.operating_unit_id
+                or mo.operating_unit_id != mo.location_dest_id.operating_unit_id
+            )
+
+            if no_mo_ou or different_ou:
                 raise ValidationError(
                     _(
                         "The Operating Unit of the Manufacturing Order must match "
