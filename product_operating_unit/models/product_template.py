@@ -13,9 +13,10 @@ class ProductTemplate(models.Model):
     def _default_operating_unit_ids(self):
         if self.categ_id and self.categ_id.operating_unit_ids:
             return [(6, 0, self.categ_id.operating_unit_ids.ids)]
-        return [(6, 0,
-                 [self.env['res.users'].operating_unit_default_get(
-                     self.env.uid).id])]
+        if self.env.user.default_operating_unit_id:
+            return [(6, 0,
+                    [self.env['res.users'].operating_unit_default_get(
+                        self.env.uid).id])]
 
     operating_unit_ids = fields.Many2many(
         'operating.unit',
