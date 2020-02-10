@@ -13,7 +13,6 @@
         'operating_unit'
     ],
     'data': [
-        'views/operating_unit.xml',
         'views/ir_sequence.xml'
     ],
     'installable': True,
