@@ -3,7 +3,7 @@
 # Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, AccessError, RedirectWarning
 
 
 class ProductTemplate(models.Model):
@@ -41,3 +41,29 @@ class ProductTemplate(models.Model):
         for record in self:
             record.operating_unit_ids = \
                 [(6, 0, record.categ_id.operating_unit_ids.ids)]
+
+    def _get_default_category_id(self):
+        for ou_id in self.env.user.operating_unit_ids:
+            category = self.env['product.category'].\
+                search([], limit=1)
+            if category:
+                return category.id
+            else:
+                try:
+                    self.env.ref('product.product_category_all',
+                                 raise_if_not_found=False).name
+                except AccessError:
+                    err_msg = _('You must define at least one product \
+                        category within your Operating Unit in order to be \
+                        able to create products.')
+                    redir_msg = _('Go to Product Categories')
+                    raise RedirectWarning(err_msg,
+                                          self.env.ref('product.\
+                                          product_category_action_form').id,
+                                          redir_msg)
+                return super()._get_default_category_id()
+
+    categ_id = fields.Many2one(
+        'product.category', 'Product Category',
+        change_default=True, default=_get_default_category_id,
+        required=True, help="Select category for the current product")
