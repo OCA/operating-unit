@@ -57,13 +57,6 @@ Usage
 This module defines the operating unit entity and the user's security rules.
 Other modules extend the standard Odoo apps with the OU.
 
-Known issues / Roadmap
-======================
-
-
-The column name of the table operating_unit_users_rel is bad. Change it in v13
-and create the proper migration script.
-
 Bug Tracker
 ===========
 
