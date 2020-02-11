@@ -14,6 +14,10 @@
     "category": "Product",
     "depends": [
         "product",
+<<<<<<< HEAD
+=======
+        "stock",
+>>>>>>> [IMP] Create Product Access Error
         "operating_unit"
     ],
     "license": "LGPL-3",
