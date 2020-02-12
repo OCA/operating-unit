@@ -59,6 +59,18 @@
                     options="{'no_create': True}"
                 />
             </field>
+            <xpath
+                expr="//field[@name='expense_line_ids']/tree/field[@name='name']"
+                position="after"
+            >
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    domain="[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]"
+                    options="{'no_create': True}"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>
