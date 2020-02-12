@@ -18,7 +18,6 @@ class HrExpenseExpense(models.Model):
         ),
     )
 
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -35,7 +34,6 @@ class HrExpenseExpense(models.Model):
                     )
                 )
 
-    @api.multi
     @api.constrains("operating_unit_id", "sheet_id")
     def _check_expense_operating_unit(self):
         for rec in self:
@@ -53,7 +51,6 @@ class HrExpenseExpense(models.Model):
                     )
                 )
 
-    @api.multi
     def action_submit_expenses(self):
         res = super(HrExpenseExpense, self).action_submit_expenses()
         if len(self.mapped("operating_unit_id")) != 1 or any(
@@ -92,7 +89,13 @@ class HrExpenseSheet(models.Model):
         ),
     )
 
-    @api.multi
+    @api.onchange("operating_unit_id")
+    def _onchange_operating_unit_id(self):
+        if self.operating_unit_id:
+            self.expense_line_ids.write(
+                {"operating_unit_id": self.operating_unit_id.id}
+            )
+
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
