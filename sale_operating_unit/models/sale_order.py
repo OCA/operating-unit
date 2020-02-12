@@ -34,7 +34,6 @@ class SaleOrder(models.Model):
         if self.team_id and self.team_id.operating_unit_id != self.operating_unit_id:
             self.team_id = False
 
-    @api.multi
     @api.constrains("team_id", "operating_unit_id")
     def _check_team_operating_unit(self):
         for rec in self:
@@ -47,7 +46,6 @@ class SaleOrder(models.Model):
                     )
                 )
 
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -64,7 +62,6 @@ class SaleOrder(models.Model):
                     )
                 )
 
-    @api.multi
     def _prepare_invoice(self):
         self.ensure_one()
         invoice_vals = super(SaleOrder, self)._prepare_invoice()
