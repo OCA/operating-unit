@@ -105,7 +105,7 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
     def test_security(self):
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Expenses of Main Operating Unit.
-        record = self.hr_expense_model.sudo(self.user2.id).search(
+        record = self.hr_expense_model.with_user(self.user2.id).search(
             [("id", "=", self.hr_expense1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
