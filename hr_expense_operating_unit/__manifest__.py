@@ -5,16 +5,13 @@
 {
     "name": "HR Expense Operating Unit",
     "version": "12.0.1.0.1",
-    "license": 'LGPL-3',
+    "license": "LGPL-3",
     "author": "Eficent Business and IT Consulting Services S.L., "
-              "Serpent Consulting Services Pvt. Ltd.,"
-              "Odoo Community Association (OCA)",
+    "Serpent Consulting Services Pvt. Ltd.,"
+    "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Generic Modules/Human Resources",
     "depends": ["hr_expense", "account_operating_unit"],
-    "data": [
-        "views/hr_expense_view.xml",
-        "security/hr_expense_security.xml"
-    ],
-    'installable': True,
+    "data": ["views/hr_expense_view.xml", "security/hr_expense_security.xml"],
+    "installable": True,
 }
