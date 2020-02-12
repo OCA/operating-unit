@@ -2,19 +2,18 @@
 # - Jordi Ballester Alomar
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, models
+from odoo import SUPERUSER_ID, _, api, models
 from odoo.exceptions import ValidationError
 
 
 class CrmTeam(models.Model):
     _inherit = "crm.team"
 
-    @api.multi
     @api.constrains("operating_unit_id")
     def _check_sales_order_operating_unit(self):
         for rec in self:
             orders = (
-                self.sudo()
+                self.with_user(SUPERUSER_ID)
                 .env["sale.order"]
                 .search(
                     [
