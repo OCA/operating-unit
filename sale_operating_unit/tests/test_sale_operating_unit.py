@@ -15,7 +15,6 @@ class TestSaleOperatingUnit(common.TransactionCase):
         self.sale_line_model = self.env["sale.order.line"]
         self.sale_team_model = self.env["crm.team"]
         self.acc_move_model = self.env["account.move"]
-        self.acc_invoice_model = self.env["account.invoice"]
         self.res_company_model = self.env["res.company"]
         self.product_model = self.env["product.product"]
         self.operating_unit_model = self.env["operating.unit"]
@@ -97,7 +96,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
     def _create_sale_team(self, uid, operating_unit):
         """Create a sale team."""
         team = (
-            self.sale_team_model.sudo(uid)
+            self.sale_team_model.with_user(uid)
             .with_context(mail_create_nosubscribe=True)
             .create(
                 {"name": operating_unit.name, "operating_unit_id": operating_unit.id}
@@ -107,7 +106,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
 
     def _create_sale_order(self, uid, customer, product, pricelist, team):
         """Create a sale order."""
-        sale = self.sale_model.sudo(uid).create(
+        sale = self.sale_model.with_user(uid).create(
             {
                 "partner_id": customer.id,
                 "partner_invoice_id": customer.id,
@@ -117,14 +116,14 @@ class TestSaleOperatingUnit(common.TransactionCase):
                 "operating_unit_id": team.operating_unit_id.id,
             }
         )
-        self.sale_line_model.sudo(uid).create(
+        self.sale_line_model.with_user(uid).create(
             {"order_id": sale.id, "product_id": product.id, "name": "Sale Order Line"}
         )
         return sale
 
     def _confirm_sale(self, sale):
         sale.action_confirm()
-        payment = self.payment_model.create({"advance_payment_method": "all"})
+        payment = self.payment_model.create({"advance_payment_method": "delivered"})
         sale_context = {
             "active_id": sale.id,
             "active_ids": sale.ids,
@@ -139,7 +138,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         """Test Sale Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Sales order from Main Operating Unit.
-        sale = self.sale_model.sudo(self.user2.id).search(
+        sale = self.sale_model.with_user(self.user2.id).search(
             [("id", "=", self.sale1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
@@ -150,7 +149,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         # Confirm Sale2
         b2c_invoice_id = self._confirm_sale(self.sale2)
         # Checks that invoice has OU b2c
-        b2c = self.acc_invoice_model.sudo(self.user2.id).search(
+        b2c = self.acc_move_model.with_user(self.user2.id).search(
             [("id", "=", b2c_invoice_id), ("operating_unit_id", "=", self.b2c.id)]
         )
         self.assertNotEqual(b2c.ids, [], "Invoice should have b2c OU")
@@ -159,14 +158,14 @@ class TestSaleOperatingUnit(common.TransactionCase):
         """Test Sale Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Sales order from Main Operating Unit.
-        sale = self.sale_model.sudo(self.user2.id).search(
+        sale = self.sale_model.with_user(self.user2.id).search(
             [("id", "=", self.sale1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
             sale.ids, [], "User 2 should not have access to " "OU %s" % self.ou1.name
         )
 
-        sale = self.sale_model.sudo(self.user2.id).search(
+        sale = self.sale_model.with_user(self.user2.id).search(
             [("id", "=", self.sale2.id), ("operating_unit_id", "=", self.b2c.id)]
         )
 

@@ -4,3 +4,4 @@
 * Miquel Raich <miquel.raich@eficent.com>
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Darshan Patel <darshan.patel.serpencs@gmail.com>
+* Alan Ramos <alan.ramos@jarsa.com.mx>
