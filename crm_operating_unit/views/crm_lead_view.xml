@@ -4,16 +4,16 @@
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
 
-        <!-- CRM Lead Form View  -->
-        <record model="ir.ui.view" id="crm_case_form_view_leads">
+        <!-- CRM Lead & Opportunity Form View  -->
+        <record model="ir.ui.view" id="crm_lead_view_form">
         <field name="name">CRM - Leads Form</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <xpath expr="//field[@name='team_id']" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
                        domain = "[('company_id','=', company_id), ('user_ids', 'in', uid)]" options="{'no_create': True}"/>
-            </field>
+            </xpath>
         </field>
         </record>
 
@@ -39,19 +39,6 @@
                 <field name="country_id" position="after">
                     <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
                            domain = "[('user_ids', 'in', uid)]"/>
-                </field>
-            </field>
-        </record>
-
-        <!-- Opportunities Form View -->
-        <record model="ir.ui.view" id="crm_case_form_view_oppor">
-            <field name="name">Opportunities</field>
-            <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
-            <field name="arch" type="xml">
-                <field name="referred" position="before">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
-                           domain = "[('user_ids', 'in', uid)]" options="{'no_create': True}"/>
                 </field>
             </field>
         </record>
