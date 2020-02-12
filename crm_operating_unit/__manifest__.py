@@ -7,15 +7,12 @@
     "name": "Operating Unit in CRM",
     "version": "12.0.1.0.0",
     "author": "Eficent, "
-              "Serpent Consulting Services Pvt. Ltd.,"
-              "Odoo Community Association (OCA)",
+    "Serpent Consulting Services Pvt. Ltd.,"
+    "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Sales",
     "depends": ["crm", "sales_team_operating_unit"],
-    "data": [
-        "views/crm_lead_view.xml",
-        "security/crm_security.xml",
-    ],
-    'installable': True,
+    "data": ["views/crm_lead_view.xml", "security/crm_security.xml"],
+    "installable": True,
 }
