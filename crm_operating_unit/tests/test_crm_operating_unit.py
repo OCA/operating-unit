@@ -64,7 +64,9 @@ class TestCrmOperatingUnit(common.TransactionCase):
 
     def _create_crm_lead(self, uid, team):
         """Create a sale order."""
-        operating_unit_id = self.crm_lead_model.sudo(uid)._get_default_operating_unit()
+        operating_unit_id = self.crm_lead_model.with_user(
+            uid
+        )._get_default_operating_unit()
         crm = self.crm_lead_model.create(
             {
                 "name": "CRM LEAD",
@@ -79,7 +81,7 @@ class TestCrmOperatingUnit(common.TransactionCase):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access CRM leads for Main Operating Unit.
 
-        lead = self.crm_lead_model.sudo(self.user2.id).search(
+        lead = self.crm_lead_model.with_user(self.user2.id).search(
             [("id", "=", self.lead1.id), ("operating_unit_id", "=", self.main_OU.id)]
         )
         self.assertEqual(
