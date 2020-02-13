@@ -9,7 +9,6 @@ from odoo.exceptions import ValidationError
 class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
-    @api.multi
     @api.constrains("operating_unit_id")
     def _check_existing_so_in_wh(self):
         for rec in self:
@@ -23,6 +22,6 @@ class StockWarehouse(models.Model):
                 raise ValidationError(
                     _(
                         "Sales Order records already exist(s) for this warehouse"
-                        " and operating unit."
+                        " and different operating unit."
                     )
                 )
