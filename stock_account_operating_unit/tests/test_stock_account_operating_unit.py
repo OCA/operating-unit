@@ -14,7 +14,6 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         self.account_model = self.env["account.account"]
         self.product_model = self.env["product.product"]
         self.product_cteg_model = self.env["product.category"]
-        self.inv_line_model = self.env["account.invoice.line"]
         self.acc_type_model = self.env["account.account.type"]
         self.operating_unit_model = self.env["operating.unit"]
         self.company_model = self.env["res.company"]
@@ -147,7 +146,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
 
     def _create_picking(self, user, ou_id, picking_type, src_loc_id, dest_loc_id):
         """Create a Picking."""
-        picking = self.picking_model.sudo(user.id).create(
+        picking = self.picking_model.with_user(user.id).create(
             {
                 "picking_type_id": picking_type.id,
                 "location_id": src_loc_id.id,
@@ -155,7 +154,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
                 "operating_unit_id": ou_id.id,
             }
         )
-        self.move_model.sudo(user.id).create(
+        self.move_model.with_user(user.id).create(
             {
                 "name": "a move",
                 "product_id": self.product.id,
@@ -174,7 +173,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         """
         picking.action_confirm()
         picking.action_assign()
-        res = picking.sudo(user_id).button_validate()
+        res = picking.with_user(user_id).button_validate()
         validate_id = res["res_id"]
         validate = self.env["stock.immediate.transfer"].browse(validate_id)
         validate.process()

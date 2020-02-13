@@ -7,7 +7,7 @@
     "name": "Stock account moves with Operating Unit",
     "summary": "Create journal entries in moves between internal locations "
     "with different operating units.",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "Eficent Business and IT Consulting Services S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
