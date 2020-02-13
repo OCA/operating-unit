@@ -6,7 +6,7 @@ from odoo import models
 
 
 class StockMove(models.Model):
-    _inherit = 'stock.move'
+    _inherit = "stock.move"
 
     def _get_new_picking_values(self):
         """
@@ -14,8 +14,6 @@ class StockMove(models.Model):
         """
         values = super(StockMove, self)._get_new_picking_values()
 
-        values.update({
-            'operating_unit_id': self.sale_line_id.operating_unit_id.id
-        })
+        values.update({"operating_unit_id": self.sale_line_id.operating_unit_id.id})
 
         return values
