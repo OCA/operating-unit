@@ -80,6 +80,22 @@ class AccountInvoice(models.Model):
                                         'Journal must be the same.'))
         return True
 
+    @api.model
+    def _prepare_refund(
+        self,
+        invoice,
+        date_invoice=None,
+        date=None,
+        description=None,
+        journal_id=None,
+    ):
+        values = super()._prepare_refund(
+            invoice, date_invoice, date, description, journal_id
+        )
+        if 'operating_unit_id' not in values:
+            values['operating_unit_id'] = invoice.operating_unit_id.id
+        return values
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
