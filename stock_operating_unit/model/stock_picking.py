@@ -8,11 +8,17 @@ from odoo.exceptions import UserError
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    @api.onchange('location_id')
+    def _get_default_operating_unit_id(self):
+        if self.location_id:
+            self.operating_unit_id = self.location_id.operating_unit_id
+
     operating_unit_id = fields.Many2one(
         'operating.unit',
         'Requesting Operating Unit',
         readonly=True,
-        states={'draft': [('readonly', False)]})
+        states={'draft': [('readonly', False)]},
+        default=lambda self: self._get_default_operating_unit_id())
 
     @api.onchange('picking_type_id', 'partner_id')
     def onchange_picking_type(self):

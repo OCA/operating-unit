@@ -17,6 +17,7 @@
         "security/stock_security.xml",
         "data/stock_data.xml",
         "view/stock.xml",
+        "view/stock_picking.xml"
     ],
     "demo": [
         "demo/stock_demo.xml",
