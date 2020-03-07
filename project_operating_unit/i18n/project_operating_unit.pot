@@ -16,6 +16,7 @@ msgstr ""
 #. module: project_operating_unit
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_project__operating_unit_id
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_task__operating_unit_id
+#: model_terms:ir.ui.view,arch_db:project_operating_unit.project_group_by_ou
 msgid "Operating Unit"
 msgstr ""
 
