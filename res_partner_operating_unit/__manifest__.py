@@ -12,7 +12,6 @@
     "depends": ["operating_unit"],
     "license": "LGPL-3",
     "data": [
-        "security/res_partner_security.xml",
         "views/res_partner_view.xml",
     ],
     'installable': True,
