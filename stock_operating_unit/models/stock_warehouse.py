@@ -8,6 +8,7 @@ from odoo.exceptions import UserError
 class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
+    @api.model
     def _default_operating_unit(self):
         if self.company_id:
             company = self.company_id
@@ -21,8 +22,7 @@ class StockWarehouse(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name='operating.unit',
         string='Operating Unit',
-        default=_default_operating_unit
-    )
+        default=_default_operating_unit)
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
@@ -31,10 +31,9 @@ class StockWarehouse(models.Model):
             if (rec.operating_unit_id and rec.company_id and
                     rec.operating_unit_id and
                     rec.company_id != rec.operating_unit_id.company_id):
-                raise UserError(
-                    _('Configuration error. The Company in the Stock Warehouse'
-                      ' and in the Operating Unit must be the same.')
-                )
+                raise UserError(_(
+                    'Configuration error. The Company in the Stock Warehouse'
+                    ' and in the Operating Unit must be the same.'))
 
 
 class StockWarehouseOrderPoint(models.Model):
