@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_operating_unit
+# 	* stock_operating_unit
 #
 msgid ""
 msgstr ""
@@ -17,58 +17,75 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_warehouse.py:52
+#: code:addons/stock_operating_unit/models/stock_warehouse.py:51
 #, python-format
-msgid "Configuration Error. The Operating Unit of the Warehouse and the Location must be the same. "
+msgid ""
+"Configuration Error. The Operating Unit of the Warehouse and the Location "
+"must be the same. "
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:52
+#: code:addons/stock_operating_unit/models/stock_location.py:46
 #, python-format
-msgid "Configuration error. The Company in the Stock Location and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Stock Location and in the Operating "
+"Unit must be the same."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_picking.py:32
+#: code:addons/stock_operating_unit/models/stock_picking.py:32
 #, python-format
-msgid "Configuration error. The Company in the Stock Picking and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Stock Picking and in the Operating "
+"Unit must be the same."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_warehouse.py:35
+#: code:addons/stock_operating_unit/models/stock_warehouse.py:34
 #, python-format
-msgid "Configuration error. The Company in the Stock Warehouse and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Stock Warehouse and in the Operating "
+"Unit must be the same."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_picking.py:45
+#: code:addons/stock_operating_unit/models/stock_picking.py:44
 #, python-format
-msgid "Configuration error. The Operating Unit of the picking must be the same as that of the warehouse of the Picking Type."
+msgid ""
+"Configuration error. The Operating Unit of the picking must be the same as "
+"that of the warehouse of the Picking Type."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:66
+#: code:addons/stock_operating_unit/models/stock_location.py:60
 #, python-format
-msgid "Configuration error. The Parent Stock Location must belong to the same Operating Unit."
+msgid ""
+"Configuration error. The Parent Stock Location must belong to the same "
+"Operating Unit."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_move.py:39
+#: code:addons/stock_operating_unit/models/stock_move.py:39
 #, python-format
-msgid "Configuration error. The Stock moves must be related to a location (source or destination) that belongs to the requesting Operating Unit."
+msgid ""
+"Configuration error. The Stock moves must be related to a location (source "
+"or destination) that belongs to the requesting Operating Unit."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:36
-#: code:addons/stock_operating_unit/model/stock_location.py:41
+#: code:addons/stock_operating_unit/models/stock_location.py:35
 #, python-format
-msgid "Configuration error. The operating unit should be assigned to internal locations only."
+msgid ""
+"Configuration error. The operating unit should be assigned to internal "
+"locations only."
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:25
+#: code:addons/stock_operating_unit/models/stock_location.py:25
 #, python-format
-msgid "Configuration error. This location is assigned to a warehouse that belongs to a different operating unit."
+msgid ""
+"Configuration error. This location is assigned to a warehouse that belongs "
+"to a different operating unit."
 msgstr ""
 
 #. module: stock_operating_unit
@@ -93,6 +110,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_operating_unit.view_picking_internal_search
 msgid "Operating Unit"
 msgstr "Unidade Operacional"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_product_product
+msgid "Product"
+msgstr ""
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__operating_unit_id
