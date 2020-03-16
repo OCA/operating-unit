@@ -14,13 +14,14 @@ class StockPicking(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]})
 
-    @api.onchange('picking_type_id', 'partner_id')
-    def onchange_picking_type(self):
-        res = super(StockPicking, self).onchange_picking_type()
+    @api.onchange('picking_type_id', 'location_id')
+    def onchange_operating_unit(self):
+        unit = False
         if self.picking_type_id:
             unit = self.picking_type_id.warehouse_id.operating_unit_id
-            self.operating_unit_id = unit
-        return res
+        if not unit:
+            unit = self.location_id and self.location_id.operating_unit_id
+        self.operating_unit_id = unit
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
@@ -28,10 +29,9 @@ class StockPicking(models.Model):
         for rec in self:
             if (rec.company_id and rec.operating_unit_id and
                     rec.company_id != rec.operating_unit_id.company_id):
-                raise UserError(
-                    _('Configuration error. The Company in the Stock Picking '
-                      'and in the Operating Unit must be the same.')
-                )
+                raise UserError(_(
+                    'Configuration error. The Company in the Stock Picking '
+                    'and in the Operating Unit must be the same.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'picking_type_id')
@@ -41,8 +41,7 @@ class StockPicking(models.Model):
             if (warehouse.operating_unit_id and
                     rec.picking_type_id and rec.operating_unit_id and
                     warehouse.operating_unit_id != rec.operating_unit_id):
-                raise UserError(
-                    _('Configuration error. The Operating Unit of the picking '
-                      'must be the same as that of the warehouse of the '
-                      'Picking Type.')
-                )
+                raise UserError(_(
+                    'Configuration error. The Operating Unit of the picking '
+                    'must be the same as that of the warehouse of the '
+                    'Picking Type.'))
