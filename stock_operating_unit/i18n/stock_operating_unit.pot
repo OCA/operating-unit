@@ -26,7 +26,7 @@ msgid "Configuration error. The Company in the Stock Location and in the Operati
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/models/stock_picking.py:32
+#: code:addons/stock_operating_unit/models/stock_picking.py:35
 #, python-format
 msgid "Configuration error. The Company in the Stock Picking and in the Operating Unit must be the same."
 msgstr ""
@@ -38,7 +38,7 @@ msgid "Configuration error. The Company in the Stock Warehouse and in the Operat
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/models/stock_picking.py:44
+#: code:addons/stock_operating_unit/models/stock_picking.py:47
 #, python-format
 msgid "Configuration error. The Operating Unit of the picking must be the same as that of the warehouse of the Picking Type."
 msgstr ""
