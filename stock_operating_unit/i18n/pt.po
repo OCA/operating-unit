@@ -33,7 +33,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/models/stock_picking.py:32
+#: code:addons/stock_operating_unit/models/stock_picking.py:35
 #, python-format
 msgid ""
 "Configuration error. The Company in the Stock Picking and in the Operating "
@@ -49,7 +49,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/models/stock_picking.py:44
+#: code:addons/stock_operating_unit/models/stock_picking.py:47
 #, python-format
 msgid ""
 "Configuration error. The Operating Unit of the picking must be the same as "
