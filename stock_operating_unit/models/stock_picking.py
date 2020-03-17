@@ -20,7 +20,10 @@ class StockPicking(models.Model):
         if self.picking_type_id:
             unit = self.picking_type_id.warehouse_id.operating_unit_id
         if not unit:
-            unit = self.location_id and self.location_id.operating_unit_id
+            if self.location_id:
+                if self.location_id.operating_unit_id:
+                    unit = self.location_id.operating_unit_id
+
         self.operating_unit_id = unit
 
     @api.multi
