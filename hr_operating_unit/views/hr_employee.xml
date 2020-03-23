@@ -1,0 +1,31 @@
+<!-- Copyright (C) 2020 Pavlov Media
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="hr_operating_unit_employee_list" model="ir.ui.view">
+        <field name="name">hr.operating.unit.employee.list</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="default_operating_unit_id"/>
+                <field name="operating_unit_ids"
+                       groups="operating_unit.group_multi_operating_unit"
+                       widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_operating_unit_employee_form" model="ir.ui.view">
+        <field name="name">hr.operating.unit.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="default_operating_unit_id"/>
+                <field name="operating_unit_ids"
+                       groups="operating_unit.group_multi_operating_unit"
+                       widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+</odoo>
