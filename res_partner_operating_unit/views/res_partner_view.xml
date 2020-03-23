@@ -27,7 +27,8 @@
         <field name="arch" type="xml">
             <field name="email" position="after">
                 <field name="operating_unit_ids"
-                       groups="operating_unit.group_multi_operating_unit"/>
+                       groups="operating_unit.group_multi_operating_unit"
+                       widget="many2many_tags"/>
             </field>
         </field>
     </record>
