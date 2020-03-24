@@ -1,0 +1,68 @@
+<odoo>
+    <!-- Copyright (C) 2019 Open Source Integrators
+    Copyright (C) 2019 Serpent Consulting Services
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+    <record id="extend_view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='other_information']" position="after">
+                <page string="Internal Quote Requests">
+                    <field name="quote_ids" context="{'active_id': active_id}">
+                        <tree>
+                            <field name="operating_unit_id"/>
+                            <field name="notes"/>
+                            <field name="expected_date"/>
+                            <field name="assigned_to"/>
+                            <field name="lead_id" attrs="{'invisible': [('lead_id', '=', False)]}"/>
+                            <button name="action_send" type="object" string="Send" class="oe_highlight" attrs="{'invisible': [('lead_id', '!=', False)]}"/>
+                        </tree>
+                        <form string="Sale Multiple Operating Unit">
+                            <header>
+                                <field name="state" widget="statusbar" statusbar_visible="new,sent,received" clickable="True"/>
+                            </header>
+                            <group name="main_group">
+                                <group>
+                                    <field name="operating_unit_id"/>
+                                    <field name="name"/>
+                                    <field name="sale_id" context="{'default_sale_id': active_id}" invisible="1"/>
+                                    <field name="expected_date"/>
+                                </group>
+                                <group>
+                                    <field name="assigned_to"/>
+                                    <field name="lead_id" force_save="1" attrs="{'invisible': [('lead_id', '=', False)]}"/>
+                                </group>
+                            </group>
+                            <group string="Notes">
+                                <field name="notes" nolabel="1"/>
+                            </group>
+                            <field name="line_ids">
+                                <form>
+                                    <group>
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="uom_id" groups="uom.group_uom"/>
+                                        <field name="qty"/>
+                                        <field name="price_unit"/>
+                                        <field name="subtotal"/>
+                                    </group>
+                                </form>
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="uom_id" groups="uom.group_uom"/>
+                                    <field name="qty"/>
+                                    <field name="price_unit"/>
+                                    <field name="subtotal"/>
+                                </tree>
+                            </field>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
