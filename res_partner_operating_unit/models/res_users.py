@@ -12,25 +12,28 @@ class ResUsers(models.Model):
     @api.model
     def create(self, vals):
         res = super().create(vals)
-        res.partner_id.operating_unit_ids = \
-            [(4, res.default_operating_unit_id.id)]
+        if vals.get('default_operating_unit_id'):
+            res.partner_id.operating_unit_ids = \
+                [(4, res.default_operating_unit_id.id)]
         return res
 
     @api.multi
     def write(self, vals):
-        res = super().write(vals)
         if vals.get('default_operating_unit_id'):
             # Add the new OU
             self.partner_id.operating_unit_ids = \
-                [(4, res.default_operating_unit_id.id)]
-        return res
+                [(4, vals.get('default_operating_unit_id'))]
+        return super().write(vals)
 
     @api.constrains('partner_id.operating_unit_ids',
                     'default_operating_unit_id')
     def check_partner_operating_unit(self):
-        if self.partner_id.operating_unit_ids and \
-                self.default_operating_unit_id.id not in \
-                self.partner_id.operating_unit_ids.ids:
-            raise UserError(_(
-                "The operating units of the partner must include the default "
-                "one of the user."))
+        if self.default_operating_unit_id:
+            if self.default_operating_unit_id not in self.operating_unit_ids:
+                self.operating_unit_ids = [(4, self.default_operating_unit_id.id)]
+            if self.partner_id.operating_unit_ids and \
+                    self.default_operating_unit_id.id not in \
+                    self.partner_id.operating_unit_ids.ids:
+                raise UserError(_(
+                    "The operating units of the partner must include the default "
+                    "one of the user."))
