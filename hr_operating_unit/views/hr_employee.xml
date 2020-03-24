@@ -7,7 +7,8 @@
         <field name="inherit_id" ref="hr.view_employee_tree"/>
         <field name="arch" type="xml">
             <field name="parent_id" position="after">
-                <field name="default_operating_unit_id"/>
+                <field name="default_operating_unit_id"
+                       groups="operating_unit.group_multi_operating_unit"/>
                 <field name="operating_unit_ids"
                        groups="operating_unit.group_multi_operating_unit"
                        widget="many2many_tags"/>
@@ -21,9 +22,12 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="default_operating_unit_id"/>
+                <field name="default_operating_unit_id"
+                       groups="operating_unit.group_multi_operating_unit"
+                       attrs="{'invisible':[('user_id', '=', False)]}"/>
                 <field name="operating_unit_ids"
                        groups="operating_unit.group_multi_operating_unit"
+                       attrs="{'invisible':[('user_id', '=', False)]}"
                        widget="many2many_tags"/>
             </field>
         </field>
