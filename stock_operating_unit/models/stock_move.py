@@ -17,26 +17,47 @@ class StockMove(models.Model):
         string='Dest. Location Operating Unit',
     )
 
+    # @api.multi
+    # @api.constrains('picking_id', 'location_id', 'location_dest_id')
+    # def _check_stock_move_operating_unit(self):
+    #     for stock_move in self:
+    #         if not stock_move.operating_unit_id:
+    #             return True
+    #         operating_unit = stock_move.operating_unit_id
+    #         operating_unit_dest = stock_move.operating_unit_dest_id
+    #         if (stock_move.location_id and
+    #             stock_move.location_id.operating_unit_id and
+    #             stock_move.picking_id and
+    #             operating_unit != stock_move.picking_id.operating_unit_id
+    #             ) and (
+    #             stock_move.location_dest_id and
+    #             stock_move.location_dest_id.operating_unit_id and
+    #             stock_move.picking_id and
+    #             operating_unit_dest != stock_move.picking_id.operating_unit_id
+    #         ):
+    #             raise UserError(
+    #                 _('Configuration error. The Stock moves must '
+    #                   'be related to a location (source or destination) '
+    #                   'that belongs to the requesting Operating Unit.')
+    #             )
+
+
     @api.multi
     @api.constrains('picking_id', 'location_id', 'location_dest_id')
     def _check_stock_move_operating_unit(self):
         for stock_move in self:
-            if not stock_move.operating_unit_id:
-                return True
             operating_unit = stock_move.operating_unit_id
+            operating_unit_source = stock_move.location_id.operating_unit_id
             operating_unit_dest = stock_move.operating_unit_dest_id
-            if (stock_move.location_id and
-                stock_move.location_id.operating_unit_id and
-                stock_move.picking_id and
-                operating_unit != stock_move.picking_id.operating_unit_id
-                ) and (
-                stock_move.location_dest_id and
-                stock_move.location_dest_id.operating_unit_id and
-                stock_move.picking_id and
-                operating_unit_dest != stock_move.picking_id.operating_unit_id
-            ):
+            operating_unit_picking = stock_move.picking_id.operating_unit_id
+            if not operating_unit_source or not operating_unit_dest or \
+                    not operating_unit_picking:
+                return True
+            if (operating_unit_source != operating_unit and \
+                    operating_unit_dest != operating_unit):
                 raise UserError(
                     _('Configuration error. The Stock moves must '
                       'be related to a location (source or destination) '
                       'that belongs to the requesting Operating Unit.')
                 )
+
