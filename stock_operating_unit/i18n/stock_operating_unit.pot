@@ -50,15 +50,15 @@ msgid "Configuration error. The Parent Stock Location must belong to the same Op
 msgstr ""
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/models/stock_move.py:39
-#, python-format
-msgid "Configuration error. The Stock moves must be related to a location (source or destination) that belongs to the requesting Operating Unit."
-msgstr ""
-
-#. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_location.py:35
 #, python-format
 msgid "Configuration error. The operating unit should be assigned to internal locations only."
+msgstr ""
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/models/stock_move.py:29
+#, python-format
+msgid "Configuration error. The stock move must be related to a location (source or destination) that belongs to the requesting Operating Unit."
 msgstr ""
 
 #. module: stock_operating_unit
