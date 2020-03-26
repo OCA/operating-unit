@@ -55,7 +55,7 @@ class SaleOrderQuote(models.Model):
     @api.onchange('operating_unit_id')
     def _onchange_operating_unit_id(self):
         if self.operating_unit_id:
-            sale_id = self.env['sale.order'].browse(
+            sale_id = self.env['sale.order'].sudo().browse(
                 self._context.get('active_id'))
             self.name = sale_id.name or 'New' + ' - ' + self.\
                 operating_unit_id.code
@@ -63,7 +63,7 @@ class SaleOrderQuote(models.Model):
     def generate_lead_description(self):
         Template = self.env["mail.template"]
         description = Template.with_context()._render_template(
-            self.sale_id.company_id.lead_description_template,
+            self.sudo().sale_id.company_id.lead_description_template,
             "sale.order.quote", self.id)
         return description
 
@@ -77,7 +77,7 @@ class SaleOrderQuote(models.Model):
         description = self.generate_lead_description()
         return {
             'name':
-                self.sale_id.name + ' - ' + self.operating_unit_id.code,
+                self.sudo().sale_id.name + ' - ' + self.operating_unit_id.code,
             'partner_id': self.env.user.partner_id.id,
             'type': 'opportunity',
             'description': description,
