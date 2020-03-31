@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2018 by Camptocamp
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import fields, models
