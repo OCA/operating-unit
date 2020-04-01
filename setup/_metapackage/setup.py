@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-hr_contract_operating_unit',
         'odoo12-addon-hr_expense_operating_unit',
         'odoo12-addon-hr_payroll_account_operating_unit',
+        'odoo12-addon-mis_builder_operating_unit',
         'odoo12-addon-mrp_operating_unit',
         'odoo12-addon-operating_unit',
         'odoo12-addon-project_operating_unit',
