@@ -12,7 +12,7 @@ class StockWarehouse(models.Model):
         if self.company_id:
             company = self.company_id
         else:
-            company = self.env["res.company"]._company_default_get("stock.inventory")
+            company = self.env.company
         for ou in self.env.user.operating_unit_ids:
             if company == self.company_id:
                 self.operating_unit_id = ou
@@ -23,7 +23,6 @@ class StockWarehouse(models.Model):
         default=_default_operating_unit,
     )
 
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -43,7 +42,6 @@ class StockWarehouse(models.Model):
 class StockWarehouseOrderPoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
-    @api.multi
     @api.constrains("operating_unit_id", "warehouse_id", "location_id")
     def _check_location(self):
         for rec in self:

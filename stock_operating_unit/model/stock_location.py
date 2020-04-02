@@ -10,7 +10,6 @@ class StockLocation(models.Model):
 
     operating_unit_id = fields.Many2one("operating.unit", "Operating Unit")
 
-    @api.multi
     @api.constrains("operating_unit_id")
     def _check_warehouse_operating_unit(self):
         for rec in self:
@@ -34,7 +33,6 @@ class StockLocation(models.Model):
                         )
                     )
 
-    @api.multi
     @api.constrains("operating_unit_id")
     def _check_required_operating_unit(self):
         for rec in self:
@@ -53,7 +51,6 @@ class StockLocation(models.Model):
                     )
                 )
 
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -69,7 +66,6 @@ class StockLocation(models.Model):
                     )
                 )
 
-    @api.multi
     @api.constrains("operating_unit_id", "location_id")
     def _check_parent_operating_unit(self):
         for rec in self:
