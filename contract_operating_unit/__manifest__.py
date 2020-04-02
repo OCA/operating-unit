@@ -8,7 +8,7 @@
     "author": "ForgeFlow S.L., " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Invoicing",
-    "depends": ["contract", "account_operating_unit"],
+    "depends": ["contract", "operating_unit"],
     "data": ["views/contract_view.xml", "security/contract_security.xml"],
     "installable": True,
 }
