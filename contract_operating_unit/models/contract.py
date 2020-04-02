@@ -21,3 +21,4 @@ class ContractContract(models.Model):
         invoice_vals = super()._prepare_invoice(date_invoice, journal)
         if self.operating_unit_id:
             invoice_vals['operating_unit_id'] = self.operating_unit_id.id
+        return invoice_vals
