@@ -20,5 +20,4 @@ class ContractContract(models.Model):
     def _prepare_invoice(self, date_invoice, journal=None):
         invoice_vals = super()._prepare_invoice(date_invoice, journal)
         if self.operating_unit_id:
-            invoice_vals['operating_unit_id'] = self.operating_unit_id
-        return invoice_vals
+            invoice_vals['operating_unit_id'] = self.operating_unit_id.id
