@@ -96,7 +96,10 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <xpath
+                expr="//group[@name='other_infos']/field[@name='company_id']"
+                position="after"
+            >
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"
@@ -104,7 +107,7 @@
                        ('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
-            </field>
+            </xpath>
             <field name="picking_type_id" position="attributes">
                 <attribute
                     name="domain"
@@ -160,27 +163,6 @@
         <field name="name">stock.move.tree</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_move_picking_tree" />
-        <field name="arch" type="xml">
-            <field name="location_id" position="after">
-                <field
-                    name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
-                    groups="operating_unit.group_multi_operating_unit"
-                />
-            </field>
-            <field name="location_dest_id" position="after">
-                <field
-                    name="operating_unit_dest_id"
-                    domain="[('user_ids', 'in', uid)]"
-                    groups="operating_unit.group_multi_operating_unit"
-                />
-            </field>
-        </field>
-    </record>
-    <record id="view_move_picking_form" model="ir.ui.view">
-        <field name="name">stock.move.form</field>
-        <field name="model">stock.move</field>
-        <field name="inherit_id" ref="stock.view_move_picking_form" />
         <field name="arch" type="xml">
             <field name="location_id" position="after">
                 <field
