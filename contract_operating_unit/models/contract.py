@@ -4,7 +4,7 @@
 from odoo import fields, models
 
 
-class Contract(models.Model):
+class ContractContract(models.Model):
 
     _inherit = "contract.contract"
 
@@ -15,3 +15,10 @@ class Contract(models.Model):
             self._uid
         ),
     )
+
+    @api.multi
+    def _prepare_invoice(self, date_invoice, journal=None):
+        invoice_vals = super()._prepare_invoice(date_invoice, journal)
+        if self.operating_unit_id:
+            invoice_vals['operating_unit_id'] = self.operating_unit_id
+        return invoice_vals
