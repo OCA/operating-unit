@@ -81,7 +81,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
 
     def _create_picking(self, user_id, ou_id, picking_type, src_loc_id, dest_loc_id):
         """Create a Picking."""
-        picking = self.PickingObj.sudo(user_id).create(
+        picking = self.PickingObj.with_user(user_id).create(
             {
                 "picking_type_id": picking_type,
                 "location_id": src_loc_id,
@@ -89,7 +89,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
                 "operating_unit_id": ou_id,
             }
         )
-        self.MoveObj.sudo(user_id).create(
+        self.MoveObj.with_user(user_id).create(
             {
                 "name": "a move",
                 "product_id": self.productA.id,
