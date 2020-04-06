@@ -76,7 +76,8 @@
         model="ir.rule"
     >
         <field name="model_id" ref="stock.model_stock_picking" />
-        <field name="domain_force">['|',
+        <field name="domain_force">['|','|',
+            ('picking_type_id.warehouse_id','=', False),
             ('picking_type_id.warehouse_id.operating_unit_id','=',False),
             ('picking_type_id.warehouse_id.operating_unit_id','in',user.operating_unit_ids.ids)]
         </field>
