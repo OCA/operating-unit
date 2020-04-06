@@ -19,21 +19,10 @@ class StockMove(models.Model):
     @api.constrains("picking_id", "location_id", "location_dest_id")
     def _check_stock_move_operating_unit(self):
         for stock_move in self:
-            if not stock_move.operating_unit_id:
-                return True
-            operating_unit = stock_move.operating_unit_id
-            operating_unit_dest = stock_move.operating_unit_dest_id
-            if (
-                stock_move.location_id
-                and stock_move.location_id.operating_unit_id
-                and stock_move.picking_id
-                and operating_unit != stock_move.picking_id.operating_unit_id
-            ) and (
-                stock_move.location_dest_id
-                and stock_move.location_dest_id.operating_unit_id
-                and stock_move.picking_id
-                and operating_unit_dest != stock_move.picking_id.operating_unit_id
-            ):
+            ou_pick = stock_move.picking_id.operating_unit_id or False
+            ou_src = stock_move.operating_unit_id or False
+            ou_dest = stock_move.operating_unit_dest_id or False
+            if ou_src and ou_pick and (ou_src != ou_pick) and (ou_dest != ou_pick):
                 raise UserError(
                     _(
                         "Configuration error. The Stock moves must "
