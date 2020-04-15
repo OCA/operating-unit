@@ -2,17 +2,17 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
-    "name": 'Accounting with Operating Units',
+    "name": "Accounting with Operating Units",
     "summary": "Introduces Operating Unit (OU) in invoices and "
-               "Accounting Entries with clearing account",
+    "Accounting Entries with clearing account",
     "version": "12.0.1.0.2",
     "author": "Eficent, "
-              "Serpent Consulting Services Pvt. Ltd.,"
-              "WilldooIT Pty Ltd,"
-              "Odoo Community Association (OCA)",
+    "Serpent Consulting Services Pvt. Ltd.,"
+    "WilldooIT Pty Ltd,"
+    "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Accounting & Finance",
-    "depends": ['account', 'operating_unit', 'analytic_operating_unit'],
+    "depends": ["account", "operating_unit", "analytic_operating_unit"],
     "license": "LGPL-3",
     "data": [
         "security/account_security.xml",
