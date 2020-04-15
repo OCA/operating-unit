@@ -3,5 +3,5 @@
   standard methods used by these reports, to introduce the ability to filter
   by Operating Unit.
 * Trial Balance, P&L and Balance Sheet were removed from Odoo Community. Once
-  OCA Financial Reports are migrated to 12 we can add the Operating Unit to
+  OCA Financial Reports are migrated to 13 we can add the Operating Unit to
   those reports.

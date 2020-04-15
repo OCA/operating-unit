@@ -10,7 +10,7 @@ class TestOuSecurity(test_ou.TestAccountOperatingUnit):
         """Test Security of Account Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot list
         # Journal Entries from Operating Unit B2B.
-        move_ids = self.aml_model.sudo(self.user2_id.id).search(
+        move_ids = self.aml_model.with_user(self.user2_id.id).search(
             [("operating_unit_id", "=", self.b2b.id)]
         )
         self.assertFalse(
