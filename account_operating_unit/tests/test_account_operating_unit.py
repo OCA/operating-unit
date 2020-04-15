@@ -7,16 +7,15 @@ from odoo.addons.account.tests.account_test_classes import AccountingTestCase
 
 class TestAccountOperatingUnit(AccountingTestCase):
     def setUp(self):
-        super(TestAccountOperatingUnit, self).setUp()
+        super().setUp()
         self.res_users_model = self.env["res.users"]
         self.aml_model = self.env["account.move.line"]
-        self.invoice_model = self.env["account.invoice"]
-        self.inv_line_model = self.env["account.invoice.line"]
+        self.move_model = self.env["account.move"]
         self.account_model = self.env["account.account"]
         self.journal_model = self.env["account.journal"]
         self.product_model = self.env["product.product"]
         self.payment_model = self.env["account.payment"]
-        self.register_payments_model = self.env["account.register.payments"]
+        self.register_payments_model = self.env["account.payment.register"]
 
         # company
         self.company = self.env.ref("base.main_company")
@@ -144,7 +143,7 @@ class TestAccountOperatingUnit(AccountingTestCase):
             }
         )
 
-    def _prepare_invoice(self, operating_unit_id):
+    def _prepare_invoice(self, operating_unit_id, name="Test Supplier Invoice"):
         line_products = [
             (self.product1, 1000),
             (self.product2, 500),
@@ -166,9 +165,8 @@ class TestAccountOperatingUnit(AccountingTestCase):
             lines.append((0, 0, line_values))
         inv_vals = {
             "partner_id": self.partner1.id,
-            "account_id": self.partner1.property_account_payable_id.id,
             "operating_unit_id": operating_unit_id,
-            "name": "Test Supplier Invoice",
+            "name": name,
             "type": "in_invoice",
             "invoice_line_ids": lines,
         }
