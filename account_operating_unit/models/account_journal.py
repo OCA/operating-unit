@@ -11,13 +11,11 @@ class AccountJournal(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
         domain="[('user_ids', '=', uid)]",
         help="Operating Unit that will be used in payments, "
         "when this journal is used.",
     )
 
-    @api.multi
     @api.constrains("type")
     def _check_ou(self):
         for journal in self:
