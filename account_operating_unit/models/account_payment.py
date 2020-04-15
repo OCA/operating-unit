@@ -2,7 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class AccountPayment(models.Model):
@@ -15,94 +15,28 @@ class AccountPayment(models.Model):
                 payment.operating_unit_id = payment.journal_id.operating_unit_id
 
     operating_unit_id = fields.Many2one(
-        "operating.unit",
-        string="Operating Unit",
+        comodel_name="operating.unit",
         domain="[('user_ids', '=', uid)]",
         compute="_compute_operating_unit_id",
         store=True,
     )
 
-    def _get_counterpart_move_line_vals(self, invoice=False):
-        res = super(AccountPayment, self)._get_counterpart_move_line_vals(
-            invoice=invoice
-        )
-        if invoice and len(invoice) == 1:
-            res["operating_unit_id"] = invoice.operating_unit_id.id or False
-        else:
-            res["operating_unit_id"] = self.operating_unit_id.id or False
+    def _prepare_payment_moves(self):
+        res = super()._prepare_payment_moves()
+        if not self.operating_unit_id:
+            return res
+        for move in res:
+            bank_journal = self.env["account.journal"].browse(move["journal_id"])
+            bank_ou_id = bank_journal.operating_unit_id.id
+            for line in move["line_ids"]:
+                line[2]["operating_unit_id"] = bank_ou_id
+        bank_account_id = self.journal_id.default_debit_account_id.id
+        if self.payment_type == "outbound":
+            bank_account_id = self.journal_id.default_credit_account_id.id
+        if self.invoice_ids and len(self.invoice_ids) == 1:
+            invoice_ou_id = self.invoice_ids.operating_unit_id.id
+            for move in res:
+                for line in move["line_ids"]:
+                    if line[2]["account_id"] != bank_account_id:
+                        line[2]["operating_unit_id"] = invoice_ou_id
         return res
-
-    def _get_liquidity_move_line_vals(self, amount):
-        res = super(AccountPayment, self)._get_liquidity_move_line_vals(amount)
-        res["operating_unit_id"] = self.journal_id.operating_unit_id.id or False
-        return res
-
-    def _get_dst_liquidity_aml_dict_vals(self):
-        dst_liquidity_aml_dict = {
-            "name": _("Transfer from %s") % self.journal_id.name,
-            "account_id": self.destination_journal_id.default_credit_account_id.id,
-            "currency_id": self.destination_journal_id.currency_id.id,
-            "payment_id": self.id,
-            "journal_id": self.destination_journal_id.id,
-        }
-
-        dst_liquidity_aml_dict.update(
-            {
-                "operating_unit_id": self.destination_journal_id.operating_unit_id.id
-                or False
-            }
-        )
-        return dst_liquidity_aml_dict
-
-    def _get_transfer_debit_aml_dict_vals(self):
-        transfer_debit_aml_dict = {
-            "name": self.name,
-            "payment_id": self.id,
-            "account_id": self.company_id.transfer_account_id.id,
-            "journal_id": self.destination_journal_id.id,
-        }
-        if self.currency_id != self.company_id.currency_id:
-            transfer_debit_aml_dict.update(
-                {"currency_id": self.currency_id.id, "amount_currency": -self.amount,}
-            )
-        transfer_debit_aml_dict.update(
-            {
-                "operating_unit_id": self.destination_journal_id.operating_unit_id.id
-                or False
-            }
-        )
-        return transfer_debit_aml_dict
-
-    def _create_transfer_entry(self, amount):
-        """ We need to override the standard method, until proper hooks are
-        created
-        """
-        aml_obj = self.env["account.move.line"].with_context(check_move_validity=False)
-        debit, credit, amount_currency, dummy = aml_obj.with_context(
-            date=self.payment_date
-        )._compute_amount_fields(amount, self.currency_id, self.company_id.currency_id)
-        amount_currency = (
-            self.destination_journal_id.currency_id
-            and self.currency_id.with_context(date=self.payment_date).compute(
-                amount, self.destination_journal_id.currency_id
-            )
-            or 0
-        )
-
-        dst_move = self.env["account.move"].create(
-            self._get_move_vals(self.destination_journal_id)
-        )
-
-        dst_liquidity_aml_dict = self._get_shared_move_line_vals(
-            debit, credit, amount_currency, dst_move.id
-        )
-        dst_liquidity_aml_dict.update(self._get_dst_liquidity_aml_dict_vals())
-        aml_obj.create(dst_liquidity_aml_dict)
-
-        transfer_debit_aml_dict = self._get_shared_move_line_vals(
-            credit, debit, 0, dst_move.id
-        )
-        transfer_debit_aml_dict.update(self._get_transfer_debit_aml_dict_vals())
-        transfer_debit_aml = aml_obj.create(transfer_debit_aml_dict)
-        dst_move.post()
-        return transfer_debit_aml
