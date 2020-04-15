@@ -9,7 +9,7 @@ class AccountInvoiceReport(models.Model):
 
     _inherit = "account.invoice.report"
 
-    operating_unit_id = fields.Many2one('operating.unit', 'Operating Unit')
+    operating_unit_id = fields.Many2one("operating.unit", "Operating Unit")
 
     def _select(self):
         select_str = super(AccountInvoiceReport, self)._select()
