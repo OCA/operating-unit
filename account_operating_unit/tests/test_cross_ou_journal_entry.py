@@ -15,7 +15,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         # Create Journal Entries and check the balance of the account
         # based on different operating units.
         self.company.write(
-            {"inter_ou_clearing_account_id": self.inter_ou_account_id.id,}
+            {"inter_ou_clearing_account_id": self.inter_ou_account_id.id}
         )
         self.acc_move_model = self.env["account.move"]
         self.journal_model = self.env["account.journal"]
@@ -48,9 +48,9 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
             ),
         ]
         move_vals.update(
-            {"journal_id": journal_ids and journal_ids.id, "line_ids": lines,}
+            {"journal_id": journal_ids and journal_ids.id, "line_ids": lines}
         )
-        move = self.acc_move_model.sudo(self.user_id.id).create(move_vals)
+        move = self.acc_move_model.with_user(self.user_id.id).create(move_vals)
         # Post journal entries
         move.post()
         # Check the balance of the account
@@ -88,7 +88,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         """
         Call read_group method and return the balance of particular account.
         """
-        aml_rec = self.aml_model.sudo(self.user_id.id).read_group(
+        aml_rec = self.aml_model.with_user(self.user_id.id).read_group(
             domain, ["debit", "credit", "account_id"], ["account_id"]
         )[0]
         return aml_rec.get("debit", 0) - aml_rec.get("credit", 0)
