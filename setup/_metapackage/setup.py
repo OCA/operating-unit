@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo13-addon-hr_expense_operating_unit',
         'odoo13-addon-operating_unit',
         'odoo13-addon-report_qweb_operating_unit',
+        'odoo13-addon-sale_operating_unit',
         'odoo13-addon-sales_team_operating_unit',
     ],
     classifiers=[
