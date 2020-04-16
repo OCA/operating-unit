@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_operating_unit
+# 	* sale_operating_unit
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,21 +14,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_operating_unit
-#: code:addons/sale_operating_unit/models/crm_team.py:20
+#: code:addons/sale_operating_unit/models/crm_team.py:0
 #, python-format
-msgid "Configuration error. It is not possible to change this team. There are sale orders referencing it in other operating units"
+msgid ""
+"Configuration error. It is not possible to change this team. There are sale "
+"orders referencing it in other operating units"
 msgstr ""
 
 #. module: sale_operating_unit
-#: code:addons/sale_operating_unit/models/sale_order.py:55
+#: code:addons/sale_operating_unit/models/sale_order.py:0
 #, python-format
-msgid "Configuration error. The Company in the Sales Order and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Sales Order and in the Operating "
+"Unit must be the same."
 msgstr ""
 
 #. module: sale_operating_unit
-#: code:addons/sale_operating_unit/models/sale_order.py:45
+#: code:addons/sale_operating_unit/models/sale_order.py:0
 #, python-format
-msgid "Configuration error. The Operating Unit of the sales team must match with that of the quote/sales order."
+msgid ""
+"Configuration error. The Operating Unit of the sales team must match with "
+"that of the quote/sales order."
 msgstr ""
 
 #. module: sale_operating_unit
@@ -38,11 +44,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale_operating_unit.view_sale_report_search
 #: model_terms:ir.ui.view,arch_db:sale_operating_unit.view_sales_order_filter
 msgid "Operating Unit"
-msgstr ""
-
-#. module: sale_operating_unit
-#: model:ir.model,name:sale_operating_unit.model_sale_order
-msgid "Sale Order"
 msgstr ""
 
 #. module: sale_operating_unit
@@ -56,8 +57,8 @@ msgid "Sales Analysis Report"
 msgstr ""
 
 #. module: sale_operating_unit
-#: model:ir.model,name:sale_operating_unit.model_crm_team
-msgid "Sales Channels"
+#: model:ir.model,name:sale_operating_unit.model_sale_order
+msgid "Sales Order"
 msgstr ""
 
 #. module: sale_operating_unit
@@ -65,3 +66,7 @@ msgstr ""
 msgid "Sales Order Line"
 msgstr ""
 
+#. module: sale_operating_unit
+#: model:ir.model,name:sale_operating_unit.model_crm_team
+msgid "Sales Team"
+msgstr ""
