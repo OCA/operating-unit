@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo13-addon-report_qweb_operating_unit',
         'odoo13-addon-sale_operating_unit',
         'odoo13-addon-sales_team_operating_unit',
+        'odoo13-addon-stock_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
