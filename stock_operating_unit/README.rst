@@ -23,7 +23,7 @@ Stock with Operating Units
     :target: https://runbot.odoo-community.org/runbot/213/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module introduces the following features:
 
@@ -83,6 +83,7 @@ Contributors
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Aaron Henriquez <aheficent@eficent.com>
 * Sudhir Arya <sudhir.arya@serpentcs.com>
+* Nicola Studer <nicola.studer@braintec-group.com>
 
 Maintainers
 ~~~~~~~~~~~
