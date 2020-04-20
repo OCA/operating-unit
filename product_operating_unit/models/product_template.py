@@ -15,8 +15,8 @@ class ProductTemplate(models.Model):
             return [(6, 0, self.categ_id.operating_unit_ids.ids)]
         if self.env.user.default_operating_unit_id:
             return [(6, 0,
-                    [self.env['res.users'].operating_unit_default_get(
-                        self.env.uid).id])]
+                     [self.env['res.users'].operating_unit_default_get(
+                         self.env.uid).id])]
 
     operating_unit_ids = fields.Many2many(
         'operating.unit',
@@ -57,10 +57,11 @@ class ProductTemplate(models.Model):
                         category within your Operating Unit in order to be \
                         able to create products.')
                     redir_msg = _('Go to Product Categories')
-                    raise RedirectWarning(err_msg,
-                                          self.env.ref('product.\
-                                          product_category_action_form').id,
-                                          redir_msg)
+                    raise RedirectWarning(
+                        err_msg,
+                        self.env.ref(
+                            'product.product_category_action_form').id,
+                        redir_msg)
                 return super()._get_default_category_id()
 
     categ_id = fields.Many2one(
