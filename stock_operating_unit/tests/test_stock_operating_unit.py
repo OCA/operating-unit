@@ -23,6 +23,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
         self.product1 = self.env.ref('product.product_product_7')
         self.product2 = self.env.ref('product.product_product_9')
         self.product3 = self.env.ref('product.product_product_11')
+        self.productA.operating_unit_ids = [(4, self.b2c.id)]
         # Locations
         b2c_wh = self.env.ref('stock_operating_unit.stock_warehouse_b2c')
         b2c_wh.lot_stock_id.write({'operating_unit_id': self.b2c.id})
