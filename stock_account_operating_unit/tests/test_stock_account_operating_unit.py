@@ -129,7 +129,8 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             'categ_id': product_cteg.id,
             'type': 'product',
             'list_price': 1.0,
-            'standard_price': 1.0
+            'standard_price': 1.0,
+            'operating_unit_ids': [(4, self.b2c.id)],
         })
         return product
 
