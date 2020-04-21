@@ -15,15 +15,8 @@ class TestProductOperatingUnit(common.TransactionCase):
         self.ProductCategory = self.env['product.category']
         # company
         self.company = self.env.ref('base.main_company')
-<<<<<<< HEAD
         # group
         self.group_user = self.env.ref('base.group_user')
-=======
-        # groups
-        self.group_stock_manager = self.env.ref('stock.group_stock_manager')
-        self.grp_acc_user = self.env.ref('account.group_account_invoice')
-        self.grp_stock_user = self.env.ref('stock.group_stock_user')
->>>>>>> [ADD] Added a product_operating_unit v12
         # Main Operating Unit
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2B Operating Unit
@@ -37,21 +30,9 @@ class TestProductOperatingUnit(common.TransactionCase):
             'product.product_product_11_product_template')
         # Create users
         self.user1_id = self._create_user(
-<<<<<<< HEAD
             'user_1', [self.group_user], self.company, [self.ou1, self.b2b])
         self.user2_id = self._create_user(
             'user_2', [self.group_user], self.company, [self.b2b])
-=======
-            'user_1',
-            [self.grp_stock_user, self.grp_acc_user, self.group_stock_manager],
-            self.company, [self.ou1, self.b2b]
-        )
-        self.user2_id = self._create_user(
-            'user_2',
-            [self.grp_stock_user, self.grp_acc_user, self.group_stock_manager],
-            self.company, [self.b2b]
-        )
->>>>>>> [ADD] Added a product_operating_unit v12
         self.product1.categ_id.operating_unit_ids = [(6, 0, [self.ou1.id])]
         self.product2.categ_id.operating_unit_ids = [(6, 0, [self.b2b.id])]
         self.product3.categ_id.operating_unit_ids = \
@@ -77,10 +58,6 @@ class TestProductOperatingUnit(common.TransactionCase):
     def test_po_ou_onchange(self):
         with self.assertRaises(ValidationError):
             self.product1.operating_unit_ids = [(6, 0, [self.b2b.id])]
-<<<<<<< HEAD
-=======
-
->>>>>>> [ADD] Added a product_operating_unit v12
         self.product1.onchange_operating_unit_ids()
 
     def test_po_ou_security(self):
