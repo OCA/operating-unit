@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo12-addon-mis_builder_operating_unit',
         'odoo12-addon-mrp_operating_unit',
         'odoo12-addon-operating_unit',
+        'odoo12-addon-product_operating_unit',
         'odoo12-addon-project_operating_unit',
         'odoo12-addon-purchase_operating_unit',
         'odoo12-addon-purchase_request_operating_unit',
