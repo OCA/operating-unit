@@ -23,7 +23,7 @@ Operating Unit in MRP
     :target: https://runbot.odoo-community.org/runbot/213/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module introduces the following features:
 
@@ -70,6 +70,7 @@ Contributors
 
 * Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* Nicola Studer <nicola.studer@braintec-group.com>
 
 Maintainers
 ~~~~~~~~~~~
