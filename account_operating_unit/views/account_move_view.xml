@@ -65,8 +65,30 @@
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute
+                    name="context"
+                >{'default_type': context.get('default_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id != company_currency_id and currency_id or False, 'operating_unit_id': operating_unit_id}</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="domain"
+                >['|', ('company_id', '=', False), ('company_id', '=', parent.company_id), '|', ('operating_unit_ids', '=', context.get('operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_line_ids']/form/sheet/group/field[@name='analytic_account_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="domain"
+                >['|', ('operating_unit_ids', '=', context.get('operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
             <field name="line_ids" position="attributes">
                 <attribute name="context">{
+                    'default_type': context.get('default_type'),
                     'line_ids': line_ids,
                     'journal_id': journal_id,
                     'default_partner_id': commercial_partner_id,
@@ -84,6 +106,59 @@
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="domain"
+                >['|', ('company_id', '=', parent.company_id), ('company_id', '=', False), '|', ('operating_unit_ids', '=', context.get('default_operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/form/group/field[@name='analytic_account_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="domain"
+                >['|', ('operating_unit_ids', '=', context.get('default_operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_invoice_tree" model="ir.ui.view">
+        <field name="name">account.invoice.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field
+                    name="operating_unit_id"
+                    options="{'no_create': True}"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+        <field name="name">account.invoice.select</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <field name="invoice_user_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+            <filter name="salesperson" position="after">
+                <filter
+                    string="Operating Unit"
+                    name="operating_unit_grouped"
+                    icon="terp-folder-orange"
+                    domain="[]"
+                    groups="operating_unit.group_multi_operating_unit"
+                    context="{'group_by':'operating_unit_id'}"
+                />
+            </filter>
         </field>
     </record>
 </odoo>
