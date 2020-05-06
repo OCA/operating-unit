@@ -249,3 +249,19 @@ class AccountMove(models.Model):
                     _("The OU in the Move and in Journal must be the same.")
                 )
         return True
+
+    @api.constrains("operating_unit_id", "company_id")
+    def _check_company_operating_unit(self):
+        for move in self:
+            if (
+                move.company_id
+                and move.operating_unit_id
+                and move.company_id != move.operating_unit_id.company_id
+            ):
+                raise UserError(
+                    _(
+                        "The Company in the Move and in "
+                        "Operating Unit must be the same."
+                    )
+                )
+        return True
