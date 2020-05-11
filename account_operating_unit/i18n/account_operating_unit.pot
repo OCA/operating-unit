@@ -104,6 +104,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_move__operating_unit_id
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_move_line__operating_unit_id
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_payment__operating_unit_id
+#: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_invoice_filter
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_invoice_report_search
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_move_line_filter
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_payment_search
@@ -132,6 +133,13 @@ msgid "Payments"
 msgstr ""
 
 #. module: account_operating_unit
+#: code:addons/account_operating_unit/models/account_move.py:0
+#, python-format
+msgid "The Company in the Move and in Operating Unit must be the same."
+msgstr ""
+
+#. module: account_operating_unit
+#: code:addons/account_operating_unit/models/account_move.py:0
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The OU in the Move and in Journal must be the same."
