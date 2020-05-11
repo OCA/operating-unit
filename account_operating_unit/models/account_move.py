@@ -53,7 +53,6 @@ class AccountMoveLine(models.Model):
         for rec in self:
             if (
                 rec.move_id
-                and rec.move_id.type == "entry"
                 and rec.move_id.operating_unit_id
                 and rec.operating_unit_id
                 and rec.move_id.operating_unit_id != rec.operating_unit_id
@@ -90,10 +89,11 @@ class AccountMove(models.Model):
 
     @api.onchange("invoice_line_ids")
     def _onchange_invoice_line_ids(self):
+        res = super()._onchange_invoice_line_ids()
         if self.operating_unit_id:
             for line in self.line_ids:
                 line.operating_unit_id = self.operating_unit_id
-        return super()._onchange_invoice_line_ids()
+        return res
 
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit(self):
@@ -224,7 +224,38 @@ class AccountMove(models.Model):
                 and move.operating_unit_id
                 and move.operating_unit_id != move.journal_id.operating_unit_id
             ):
+                # Change journal_id if create move from other model. e.g., sale.order
+                if (
+                    move._context.get("active_model")
+                    and move._context.get("active_model") != "account.move"
+                ):
+                    move._onchange_operating_unit()
+                    if (
+                        move.journal_id.operating_unit_id
+                        and move.operating_unit_id
+                        and move.operating_unit_id != move.journal_id.operating_unit_id
+                    ):
+                        raise UserError(
+                            _("The OU in the Move and in Journal must be the same.")
+                        )
+                else:
+                    raise UserError(
+                        _("The OU in the Move and in Journal must be the same.")
+                    )
+        return True
+
+    @api.constrains("operating_unit_id", "company_id")
+    def _check_company_operating_unit(self):
+        for move in self:
+            if (
+                move.company_id
+                and move.operating_unit_id
+                and move.company_id != move.operating_unit_id.company_id
+            ):
                 raise UserError(
-                    _("The OU in the Move and in Journal must be the same.")
+                    _(
+                        "The Company in the Move and in "
+                        "Operating Unit must be the same."
+                    )
                 )
         return True
