@@ -21,8 +21,8 @@
                 
                 ],
     "data": [
-#         "security/sale_security.xml",
-#         "views/sale_view.xml",
+        "security/pos_security.xml",
+        "views/pos_view.xml",
 #         "views/sale_report_view.xml",
     ],
     'installable': True

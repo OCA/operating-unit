@@ -4,12 +4,12 @@
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
 
-    <record id="view_quotation_tree" model="ir.ui.view">
-        <field name="name">sale.order.tree</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+    <record id="view_pos_tree" model="ir.ui.view">
+        <field name="name">pos.config.tree</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_tree"/>
         <field name="arch" type="xml">
-            <field name="user_id" position="after">
+            <field name="name" position="after">
                 <field name="operating_unit_id"
                        domain="[('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
@@ -17,12 +17,12 @@
         </field>
     </record>
 
-    <record id="view_order_tree" model="ir.ui.view">
-        <field name="name">sale.order.tree</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_tree"/>
+    <record id="view_posorder_tree" model="ir.ui.view">
+        <field name="name">pos.order.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
         <field name="arch" type="xml">
-            <field name="user_id" position="after">
+            <field name="session_id" position="after">
                 <field name="operating_unit_id"
                        domain="[('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
@@ -30,30 +30,30 @@
         </field>
     </record>
 
-    <record id="view_order_form" model="ir.ui.view">
-        <field name="name">sale.order.form</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+    <record id="view_posorder_form" model="ir.ui.view">
+        <field name="name">pos.order.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
         <field name="arch" type="xml">
-            <field name="user_id" position="after">
-                <field name="operating_unit_id" widget="selection"
+            <field name="invoice_group" position="after">
+                <field name="operating_unit_id"
                        domain="[('user_ids', 'in', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>
     </record>
 
-    <record id="view_sales_order_filter" model="ir.ui.view">
-        <field name="name">sale.order.list.select</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+    <record id="view_pos_order_filter" model="ir.ui.view">
+        <field name="name">pos.order.list.select</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_filter"/>
         <field name="arch" type="xml">
-            <filter name="my_sale_orders_filter" position="after">
+            <filter name="session" position="after">
                 <filter string="Operating Unit" name="operating_unit_grouped"
                         groups="operating_unit.group_multi_operating_unit"
                         context="{'group_by':'operating_unit_id'}"/>
             </filter>
-            <field name="partner_id" position="after">
+            <field name="session_id" position="after">
                 <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>

@@ -6,8 +6,8 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class PosConfig(models.Model):
-    _inherit = 'pos.config'
+class PosOrder(models.Model):
+    _inherit = 'pos.order'
 
     @api.model
     def _default_operating_unit(self):
@@ -25,7 +25,11 @@ class PosConfig(models.Model):
                 'sent': [('readonly', False)]}
     )
 
-
+    crm_team_id = fields.Many2one(
+        comodel_name='crm.team', 
+        related='config_id.crm_team_id', 
+        string="Sales Team", 
+        )
 
     @api.onchange('team_id')
     def onchange_team_id(self):
@@ -46,7 +50,7 @@ class PosConfig(models.Model):
                     rec.team_id.operating_unit_id != rec.operating_unit_id):
                 raise ValidationError(_('Configuration error. The Operating '
                                         'Unit of the sales team must match '
-                                        'with that of the POS Config.'))
+                                        'with that of the POS order.'))
 
     @api.multi
     @api.constrains('operating_unit_id', 'company_id')
@@ -55,7 +59,19 @@ class PosConfig(models.Model):
             if (rec.company_id and rec.operating_unit_id and
                     rec.company_id != rec.operating_unit_id.company_id):
                 raise ValidationError(_('Configuration error. The Company in '
-                                        'the POS Config and in the Operating '
+                                        'the POS Order and in the Operating '
                                         'Unit must be the same.'))
 
+    @api.multi
+    def _prepare_invoice(self):
+        self.ensure_one()
+        invoice_vals = super(PosOrder, self)._prepare_invoice()
+        invoice_vals['operating_unit_id'] = self.operating_unit_id.id
+        return invoice_vals
 
+
+class PosOrderLine(models.Model):
+    _inherit = 'pos.order.line'
+
+    operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
+                                        string='Operating Unit')

@@ -19,6 +19,6 @@ class CrmTeam(models.Model):
             if orders:
                 raise ValidationError(_('Configuration error. It is not '
                                         'possible to change this '
-                                        'team. There are sale orders '
+                                        'team. There are pos orders '
                                         'referencing it in other operating '
                                         'units'))
