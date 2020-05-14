@@ -12,7 +12,7 @@
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Accounting & Finance",
-    "depends": ["account", "analytic_operating_unit"],
+    "depends": ["account", "operating_unit"],
     "license": "LGPL-3",
     "data": [
         "security/account_security.xml",
