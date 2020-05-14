@@ -1,62 +1,88 @@
 <?xml version="1.0"?>
-<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
-     Serpent Consulting Services Pvt. Ltd.
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L. Serpent 
+	Consulting Services Pvt. Ltd. License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
 
-    <record id="view_pos_tree" model="ir.ui.view">
-        <field name="name">pos.config.tree</field>
-        <field name="model">pos.config</field>
-        <field name="inherit_id" ref="point_of_sale.view_pos_config_tree"/>
-        <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="operating_unit_id"
-                       domain="[('user_ids', 'in', uid)]"
-                       groups="operating_unit.group_multi_operating_unit"/>
-            </field>
-        </field>
-    </record>
+	<record id="view_pos_config_form" model="ir.ui.view">
+		<field name="name">pos.config.form</field>
+		<field name="model">pos.config</field>
+		<field name="inherit_id"
+			ref="point_of_sale.pos_config_view_form" />
+		<field name="arch" type="xml">
 
-    <record id="view_posorder_tree" model="ir.ui.view">
-        <field name="name">pos.order.tree</field>
-        <field name="model">pos.order</field>
-        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
-        <field name="arch" type="xml">
-            <field name="session_id" position="after">
-                <field name="operating_unit_id"
-                       domain="[('user_ids', 'in', uid)]"
-                       groups="operating_unit.group_multi_operating_unit"/>
-            </field>
-        </field>
-    </record>
+			<div id="crm_team_id" position="after">
+				<div class="row mt16 o_settings_container"
+					id="operating_unit_id" groups="base.group_no_one">
+					<div class="col-12 col-lg-6 o_setting_box">
+						<div class="o_setting_right_pane">
+							<label for="operating_unit_id" class="col-lg-3" />
+							<field name="operating_unit_id"
+								domain="[('user_ids', 'in', uid)]"
+								groups="operating_unit.group_multi_operating_unit" />
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <record id="view_posorder_form" model="ir.ui.view">
-        <field name="name">pos.order.form</field>
-        <field name="model">pos.order</field>
-        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
-        <field name="arch" type="xml">
-            <field name="invoice_group" position="after">
-                <field name="operating_unit_id"
-                       domain="[('user_ids', 'in', uid)]"
-                       groups="operating_unit.group_multi_operating_unit"/>
-            </field>
-        </field>
-    </record>
+		</field>
+	</record>
 
-    <record id="view_pos_order_filter" model="ir.ui.view">
-        <field name="name">pos.order.list.select</field>
-        <field name="model">pos.order</field>
-        <field name="inherit_id" ref="point_of_sale.view_pos_order_filter"/>
-        <field name="arch" type="xml">
-            <filter name="session" position="after">
-                <filter string="Operating Unit" name="operating_unit_grouped"
-                        groups="operating_unit.group_multi_operating_unit"
-                        context="{'group_by':'operating_unit_id'}"/>
-            </filter>
-            <field name="session_id" position="after">
-                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
-            </field>
-        </field>
-    </record>
+	<record id="view_pos_config_tree" model="ir.ui.view">
+		<field name="name">pos.config.tree</field>
+		<field name="model">pos.config</field>
+		<field name="inherit_id"
+			ref="point_of_sale.view_pos_config_tree" />
+		<field name="arch" type="xml">
+			<field name="name" position="after">
+				<field name="operating_unit_id"
+					domain="[('user_ids', 'in', uid)]"
+					groups="operating_unit.group_multi_operating_unit" />
+			</field>
+		</field>
+	</record>
+
+	<record id="view_posorder_tree" model="ir.ui.view">
+		<field name="name">pos.order.tree</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_order_tree" />
+		<field name="arch" type="xml">
+			<field name="session_id" position="after">
+				<field name="operating_unit_id"
+					domain="[('user_ids', 'in', uid)]"
+					groups="operating_unit.group_multi_operating_unit" />
+			</field>
+		</field>
+	</record>
+
+	<record id="view_posorder_form" model="ir.ui.view">
+		<field name="name">pos.order.form</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+		<field name="arch" type="xml">
+			<field name="invoice_group" position="after">
+				<field name="operating_unit_id"
+					domain="[('user_ids', 'in', uid)]"
+					groups="operating_unit.group_multi_operating_unit" />
+			</field>
+		</field>
+	</record>
+
+	<record id="view_pos_order_filter" model="ir.ui.view">
+		<field name="name">pos.order.list.select</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id"
+			ref="point_of_sale.view_pos_order_filter" />
+		<field name="arch" type="xml">
+			<filter name="session" position="after">
+				<filter string="Operating Unit" name="operating_unit_grouped"
+					groups="operating_unit.group_multi_operating_unit"
+					context="{'group_by':'operating_unit_id'}" />
+			</filter>
+			<field name="session_id" position="after">
+				<field name="operating_unit_id"
+					groups="operating_unit.group_multi_operating_unit" />
+			</field>
+		</field>
+	</record>
 
 </odoo>
