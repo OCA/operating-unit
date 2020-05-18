@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<templates id="OUtemplate" xml:space="preserve">
-    <t t-name="SwitchOuMenu">
-        <li class="o_switch_ou_menu">
+<templates id="OperatingUnittemplate" xml:space="preserve">
+    <t t-name="SwitchOperatingUnituMenu">
+        <li class="o_switch_operating_unit_menu">
             <a
                 role="button"
                 class="dropdown-toggle"
@@ -15,28 +15,31 @@
                     t-attf-class="#{widget.isMobile ? 'fa fa-building-o' : 'oe_topbar_name'}"
                 >
                     <t t-if="!widget.isMobile">
-                        <t t-esc="widget.current_ou_name" />
+                        <t t-esc="widget.current_operating_unit_name" />
                     </t>
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <t t-foreach="widget.user_operating_units" t-as="ou">
+                <t t-foreach="widget.user_operating_units" t-as="operating_unit">
                     <div
                         class="dropdown-item d-flex py-0 px-0"
-                        data-menu="ou"
-                        t-att-data-ou-id="ou[0]"
+                        data-menu="operating_unit"
+                        t-att-data-operating_unit-id="operating_unit[0]"
                     >
                         <t
                             t-set="is_allowed"
-                            t-value="widget.allowed_ou_ids.includes(ou[0])"
+                            t-value="widget.allowed_operating_unit_ids.includes(operating_unit[0])"
                         />
-                        <t t-set="is_current" t-value="ou[0] === widget.current_ou" />
+                        <t
+                            t-set="is_current"
+                            t-value="operating_unit[0] === widget.current_operating_unit"
+                        />
                         <div
                             role="menuitemcheckbox"
                             t-att-aria-checked="is_allowed"
-                            t-att-aria-label="ou[1]"
+                            t-att-aria-label="operating_unit[1]"
                             tabindex="0"
-                            class="ml-auto pl-3 pr-3 border border-top-0 border-left-0 border-bottom-0 toggle_ou o_py"
+                            class="ml-auto pl-3 pr-3 border border-top-0 border-left-0 border-bottom-0 toggle_operating_unit o_py"
                         >
                             <span style="height: 2rem;">
                                 <t t-if="is_allowed">
@@ -50,19 +53,19 @@
                         <div
                             role="button"
                             t-att-aria-pressed="is_current"
-                            aria-label="Switch to this ou"
+                            aria-label="Switch to this operating_unit"
                             tabindex="0"
                             class="d-flex flex-grow-1 align-items-center py-0 log_into pl-3 o_py"
                             t-att-style="is_current ? 'background-color: lightgrey;' : ''"
                         >
                             <t t-if="is_allowed">
-                                <span class='mr-3 ou_label'>
-                                    <t t-esc="ou[1]" />
+                                <span class='mr-3 operating_unit_label'>
+                                    <t t-esc="operating_unit[1]" />
                                 </span>
                             </t>
                             <t t-if="!is_allowed">
-                                <span class='mr-3 ou_label text-muted'>
-                                    <t t-esc="ou[1]" />
+                                <span class='mr-3 operating_unit_label text-muted'>
+                                    <t t-esc="operating_unit[1]" />
                                 </span>
                             </t>
                         </div>

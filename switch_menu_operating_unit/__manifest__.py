@@ -9,7 +9,7 @@
     "depends": ["operating_unit"],
     "license": "LGPL-3",
     "data": ["views/assets.xml"],
-    "qweb": ["static/src/xml/switch_ou_menu.xml"],
+    "qweb": ["static/src/xml/switch_operating_unit_menu.xml"],
     "demo": [],
     "installable": True,
 }
