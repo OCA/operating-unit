@@ -28,7 +28,8 @@ class Http(models.AbstractModel):
                     ],
                 },
                 "display_switch_ou_menu": len(user.operating_unit_ids) > 1,
-                # user.has_group('base.group_multi_company') and len(user.company_ids) > 1,
+                # user.has_group('base.group_multi_company') \
+                # and len(user.company_ids) > 1,
             }
         )
 
