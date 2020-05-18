@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="Ou switch menu assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/switch_menu_operating_unit/static/src/scss/switch_ou_menu.scss"/>
+            <script type="text/javascript" src="/switch_menu_operating_unit/static/src/js/widgets/switch_ou_menu.js"></script>
+            <!-- <script type="text/javascript" src="/switch_menu_operating_unit/static/tests/widgets/ou_switcher_tests.js"/> -->
+            <script type="text/javascript" src="/switch_menu_operating_unit/static/src/js/core/session.js"></script>
+        </xpath>
+    </template>
+</odoo>
