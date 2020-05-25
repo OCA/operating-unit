@@ -26,7 +26,7 @@ Operating Unit in Sales
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module extends the Sales capabilities of Odoo and introduces the operating
-unit to the Sales Order. Security rules are defined to ensure that users can
+unit to the Sales Order and pricelist. Security rules are defined to ensure that users can
 only display the Sales Orders in which they are allowed access to.
 
 **Table of contents**
@@ -41,6 +41,8 @@ Follow these steps:
 
 #. Create a Sale Order.
 #. The Operating Unit of the Sale Team is assigned to the Sale Order.
+#. Create a Product Pricelist.
+#. The Operating Unit can be assigned to the Product Pricelist.
 
 Bug Tracker
 ===========
@@ -71,6 +73,7 @@ Contributors
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Darshan Patel <darshan.patel.serpencs@gmail.com>
 * Alan Ramos <alan.ramos@jarsa.com.mx>
+* Jesus Alcala <jesus.alcala@jarsa.com.mx>
 
 Maintainers
 ~~~~~~~~~~~
