@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
+     Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_stock_warehouse_orderpoint_form" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.form</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_multiple']" position="after">
+                <field name="operating_unit_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

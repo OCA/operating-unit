@@ -31,6 +31,7 @@ This module introduces the following features:
 - Adds the operating unit to the Stock Location.
 - Adds the requesting operating unit to stock pickings.
 - Implements user's security access rules.
+- Adds the operating unit to the Stock Warehouse Orderpoint.
 
 **Table of contents**
 
@@ -84,6 +85,7 @@ Contributors
 * Aaron Henriquez <aheficent@eficent.com>
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Nicola Studer <nicola.studer@braintec-group.com>
+* Jesus Alcala <jesus.alcala@jarsa.com.mx>
 
 Maintainers
 ~~~~~~~~~~~

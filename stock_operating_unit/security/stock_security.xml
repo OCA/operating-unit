@@ -104,4 +104,19 @@
         <field eval="1" name="perm_read" />
         <field eval="0" name="perm_create" />
     </record>
+    <record
+        id="ir_rule_stock_warehouse_orderpoint_allowed_operating_units"
+        model="ir.rule"
+    >
+        <field name="model_id" ref="stock.model_stock_warehouse_orderpoint" />
+        <field
+            name="domain_force"
+        >['|',('operating_unit_id','=',False),('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">operating units of Product Pricelist</field>
+        <field eval="True" name="global" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
 </odoo>
