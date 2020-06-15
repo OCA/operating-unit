@@ -28,9 +28,9 @@ class AccountInvoice(models.Model):
                 [('type', '=', self.journal_id.type)])
             jf = journal.filtered(
                 lambda aj: aj.operating_unit_id == self.operating_unit_id)
-            if not jf:
+            if not jf and journal:
                 self.journal_id = journal[0]
-            else:
+            elif jf:
                 self.journal_id = jf[0]
 
     @api.onchange('journal_id')
