@@ -42,7 +42,7 @@ addon | version | summary
 [sale_stock_operating_unit](sale_stock_operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 10.0.1.0.0 | Sales Team Operating Unit
 [stock_account_operating_unit](stock_account_operating_unit/) | 10.0.1.0.1 | Create journal entries in moves between internal locations with different operating units.
-[stock_operating_unit](stock_operating_unit/) | 10.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
+[stock_operating_unit](stock_operating_unit/) | 10.0.1.1.0 | An operating unit (OU) is an organizational entity part of a company
 [stock_picking_qweb_operating_unit](stock_picking_qweb_operating_unit/) | 10.0.1.0.0 | Stock Picking Qweb Report With Operating Unit
 
 [//]: # (end addons)
