@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_operating_unit_form" model="ir.ui.view">
+        <field name="name">operating.unit.form</field>
+        <field name="model">operating.unit</field>
+        <field name="inherit_id" ref="operating_unit.view_operating_unit_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main_group']" position="after">
+                <group name="payment_sequence_group">
+                    <field name="payment_transfer_seq_id" />
+                    <field name="payment_cust_inv_seq_id" />
+                    <field name="payment_cust_refund_seq_id" />
+                    <field name="payment_supp_inv_seq_id" />
+                    <field name="payment_supp_refund_seq_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
