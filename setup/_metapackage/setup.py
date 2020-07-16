@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo12-addon-purchase_request_operating_unit',
         'odoo12-addon-report_qweb_operating_unit',
         'odoo12-addon-res_partner_operating_unit',
+        'odoo12-addon-sale_multi_operating_unit',
         'odoo12-addon-sale_operating_unit',
         'odoo12-addon-sale_stock_operating_unit',
         'odoo12-addon-sales_team_operating_unit',
