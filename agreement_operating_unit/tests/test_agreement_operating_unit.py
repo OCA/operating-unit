@@ -11,11 +11,13 @@ class TestAgreementOperatingUnit(common.TransactionCase):
         self.agreement_obj = self.env['agreement']
         self.serviceprofile_obj = self.env['agreement.serviceprofile']
         self.res_users_model = self.env['res.users']
-        self.product_id = self.env['product.template'
-                                   ].search([('type', '=', 'service')], limit=1)
+        self.product_id = self.env['product.template'].search(
+            [('type', '=', 'service')], limit=1)
 
         # Groups
-        self.grp_user = self.env.ref('base.group_user')
+        self.grp_agreement_manager = self.env.ref(
+            'agreement_legal.group_agreement_manager')
+        self.group_user = self.env.ref('base.group_user')
         # Company
         self.company = self.env.ref('base.main_company')
         # Main Operating Unit
@@ -23,12 +25,15 @@ class TestAgreementOperatingUnit(common.TransactionCase):
         # B2C Operating Unit
         self.b2c_OU = self.env.ref('operating_unit.b2c_operating_unit')
         # Create User 1 with Main OU
-        self.user1 = self._create_user('user_1', [self.grp_user],
+        self.user1 = self._create_user('user_1',
+                                       [self.grp_agreement_manager,
+                                           self.group_user],
                                        self.company, [self.main_OU])
         # Create User 2 with B2C OU
-        self.user2 = self._create_user('user_2', [self.grp_user],
+        self.user2 = self._create_user('user_2',
+                                       [self.grp_agreement_manager,
+                                           self.group_user],
                                        self.company, [self.b2c_OU])
-
         self.agreement1 = self._create_agreement(self.user1.id, self.main_OU)
         self.agreement2 = self._create_agreement(self.user2.id, self.b2c_OU)
 
@@ -61,7 +66,8 @@ class TestAgreementOperatingUnit(common.TransactionCase):
         agreement_ids = self.agreement_obj.sudo(self.user2.id).search(
             [('id', '=', self.agreement2.id),
              ('operating_unit_id', '=', self.main_OU.id)])
-        self.assertEqual(agreement_ids.ids, [], 'User 2 should not have access '
+        self.assertEqual(agreement_ids.ids, [],
+                         'User 2 should not have access '
                          'to %s' % self.main_OU.name)
         self.assertEqual(self.agreement1.operating_unit_id.id, self.main_OU.id)
 
