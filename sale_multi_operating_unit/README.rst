@@ -25,7 +25,7 @@ Sale with Multiple Operating Unit
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module adds operating unit information to projects and tasks.
+This module allows a user in an operating unit to request internal quote to another operating unit.
 
 **Table of contents**
 
@@ -42,6 +42,7 @@ Usage
 * Send the internal quote
 
 As a user in the other OUs
+
 * Go to CRM
 * A new lead has been created for the internal customer
 * The description contains the delivery address and the list of products and quantity to quote
@@ -77,7 +78,7 @@ Other credits
 ~~~~~~~~~~~~~
 
 * Open Source Integrators
-* Serpent Consulting Services Pvt. Ltd.
+* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainers
 ~~~~~~~~~~~
