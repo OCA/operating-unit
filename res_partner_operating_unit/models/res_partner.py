@@ -39,7 +39,16 @@ class ResPartner(models.Model):
                   ('operating_unit_ids', '=', False)]
         return super().search(domain + args, offset=offset, limit=limit,
                               order=order, count=count)
-
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        # Get the OUs of the user
+        ou_ids = self.env.user.operating_unit_ids.ids
+        domain = ['|',
+                  ('operating_unit_ids', 'in', ou_ids),
+                  ('operating_unit_ids', '=', False)]
+        return super().name_search(name, domain + args, operator=operator, limit=limit)
+    
     @api.model
     def search_count(self, args):
         # Get the OUs of the user
