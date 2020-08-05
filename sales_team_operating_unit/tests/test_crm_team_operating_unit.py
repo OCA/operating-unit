@@ -13,6 +13,7 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
         self.res_users_model = self.env['res.users'].with_context(
             tracking_disable=True, no_reset_password=True)
         self.crm_team_model = self.env['crm.team']
+        self.res_partner_model = self.env['res.partner']
         # Groups
         self.grp_sale_mngr = self.env.ref('sales_team.group_sale_manager')
         self.grp_user = self.env.ref(
@@ -23,20 +24,38 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
         self.ou1 = self.env.ref('operating_unit.main_operating_unit')
         # B2C Operating Unit
         self.b2c = self.env.ref('operating_unit.b2c_operating_unit')
-        # Create User 1 with Main OU
 
-        self.user1 = self._create_user('user_1', [self.grp_sale_mngr,
-                                                  self.grp_user], self.company,
-                                       [self.ou1])
+        # Create Partner 1 with Main OU
+        self.partner1 = self._create_partner('Test Partner 1', self.ou1)
+
+        # Create Partner 2 with B2C OU
+        self.partner2 = self._create_partner('Test Partner 2', self.b2c)
+
+        # Create User 1 with Main OU
+        self.user1 = self._create_user(
+            self.partner1, 'user_1', [self.grp_sale_mngr,
+                                      self.grp_user], self.company,
+            [self.ou1])
         # Create User 2 with B2C OU
-        self.user2 = self._create_user('user_2', [self.grp_sale_mngr,
-                                                  self.grp_user], self.company,
-                                       [self.b2c])
+        self.user2 = self._create_user(
+            self.partner2, 'user_2', [self.grp_sale_mngr,
+                                      self.grp_user], self.company,
+            [self.b2c])
+
         # Create CRM teams
         self.team1 = self._create_crm_team(self.user1.id, self.ou1)
         self.team2 = self._create_crm_team(self.user2.id, self.b2c)
 
-    def _create_user(self, login, groups, company, operating_units,
+    def _create_partner(self, name, operating_unit, context=None):
+        """ Create a partner. """
+        partner = self.res_partner_model.create({
+            'name': name,
+            'operating_unit_id': operating_unit.id,
+            'operating_unit_ids': [(6, 0, operating_unit.ids)],
+        })
+        return partner
+
+    def _create_user(self, partner, login, groups, company, operating_units,
                      context=None):
         """ Create a user. """
         group_ids = [group.id for group in groups]
@@ -47,6 +66,8 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
             'email': 'test@yourcompany.com',
             'company_id': company.id,
             'company_ids': [(4, company.id)],
+            'partner_id': partner.id,
+            'default_operating_unit_id': operating_units[0].id,
             'operating_unit_ids': [(4, ou.id) for ou in operating_units],
             'groups_id': [(6, 0, group_ids)]
         })
