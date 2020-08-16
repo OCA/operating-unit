@@ -5,12 +5,13 @@ from odoo import fields, models
 
 
 class ProjectTask(models.Model):
-    _inherit = 'project.task'
+    _inherit = "project.task"
 
     operating_unit_id = fields.Many2one(
-        comodel_name='operating.unit',
+        comodel_name="operating.unit",
         related="project_id.operating_unit_id",
-        string='Operating Unit',
-        default=lambda self: self.env['res.users'].operating_unit_default_get(
-            self._uid)
+        string="Operating Unit",
+        default=lambda self: self.env["res.users"].operating_unit_default_get(
+            self._uid
+        ),
     )
