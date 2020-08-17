@@ -59,7 +59,7 @@ class TestFSMOrder(common.TransactionCase):
         return user
 
     def _create_fsm_order(self, uid, operating_unit):
-        fsm_order = self.fsm_order_obj.sudo(uid).create(
+        fsm_order = self.fsm_order_obj.with_user(uid).create(
             {
                 "location_id": self.test_location.id,
                 "operating_unit_id": operating_unit.id,
@@ -73,7 +73,7 @@ class TestFSMOrder(common.TransactionCase):
     def test_fsm_order(self):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access FSM Orders for Main Operating Unit.
-        fsm_orders = self.fsm_order_obj.sudo(self.user2.id).search(
+        fsm_orders = self.fsm_order_obj.with_user(self.user2.id).search(
             [
                 ("id", "=", self.fsm_order2.id),
                 ("operating_unit_id", "=", self.main_OU.id),
