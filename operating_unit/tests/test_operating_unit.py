@@ -70,7 +70,13 @@ class TestOperatingUnit(common.TransactionCase):
             .search([])
             .mapped("code")
         )
-        nou = self.env["operating.unit"].search([])
+        nou = self.env["operating.unit"].search(
+            [
+                "|",
+                ("company_id", "=", False),
+                ("company_id", "in", self.user1.company_ids.ids),
+            ]
+        )
         self.assertEqual(
             len(operating_unit_list_1),
             len(nou),
