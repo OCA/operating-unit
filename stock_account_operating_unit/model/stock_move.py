@@ -84,7 +84,7 @@ class StockMove(models.Model):
                             'line_ids': move_lines,
                             'company_id': move.company_id.id,
                             'ref': move.picking_id and move.picking_id.name,
-                            'stock_move_id': self.id,
+                            'stock_move_id': move.id,
                         })
                     am.post()
             return res
