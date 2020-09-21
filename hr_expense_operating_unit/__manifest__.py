@@ -4,7 +4,7 @@
 
 {
     "name": "HR Expense Operating Unit",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "license": "LGPL-3",
     "author": "Eficent Business and IT Consulting Services S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
