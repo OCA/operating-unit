@@ -99,6 +99,7 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_operating_unit
+#: model:ir.model.fields,field_description:account_operating_unit.field_account_bank_statement_import_journal_creation__operating_unit_id
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_invoice_report__operating_unit_id
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_journal__operating_unit_id
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_move__operating_unit_id
@@ -112,6 +113,7 @@ msgid "Operating Unit"
 msgstr ""
 
 #. module: account_operating_unit
+#: model:ir.model.fields,help:account_operating_unit.field_account_bank_statement_import_journal_creation__operating_unit_id
 #: model:ir.model.fields,help:account_operating_unit.field_account_journal__operating_unit_id
 msgid ""
 "Operating Unit that will be used in payments, when this journal is used."
