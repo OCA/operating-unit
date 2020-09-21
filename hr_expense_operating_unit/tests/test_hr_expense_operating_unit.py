@@ -113,17 +113,8 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
         )
         # Create the expense sheet
         hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
-        self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(
-            {
-                "name": hr_expense_dict1["context"]["default_name"],
-                "employee_id": hr_expense_dict1["context"]["default_employee_id"],
-                "expense_line_ids": [
-                    (4, hr_expense_dict1["context"]["default_expense_line_ids"][0])
-                ],
-                "operating_unit_id": hr_expense_dict1["context"][
-                    "default_operating_unit_id"
-                ],
-            }
+        self.hr_expense_sheet1 = self.hr_expense_sheet_model.browse(
+            hr_expense_dict1["res_id"]
         )
         self.hr_expense1.write({"sheet_id": self.hr_expense_sheet1.id})
         self._post_journal_entries(self.hr_expense_sheet1)
@@ -137,17 +128,8 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
     def test_constrains_error(self):
         with self.assertRaises(ValidationError):
             hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
-            self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(
-                {
-                    "name": hr_expense_dict1["context"]["default_name"],
-                    "employee_id": hr_expense_dict1["context"]["default_employee_id"],
-                    "expense_line_ids": [
-                        (4, hr_expense_dict1["context"]["default_expense_line_ids"][0])
-                    ],
-                    "operating_unit_id": hr_expense_dict1["context"][
-                        "default_operating_unit_id"
-                    ],
-                }
+            self.hr_expense_sheet1 = self.hr_expense_sheet_model.browse(
+                hr_expense_dict1["res_id"]
             )
             self.hr_expense1.write({"sheet_id": self.hr_expense_sheet1.id})
             self.hr_expense_sheet1.expense_line_ids.write(
@@ -164,17 +146,8 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
 
         with self.assertRaises(ValidationError):
             hr_expense_dict2 = self.hr_expense2.action_submit_expenses()
-            self.hr_expense_sheet2 = self.hr_expense_sheet_model.create(
-                {
-                    "name": hr_expense_dict2["context"]["default_name"],
-                    "employee_id": hr_expense_dict2["context"]["default_employee_id"],
-                    "expense_line_ids": [
-                        (4, hr_expense_dict2["context"]["default_expense_line_ids"][0])
-                    ],
-                    "operating_unit_id": hr_expense_dict2["context"][
-                        "default_operating_unit_id"
-                    ],
-                }
+            self.hr_expense_sheet2 = self.hr_expense_sheet_model.browse(
+                hr_expense_dict2["res_id"]
             )
             self.hr_expense_sheet2.expense_line_ids.write({"company_id": company_id.id})
 
