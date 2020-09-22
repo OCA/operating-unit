@@ -4,7 +4,7 @@
 # Copyright 2018-19 ACSONE SA/NV
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class MisReportInstance(models.Model):
@@ -20,7 +20,6 @@ class MisReportInstancePeriod(models.Model):
 
     operating_unit_ids = fields.Many2many("operating.unit", string="Operating Unit",)
 
-    @api.multi
     def _get_additional_move_line_filter(self):
         aml_domain = super(
             MisReportInstancePeriod, self
