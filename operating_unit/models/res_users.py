@@ -38,6 +38,10 @@ class ResUsers(models.Model):
         default=lambda self: self._default_operating_units(),
     )
 
+    def _accessible_operating_units(self):
+        """Return the OUs the user can access"""
+        return self.mapped("operating_unit_ids")
+
     default_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Default Operating Unit",
