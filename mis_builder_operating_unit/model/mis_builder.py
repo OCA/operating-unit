@@ -9,27 +9,22 @@ from odoo import api, fields, models
 
 class MisReportInstance(models.Model):
 
-    _inherit = 'mis.report.instance'
+    _inherit = "mis.report.instance"
 
-    operating_unit_ids = fields.Many2many(
-        'operating.unit',
-        string='Operating Unit',
-    )
+    operating_unit_ids = fields.Many2many("operating.unit", string="Operating Unit",)
 
 
 class MisReportInstancePeriod(models.Model):
 
-    _inherit = 'mis.report.instance.period'
+    _inherit = "mis.report.instance.period"
 
-    operating_unit_ids = fields.Many2many(
-        'operating.unit',
-        string='Operating Unit',
-    )
+    operating_unit_ids = fields.Many2many("operating.unit", string="Operating Unit",)
 
     @api.multi
     def _get_additional_move_line_filter(self):
-        aml_domain = super(MisReportInstancePeriod, self).\
-            _get_additional_move_line_filter()
+        aml_domain = super(
+            MisReportInstancePeriod, self
+        )._get_additional_move_line_filter()
         # we need sudo because, imagine a user having access
         # to operating unit A, viewing a report with 3 columns
         # for OU A, B, C: in columns B and C, self.operating_unit_ids
@@ -40,10 +35,14 @@ class MisReportInstancePeriod(models.Model):
         sudoself = self.sudo()
         if sudoself.report_instance_id.operating_unit_ids:
             aml_domain.append(
-                ('operating_unit_id', 'in',
-                 sudoself.report_instance_id.operating_unit_ids.ids))
+                (
+                    "operating_unit_id",
+                    "in",
+                    sudoself.report_instance_id.operating_unit_ids.ids,
+                )
+            )
         if sudoself.operating_unit_ids:
             aml_domain.append(
-                ('operating_unit_id', 'in',
-                 sudoself.operating_unit_ids.ids))
+                ("operating_unit_id", "in", sudoself.operating_unit_ids.ids)
+            )
         return aml_domain
