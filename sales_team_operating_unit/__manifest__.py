@@ -15,6 +15,7 @@
     "depends": ["sales_team", "operating_unit"],
     "data": [
         "security/crm_security.xml",
+        "demo/sales_team_demo.xml",
         "views/crm_team_view.xml",
     ],
     'installable': True,
