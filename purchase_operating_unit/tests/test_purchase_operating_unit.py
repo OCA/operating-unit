@@ -15,6 +15,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.StockPicking = self.env["stock.picking"]
         self.PurchaseOrder = self.env["purchase.order"]
         self.AccountInvoice = self.env["account.move"]
+        self.AccountAccount = self.env["account.account"]
         # company
         self.company1 = self.env.ref("base.main_company")
         self.company2 = self.env.ref("stock.res_company_1")
@@ -32,7 +33,10 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.product2 = self.env.ref("product.product_product_9")
         self.product3 = self.env.ref("product.product_product_11")
         # Account
-        self.account = self.env.ref("l10n_generic_coa.payable")
+        payable_acc_type = self.env.ref("account.data_account_type_payable").id
+        self.account = self.AccountAccount.search(
+            [("user_type_id", "=", payable_acc_type)], limit=1
+        )
         # Create users
         self.user1_id = self._create_user(
             "user_1",
