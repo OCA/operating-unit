@@ -30,7 +30,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
     def _create_partner(self, name, operating_unit, context=None):
         """ Create a partner. """
         partner = self.res_partner_model.create(
-            {"name": name, "operating_unit_id": operating_unit.id,}
+            {"name": name, "operating_unit_id": operating_unit.id}
         )
         return partner
 
