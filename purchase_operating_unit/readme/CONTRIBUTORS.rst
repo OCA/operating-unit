@@ -2,3 +2,4 @@
 * Aaron Henriquez <aheficent@eficent.com>
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Nicola Studer <nicola.studer@braintec-group.com>
+* Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
