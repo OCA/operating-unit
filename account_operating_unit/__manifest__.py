@@ -1,4 +1,4 @@
-# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 ForgeFlow S.L.
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
@@ -6,7 +6,7 @@
     "summary": "Introduces Operating Unit (OU) in invoices and "
     "Accounting Entries with clearing account",
     "version": "13.0.1.2.0",
-    "author": "Eficent, "
+    "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "WilldooIT Pty Ltd,"
     "Odoo Community Association (OCA)",
