@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2016-17 ForgeFlow S.L.
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl) -->
 <odoo>
     <record id="ir_rule_analytic_account_allowed_operating_units" model="ir.rule">
