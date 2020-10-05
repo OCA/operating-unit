@@ -58,16 +58,16 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
 ~~~~~~~~~~~~
 
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
-* Aaron Henriquez <aheficent@eficent.com>
-* Lois Rilo <lois.rilo@eficent.com>
-* Miquel Raich <miquel.raich@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+* Aaron Henriquez <ahforgeflow@forgeflow.com>
+* Lois Rilo <lois.rilo@forgeflow.com>
+* Miquel Raich <miquel.raich@forgeflow.com>
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Darshan Patel <darshan.patel.serpencs@gmail.com>
 * Alan Ramos <alan.ramos@jarsa.com.mx>
