@@ -109,16 +109,16 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 * Serpent Consulting Services Pvt. Ltd.
 * WilldooIT Pty Ltd
 
 Contributors
 ~~~~~~~~~~~~
 
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
-* Aarón Henríquez <ahenriquez@eficent.com>
+* ForgeFlow <contact@forgeflow.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+* Aarón Henríquez <ahenriquez@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * WilldooIT Pty Ltd <info@willdooit.com>
 * Michael Villamar <michael.villamar@willdooit.com>
