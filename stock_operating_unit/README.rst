@@ -74,14 +74,14 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
 ~~~~~~~~~~~~
 
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
-* Aaron Henriquez <aheficent@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+* Aaron Henriquez <ahforgeflow@forgeflow.com>
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Nicola Studer <nicola.studer@braintec-group.com>
 

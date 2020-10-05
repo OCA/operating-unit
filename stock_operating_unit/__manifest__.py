@@ -1,4 +1,4 @@
-# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 ForgeFlow S.L.
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
@@ -7,7 +7,7 @@
     "summary": "Adds the concept of operating unit (OU) in stock management",
     "version": "13.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
-    "author": "Eficent, "
+    "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd., "
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",
