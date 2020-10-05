@@ -1,4 +1,4 @@
-# © 2019 Eficent Business and IT Consulting Services S.L.
+# © 2019 ForgeFlow S.L.
 # - Jordi Ballester Alomar
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
@@ -7,7 +7,7 @@
     "version": "13.0.1.0.0",
     "summary": "An operating unit (OU) is an organizational entity part of a "
     "company",
-    "author": "Eficent, "
+    "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",
