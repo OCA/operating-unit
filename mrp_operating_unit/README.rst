@@ -62,13 +62,13 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent Business and IT Consulting Services S.L.
+* ForgeFlow S.L.
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
 ~~~~~~~~~~~~
 
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+* ForgeFlow S.L. <contact@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Nicola Studer <nicola.studer@braintec-group.com>
 
