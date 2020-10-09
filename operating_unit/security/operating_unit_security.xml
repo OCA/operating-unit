@@ -21,9 +21,9 @@
         <field name="name">Operating Unit Entry</field>
         <field name="model_id" ref="model_operating_unit" />
         <field name="global" eval="True" />
-        <field
-            name="domain_force"
-        >['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        <field name="domain_force">
+            ['|',('company_id','=',False),('company_id', 'in', company_ids)]
+        </field>
     </record>
     <record id="ir_rule_operating_unit_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="model_operating_unit" />
