@@ -11,7 +11,8 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     inter_ou_clearing_account_id = fields.Many2one(
-        comodel_name="account.account", string="Inter-operating unit clearing account",
+        comodel_name="account.account",
+        string="Inter-operating unit clearing account",
     )
     ou_is_self_balanced = fields.Boolean(
         string="Operating Units are self-balanced",
