@@ -2,10 +2,10 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestAccountOperatingUnit(AccountingTestCase):
+class TestAccountOperatingUnit(AccountTestInvoicingCommon):
     def setUp(self):
         super().setUp()
         self.res_users_model = self.env["res.users"]
@@ -18,7 +18,7 @@ class TestAccountOperatingUnit(AccountingTestCase):
         self.register_payments_model = self.env["account.payment.register"]
 
         # company
-        self.company = self.env.ref("base.main_company")
+        self.company = self.env.user.company_id
         self.grp_acc_manager = self.env.ref("account.group_account_manager")
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
@@ -26,6 +26,18 @@ class TestAccountOperatingUnit(AccountingTestCase):
         self.b2b = self.env.ref("operating_unit.b2b_operating_unit")
         # B2C Operating Unit
         self.b2c = self.env.ref("operating_unit.b2c_operating_unit")
+        # Assign user to main company to allow to write OU
+        self.env.user.write(
+            {
+                "company_ids": [(4, self.env.ref("base.main_company").id)],
+                "operating_unit_ids": [
+                    (4, self.b2b.id),
+                    (4, self.b2c.id),
+                ],
+            }
+        )
+        # Assign company to OU
+        (self.ou1 + self.b2b + self.b2c).write({"company_id": self.company.id})
         # Partner
         self.partner1 = self.env.ref("base.res_partner_1")
         # Products
@@ -112,8 +124,7 @@ class TestAccountOperatingUnit(AccountingTestCase):
                 "code": "test_cash_1",
                 "type": "cash",
                 "company_id": self.company.id,
-                "default_debit_account_id": self.cash1_account_id.id,
-                "default_credit_account_id": self.cash1_account_id.id,
+                "default_account_id": self.cash1_account_id.id,
                 "operating_unit_id": self.ou1.id,
             }
         )
@@ -137,8 +148,7 @@ class TestAccountOperatingUnit(AccountingTestCase):
                 "code": "test_cash_2",
                 "type": "cash",
                 "company_id": self.company.id,
-                "default_debit_account_id": self.cash2_account_id.id,
-                "default_credit_account_id": self.cash2_account_id.id,
+                "default_account_id": self.cash2_account_id.id,
                 "operating_unit_id": self.b2b.id,
             }
         )
@@ -167,7 +177,7 @@ class TestAccountOperatingUnit(AccountingTestCase):
             "partner_id": self.partner1.id,
             "operating_unit_id": operating_unit_id,
             "name": name,
-            "type": "in_invoice",
+            "move_type": "in_invoice",
             "invoice_line_ids": lines,
         }
         return inv_vals
