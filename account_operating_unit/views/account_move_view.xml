@@ -66,33 +66,42 @@
                 />
             </field>
             <field name="invoice_line_ids" position="attributes">
-                <attribute
-                    name="context"
-                >{'default_type': context.get('default_type'), 'journal_id': journal_id, 'default_partner_id': commercial_partner_id, 'default_currency_id': currency_id != company_currency_id and currency_id or False, 'operating_unit_id': operating_unit_id}</attribute>
+                <attribute name="context">
+                    {'default_type': context.get('default_type'), 'journal_id':
+                    journal_id, 'default_partner_id': commercial_partner_id,
+                    'default_currency_id': currency_id != company_currency_id and
+                    currency_id or False, 'operating_unit_id': operating_unit_id}
+                </attribute>
             </field>
             <xpath
                 expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']"
                 position="attributes"
             >
-                <attribute
-                    name="domain"
-                >['|', ('company_id', '=', False), ('company_id', '=', parent.company_id), '|', ('operating_unit_ids', '=', context.get('operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+                <attribute name="domain">
+                    ['|', ('company_id', '=', False), ('company_id', '=',
+                    parent.company_id), '|', ('operating_unit_ids', '=',
+                    context.get('operating_unit_id', False)), ('operating_unit_ids',
+                    '=', False)]
+                </attribute>
             </xpath>
             <xpath
                 expr="//field[@name='invoice_line_ids']/form/sheet/group/field[@name='analytic_account_id']"
                 position="attributes"
             >
-                <attribute
-                    name="domain"
-                >['|', ('operating_unit_ids', '=', context.get('operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+                <attribute name="domain">
+                    ['|', ('operating_unit_ids', '=', context.get('operating_unit_id',
+                    False)), ('operating_unit_ids', '=', False)]
+                </attribute>
             </xpath>
             <field name="line_ids" position="attributes">
-                <attribute name="context">{
+                <attribute name="context">
+                    {
                     'default_type': context.get('default_type'),
                     'line_ids': line_ids,
                     'journal_id': journal_id,
                     'default_partner_id': commercial_partner_id,
-                    'default_currency_id': currency_id != company_currency_id and currency_id or False,
+                    'default_currency_id': currency_id != company_currency_id and
+                    currency_id or False,
                     'default_operating_unit_id': operating_unit_id}
                 </attribute>
             </field>
@@ -110,17 +119,22 @@
                 expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']"
                 position="attributes"
             >
-                <attribute
-                    name="domain"
-                >['|', ('company_id', '=', parent.company_id), ('company_id', '=', False), '|', ('operating_unit_ids', '=', context.get('default_operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+                <attribute name="domain">
+                    ['|', ('company_id', '=', parent.company_id), ('company_id', '=',
+                    False), '|', ('operating_unit_ids', '=',
+                    context.get('default_operating_unit_id', False)),
+                    ('operating_unit_ids', '=', False)]
+                </attribute>
             </xpath>
             <xpath
                 expr="//field[@name='line_ids']/form/group/field[@name='analytic_account_id']"
                 position="attributes"
             >
-                <attribute
-                    name="domain"
-                >['|', ('operating_unit_ids', '=', context.get('default_operating_unit_id', False)), ('operating_unit_ids', '=', False)]</attribute>
+                <attribute name="domain">
+                    ['|', ('operating_unit_ids', '=',
+                    context.get('default_operating_unit_id', False)),
+                    ('operating_unit_ids', '=', False)]
+                </attribute>
             </xpath>
         </field>
     </record>
