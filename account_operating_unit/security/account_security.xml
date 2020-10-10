@@ -5,9 +5,9 @@
 <odoo noupdate="0">
     <record id="ir_rule_account_journal_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="account.model_account_journal" />
-        <field
-            name="domain_force"
-        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in',user.operating_unit_ids.ids)]
+        <field name="domain_force">
+            ['|', ('operating_unit_id','=',False),
+            ('operating_unit_id','in',user.operating_unit_ids.ids)]
         </field>
         <field name="name">Journals from allowed operating units</field>
         <field name="global" eval="True" />
@@ -18,9 +18,9 @@
     </record>
     <record id="ir_rule_move_line_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="account.model_account_move_line" />
-        <field
-            name="domain_force"
-        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in', user.operating_unit_ids.ids)]
+        <field name="domain_force">
+            ['|', ('operating_unit_id','=',False), ('operating_unit_id','in',
+            user.operating_unit_ids.ids)]
         </field>
         <field name="name">Move lines from allowed operating units</field>
         <field name="global" eval="True" />
@@ -31,9 +31,9 @@
     </record>
     <record id="ir_rule_move_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="account.model_account_move" />
-        <field
-            name="domain_force"
-        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in', user.operating_unit_ids.ids)]
+        <field name="domain_force">
+            ['|', ('operating_unit_id','=',False), ('operating_unit_id','in',
+            user.operating_unit_ids.ids)]
         </field>
         <field name="name">Moves from allowed operating units</field>
         <field name="global" eval="True" />
@@ -44,9 +44,9 @@
     </record>
     <record id="ir_rule_account_payment_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="account.model_account_payment" />
-        <field
-            name="domain_force"
-        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in', user.operating_unit_ids.ids)]
+        <field name="domain_force">
+            ['|', ('operating_unit_id','=',False), ('operating_unit_id','in',
+            user.operating_unit_ids.ids)]
         </field>
         <field name="name">Payments from allowed operating units</field>
         <field name="global" eval="True" />
@@ -57,9 +57,9 @@
     </record>
     <record id="ir_rule_invoice_report_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="account.model_account_invoice_report" />
-        <field
-            name="domain_force"
-        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in', user.operating_unit_ids.ids)]
+        <field name="domain_force">
+            ['|', ('operating_unit_id','=',False), ('operating_unit_id','in',
+            user.operating_unit_ids.ids)]
         </field>
         <field name="name">Invoice Report from allowed operating units</field>
         <field name="global" eval="True" />
