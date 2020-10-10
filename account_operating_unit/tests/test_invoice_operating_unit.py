@@ -27,6 +27,5 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.assertNotEqual(
             all_op_units,
             False,
-            "Journal Entries have\
-                            different Operating Units.",
+            "Journal Entries have different Operating Units.",
         )

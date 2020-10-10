@@ -28,13 +28,13 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             }
         )
 
-        register_payments.create_payments()
+        register_payments.action_create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
         # Validate that inter OU balance move lines are created
-        self.assertEqual(len(payment.mapped("move_line_ids.move_id.line_ids")), 4)
+        self.assertEqual(len(payment.move_id.line_ids), 4)
         self.assertAlmostEqual(payment.amount, 115000)
         self.assertEqual(payment.state, "posted")
-        self.assertEqual(self.invoice.invoice_payment_state, "paid")
+        self.assertEqual(self.invoice.payment_state, "paid")
 
     def test_payment_from_two_invoices(self):
         """ Create two invoices of different OU and payment from a third OU"""
@@ -58,33 +58,46 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             }
         )
 
-        register_payments.create_payments()
+        register_payments.action_create_payments()
         payments = self.payment_model.search([], order="id desc", limit=2)
         for payment in payments:
             # Validate that inter OU balance move lines are created
-            self.assertEqual(len(payment.mapped("move_line_ids.move_id.line_ids")), 4)
+            self.assertEqual(len(payment.move_id.line_ids), 4)
             self.assertAlmostEqual(payment.amount, 115000)
             self.assertEqual(payment.state, "posted")
-            self.assertEqual(payment.invoice_ids.invoice_payment_state, "paid")
+        for invoice in invoices:
+            self.assertEqual(invoice.payment_state, "paid")
 
     def test_payment_transfer(self):
         """Create a transfer payment with journals in different OU"""
 
-        payment = self.payment_model.create(
+        payments = self.payment_model.create(
             {
-                "payment_type": "transfer",
+                "payment_type": "outbound",
                 "amount": 115000,
-                "payment_date": time.strftime("%Y") + "-07-15",
+                "date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.cash_journal_ou1.id,
-                "destination_journal_id": self.cash2_journal_b2b.id,
+                "destination_account_id": self.company.transfer_account_id.id,
                 "payment_method_id": self.payment_method_manual_in.id,
+                "is_internal_transfer": True,
             }
         )
-        payment.post()
-        self.assertEqual(len(payment.move_line_ids.mapped("operating_unit_id")), 2)
+        payments |= self.payment_model.create(
+            {
+                "payment_type": "inbound",
+                "amount": 115000,
+                "date": time.strftime("%Y") + "-07-15",
+                "journal_id": self.cash2_journal_b2b.id,
+                "destination_account_id": self.company.transfer_account_id.id,
+                "payment_method_id": self.payment_method_manual_in.id,
+                "is_internal_transfer": True,
+            }
+        )
+        payments.action_post()
+        self.assertEqual(len(payments.move_id.mapped("line_ids.operating_unit_id")), 2)
         # Validate that every move has their correct OU
-        for move in payment.move_line_ids.mapped("move_id"):
-            ou_in_lines = move.line_ids.mapped("operating_unit_id")
+        for move in payments.move_id:
+            ou_in_lines = move.line_ids.operating_unit_id
             self.assertEqual(len(ou_in_lines), 1)
             ou_in_journal = move.journal_id.operating_unit_id
             self.assertEqual(ou_in_lines, ou_in_journal)

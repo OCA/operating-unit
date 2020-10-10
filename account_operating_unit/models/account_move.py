@@ -72,8 +72,8 @@ class AccountMove(models.Model):
     @api.model
     def _default_operating_unit_id(self):
         if (
-            self._context.get("default_type", False)
-            and self._context.get("default_type") != "entry"
+            self._context.get("default_move_type", False)
+            and self._context.get("default_move_type") != "entry"
         ):
             return self.env["res.users"].operating_unit_default_get()
         return False
@@ -141,6 +141,7 @@ class AccountMove(models.Model):
             "journal_id": move.journal_id.id,
             "date": move.date,
             "operating_unit_id": ou_id,
+            "partner_id": move.partner_id and move.partner_id.id or False,
             "account_id": move.company_id.inter_ou_clearing_account_id.id,
         }
 
@@ -159,7 +160,7 @@ class AccountMove(models.Model):
             ou_balance[line.operating_unit_id.id] += line.debit - line.credit
         return ou_balance
 
-    def post(self):
+    def _post(self, soft=True):
         ml_obj = self.env["account.move.line"]
         for move in self:
             if not move.company_id.ou_is_self_balanced:
@@ -167,12 +168,7 @@ class AccountMove(models.Model):
 
             # If all move lines point to the same operating unit, there's no
             # need to create a balancing move line
-            ou_list_ids = {
-                line.operating_unit_id and line.operating_unit_id.id
-                for line in move.line_ids
-                if line.operating_unit_id
-            }
-            if len(ou_list_ids) <= 1:
+            if len(move.line_ids.operating_unit_id) <= 1:
                 continue
             # Create balancing entries for un-balanced OU's.
             ou_balances = self._check_ou_balance(move)
@@ -193,7 +189,7 @@ class AccountMove(models.Model):
                     {"line_ids": [(4, aml.id) for aml in amls]}
                 )
 
-        return super().post()
+        return super()._post(soft)
 
     def _check_balanced(self):
         if self.env.context.get("wip"):
