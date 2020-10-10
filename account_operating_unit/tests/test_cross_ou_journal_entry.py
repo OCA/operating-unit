@@ -20,7 +20,9 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         self.acc_move_model = self.env["account.move"]
         self.journal_model = self.env["account.journal"]
         # Create Journal Entries
-        journal_ids = self.journal_model.search([("code", "=", "MISC")], limit=1)
+        journal_ids = self.journal_model.search(
+            [("code", "=", "MISC"), ("company_id", "=", self.company.id)], limit=1
+        )
         # get default values of account move
         move_vals = self.acc_move_model.default_get([])
         lines = [
@@ -52,7 +54,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         )
         move = self.acc_move_model.with_user(self.user_id.id).create(move_vals)
         # Post journal entries
-        move.post()
+        move.action_post()
         # Check the balance of the account
         self._check_balance(self.current_asset_account_id.id, acc_type="other")
         clearing_account_id = self.company.inter_ou_clearing_account_id.id
