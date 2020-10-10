@@ -21,22 +21,15 @@ class AccountPayment(models.Model):
         store=True,
     )
 
-    def _prepare_payment_moves(self):
-        res = super()._prepare_payment_moves()
-        if not self.operating_unit_id:
-            return res
-        for move in res:
-            bank_journal = self.env["account.journal"].browse(move["journal_id"])
-            bank_ou_id = bank_journal.operating_unit_id.id
-            for line in move["line_ids"]:
-                line[2]["operating_unit_id"] = bank_ou_id
-        bank_account_id = self.journal_id.default_debit_account_id.id
-        if self.payment_type == "outbound":
-            bank_account_id = self.journal_id.default_credit_account_id.id
-        if self.invoice_ids and len(self.invoice_ids) == 1:
-            invoice_ou_id = self.invoice_ids.operating_unit_id.id
-            for move in res:
-                for line in move["line_ids"]:
-                    if line[2]["account_id"] != bank_account_id:
-                        line[2]["operating_unit_id"] = invoice_ou_id
+    def _prepare_move_line_default_vals(self, write_off_line_vals=None):
+        res = super()._prepare_move_line_default_vals(write_off_line_vals)
+        for line in res:
+            line["operating_unit_id"] = self.operating_unit_id.id
+        invoices = self.env["account.move"].browse(self._context.get("active_ids"))
+        invoices_ou = invoices.operating_unit_id
+        if invoices and len(invoices_ou) == 1 and invoices_ou != self.operating_unit_id:
+            destination_account_id = self.destination_account_id.id
+            for line in res:
+                if line["account_id"] == destination_account_id:
+                    line["operating_unit_id"] = invoices_ou.id
         return res
