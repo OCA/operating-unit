@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo13-addon-account_operating_unit',
         'odoo13-addon-analytic_operating_unit',
         'odoo13-addon-crm_operating_unit',
+        'odoo13-addon-hr_contract_operating_unit',
         'odoo13-addon-hr_expense_operating_unit',
         'odoo13-addon-mrp_operating_unit',
         'odoo13-addon-operating_unit',
