@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* hr_contract_operating_unit
+# 	* hr_contract_operating_unit
 #
 msgid ""
 msgstr ""
@@ -18,10 +18,13 @@ msgstr ""
 
 #. module: hr_contract_operating_unit
 #: model:ir.model,name:hr_contract_operating_unit.model_hr_contract
-msgid "Employee Contract"
-msgstr "Contrato de Funcionário"
+msgid "Contract"
+msgstr ""
 
 #. module: hr_contract_operating_unit
 #: model:ir.model.fields,field_description:hr_contract_operating_unit.field_hr_contract__operating_unit_id
 msgid "Operating Unit"
 msgstr "Unidade Operacional"
+
+#~ msgid "Employee Contract"
+#~ msgstr "Contrato de Funcionário"
