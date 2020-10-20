@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_operating_unit
-#: code:addons/product_operating_unit/models/product_template.py:59
+#: code:addons/product_operating_unit/models/product_template.py:60
 #, python-format
 msgid "Go to Product Categories"
 msgstr ""
@@ -51,7 +51,7 @@ msgid "The operating units of the product must include the ones from the categor
 msgstr ""
 
 #. module: product_operating_unit
-#: code:addons/product_operating_unit/models/product_template.py:56
+#: code:addons/product_operating_unit/models/product_template.py:57
 #, python-format
 msgid "You must define at least one product                         category within your Operating Unit in order to be                         able to create products."
 msgstr ""
