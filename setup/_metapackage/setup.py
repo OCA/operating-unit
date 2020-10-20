@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-operating_unit',
+        'odoo14-addon-sales_team_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',
