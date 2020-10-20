@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [operating_unit](operating_unit/) | 14.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+[sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 | Sales Team Operating Unit
 
 [//]: # (end addons)
 
