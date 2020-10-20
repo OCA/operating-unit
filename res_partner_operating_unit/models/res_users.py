@@ -22,7 +22,7 @@ class ResUsers(models.Model):
         if vals.get('default_operating_unit_id'):
             # Add the new OU
             self.partner_id.operating_unit_ids = \
-                [(4, res.default_operating_unit_id.id)]
+                [(4, vals['default_operating_unit_id'])]
         return res
 
     @api.constrains('partner_id.operating_unit_ids',
