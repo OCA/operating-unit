@@ -46,7 +46,10 @@ class ProductTemplate(models.Model):
     @api.onchange("categ_id")
     def onchange_operating_unit_ids(self):
         for record in self:
-            record.operating_unit_ids = [(6, 0, record.categ_id.operating_unit_ids.ids)]
+            if record.categ_id.operating_unit_ids:
+                record.operating_unit_ids = [
+                    (6, 0, record.categ_id.operating_unit_ids.ids)
+                ]
 
     def _get_default_category_id(self):
         category = self.env["product.category"].search([], limit=1)
