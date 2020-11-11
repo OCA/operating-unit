@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <template id="assets_backend" name="op assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/web_switch_operating_unit/static/src/js/switch_op.js"></script>
+            </xpath>
+        </template>
+
+        <template  id="assets_frontend" name="Website Assets" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/web_switch_operating_unit/static/src/scss/navbar_mobile.scss"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>
