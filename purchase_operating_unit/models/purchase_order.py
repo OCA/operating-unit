@@ -57,11 +57,26 @@ class PurchaseOrder(models.Model):
         default=lambda self: self._default_picking_type(),
     )
 
+    @api.model
+    def create(self, vals):
+        res = super(PurchaseOrder, self).create(vals)
+        for purchase in res:
+            picking_type = purchase.picking_type_id
+            if picking_type:
+                warehouse = picking_type.warehouse_id
+                if purchase.env.user.id == 1 and warehouse.operating_unit_id:
+                    res['operating_unit_id'] = warehouse.operating_unit_id.id
+                    res['requesting_operating_unit_id'] = warehouse.operating_unit_id.id
+        return res
+
     @api.constrains('operating_unit_id', 'picking_type_id')
     def _check_warehouse_operating_unit(self):
         for record in self:
             picking_type = record.picking_type_id
             if not record.picking_type_id:
+                continue
+            # OdooBot run scheduler for all operating units
+            if record.env.user.id == 1:
                 continue
             warehouse = picking_type.warehouse_id
             if (warehouse.operating_unit_id and
