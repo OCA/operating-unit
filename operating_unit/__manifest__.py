@@ -9,6 +9,7 @@
     "version": "13.0.2.0.0",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
+    "Noviat,"
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Generic",
@@ -16,9 +17,11 @@
     "license": "LGPL-3",
     "data": [
         "security/operating_unit_security.xml",
+        "security/res_partner_security.xml",
         "security/ir.model.access.csv",
         "data/operating_unit_data.xml",
         "view/operating_unit_view.xml",
+        "view/res_partner_views.xml",
         "view/res_users_view.xml",
     ],
     "demo": ["demo/operating_unit_demo.xml"],
