@@ -17,7 +17,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(PurchaseRequestLineMakePurchaseOrder, self).default_get(fields)
+        res = super().default_get(fields)
         request_line_obj = self.env["purchase.request.line"]
         request_line_ids = self._context.get("active_ids", [])
         operating_unit_id = False
@@ -42,9 +42,9 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
 
     @api.model
     def _prepare_purchase_order(self, picking_type, location, company_id, origin):
-        data = super(
-            PurchaseRequestLineMakePurchaseOrder, self
-        )._prepare_purchase_order(picking_type, location, company_id, origin)
+        data = super()._prepare_purchase_order(
+            picking_type, location, company_id, origin
+        )
         if self.operating_unit_id:
             data["requesting_operating_unit_id"] = self.operating_unit_id.id
             data["operating_unit_id"] = self.operating_unit_id.id
