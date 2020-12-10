@@ -9,7 +9,7 @@ from odoo.tests import common
 
 class TestPurchaseRequestOperatingUnit(common.TransactionCase):
     def setUp(self):
-        super(TestPurchaseRequestOperatingUnit, self).setUp()
+        super().setUp()
         # Models
         self.res_users_model = self.env["res.users"]
         self.purchase_request = self.env["purchase.request"]
@@ -92,9 +92,9 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         return purchase_request
 
     def test_purchase_request(self):
-        record = self.purchase_request.sudo(self.user2.id).search(
+        record = self.purchase_request.with_user(self.user2.id).search(
             [("id", "=", self.request1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
-            record.ids, [], "User 2 should not have access to " "OU %s" % self.ou1.name
+            record.ids, [], "User 2 should not have access to OU %s" % self.ou1.name
         )
