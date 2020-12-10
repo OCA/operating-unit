@@ -4,8 +4,8 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo import SUPERUSER_ID
 from odoo.tests import common
-from odoo.tools import SUPERUSER_ID
 
 
 class TestPurchaseRequestToRfq(common.TransactionCase):
