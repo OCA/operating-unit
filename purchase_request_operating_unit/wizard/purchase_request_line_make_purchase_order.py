@@ -12,16 +12,25 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
     _inherit = "purchase.request.line.make.purchase.order"
 
     operating_unit_id = fields.Many2one(
-        "operating.unit", string="Operating Unit", readonly=True,
+        "operating.unit",
+        string="Operating Unit",
+        readonly=True,
     )
 
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
-        request_line_obj = self.env["purchase.request.line"]
-        request_line_ids = self._context.get("active_ids", [])
         operating_unit_id = False
-        for line in request_line_obj.browse(request_line_ids):
+        active_model = self.env.context.get("active_model", False)
+        active_ids = self.env.context.get("active_ids", False)
+        _model = {
+            "purchase.request.line": "",
+            "purchase.request": "line_ids",
+        }
+        request_lines = (
+            self.env[active_model].browse(active_ids).mapped(_model[active_model])
+        )
+        for line in request_lines:
             line_operating_unit_id = (
                 line.request_id.operating_unit_id
                 and line.request_id.operating_unit_id.id

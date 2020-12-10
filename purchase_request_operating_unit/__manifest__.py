@@ -6,9 +6,9 @@
 
 {
     "name": "Operating Unit in Purchase Requests",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "author": "Eficent, SerpentCS, Odoo Community Association (OCA)",
-    "website": "https://www.github.com/OCA/operating-unit",
+    "website": "https://github.com/OCA/operating-unit",
     "license": "LGPL-3",
     "category": "Purchase Management",
     "depends": ["purchase_request", "purchase_operating_unit"],
