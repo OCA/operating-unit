@@ -24,7 +24,6 @@ class PurchaseRequest(models.Model):
         ),
     )
 
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -41,7 +40,6 @@ class PurchaseRequest(models.Model):
                     )
                 )
 
-    @api.multi
     @api.constrains("operating_unit_id", "picking_type_id")
     def _check_warehouse_operating_unit(self):
         for rec in self:
@@ -56,9 +54,9 @@ class PurchaseRequest(models.Model):
                 ):
                     raise ValidationError(
                         _(
-                            "Configuration error. The\
-                    Purchase Request and the Warehouse of picking type\
-                    must belong to the same Operating Unit."
+                            "Configuration error. The Purchase Request and the"
+                            "Warehouse of picking type must belong to the same "
+                            "Operating Unit."
                         )
                     )
 
@@ -72,9 +70,8 @@ class PurchaseRequest(models.Model):
             ):
                 raise ValidationError(
                     _(
-                        "Configuration error. The "
-                        "approver has not the indicated "
-                        "Operating Unit"
+                        "Configuration error. The approver has not "
+                        "the indicated Operating Unit"
                     )
                 )
 
