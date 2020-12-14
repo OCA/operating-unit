@@ -13,7 +13,7 @@
     "depends": [
         "crm",
         "product_operating_unit",
-        "res_partner_operating_unit",
+        # "res_partner_operating_unit",
         "sale_operating_unit",
     ],
     "license": "AGPL-3",
