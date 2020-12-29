@@ -15,7 +15,7 @@ class AccountMove(models.Model):
     @api.constrains('operating_unit_id')
     def check_payslips_ou(self):
         for move in self:
-            pay = self.env['hr.payslip'].search(
+            pay = self.env['hr.payslip'].sudo().search(
                 [('move_id', '=', move.id)])
             if ((pay.operating_unit_id and move.operating_unit_id)
                     and (pay.operating_unit_id != move.operating_unit_id)):
