@@ -21,6 +21,16 @@ class PosOrder(models.Model):
         string="Sales Team", 
         )
 
+    def _prepare_invoice(self):
+        """
+        Prepare the dict of values to create the new invoice for a pos order.
+        """
+        res = super(PosOrder, self)._prepare_invoice()
+        res.update( {
+            'operating_unit_id': self.config_id.operating_unit_id.id or False,
+        })
+        return res
+
 
 class PosOrderLine(models.Model):
     _inherit = 'pos.order.line'
