@@ -3,3 +3,5 @@
 * Sudhir Arya <sudhir.arya@serpentcs.com>
 * Nicola Studer <nicola.studer@braintec-group.com>
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
+* Aldo Nerio <aldo.nerio@jarsa.com.mx>
+* Alan Ramos <alan.ramos@jarsa.com.mx>

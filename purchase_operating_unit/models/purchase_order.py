@@ -119,6 +119,21 @@ class PurchaseOrder(models.Model):
         picking_vals["operating_unit_id"] = self.operating_unit_id.id
         return picking_vals
 
+    def action_view_invoice(self):
+        result = super().action_view_invoice()
+        company_id = self._context.get(
+            "force_company",
+            self._context.get("default_company_id", self.env.company.id),
+        )
+        domain = [
+            ("company_id", "=", company_id),
+            ("type", "=", "purchase"),
+            ("operating_unit_id", "=", self.operating_unit_id.id),
+        ]
+        journal = self.env["account.journal"].search(domain, limit=1)
+        result["context"]["default_journal_id"] = journal.id
+        return result
+
 
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
