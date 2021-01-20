@@ -10,10 +10,10 @@ class StockMove(models.Model):
 
     def _generate_valuation_lines_data(
         self, partner_id, qty, debit_value, credit_value, debit_account_id,
-            credit_account_id):
+            credit_account_id, description):
         res = super(StockMove, self)._generate_valuation_lines_data(
             partner_id, qty, debit_value, credit_value, debit_account_id,
-            credit_account_id)
+            credit_account_id, description)
         if res:
             debit_line_vals = res.get('debit_line_vals')
             credit_line_vals = res.get('credit_line_vals')
@@ -50,7 +50,6 @@ class StockMove(models.Model):
             return rslt
         return res
 
-    @api.multi
     def _action_done(self):
         """
         Generate accounting moves if the product being moved is subject
