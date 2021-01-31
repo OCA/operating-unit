@@ -21,8 +21,9 @@ class ResUsers(models.Model):
         res = super().write(vals)
         if vals.get('default_operating_unit_id'):
             # Add the new OU
-            self.partner_id.operating_unit_ids = \
-                [(4, res.default_operating_unit_id.id)]
+            for user in self:
+                user.partner_id.operating_unit_ids = \
+                    [(4, user.default_operating_unit_id.id)]
         return res
 
     @api.constrains('partner_id.operating_unit_ids',
