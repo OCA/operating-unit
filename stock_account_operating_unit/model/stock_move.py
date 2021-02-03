@@ -10,10 +10,10 @@ class StockMove(models.Model):
 
     def _generate_valuation_lines_data(
         self, partner_id, qty, debit_value, credit_value, debit_account_id,
-            credit_account_id):
+            credit_account_id, description):
         res = super(StockMove, self)._generate_valuation_lines_data(
             partner_id, qty, debit_value, credit_value, debit_account_id,
-            credit_account_id)
+            credit_account_id, description)
         if res:
             debit_line_vals = res.get('debit_line_vals')
             credit_line_vals = res.get('credit_line_vals')
@@ -50,8 +50,7 @@ class StockMove(models.Model):
             return rslt
         return res
 
-    @api.multi
-    def _action_done(self):
+    def _action_done(self, cancel_backorder=False):
         """
         Generate accounting moves if the product being moved is subject
         to real_time valuation tracking,
@@ -59,7 +58,7 @@ class StockMove(models.Model):
         a transit location or is outside of the company or the source or
         destination locations belong to different operating units.
         """
-        res = super(StockMove, self)._action_done()
+        res = super(StockMove, self)._action_done(cancel_backorder=cancel_backorder)
         for move in self:
 
             if move.product_id.valuation == 'real_time':
