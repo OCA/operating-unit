@@ -53,7 +53,6 @@ class SaleOrder(models.Model):
                     self.operating_unit_id:
                 self.team_id = False
 
-    @api.multi
     @api.constrains('operating_unit_id', 'warehouse_id')
     def _check_wh_operating_unit(self):
         for rec in self:
