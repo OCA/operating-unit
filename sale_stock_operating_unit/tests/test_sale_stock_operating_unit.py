@@ -3,6 +3,7 @@
 # Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo.exceptions import ValidationError
 from odoo.tests import common
 
 
@@ -144,3 +145,26 @@ class TestSaleStockOperatingUnit(common.TransactionCase):
             self.sale2.picking_ids.operating_unit_id,
             "OU in Sale Order and Picking should be same",
         )
+
+    def test_default_warehouse_id(self):
+        self.assertEqual(self.sale1._default_warehouse_id(), self.ou1_wh)
+
+    def test_onchange_team_id(self):
+        self.sale1.onchange_team_id()
+        self.assertEqual(self.sale1.warehouse_id, self.ou1_wh)
+
+    def test_onchange_operating_unit_id(self):
+        self.sale1.onchange_operating_unit_id()
+        self.assertEqual(self.sale1.warehouse_id, self.ou1_wh)
+
+    def test_onchange_warehouse_id(self):
+        self.sale1.onchange_warehouse_id()
+        self.assertEqual(self.sale1.team_id, self.sale_team_ou1)
+
+    def test_check_wh_operating_unit(self):
+        with self.assertRaises(ValidationError):
+            self.sale1.operating_unit_id = self.b2c
+
+    def test_check_existing_so_in_wh(self):
+        with self.assertRaises(ValidationError):
+            self.ou1_wh.operating_unit_id = self.b2c
