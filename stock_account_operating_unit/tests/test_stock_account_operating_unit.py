@@ -141,7 +141,6 @@ class TestStockAccountOperatingUnit(TestStockCommon):
                 "type": "product",
                 "list_price": 1.0,
                 "standard_price": 1.0,
-                #"operating_unit_ids": [(4, self.b2c.id)],
             }
         )
         return product
