@@ -97,11 +97,14 @@ class StockMove(models.Model):
                         acc_valuation,
                     ) = move._get_accounting_data_for_valuation()
 
+                    description = _("Generated accounting move since product '%s' is subject to realtime valuation tracking and the source/destination location is a transit location, is outside the company or belongs to a different operating unit.") % (move.product_id.name)
+
                     move_lines = move._prepare_account_move_line(
                         move.product_qty,
                         move.product_id.standard_price,
                         acc_valuation,
                         acc_valuation,
+                        description
                     )
                     am = (
                         self.env["account.move"]
