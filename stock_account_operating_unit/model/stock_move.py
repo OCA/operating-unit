@@ -2,7 +2,7 @@
 # - Jordi Ballester Alomar
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, exceptions, models
+from odoo import _, exceptions, models
 
 
 class StockMove(models.Model):
@@ -16,6 +16,7 @@ class StockMove(models.Model):
         credit_value,
         debit_account_id,
         credit_account_id,
+        description,
     ):
         res = super(StockMove, self)._generate_valuation_lines_data(
             partner_id,
@@ -24,6 +25,7 @@ class StockMove(models.Model):
             credit_value,
             debit_account_id,
             credit_account_id,
+            description,
         )
         if res:
             debit_line_vals = res.get("debit_line_vals")
@@ -69,8 +71,7 @@ class StockMove(models.Model):
             return rslt
         return res
 
-    @api.multi
-    def _action_done(self):
+    def _action_done(self, cancel_backorder=False):
         """
         Generate accounting moves if the product being moved is subject
         to real_time valuation tracking,
@@ -78,7 +79,7 @@ class StockMove(models.Model):
         a transit location or is outside of the company or the source or
         destination locations belong to different operating units.
         """
-        res = super(StockMove, self)._action_done()
+        res = super(StockMove, self)._action_done(cancel_backorder=cancel_backorder)
         for move in self:
 
             if move.product_id.valuation == "real_time":
@@ -96,11 +97,19 @@ class StockMove(models.Model):
                         acc_valuation,
                     ) = move._get_accounting_data_for_valuation()
 
+                    description = _(
+                        "Generated accounting move since product '%s' is subject to "
+                        "realtime valuation tracking and the source/destination "
+                        "location is a transit location, is outside the company or "
+                        "belongs to a different operating unit."
+                    ) % (move.product_id.name)
+
                     move_lines = move._prepare_account_move_line(
                         move.product_qty,
                         move.product_id.standard_price,
                         acc_valuation,
                         acc_valuation,
+                        description,
                     )
                     am = (
                         self.env["account.move"]
