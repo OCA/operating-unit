@@ -61,6 +61,9 @@ class OperatingUnit(models.Model):
     def create(self, values):
         res = super(OperatingUnit, self).create(values)
         res.user_ids += self.env.user
+        res.user_ids += self.env["res.users"].search(
+            [("login", "=", "__system__"), ("active", "in", [True, False])]
+        )
         self.clear_caches()
         return res
 
