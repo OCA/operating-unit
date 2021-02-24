@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class HrExpenseExpense(models.Model):
@@ -11,12 +11,24 @@ class HrExpenseExpense(models.Model):
     _inherit = "hr.expense"
 
     operating_unit_id = fields.Many2one(
-        "operating.unit",
-        "Operating Unit",
-        default=lambda self: self.env["res.users"].operating_unit_default_get(
-            self._uid
-        ),
+        comodel_name="operating.unit",
+        string="Operating Unit",
+        default=lambda self: self.env["res.users"].operating_unit_default_get(),
     )
+
+    def action_submit_expenses(self):
+        ctx = self._context.copy()
+        operating_unit_id = self.mapped("operating_unit_id")
+        if operating_unit_id and len(operating_unit_id) > 1:
+            raise UserError(
+                _(
+                    "Configuration error. The Operating "
+                    "Unit in the Expense sheet and in the "
+                    "Expense must be the same."
+                )
+            )
+        ctx.update({"default_operating_unit_id": operating_unit_id.id})
+        return super(HrExpenseExpense, self.with_context(ctx)).action_submit_expenses()
 
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
@@ -79,11 +91,9 @@ class HrExpenseSheet(models.Model):
     _inherit = "hr.expense.sheet"
 
     operating_unit_id = fields.Many2one(
-        "operating.unit",
-        "Operating Unit",
-        default=lambda self: self.env["res.users"].operating_unit_default_get(
-            self._uid
-        ),
+        comodel_name="operating.unit",
+        string="Operating Unit",
+        default=lambda self: self.env["res.users"].operating_unit_default_get(),
     )
 
     @api.onchange("operating_unit_id")
