@@ -33,6 +33,7 @@ class ResPartner(models.Model):
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
         # Get the OUs of the user
+        domain = []
         if self.env.user.id != SUPERUSER_ID:
             ou_ids = self.env.user.operating_unit_ids.ids
             domain = ['|',
@@ -44,6 +45,7 @@ class ResPartner(models.Model):
     @api.model
     def search_count(self, args):
         # Get the OUs of the user
+        domain = []
         if self.env.user.id != SUPERUSER_ID:
             ou_ids = self.env.user.operating_unit_ids.ids
             domain = ['|',
