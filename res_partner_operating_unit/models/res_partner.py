@@ -1,7 +1,7 @@
 # © 2017 Niaga Solution - Edi Santoso <repodevs@gmail.com>
 # Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import api, fields, models
+from odoo import api, fields, models, SUPERUSER_ID
 
 
 class ResPartner(models.Model):
@@ -33,18 +33,20 @@ class ResPartner(models.Model):
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
         # Get the OUs of the user
-        ou_ids = self.env.user.operating_unit_ids.ids
-        domain = ['|',
-                  ('operating_unit_ids', 'in', ou_ids),
-                  ('operating_unit_ids', '=', False)]
+        if self.env.user.id != SUPERUSER_ID:
+            ou_ids = self.env.user.operating_unit_ids.ids
+            domain = ['|',
+                      ('operating_unit_ids', 'in', ou_ids),
+                      ('operating_unit_ids', '=', False)]
         return super().search(domain + args, offset=offset, limit=limit,
                               order=order, count=count)
 
     @api.model
     def search_count(self, args):
         # Get the OUs of the user
-        ou_ids = self.env.user.operating_unit_ids.ids
-        domain = ['|',
-                  ('operating_unit_ids', 'in', ou_ids),
-                  ('operating_unit_ids', '=', False)]
+        if self.env.user.id != SUPERUSER_ID:
+            ou_ids = self.env.user.operating_unit_ids.ids
+            domain = ['|',
+                      ('operating_unit_ids', 'in', ou_ids),
+                      ('operating_unit_ids', '=', False)]
         return super().search_count(domain + args)
