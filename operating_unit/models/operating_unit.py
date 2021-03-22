@@ -55,6 +55,15 @@ class OperatingUnit(models.Model):
         # Merge both results
         return list(set(names1) | set(names2))[:limit]
 
+    def name_get(self):
+        res = []
+        for ou in self:
+            name = ou.name
+            if ou.code:
+                name = "[{}] {}".format(ou.code, name)
+            res.append((ou.id, name))
+        return res
+
     @api.model
     def create(self, values):
         res = super(OperatingUnit, self).create(values)
