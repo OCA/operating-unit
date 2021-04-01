@@ -2,7 +2,7 @@
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, fields, models
+from odoo import _, api, fields, models, SUPERUSER_ID
 from odoo.exceptions import ValidationError, UserError
 
 
@@ -63,6 +63,10 @@ class PurchaseOrder(models.Model):
             picking_type = record.picking_type_id
             if not record.picking_type_id:
                 continue
+            # OMO-236 : start # continue when SUERUSER
+            if record.env.user.id == SUPERUSER_ID:
+                continue
+            # OMO-236 : end
             warehouse = picking_type.warehouse_id
             if (warehouse.operating_unit_id and
                     picking_type.warehouse_id and
@@ -77,6 +81,10 @@ class PurchaseOrder(models.Model):
 
     @api.constrains('operating_unit_id', 'company_id')
     def _check_company_operating_unit(self):
+        # OMO-236 : start
+        if self.env.user.id == SUPERUSER_ID:
+            return
+        # OMO-236 : end
         for record in self:
             if (record.company_id and record.operating_unit_id and
                     record.company_id != record.operating_unit_id.company_id):
@@ -106,6 +114,20 @@ class PurchaseOrder(models.Model):
         picking_vals = super(PurchaseOrder, self)._prepare_picking()
         picking_vals['operating_unit_id'] = self.operating_unit_id.id
         return picking_vals
+
+    @api.model
+    def create(self, vals):
+        ''' overrite method for set the default operating unit '''
+        # OMO-236
+        res = super(PurchaseOrder, self).create(vals)
+        for purchase in res:
+            picking_type = purchase.picking_type_id
+            if picking_type:
+                warehouse = picking_type.warehouse_id
+                if purchase.env.user.id == SUPERUSER_ID and warehouse.operating_unit_id:
+                    res['operating_unit_id'] = warehouse.operating_unit_id.id
+                    res['requesting_operating_unit_id'] = warehouse.operating_unit_id.id
+        return res
 
 
 class PurchaseOrderLine(models.Model):
