@@ -27,7 +27,7 @@ addon | version | summary
 [crm_operating_unit](crm_operating_unit/) | 10.0.1.0.0 | Operating Unit in CRM
 [hr_contract_operating_unit](hr_contract_operating_unit/) | 10.0.1.0.0 | HR Contract Operating Unit
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 10.0.1.0.0 | HR Expense Operating Unit
-[hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 10.0.1.0.0 | HR Payroll Account Operating Unit
+[hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 10.0.1.0.1 | HR Payroll Account Operating Unit
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 10.0.1.0.0 | MIS Builder with Operating Unit
 [mrp_operating_unit](mrp_operating_unit/) | 10.0.1.0.0 | Operating Unit in MRP
 [operating_unit](operating_unit/) | 10.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
