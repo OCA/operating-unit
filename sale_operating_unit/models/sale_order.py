@@ -17,7 +17,7 @@ class SaleOrder(models.Model):
         return self.env.user.default_operating_unit_id
 
     team_id = fields.Many2one(
-        compute="compute_team_id",
+        compute="_compute_team_id",
         store=True,
         readonly=False,
     )
@@ -26,20 +26,20 @@ class SaleOrder(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=_default_operating_unit,
-        compute="compute_operating_unit_id",
+        compute="_compute_operating_unit_id",
         store=True,
         readonly=True,
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
     )
 
     @api.depends("team_id")
-    def compute_operating_unit_id(self):
+    def _compute_operating_unit_id(self):
         for record in self:
             if record.team_id:
                 record.operating_unit_id = record.team_id.operating_unit_id
 
     @api.depends("operating_unit_id")
-    def compute_team_id(self):
+    def _compute_team_id(self):
         for record in self:
             if (
                 record.team_id
