@@ -41,7 +41,8 @@ class SaleOrder(models.Model):
     @api.depends("operating_unit_id")
     def compute_team_id(self):
         for record in self:
-            if (record.team_id
+            if (
+                record.team_id
                 and record.team_id.operating_unit_id != record.operating_unit_id
             ):
                 record.team_id = False
@@ -49,8 +50,7 @@ class SaleOrder(models.Model):
     @api.constrains("team_id", "operating_unit_id")
     def _check_team_operating_unit(self):
         for rec in self:
-            if (rec.team_id
-                and rec.team_id.operating_unit_id != rec.operating_unit_id):
+            if rec.team_id and rec.team_id.operating_unit_id != rec.operating_unit_id:
                 raise ValidationError(
                     _(
                         "Configuration error. The Operating "
