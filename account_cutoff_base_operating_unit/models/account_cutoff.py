@@ -101,11 +101,6 @@ class AccountCutoff(models.Model):
             res['operating_unit_id'] = cutoff_tax_line.operating_unit_id.id
         return res
 
-    def _prepare_prepaid_lines(self, aml, mapping):
-        res = super(AccountCutoff, self)._prepare_prepaid_lines(aml, mapping)
-        res['operating_unit_id'] = aml.operating_unit_id.id
-        return res
-
 class AccountCutoffLine(models.Model):
     _inherit = 'account.cutoff.line'
 
