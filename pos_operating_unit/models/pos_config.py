@@ -25,13 +25,13 @@ class PosConfig(models.Model):
     @api.onchange('crm_team_id')
     def onchange_team_id(self):
         if self.crm_team_id:
-            self.operating_unit_id = self.team_id.operating_unit_id
+            self.operating_unit_id = self.crm_team_id.operating_unit_id
 
     @api.onchange('operating_unit_id')
     def onchange_operating_unit_id(self):
-        if self.crm_team_id and self.team_id.operating_unit_id != \
+        if self.crm_team_id and self.crm_team_id.operating_unit_id != \
                 self.operating_unit_id:
-            self.team_id = False
+            self.crm_team_id = False
 
     @api.multi
     @api.constrains('crm_team_id', 'operating_unit_id')
