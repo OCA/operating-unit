@@ -79,11 +79,16 @@ class HrExpenseExpense(models.Model):
         return sheet
 
     def _get_account_move_line_values(self):
-        res = super(HrExpenseExpense, self)._get_account_move_line_values()
+        res = super()._get_account_move_line_values()
         for expense in self:
             res[expense.id][0].update({"operating_unit_id": self.operating_unit_id.id})
             res[expense.id][1].update({"operating_unit_id": self.operating_unit_id.id})
         return res
+
+    def _prepare_move_values(self):
+        move_values = super()._prepare_move_values()
+        move_values["operating_unit_id"] = self.operating_unit_id.id
+        return move_values
 
 
 class HrExpenseSheet(models.Model):
