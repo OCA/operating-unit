@@ -15,6 +15,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.invoice = self.move_model.with_user(self.user_id.id).create(
             self._prepare_invoice(self.b2b.id)
         )
+        self.invoice.invoice_date = self.invoice.date
         # Validate the invoice
         self.invoice.with_user(self.user_id.id).action_post()
         # Check Operating Units in journal entries
