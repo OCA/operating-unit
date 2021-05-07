@@ -69,8 +69,12 @@ class HrExpenseExpense(models.Model):
     def _get_account_move_line_values(self):
         res = super(HrExpenseExpense, self)._get_account_move_line_values()
         for expense in self:
-            res[expense.id][0].update({"operating_unit_id": self.operating_unit_id.id})
-            res[expense.id][1].update({"operating_unit_id": self.operating_unit_id.id})
+            res[expense.id][0].update(
+                {"operating_unit_id": expense.operating_unit_id.id}
+            )
+            res[expense.id][1].update(
+                {"operating_unit_id": expense.operating_unit_id.id}
+            )
         return res
 
 
