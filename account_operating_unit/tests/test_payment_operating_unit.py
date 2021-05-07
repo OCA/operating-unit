@@ -15,6 +15,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.invoice = self.move_model.with_user(self.user_id.id).create(
             self._prepare_invoice(self.b2b.id)
         )
+        self.invoice.invoice_date = self.invoice.date
         # Validate the invoice
         self.invoice.with_user(self.user_id.id).action_post()
 
@@ -45,6 +46,8 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             self._prepare_invoice(self.b2c.id, "SUPP/B2C/02"),
         ]
         invoices = self.move_model.with_user(self.user_id.id).create(to_create)
+        for invoice in invoices:
+            invoice.invoice_date = invoice.date
         # Validate the invoices
         invoices.with_user(self.user_id.id).action_post()
 
