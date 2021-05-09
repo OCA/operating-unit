@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_operating_unit
+# 	* purchase_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,9 @@ msgstr ""
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:84
 #, python-format
-msgid "Configuration error. The Company in the Purchase Order and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Purchase Order and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Erro de Configuração. A Empresa na Encomenda de Compra e na Unidade "
 "Operacional tam que ser a mesma."
@@ -27,7 +29,9 @@ msgstr ""
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:73
 #, python-format
-msgid "Configuration error. The Quotation / Purchase Order and the Warehouse of picking type must belong to the same Operating Unit."
+msgid ""
+"Configuration error. The Quotation / Purchase Order and the Warehouse of "
+"picking type must belong to the same Operating Unit."
 msgstr ""
 "Erro de Configuração. A Cotação / Encomenda de Compra e o Armazém do tipo de "
 "operação têm que pertencer à mesma Unidade Operacional."
@@ -50,7 +54,8 @@ msgstr "Linha de Fatura"
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:100
 #, python-format
-msgid "No Warehouse found with the Operating Unit indicated in the Purchase Order"
+msgid ""
+"No Warehouse found with the Operating Unit indicated in the Purchase Order"
 msgstr ""
 "Nenhum Armazém encontrado com a Unidade Operacional indicada na Encomenda de "
 "Compra"
@@ -58,6 +63,7 @@ msgstr ""
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__operating_unit_id
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__operating_unit_id
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.purchase_order_line_search
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_filter
 msgid "Operating Unit"
@@ -74,14 +80,22 @@ msgid "Purchase Order Line"
 msgstr "Linha de Encomenda de Compra"
 
 #. module: purchase_operating_unit
+#: model:ir.model,name:purchase_operating_unit.model_purchase_report
+msgid "Purchase Report"
+msgstr ""
+
+#. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__requesting_operating_unit_id
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__requesting_operating_unit_id
 msgid "Requesting Operating Unit"
 msgstr "Unidade Operacional Requerente"
 
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/account_invoice.py:43
 #, python-format
-msgid "The operating unit of the purchase order must be the same as in the associated invoices."
+msgid ""
+"The operating unit of the purchase order must be the same as in the "
+"associated invoices."
 msgstr ""
 "A unidade operacional da encomenda de compra tem que ser a mesma que a das "
 "faturas associadas."
