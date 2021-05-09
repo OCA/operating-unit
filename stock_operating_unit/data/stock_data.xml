@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L.
+     Copyright 2019 Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo noupdate="1">
+    <record id="stock.warehouse0" model="stock.warehouse">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit" />
+    </record>
+    <record id="stock.stock_location_stock" model="stock.location">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit" />
+    </record>
+</odoo>
