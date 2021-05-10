@@ -4,3 +4,5 @@ contract
 field-service
 mis-builder
 purchase-workflow
+account-financial-reporting
+
