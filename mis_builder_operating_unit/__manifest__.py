@@ -1,13 +1,13 @@
-# © 2015-19 Eficent Business and IT Consulting Services S.L. -
+# © 2015-19 ForgeFlow S.L. -
 # Jordi Ballester Alomar
 # © 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "MIS Builder with Operating Unit",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Reporting",
-    "author": "Eficent Business and IT Consulting Services S.L., "
+    "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "ACSONE SA/NV,"
     "Odoo Community Association (OCA)",
