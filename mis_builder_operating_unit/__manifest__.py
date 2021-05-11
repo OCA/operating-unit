@@ -12,7 +12,7 @@
     "ACSONE SA/NV,"
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",
-    "website": "https://github.com/operating-unit",
+    "website": "https://github.com/OCA/operating-unit",
     "depends": ["mis_builder", "account_operating_unit"],
     "data": ["security/mis_builder_security.xml", "view/mis_builder.xml"],
     "installable": True,
