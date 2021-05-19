@@ -8,7 +8,7 @@
     "author": "ForgeFlow S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
-    "website": "https://github.com/operating-unit",
+    "website": "https://github.com/OCA/operating-unit",
     "license": "LGPL-3",
     "category": "Manufacturing",
     "depends": ["mrp", "stock_operating_unit", "sales_team"],
