@@ -23,7 +23,7 @@ Operating Unit in MRP
     :target: https://runbot.odoo-community.org/runbot/213/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module introduces the following features:
 
@@ -71,6 +71,7 @@ Contributors
 * ForgeFlow S.L. <contact@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Nicola Studer <nicola.studer@braintec-group.com>
+* Rujia Liu <rujial@roof.co.nz>
 
 Maintainers
 ~~~~~~~~~~~
