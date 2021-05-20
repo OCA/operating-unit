@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Rujia Liu
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="product_supplierinfo_form_view">
+        <field
+            name="name"
+        >product.supplierinfo.form (in product_supplierinfo_operating_unit)</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="before">
+                <field name="operating_unit_id" options="{'no_create': True}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_form_purchase" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.purchase</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25" />
+        <field
+            name="inherit_id"
+            ref="purchase.res_config_settings_view_form_purchase"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='purchase']/div[3]/div" position="after">
+                <div
+                    class="col-xs-12 col-md-6 o_setting_box"
+                    title="By default vendor prices can be set per company or globally in the product detail form. If different operating units buy products from different suppliers, or at different prices enable this option to assign an operating unit in the product detail form."
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="group_manage_vendor_ou_price" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="group_manage_vendor_ou_price" />
+                        <div class="text-muted">
+                            Manager Vendor Pricing per Operating Unit
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
