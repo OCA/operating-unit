@@ -9,5 +9,5 @@ class ResConfigSettings(models.TransientModel):
 
     group_manage_vendor_ou_price = fields.Boolean(
         string="Operating Unit Vendor Pricing",
-        implied_group="purchase_operating_unit.group_manage_vendor_ou_price",
+        implied_group="product_supplierinfo_operating_unit.group_manage_vendor_ou_price",
     )

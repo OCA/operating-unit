@@ -27,7 +27,7 @@ Product Supplierinfo Operating Unit
 
 This module introduces the following features:
 
-* Adds Operating Unit (OU) to product supplier pricelist.
+* Adds Operating Unit (OU) to product supplierinfo records to allow different suppliers and pricing by operating unit.
 
 **Table of contents**
 
@@ -47,9 +47,13 @@ Do not contact contributors directly about support or help with technical issues
 Credits
 =======
 
+Authors
+~~~~~~~
+
+* Open For Small Business Ltd
+
 Contributors
 ~~~~~~~~~~~~
-
 
 * Graeme Gellatly <graeme@o4sb.com>
 * Rujia Liu <rujial@roof.co.nz>

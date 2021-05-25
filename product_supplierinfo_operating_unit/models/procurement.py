@@ -10,13 +10,7 @@ class StockRule(models.Model):
 
     def _prepare_purchase_order(self, company_id, origin, values):
         res = super()._prepare_purchase_order(company_id, origin, values)
-        operating_unit = self.location_id.operating_unit_id
-        if not operating_unit and "sale_line_id" in values:
-            operating_unit = (
-                self.env["sale.order.line"]
-                .browse(values["sale_line_id"])
-                .order_id.operating_unit_id
-            )
+        operating_unit = self.operating_unit_id
         if operating_unit:
             res.update(
                 {
@@ -29,5 +23,5 @@ class StockRule(models.Model):
     def _run_buy(self, procurements):
         return super(
             StockRule,
-            self.with_context(operating_unit=self.location_id.operating_unit_id),
+            self.with_context(operating_unit=self.operating_unit_id),
         )._run_buy(procurements)

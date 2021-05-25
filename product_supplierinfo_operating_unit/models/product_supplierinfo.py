@@ -1,7 +1,5 @@
 # Copyright 2017 Open For Small Business Ltd
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-# flake8: noqa
-# as we are copying from odoo core
 from odoo import fields, models
 
 
@@ -10,10 +8,10 @@ class ProductProduct(models.Model):
 
     def _prepare_sellers(self, params):
         sellers = super()._prepare_sellers(params)
-        if self._context.get("operating_unit"):
+        if self._context.get("operating_unit_id"):
             sellers = sellers.filtered(
                 lambda r: not r.operating_unit_id
-                or r.operating_unit_id == self._context["operating_unit"]
+                or r.operating_unit_id == self._context["operating_unit_id"]
             )
         return sellers
 
