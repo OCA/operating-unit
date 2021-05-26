@@ -3,6 +3,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # Rujia Liu
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from odoo.exceptions import UserError
 from odoo.tests.common import Form
 
 from odoo.addons.stock.tests.common import TestStockCommon
@@ -38,6 +39,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         self.partner1 = self.env.ref("base.res_partner_1")
         self.stock_location_stock = self.env.ref("stock.stock_location_stock")
         self.supplier_location = self.env.ref("stock.stock_location_suppliers")
+        self.customer_location = self.env.ref("stock.stock_location_customers")
 
         # Create user1
         self.user1 = self._create_user(
@@ -219,6 +221,13 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         else:
             return 0.0
 
+    def test_stock_operating_unit(self):
+        with self.assertRaises(UserError):
+            self.stock_location_stock.operating_unit_id = False
+        with self.assertRaises(UserError):
+            self.stock_location_stock.usage = "internal"
+            self.stock_location_stock.operating_unit_id = False
+
     def test_pickings(self):
         """Test account balances during receiving stock into the main
         operating unit, then into b2c operating unit, and then transfer stock
@@ -366,4 +375,24 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             self.account_inter_ou_clearing.id,
             operating_unit=None,
             expected_balance=expected_balance,
+        )
+
+        # Create shippment from vendor to customer
+        self.picking = self._create_picking(
+            self.user1,
+            self.ou1,
+            self.incoming_id,
+            self.supplier_location,
+            self.customer_location,
+        )
+        # Receive it
+        self._confirm_receive(self.user1.id, self.picking)
+        account_move = self.env["account.move"].search(
+            [("stock_move_id", "=", self.picking.move_lines[0].id)]
+        )
+        account_move.line_ids.mapped("operating_unit_id")
+        # Confirm the ou is picking type's ou
+        self.assertEqual(
+            account_move.line_ids.mapped("operating_unit_id"),
+            self.picking.picking_type_id.warehouse_id.operating_unit_id,
         )

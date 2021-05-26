@@ -18,7 +18,7 @@ class StockMove(models.Model):
         credit_account_id,
         description,
     ):
-        res = super(StockMove, self)._generate_valuation_lines_data(
+        rslt = super(StockMove, self)._generate_valuation_lines_data(
             partner_id,
             qty,
             debit_value,
@@ -27,10 +27,10 @@ class StockMove(models.Model):
             credit_account_id,
             description,
         )
-        if res:
-            debit_line_vals = res.get("debit_line_vals")
-            credit_line_vals = res.get("credit_line_vals")
-            price_diff_line_vals = res.get("price_diff_line_vals", {})
+        if rslt:
+            debit_line_vals = rslt.get("debit_line_vals")
+            credit_line_vals = rslt.get("credit_line_vals")
+            price_diff_line_vals = rslt.get("price_diff_line_vals", {})
 
             if (
                 self.operating_unit_id
@@ -59,17 +59,14 @@ class StockMove(models.Model):
             credit_line_vals["operating_unit_id"] = (
                 ou_id or self.operating_unit_id.id or self.operating_unit_dest_id.id
             )
-            rslt = {
-                "credit_line_vals": credit_line_vals,
-                "debit_line_vals": debit_line_vals,
-            }
+            rslt["credit_line_vals"] = credit_line_vals
+            rslt["debit_line_vals"] = debit_line_vals
             if price_diff_line_vals:
                 price_diff_line_vals["operating_unit_id"] = (
                     ou_id or self.operating_unit_id.id or self.operating_unit_dest_id.id
                 )
                 rslt["price_diff_line_vals"] = price_diff_line_vals
-            return rslt
-        return res
+        return rslt
 
     def _action_done(self, cancel_backorder=False):
         """
