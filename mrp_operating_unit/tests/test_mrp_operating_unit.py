@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo.exceptions import ValidationError
 from odoo.tests import common
+from odoo.tests.common import Form
 
 
 class TestMrpOperatingUnit(common.TransactionCase):
@@ -20,6 +21,8 @@ class TestMrpOperatingUnit(common.TransactionCase):
 
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
+        # B2B Operating Unit
+        self.b2b = self.env.ref("operating_unit.b2b_operating_unit")
         # Chicago Operating Unit
         self.chicago = self.env.ref("stock_operating_unit.operating_unit_shop0")
         # Groups
@@ -86,6 +89,41 @@ class TestMrpOperatingUnit(common.TransactionCase):
                 }
             )
         return mrp
+
+    def test_onchange_operating_unit_id(self):
+        # Test the ou does not belong to any warehouse
+        test_ou = self.env["operating.unit"].create(
+            {
+                "name": "Test OU",
+                "code": "TOU",
+                "partner_id": self.env.ref("stock.res_partner_company_1").id,
+                "company_id": self.env.ref("stock.res_company_1").id,
+            }
+        )
+        location_test = self.env["stock.location"].create(
+            {
+                "name": "Test Location",
+                "usage": "internal",
+                "operating_unit_id": test_ou.id,
+                "company_id": self.env.ref("stock.res_company_1").id,
+            }
+        )
+        record = self._create_mrp(
+            "Test Onchange Operating Unit", test_ou, location_test
+        )
+        self.assertEqual(None, record._onchange_operating_unit_id())
+
+        # Test onchange picking_type_id
+        new_picking_type_id = self.env["stock.picking.type"].search(
+            [
+                ("company_id", "=", self.mrp_record1.company_id.id),
+                ("code", "=", "mrp_operation"),
+                ("warehouse_id.operating_unit_id", "=", self.b2b.id),
+            ]
+        )
+        with Form(self.mrp_record1) as mrp_form:
+            mrp_form.operating_unit_id = self.b2b
+            self.assertEqual(new_picking_type_id, mrp_form.picking_type_id)
 
     def test_mrp_ou(self):
         record = self.mrp_production_model.with_user(self.user2.id).search(
