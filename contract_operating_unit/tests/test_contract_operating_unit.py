@@ -12,9 +12,7 @@ class TestContractOperatingUnit(common.TransactionCase):
         self.contract_model = self.env["contract.contract"]
 
         self.company = self.env.ref("base.main_company")
-        self.grp_contract_manager = self.env.ref(
-            "account.group_account_manager"
-        )
+        self.grp_contract_manager = self.env.ref("account.group_account_manager")
         self.group_user = self.env.ref("base.group_user")
 
         # Main Operating Unit
@@ -37,7 +35,9 @@ class TestContractOperatingUnit(common.TransactionCase):
         )
 
         self.partner = self.env["res.partner"].create(
-            {"name": "Test contract partner", }
+            {
+                "name": "Test contract partner",
+            }
         )
 
         self.contract1 = (
@@ -63,9 +63,7 @@ class TestContractOperatingUnit(common.TransactionCase):
             )
         )
 
-    def _create_user(
-        self, login, groups, company, operating_units, context=None
-    ):
+    def _create_user(self, login, groups, company, operating_units, context=None):
         """Creates a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create(
