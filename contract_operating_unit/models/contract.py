@@ -1,7 +1,7 @@
 # Copyright 2020 ForgeFlow S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ContractContract(models.Model):
@@ -16,9 +16,10 @@ class ContractContract(models.Model):
         ),
     )
 
-    @api.multi
     def _prepare_invoice(self, date_invoice, journal=None):
-        invoice_vals = super()._prepare_invoice(date_invoice, journal)
+        (invoice_vals, move_form) = super()._prepare_invoice(
+            date_invoice, journal=journal
+        )
         if self.operating_unit_id:
             invoice_vals["operating_unit_id"] = self.operating_unit_id.id
-        return invoice_vals
+        return (invoice_vals, move_form)

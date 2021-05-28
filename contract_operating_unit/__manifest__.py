@@ -3,12 +3,12 @@
 
 {
     "name": "Contract Operating Unit",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "LGPL-3",
-    "author": "ForgeFlow S.L., " "Odoo Community Association (OCA)",
+    "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Invoicing",
-    "depends": ["contract", "operating_unit"],
+    "depends": ["contract", "account_operating_unit"],
     "data": ["views/contract_view.xml", "security/contract_security.xml"],
     "installable": True,
 }
