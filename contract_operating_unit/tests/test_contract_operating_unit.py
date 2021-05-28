@@ -42,7 +42,7 @@ class TestContractOperatingUnit(common.TransactionCase):
 
         self.contract1 = (
             self.env["contract.contract"]
-            .sudo(self.user1)
+            .with_user(self.user1.id)
             .create(
                 {
                     "name": "Maintenance of Servers",
@@ -53,7 +53,7 @@ class TestContractOperatingUnit(common.TransactionCase):
         )
         self.contract2 = (
             self.env["contract.contract"]
-            .sudo(self.user2)
+            .with_user(self.user2.id)
             .create(
                 {
                     "name": "Maintenance of Servers",
@@ -84,7 +84,7 @@ class TestContractOperatingUnit(common.TransactionCase):
         """Test Hr Contract Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Contract records of Main Operating Unit.
-        record = self.contract_model.sudo(self.user2.id).search(
+        record = self.contract_model.with_user(self.user2.id).search(
             [
                 ("id", "=", self.contract1.id),
                 ("operating_unit_id", "=", self.ou1.id),
