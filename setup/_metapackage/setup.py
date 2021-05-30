@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-account_operating_unit',
         'odoo14-addon-analytic_operating_unit',
         'odoo14-addon-operating_unit',
+        'odoo14-addon-purchase_operating_unit',
         'odoo14-addon-sales_team_operating_unit',
         'odoo14-addon-stock_operating_unit',
     ],
