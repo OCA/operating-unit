@@ -23,6 +23,7 @@ addon | version | summary
 [account_operating_unit](account_operating_unit/) | 14.0.1.0.0 | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 | Analytic Operating Unit
 [operating_unit](operating_unit/) | 14.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
+[purchase_operating_unit](purchase_operating_unit/) | 14.0.1.0.0 | Adds the concecpt of operating unit (OU) in purchase order management
 [sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 | Sales Team Operating Unit
 [stock_operating_unit](stock_operating_unit/) | 14.0.1.0.0 | Adds the concept of operating unit (OU) in stock management
 
