@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-account_financial_report_operating_unit',
         'odoo14-addon-account_operating_unit',
         'odoo14-addon-analytic_operating_unit',
+        'odoo14-addon-hr_expense_operating_unit',
         'odoo14-addon-operating_unit',
         'odoo14-addon-purchase_operating_unit',
         'odoo14-addon-sales_team_operating_unit',
