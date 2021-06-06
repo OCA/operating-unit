@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="group_all_ou_purchase_request" model="res.groups">
+        <field name="name">Access all OUs' purchase requests</field>
+        <field name="category_id" ref="operating_unit.module_operating_units" />
+    </record>
+
+    <function model="ir.rule" name="write">
+        <value
+            eval="[ref('purchase_request_operating_unit.ir_rule_purchase_request_allowed_operating_units')]"
+        />
+        <value
+            eval="{'domain_force': &quot;['|','|',(1, '=', 1) if user.has_group('purchase_request_operating_unit_access_all.group_all_ou_purchase_request') else (0, '=', 1),('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]&quot;}"
+        />
+    </function>
+
+    <function model="ir.rule" name="write">
+        <value
+            eval="[ref('purchase_request_operating_unit.ir_rule_purchase_request_line_allowed_operating_units')]"
+        />
+        <value
+            eval="{'domain_force': &quot;['|','|',(1, '=', 1) if user.has_group('purchase_request_operating_unit_access_all.group_all_ou_purchase_request') else (0, '=', 1),('request_id.operating_unit_id','=',False),('request_id.operating_unit_id','in', user.operating_unit_ids.ids)]&quot;}"
+        />
+    </function>
+
+</odoo>
