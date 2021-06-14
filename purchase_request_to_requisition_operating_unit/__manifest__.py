@@ -4,8 +4,8 @@
 
 {
     "name": "Purchase Request to Call for Bids with Operating Units",
-    "version": "9.0.1.0.0",
-    "author": "Eficent"
+    "version": "14.0.1.0.0",
+    "author": "Eficent,"
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",

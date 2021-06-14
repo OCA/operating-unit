@@ -1,8 +1,8 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.tests import common
-from openerp.tools import SUPERUSER_ID
+from odoo import SUPERUSER_ID
+from odoo.tests import common
 
 
 class TestPurchaseRequestToRequisition(common.TransactionCase):
@@ -11,9 +11,6 @@ class TestPurchaseRequestToRequisition(common.TransactionCase):
         self.purchase_request = self.env["purchase.request"]
         self.purchase_request_line_obj = self.env["purchase.request.line"]
         self.wiz = self.env["purchase.request.line.make.purchase.requisition"]
-        self.purchase_requisition_partner_model = self.env[
-            "purchase.requisition.partner"
-        ]
         self.purchase_order = self.env["purchase.order"]
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
@@ -31,7 +28,7 @@ class TestPurchaseRequestToRequisition(common.TransactionCase):
         vals = {
             "request_id": purchase_request.id,
             "product_id": self.product1.id,
-            "product_uom_id": self.env.ref("product.product_uom_unit").id,
+            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
             "product_qty": 5.0,
         }
         self.purchase_request_line = self.purchase_request_line_obj.create(vals)
