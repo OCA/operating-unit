@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="group_all_ou_purchase_requisition" model="res.groups">
+        <field name="name">Access all OUs' Purchase Agreement</field>
+        <field name="category_id" ref="operating_unit.module_operating_units" />
+    </record>
+
+    <function model="ir.rule" name="write">
+        <value
+            eval="[ref('purchase_requisition_operating_unit.ir_rule_purchase_requisition_allowed_operating_units'),
+                   ref('purchase_requisition_operating_unit.ir_rule_purchase_requisition_line_allowed_operating_units')]"
+        />
+        <value
+            eval="{'domain_force': &quot;['|','|',(1, '=', 1) if user.has_group('purchase_requisition_operating_unit_access_all.group_all_ou_purchase_requisition') else (0, '=', 1),('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]&quot;}"
+        />
+    </function>
+
+</odoo>
