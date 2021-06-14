@@ -1,20 +1,35 @@
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 ForgeFlow S.L. (https://www.forgeflow.com)
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, fields, models
-from openerp.exceptions import Warning as UserError
-from openerp.tools.translate import _
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class PurchaseRequisition(models.Model):
-
     _inherit = "purchase.requisition"
+
+    operating_unit_id = fields.Many2one(
+        comodel_name="operating.unit",
+        string="Operating Unit",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        default=lambda self: self.env["res.users"].operating_unit_default_get(
+            self.env.uid
+        ),
+    )
+    picking_type_id = fields.Many2one(
+        comodel_name="stock.picking.type",
+        string="Picking Type",
+        domain=[("code", "=", "incoming")],
+        required=True,
+        default=lambda self: self._get_picking_in(),
+    )
 
     @api.model
     def _get_picking_in(self):
         res = super(PurchaseRequisition, self)._get_picking_in()
         type_obj = self.env["stock.picking.type"]
-        operating_unit = self.env["res.users"].operating_unit_default_get(self._uid)
+        operating_unit = self.env["res.users"].operating_unit_default_get(self.env.uid)
         types = type_obj.search(
             [
                 ("code", "=", "incoming"),
@@ -25,25 +40,6 @@ class PurchaseRequisition(models.Model):
             res = types[:1].id
         return res
 
-    operating_unit_id = fields.Many2one(
-        "operating.unit",
-        "Operating Unit",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default=lambda self: self.env["res.users"].operating_unit_default_get(
-            self._uid
-        ),
-    )
-
-    picking_type_id = fields.Many2one(
-        "stock.picking.type",
-        "Picking Type",
-        domain=[("code", "=", "incoming")],
-        required=True,
-        default=_get_picking_in,
-    )
-
-    @api.multi
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -59,7 +55,6 @@ class PurchaseRequisition(models.Model):
                     )
                 )
 
-    @api.multi
     @api.constrains("operating_unit_id", "picking_type_id")
     def _check_warehouse_operating_unit(self):
         for rec in self:
@@ -74,9 +69,9 @@ class PurchaseRequisition(models.Model):
                 ):
                     raise UserError(
                         _(
-                            "Configuration error!\nThe Operating \
-                    Unit in Purchase Requisition and the Warehouse of picking \
-                    type must belong to the same Operating Unit."
+                            "Configuration error!\nThe Operating "
+                            "Unit in Purchase Requisition and the Warehouse of picking "
+                            "type must belong to the same Operating Unit."
                         )
                     )
 
@@ -101,22 +96,14 @@ class PurchaseRequisition(models.Model):
                     )
                 )
 
-    @api.model
-    def _prepare_purchase_order(self, requisition, supplier):
-        res = super(PurchaseRequisition, self)._prepare_purchase_order(
-            requisition, supplier
-        )
-        res.update({"operating_unit_id": requisition.operating_unit_id.id})
-        return res
-
 
 class PurchaseRequisitionLine(models.Model):
     _inherit = "purchase.requisition.line"
 
     operating_unit_id = fields.Many2one(
-        "operating.unit",
-        "Operating Unit",
-        related="requisition_id." "operating_unit_id",
+        comodel_name="operating.unit",
+        string="Operating Unit",
+        related="requisition_id.operating_unit_id",
         readonly=True,
         store=True,
     )

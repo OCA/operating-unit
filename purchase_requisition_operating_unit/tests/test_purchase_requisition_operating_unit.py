@@ -1,8 +1,8 @@
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 ForgeFlow S.L. (https://www.forgeflow.com)
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp.exceptions import ValidationError
-from openerp.tests import common
+from odoo.exceptions import UserError
+from odoo.tests import Form, common
 
 
 class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
@@ -43,10 +43,11 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
             line_values = {
                 "product_id": product.id,
                 "product_qty": qty,
+                "product_uom_id": product.uom_po_id.id,
             }
             lines.append((0, 0, line_values))
         pr_vals = {
-            "exclusive": "exclusive",
+            "type_id": self.env.ref("purchase_requisition.type_multi").id,
             "operating_unit_id": self.ou1.id,
             "line_ids": lines,
         }
@@ -56,7 +57,7 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
     def test_create_purchase_requisition(self):
         self._create_pr()
         # Change OU, result in warning
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(UserError):
             self.pr.operating_unit_id = self.b2c
         # on_change OU
         pr_mock = self.pr_model.new()
@@ -70,14 +71,24 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
             "type does not belong to same Operating Unit.",
         )
         # Now OU and Picking Type should be in line as b2c
-        self.pr.picking_type_id = picktype
+        self.pr.write(
+            {
+                "picking_type_id": pr_mock.picking_type_id.id,
+                "warehouse_id": pr_mock.warehouse_id.id,
+                "operating_unit_id": pr_mock.operating_unit_id.id,
+            }
+        )
         # Confirm Call
-        self.pr.sudo().signal_workflow("sent_suppliers")
+        self.pr.action_in_progress()
         self.assertEqual(self.pr.state, "in_progress", "State not changed to Confirmed")
         # Create PO
-        pr_po = self.pr.make_purchase_order(self.partner1.id)
-        po_id = pr_po.get(self.pr.id)
-        self.po = self.po_model.browse(po_id)
+        ctx = {"default_requisition_id": self.pr.id, "default_user_id": False}
+        view_id = "purchase.purchase_order_form"
+        with Form(
+            self.env["purchase.order"].with_context(ctx), view=view_id
+        ) as purchase:
+            purchase.partner_id = self.partner1
+        self.po = purchase.save()
         self.assertEqual(
             self.po.operating_unit_id,
             self.pr.operating_unit_id,

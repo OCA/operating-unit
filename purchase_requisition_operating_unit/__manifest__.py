@@ -1,11 +1,11 @@
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 ForgeFlow S.L. (https://www.forgeflow.com)
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Operating Unit in Purchase Requisitions",
-    "version": "9.0.1.0.0",
-    "author": "Eficent Business and IT Consulting Services S.L., "
+    "version": "14.0.1.0.0",
+    "author": "ForgeFlow S.L.,"
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",
