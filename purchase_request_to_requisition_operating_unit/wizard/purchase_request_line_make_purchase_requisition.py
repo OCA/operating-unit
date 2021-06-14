@@ -1,8 +1,8 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import _, api, fields, models
-from openerp.exceptions import except_orm
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class PurchaseRequestLineMakePurchaseRequisition(models.TransientModel):
@@ -16,11 +16,17 @@ class PurchaseRequestLineMakePurchaseRequisition(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(PurchaseRequestLineMakePurchaseRequisition, self).default_get(
-            fields
-        )
+        res = super().default_get(fields)
+        # By default, expect called from PR Line
         request_line_obj = self.env["purchase.request.line"]
-        request_line_ids = self._context.get("active_ids", [])
+        request_line_ids = self.env.context.get("active_ids")
+        active_model = self.env.context.get("active_model")
+        # For case called from PR
+        if active_model == "purchase.request":
+            request_ids = self.env.context.get("active_ids")
+            requests = self.env["purchase.request"].browse(request_ids)
+            request_line_ids = requests.mapped("line_ids").ids
+            active_model = "purchase.request.line"
         operating_unit_id = False
         for line in request_line_obj.browse(request_line_ids):
             line_operating_unit_id = (
@@ -29,9 +35,9 @@ class PurchaseRequestLineMakePurchaseRequisition(models.TransientModel):
                 or False
             )
             if operating_unit_id and line_operating_unit_id != operating_unit_id:
-                raise except_orm(
+                raise UserError(
                     _("Could not process !"),
-                    _("You have to select lines " "from the same operating unit."),
+                    _("You have to select lines from the same operating unit."),
                 )
             else:
                 operating_unit_id = line_operating_unit_id
