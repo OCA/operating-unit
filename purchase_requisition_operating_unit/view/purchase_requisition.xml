@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!-- Copyright 2015 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2015 ForgeFlow S.L.
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <openerp>
@@ -56,12 +56,13 @@
             <field name="arch" type="xml">
                 <xpath expr="//filter[1]" position="after">
                   <filter
+                        name="operating_unit"
                         string="Operating Unit"
                         context="{'group_by':'operating_unit_id'}"
                         groups="operating_unit.group_multi_operating_unit"
                     />
                 </xpath>
-                <field name="exclusive" position="after">
+                <field name="product_id" position="after">
                   <field
                         name="operating_unit_id"
                         groups="operating_unit.group_multi_operating_unit"
