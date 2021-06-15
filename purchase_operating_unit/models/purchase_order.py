@@ -119,6 +119,11 @@ class PurchaseOrder(models.Model):
         picking_vals["operating_unit_id"] = self.operating_unit_id.id
         return picking_vals
 
+    def _prepare_invoice(self):
+        invoice_vals = super()._prepare_invoice()
+        invoice_vals["operating_unit_id"] = self.operating_unit_id.id
+        return invoice_vals
+
 
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
