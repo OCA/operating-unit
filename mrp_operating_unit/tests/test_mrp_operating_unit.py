@@ -1,6 +1,8 @@
 # Copyright 2019 ForgeFlow S.L.
 # Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from datetime import datetime
+
 from odoo.exceptions import ValidationError
 from odoo.tests import common
 from odoo.tests.common import Form
@@ -90,6 +92,13 @@ class TestMrpOperatingUnit(common.TransactionCase):
             )
         return mrp
 
+    def test_check_location_operating_unit(self):
+        with self.assertRaises(ValidationError):
+            self.mrp_record1.location_src_id = self.stock_location.id
+
+        with self.assertRaises(ValidationError):
+            self.mrp_record2.operating_unit_id = False
+
     def test_onchange_operating_unit_id(self):
         # Test the ou does not belong to any warehouse
         test_ou = self.env["operating.unit"].create(
@@ -139,3 +148,22 @@ class TestMrpOperatingUnit(common.TransactionCase):
             self.mrp_record1.operating_unit_id = False
         with self.assertRaises(ValidationError):
             self.mrp_record1.write({"operating_unit_id": self.chicago.id})
+
+    def test_prepare_mo_vals(self):
+        self.assertIn(
+            "operating_unit_id",
+            self.env["stock.rule"]._prepare_mo_vals(
+                self.env.ref("product.product_product_4"),
+                0,
+                self.env.ref("uom.product_uom_unit"),
+                self.env.ref("stock.stock_location_shop0"),
+                "test",
+                False,
+                self.env.company,
+                {
+                    "date_planned": datetime.today(),
+                    "warehouse_id": self.env.ref("stock.warehouse0"),
+                },
+                self.env.ref("mrp.mrp_bom_manufacture"),
+            ),
+        )
