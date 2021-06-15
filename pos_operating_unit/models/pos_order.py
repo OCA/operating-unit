@@ -12,7 +12,8 @@ class PosOrder(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name='operating.unit',
         string='Operating Unit',
-        related='config_id.operating_unit_id',         
+        related='config_id.operating_unit_id',
+        store=True         
     )
 
     crm_team_id = fields.Many2one(
@@ -36,4 +37,5 @@ class PosOrderLine(models.Model):
     _inherit = 'pos.order.line'
 
     operating_unit_id = fields.Many2one(related='order_id.operating_unit_id',
-                                        string='Operating Unit')
+                                        string='Operating Unit',
+                                        store=True)
