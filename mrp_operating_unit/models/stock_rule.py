@@ -16,11 +16,20 @@ class StockRule(models.Model):
         location_id,
         name,
         origin,
+        company_id,
         values,
         bom,
     ):
-        mo_vals = super(StockRule, self)._prepare_mo_vals(
-            product_id, product_qty, product_uom, location_id, name, origin, values, bom
+        mo_vals = super()._prepare_mo_vals(
+            product_id,
+            product_qty,
+            product_uom,
+            location_id,
+            name,
+            origin,
+            company_id,
+            values,
+            bom,
         )
         mo_vals["operating_unit_id"] = self.operating_unit_id.id
         return mo_vals

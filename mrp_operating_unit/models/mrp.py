@@ -42,27 +42,25 @@ class MrpProduction(models.Model):
                         "Locations."
                     )
                 )
-        return True
 
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit_id(self):
         """Change locations according to the warehouse of the operating unit"""
-        if not self.operating_unit_id:
-            return
-
-        # Take first warehouse with the current operating unit
-        wh = self.env["stock.warehouse"].search(
-            [("operating_unit_id", "=", self.operating_unit_id.id)], limit=1
-        )
-        if not wh:
-            return
-
-        picking_type_id = self.env["stock.picking.type"].search(
-            [
-                ("code", "=", "mrp_operation"),
-                ("company_id", "=", self.company_id.id),
-                ("warehouse_id", "=", wh.id),
-            ]
-        )
-        if picking_type_id:
-            self.picking_type_id = picking_type_id
+        if self.operating_unit_id:
+            # Take first warehouse with the current operating unit
+            wh = self.env["stock.warehouse"].search(
+                [("operating_unit_id", "=", self.operating_unit_id.id)], limit=1
+            )
+            picking_type_id = (
+                self.env["stock.picking.type"].search(
+                    [
+                        ("code", "=", "mrp_operation"),
+                        ("company_id", "=", self.company_id.id),
+                        ("warehouse_id", "=", wh.id),
+                    ]
+                )
+                if wh
+                else False
+            )
+            if picking_type_id:
+                self.picking_type_id = picking_type_id
