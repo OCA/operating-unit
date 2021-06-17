@@ -81,7 +81,7 @@ class TestContractOperatingUnit(common.TransactionCase):
         return user
 
     def test_contract_ou(self):
-        """Test Hr Contract Operating Unit"""
+        """Test Contract Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Contract records of Main Operating Unit.
         record = self.contract_model.with_user(self.user2.id).search(
