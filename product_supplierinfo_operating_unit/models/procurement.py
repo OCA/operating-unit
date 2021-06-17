@@ -10,12 +10,11 @@ class StockRule(models.Model):
 
     def _prepare_purchase_order(self, company_id, origin, values):
         res = super()._prepare_purchase_order(company_id, origin, values)
-        operating_unit = self.operating_unit_id
-        if operating_unit:
+        if self.operating_unit_id:
             res.update(
                 {
-                    "operating_unit_id": operating_unit.id,
-                    "requesting_operating_unit_id": operating_unit.id,
+                    "operating_unit_id": self.operating_unit_id.id,
+                    "requesting_operating_unit_id": self.operating_unit_id.id,
                 }
             )
         return res

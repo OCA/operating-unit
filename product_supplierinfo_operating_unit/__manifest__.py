@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), Open For Small Business Ltd",
     "website": "https://github.com/OCA/operating-unit",
-    "depends": ["purchase", "stock_operating_unit", "purchase_operating_unit"],
+    "depends": ["sale", "purchase", "stock_operating_unit", "purchase_operating_unit"],
     "data": [
         "security/product_supplierinfo.xml",
         "views/product_supplierinfo.xml",
