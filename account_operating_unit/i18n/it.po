@@ -6,23 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-06-17 13:48+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
 msgid "Activate if your company is required to generate a balanced balance sheet for each operating unit."
 msgstr ""
+"Da attivare se la tua azienda è tenuta a generare un bilancio in pareggio "
+"per ogni Unità Operativa."
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_journal.py:26
