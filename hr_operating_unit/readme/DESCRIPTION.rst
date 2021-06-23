@@ -4,4 +4,3 @@ This module introduces the following features:
 
 * The Employees's default Operating Unit (OU) is proposed at the time of creation
   getting it from the logged user.
-
