@@ -45,6 +45,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
                 "operating_unit_ids": [(4, ou.id) for ou in operating_units],
+                "notification_type": "inbox",
             }
         )
         return user

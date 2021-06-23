@@ -13,6 +13,7 @@ class ResUsers(models.Model):
     def create(self, vals):
         res = super().create(vals)
         res.partner_id.operating_unit_ids = [(4, res.default_operating_unit_id.id)]
+        res.check_partner_operating_unit()
         return res
 
     def write(self, vals):
@@ -20,9 +21,9 @@ class ResUsers(models.Model):
         if vals.get("default_operating_unit_id"):
             # Add the new OU
             self.partner_id.operating_unit_ids = [(4, res.default_operating_unit_id.id)]
+            self.check_partner_operating_unit()
         return res
 
-    @api.constrains("partner_id.operating_unit_ids", "default_operating_unit_id")
     def check_partner_operating_unit(self):
         if (
             self.partner_id.operating_unit_ids
