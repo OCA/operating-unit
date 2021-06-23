@@ -28,31 +28,6 @@ class ResPartner(models.Model):
         "partner_id",
         "operating_unit_id",
         "Operating Units",
+        required=True,
         default=lambda self: self._default_operating_units(),
     )
-
-    # Extending methods to replace a record rule.
-    # Ref: https://github.com/OCA/operating-unit/issues/258
-    @api.model
-    def search(self, args, offset=0, limit=None, order=None, count=False):
-        # Get the OUs of the user
-        ou_ids = self.env.user.operating_unit_ids.ids
-        domain = [
-            "|",
-            ("operating_unit_ids", "in", ou_ids),
-            ("operating_unit_ids", "=", False),
-        ]
-        return super().search(
-            domain + args, offset=offset, limit=limit, order=order, count=count
-        )
-
-    @api.model
-    def search_count(self, args):
-        # Get the OUs of the user
-        ou_ids = self.env.user.operating_unit_ids.ids
-        domain = [
-            "|",
-            ("operating_unit_ids", "in", ou_ids),
-            ("operating_unit_ids", "=", False),
-        ]
-        return super().search_count(domain + args)

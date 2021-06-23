@@ -28,14 +28,14 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         self.partner2 = self._create_partner("Test Partner 2", self.b2c)
 
     def _create_partner(self, name, operating_unit, context=None):
-        """ Create a partner. """
+        """Create a partner."""
         partner = self.res_partner_model.create(
             {"name": name, "operating_unit_id": operating_unit.id}
         )
         return partner
 
     def _create_user(self, login, company, operating_units, context=None):
-        """ Create a user. """
+        """Create a user."""
         user = self.res_users_model.create(
             {
                 "name": "Test User",
@@ -45,6 +45,13 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
                 "operating_unit_ids": [(4, ou.id) for ou in operating_units],
+                "notification_type": "inbox",
             }
         )
         return user
+
+    def _update_user(self, user, operating_units, context=None):
+        with self.assertRaises(UserError):
+            user.write(
+                {"default_operating_unit_id": [(4, ou.id) for ou in operating_units]}
+            )
