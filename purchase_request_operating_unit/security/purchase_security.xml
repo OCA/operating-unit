@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright 2016-19 Eficent Business and IT Consulting Services S.L.-->
+<!--(http://www.eficent.com)-->
+<!--Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.-->
+<!--(<http://www.serpentcs.com>)-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+    <record id="ir_rule_purchase_request_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="purchase_request.model_purchase_request" />
+        <field name="domain_force">['|',('operating_unit_id','=',False),
+            ('operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Purchase Requests from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+    <record id="ir_rule_purchase_request_line_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="purchase_request.model_purchase_request_line" />
+        <field name="domain_force">['|',('request_id.operating_unit_id','=',False),
+            ('request_id.operating_unit_id','in',[g.id for g in user.operating_unit_ids])]</field>
+        <field name="name">Purchase Requests lines from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+</odoo>

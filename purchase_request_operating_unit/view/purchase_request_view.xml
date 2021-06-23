@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright 2016-19 Eficent Business and IT Consulting Services S.L.-->
+<!--(http://www.eficent.com)-->
+<!--Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.-->
+<!--(<http://www.serpentcs.com>)-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+    <record id="view_purchase_request_tree" model="ir.ui.view">
+        <field name="name">purchase.request.tree</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_purchase_request_form" model="ir.ui.view">
+        <field name="name">purchase.request.form</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    domain="[('company_id','=', company_id),
+                     ('user_ids', 'in', requested_by)]"
+                />
+            </field>
+            <field name="line_ids" position="attributes">
+                <attribute name="context">
+                    {'operating_unit_id': operating_unit_id}
+                </attribute>
+            </field>
+        </field>
+    </record>
+    <record id="view_purchase_request_search" model="ir.ui.view">
+        <field name="name">purchase.request.list.select</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_search" />
+        <field name="arch" type="xml">
+            <group position="inside">
+                <filter
+                    name="operating_unit"
+                    string="Operating Unit"
+                    groups="operating_unit.group_multi_operating_unit"
+                    context="{'group_by':'operating_unit_id'}"
+                />
+            </group>
+            <field name="picking_type_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_request_line_tree" model="ir.ui.view">
+        <field name="name">purchase.request.line.tree</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_tree" />
+        <field name="arch" type="xml">
+            <field name="supplier_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_request_line_form" model="ir.ui.view">
+        <field name="name">purchase.request.line.form</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_form" />
+        <field name="arch" type="xml">
+            <field name="date_required" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="purchase_request_line_search" model="ir.ui.view">
+        <field name="name">purchase.request.line.search</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_search" />
+        <field name="arch" type="xml">
+            <field name="analytic_account_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+            <group position="inside">
+                <filter
+                    name="operating_unit"
+                    string="Operating Unit"
+                    domain="[]"
+                    groups="operating_unit.group_multi_operating_unit"
+                    context="{'group_by':'operating_unit_id'}"
+                />
+            </group>
+        </field>
+    </record>
+</odoo>
