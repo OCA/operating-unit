@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="group_all_ou_analytic" model="res.groups">
+        <field name="name">Access all OUs' analytics</field>
+        <field name="category_id" ref="operating_unit.module_operating_units" />
+    </record>
+
+    <function model="ir.rule" name="write">
+        <value
+            eval="[ref('analytic_operating_unit.ir_rule_analytic_account_allowed_operating_units')]"
+        />
+        <value
+            eval="{'domain_force': &quot;['|','|',(1, '=', 1) if user.has_group('analytic_operating_unit_access_all.group_all_ou_analytic') else (0, '=', 1),('operating_unit_ids','=',False),('operating_unit_ids','in', user.operating_unit_ids.ids)]&quot;}"
+        />
+    </function>
+
+</odoo>
