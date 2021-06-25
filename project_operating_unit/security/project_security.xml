@@ -10,10 +10,10 @@
         </field>
         <field name="name">Project Operating Unit</field>
         <field name="global" eval="True" />
-        <field eval="0" name="perm_unlink" />
-        <field eval="0" name="perm_write" />
-        <field eval="1" name="perm_read" />
-        <field eval="0" name="perm_create" />
+        <field name="perm_unlink" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
     </record>
     <record id="ir_rule_project_task_operating_unit" model="ir.rule">
         <field name="model_id" ref="project.model_project_task" />
@@ -23,9 +23,9 @@
         </field>
         <field name="name">Project Task Operating Unit</field>
         <field name="global" eval="True" />
-        <field eval="0" name="perm_unlink" />
-        <field eval="0" name="perm_write" />
-        <field eval="1" name="perm_read" />
-        <field eval="0" name="perm_create" />
+        <field name="perm_unlink" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
     </record>
 </odoo>
