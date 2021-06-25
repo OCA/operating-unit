@@ -5,7 +5,7 @@
     "name": "Project with Operating Units",
     "summary": """
         This module adds operating unit information to projects and tasks.""",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "author": "Open Source Integrators, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
