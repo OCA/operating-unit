@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo13-addon-sales_team_operating_unit',
         'odoo13-addon-stock_account_operating_unit',
         'odoo13-addon-stock_operating_unit',
+        'odoo13-addon-product_supplierinfo_operating_unit',
     ],
     classifiers=[
         'Programming Language :: Python',

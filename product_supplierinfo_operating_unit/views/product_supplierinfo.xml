@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Rujia Liu
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="product_supplierinfo_form_view">
+        <field name="name">product.supplierinfo.form</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/group" position="inside">
+                <group
+                    string="Operating Unit"
+                    groups="operating_unit.group_multi_operating_unit"
+                >
+                    <field
+                        name="operating_unit_id"
+                        options="{'no_create': True, 'no_open': True}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
