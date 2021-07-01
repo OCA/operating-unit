@@ -97,6 +97,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         self.location_b2c_id = b2c_wh.lot_stock_id
         self.b2c_type_in_id = b2c_wh.in_type_id
         self.b2c_type_int_id = b2c_wh.int_type_id
+        self.b2c_type_out_id = b2c_wh.out_type_id
 
     def _create_user(self, login, groups, company, operating_units):
         """Create a user."""
@@ -221,6 +222,28 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         else:
             return 0.0
 
+    def _check_ou_in_svl(self, picking_id, ou=None):
+        scraps = self.env["stock.scrap"].search([("picking_id", "=", picking_id.id)])
+        domain = [("product_id.type", "=", "product")]
+        if scraps:
+            domain.append(
+                (
+                    "id",
+                    "in",
+                    (
+                        picking_id.move_lines + scraps.move_id
+                    ).stock_valuation_layer_ids.ids,
+                )
+            )
+        else:
+            domain.append(
+                ("id", "in", picking_id.move_lines.stock_valuation_layer_ids.ids)
+            )
+        svls = self.env["stock.valuation.layer"].search(domain)
+        for svl in svls:
+            if ou:
+                self.assertEqual(svl.operating_unit_id, ou)
+
     def test_stock_operating_unit(self):
         with self.assertRaises(UserError):
             self.stock_location_stock.operating_unit_id = False
@@ -242,6 +265,8 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         )
         # Receive it
         self._confirm_receive(self.user1.id, self.picking)
+        # check destination ou is ou1
+        # self._check_ou_in_svl(self.picking, ou=self.ou1)
         # GL account ‘Inventory’ has balance 1 irrespective of the OU
         expected_balance = 1.0
         self._check_account_balance(
@@ -295,7 +320,8 @@ class TestStockAccountOperatingUnit(TestStockCommon):
 
         # Receive it
         self._confirm_receive(self.user2.id, self.picking)
-
+        # check destination ou is b2c
+        # self._check_ou_in_svl(self.picking, ou=self.b2c)
         # GL account ‘Inventory’ has balance 2 irrespective of the OU
         expected_balance = 2.0
         self._check_account_balance(
@@ -396,3 +422,17 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             account_move.line_ids.mapped("operating_unit_id"),
             self.picking.picking_type_id.warehouse_id.operating_unit_id,
         )
+        # check operating units on both svls are from picking_id.operating_unit_id
+        self._check_ou_in_svl(self.picking, ou=self.picking.operating_unit_id)
+        # Create outgoing shipment
+        self.picking = self._create_picking(
+            self.user1,
+            self.b2c,
+            self.b2c_type_out_id,
+            self.location_b2c_id,
+            self.customer_location,
+        )
+        # Receive it
+        self._confirm_receive(self.user1.id, self.picking)
+        # check source ou is b2c
+        # self._check_ou_in_svl(self.picking, ou=self.b2c)
