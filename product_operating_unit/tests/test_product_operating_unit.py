@@ -8,7 +8,7 @@ from odoo.tests import common
 
 class TestProductOperatingUnit(common.TransactionCase):
     def setUp(self):
-        super(TestProductOperatingUnit, self).setUp()
+        super().setUp()
         self.ResUsers = self.env["res.users"]
         self.ProductTemplate = self.env["product.template"]
         self.ProductCategory = self.env["product.category"]
@@ -63,25 +63,41 @@ class TestProductOperatingUnit(common.TransactionCase):
         # User 1 is only assigned to Operating Unit 1, and can see all
         # products having Operating Unit 1.
         ou_domain = [("operating_unit_ids", "in", self.ou1.id)]
-        product_ids = self.ProductTemplate.sudo(self.user1_id).search(ou_domain).ids
-        category_ids = self.ProductCategory.sudo(self.user1_id).search(ou_domain).ids
+        product_ids = (
+            self.ProductTemplate.with_user(self.user1_id).search(ou_domain).ids
+        )
+        category_ids = (
+            self.ProductCategory.with_user(self.user1_id).search(ou_domain).ids
+        )
         self.assertIn(category_ids[0], product_ids)
 
         # User 2 is only assigned to Operating Unit 2, so cannot see products
         # having Operating Unit 1, expect those also having Operating Unit b2b
-        product_ids = self.ProductTemplate.sudo(self.user2_id).search(ou_domain).ids
-        category_ids = self.ProductCategory.sudo(self.user2_id).search(ou_domain).ids
+        product_ids = (
+            self.ProductTemplate.with_user(self.user2_id).search(ou_domain).ids
+        )
+        category_ids = (
+            self.ProductCategory.with_user(self.user2_id).search(ou_domain).ids
+        )
         self.assertIn(category_ids[0], product_ids)
 
         # User 2 is only assigned to Operating Unit 2, and can see all
         # products having Operating Unit b2b.
         b2b_domain = [("operating_unit_ids", "in", self.b2b.id)]
-        product_ids = self.ProductTemplate.sudo(self.user2_id).search(b2b_domain).ids
-        category_ids = self.ProductCategory.sudo(self.user2_id).search(b2b_domain).ids
+        product_ids = (
+            self.ProductTemplate.with_user(self.user2_id).search(b2b_domain).ids
+        )
+        category_ids = (
+            self.ProductCategory.with_user(self.user2_id).search(b2b_domain).ids
+        )
         self.assertIn(category_ids[0], product_ids)
 
         # User 1 is only assigned to Operating Unit 1, so cannot see products
         # having Operating Unit b2b, expect those also having Operating Unit 1
-        product_ids = self.ProductTemplate.sudo(self.user1_id).search(b2b_domain).ids
-        category_ids = self.ProductCategory.sudo(self.user2_id).search(b2b_domain).ids
+        product_ids = (
+            self.ProductTemplate.with_user(self.user1_id).search(b2b_domain).ids
+        )
+        category_ids = (
+            self.ProductCategory.with_user(self.user2_id).search(b2b_domain).ids
+        )
         self.assertIn(category_ids[0], product_ids)
