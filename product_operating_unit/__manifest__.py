@@ -7,15 +7,12 @@
     "summary": "Adds the concept of operating unit (OU) in products",
     "version": "12.0.1.0.1",
     "author": "brain-tec AG, "
-              "Open Source Integrators, "
-              "Serpent Consulting Services Pvt. Ltd.,"
-              "Odoo Community Association (OCA)",
+    "Open Source Integrators, "
+    "Serpent Consulting Services Pvt. Ltd.,"
+    "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Product",
-    "depends": [
-        "product",
-        "operating_unit"
-    ],
+    "depends": ["product", "operating_unit"],
     "license": "LGPL-3",
     "data": [
         "security/product_template_security.xml",
