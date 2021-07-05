@@ -1,7 +1,7 @@
 # Copyright (C) 2019 Open Source Integrators
 # Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ProductCategory(models.Model):
@@ -13,7 +13,6 @@ class ProductCategory(models.Model):
         string="Operating Units",
     )
 
-    @api.multi
     def write(self, vals):
         res = super(ProductCategory, self).write(vals)
         product_template_obj = self.env["product.template"]
