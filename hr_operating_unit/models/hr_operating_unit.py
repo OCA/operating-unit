@@ -9,7 +9,7 @@ class HrOperatingUnit(models.Model):
     employee_ids = fields.Many2many(
         "hr.employee",
         "operating_unit_employees_rel",
-        "poid",
+        "operating_unit_id",
         "employee_id",
         "Employees Allowed",
     )
