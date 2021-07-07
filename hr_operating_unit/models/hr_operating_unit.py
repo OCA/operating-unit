@@ -3,7 +3,7 @@
 from odoo import fields, models
 
 
-class HrOperatingUnit(models.Model):
+class OperatingUnit(models.Model):
     _inherit = "operating.unit"
 
     employee_ids = fields.Many2many(
