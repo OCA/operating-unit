@@ -17,7 +17,7 @@ HR Operating Unit
     :target: https://github.com/OCA/operating-unit/tree/14.0/hr_operating_unit
     :alt: OCA/operating-unit
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/operating-unit-12-0/operating-unit-12-0-hr_operating_unit
+    :target: https://translation.odoo-community.org/projects/operating-unit-14-0/operating-unit-14-0-hr_operating_unit
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/213/14.0
@@ -29,9 +29,8 @@ This module introduces the following features:
 
 * Adds the Operating Unit (OU) to the Employee.
 
-* The Employees's default Operating Unit (OU) is proposed at the time of creating
-  getting the logged user one.
-
+* The Employees's default Operating Unit (OU) is proposed at the time of creation
+  getting it from the logged user.
 
 **Table of contents**
 
@@ -59,14 +58,13 @@ Credits
 Authors
 ~~~~~~~
 
-* Gonzalo González Domí­nguez
+* Gonzalo González Domínguez
 
 Contributors
 ~~~~~~~~~~~~
 
 * Gonzalo González Domínguez <meigallo@meigallodixital.com>
 * Murtaza Mithaiwala <mmithaiwala@opensourceintegrators.com>
-
 
 Maintainers
 ~~~~~~~~~~~

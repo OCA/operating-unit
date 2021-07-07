@@ -1,14 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* hr_operating_unit
+# 	* hr_operating_unit
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-13 11:02+0000\n"
-"PO-Revision-Date: 2019-05-13 11:02+0000\n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,6 +20,12 @@ msgid "Default Operating Unit"
 msgstr ""
 
 #. module: hr_operating_unit
+#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_operating_unit
 #: model:ir.model,name:hr_operating_unit.model_hr_employee
 msgid "Employee"
 msgstr ""
@@ -29,6 +33,18 @@ msgstr ""
 #. module: hr_operating_unit
 #: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__employee_ids
 msgid "Employees Allowed"
+msgstr ""
+
+#. module: hr_operating_unit
+#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee__id
+#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_operating_unit
+#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: hr_operating_unit
@@ -40,4 +56,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee__operating_unit_ids
 msgid "Operating Units"
 msgstr ""
-
