@@ -10,7 +10,7 @@ class HrEmployee(models.Model):
         "operating.unit",
         "operating_unit_employees_rel",
         "employee_id",
-        "poid",
+        "operating_unit_id",
         "Operating Units",
         default=lambda self: (self.env["res.users"].operating_unit_default_get()),
     )
