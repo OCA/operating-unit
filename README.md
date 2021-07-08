@@ -31,6 +31,7 @@ addon | version | summary
 [purchase_request_operating_unit](purchase_request_operating_unit/) | 14.0.1.0.0 | Operating Unit in Purchase Requests
 [sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 | Sales Team Operating Unit
 [stock_operating_unit](stock_operating_unit/) | 14.0.1.0.0 | Adds the concept of operating unit (OU) in stock management
+[stock_operating_unit_access_all](stock_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Stock
 
 [//]: # (end addons)
 
