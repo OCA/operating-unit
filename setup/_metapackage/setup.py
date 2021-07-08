@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo14-addon-purchase_request_operating_unit',
         'odoo14-addon-sales_team_operating_unit',
         'odoo14-addon-stock_operating_unit',
+        'odoo14-addon-stock_operating_unit_access_all',
     ],
     classifiers=[
         'Programming Language :: Python',
