@@ -24,6 +24,7 @@ addon | version | summary
 [analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 | Analytic Operating Unit
 [analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Analytics
 [contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 | Contract Operating Unit
+[fieldservice_operating_unit](fieldservice_operating_unit/) | 14.0.1.0.0 | This module adds operating unit information to Field Service orders.
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 | HR Expense Operating Unit
 [hr_operating_unit](hr_operating_unit/) | 14.0.1.0.0 | HR Operating Unit
 [operating_unit](operating_unit/) | 14.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
