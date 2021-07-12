@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* fieldservice_operating_unit
+# 	* fieldservice_operating_unit
 #
 msgid ""
 msgstr ""
@@ -20,6 +20,21 @@ msgid "Field Service Order"
 msgstr ""
 
 #. module: fieldservice_operating_unit
+#: model:ir.model.fields,field_description:fieldservice_operating_unit.field_fsm_order__id
+msgid "ID"
+msgstr ""
+
+#. module: fieldservice_operating_unit
+#: model:ir.model.fields,field_description:fieldservice_operating_unit.field_fsm_order____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: fieldservice_operating_unit
 #: model:ir.model.fields,field_description:fieldservice_operating_unit.field_fsm_order__operating_unit_id
 msgid "Operating Unit"
+msgstr ""
+
+#. module: fieldservice_operating_unit
+#: model:ir.model.fields,field_description:fieldservice_operating_unit.field_fsm_order__display_name
+msgid "Order"
 msgstr ""
