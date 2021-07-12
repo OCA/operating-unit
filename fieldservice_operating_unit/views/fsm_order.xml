@@ -1,0 +1,17 @@
+<odoo>
+    <!-- Copyright (C) 2021 Open Source Integrators
+    Copyright (C) 2021 Serpent Consulting Services
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+    <record id="view_fsm_order_form_inherit" model="ir.ui.view">
+        <field name="name">fsm.order.form</field>
+        <field name="model">fsm.order</field>
+        <field name="inherit_id" ref="fieldservice.fsm_order_form" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="operating_unit_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
