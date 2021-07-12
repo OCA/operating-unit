@@ -25,6 +25,7 @@ addon | version | summary
 [analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Analytics
 [contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 | Contract Operating Unit
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 | HR Expense Operating Unit
+[hr_operating_unit](hr_operating_unit/) | 14.0.1.0.0 | HR Operating Unit
 [operating_unit](operating_unit/) | 14.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | Access all Operating Units
 [purchase_operating_unit](purchase_operating_unit/) | 14.0.1.0.0 | Adds the concecpt of operating unit (OU) in purchase order management
