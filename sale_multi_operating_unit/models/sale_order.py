@@ -5,10 +5,9 @@ from odoo import api, fields, models
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
-    quote_ids = fields.One2many(
-        'sale.order.quote', 'sale_id', string='Internal Quotes')
+    quote_ids = fields.One2many("sale.order.quote", "sale_id", string="Internal Quotes")
 
     @api.model
     def create(self, vals):

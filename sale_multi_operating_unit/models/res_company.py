@@ -5,7 +5,7 @@ from odoo import api, fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     @api.model
     def _get_default_lead_description_template(self):
@@ -27,8 +27,9 @@ Products:
 %endfor"""
 
     lead_description_template = fields.Text(
-        string='Lead Description Template',
+        string="Lead Description Template",
         required=True,
         default=_get_default_lead_description_template,
         help="Template used to provide the information for an operating unit "
-             "to quote another.")
+        "to quote another.",
+    )
