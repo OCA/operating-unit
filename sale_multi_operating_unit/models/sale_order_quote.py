@@ -1,7 +1,8 @@
-# Copyright (C) 2019 Open Source Integrators
-# Copyright (C) 2019 Serpent Consulting Services
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+# Copyright (C) 2021 Open Source Integrators
+# Copyright (C) 2021 Serpent Consulting Services
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).lgpl.html).
+
+from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -21,8 +22,20 @@ class SaleOrderQuote(models.Model):
         string="State",
         copy=False,
         default="new",
-        track_visibility="onchange",
+        tracking=True,
     )
+
+    expected_date = fields.Date(string="Expected Date")
+
+    assigned_to = fields.Many2one("res.users", related="lead_id.user_id")
+
+    def _valid_field_parameter(self, field, name):
+        # I can't even
+        return (
+            name == "tracking"
+            or name == "old_name"
+            or super()._valid_field_parameter(field, name)
+        )
 
     _sql_constraints = [
         (
@@ -35,22 +48,15 @@ class SaleOrderQuote(models.Model):
         ),
     ]
 
-    notes = fields.Text("Notes")
-    expected_date = fields.Date(string="Expected Date")
-
-    assigned_to = fields.Many2one("res.users", related="lead_id.user_id")
-
-    @api.multi
     @api.constrains("operating_unit_id")
     def _check_operating_unit_id(self):
-        for rec in self:
-            if rec.operating_unit_id == rec.sale_id.operating_unit_id:
-                raise UserError(
-                    _(
-                        "You cannot create an internal quote for the same "
-                        "operating unit as the sale order!"
-                    )
+        if self.operating_unit_id == self.sale_id.operating_unit_id:
+            raise UserError(
+                _(
+                    "You cannot create an internal quote for the same "
+                    "operating unit as the sale order!"
                 )
+            )
 
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit_id(self):
@@ -60,20 +66,20 @@ class SaleOrderQuote(models.Model):
 
     def generate_lead_description(self):
         Template = self.env["mail.template"]
-        description = Template.with_context()._render_template(
+        description = Template._render_template(
             self.sale_id.company_id.lead_description_template,
             "sale.order.quote",
-            self.id,
+            self.ids,
         )
         return description
 
     def prepare_crm_lead_values(self):
-        teams = (
+        team = (
             self.env["crm.team"]
-            .sudo()
+            .with_user(SUPERUSER_ID)
             .search([("operating_unit_id", "=", self.operating_unit_id.id)], limit=1)
         )
-        if not teams:
+        if not team:
             raise UserError(
                 _(
                     "This operating unit has no sales team! Please "
@@ -87,7 +93,7 @@ class SaleOrderQuote(models.Model):
             "type": "opportunity",
             "description": description,
             "user_id": False,
-            "team_id": teams[0].id,
+            "team_id": team.id,
             "date_deadline": self.expected_date,
         }
 
@@ -95,14 +101,15 @@ class SaleOrderQuote(models.Model):
         for rec in self:
             if not rec.lead_id:
                 rec.lead_id = (
-                    self.env["crm.lead"].sudo().create(rec.prepare_crm_lead_values())
+                    self.env["crm.lead"]
+                    .with_user(SUPERUSER_ID)
+                    .create(rec.prepare_crm_lead_values())
                 )
         return True
 
     def action_send(self):
         return self.write({"state": "sent"})
 
-    @api.multi
     def write(self, vals):
         res = super().write(vals)
         if vals.get("expected_date", False) and self.lead_id:

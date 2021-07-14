@@ -1,6 +1,7 @@
-# Copyright (C) 2019 Open Source Integrators
-# Copyright (C) 2019 Serpent Consulting Services
+# Copyright (C) 2021 Open Source Integrators
+# Copyright (C) 2021 Serpent Consulting Services
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo.tests import common
 
 
@@ -14,7 +15,6 @@ class TestSaleMultiOperatingUnit(common.TransactionCase):
         self.sale_line_model = self.env["sale.order.line"]
         self.sale_team_model = self.env["crm.team"]
         self.acc_move_model = self.env["account.move"]
-        self.acc_invoice_model = self.env["account.invoice"]
         self.res_company_model = self.env["res.company"]
         self.product_model = self.env["product.product"]
         self.operating_unit_model = self.env["operating.unit"]
@@ -110,7 +110,7 @@ class TestSaleMultiOperatingUnit(common.TransactionCase):
     def _create_sale_team(self, uid, operating_unit):
         """Create a sale team."""
         team = (
-            self.sale_team_model.sudo(uid)
+            self.sale_team_model.with_user(uid)
             .with_context(mail_create_nosubscribe=True)
             .create(
                 {"name": operating_unit.name, "operating_unit_id": operating_unit.id}
@@ -120,7 +120,7 @@ class TestSaleMultiOperatingUnit(common.TransactionCase):
 
     def _create_sale_order(self, uid, customer, product, pricelist, team):
         """Create a sale order."""
-        sale = self.sale_model.sudo(uid).create(
+        sale = self.sale_model.with_user(uid).create(
             {
                 "partner_id": customer.id,
                 "partner_invoice_id": customer.id,
@@ -130,14 +130,14 @@ class TestSaleMultiOperatingUnit(common.TransactionCase):
                 "operating_unit_id": team.operating_unit_id.id,
             }
         )
-        self.sale_line_model.sudo(uid).create(
+        self.sale_line_model.with_user(uid).create(
             {"order_id": sale.id, "product_id": product.id, "name": "Sale Order Line"}
         )
         return sale
 
     def _confirm_sale(self, sale):
         sale.action_confirm()
-        payment = self.payment_model.create({"advance_payment_method": "all"})
+        payment = self.payment_model.create({"advance_payment_method": "delivered"})
         sale_context = {
             "active_id": sale.id,
             "active_ids": sale.ids,
@@ -152,7 +152,7 @@ class TestSaleMultiOperatingUnit(common.TransactionCase):
         self._confirm_sale(self.sale1)
         self.order_quote._onchange_operating_unit_id()
         for line_rec in self.order_quote.line_ids:
-            line_rec.onchange_product_id()
+            line_rec._onchange_product_id()
             line_rec._onchange_qty()
         self.order_quote.action_send()
-        self.order_quote.lead_id.onchange_date_deadline()
+        self.order_quote.lead_id._onchange_date_deadline()

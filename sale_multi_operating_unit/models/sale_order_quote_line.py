@@ -1,6 +1,7 @@
-# Copyright (C) 2019 Open Source Integrators
-# Copyright (C) 2019 Serpent Consulting Services
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+# Copyright (C) 2021 Open Source Integrators
+# Copyright (C) 2021 Serpent Consulting Services
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).lgpl.html).
+
 from odoo import api, fields, models
 
 
@@ -16,9 +17,8 @@ class SaleOrderQuoteLine(models.Model):
     price_unit = fields.Float(string="Unit Price")
     subtotal = fields.Float(string="Subtotal")
 
-    @api.multi
     @api.onchange("product_id")
-    def onchange_product_id(self):
+    def _onchange_product_id(self):
         if not self.product_id:
             return {"domain": {"product_uom": []}}
         vals = {}
@@ -35,8 +35,6 @@ class SaleOrderQuoteLine(models.Model):
         self.update(vals)
         return result
 
-    @api.multi
     @api.onchange("qty", "price_unit")
     def _onchange_qty(self):
-        if self.qty:
-            self.subtotal = self.price_unit * self.qty
+        self.subtotal = self.price_unit * self.qty
