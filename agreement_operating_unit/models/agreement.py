@@ -11,6 +11,6 @@ class Agreement(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=lambda self: self.env["res.users"].operating_unit_default_get(
-            self._uid
+            self.env.user.id
         ),
     )
