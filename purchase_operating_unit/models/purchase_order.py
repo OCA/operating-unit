@@ -133,7 +133,7 @@ class PurchaseOrderLine(models.Model):
     )
     
     def _prepare_account_move_line(self, move=False):
-        vals = super()._prepare_account_move_line()
+        vals = super()._prepare_account_move_line(move=move)
         vals.update({'operating_unit_id': self.operating_unit_id.id})
         return vals
     
