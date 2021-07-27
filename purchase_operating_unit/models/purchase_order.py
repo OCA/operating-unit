@@ -118,6 +118,11 @@ class PurchaseOrder(models.Model):
         picking_vals = super(PurchaseOrder, self)._prepare_picking()
         picking_vals["operating_unit_id"] = self.operating_unit_id.id
         return picking_vals
+    
+    def _prepare_invoice(self):
+        vals = super()._prepare_invoice()
+        vals.update({'operating_unit_id': self.operating_unit_id.id})
+        return vals
 
 
 class PurchaseOrderLine(models.Model):
@@ -126,3 +131,9 @@ class PurchaseOrderLine(models.Model):
     operating_unit_id = fields.Many2one(
         related="order_id.operating_unit_id", string="Operating Unit"
     )
+    
+    def _prepare_account_move_line(self, move=False):
+        vals = super()._prepare_account_move_line()
+        vals.update({'operating_unit_id': self.operating_unit_id.id})
+        return vals
+    
