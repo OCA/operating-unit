@@ -1,0 +1,44 @@
+<odoo>
+    <record id="request_request_view_search" model="ir.ui.view">
+        <field name="name">request.request.view.search</field>
+        <field name="model">request.request</field>
+        <field name="inherit_id" ref="request_flow.request_request_view_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="request_request_view_form" model="ir.ui.view">
+        <field name="name">request.request.view.form</field>
+        <field name="model">request.request</field>
+        <field name="inherit_id" ref="request_flow.request_request_view_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="before">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    domain="[('company_id','=', company_id),
+                       ('user_ids', 'in', uid)]"
+                    options="{'no_create': True}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="request_request_view_tree" model="ir.ui.view">
+        <field name="name">request.request.view.tree</field>
+        <field name="model">request.request</field>
+        <field name="inherit_id" ref="request_flow.request_request_view_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
