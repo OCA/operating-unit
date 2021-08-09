@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-account_financial_report_operating_unit',
         'odoo14-addon-account_operating_unit',
+        'odoo14-addon-agreement_operating_unit',
         'odoo14-addon-analytic_operating_unit',
         'odoo14-addon-analytic_operating_unit_access_all',
         'odoo14-addon-contract_operating_unit',
