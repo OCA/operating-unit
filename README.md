@@ -21,6 +21,7 @@ addon | version | summary
 --- | --- | ---
 [account_financial_report_operating_unit](account_financial_report_operating_unit/) | 14.0.1.0.0 | Introduces Operating Unit (OU) in financial reports
 [account_operating_unit](account_operating_unit/) | 14.0.1.0.0 | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
+[agreement_operating_unit](agreement_operating_unit/) | 14.0.1.0.0 | This module adds operating unit information to agreements and service profiles.
 [analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 | Analytic Operating Unit
 [analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Analytics
 [contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 | Contract Operating Unit
