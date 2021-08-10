@@ -12,13 +12,14 @@
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Agreement",
-    "depends": ["operating_unit", "agreement_legal"],
+    "depends": ["agreement_operating_unit", "agreement_serviceprofile"],
     "license": "AGPL-3",
     "data": [
         "security/aggreement_security.xml",
-        "views/agreement.xml",
+        "views/agreement_serviceprofile.xml",
     ],
     "installable": True,
+    "auto_install": True,
     "development_status": "Beta",
     "maintainers": [
         "max3903",
