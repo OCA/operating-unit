@@ -8,7 +8,6 @@ class TestAgreementOperatingUnit(common.TransactionCase):
     def setUp(self):
         super(TestAgreementOperatingUnit, self).setUp()
         self.agreement_obj = self.env["agreement"]
-        self.serviceprofile_obj = self.env["agreement.serviceprofile"]
         self.res_users_model = self.env["res.users"]
         self.product_id = self.env["product.template"].search(
             [("type", "=", "service")], limit=1
@@ -84,13 +83,3 @@ class TestAgreementOperatingUnit(common.TransactionCase):
             "User 2 should not have access " "to %s" % self.main_OU.name,
         )
         self.assertEqual(self.agreement1.operating_unit_id.id, self.main_OU.id)
-
-    def test_agreement_serviceprofile(self):
-        serviceprofile_id = self.serviceprofile_obj.create(
-            {
-                "name": "Test Agreement Serviceprofile",
-                "agreement_id": self.agreement1.id,
-                "product_id": self.product_id.id,
-            }
-        )
-        self.assertEqual(serviceprofile_id.agreement_id.operating_unit_id, self.main_OU)

@@ -1,3 +1,3 @@
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
 * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
-* Kitti U. <kittiu@ecosoft.co.th>
+* Kiti U. <kittiu@ecosoft.co.th>
