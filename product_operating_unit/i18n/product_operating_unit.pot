@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* product_operating_unit
+# 	* product_operating_unit
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,9 +14,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_operating_unit
-#: code:addons/product_operating_unit/models/product_template.py:60
+#: model:ir.model.fields,field_description:product_operating_unit.field_product_category__display_name
+#: model:ir.model.fields,field_description:product_operating_unit.field_product_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: product_operating_unit
+#: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
 msgid "Go to Product Categories"
+msgstr ""
+
+#. module: product_operating_unit
+#: model:ir.model.fields,field_description:product_operating_unit.field_product_category__id
+#: model:ir.model.fields,field_description:product_operating_unit.field_product_template__id
+msgid "ID"
+msgstr ""
+
+#. module: product_operating_unit
+#: model:ir.model.fields,field_description:product_operating_unit.field_product_category____last_update
+#: model:ir.model.fields,field_description:product_operating_unit.field_product_template____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: product_operating_unit
@@ -45,14 +63,17 @@ msgid "Select category for the current product"
 msgstr ""
 
 #. module: product_operating_unit
-#: code:addons/product_operating_unit/models/product_template.py:34
+#: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
-msgid "The operating units of the product must include the ones from the category."
+msgid ""
+"The operating units of the product must include the ones from the category."
 msgstr ""
 
 #. module: product_operating_unit
-#: code:addons/product_operating_unit/models/product_template.py:57
+#: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
-msgid "You must define at least one product                         category within your Operating Unit in order to be                         able to create products."
+msgid ""
+"You must define at least one product                         category within"
+" your Operating Unit in order to be                         able to create "
+"products."
 msgstr ""
-
