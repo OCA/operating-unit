@@ -1,0 +1,24 @@
+<!--
+    Copyright (C) 2019 Open Source Integrators
+    Copyright (C) 2019 Serpent Consulting Services
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+-->
+<odoo>
+
+    <record id="product_category_form_view" model="ir.ui.view">
+        <field name="name">product.category.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field
+                    name="operating_unit_ids"
+                    domain="[('user_ids', 'in', uid)]"
+                    groups="operating_unit.group_multi_operating_unit"
+                    widget="many2many_tags"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
