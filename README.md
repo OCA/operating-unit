@@ -17,28 +17,28 @@ TODO: add repo description.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[account_financial_report_operating_unit](account_financial_report_operating_unit/) | 14.0.1.0.0 | Introduces Operating Unit (OU) in financial reports
-[account_operating_unit](account_operating_unit/) | 14.0.1.0.0 | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
-[agreement_operating_unit](agreement_operating_unit/) | 14.0.1.0.0 | This module adds operating unit information to agreements and service profiles.
-[analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 | Analytic Operating Unit
-[analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Analytics
-[contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 | Contract Operating Unit
-[fieldservice_operating_unit](fieldservice_operating_unit/) | 14.0.1.0.0 | This module adds operating unit information to Field Service orders.
-[hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 | HR Expense Operating Unit
-[hr_operating_unit](hr_operating_unit/) | 14.0.1.0.0 | HR Operating Unit
-[operating_unit](operating_unit/) | 14.0.1.0.1 | An operating unit (OU) is an organizational entity part of a company
-[operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | Access all Operating Units
-[product_operating_unit](product_operating_unit/) | 14.0.1.0.0 | Adds the concept of operating unit (OU) in products
-[purchase_operating_unit](purchase_operating_unit/) | 14.0.1.0.1 | Adds the concecpt of operating unit (OU) in purchase order management
-[purchase_request_operating_unit](purchase_request_operating_unit/) | 14.0.1.0.0 | Operating Unit in Purchase Requests
-[purchase_request_operating_unit_access_all](purchase_request_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Purchase Requests
-[purchase_requisition_operating_unit](purchase_requisition_operating_unit/) | 14.0.1.0.0 | Operating Unit in Purchase Requisitions
-[purchase_requisition_operating_unit_access_all](purchase_requisition_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Purchase Agreement
-[sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 | Sales Team Operating Unit
-[stock_operating_unit](stock_operating_unit/) | 14.0.1.0.0 | Adds the concept of operating unit (OU) in stock management
-[stock_operating_unit_access_all](stock_operating_unit_access_all/) | 14.0.1.0.0 | Access all OUs' Stock
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[account_financial_report_operating_unit](account_financial_report_operating_unit/) | 14.0.1.0.0 |  | Introduces Operating Unit (OU) in financial reports
+[account_operating_unit](account_operating_unit/) | 14.0.1.0.0 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
+[agreement_operating_unit](agreement_operating_unit/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to agreements and service profiles.
+[analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 |  | Analytic Operating Unit
+[analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Analytics
+[contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 |  | Contract Operating Unit
+[fieldservice_operating_unit](fieldservice_operating_unit/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to Field Service orders.
+[hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 |  | HR Expense Operating Unit
+[hr_operating_unit](hr_operating_unit/) | 14.0.1.0.0 |  | HR Operating Unit
+[operating_unit](operating_unit/) | 14.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
+[operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all Operating Units
+[product_operating_unit](product_operating_unit/) | 14.0.1.0.0 |  | Adds the concept of operating unit (OU) in products
+[purchase_operating_unit](purchase_operating_unit/) | 14.0.1.0.1 |  | Adds the concecpt of operating unit (OU) in purchase order management
+[purchase_request_operating_unit](purchase_request_operating_unit/) | 14.0.1.0.0 |  | Operating Unit in Purchase Requests
+[purchase_request_operating_unit_access_all](purchase_request_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Requests
+[purchase_requisition_operating_unit](purchase_requisition_operating_unit/) | 14.0.1.0.0 |  | Operating Unit in Purchase Requisitions
+[purchase_requisition_operating_unit_access_all](purchase_requisition_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Agreement
+[sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 |  | Sales Team Operating Unit
+[stock_operating_unit](stock_operating_unit/) | 14.0.1.0.0 |  | Adds the concept of operating unit (OU) in stock management
+[stock_operating_unit_access_all](stock_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Stock
 
 [//]: # (end addons)
 
