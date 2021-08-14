@@ -17,9 +17,9 @@ across all Odoo processes.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[operating_unit](operating_unit/) | 8.0.1.0.0 | An operating unit (OU) is an organizational entity part of a company
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[operating_unit](operating_unit/) | 8.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 
 [//]: # (end addons)
 
