@@ -43,7 +43,12 @@ class StockWarehouse(models.Model):
 class StockWarehouseOrderPoint(models.Model):
     _inherit = "stock.warehouse.orderpoint"
 
-    @api.constrains("operating_unit_id", "warehouse_id", "location_id")
+    @api.constrains(
+        "warehouse_id",
+        "location_id",
+        "location_id.operating_unit_id",
+        "warehouse_id.operating_unit_id",
+    )
     def _check_location(self):
         for rec in self:
             if (
