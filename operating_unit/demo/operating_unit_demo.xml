@@ -13,7 +13,7 @@
     <record model="res.users" id="base.user_demo">
         <field name="default_operating_unit_id" ref="main_operating_unit" />
         <field
-            name="operating_unit_ids"
+            name="assigned_operating_unit_ids"
             eval="[(4, ref('main_operating_unit')),(4, ref('b2b_operating_unit')),(4, ref('b2c_operating_unit'))]"
         />
         <field
