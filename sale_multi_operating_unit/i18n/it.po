@@ -6,96 +6,98 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-08-23 18:50+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model,name:sale_multi_operating_unit.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__create_uid
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__create_date
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__name
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__display_name
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__expected_date
 msgid "Expected Date"
-msgstr ""
+msgstr "Data Prevista"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__id
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model,name:sale_multi_operating_unit.model_sale_order_quote
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__quote_id
 msgid "Internal Quote"
-msgstr ""
+msgstr "Preventivo Interno"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model,name:sale_multi_operating_unit.model_sale_order_quote_line
 msgid "Internal Quote Line"
-msgstr ""
+msgstr "Riga preventivo interno"
 
 #. module: sale_multi_operating_unit
 #: model_terms:ir.ui.view,arch_db:sale_multi_operating_unit.extend_view_order_form
 msgid "Internal Quote Requests"
-msgstr ""
+msgstr "Richieste preventivo interno"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order__quote_ids
 msgid "Internal Quotes"
-msgstr ""
+msgstr "Preventivi Interni"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote____last_update
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__write_uid
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__write_date
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__lead_id
 msgid "Lead"
-msgstr ""
+msgstr "Lead"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_res_company__lead_description_template
@@ -110,87 +112,87 @@ msgstr ""
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: sale_multi_operating_unit
 #: selection:sale.order.quote,state:0
 msgid "New"
-msgstr ""
+msgstr "Nuovo"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__notes
 msgid "Notes"
-msgstr ""
+msgstr "Note"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__operating_unit_id
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unità Operativa"
 
 #. module: sale_multi_operating_unit
 #: model_terms:ir.ui.view,arch_db:sale_multi_operating_unit.view_res_company_form
 msgid "Operating Units"
-msgstr ""
+msgstr "Unità Operative"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__product_id
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__line_ids
 msgid "Products"
-msgstr ""
+msgstr "Prodotti"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__qty
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
 #. module: sale_multi_operating_unit
 #: selection:sale.order.quote,state:0
 msgid "Received"
-msgstr ""
+msgstr "Ricevuto"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__sale_id
 msgid "Sale"
-msgstr ""
+msgstr "Vendita"
 
 #. module: sale_multi_operating_unit
 #: model_terms:ir.ui.view,arch_db:sale_multi_operating_unit.extend_view_order_form
 msgid "Sale Multiple Operating Unit"
-msgstr ""
+msgstr "Unità Operative multiple per la vendita"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model,name:sale_multi_operating_unit.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "Ordine di Vendita"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__assigned_to
 msgid "Salesperson"
-msgstr ""
+msgstr "Addetto alle Vendite"
 
 #. module: sale_multi_operating_unit
 #: model_terms:ir.ui.view,arch_db:sale_multi_operating_unit.extend_view_order_form
 msgid "Send"
-msgstr ""
+msgstr "Invia"
 
 #. module: sale_multi_operating_unit
 #: selection:sale.order.quote,state:0
 msgid "Sent"
-msgstr ""
+msgstr "Inviato"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote__state
 msgid "State"
-msgstr ""
+msgstr "Stato"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__subtotal
 msgid "Subtotal"
-msgstr ""
+msgstr "Subtotale"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,help:sale_multi_operating_unit.field_res_company__lead_description_template
@@ -206,12 +208,12 @@ msgstr ""
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__price_unit
 msgid "Unit Price"
-msgstr ""
+msgstr "Prezzo Unitario"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__uom_id
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Unità di Misura"
 
 #. module: sale_multi_operating_unit
 #: code:addons/sale_multi_operating_unit/models/sale_order_quote.py:38
