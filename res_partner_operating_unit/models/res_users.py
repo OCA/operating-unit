@@ -17,12 +17,13 @@ class ResUsers(models.Model):
         return res
 
     def write(self, vals):
-        res = super().write(vals)
-        if vals.get("default_operating_unit_id"):
-            # Add the new OU
-            self.partner_id.operating_unit_ids = [(4, res.default_operating_unit_id.id)]
-            self.check_partner_operating_unit()
-        return res
+        for user in self:
+            res = super().write(vals)
+            if vals.get("default_operating_unit_id"):
+                # Add the new OU
+                user.partner_id.operating_unit_ids = [(4, user.default_operating_unit_id.id)]
+                user.check_partner_operating_unit()
+            return res
 
     def check_partner_operating_unit(self):
         if (
