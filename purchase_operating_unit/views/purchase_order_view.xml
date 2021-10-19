@@ -34,7 +34,7 @@
             <field name="order_line" position="attributes">
                 <attribute
                     name="context"
-                >{'operating_unit_id': operating_unit_id}</attribute>
+                >{'default_state': 'draft', 'operating_unit_id': operating_unit_id}</attribute>
             </field>
         </field>
     </record>
