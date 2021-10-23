@@ -38,7 +38,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.assertEqual(self.invoice.payment_state, "paid")
 
     def test_payment_from_two_invoices(self):
-        """ Create two invoices of different OU and payment from a third OU"""
+        """Create two invoices of different OU and payment from a third OU"""
 
         # Create invoices for B2B and B2C operating units
         to_create = [
