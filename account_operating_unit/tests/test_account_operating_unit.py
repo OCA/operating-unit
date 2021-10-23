@@ -51,9 +51,7 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
         )
 
         # Create user1
-        self.user_id = self.res_users_model.with_context(
-            {"no_reset_password": True}
-        ).create(
+        self.user_id = self.res_users_model.with_context(no_reset_password=True).create(
             {
                 "name": "Test Account User",
                 "login": "user_1",
@@ -91,7 +89,7 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
 
         # Create user2
         self.user2_id = self.res_users_model.with_context(
-            {"no_reset_password": True}
+            no_reset_password=True
         ).create(
             {
                 "name": "Test Account User",
@@ -121,20 +119,19 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
         self.cash_journal_ou1 = self.journal_model.create(
             {
                 "name": "Cash Journal 1 - Test",
-                "code": "test_cash_1",
+                "code": "cash1",
                 "type": "cash",
                 "company_id": self.company.id,
                 "default_account_id": self.cash1_account_id.id,
                 "operating_unit_id": self.ou1.id,
             }
         )
-
         # Create a cash account 2
         user_type = self.env.ref("account.data_account_type_liquidity")
         self.cash2_account_id = self.account_model.create(
             {
                 "name": "Cash 2 - Test",
-                "code": "test_cash_2",
+                "code": "cash2",
                 "user_type_id": user_type.id,
                 "company_id": self.company.id,
             }
