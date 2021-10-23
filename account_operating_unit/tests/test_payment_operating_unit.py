@@ -21,11 +21,11 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
 
         # Pay the invoice using a cash journal associated to the main company
         ctx = {"active_model": "account.move", "active_ids": [self.invoice.id]}
-        register_payments = self.register_payments_model.with_context(ctx).create(
+        register_payments = self.register_payments_model.with_context(**ctx).create(
             {
                 "payment_date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.cash_journal_ou1.id,
-                "payment_method_id": self.payment_method_manual_in.id,
+                "payment_method_line_id": self.payment_method_manual_in.id,
             }
         )
 
@@ -53,11 +53,11 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
 
         # Pay the invoices using a cash journal associated to the main company
         ctx = {"active_model": "account.move", "active_ids": invoices.ids}
-        register_payments = self.register_payments_model.with_context(ctx).create(
+        register_payments = self.register_payments_model.with_context(**ctx).create(
             {
                 "payment_date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.cash_journal_ou1.id,
-                "payment_method_id": self.payment_method_manual_in.id,
+                "payment_method_line_id": self.payment_method_manual_in.id,
             }
         )
 
@@ -73,30 +73,20 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
 
     def test_payment_transfer(self):
         """Create a transfer payment with journals in different OU"""
-
-        payments = self.payment_model.create(
+        payment = self.payment_model.create(
             {
                 "payment_type": "outbound",
                 "amount": 115000,
                 "date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.cash_journal_ou1.id,
+                "destination_journal_id": self.cash2_journal_b2b.id,
                 "destination_account_id": self.company.transfer_account_id.id,
-                "payment_method_id": self.payment_method_manual_in.id,
+                "payment_method_line_id": self.payment_method_manual_in.id,
                 "is_internal_transfer": True,
             }
         )
-        payments |= self.payment_model.create(
-            {
-                "payment_type": "inbound",
-                "amount": 115000,
-                "date": time.strftime("%Y") + "-07-15",
-                "journal_id": self.cash2_journal_b2b.id,
-                "destination_account_id": self.company.transfer_account_id.id,
-                "payment_method_id": self.payment_method_manual_in.id,
-                "is_internal_transfer": True,
-            }
-        )
-        payments.action_post()
+        payment.action_post()
+        payments = payment + payment.paired_internal_transfer_payment_id
         self.assertEqual(len(payments.move_id.mapped("line_ids.operating_unit_id")), 2)
         # Validate that every move has their correct OU
         for move in payments.move_id:
