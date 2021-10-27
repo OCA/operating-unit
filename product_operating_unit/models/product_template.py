@@ -38,7 +38,9 @@ class ProductTemplate(models.Model):
     @api.constrains("operating_unit_ids", "categ_id")
     def _check_operating_unit(self):
         for record in self:
-            if record.categ_id.operating_unit_ids and not all(
+            if (
+                record.operating_unit_ids and record.categ_id.operating_unit_ids
+            ) and not all(
                 ou in record.operating_unit_ids.ids
                 for ou in record.categ_id.operating_unit_ids.ids
             ):
