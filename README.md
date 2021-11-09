@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 |  | Contract Operating Unit
 [fieldservice_operating_unit](fieldservice_operating_unit/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to Field Service orders.
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 |  | HR Expense Operating Unit
+[hr_expense_operating_unit_access_all](hr_expense_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Expenses
 [hr_operating_unit](hr_operating_unit/) | 14.0.1.0.0 |  | HR Operating Unit
 [operating_unit](operating_unit/) | 14.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all Operating Units
