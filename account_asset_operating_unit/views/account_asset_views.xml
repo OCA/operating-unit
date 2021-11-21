@@ -1,0 +1,30 @@
+<odoo>
+
+    <record id="account_asset_view_form" model="ir.ui.view">
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" />
+            </field>
+        </field>
+    </record>
+    <record id="account_asset_view_tree" model="ir.ui.view">
+        <field name="name">account.asset.tree</field>
+        <field name="model">account.asset</field>
+        <field
+            name="inherit_id"
+            ref="account_asset_management.account_asset_view_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
