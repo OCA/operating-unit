@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 |  | Analytic Operating Unit
 [analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Analytics
 [contract_operating_unit](contract_operating_unit/) | 14.0.1.0.0 |  | Contract Operating Unit
+[crm_operating_unit](crm_operating_unit/) | 14.0.1.0.0 |  | Operating Unit in CRM
 [fieldservice_operating_unit](fieldservice_operating_unit/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to Field Service orders.
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 |  | HR Expense Operating Unit
 [hr_expense_operating_unit_access_all](hr_expense_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Expenses
