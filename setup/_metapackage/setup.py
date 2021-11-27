@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-analytic_operating_unit',
         'odoo14-addon-analytic_operating_unit_access_all',
         'odoo14-addon-contract_operating_unit',
+        'odoo14-addon-crm_operating_unit',
         'odoo14-addon-fieldservice_operating_unit',
         'odoo14-addon-hr_expense_operating_unit',
         'odoo14-addon-hr_expense_operating_unit_access_all',
