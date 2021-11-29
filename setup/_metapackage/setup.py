@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-hr_contract_operating_unit',
         'odoo12-addon-hr_expense_operating_unit',
         'odoo12-addon-hr_payroll_account_operating_unit',
+        'odoo12-addon-mis_builder_budget_operating_unit',
         'odoo12-addon-mis_builder_operating_unit',
         'odoo12-addon-mrp_operating_unit',
         'odoo12-addon-operating_unit',
@@ -25,6 +26,7 @@ setuptools.setup(
         'odoo12-addon-purchase_request_operating_unit',
         'odoo12-addon-report_qweb_operating_unit',
         'odoo12-addon-res_partner_operating_unit',
+        'odoo12-addon-sale_multi_operating_unit',
         'odoo12-addon-sale_operating_unit',
         'odoo12-addon-sale_stock_operating_unit',
         'odoo12-addon-sales_team_operating_unit',
@@ -34,5 +36,6 @@ setuptools.setup(
     classifiers=[
         'Programming Language :: Python',
         'Framework :: Odoo',
+        'Framework :: Odoo :: 12.0',
     ]
 )

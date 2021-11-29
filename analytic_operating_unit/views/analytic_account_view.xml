@@ -11,6 +11,7 @@
         <field name="arch" type="xml">
             <field name="company_id" position="before">
                 <field name="operating_unit_ids" widget="many2many_tags"
+                       domain="[('user_ids', '=', uid)]"
                        groups="operating_unit.group_multi_operating_unit"/>
             </field>
         </field>

@@ -24,7 +24,7 @@ class StockMove(models.Model):
             ou_pick = stock_move.picking_id.operating_unit_id or False
             ou_src = stock_move.operating_unit_id or False
             ou_dest = stock_move.operating_unit_dest_id or False
-            if ou_src and ou_pick and (ou_src != ou_pick) and \
+            if ou_src and ou_pick and ou_dest and (ou_src != ou_pick) and \
                     (ou_dest != ou_pick):
                 raise UserError(_(
                     "Configuration error. The stock move must be related to "

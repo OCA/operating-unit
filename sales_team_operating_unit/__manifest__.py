@@ -5,7 +5,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Sales Team Operating Unit",
-    "version": "12.0.1.1.0",
+    "version": "12.0.1.1.2",
     "author": "Eficent, "
               "SerpentCS,"
               "Odoo Community Association (OCA)",
@@ -15,6 +15,7 @@
     "depends": ["sales_team", "operating_unit"],
     "data": [
         "security/crm_security.xml",
+        "demo/sales_team_demo.xml",
         "views/crm_team_view.xml",
     ],
     'installable': True,

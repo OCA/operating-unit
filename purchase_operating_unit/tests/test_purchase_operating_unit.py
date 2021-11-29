@@ -32,7 +32,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.product2 = self.env.ref('product.product_product_9')
         self.product3 = self.env.ref('product.product_product_11')
         # Account
-        self.account = self.env.ref('l10n_generic_coa.conf_a_pay')
+        self.account = self.partner1.property_account_payable_id
         # Create users
         self.user1_id = self._create_user('user_1',
                                           [self.group_purchase_user,
