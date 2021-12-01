@@ -11,7 +11,6 @@ def migrate(env, version):
         INSERT INTO operating_unit_partner_rel(
             partner_id, operating_unit_id
         )
-        SELECT id, 1 FROM res_partner WHERE id NOT IN (
-            SELECT partner_id from operating_unit_partner_rel
-        );
+        SELECT rp.id, 1 FROM res_partner AS rp left JOIN operating_unit_partner_rel 
+        AS op ON op.partner_id = rp.id WHERE op.partner_id is  null;
     """)
