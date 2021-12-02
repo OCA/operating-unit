@@ -3,7 +3,7 @@
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
 
 
 class PurchaseOrder(models.Model):
@@ -106,12 +106,12 @@ class PurchaseOrder(models.Model):
             if types:
                 self.picking_type_id = types[:1]
             else:
-                raise UserError(
-                    _(
-                        "No Warehouse found with the Operating Unit indicated "
-                        "in the Purchase Order"
-                    )
-                )
+                warning = {
+                    "title": "%s Error" % self.operating_unit_id.name,
+                    "message": "No Warehouse found with the Operating Unit indicated "
+                    "in the Purchase Order",
+                }
+                return {"warning": warning}
 
     @api.model
     def _prepare_picking(self):
