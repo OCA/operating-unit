@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mis_budget_item_tree_view" model="ir.ui.view">
+        <field name="name">mis.budget.item.tree</field>
+        <field name="model">mis.budget.item</field>
+        <field name="inherit_id" ref="mis_builder_budget.mis_budget_item_tree_view" />
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </tree>
+        </field>
+    </record>
+</odoo>
