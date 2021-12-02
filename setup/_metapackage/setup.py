@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo14-addon-hr_expense_operating_unit',
         'odoo14-addon-hr_expense_operating_unit_access_all',
         'odoo14-addon-hr_operating_unit',
+        'odoo14-addon-mis_builder_budget_operating_unit',
         'odoo14-addon-operating_unit',
         'odoo14-addon-operating_unit_access_all',
         'odoo14-addon-product_operating_unit',
