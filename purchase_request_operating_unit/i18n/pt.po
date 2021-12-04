@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_request_operating_unit
+# 	* purchase_request_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,10 @@ msgstr ""
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:46
 #, python-format
-msgid "Configuration error. The                    Purchase Request and the Warehouse of picking type                    must belong to the same Operating Unit."
+msgid ""
+"Configuration error. The                    Purchase Request and the "
+"Warehouse of picking type                    must belong to the same "
+"Operating Unit."
 msgstr ""
 
 #. module: purchase_request_operating_unit
@@ -29,9 +32,10 @@ msgid "Configuration error. The approver has not the indicated Operating Unit"
 msgstr ""
 
 #. module: purchase_request_operating_unit
-#: code:addons/purchase_request_operating_unit/wizard/purchase_request_line_make_purchase_order.py:32
+#: code:addons/purchase_request_operating_unit/wizard/purchase_request_line_make_purchase_order.py:41
 #, python-format
-msgid "Could not process !You have to select linesfrom the same operating unit."
+msgid ""
+"Could not process !You have to select linesfrom the same operating unit."
 msgstr ""
 
 #. module: purchase_request_operating_unit
@@ -61,5 +65,7 @@ msgstr ""
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:31
 #, python-format
-msgid "The Company in the Purchase Request and in the Operating Unit must bethe same."
+msgid ""
+"The Company in the Purchase Request and in the Operating Unit must bethe "
+"same."
 msgstr ""
