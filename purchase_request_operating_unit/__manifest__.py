@@ -6,7 +6,7 @@
 
 {
     "name": "Operating Unit in Purchase Requests",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "author": "Eficent, "
               "SerpentCS, "
               "Odoo Community Association (OCA)",
