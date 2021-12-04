@@ -26,7 +26,7 @@ msgid "Configuration error. The approver has not the indicated Operating Unit"
 msgstr ""
 
 #. module: purchase_request_operating_unit
-#: code:addons/purchase_request_operating_unit/wizard/purchase_request_line_make_purchase_order.py:32
+#: code:addons/purchase_request_operating_unit/wizard/purchase_request_line_make_purchase_order.py:41
 #, python-format
 msgid "Could not process !You have to select linesfrom the same operating unit."
 msgstr ""
