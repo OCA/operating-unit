@@ -30,6 +30,11 @@
                     options="{'no_create': True}"
                 />
             </field>
+            <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                <attribute name="domain">
+                    ['|', ('company_id', '=', company_id), ('company_id', '=', False), '|', ('operating_unit_ids', '=', operating_unit_id), ('operating_unit_ids', '=', False)]
+                </attribute>
+            </xpath>
         </field>
     </record>
     <record id="view_hr_expense_sheet_tree" model="ir.ui.view">
