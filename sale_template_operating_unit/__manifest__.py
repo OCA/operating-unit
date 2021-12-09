@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Operating Unit in Sale Templates",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "summary": "An operating unit (OU) is an organizational entity part of a "
     "company",
     "author": "Pavlov Media, Odoo Community Association (OCA)",
