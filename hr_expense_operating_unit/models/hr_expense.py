@@ -81,8 +81,12 @@ class HrExpenseExpense(models.Model):
     def _get_account_move_line_values(self):
         res = super()._get_account_move_line_values()
         for expense in self:
-            res[expense.id][0].update({"operating_unit_id": self.operating_unit_id.id})
-            res[expense.id][1].update({"operating_unit_id": self.operating_unit_id.id})
+            res[expense.id][0].update(
+                {"operating_unit_id": expense.operating_unit_id.id}
+            )
+            res[expense.id][1].update(
+                {"operating_unit_id": expense.operating_unit_id.id}
+            )
         return res
 
     def _prepare_move_values(self):
@@ -107,6 +111,17 @@ class HrExpenseSheet(models.Model):
             self.expense_line_ids.write(
                 {"operating_unit_id": self.operating_unit_id.id}
             )
+
+    @api.constrains("operating_unit_id", "expense_line_ids")
+    def _check_expense_operating_unit(self):
+        for rec in self:
+            if len(rec.expense_line_ids.mapped("operating_unit_id")) > 1:
+                raise ValidationError(
+                    _(
+                        "Configuration error. The Operating "
+                        "Unit in the Expense Lines must be the same."
+                    )
+                )
 
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
