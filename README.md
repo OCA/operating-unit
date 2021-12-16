@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[analytic_operating_unit](analytic_operating_unit/) | 15.0.1.0.0 |  | Analytic Operating Unit
 [operating_unit](operating_unit/) | 15.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 
 [//]: # (end addons)
