@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-12-16 14:39+0000\n"
+"PO-Revision-Date: 2021-12-20 14:39+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -37,12 +37,12 @@ msgstr "Ultima modifica il"
 #. module: mis_builder_operating_unit
 #: model:ir.model,name:mis_builder_operating_unit.model_mis_report_instance
 msgid "MIS Report Instance"
-msgstr ""
+msgstr "Report Istanza MIS"
 
 #. module: mis_builder_operating_unit
 #: model:ir.model,name:mis_builder_operating_unit.model_mis_report_instance_period
 msgid "MIS Report Instance Period"
-msgstr ""
+msgstr "Report Periodo Istanza MIS"
 
 #. module: mis_builder_operating_unit
 #: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance__operating_unit_ids
