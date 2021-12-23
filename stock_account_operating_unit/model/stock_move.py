@@ -116,6 +116,7 @@ class StockMove(models.Model):
                     )
                     am = (
                         self.env["account.move"]
+                        .sudo()
                         .with_context(
                             company_id=move.company_id.id,
                         )
