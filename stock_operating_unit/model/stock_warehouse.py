@@ -46,8 +46,6 @@ class StockWarehouseOrderPoint(models.Model):
     @api.constrains(
         "warehouse_id",
         "location_id",
-        "location_id.operating_unit_id",
-        "warehouse_id.operating_unit_id",
     )
     def _check_location(self):
         for rec in self:
