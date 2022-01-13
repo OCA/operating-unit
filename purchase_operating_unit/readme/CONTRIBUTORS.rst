@@ -4,3 +4,4 @@
 * Nicola Studer <nicola.studer@braintec-group.com>
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
 * Kitti U. <kittiu@ecosoft.co.th>
+* Alan Ramos <alan.ramos@jarsa.com>

@@ -8,7 +8,6 @@
             <field name="partner_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -22,7 +21,6 @@
             <field name="price_unit" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -44,7 +42,6 @@
             <field name="partner_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
