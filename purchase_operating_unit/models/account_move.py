@@ -1,8 +1,9 @@
-# © 2015-17 ForgeFlow S.L.
+# Copyright 2015-17 ForgeFlow S.L.
 # - Jordi Ballester Alomar
-# © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, exceptions, models
+from odoo import _, api, models
+from odoo.exceptions import ValidationError
 
 
 class AccountMove(models.Model):
@@ -44,7 +45,7 @@ class AccountMoveLine(models.Model):
                 line.purchase_line_id
                 and line.operating_unit_id != line.purchase_line_id.operating_unit_id
             ):
-                raise exceptions.ValidationError(
+                raise ValidationError(
                     _(
                         "The operating unit of the purchase order must "
                         "be the same as in the associated invoices."

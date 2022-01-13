@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--© 2015-17 ForgeFlow S.L.-->
+<!--Copyright 2015-17 ForgeFlow S.L.-->
 <!-- - Jordi Ballester Alomar-->
-<!--© 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
+<!--Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
 <!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
 <odoo noupdate="1">
     <record id="ir_rule_purchase_order_allowed_operating_units" model="ir.rule">
