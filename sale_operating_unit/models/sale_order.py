@@ -22,6 +22,7 @@ class SaleOrder(models.Model):
         default=_default_operating_unit,
         readonly=True,
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
+        index=True,
     )
 
     @api.onchange("team_id")
@@ -73,5 +74,8 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     operating_unit_id = fields.Many2one(
-        related="order_id.operating_unit_id", string="Operating Unit", store=True,
+        related="order_id.operating_unit_id",
+        string="Operating Unit",
+        store=True,
+        index=True,
     )
