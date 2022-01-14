@@ -4,7 +4,7 @@
 
 {
     "name": "HR Expense Operating Unit",
-    "version": "13.0.1.0.3",
+    "version": "13.0.1.1.0",
     "license": "LGPL-3",
     "author": "ForgeFlow S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
