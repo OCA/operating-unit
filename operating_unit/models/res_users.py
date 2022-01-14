@@ -28,6 +28,7 @@ class ResUsers(models.Model):
         comodel_name="operating.unit",
         compute="_compute_operating_unit_ids",
         inverse="_inverse_operating_unit_ids",
+        index=True,
     )
     assigned_operating_unit_ids = fields.Many2many(
         comodel_name="operating.unit",
@@ -36,12 +37,14 @@ class ResUsers(models.Model):
         column2="operating_unit_id",
         string="Operating Units",
         default=lambda self: self._default_operating_units(),
+        index=True,
     )
 
     default_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
+        index=True,
     )
 
     @api.depends("groups_id", "assigned_operating_unit_ids")
