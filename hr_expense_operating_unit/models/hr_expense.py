@@ -16,6 +16,7 @@ class HrExpenseExpense(models.Model):
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self._uid
         ),
+        index=True,
     )
 
     @api.constrains("operating_unit_id", "company_id")
@@ -88,6 +89,7 @@ class HrExpenseSheet(models.Model):
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self._uid
         ),
+        index=True,
     )
 
     @api.onchange("operating_unit_id")
