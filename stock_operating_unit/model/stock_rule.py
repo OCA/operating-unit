@@ -12,4 +12,6 @@ class StockRule(models.Model):
         "operating.unit",
         related="warehouse_id.operating_unit_id",
         domain="[('user_ids', '=', uid)]",
+        index=True,
+        store=True,
     )
