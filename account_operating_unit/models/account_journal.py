@@ -14,6 +14,7 @@ class AccountJournal(models.Model):
         domain="[('user_ids', '=', uid)]",
         help="Operating Unit that will be used in payments, "
         "when this journal is used.",
+        index=True,
     )
 
     @api.constrains("type")

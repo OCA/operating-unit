@@ -10,7 +10,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     operating_unit_id = fields.Many2one(
-        comodel_name="operating.unit", domain="[('user_ids', '=', uid)]"
+        comodel_name="operating.unit", domain="[('user_ids', '=', uid)]", index=True
     )
 
     @api.model_create_multi
@@ -85,6 +85,7 @@ class AccountMove(models.Model):
         help="This operating unit will be defaulted in the move lines.",
         readonly=True,
         states={"draft": [("readonly", False)]},
+        index=True,
     )
 
     @api.onchange("invoice_line_ids")
