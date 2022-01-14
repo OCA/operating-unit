@@ -4,7 +4,7 @@
 
 {
     "name": "Operating Unit in MRP",
-    "version": "13.0.1.0.1",
+    "version": "13.0.1.1.0",
     "author": "ForgeFlow S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
