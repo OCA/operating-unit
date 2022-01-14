@@ -16,4 +16,5 @@ class HrContract(models.Model):
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self._uid
         ),
+        index=True,
     )
