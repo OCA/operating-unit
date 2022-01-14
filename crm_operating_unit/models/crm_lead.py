@@ -20,4 +20,6 @@ class CRMLead(models.Model):
         "Operating Unit",
         related="team_id.operating_unit_id",
         default=_get_default_operating_unit,
+        store=True,
+        index=True,
     )
