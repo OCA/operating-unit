@@ -21,6 +21,7 @@ class StockWarehouse(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=_default_operating_unit,
+        index=True,
     )
 
     @api.constrains("operating_unit_id", "company_id")

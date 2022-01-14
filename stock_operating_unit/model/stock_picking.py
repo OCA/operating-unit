@@ -13,6 +13,7 @@ class StockPicking(models.Model):
         "Requesting Operating Unit",
         readonly=True,
         states={"draft": [("readonly", False)]},
+        index=True,
     )
 
     @api.onchange("picking_type_id", "partner_id")
