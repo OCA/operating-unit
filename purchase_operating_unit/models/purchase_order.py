@@ -37,6 +37,7 @@ class PurchaseOrder(models.Model):
         default=lambda self: (
             self.env["res.users"].operating_unit_default_get(self.env.uid)
         ),
+        index=True,
     )
 
     requesting_operating_unit_id = fields.Many2one(
@@ -46,6 +47,7 @@ class PurchaseOrder(models.Model):
         default=lambda self: (
             self.env["res.users"].operating_unit_default_get(self.env.uid)
         ),
+        index=True,
     )
 
     picking_type_id = fields.Many2one(
@@ -124,5 +126,8 @@ class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     operating_unit_id = fields.Many2one(
-        related="order_id.operating_unit_id", string="Operating Unit"
+        related="order_id.operating_unit_id",
+        string="Operating Unit",
+        store=True,
+        index=True,
     )
