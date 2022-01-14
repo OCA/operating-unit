@@ -6,7 +6,7 @@
 
 {
     "name": "HR Contract Operating Unit",
-    "version": "13.0.1.0.1",
+    "version": "13.0.1.1.0",
     "license": "LGPL-3",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
