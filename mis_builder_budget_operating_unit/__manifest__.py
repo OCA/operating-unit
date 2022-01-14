@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 {
     "name": "MIS Builder Budget with Operating Unit",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "category": "Reporting",
     "author": "Camptocamp SA,Odoo Community Association (OCA)",
     "license": "LGPL-3",
