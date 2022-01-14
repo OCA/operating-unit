@@ -18,6 +18,7 @@ class MrpProduction(models.Model):
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self._uid
         ),
+        index=True,
     )
 
     @api.constrains("operating_unit_id", "location_src_id", "location_dest_id")
