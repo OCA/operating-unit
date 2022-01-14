@@ -39,6 +39,7 @@ class ResUsers(models.Model):
         column2="operating_unit_id",
         string="Operating Units",
         default=lambda self: self._default_operating_units(),
+        index=True
     )
 
     default_operating_unit_id = fields.Many2one(
@@ -46,6 +47,7 @@ class ResUsers(models.Model):
         string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
+        index=True
     )
 
     @api.onchange("operating_unit_ids")

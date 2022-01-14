@@ -6,7 +6,7 @@
     "name": "Operating Unit",
     "summary": "An operating unit (OU) is an organizational entity part of a "
     "company",
-    "version": "13.0.2.1.2",
+    "version": "13.0.2.2.0",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
