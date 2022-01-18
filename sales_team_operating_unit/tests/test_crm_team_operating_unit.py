@@ -35,7 +35,7 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
         self.team2 = self._create_crm_team(self.user2.id, self.b2c)
 
     def _create_user(self, login, groups, company, operating_units, context=None):
-        """ Create a user. """
+        """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create(
             {

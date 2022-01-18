@@ -3,10 +3,10 @@
      Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
-    <record id="crm_team_salesteams_search" model="ir.ui.view">
+    <record id="crm_team_view_search" model="ir.ui.view">
         <field name="name">Case Teams - Search</field>
         <field name="model">crm.team</field>
-        <field name="inherit_id" ref="sales_team.crm_team_salesteams_search" />
+        <field name="inherit_id" ref="sales_team.crm_team_view_search" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field
