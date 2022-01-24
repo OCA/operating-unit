@@ -40,7 +40,7 @@ This module adds operating unit information to assets.
 Usage
 =====
 
-* Go to Assets
+* Go to Invoicing > Assets > Assets
 * You only see the assets of your operating units
 * Create an asset. It is assigned to your default operating unit.
 
