@@ -28,7 +28,9 @@ class HrExpenseExpense(models.Model):
                 )
             )
         ctx.update({"default_operating_unit_id": operating_unit_id.id})
-        return super(HrExpenseExpense, self.with_context(ctx)).action_submit_expenses()
+        return super(
+            HrExpenseExpense, self.with_context(**ctx)
+        ).action_submit_expenses()
 
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
@@ -63,8 +65,8 @@ class HrExpenseExpense(models.Model):
                     )
                 )
 
-    def _create_sheet_from_expenses(self):
-        sheet = super()._create_sheet_from_expenses()
+    def _get_default_expense_sheet_values(self):
+        sheet = super()._get_default_expense_sheet_values()
         if len(self.mapped("operating_unit_id")) != 1 or any(
             not expense.operating_unit_id for expense in self
         ):
@@ -75,7 +77,7 @@ class HrExpenseExpense(models.Model):
                     "no Operating Unit"
                 )
             )
-        sheet.write({"operating_unit_id": self.mapped("operating_unit_id").id})
+        sheet.update({"operating_unit_id": self.mapped("operating_unit_id").id})
         return sheet
 
     def _get_account_move_line_values(self):
