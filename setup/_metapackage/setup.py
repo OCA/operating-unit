@@ -8,6 +8,8 @@ setuptools.setup(
     description="Meta package for oca-operating-unit Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-account_asset_operating_unit',
+        'odoo14-addon-account_asset_operating_unit_access_all',
         'odoo14-addon-account_financial_report_operating_unit',
         'odoo14-addon-account_operating_unit',
         'odoo14-addon-agreement_operating_unit',
