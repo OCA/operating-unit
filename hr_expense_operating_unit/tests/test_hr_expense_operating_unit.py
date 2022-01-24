@@ -9,6 +9,7 @@ from odoo.tests import common
 class TestHrExpenseOperatingUnit(common.TransactionCase):
     def setUp(self):
         super(TestHrExpenseOperatingUnit, self).setUp()
+
         self.res_users_model = self.env["res.users"]
         self.hr_expense_model = self.env["hr.expense"]
         self.hr_expense_sheet_model = self.env["hr.expense.sheet"]
@@ -19,7 +20,7 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
         self.partner2 = self.env.ref("base.res_partner_2")
 
         # Expense Product
-        self.product1 = self.env.ref("hr_expense.air_ticket")
+        self.product1 = self.env.ref("hr_expense.trans_expense_product")
 
         self.grp_hr_user = self.env.ref("hr.group_hr_user")
         self.grp_accou_mng = self.env.ref("account.group_account_manager")
@@ -113,10 +114,15 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
         )
         # Create the expense sheet
         hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
-        self.hr_expense_sheet1 = self.hr_expense_sheet_model.browse(
-            hr_expense_dict1["res_id"]
-        )
-        self.hr_expense1.write({"sheet_id": self.hr_expense_sheet1.id})
+        sheet_context = hr_expense_dict1.get("context")
+        sheet_dict = {
+            "name": sheet_context.get("default_name", ""),
+            "employee_id": sheet_context.get("default_employee_id", False),
+            "company_id": sheet_context.get("default_company_id", False),
+            "state": sheet_context.get("default_state", ""),
+            "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+        }
+        self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(sheet_dict)
         self._post_journal_entries(self.hr_expense_sheet1)
         # Expense OU should have same OU of its accounting entries
         self.assertEqual(
@@ -128,10 +134,15 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
     def test_constrains_error(self):
         with self.assertRaises(ValidationError):
             hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
-            self.hr_expense_sheet1 = self.hr_expense_sheet_model.browse(
-                hr_expense_dict1["res_id"]
-            )
-            self.hr_expense1.write({"sheet_id": self.hr_expense_sheet1.id})
+            sheet_context = hr_expense_dict1.get("context")
+            sheet_dict = {
+                "name": sheet_context.get("default_name", ""),
+                "employee_id": sheet_context.get("default_employee_id", False),
+                "company_id": sheet_context.get("default_company_id", False),
+                "state": sheet_context.get("default_state", ""),
+                "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+            }
+            self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(sheet_dict)
             self.hr_expense_sheet1.expense_line_ids.write(
                 {"operating_unit_id": self.b2c.id}
             )
@@ -146,9 +157,15 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
 
         with self.assertRaises(ValidationError):
             hr_expense_dict2 = self.hr_expense2.action_submit_expenses()
-            self.hr_expense_sheet2 = self.hr_expense_sheet_model.browse(
-                hr_expense_dict2["res_id"]
-            )
+            sheet_context = hr_expense_dict2.get("context")
+            sheet_dict = {
+                "name": sheet_context.get("default_name", ""),
+                "employee_id": sheet_context.get("default_employee_id", False),
+                "company_id": sheet_context.get("default_company_id", False),
+                "state": sheet_context.get("default_state", ""),
+                "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+            }
+            self.hr_expense_sheet2 = self.hr_expense_sheet_model.create(sheet_dict)
             self.hr_expense_sheet2.expense_line_ids.write({"company_id": company_id.id})
 
         with self.assertRaises(ValidationError):
