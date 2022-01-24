@@ -3,6 +3,7 @@
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
+    <!-- Expenses -->
     <record id="view_expenses_tree" model="ir.ui.view">
         <field name="name">hr.expense.tree</field>
         <field name="model">hr.expense</field>
@@ -25,13 +26,27 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
-                    domain="[('company_id','=', company_id),
-                       ('user_ids', 'in', uid)]"
+                    domain="[('company_id','=', company_id)]"
                     options="{'no_create': True}"
                 />
             </field>
         </field>
     </record>
+    <record id="hr_expense_view_search" model="ir.ui.view">
+        <field name="name">hr.expense.view.search</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search/group" position="inside">
+                <filter
+                    name="groupby_operating_unit"
+                    string="Operating Unit"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <!-- Expense Sheet -->
     <record id="view_hr_expense_sheet_tree" model="ir.ui.view">
         <field name="name">hr.expense.sheet.tree</field>
         <field name="model">hr.expense.sheet</field>
@@ -54,8 +69,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
-                    domain="[('company_id','=', company_id),
-                       ('user_ids', 'in', uid)]"
+                    domain="[('company_id','=', company_id)]"
                     options="{'no_create': True}"
                 />
             </field>
@@ -66,9 +80,22 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
-                    domain="[('company_id','=', company_id),
-                       ('user_ids', 'in', uid)]"
+                    domain="[('company_id','=', company_id)]"
                     options="{'no_create': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_expense_sheet_view_search" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.view.search</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_sheet_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search/group" position="inside">
+                <filter
+                    name="groupby_operating_unit"
+                    string="Operating Unit"
+                    context="{'group_by': 'operating_unit_id'}"
                 />
             </xpath>
         </field>
