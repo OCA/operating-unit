@@ -11,7 +11,12 @@ class AccountAssetRemove(models.TransientModel):
         res = super().remove()
         asset_id = self.env.context.get("active_id")
         asset = self.env["account.asset"].browse(asset_id)
-        move = self.env["account.move"].search(res["domain"])
+        move = False
+        if isinstance(res, dict):
+            if "domain" in res.keys() and "res_model" in res.keys():
+                if res["res_model"] == "account.move":
+                    move = self.env["account.move"].search(res["domain"])
+        # Assign operating unit to journal entry if any
         if asset and move:
             move.operating_unit_id = asset.operating_unit_id
             move._onchange_invoice_line_ids()
