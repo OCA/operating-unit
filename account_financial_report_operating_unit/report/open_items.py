@@ -12,10 +12,10 @@ class OpenItemsReport(models.AbstractModel):
         return super()._get_report_values(docids, data)
 
     @api.model
-    def _get_move_lines_domain(
+    def _get_move_lines_domain_not_reconciled(
         self, company_id, account_ids, partner_ids, target_move, date_from
     ):
-        domain = super()._get_move_lines_domain(
+        domain = super()._get_move_lines_domain_not_reconciled(
             company_id, account_ids, partner_ids, target_move, date_from
         )
         operating_unit_ids = self.env.context.get("operating_unit_ids", [])
