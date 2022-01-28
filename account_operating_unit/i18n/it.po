@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-01-28 13:31+0000\n"
+"PO-Revision-Date: 2022-01-28 16:31+0000\n"
 "Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -37,8 +37,8 @@ msgid ""
 "Configuration error. If defined as self-balanced at company level, the "
 "operating unit is mandatory in bank journal."
 msgstr ""
-"Configurazione errore. Se definito come autobilanciata a livello aziendale, "
-"l'unità operativa è obbligatoria nel Registro banca."
+"Errore di configurazione. Se definito come autobilanciata a livello "
+"aziendale, l'unità operativa è obbligatoria nel Registro banca."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/res_company.py:0
@@ -47,7 +47,7 @@ msgid ""
 "Configuration error. Please provide an Inter-operating unit clearing "
 "account."
 msgstr ""
-"Configurazione errore. Per favore Fornisci un conto di compensazione tra "
+"Errore di configurazione. Per favore Fornisci un conto di compensazione tra "
 "unità operative."
 
 #. module: account_operating_unit
@@ -57,7 +57,7 @@ msgid ""
 "Configuration error. The Company in the Move Line and in the Operating Unit "
 "must be the same."
 msgstr ""
-"Configurazione errore. L'azienda nella riga di movimento e nell'unità "
+"Errore di configurazione. L'azienda nella riga di movimento e nell'unità "
 "operativa deve essere la stessa."
 
 #. module: account_operating_unit
@@ -67,7 +67,7 @@ msgid ""
 "Configuration error. The Operating Unit in the Move Line and in the Move "
 "must be the same."
 msgstr ""
-"Configurazione errore. L'Unità Operativa nella riga di movimento e e nel "
+"Errore di configurazione. L'Unità Operativa nella riga di movimento e e nel "
 "movimento deve essere la stessa."
 
 #. module: account_operating_unit
@@ -77,8 +77,8 @@ msgid ""
 "Configuration error. The operating unit is mandatory for each line as the "
 "operating unit has been defined as self-balanced at company level."
 msgstr ""
-"Configurazione errore. L'unità operativa è obbligatoria per ciascuna linea "
-"in quanto l'unità operativa è stata definita autobilanciata a livello "
+"Errore di configurazione. L'unità operativa è obbligatoria per ciascuna "
+"linea in quanto l'unità operativa è stata definita autobilanciata a livello "
 "aziendale."
 
 #. module: account_operating_unit
@@ -88,8 +88,8 @@ msgid ""
 "Configuration error. You need to define aninter-operating unit clearing "
 "account in the company settings"
 msgstr ""
-"Configurazione errore. È necessario definire un conto di compensazione tra "
-"unità operative nelle impostazioni dell'azienda"
+"Errore di configurazione. È necessario definire un conto di compensazione "
+"tra unità operative nelle impostazioni dell'azienda"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_invoice_report__display_name
