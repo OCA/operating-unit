@@ -39,7 +39,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         # Partner
         self.partner1 = self.env.ref("base.res_partner_1")
         # Products
-        self.product1 = self.env.ref("product.product_product_7")
+        self.product1 = self.env.ref("product.product_product_2")
         self.product1.write({"invoice_policy": "order"})
         # Create user1
         self.user1 = self._create_user(
