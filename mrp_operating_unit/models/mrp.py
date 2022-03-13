@@ -57,7 +57,8 @@ class MrpProduction(models.Model):
                         ("code", "=", "mrp_operation"),
                         ("company_id", "=", self.company_id.id),
                         ("warehouse_id", "=", wh.id),
-                    ]
+                    ],
+                    limit=1,
                 )
                 if wh
                 else False
