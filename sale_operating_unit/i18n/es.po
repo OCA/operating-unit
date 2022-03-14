@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-03-14 11:17+0000\n"
+"Last-Translator: Javier Colmenero <javierjcf@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: sale_operating_unit
 #: code:addons/sale_operating_unit/models/crm_team.py:0
@@ -21,6 +23,8 @@ msgid ""
 "Configuration error. It is not possible to change this team. There are sale "
 "orders referencing it in other operating units"
 msgstr ""
+"Error de configuración. No es posible cambiar este quipo. Hay pedidos de "
+"venta referenciandos en otras unidades operacionales"
 
 #. module: sale_operating_unit
 #: code:addons/sale_operating_unit/models/sale_order.py:0
@@ -29,6 +33,8 @@ msgid ""
 "Configuration error. The Company in the Sales Order and in the Operating "
 "Unit must be the same."
 msgstr ""
+"Error de configuración. La compañía en el pedido de venta y en la unidad "
+"operacional debe ser la misma."
 
 #. module: sale_operating_unit
 #: code:addons/sale_operating_unit/models/sale_order.py:0
@@ -37,6 +43,8 @@ msgid ""
 "Configuration error. The Operating Unit of the sales team must match with "
 "that of the quote/sales order."
 msgstr ""
+"Error de configuración. La unidad operacional del equipo de ventas debe "
+"coincidir con la del presupuesto/pedido de venta."
 
 #. module: sale_operating_unit
 #: model:ir.model.fields,field_description:sale_operating_unit.field_sale_order__operating_unit_id
@@ -45,29 +53,29 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale_operating_unit.view_sale_report_search
 #: model_terms:ir.ui.view,arch_db:sale_operating_unit.view_sales_order_filter
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad operacional"
 
 #. module: sale_operating_unit
 #: model:ir.model,name:sale_operating_unit.model_sale_advance_payment_inv
 msgid "Sales Advance Payment Invoice"
-msgstr ""
+msgstr "Factura de pago anticipado de ventas"
 
 #. module: sale_operating_unit
 #: model:ir.model,name:sale_operating_unit.model_sale_report
 msgid "Sales Analysis Report"
-msgstr ""
+msgstr "Informe análisis de ventas"
 
 #. module: sale_operating_unit
 #: model:ir.model,name:sale_operating_unit.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Pedidos de venta"
 
 #. module: sale_operating_unit
 #: model:ir.model,name:sale_operating_unit.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Línea pedido de venta"
 
 #. module: sale_operating_unit
 #: model:ir.model,name:sale_operating_unit.model_crm_team
 msgid "Sales Team"
-msgstr ""
+msgstr "Equipo de ventas"
