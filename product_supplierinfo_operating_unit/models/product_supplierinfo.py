@@ -7,12 +7,16 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     def _prepare_sellers(self, params):
-        sellers = super()._prepare_sellers(params)
+        sellers = super(ProductProduct, self.sudo())._prepare_sellers(params)
         operating_unit_id = self._context.get("operating_unit_id")
-        if operating_unit_id:
-            sellers = sellers.filtered(
-                lambda r: r.operating_unit_id.id in [operating_unit_id, False]
+        sellers = sellers.filtered(
+            lambda r: (
+                r.operating_unit_id.id in [operating_unit_id, False]
+                if operating_unit_id
+                else True
             )
+            and r.company_id.id in [self.env.company.id, False]
+        )
         return sellers
 
 
