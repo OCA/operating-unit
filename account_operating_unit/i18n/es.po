@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-03-14 11:17+0000\n"
+"Last-Translator: Javier Colmenero <javierjcf@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
@@ -20,11 +22,13 @@ msgid ""
 "Activate if your company is required to generate a balanced balance sheet "
 "for each operating unit."
 msgstr ""
+"Activar si tu compañía necesita generar una hoja de balance para cada unidad "
+"operacional."
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_journal.py:0
@@ -33,6 +37,8 @@ msgid ""
 "Configuration error. If defined as self-balanced at company level, the "
 "operating unit is mandatory in bank journal."
 msgstr ""
+"Error de configuración. Si se definió como auto balanceado a nivel de "
+"compañía, la unidad operacional es obligatoria en el diario de banco."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/res_company.py:0
@@ -41,6 +47,8 @@ msgid ""
 "Configuration error. Please provide an Inter-operating unit clearing "
 "account."
 msgstr ""
+"Error de configuración. Por favor indique una cuanta de compensación entre "
+"unidades operacionales."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
@@ -49,6 +57,8 @@ msgid ""
 "Configuration error. The Company in the Move Line and in the Operating Unit "
 "must be the same."
 msgstr ""
+"Error de configuración. La compañía en el movimiento y en la unidad "
+"operacional debe ser la misma."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
@@ -57,6 +67,8 @@ msgid ""
 "Configuration error. The Operating Unit in the Move Line and in the Move "
 "must be the same."
 msgstr ""
+"Error de configuración. La unidad operacional en el apunte contable y en el "
+"asiento debe ser la misma."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
@@ -65,6 +77,9 @@ msgid ""
 "Configuration error. The operating unit is mandatory for each line as the "
 "operating unit has been defined as self-balanced at company level."
 msgstr ""
+"Error de configuración. La unidad operacional es obligatoria para cada "
+"línea, ya que la unidad operacional ha sido definida como auto balanceada a "
+"nivel de compañía."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
@@ -73,31 +88,33 @@ msgid ""
 "Configuration error. You need to define aninter-operating unit clearing "
 "account in the company settings"
 msgstr ""
+"Error de configuración. Se necesita definir una cuenta de compensación ente "
+"unidades operacionales en la configuración"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__inter_ou_clearing_account_id
 msgid "Inter-operating unit clearing account"
-msgstr ""
+msgstr "Cuenta de compensación entre unidades operacionales"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_invoice_report
 msgid "Invoices Statistics"
-msgstr ""
+msgstr "Estádisticas de facturación"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_move
 msgid "Journal Entries"
-msgstr ""
+msgstr "Entradas de diario"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Item de diario"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_bank_statement_import_journal_creation__operating_unit_id
@@ -111,7 +128,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_move_line_filter
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_payment_search
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad operacional"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_bank_statement_import_journal_creation__operating_unit_id
@@ -119,36 +136,38 @@ msgstr ""
 msgid ""
 "Operating Unit that will be used in payments, when this journal is used."
 msgstr ""
+"La unidad operacional que será usada en pagos, cuando este diario sea usado."
 
 #. module: account_operating_unit
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_company_form
 msgid "Operating Units"
-msgstr ""
+msgstr "Unidades operacionales"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__ou_is_self_balanced
 msgid "Operating Units are self-balanced"
-msgstr ""
+msgstr "Las Unidades operacionales están auto balanceadas"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Pagos"
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The Company in the Move and in Operating Unit must be the same."
 msgstr ""
+"La compañía en el Asiento y en la unidad operacional deben ser la misma."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The OU in the Move and in Journal must be the same."
-msgstr ""
+msgstr "La unidad operacional en el asiento y en el diario debe ser la misma."
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_move__operating_unit_id
 msgid "This operating unit will be defaulted in the move lines."
-msgstr ""
+msgstr "Esta unidad operacional será la por defecto en los apuntes contables."
