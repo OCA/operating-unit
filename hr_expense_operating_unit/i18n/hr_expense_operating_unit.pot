@@ -23,6 +23,7 @@ msgstr ""
 
 #. module: hr_expense_operating_unit
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:0
+#: code:addons/hr_expense_operating_unit/models/hr_expense.py:0
 #, python-format
 msgid ""
 "Configuration error. The Operating Unit in the Expense sheet and in the "
