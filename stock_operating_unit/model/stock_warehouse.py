@@ -1,5 +1,5 @@
-# © 2019 ForgeFlow S.L.
-# © 2019 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -46,8 +46,6 @@ class StockWarehouseOrderPoint(models.Model):
     @api.constrains(
         "warehouse_id",
         "location_id",
-        "location_id.operating_unit_id",
-        "warehouse_id.operating_unit_id",
     )
     def _check_location(self):
         for rec in self:
