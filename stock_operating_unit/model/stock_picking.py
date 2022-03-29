@@ -1,5 +1,5 @@
-# © 2019 ForgeFlow S.L.
-# © 2019 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -16,11 +16,10 @@ class StockPicking(models.Model):
     )
 
     @api.onchange("picking_type_id", "partner_id")
-    def onchange_picking_type(self):
-        res = super(StockPicking, self).onchange_picking_type()
+    def _onchange_picking_type(self):
+        res = super()._onchange_picking_type()
         if self.picking_type_id:
-            unit = self.picking_type_id.warehouse_id.operating_unit_id
-            self.operating_unit_id = unit
+            self.operating_unit_id = self.picking_type_id.warehouse_id.operating_unit_id
         return res
 
     @api.constrains("operating_unit_id", "company_id")

@@ -1,5 +1,5 @@
-# © 2019 ForgeFlow S.L.
-# © 2019 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo.addons.stock.tests import common
 
@@ -65,7 +65,7 @@ class TestStockOperatingUnit(common.TestStockCommon):
     def _create_user(self, login, groups, company, operating_units):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.ResUsers.with_context({"no_reset_password": True}).create(
+        user = self.ResUsers.with_context(**{"no_reset_password": True}).create(
             {
                 "name": "Stock User",
                 "login": login,

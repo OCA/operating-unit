@@ -1,11 +1,11 @@
-# © 2019 ForgeFlow S.L.
-# © 2019 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Stock with Operating Units",
     "summary": "Adds the concept of operating unit (OU) in stock management",
-    "version": "14.0.1.0.2",
+    "version": "15.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd., "
