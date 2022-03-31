@@ -42,7 +42,7 @@ class TestFSMOrder(common.TransactionCase):
         self.fsm_order2 = self._create_fsm_order(self.user2, self.b2c_OU)
 
     def _create_user(self, login, groups, company, operating_units):
-        """ Create a user. """
+        """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create(
             {
