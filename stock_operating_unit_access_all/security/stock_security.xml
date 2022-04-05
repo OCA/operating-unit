@@ -39,6 +39,7 @@
                 '|',(1, '=', 1) if user.has_group('stock_operating_unit_access_all.group_all_ou_stock') else (0, '=', 1),
                 '|',('location_id.operating_unit_id','=',False),
                 ('location_id.operating_unit_id','in',user.operating_unit_ids.ids),
+                '|',(1, '=', 1) if user.has_group('stock_operating_unit_access_all.group_all_ou_stock') else (0, '=', 1),
                 '|',('location_dest_id.operating_unit_id','=',False),
                 ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids)]&quot;}"
         />
