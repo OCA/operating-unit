@@ -16,23 +16,36 @@ class SaleOrder(models.Model):
             return team.operating_unit_id
         return self.env.user.default_operating_unit_id
 
+    team_id = fields.Many2one(
+        compute="_compute_team_id",
+        store=True,
+        readonly=False,
+    )
+
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Operating Unit",
         default=_default_operating_unit,
+        compute="_compute_operating_unit_id",
+        store=True,
         readonly=True,
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
     )
 
-    @api.onchange("team_id")
-    def onchange_team_id(self):
-        if self.team_id:
-            self.operating_unit_id = self.team_id.operating_unit_id
+    @api.depends("team_id")
+    def _compute_operating_unit_id(self):
+        for record in self:
+            if record.team_id:
+                record.operating_unit_id = record.team_id.operating_unit_id
 
-    @api.onchange("operating_unit_id")
-    def onchange_operating_unit_id(self):
-        if self.team_id and self.team_id.operating_unit_id != self.operating_unit_id:
-            self.team_id = False
+    @api.depends("operating_unit_id")
+    def _compute_team_id(self):
+        for record in self:
+            if (
+                record.team_id
+                and record.team_id.operating_unit_id != record.operating_unit_id
+            ):
+                record.team_id = False
 
     @api.constrains("team_id", "operating_unit_id")
     def _check_team_operating_unit(self):
