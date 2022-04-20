@@ -2,9 +2,12 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+import odoo.tests
+
 from . import test_account_operating_unit as test_ou
 
 
+@odoo.tests.tagged("post_install", "-at_install")
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
     def test_create_invoice_validate(self):
         """Create & Validate the invoice.
