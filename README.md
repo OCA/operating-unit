@@ -1,8 +1,9 @@
 
-[![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/operating-unit&target_branch=14.0)
-[![Build Status](https://travis-ci.com/OCA/operating-unit.svg?branch=14.0)](https://travis-ci.com/OCA/operating-unit)
-[![codecov](https://codecov.io/gh/OCA/operating-unit/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/operating-unit)
-[![Translation Status](https://translation.odoo-community.org/widgets/operating-unit-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/operating-unit-14-0/?utm_source=widget)
+<!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
+[![Pre-commit Status](https://github.com/https://github.com/OCA/operating-unit/operating-unit/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/https://github.com/OCA/operating-unit/operating-unit/actions/workflows/pre-commit.yml?query=branch%3A14.0)
+[![Build Status](https://github.com/https://github.com/OCA/operating-unit/operating-unit/actions/workflows/test.yml/badge.svg?branch=14.0)](https://github.com/https://github.com/OCA/operating-unit/operating-unit/actions/workflows/test.yml?query=branch%3A14.0)
+[![codecov](https://codecov.io/gh/https://github.com/OCA/operating-unit/operating-unit/branch/14.0/graph/badge.svg)](https://codecov.io/gh/https://github.com/OCA/operating-unit/operating-unit)
+<!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 
 <!-- /!\ do not modify above this line -->
 
@@ -61,6 +62,4 @@ policy. Consult each module's `__manifest__.py` file, which contains a `license`
 that explains its license.
 
 ----
-OCA, or the [Odoo Community Association](http://odoo-community.org/), is a nonprofit
-organization whose mission is to support the collaborative development of Odoo features
-and promote its widespread use.
+<!-- /!\ Non OCA Context : Set here the full description of your organization. -->
