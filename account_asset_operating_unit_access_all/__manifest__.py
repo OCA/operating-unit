@@ -13,5 +13,6 @@
         "security/account_asset_security.xml",
     ],
     "installable": True,
+    "development_status": "Alpha",
     "maintainers": ["ps-tubtim"],
 }
