@@ -13,7 +13,11 @@
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Sales Management",
-    "depends": ["sale", "account_operating_unit", "sales_team_operating_unit"],
+    "depends": [
+        "sale_management",
+        "account_operating_unit",
+        "sales_team_operating_unit",
+    ],
     "data": [
         "security/sale_security.xml",
         "views/sale_view.xml",
