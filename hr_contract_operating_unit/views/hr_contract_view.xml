@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
@@ -7,10 +7,13 @@
         <record id="hr_contract_view_search" model="ir.ui.view">
             <field name="name">hr.contract.view.search</field>
             <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_search" />
             <field name="arch" type="xml">
                 <field name="employee_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
                 </field>
             </field>
         </record>
@@ -18,11 +21,15 @@
         <record id="hr_contract_view_form" model="ir.ui.view">
             <field name="name">hr.contract.view.form</field>
             <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
             <field name="arch" type="xml">
                 <field name="job_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"
-                           domain="[('user_ids', 'in', uid)]" options="{'no_create': True}"/>
+                    <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    domain="[('user_ids', 'in', uid)]"
+                    options="{'no_create': True}"
+                />
                 </field>
             </field>
         </record>
@@ -30,10 +37,13 @@
         <record id="hr_contract_view_tree" model="ir.ui.view">
             <field name="name">hr.contract.view.tree</field>
             <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_tree" />
             <field name="arch" type="xml">
                 <field name="employee_id" position="after">
-                    <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+                    <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
                 </field>
             </field>
         </record>
