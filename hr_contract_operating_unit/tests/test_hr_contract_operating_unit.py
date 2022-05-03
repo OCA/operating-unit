@@ -1,5 +1,5 @@
-# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-19 ForgeFlow S.L.
+#   (http://www.forgeflow.com)
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
@@ -16,7 +16,6 @@ class TestHrContractOperatingUnit(common.TransactionCase):
         self.hr_employee_model = self.env["hr.employee"]
 
         self.company = self.env.ref("base.main_company")
-        self.contract_type = self.env.ref("hr_contract.hr_contract_type_emp")
         self.grp_hr_contract_manager = self.env.ref(
             "hr_contract.group_hr_contract_manager"
         )
@@ -81,7 +80,6 @@ class TestHrContractOperatingUnit(common.TransactionCase):
                 "name": "Sample Contract",
                 "operating_unit_id": operating_unit.id,
                 "employee_id": self.emp.id,
-                "type_id": self.contract_type.id,
                 "wage": "10000",
             }
         )
@@ -91,8 +89,15 @@ class TestHrContractOperatingUnit(common.TransactionCase):
         """Test Hr Contract Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Hr Contract records of Main Operating Unit.
-        record = self.hr_contract_model.sudo(self.user2.id).search(
-            [("id", "=", self.hr_contract1.id), ("operating_unit_id", "=", self.ou1.id)]
+        record = (
+            self.hr_contract_model.sudo()
+            .with_user(self.user2.id)
+            .search(
+                [
+                    ("id", "=", self.hr_contract1.id),
+                    ("operating_unit_id", "=", self.ou1.id),
+                ]
+            )
         )
         self.assertEqual(
             record.ids, [], "User 2 should not have access to " "OU %s" % self.ou1.name
