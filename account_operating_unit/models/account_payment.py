@@ -25,11 +25,13 @@ class AccountPayment(models.Model):
         res = super()._prepare_move_line_default_vals(write_off_line_vals)
         for line in res:
             line["operating_unit_id"] = self.operating_unit_id.id
-        invoices = self.env["account.move"].browse(self._context.get("active_ids"))
-        invoices_ou = invoices.operating_unit_id
-        if invoices and len(invoices_ou) == 1 and invoices_ou != self.operating_unit_id:
+        models = self.env[self._context.get("active_model", "account.move")]
+        active_ids = self._context.get("active_ids")
+        moves = models.browse(active_ids)
+        moves_ou = moves.operating_unit_id
+        if moves and len(moves_ou) == 1 and moves_ou != self.operating_unit_id:
             destination_account_id = self.destination_account_id.id
             for line in res:
                 if line["account_id"] == destination_account_id:
-                    line["operating_unit_id"] = invoices_ou.id
+                    line["operating_unit_id"] = moves_ou.id
         return res
