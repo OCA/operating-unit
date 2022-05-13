@@ -10,7 +10,7 @@
     "author": "ForgeFlow S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
-    "website": "https://odoo-community.org/",
+    "website": "https://github.com/OCA/operating-unit",
     "depends": ["operating_unit"],
     "data": ["views/report_qweb_operating_unit.xml"],
     "installable": True,
