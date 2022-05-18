@@ -47,6 +47,7 @@ addon | version | maintainers | summary
 [purchase_request_operating_unit_access_all](purchase_request_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Requests
 [purchase_requisition_operating_unit](purchase_requisition_operating_unit/) | 14.0.1.0.1 |  | Operating Unit in Purchase Requisitions
 [purchase_requisition_operating_unit_access_all](purchase_requisition_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Agreement
+[report_qweb_operating_unit](report_qweb_operating_unit/) | 14.0.1.0.0 |  | Qweb Report With Operating Unit
 [sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 |  | Sales Team Operating Unit
 [stock_operating_unit](stock_operating_unit/) | 14.0.1.0.2 |  | Adds the concept of operating unit (OU) in stock management
 [stock_operating_unit_access_all](stock_operating_unit_access_all/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Stock
