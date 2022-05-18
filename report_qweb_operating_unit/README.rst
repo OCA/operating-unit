@@ -59,7 +59,6 @@ Contributors
 * Jarsa Sistemas <info@jarsa.com.mx>
 * Juany Davila <juany.davila@forgeflow.com>
 
-
 Maintainers
 ~~~~~~~~~~~
 
