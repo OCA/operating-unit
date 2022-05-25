@@ -29,8 +29,8 @@ This module introduces the following features:
 
 * Adds the Operating Unit (OU) to the Employee.
 
-* The Employees's default Operating Unit (OU) is proposed at the time of creating
-  getting the logged user one.
+* The Employees's default Operating Unit (OU) is proposed at the time of creation
+  getting it from the logged user.
 
 
 **Table of contents**
@@ -59,13 +59,12 @@ Credits
 Authors
 ~~~~~~~
 
-* Gonzalo González Domí­nguez
+* Gonzalo González Domínguez
 
 Contributors
 ~~~~~~~~~~~~
 
 * Gonzalo González Domínguez <meigallo@meigallodixital.com>
-
 
 Maintainers
 ~~~~~~~~~~~
