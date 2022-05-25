@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo12-addon-fieldservice_operating_unit',
         'odoo12-addon-hr_contract_operating_unit',
         'odoo12-addon-hr_expense_operating_unit',
+        'odoo12-addon-hr_operating_unit',
         'odoo12-addon-hr_payroll_account_operating_unit',
         'odoo12-addon-mail_template_operating_unit',
         'odoo12-addon-mis_builder_budget_operating_unit',
