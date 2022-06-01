@@ -1,14 +1,14 @@
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# © 2016 Forgeflow S.L.
 # © 2016 Serpent Consulting Services Pvt. Ltd.
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Purchase Request to Call for Bids with Operating Units",
     "version": "14.0.1.0.0",
-    "author": "Eficent,"
+    "author": "Forgeflow,Ecosoft,"
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Purchase Management",
     "depends": [
