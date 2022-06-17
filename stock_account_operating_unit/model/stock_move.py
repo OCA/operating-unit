@@ -117,7 +117,8 @@ class StockMove(models.Model):
                                 "ref": move.picking_id and move.picking_id.name,
                                 "stock_move_id": move.id,
                             }
-                        ).with_company(move.location_id.company_id.id)
+                        )
+                        .with_company(move.location_id.company_id.id)
                     )
                     am.action_post()
             return res

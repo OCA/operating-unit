@@ -2,6 +2,8 @@
 # - Jordi Ballester Alomar
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from odoo.tests import Form
+
 from odoo.addons.stock.tests.common import TestStockCommon
 from odoo.tests import Form
 
@@ -175,8 +177,15 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         picking.action_confirm()
         picking.action_assign()
         res = picking.with_user(user_id).button_validate()
+<<<<<<< Updated upstream
         wiz = Form(self.env[res['res_model']].with_context(res['context']),
                    view=self.env.ref('stock.view_immediate_transfer')).save()
+=======
+        wiz = Form(
+            self.env[res["res_model"]].with_context(**res["context"]),
+            view=self.env.ref("stock.view_immediate_transfer"),
+        ).save()
+>>>>>>> Stashed changes
         wiz.process()
 
     def _check_account_balance(
