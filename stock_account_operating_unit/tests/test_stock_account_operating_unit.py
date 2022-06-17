@@ -2,6 +2,8 @@
 # - Jordi Ballester Alomar
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from odoo.tests import Form
+
 from odoo.addons.stock.tests.common import TestStockCommon
 
 
@@ -174,9 +176,11 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         picking.action_confirm()
         picking.action_assign()
         res = picking.with_user(user_id).button_validate()
-        validate_id = res["res_id"]
-        validate = self.env["stock.immediate.transfer"].browse(validate_id)
-        validate.process()
+        wiz = Form(
+            self.env[res["res_model"]].with_context(**res["context"]),
+            view=self.env.ref("stock.view_immediate_transfer"),
+        ).save()
+        wiz.process()
 
     def _check_account_balance(
         self, account_id, operating_unit=None, expected_balance=0.0
