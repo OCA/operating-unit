@@ -107,7 +107,6 @@ class StockMove(models.Model):
                     am = (
                         self.env["account.move"]
                         .with_context(
-                            force_company=move.location_id.company_id.id,
                             company_id=move.company_id.id,
                         )
                         .create(
@@ -119,6 +118,7 @@ class StockMove(models.Model):
                                 "stock_move_id": move.id,
                             }
                         )
+                        .with_company(move.location_id.company_id.id)
                     )
-                    am.post()
+                    am.action_post()
             return res
