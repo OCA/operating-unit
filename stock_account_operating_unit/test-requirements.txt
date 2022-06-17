@@ -1,0 +1,2 @@
+odoo15-addon-account_operating_unit @ git+https://github.com/OCA/operating-unit/pull/420/head#subdirectory=setup/account_operating_unit
+odoo15-addon-stock_operating_unit @ git+https://github.com/OCA/operating-unit/pull/439/head#subdirectory=setup/stock_operating_unit
