@@ -130,7 +130,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
             "active_model": "sale.order",
             "open_invoices": True,
         }
-        res = payment.with_context(sale_context).create_invoices()
+        res = payment.with_context(**sale_context).create_invoices()
         invoice_id = res["res_id"]
         return invoice_id
 
