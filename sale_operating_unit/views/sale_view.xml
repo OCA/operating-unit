@@ -11,7 +11,6 @@
             <field name="user_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -25,7 +24,6 @@
             <field name="user_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -40,7 +38,6 @@
                 <field
                     name="operating_unit_id"
                     widget="selection"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
