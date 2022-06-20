@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_stock_operating_unit
+# 	* sale_stock_operating_unit
 #
 msgid ""
 msgstr ""
@@ -17,9 +17,10 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: sale_stock_operating_unit
-#: code:addons/sale_stock_operating_unit/models/sale_order.py:64
+#: code:addons/sale_stock_operating_unit/models/sale_order.py:0
 #, python-format
-msgid "Configuration error!\n"
+msgid ""
+"Configuration error!\n"
 "The OperatingUnit in the Sales Order and in the Warehouse must be the same."
 msgstr ""
 "Errore di configurazione!\n"
@@ -28,13 +29,14 @@ msgstr ""
 
 #. module: sale_stock_operating_unit
 #: model:ir.model,name:sale_stock_operating_unit.model_sale_order
-msgid "Sale Order"
-msgstr "Ordine di Vendita"
+msgid "Sales Order"
+msgstr ""
 
 #. module: sale_stock_operating_unit
-#: code:addons/sale_stock_operating_unit/models/stock_warehouse.py:20
+#: code:addons/sale_stock_operating_unit/models/stock_warehouse.py:0
 #, python-format
-msgid "Sales Order records already exist(s) for this warehouse and operating unit."
+msgid ""
+"Sales Order records already exist(s) for this warehouse and operating unit."
 msgstr ""
 "Esistono già degli ordini di vendita per questo magazzino e Unità Operativa."
 
@@ -48,3 +50,6 @@ msgstr "Movimento di Magazzino"
 #: model:ir.model.fields,field_description:sale_stock_operating_unit.field_sale_order__warehouse_id
 msgid "Warehouse"
 msgstr "Magazzino"
+
+#~ msgid "Sale Order"
+#~ msgstr "Ordine di Vendita"
