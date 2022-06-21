@@ -34,5 +34,6 @@ class AccountPaymentRegister(models.TransientModel):
                     }
                 )
                 payment.action_post()
-                to_reconcile.reconcile()
+                if payment.state == 'posted':
+                    to_reconcile.reconcile()
         return payments
