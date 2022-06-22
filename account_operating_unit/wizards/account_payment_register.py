@@ -11,6 +11,7 @@ class AccountPaymentRegister(models.TransientModel):
         payments = super()._create_payments()
         if self.group_payment and len(payments) > 1:
             return payments
+        count = 0
         for payment in payments:
             to_reconcile = self.env["account.move.line"]
             reconciled_moves = (
@@ -33,7 +34,9 @@ class AccountPaymentRegister(models.TransientModel):
                         "operating_unit_id": reconciled_moves.operating_unit_id.id,
                     }
                 )
-                payment.action_post()
+                print("/222222222222222222222222222", count)
+                payment.with_context(count = count).action_post()
+                count += 1
                 if payment.state == 'posted':
                     to_reconcile.reconcile()
         return payments
