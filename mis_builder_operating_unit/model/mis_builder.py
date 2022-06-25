@@ -7,6 +7,12 @@
 from odoo import fields, models
 
 
+class MisReport(models.Model):
+    _inherit = "mis.report"
+
+    auto_expand_col_name = fields.Selection(selection_add=[('operating_unit_id', 'Operating Unit')], ondelete={'operating_unit_id': 'set default'})
+
+
 class MisReportInstance(models.Model):
 
     _inherit = "mis.report.instance"
