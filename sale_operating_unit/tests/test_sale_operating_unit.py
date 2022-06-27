@@ -122,7 +122,7 @@ class TestSaleOperatingUnit(common.TransactionCase):
         return sale
 
     def _confirm_sale(self, sale):
-        sale.action_confirm()
+        sale.sudo().action_confirm()
         payment = self.payment_model.create({"advance_payment_method": "delivered"})
         sale_context = {
             "active_id": sale.id,
