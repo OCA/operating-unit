@@ -23,7 +23,7 @@ HR Contract Operating Unit
     :target: https://runbot.odoo-community.org/runbot/213/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module introduces the following features:
 
@@ -52,7 +52,7 @@ Credits
 Authors
 ~~~~~~~
 
-* ForgeFlow S.L.
+* Forgeflow S.L.
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
@@ -61,7 +61,6 @@ Contributors
 * ForgeFlow S.L. <contact@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Juany Davila <juany.davila@forgeflow.com>
-
 
 Maintainers
 ~~~~~~~~~~~
