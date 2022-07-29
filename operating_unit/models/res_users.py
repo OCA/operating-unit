@@ -61,6 +61,22 @@ class ResUsers(models.Model):
             else:
                 user.operating_unit_ids = user.assigned_operating_unit_ids
 
+    @api.model
+    def default_get(self, fields):
+        vals = super(ResUsers, self).default_get(fields)
+        if (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("base_setup.default_user_rights", "False")
+            == "True"
+        ):
+            default_user = self.env.ref("base.default_user")
+            vals[
+                "default_operating_unit_id"
+            ] = default_user.default_operating_unit_id.id
+            vals["operating_unit_ids"] = [(6, 0, default_user.operating_unit_ids.ids)]
+        return vals
+
     def _inverse_operating_unit_ids(self):
         for user in self:
             user.assigned_operating_unit_ids = user.operating_unit_ids
