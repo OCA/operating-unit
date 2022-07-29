@@ -3,6 +3,7 @@
 
 from odoo.exceptions import AccessError
 from odoo.tests import common
+from odoo.tests.common import Form
 
 
 class TestOperatingUnit(common.TransactionCase):
@@ -105,4 +106,17 @@ class TestOperatingUnit(common.TransactionCase):
             operating_unit_list_2[0],
             "B2C",
             "User 2 should have access to " "%s" % self.b2c.name,
+        )
+
+    def test_02_operating_unit(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "base_setup.default_user_rights", "True"
+        )
+        user_form = Form(self.env["res.users"])
+        user_form.name = "Test Customer"
+        user_form.login = "test"
+        user = user_form.save()
+        default_user = self.env.ref("base.default_user")
+        self.assertEqual(
+            user.default_operating_unit_id, default_user.default_operating_unit_id
         )
