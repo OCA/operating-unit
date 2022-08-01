@@ -81,7 +81,7 @@ class ProductTemplate(models.Model):
                         err_msg,
                         self.env.ref("product.product_category_action_form").id,
                         redir_msg,
-                    )
+                    ) from AccessError
                 return super()._get_default_category_id()
 
     categ_id = fields.Many2one(
