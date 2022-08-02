@@ -1,5 +1,4 @@
-# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-19 ForgeFlow S.L.
 # Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
