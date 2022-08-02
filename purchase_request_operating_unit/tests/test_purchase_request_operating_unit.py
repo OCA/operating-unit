@@ -1,13 +1,13 @@
-# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-19 ForgeFlow S.L.
 # Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests import common
+from odoo.exceptions import ValidationError
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestPurchaseRequestOperatingUnit(common.TransactionCase):
+class TestPurchaseRequestOperatingUnit(TransactionCase):
     def setUp(self):
         super().setUp()
         # Models
@@ -16,6 +16,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self.purchase_request_line = self.env["purchase.request.line"]
         # Company
         self.company = self.env.ref("base.main_company")
+        self.company2 = self.env["res.company"].create({"name": "Test Company"})
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
@@ -31,7 +32,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         )
         # Picking Type
         b2c_wh = self.env.ref("stock_operating_unit.stock_warehouse_b2c")
-        self.b2c_type_in_id = b2c_wh.in_type_id.id
+        self.b2c_type_in = b2c_wh.in_type_id
         self.picking_type = self.env.ref("stock.picking_type_in")
 
         # Creates Users and Purchase request
@@ -41,7 +42,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         )
         self.request1 = self._create_purchase_request(self.ou1)
         self._purchase_line(self.request1)
-        self.request2 = self._create_purchase_request(self.b2c, self.b2c_type_in_id)
+        self.request2 = self._create_purchase_request(self.b2c, self.b2c_type_in.id)
         self._purchase_line(self.request2)
 
     def _create_user(self, login, groups, company, operating_units, context=None):
@@ -72,23 +73,14 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         )
         return line
 
-    def _create_purchase_request(self, operating_unit, picking_type=False):
-        if picking_type:
-            purchase_request = self.purchase_request.create(
-                {
-                    "assigned_to": self.user_root.id,
-                    "picking_type_id": self.b2c_type_in_id,
-                    "operating_unit_id": operating_unit.id,
-                }
-            )
-        else:
-            purchase_request = self.purchase_request.create(
-                {
-                    "assigned_to": self.user_root.id,
-                    "picking_type_id": self.picking_type.id,
-                    "operating_unit_id": operating_unit.id,
-                }
-            )
+    def _create_purchase_request(self, operating_unit, picking_type_id=False):
+        purchase_request = self.purchase_request.create(
+            {
+                "assigned_to": self.user_root.id,
+                "picking_type_id": picking_type_id or self.picking_type.id,
+                "operating_unit_id": operating_unit.id,
+            }
+        )
         return purchase_request
 
     def test_purchase_request(self):
@@ -98,3 +90,19 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self.assertEqual(
             record.ids, [], "User 2 should not have access to OU %s" % self.ou1.name
         )
+
+        # Check company in OU and operating unit must be equal
+        with self.assertRaises(ValidationError):
+            with Form(self.request1) as pr:
+                pr.company_id = self.company2
+
+        # Check OU in picking type and operating unit must be equal
+        with self.assertRaises(ValidationError):
+            with Form(self.request1) as pr:
+                pr.picking_type_id = self.b2c_type_in
+
+        # Check OU in assigned_to and operating unit must be equal
+        with self.assertRaises(ValidationError):
+            with Form(self.request1) as pr:
+                pr.assigned_to = self.user2
+                pr.operating_unit_id = self.ou1

@@ -1,5 +1,4 @@
-# Copyright 2016-19 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2016-19 ForgeFlow S.L.
 # Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
@@ -50,9 +49,11 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
         return res
 
     @api.model
-    def _prepare_purchase_order(self, picking_type, location, company_id, origin):
+    def _prepare_purchase_order(
+        self, picking_type, group_id, company, currency, origin
+    ):
         data = super()._prepare_purchase_order(
-            picking_type, location, company_id, origin
+            picking_type, group_id, company, currency, origin
         )
         if self.operating_unit_id:
             data["requesting_operating_unit_id"] = self.operating_unit_id.id
