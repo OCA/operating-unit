@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="pos_order_operating_unit_view_tree" model="ir.ui.view">
+        <field name="name">pos.order.operating.unit.view.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="operating_unit_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record id="pos_order_operating_unit_view_search" model="ir.ui.view">
+        <field name="name">pos.order.operating.unit.view.search</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='session_id']" position="after">
+                <field name="operating_unit_id" />
+            </xpath>
+            <xpath expr="//filter[@name='order_month']" position="after">
+                <filter
+                    name="operating_unit"
+                    string="Operating Unit"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="pos_order_operating_unit_view_form" model="ir.ui.view">
+        <field name="name">pos.order.operating.unit.view.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="operating_unit_id" options="{'no_create': True}" />
+            </xpath>
+            <xpath
+                expr="//field[@name='lines']/tree/field[@name='qty']"
+                position="before"
+            >
+                <field name="operating_unit_id" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='lines']/form/group" position="inside">
+                <field name="operating_unit_id" options="{'no_create': True}" />
+            </xpath>
+            <xpath
+                expr="//field[@name='payment_ids']/tree/field[@name='payment_date']"
+                position="after"
+            >
+                <field name="operating_unit_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

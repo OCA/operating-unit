@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="pos_config_operating_unit_view_tree" model="ir.ui.view">
+        <field name="name">pos.config.operating.unit.view.tree</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="operating_unit_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record id="pos_config_operating_unit_view_search" model="ir.ui.view">
+        <field name="name">pos.config.operating.unit.view.search</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="operating_unit_id" />
+                <filter
+                    name="operating_unit"
+                    string="Operating Unit"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="pos_config_operating_unit_view_form" model="ir.ui.view">
+        <field name="name">pos.config.operating.unit.view.form</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='company']" position="after">
+                <div
+                    id="operating_unit"
+                    class="col-12 col-lg-6 o_setting_box"
+                    groups="operating_unit.group_multi_operating_unit"
+                >
+                    <div class="o_setting_right_pane">
+                        <label for="operating_unit_id" />
+                        <div>
+                            <field
+                                name="operating_unit_id"
+                                options="{'no_create': True}"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
