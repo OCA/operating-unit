@@ -3,6 +3,7 @@
 
 import time
 
+from odoo import fields
 from odoo.tests import common
 
 
@@ -65,6 +66,13 @@ class TestAccountAssetOperatingUnit(common.TransactionCase):
         self.journal_purchase = self.env["account.journal"].search(
             [("company_id", "=", self.company.id), ("type", "=", "purchase")], limit=1
         )
+        # Asset Group
+        self.asset_group_id = self.env["account.asset.group"].create(
+            {
+                "name": "Fixed Assets",
+                "code": "FA",
+            }
+        )
         # Asset Profile
         self.profile_id = self.env["account.asset.profile"].create(
             {
@@ -76,6 +84,7 @@ class TestAccountAssetOperatingUnit(common.TransactionCase):
                 "method_time": "year",
                 "method_number": 3,
                 "method_period": "year",
+                "group_ids": [(6, 0, [self.asset_group_id.id])],
             }
         )
         self.asset1 = self._create_asset(self.user1.id, self.main_OU)
@@ -129,3 +138,27 @@ class TestAccountAssetOperatingUnit(common.TransactionCase):
             "User 2 should not have access to %s" % self.main_OU.name,
         )
         self.assertEqual(self.asset1.operating_unit_id.id, self.main_OU.id)
+
+    def test_asset_report(self):
+        fy_dates = self.env.company.compute_fiscalyear_dates(fields.date.today())
+        wizard = self.env["wiz.account.asset.report"].create(
+            {
+                "asset_group_id": self.asset_group_id.id,
+                "date_from": fy_dates["date_from"],
+                "date_to": fy_dates["date_to"],
+                "operating_unit_id": self.main_OU.id,
+            }
+        )
+        report_action = wizard.xls_export()
+        self.assertGreaterEqual(
+            report_action.items(),
+            {
+                "type": "ir.actions.report",
+                "report_type": "xlsx",
+                "report_name": "account_asset_management.asset_report_xls",
+            }.items(),
+        )
+        model = self.env["report.%s" % report_action["report_name"]].with_context(
+            active_model=wizard._name, **report_action["context"]
+        )
+        model.create_xlsx_report(wizard.ids, data=report_action["data"])
