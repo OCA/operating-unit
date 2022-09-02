@@ -4,7 +4,7 @@
     "author": "Ilyas, Ooops404, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Point of sale",
-    "depends": ["point_of_sale", "operating_unit"],
+    "depends": ["point_of_sale", "operating_unit_access_all"],
     "license": "LGPL-3",
     "data": [
         "security/pos_security.xml",
