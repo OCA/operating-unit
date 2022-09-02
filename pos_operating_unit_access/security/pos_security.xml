@@ -5,7 +5,10 @@
         <field name="domain_force">['|', ('operating_unit_ids', '=', False),
             ('operating_unit_ids', 'in', user.operating_unit_ids.ids)]</field>
         <field name="name">POS Config allowed operating units</field>
-        <field name="global" eval="True" />
+        <field name="groups" eval="[
+                (4, ref('point_of_sale.group_pos_manager')),
+                (4, ref('point_of_sale.group_pos_user')),
+            ]"/>
         <field eval="1" name="perm_unlink" />
         <field eval="1" name="perm_write" />
         <field eval="1" name="perm_read" />
