@@ -28,7 +28,9 @@ class ResUsers(models.Model):
         comodel_name="operating.unit",
         compute="_compute_operating_unit_ids",
         inverse="_inverse_operating_unit_ids",
+        string="Allowed Operating Units",
     )
+
     assigned_operating_unit_ids = fields.Many2many(
         comodel_name="operating.unit",
         relation="operating_unit_users_rel",
@@ -43,6 +45,16 @@ class ResUsers(models.Model):
         string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
     )
+
+    @api.onchange("operating_unit_ids")
+    def _onchange_operating_unit_ids(self):
+        for record in self:
+            if (
+                record.default_operating_unit_id
+                and record.default_operating_unit_id
+                not in record.operating_unit_ids._origin
+            ):
+                record.default_operating_unit_id = False
 
     @api.depends("groups_id", "assigned_operating_unit_ids")
     def _compute_operating_unit_ids(self):
