@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-account_asset_operating_unit_access_all',
         'odoo14-addon-account_financial_report_operating_unit',
         'odoo14-addon-account_operating_unit',
+        'odoo14-addon-account_operating_unit_access_all',
         'odoo14-addon-agreement_operating_unit',
         'odoo14-addon-analytic_operating_unit',
         'odoo14-addon-analytic_operating_unit_access_all',
