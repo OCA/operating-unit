@@ -1,4 +1,4 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 ForgeFlow S.L.
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
@@ -11,7 +11,6 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    @api.multi
     @api.constrains("operating_unit_id")
     def check_payslips_ou(self):
         for move in self:

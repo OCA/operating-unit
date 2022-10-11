@@ -1,4 +1,4 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 ForgeFlow S.L.
 #   (http://www.eficent.com)
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
@@ -18,7 +18,7 @@ class TestPayrollAccountOperatingUnit(TestHrContractOperatingUnit):
         self.acc_move_model = self.env["account.move"]
         self.acc_journal_model = self.env["account.journal"]
 
-        self.hr_payroll_struct = self.env.ref("hr_payroll.structure_base")
+        self.hr_payroll_struct = self.env.ref("payroll.structure_base")
         cash_account = (
             self.env["account.account"]
             .search(

@@ -1,4 +1,4 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 ForgeFlow S.L.
 #   (http://www.eficent.com)
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
@@ -14,7 +14,7 @@
     "category": "Generic Modules/Human Resources",
     "website": "https://github.com/OCA/operating-unit",
     "depends": [
-        "hr_payroll_account",
+        "payroll_account",
         "hr_contract_operating_unit",
         "account_operating_unit",
     ],
