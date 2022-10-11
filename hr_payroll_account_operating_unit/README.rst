@@ -23,7 +23,7 @@ HR Payroll Account Operating Unit
     :target: https://runbot.odoo-community.org/runbot/213/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module introduces the following features:
 
@@ -50,13 +50,13 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent Business and IT Consulting Services S.L.
+* ForgeFlow S.L.
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
 ~~~~~~~~~~~~
 
-* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+* ForgeFlow S.L. <contact@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 
 Maintainers
