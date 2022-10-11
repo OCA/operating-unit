@@ -1,8 +1,8 @@
-# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 ForgeFlow S.L.
 # Copyright 2016-17 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class HrPayslip(models.Model):
@@ -11,7 +11,6 @@ class HrPayslip(models.Model):
 
     operating_unit_id = fields.Many2one(related="contract_id.operating_unit_id")
 
-    @api.multi
     def write(self, vals):
         res = super(HrPayslip, self).write(vals)
         if vals.get("move_id", False):
