@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 14.0.1.0.0 |  | HR Expense Operating Unit
 [hr_expense_operating_unit_access_all](hr_expense_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Expenses
 [hr_operating_unit](hr_operating_unit/) | 14.0.1.1.0 |  | HR Operating Unit
+[hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 14.0.1.0.0 |  | HR Payroll Account Operating Unit
 [mis_builder_budget_operating_unit](mis_builder_budget_operating_unit/) | 14.0.1.0.0 |  | MIS Builder Budget with Operating Unit
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 14.0.1.0.0 |  | MIS Builder with Operating Unit
 [mis_builder_operating_unit_access_all](mis_builder_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' MIS Builder
