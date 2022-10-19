@@ -137,3 +137,4 @@ class TestOperatingUnit(common.TransactionCase):
                 line.code = "007"
             user_form.name = "Test Customer"
             user_form.login = "test2"
+
