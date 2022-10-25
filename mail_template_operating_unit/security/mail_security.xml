@@ -1,0 +1,17 @@
+<!-- Copyright 2020 Pavlov Media
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="ir_rule_mail_template_operating_unit" model="ir.rule">
+        <field name="model_id" ref="mail.model_mail_template" />
+        <field
+            name="domain_force"
+        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in',user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Mail Template Operating Unit</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<!-- Copyright 2020 Pavlov Media
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+        <record id="email_template_operating_unit_view_form" model="ir.ui.view">
+        <field name="name">Email Template Form</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form" />
+        <field name="arch" type="xml">
+            <field name="scheduled_date" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    options="{'no_create': True}"
+                />
+                </field>
+            </field>
+        </record>
+
+        <record id="email_template_operating_unit_view_tree" model="ir.ui.view">
+            <field name="name">Email Templates</field>
+            <field name="model">mail.template</field>
+            <field name="inherit_id" ref="mail.email_template_tree" />
+            <field name="arch" type="xml">
+                <field name="report_name" position="after">
+                    <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+                </field>
+            </field>
+        </record>
+</odoo>
