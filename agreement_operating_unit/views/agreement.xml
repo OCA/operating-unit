@@ -1,0 +1,17 @@
+<odoo>
+    <!-- Copyright (C) 2021 Open Source Integrators
+    Copyright (C) 2021 Serpent Consulting Services
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+    <record id="view_agreement_form_inherit" model="ir.ui.view">
+        <field name="name">agreement.form</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement.agreement_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

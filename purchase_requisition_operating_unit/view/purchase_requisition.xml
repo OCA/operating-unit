@@ -36,7 +36,6 @@
                         groups="operating_unit.group_multi_operating_unit"
                         options="{'no_create': True}"
                     />
-                    <field name="picking_type_id" />
                 </field>
                 <xpath expr="//field[@name='line_ids']" position="attributes">
                     <attribute

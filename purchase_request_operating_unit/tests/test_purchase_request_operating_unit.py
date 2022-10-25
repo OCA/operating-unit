@@ -45,7 +45,7 @@ class TestPurchaseRequestOperatingUnit(common.TransactionCase):
         self._purchase_line(self.request2)
 
     def _create_user(self, login, groups, company, operating_units, context=None):
-        """ Create a user. """
+        """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create(
             {

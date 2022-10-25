@@ -29,7 +29,9 @@ class ResUsers(models.Model):
         compute="_compute_operating_unit_ids",
         inverse="_inverse_operating_unit_ids",
         compute_sudo=True,
+        string="Allowed Operating Units",
     )
+
     assigned_operating_unit_ids = fields.Many2many(
         comodel_name="operating.unit",
         relation="operating_unit_users_rel",
@@ -46,6 +48,16 @@ class ResUsers(models.Model):
         domain="[('company_id', '=', current_company_id)]",
         company_dependent=True
     )
+
+    @api.onchange("operating_unit_ids")
+    def _onchange_operating_unit_ids(self):
+        for record in self:
+            if (
+                record.default_operating_unit_id
+                and record.default_operating_unit_id
+                not in record.operating_unit_ids._origin
+            ):
+                record.default_operating_unit_id = False
 
     @api.depends("groups_id", "assigned_operating_unit_ids")
     def _compute_operating_unit_ids(self):
@@ -64,6 +76,23 @@ class ResUsers(models.Model):
             else:
                 user.operating_unit_ids = user.assigned_operating_unit_ids
 
+    @api.model
+    def default_get(self, fields):
+        vals = super(ResUsers, self).default_get(fields)
+        if (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("base_setup.default_user_rights", "False")
+            == "True"
+        ):
+            default_user = self.env.ref("base.default_user")
+            vals[
+                "default_operating_unit_id"
+            ] = default_user.default_operating_unit_id.id
+            vals["operating_unit_ids"] = [(6, 0, default_user.operating_unit_ids.ids)]
+        return vals
+
     def _inverse_operating_unit_ids(self):
         for user in self:
             user.assigned_operating_unit_ids = user.operating_unit_ids
+        self.clear_caches()
