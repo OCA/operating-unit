@@ -40,6 +40,7 @@ setuptools.setup(
         'odoo14-addon-purchase_requisition_operating_unit',
         'odoo14-addon-purchase_requisition_operating_unit_access_all',
         'odoo14-addon-report_qweb_operating_unit',
+        'odoo14-addon-sale_operating_unit',
         'odoo14-addon-sales_team_operating_unit',
         'odoo14-addon-stock_operating_unit',
         'odoo14-addon-stock_operating_unit_access_all',
