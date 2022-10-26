@@ -80,3 +80,4 @@ class ResUsers(models.Model):
     def _inverse_operating_unit_ids(self):
         for user in self:
             user.assigned_operating_unit_ids = user.operating_unit_ids
+        self.clear_caches()
