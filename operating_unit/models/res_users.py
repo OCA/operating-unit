@@ -46,7 +46,7 @@ class ResUsers(models.Model):
         string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
-        company_dependent=True
+        company_dependent=True,
     )
 
     @api.onchange("operating_unit_ids")
