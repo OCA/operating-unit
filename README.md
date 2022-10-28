@@ -50,6 +50,7 @@ addon | version | maintainers | summary
 [purchase_operating_unit_access_all](purchase_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Orders
 [purchase_request_operating_unit](purchase_request_operating_unit/) | 14.0.1.0.0 |  | Operating Unit in Purchase Requests
 [purchase_request_operating_unit_access_all](purchase_request_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Requests
+[purchase_request_to_requisition_operating_unit](purchase_request_to_requisition_operating_unit/) | 14.0.1.0.0 |  | Purchase Request to Call for Bids with Operating Units
 [purchase_requisition_operating_unit](purchase_requisition_operating_unit/) | 14.0.1.0.1 |  | Operating Unit in Purchase Requisitions
 [purchase_requisition_operating_unit_access_all](purchase_requisition_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Agreement
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 14.0.1.0.0 |  | Qweb Report With Operating Unit
