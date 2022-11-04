@@ -39,7 +39,7 @@ class TestProject(common.TransactionCase):
         self.task2 = self._create_task(self.user2, self.project2)
 
     def _create_user(self, login, groups, company, operating_units):
-        """ Create a user. """
+        """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.res_users_model.create(
             {
