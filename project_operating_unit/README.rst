@@ -46,7 +46,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/operating-unit/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/operating-unit/issues/new?body=module:%20project_operating_unit%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/operating-unit/issues/new?body=module:%20project_operating_unit%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -93,6 +93,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-max3903| 
 
-This module is part of the `OCA/operating-unit <https://github.com/OCA/operating-unit/tree/12.0/project_operating_unit>`_ project on GitHub.
+This module is part of the `OCA/operating-unit <https://github.com/OCA/operating-unit/tree/14.0/project_operating_unit>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
