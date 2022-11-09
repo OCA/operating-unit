@@ -1,0 +1,48 @@
+# © 2016 Forgeflow S.L.
+# © 2016 Serpent Consulting Services Pvt. Ltd.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import SUPERUSER_ID
+from odoo.tests import common
+
+
+class TestPurchaseRequestToRequisition(common.TransactionCase):
+    def setUp(self):
+        super(TestPurchaseRequestToRequisition, self).setUp()
+        self.purchase_request = self.env["purchase.request"]
+        self.purchase_request_line_obj = self.env["purchase.request.line"]
+        self.wiz = self.env["purchase.request.line.make.purchase.requisition"]
+        self.purchase_order = self.env["purchase.order"]
+        # Main Operating Unit
+        self.ou1 = self.env.ref("operating_unit.main_operating_unit")
+        # Products
+        self.product1 = self.env.ref("product.product_product_9")
+        self._create_purchase_request()
+
+    def _create_purchase_request(self):
+        vals = {
+            "picking_type_id": self.env.ref("stock.picking_type_in").id,
+            "requested_by": SUPERUSER_ID,
+            "operating_unit_id": self.ou1.id,
+        }
+        purchase_request = self.purchase_request.create(vals)
+        vals = {
+            "request_id": purchase_request.id,
+            "product_id": self.product1.id,
+            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+            "product_qty": 5.0,
+        }
+        self.purchase_request_line = self.purchase_request_line_obj.create(vals)
+
+    def test_purchase_request_to_purchase_requisition(self):
+        wiz = self.wiz.with_context(
+            active_model="purchase.request.line",
+            active_ids=[self.purchase_request_line.id],
+            active_id=self.purchase_request_line.id,
+        ).create({})
+        wiz.make_purchase_requisition()
+        requisition_id = self.purchase_request_line.requisition_lines.requisition_id
+        self.assertEqual(
+            requisition_id.operating_unit_id,
+            self.purchase_request_line.operating_unit_id,
+            "Should have the same Operating Unit",
+        )

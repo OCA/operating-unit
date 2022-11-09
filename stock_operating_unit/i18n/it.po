@@ -1,0 +1,192 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_operating_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-01-28 16:31+0000\n"
+"Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_warehouse.py:0
+#, python-format
+msgid ""
+"Configuration Error. The Operating Unit of the Warehouse and the Location "
+"must be the same. "
+msgstr ""
+"Errore di Configurazione. l'Unità operativa del Magazzino e dell'ubicazione "
+"devono essere uguali. "
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_location.py:0
+#, python-format
+msgid ""
+"Configuration error. The Company in the Stock Location and in the Operating "
+"Unit must be the same."
+msgstr ""
+"Errore di Configurazione. L'Azienda nell'ubicazione di giacenza e nell'Unità "
+"Operativa devono essere uguali."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_picking.py:0
+#, python-format
+msgid ""
+"Configuration error. The Company in the Stock Picking and in the Operating "
+"Unit must be the same."
+msgstr ""
+"Errore di Configurazione. L'Azienda nel Magazzino di Prelievo e nell'Unità "
+"Operativa devono essere uguali."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_warehouse.py:0
+#, python-format
+msgid ""
+"Configuration error. The Company in the Stock Warehouse and in the Operating"
+" Unit must be the same."
+msgstr ""
+"Errore di Configurazione. L'Azienda nel Magazzino di Stoccaggio e nell'Unità "
+"Operativa devono essere uguali."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_picking.py:0
+#, python-format
+msgid ""
+"Configuration error. The Operating Unit of the picking must be the same as "
+"that of the warehouse of the Picking Type."
+msgstr ""
+"Errore di Configurazione. L'unità operativa del prelievo deve essere la "
+"stessa come quella del magazzino della Tipologia prelievo."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_location.py:0
+#, python-format
+msgid ""
+"Configuration error. The Parent Stock Location must belong to the same "
+"Operating Unit."
+msgstr ""
+"Errore di Configurazione. L'ubicazione del Magazzino Principale deve "
+"appartenere alla stessa Unità Operativa."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_move.py:0
+#, python-format
+msgid ""
+"Configuration error. The Stock moves must be related to a location (source "
+"or destination) that belongs to the requesting Operating Unit."
+msgstr ""
+"Errore di configurazione. i movimento di magazzino devono essere relazionati "
+"all'ubicazione (origine o destinazione) che appartiene all'Unità Operativa "
+"richiedente."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_location.py:0
+#: code:addons/stock_operating_unit/model/stock_location.py:0
+#, python-format
+msgid ""
+"Configuration error. The operating unit should be assigned to internal "
+"locations only."
+msgstr ""
+"Errore di Configurazione. L'Unità Operativa dovrebbe essere assegnata solo a "
+"ubicazioni interne."
+
+#. module: stock_operating_unit
+#: code:addons/stock_operating_unit/model/stock_location.py:0
+#, python-format
+msgid ""
+"Configuration error. This location is assigned to a warehouse that belongs "
+"to a different operating unit."
+msgstr ""
+"Errore di Configurazione. Questa ubicazione è assegnata ad un magazzino che "
+"appartiene a diverse unità operative."
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_dest_id
+msgid "Dest. Location Operating Unit"
+msgstr "Unità Operativa dell'ubicazione di Destinazione"
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__display_name
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_rule__display_name
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__display_name
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse_orderpoint__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_rule__id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse_orderpoint__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicazione d'inventario"
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move____last_update
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_rule____last_update
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse____last_update
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse_orderpoint____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regola minima dell'Inventario"
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__operating_unit_id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_rule__operating_unit_id
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__operating_unit_id
+#: model_terms:ir.ui.view,arch_db:stock_operating_unit.view_picking_internal_search
+msgid "Operating Unit"
+msgstr "Unità operativa"
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__operating_unit_id
+msgid "Requesting Operating Unit"
+msgstr "Unità Operativa Richiedente"
+
+#. module: stock_operating_unit
+#: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_id
+msgid "Source Location Operating Unit"
+msgstr "Unità Operativa dell'ubicazione Sorgente"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento scorte"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_stock_rule
+msgid "Stock Rule"
+msgstr "Regole Scorte"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: stock_operating_unit
+#: model:ir.model,name:stock_operating_unit.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Magazzino"

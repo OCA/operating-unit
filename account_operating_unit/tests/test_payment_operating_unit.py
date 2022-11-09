@@ -4,9 +4,12 @@
 
 import time
 
+import odoo.tests
+
 from . import test_account_operating_unit as test_ou
 
 
+@odoo.tests.tagged("post_install", "-at_install")
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
     def test_payment_from_invoice(self):
         """Create and invoice and a subsquent payment, in another OU"""
@@ -38,7 +41,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.assertEqual(self.invoice.payment_state, "paid")
 
     def test_payment_from_two_invoices(self):
-        """ Create two invoices of different OU and payment from a third OU"""
+        """Create two invoices of different OU and payment from a third OU"""
 
         # Create invoices for B2B and B2C operating units
         to_create = [

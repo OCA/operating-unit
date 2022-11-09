@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     Copyright 2017 Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <template
+        id="external_layout_standard_ou"
+        inherit_id="web.external_layout_standard"
+    >
+        <xpath expr="//img" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <img
+                    t-if="o.operating_unit_id.partner_id.image_1920"
+                    t-att-src="image_data_uri(o.operating_unit_id.partner_id.image_1920)"
+                    style="max-height: 45px;"
+                    alt="Logo"
+                />
+            </t>
+            <t t-else="">
+                <img
+                    t-if="company.logo"
+                    t-att-src="image_data_uri(company.logo)"
+                    style="max-height: 45px;"
+                    alt="Logo"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('col-6')]" position="replace">
+            <div class="col-6" name="company_address">
+                <t t-if="'operating_unit_id' in o.fields_get()">
+                    <div
+                        t-field="o.operating_unit_id.partner_id"
+                        t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"
+                    />
+                </t>
+                <t t-else="">
+                    <div
+                        t-field="company.partner_id"
+                        t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"
+                    />
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//ul[hasclass('list-inline')]" position="replace">
+            <ul class="list-inline mb4">
+                <t t-if="'operating_unit_id' in o.fields_get()">
+                    <li
+                        t-if="o.operating_unit_id.partner_id.phone"
+                        class="list-inline-item d-inline"
+                    >Phone: <span t-field="o.operating_unit_id.partner_id.phone" /></li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.email"
+                        class="list-inline-item d-inline"
+                    >Email: <span t-field="o.operating_unit_id.partner_id.email" /></li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.website"
+                        class="list-inline-item d-inline"
+                    >Web: <span t-field="o.operating_unit_id.partner_id.website" /></li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.vat"
+                        class="list-inline-item d-inline"
+                    ><t
+                            t-esc="o.operating_unit_id.partner_id.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="o.operating_unit_id.partner_id.vat" /></li>
+                </t>
+                <t t-else="">
+                    <li
+                        t-if="company.phone"
+                        class="list-inline-item d-inline"
+                    >Phone: <span t-field="company.phone" /></li>
+                    <li
+                        t-if="company.email"
+                        class="list-inline-item d-inline"
+                    >Email: <span t-field="company.email" /></li>
+                    <li
+                        t-if="company.website"
+                        class="list-inline-item d-inline"
+                    >Web: <span t-field="company.website" /></li>
+                    <li t-if="company.vat" class="list-inline-item d-inline"><t
+                            t-esc="company.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="company.vat" /></li>
+                </t>
+            </ul>
+        </xpath>
+    </template>
+    <template
+        id="external_layout_background_ou"
+        inherit_id="web.external_layout_background"
+    >
+        <xpath expr="//img[hasclass('float-left')]" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <img
+                    t-if="o.operating_unit_id.partner_id.image_1920"
+                    t-att-src="image_data_uri(o.operating_unit_id.partner_id.image_1920)"
+                    class="float-left"
+                    alt="Logo"
+                />
+            </t>
+            <t t-else="">
+                <img
+                    t-if="company.logo"
+                    t-att-src="image_data_uri(company.logo)"
+                    class="float-left"
+                    alt="Logo"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//strong" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <strong t-field="o.operating_unit_id.partner_id.name" />
+            </t>
+            <t t-else="">
+                <strong t-field="company.partner_id.name" />
+            </t>
+        </xpath>
+        <xpath expr="//span[1]" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <span
+                    t-field="o.operating_unit_id.partner_id"
+                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"
+                />
+            </t>
+            <t t-else="">
+                <span
+                    t-field="company.partner_id"
+                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//ul[hasclass('list-inline')]" position="replace">
+            <ul class="list-inline">
+                <t t-if="'operating_unit_id' in o.fields_get()">
+                    <li
+                        t-if="o.operating_unit_id.partner_id.phone"
+                        class="list-inline-item"
+                    >
+                        <i
+                            class="fa fa-phone"
+                            role="img"
+                            aria-label="Phone"
+                            title="Phone"
+                        />
+                        <span t-field="o.operating_unit_id.partner_id.phone" />
+                    </li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.email"
+                        class="list-inline-item"
+                    >
+                        <i
+                            class="fa fa-at"
+                            role="img"
+                            aria-label="Email"
+                            title="Email"
+                        />
+                        <span t-field="o.operating_unit_id.partner_id.email" />
+                    </li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.website"
+                        class="list-inline-item"
+                    >
+                        <i
+                            class="fa fa-globe"
+                            role="img"
+                            aria-label="Website"
+                            title="Website"
+                        />
+                        <span t-field="o.operating_unit_id.partner_id.website" />
+                    </li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.vat"
+                        class="list-inline-item"
+                    ><i
+                            class="fa fa-building-o"
+                            role="img"
+                            aria-label="Fiscal number"
+                        /><t
+                            t-esc="o.operating_unit_id.partner_id.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="o.operating_unit_id.partner_id.vat" /></li>
+                </t>
+                <t t-else="">
+                    <li t-if="company.phone" class="list-inline-item">
+                        <i
+                            class="fa fa-phone"
+                            role="img"
+                            aria-label="Phone"
+                            title="Phone"
+                        />
+                        <span t-field="company.phone" />
+                    </li>
+                    <li t-if="company.email" class="list-inline-item">
+                        <i
+                            class="fa fa-at"
+                            role="img"
+                            aria-label="Email"
+                            title="Email"
+                        />
+                        <span t-field="company.email" />
+                    </li>
+                    <li t-if="company.website" class="list-inline-item">
+                        <i
+                            class="fa fa-globe"
+                            role="img"
+                            aria-label="Website"
+                            title="Website"
+                        />
+                        <span t-field="company.website" />
+                    </li>
+                    <li t-if="company.vat" class="list-inline-item"><i
+                            class="fa fa-building-o"
+                            role="img"
+                            aria-label="Fiscal number"
+                        /><t t-esc="company.country_id.vat_label or 'Tax ID'" />: <span
+                            t-field="company.vat"
+                        /></li>
+                </t>
+            </ul>
+        </xpath>
+    </template>
+    <template id="external_layout_boxed_ou" inherit_id="web.external_layout_boxed">
+        <xpath expr="//img" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <img
+                    t-if="o.operating_unit_id.partner_id.image_1920"
+                    t-att-src="image_data_uri(o.operating_unit_id.partner_id.image_1920)"
+                    alt="Logo"
+                />
+            </t>
+            <t t-else="">
+                <img
+                    t-if="company.logo"
+                    t-att-src="image_data_uri(company.logo)"
+                    alt="Logo"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//span[hasclass('company_address')]" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <span
+                    class="company_address"
+                    t-field="o.operating_unit_id.partner_id"
+                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"
+                />
+            </t>
+            <t t-else="">
+                <span
+                    class="company_address"
+                    t-field="company.partner_id"
+                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//ul[hasclass('list-inline')]" position="replace">
+            <ul class="list-inline">
+                <t t-if="'operating_unit_id' in o.fields_get()">
+                    <li
+                        t-if="o.operating_unit_id.partner_id.phone"
+                        class="list-inline-item"
+                    >Tel: <span t-field="o.operating_unit_id.partner_id.phone" /></li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.email"
+                        class="list-inline-item"
+                    >Mail: <span t-field="o.operating_unit_id.partner_id.email" /></li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.website"
+                        class="list-inline-item"
+                    >Web: <span t-field="o.operating_unit_id.partner_id.website" /></li>
+                    <li
+                        t-if="o.operating_unit_id.partner_id.vat"
+                        class="list-inline-item"
+                    ><t
+                            t-esc="o.operating_unit_id.partner_id.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="o.operating_unit_id.partner_id.vat" /></li>
+                </t>
+                <t t-else="">
+                    <li t-if="company.phone" class="list-inline-item">Tel: <span
+                            t-field="company.phone"
+                        /></li>
+                    <li t-if="company.email" class="list-inline-item">Mail: <span
+                            t-field="company.email"
+                        /></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span
+                            t-field="company.website"
+                        /></li>
+                    <li t-if="company.vat" class="list-inline-item"><t
+                            t-esc="company.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="company.vat" /></li>
+                </t>
+            </ul>
+        </xpath>
+    </template>
+    <template id="external_layout_clean_ou" inherit_id="web.external_layout_clean">
+        <xpath expr="//img" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <img
+                    t-if="o.operating_unit_id.partner_id.image_1920"
+                    t-att-src="image_data_uri(o.operating_unit_id.partner_id.image_1920)"
+                    alt="Logo"
+                />
+            </t>
+            <t t-else="">
+                <img
+                    t-if="company.logo"
+                    t-att-src="image_data_uri(company.logo)"
+                    alt="Logo"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//ul[hasclass('list-unstyled')]" position="replace">
+            <ul class="list-unstyled">
+                <t t-if="'operating_unit_id' in o.fields_get()">
+                    <strong>
+                        <li t-if="o.operating_unit_id.partner_id.name">
+                            <span t-field="o.operating_unit_id.partner_id.name" />
+                        </li>
+                    </strong>
+                    <li t-if="o.operating_unit_id.partner_id.vat"><t
+                            t-esc="o.operating_unit_id.partner_id.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="o.operating_unit_id.partner_id.vat" /></li>
+                    <li t-if="o.operating_unit_id.partner_id.phone">Tel: <span
+                            t-field="o.operating_unit_id.partner_id.phone"
+                        /></li>
+                    <li t-if="o.operating_unit_id.partner_id.email">
+                        <span t-field="o.operating_unit_id.partner_id.email" />
+                    </li>
+                    <li t-if="o.operating_unit_id.partner_id.website">
+                        <span t-field="o.operating_unit_id.partner_id.website" />
+                    </li>
+                </t>
+                <t t-else="">
+                    <strong>
+                        <li t-if="company.name">
+                            <span t-field="company.name" />
+                        </li>
+                    </strong>
+                    <li t-if="company.vat"><t
+                            t-esc="company.country_id.vat_label or 'Tax ID'"
+                        />: <span t-field="company.vat" /></li>
+                    <li t-if="company.phone">Tel: <span t-field="company.phone" /></li>
+                    <li t-if="company.email">
+                        <span t-field="company.email" />
+                    </li>
+                    <li t-if="company.website">
+                        <span t-field="company.website" />
+                    </li>
+                </t>
+            </ul>
+        </xpath>
+        <xpath expr="//span[hasclass('company_address')]" position="replace">
+            <t t-if="'operating_unit_id' in o.fields_get()">
+                <span
+                    class="company_address"
+                    t-field="o.operating_unit_id.partner_id"
+                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"
+                />
+            </t>
+            <t t-else="">
+                <span
+                    class="company_address"
+                    t-field="company.partner_id"
+                    t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"
+                />
+            </t>
+        </xpath>
+    </template>
+</odoo>
