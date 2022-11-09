@@ -1,13 +1,17 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.1.4
+_commit: v1.6.1
 _src_path: gh:oca/oca-addons-repo-template
+ci: GitHub
 dependency_installation_mode: PIP
-generate_requirements_txt: true
+generate_requirements_txt: false
 include_wkhtmltopdf: false
 odoo_version: 14.0
+org_name: Odoo Community Association (OCA)
+org_slug: https://github.com/OCA/operating-unit
 rebel_module_groups: []
-repo_description: "TODO: add repo description."
+repo_description: Operating Units Addons
 repo_name: operating-unit
 repo_slug: operating-unit
+repo_website: https://github.com/OCA/operating-unit
 travis_apt_packages: []
 travis_apt_sources: []
