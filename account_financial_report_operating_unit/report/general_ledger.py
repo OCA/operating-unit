@@ -12,10 +12,10 @@ class GeneralLedgerReport(models.AbstractModel):
         return super()._get_report_values(docids, data)
 
     def _get_initial_balances_bs_ml_domain(
-        self, account_ids, company_id, date_from, base_domain, acc_prt=False
+        self, account_ids, company_id, date_from, base_domain, grouped_by, acc_prt=False
     ):
         domain = super()._get_initial_balances_bs_ml_domain(
-            account_ids, company_id, date_from, base_domain, acc_prt=acc_prt
+            account_ids, company_id, date_from, base_domain, grouped_by, acc_prt=acc_prt
         )
         operating_unit_ids = self.env.context.get("operating_unit_ids", [])
         if operating_unit_ids:
