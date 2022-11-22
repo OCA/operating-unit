@@ -47,11 +47,19 @@ class TestModule(TransactionCase):
         config2_ids = self.env["pos.config"].with_user(self.user2_id).search([])
         self.assertNotIn(self.pos_config, config2_ids)
 
+    def test_operating_unit_access_session(self):
+        self.pos_config.current_session_id.with_user(self.user1_id).read()
+        with self.assertRaises(AccessError):
+            self.pos_config.current_session_id.with_user(self.user2_id).read()
+
     def test_operating_unit_access_order_and_line(self):
         order = self._create_order()
         order.with_user(self.user1_id).read()
+        order.lines.with_user(self.user1_id).read()
         with self.assertRaises(AccessError):
             order.with_user(self.user2_id).read()
+        with self.assertRaises(AccessError):
+            order.lines.with_user(self.user2_id).read()
 
     def _create_order(self):
         # Create order
