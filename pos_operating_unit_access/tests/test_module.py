@@ -52,7 +52,7 @@ class TestModule(TransactionCase):
         with self.assertRaises(AccessError):
             self.pos_config.current_session_id.with_user(self.user2_id).read()
 
-    def test_operating_unit_access_order_and_line(self):
+    def test_operating_unit_access_order_and_line_and_payment(self):
         order = self._create_order()
         order.with_user(self.user1_id).read()
         order.lines.with_user(self.user1_id).read()
@@ -60,6 +60,9 @@ class TestModule(TransactionCase):
             order.with_user(self.user2_id).read()
         with self.assertRaises(AccessError):
             order.lines.with_user(self.user2_id).read()
+        order.payment_ids.with_user(self.user1_id).read()
+        with self.assertRaises(AccessError):
+            order.payment_ids.with_user(self.user2_id).read()
 
     def _create_order(self):
         # Create order
