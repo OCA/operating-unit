@@ -13,4 +13,20 @@
             </tree>
         </field>
     </record>
+    <record id="mis_budget_by_account_tree_view" model="ir.ui.view">
+        <field name="name">mis.budget.by.account.item.tree</field>
+        <field name="model">mis.budget.by.account.item</field>
+        <field
+            name="inherit_id"
+            ref="mis_builder_budget.mis_budget_by_account_item_tree_view"
+        />
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </tree>
+        </field>
+    </record>
 </odoo>
