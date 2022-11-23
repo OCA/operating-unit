@@ -33,6 +33,7 @@ setuptools.setup(
         'odoo14-addon-operating_unit',
         'odoo14-addon-operating_unit_access_all',
         'odoo14-addon-product_operating_unit',
+        'odoo14-addon-project_operating_unit',
         'odoo14-addon-purchase_operating_unit',
         'odoo14-addon-purchase_operating_unit_access_all',
         'odoo14-addon-purchase_request_operating_unit',
