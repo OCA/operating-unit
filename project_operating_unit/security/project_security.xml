@@ -1,0 +1,31 @@
+<odoo>
+    <!-- Copyright (C) 2019 Open Source Integrators
+    Copyright (C) 2019 Serpent Consulting Services
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+    <record id="ir_rule_project_project_operating_unit" model="ir.rule">
+        <field name="model_id" ref="project.model_project_project" />
+        <field
+            name="domain_force"
+        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in',user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Project Operating Unit</field>
+        <field name="global" eval="True" />
+        <field name="perm_unlink" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+    </record>
+    <record id="ir_rule_project_task_operating_unit" model="ir.rule">
+        <field name="model_id" ref="project.model_project_task" />
+        <field
+            name="domain_force"
+        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in',user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Project Task Operating Unit</field>
+        <field name="global" eval="True" />
+        <field name="perm_unlink" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+    </record>
+</odoo>
