@@ -6,7 +6,6 @@ import time
 
 from odoo.tests import common
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.exceptions import ValidationError
 
 
 class TestPurchaseOperatingUnit(common.TransactionCase):
@@ -59,7 +58,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         self.invoice = self._create_invoice(self.purchase1, self.partner1, self.account)
 
     def _create_user(self, login, groups, company, operating_units):
-        """ Create a user."""
+        """Create a user."""
         group_ids = [group.id for group in groups]
         user = self.ResUsers.with_context({"no_reset_password": True}).create(
             {
@@ -104,7 +103,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
         return purchase
 
     def _create_invoice(self, purchase, partner, account):
-        """ Create a vendor invoice for the purchase order."""
+        """Create a vendor invoice for the purchase order."""
         invoice_vals = {
             "purchase_id": purchase.id,
             "partner_id": partner.id,
