@@ -6,6 +6,7 @@ import time
 
 from odoo.tests import common
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo.exceptions import ValidationError
 
 
 class TestPurchaseOperatingUnit(common.TransactionCase):
@@ -98,6 +99,8 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
                 "company_id": self.company1.id,
             }
         )
+        if purchase.operating_unit_id:
+            purchase._onchange_operating_unit_id()
         return purchase
 
     def _create_invoice(self, purchase, partner, account):
