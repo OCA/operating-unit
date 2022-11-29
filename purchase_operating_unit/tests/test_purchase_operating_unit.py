@@ -54,6 +54,10 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
             self.user1_id,
             [(self.product1, 1000), (self.product2, 500), (self.product3, 800)],
         )
+        self.purchase2 = self._create_purchase2(
+            self.user1_id,
+            [(self.product1, 1000), (self.product2, 500), (self.product3, 800)],
+        )
         self.purchase1.with_user(self.user1_id).button_confirm()
         self.invoice = self._create_invoice(self.purchase1, self.partner1, self.account)
 
@@ -98,8 +102,24 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
                 "company_id": self.company1.id,
             }
         )
-        purchase._onchange_operating_unit_id()
-        self.assertFalse("warning" in purchase)
+        return purchase
+
+    def _create_purchase2(self, user_id, line_products):
+        """Create a purchase order.
+        ``line_products`` is a list of tuple [(product, qty)]
+        """
+        purchase = self._create_purchase(user_id, line_products)
+        type_obj = self.env["stock.picking.type"]
+        types = type_obj.search(
+            [
+                ("code", "=", "incoming"),
+                ("warehouse_id.operating_unit_id", "=", self.ou1.id),
+            ]
+        )
+        for typ in types:
+            typ.warehouse_id.operating_unit_id = False
+        test = purchase._onchange_operating_unit_id()
+        self.assertTrue("warning" in test)
         return purchase
 
     def _create_invoice(self, purchase, partner, account):
