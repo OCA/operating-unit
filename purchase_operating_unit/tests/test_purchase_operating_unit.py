@@ -98,8 +98,8 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
                 "company_id": self.company1.id,
             }
         )
-        if purchase.operating_unit_id:
-            purchase._onchange_operating_unit_id()
+        purchase._onchange_operating_unit_id()
+        self.assertTrue("warning" in purchase)
         return purchase
 
     def _create_invoice(self, purchase, partner, account):
