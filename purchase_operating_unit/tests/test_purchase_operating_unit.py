@@ -99,7 +99,7 @@ class TestPurchaseOperatingUnit(common.TransactionCase):
             }
         )
         purchase._onchange_operating_unit_id()
-        self.assertTrue("warning" in purchase)
+        self.assertFalse("warning" in purchase)
         return purchase
 
     def _create_invoice(self, purchase, partner, account):
