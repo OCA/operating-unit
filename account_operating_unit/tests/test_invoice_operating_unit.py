@@ -2,9 +2,12 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo.tests.common import tagged
+
 from . import test_account_operating_unit as test_ou
 
 
+@tagged("-at_install", "post_install")
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
     def test_create_invoice_validate(self):
         """Create & Validate the invoice.
@@ -12,6 +15,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         passed to the accounting journal items.
         """
         # Create invoice
+        self.partner1.operating_unit_ids = self.user_id.operating_unit_ids
         self.invoice = self.move_model.with_user(self.user_id.id).create(
             self._prepare_invoice(self.b2b.id)
         )

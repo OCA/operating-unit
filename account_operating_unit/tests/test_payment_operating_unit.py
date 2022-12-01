@@ -4,14 +4,18 @@
 
 import time
 
+from odoo.tests.common import tagged
+
 from . import test_account_operating_unit as test_ou
 
 
+@tagged("-at_install", "post_install")
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
     def test_payment_from_invoice(self):
         """Create and invoice and a subsquent payment, in another OU"""
 
         # Create invoice for B2B operating unit
+        self.partner1.operating_unit_ids = self.user_id.operating_unit_ids
         self.invoice = self.move_model.with_user(self.user_id.id).create(
             self._prepare_invoice(self.b2b.id)
         )
@@ -38,13 +42,14 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.assertEqual(self.invoice.payment_state, "paid")
 
     def test_payment_from_two_invoices(self):
-        """ Create two invoices of different OU and payment from a third OU"""
+        """Create two invoices of different OU and payment from a third OU"""
 
         # Create invoices for B2B and B2C operating units
         to_create = [
             self._prepare_invoice(self.b2b.id, "SUPP/B2B/01"),
             self._prepare_invoice(self.b2c.id, "SUPP/B2C/02"),
         ]
+        self.partner1.operating_unit_ids = self.user_id.operating_unit_ids
         invoices = self.move_model.with_user(self.user_id.id).create(to_create)
         for invoice in invoices:
             invoice.invoice_date = invoice.date
