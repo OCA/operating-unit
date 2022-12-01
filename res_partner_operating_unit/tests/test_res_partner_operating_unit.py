@@ -51,6 +51,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         return user
 
     def _update_user(self, user, operating_units, context=None):
-        user.write(
-            {"default_operating_unit_id": [(4, ou.id) for ou in operating_units]}
-        )
+        with self.assertRaises(UserError):
+            user.write(
+                {"default_operating_unit_id": [(4, ou.id) for ou in operating_units]}
+            )
