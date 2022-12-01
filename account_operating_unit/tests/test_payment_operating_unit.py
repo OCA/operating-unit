@@ -4,12 +4,12 @@
 
 import time
 
-from odoo.tests.common import tagged
+import odoo.tests
 
 from . import test_account_operating_unit as test_ou
 
 
-@tagged("-at_install", "post_install")
+@odoo.tests.tagged("post_install", "-at_install")
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
     def test_payment_from_invoice(self):
         """Create and invoice and a subsquent payment, in another OU"""
