@@ -10,7 +10,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     operating_unit_id = fields.Many2one(
-        comodel_name="operating.unit", domain="[('user_ids', '=', uid)]"
+        comodel_name="operating.unit",
     )
 
     @api.model_create_multi
@@ -81,7 +81,6 @@ class AccountMove(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         default=_default_operating_unit_id,
-        domain="[('user_ids', '=', uid)]",
         help="This operating unit will be defaulted in the move lines.",
         readonly=True,
         states={"draft": [("readonly", False)]},

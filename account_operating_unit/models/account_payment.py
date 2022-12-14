@@ -2,7 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountPayment(models.Model):
@@ -10,10 +10,14 @@ class AccountPayment(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        domain="[('user_ids', '=', uid)]",
         compute="_compute_operating_unit_id",
         store=True,
     )
+
+    @api.depends("journal_id")
+    def _compute_operating_unit_id(self):
+        for payment in self.filtered("journal_id"):
+            payment.operating_unit_id = payment.journal_id.operating_unit_id
 
     def _prepare_move_line_default_vals(self, write_off_line_vals=None):
         lines = super()._prepare_move_line_default_vals(write_off_line_vals)
