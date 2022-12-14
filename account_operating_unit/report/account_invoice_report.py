@@ -6,7 +6,6 @@ from odoo import fields, models
 
 
 class AccountInvoiceReport(models.Model):
-
     _inherit = "account.invoice.report"
 
     operating_unit_id = fields.Many2one(
