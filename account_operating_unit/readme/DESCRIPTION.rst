@@ -20,3 +20,4 @@ Units (OU's).
   unit of a payment will be that of the payment method chosen.
 * Implements security rules at OU level to invoices, payments and journal
   items.
+* Adds the Operating Unit to the cash basis journal entries.
