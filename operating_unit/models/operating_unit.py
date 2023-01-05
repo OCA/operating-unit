@@ -51,6 +51,8 @@ class OperatingUnit(models.Model):
         names2 = []
         if name:
             domain = [("code", "=ilike", name + "%")]
+            if args:
+                domain.extend(list(args))
             names2 = self.search(domain, limit=limit).name_get()
         # Merge both results
         return list(set(names1) | set(names2))[:limit]
