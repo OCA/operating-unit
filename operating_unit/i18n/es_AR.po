@@ -22,7 +22,7 @@ msgid "Active"
 msgstr "Activo"
 
 #. module: operating_unit
-#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
+#: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
 msgid "Allowed Operating Units"
 msgstr "Unidades Operativas Permitidas"
 
@@ -59,19 +59,16 @@ msgstr "Unidad Operativa Predeterminada"
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__display_name
-#: model:ir.model.fields,field_description:operating_unit.field_res_users__display_name
 msgid "Display Name"
 msgstr "Nombre Mostrado"
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__id
-#: model:ir.model.fields,field_description:operating_unit.field_res_users__id
 msgid "ID"
 msgstr "ID"
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit____last_update
-#: model:ir.model.fields,field_description:operating_unit.field_res_users____last_update
 msgid "Last Modified on"
 msgstr "Última Modificación el"
 
@@ -102,10 +99,8 @@ msgstr "Nombre"
 
 #. module: operating_unit
 #: model:ir.model,name:operating_unit.model_operating_unit
-#: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_form
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
-#: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_tree
 msgid "Operating Unit"
 msgstr "Unidad Operativa"
 
@@ -113,6 +108,7 @@ msgstr "Unidad Operativa"
 #: model:ir.actions.act_window,name:operating_unit.action_operating_unit_tree
 #: model:ir.model.fields,field_description:operating_unit.field_res_users__assigned_operating_unit_ids
 #: model:ir.ui.menu,name:operating_unit.menu_action_operating_unit_tree
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
 msgid "Operating Units"
 msgstr "Unidades Operativas"
 
