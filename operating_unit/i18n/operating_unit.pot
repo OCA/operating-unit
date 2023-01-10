@@ -19,7 +19,7 @@ msgid "Active"
 msgstr ""
 
 #. module: operating_unit
-#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
+#: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
 msgid "Allowed Operating Units"
 msgstr ""
 
@@ -96,7 +96,6 @@ msgstr ""
 
 #. module: operating_unit
 #: model:ir.model,name:operating_unit.model_operating_unit
-#: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_form
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
 msgid "Operating Unit"
@@ -106,6 +105,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:operating_unit.action_operating_unit_tree
 #: model:ir.model.fields,field_description:operating_unit.field_res_users__assigned_operating_unit_ids
 #: model:ir.ui.menu,name:operating_unit.menu_action_operating_unit_tree
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
 msgid "Operating Units"
 msgstr ""
 
