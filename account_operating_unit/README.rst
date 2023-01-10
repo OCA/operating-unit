@@ -47,6 +47,7 @@ Units (OU's).
   unit of a payment will be that of the payment method chosen.
 * Implements security rules at OU level to invoices, payments and journal
   items.
+* Adds the Operating Unit to the cash basis journal entries.
 
 **Table of contents**
 
@@ -124,6 +125,8 @@ Contributors
 * Michael Villamar <michael.villamar@willdooit.com>
 * Jarsa Sistemas <info@jarsa.com.mx>
 * Alan Ramos <alan.ramos@jarsa.com.mx>
+* Saran Lim. <saranl@ecosoft.co.th>
+* Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
 Maintainers
 ~~~~~~~~~~~
