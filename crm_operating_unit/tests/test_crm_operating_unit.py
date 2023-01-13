@@ -55,7 +55,7 @@ class TestCrmOperatingUnit(common.TransactionCase):
     def _create_crm_team(self, uid, operating_unit):
         """Create a sale order."""
         crm = self.crm_team_model.with_context(
-            {"mail_create_nosubscribe": True, "mail_create_nolog": True}
+            mail_create_nosubscribe=True, mail_create_nolog=True
         ).create(
             {"name": "CRM team", "operating_unit_id": operating_unit.id, "user_id": uid}
         )
