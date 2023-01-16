@@ -3,8 +3,8 @@
 
 {
     "name": "Access all OUs' Accounting",
-    "version": "14.0.1.0.0",
-    "author": "Ecosoft,Odoo Community Association (OCA)",
+    "version": "15.0.1.0.0",
+    "author": "Ecosoft, Odoo Community Association (OCA)",
     "category": "Accounting & Finance",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/operating-unit",
