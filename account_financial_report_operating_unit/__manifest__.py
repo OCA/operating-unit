@@ -3,8 +3,8 @@
 {
     "name": "Accounting Fincnaial Report Operating Unit",
     "summary": "Introduces Operating Unit (OU) in financial reports",
-    "version": "14.0.1.0.2",
-    "author": "Ecosoft,Odoo Community Association (OCA)",
+    "version": "15.0.1.0.0",
+    "author": "Ecosoft, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Accounting & Finance",
     "depends": ["account_financial_report", "account_operating_unit"],
