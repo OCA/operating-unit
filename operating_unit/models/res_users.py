@@ -12,7 +12,7 @@ class ResUsers(models.Model):
     @api.model
     def operating_unit_default_get(self, uid2=False):
         if not uid2:
-            uid2 = self._uid
+            uid2 = self.env.user.id
         user = self.env["res.users"].browse(uid2)
         return user.default_operating_unit_id
 
@@ -29,6 +29,7 @@ class ResUsers(models.Model):
         compute="_compute_operating_unit_ids",
         inverse="_inverse_operating_unit_ids",
         string="Allowed Operating Units",
+        compute_sudo=True,
     )
 
     assigned_operating_unit_ids = fields.Many2many(
@@ -44,6 +45,7 @@ class ResUsers(models.Model):
         comodel_name="operating.unit",
         string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
+        domain="[('company_id', '=', current_company_id)]",
     )
 
     @api.onchange("operating_unit_ids")
