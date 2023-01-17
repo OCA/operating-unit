@@ -18,29 +18,34 @@ msgstr ""
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
+msgid ""
+"<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
 msgstr ""
-"<i class=\"fa fa-at\" role=\"img\" aria-label=\"Correo electrónico\" title=\""
-"Correo electrónico\"/>"
+"<i class=\"fa fa-at\" role=\"img\" aria-label=\"Correo electrónico\" title="
+"\"Correo electrónico\"/>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
+msgid ""
+"<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
 msgstr "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"RFC\"/>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website\"/>"
+msgid ""
+"<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website"
+"\"/>"
 msgstr ""
 "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Sitio Web\" title=\"Sitio "
 "Web\"/>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
+msgid ""
+"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
 msgstr ""
-"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Teléfono\" title=\""
-"Teléfono\"/>"
+"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Teléfono\" title="
+"\"Teléfono\"/>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
