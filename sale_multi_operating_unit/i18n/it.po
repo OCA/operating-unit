@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-08-23 18:50+0000\n"
+"PO-Revision-Date: 2023-01-18 11:48+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model,name:sale_multi_operating_unit.model_res_company
@@ -132,7 +132,7 @@ msgstr "Unità Operativa"
 #. module: sale_multi_operating_unit
 #: model_terms:ir.ui.view,arch_db:sale_multi_operating_unit.view_res_company_form
 msgid "Operating Units"
-msgstr "Unità Operative"
+msgstr "Unità operative"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__product_id
@@ -213,7 +213,7 @@ msgstr "Prezzo Unitario"
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__uom_id
 msgid "Unit of Measure"
-msgstr "Unità di Misura"
+msgstr "Unità di misura"
 
 #. module: sale_multi_operating_unit
 #: code:addons/sale_multi_operating_unit/models/sale_order_quote.py:38
