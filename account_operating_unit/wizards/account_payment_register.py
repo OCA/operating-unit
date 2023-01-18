@@ -24,7 +24,7 @@ class AccountPaymentRegister(models.TransientModel):
                     )
                 )
             if reconciled_moves.operating_unit_id != payment.operating_unit_id:
-                destination_account = payments.destination_account_id
+                destination_account = payment.destination_account_id
                 to_reconcile |= payment.move_id.line_ids.filtered(
                     lambda l: l.account_id == destination_account
                 )
@@ -41,5 +41,5 @@ class AccountPaymentRegister(models.TransientModel):
                     }
                 )
                 payment.action_post()
-                to_reconcile.reconcile()
+                to_reconcile.filtered(lambda r: not r.reconciled).reconcile()
         return payments
