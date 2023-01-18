@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-05-06 17:19+0000\n"
+"PO-Revision-Date: 2023-01-18 11:47+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__active
@@ -110,7 +110,7 @@ msgstr "Unità Operativa"
 #: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
 #: model:ir.ui.menu,name:operating_unit.menu_action_operating_unit_tree
 msgid "Operating Units"
-msgstr "Unità Operative"
+msgstr "Unità operative"
 
 #. module: operating_unit
 #: model:ir.module.category,name:operating_unit.module_operating_units
