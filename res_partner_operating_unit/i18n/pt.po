@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* res_partner_operating_unit
+# 	* res_partner_operating_unit
 #
 msgid ""
 msgstr ""
@@ -31,7 +31,8 @@ msgstr "Unidades Operacionais"
 #. module: res_partner_operating_unit
 #: code:addons/res_partner_operating_unit/models/res_users.py:34
 #, python-format
-msgid "The operating units of the partner must include the default one of the user."
+msgid ""
+"The operating units of the partner must include the default one of the user."
 msgstr ""
 "As unidades operacionais deste parceiro devem incluir a predefinida do "
 "utilizador."
