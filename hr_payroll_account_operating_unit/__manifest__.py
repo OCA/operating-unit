@@ -6,7 +6,7 @@
 
 {
     "name": "HR Payroll Account Operating Unit",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "license": "LGPL-3",
     "author": "ForgeFlow S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
@@ -14,7 +14,7 @@
     "category": "Generic Modules/Human Resources",
     "website": "https://github.com/OCA/operating-unit",
     "depends": [
-        "payroll_account",
+        "hr_payroll_account",
         "hr_contract_operating_unit",
         "account_operating_unit",
     ],
