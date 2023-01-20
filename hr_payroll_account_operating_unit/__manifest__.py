@@ -14,7 +14,7 @@
     "category": "Generic Modules/Human Resources",
     "website": "https://github.com/OCA/operating-unit",
     "depends": [
-        "hr_payroll_account",
+        "payroll_account",
         "hr_contract_operating_unit",
         "account_operating_unit",
     ],
