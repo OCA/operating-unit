@@ -75,7 +75,7 @@ class TestHrContractOperatingUnit(common.TransactionCase):
 
     def _create_hr_contract(self, uid, operating_unit):
         """Creates a contract for an employee."""
-        contract = self.hr_contract_model.sudo(uid).create(
+        contract = self.hr_contract_model.with_user(uid).create(
             {
                 "name": "Sample Contract",
                 "operating_unit_id": operating_unit.id,
