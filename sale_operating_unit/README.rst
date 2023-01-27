@@ -23,7 +23,7 @@ Operating Unit in Sales
     :target: https://runbot.odoo-community.org/runbot/213/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module extends the Sales capabilities of Odoo and introduces the operating
 unit to the Sales Order. Security rules are defined to ensure that users can
@@ -81,7 +81,6 @@ Contributors
 * Darshan Patel <darshan.patel.serpencs@gmail.com>
 * Alan Ramos <alan.ramos@jarsa.com.mx>
 * Jorge Alberto Olvera Cuenca <jorge.olvera@jarsa.com>
-* Carlos Ramos - <cramosh@dmintegrations.eu>
 
 Maintainers
 ~~~~~~~~~~~
