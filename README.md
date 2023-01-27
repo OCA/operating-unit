@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [account_operating_unit](account_operating_unit/) | 14.0.1.0.2 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [account_operating_unit_access_all](account_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Accounting
 [agreement_operating_unit](agreement_operating_unit/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to agreements and service profiles.
-[analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.0 |  | Analytic Operating Unit
+[analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.1 |  | Analytic Operating Unit
 [analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Analytics
 [contract_operating_unit](contract_operating_unit/) | 14.0.1.0.1 |  | Contract Operating Unit
 [contract_operating_unit_access_all](contract_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Contracts
@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 14.0.1.0.0 |  | MIS Builder with Operating Unit
 [mis_builder_operating_unit_access_all](mis_builder_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' MIS Builder
 [mrp_operating_unit](mrp_operating_unit/) | 14.0.1.0.0 |  | Operating Unit in MRP
-[operating_unit](operating_unit/) | 14.0.1.0.6 |  | An operating unit (OU) is an organizational entity part of a company
+[operating_unit](operating_unit/) | 14.0.1.0.7 |  | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all Operating Units
 [pos_operating_unit](pos_operating_unit/) | 14.0.1.0.0 |  | POS Operating Unit Access
 [product_operating_unit](product_operating_unit/) | 14.0.1.0.1 |  | Adds the concept of operating unit (OU) in products
