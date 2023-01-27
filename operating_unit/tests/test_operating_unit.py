@@ -126,7 +126,8 @@ class TestOperatingUnit(common.TransactionCase):
                 "|",
                 ("company_id", "=", False),
                 ("company_id", "in", self.user1.company_ids.ids),
-            ]
+            ],
+            limit=1,
         )
         partner = self.env["res.partner"].search([], limit=1)
         with Form(self.env["res.users"], view="base.view_users_form") as user_form:
