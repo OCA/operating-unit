@@ -23,14 +23,14 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_check_deposit_operating_unit](account_check_deposit_operating_unit/) | 13.0.1.0.0 | [![newtratip](https://github.com/newtratip.png?size=30px)](https://github.com/newtratip) | Operating Unit in Check Deposit
 [account_operating_unit](account_operating_unit/) | 13.0.1.2.0 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
-[analytic_operating_unit](analytic_operating_unit/) | 13.0.1.0.0 |  | Analytic Operating Unit
+[analytic_operating_unit](analytic_operating_unit/) | 13.0.1.0.1 |  | Analytic Operating Unit
 [crm_operating_unit](crm_operating_unit/) | 13.0.1.0.0 |  | Operating Unit in CRM
-[hr_contract_operating_unit](hr_contract_operating_unit/) | 13.0.1.0.0 |  | HR Contract Operating Unit
+[hr_contract_operating_unit](hr_contract_operating_unit/) | 13.0.1.0.1 |  | HR Contract Operating Unit
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 13.0.1.0.3 |  | HR Expense Operating Unit
 [mis_builder_budget_operating_unit](mis_builder_budget_operating_unit/) | 13.0.1.0.1 |  | MIS Builder Budget with Operating Unit
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 13.0.1.0.1 |  | MIS Builder with Operating Unit
 [mrp_operating_unit](mrp_operating_unit/) | 13.0.1.0.1 |  | Operating Unit in MRP
-[operating_unit](operating_unit/) | 13.0.2.1.0 |  | An operating unit (OU) is an organizational entity part of a company
+[operating_unit](operating_unit/) | 13.0.2.1.1 |  | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 13.0.1.0.1 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 13.0.1.0.1 |  | Qweb Report With Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 13.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
