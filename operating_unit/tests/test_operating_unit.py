@@ -1,5 +1,7 @@
 # © 2017-TODAY ForgeFlow S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
+from lxml import etree
+from lxml.builder import E
 
 from odoo.exceptions import AccessError
 from odoo.tests import common
@@ -121,12 +123,24 @@ class TestOperatingUnit(common.TransactionCase):
         self.assertEqual(
             user.default_operating_unit_id, default_user.default_operating_unit_id
         )
+        # <---- hardcoded fix in view to avoid Form error later
+        view = self.env.ref("base.user_groups_view", raise_if_not_found=False)
+        xml = E.field(name="groups_id", position="after")
+        xml_content = etree.tostring(xml, pretty_print=True, encoding="unicode")
+        new_context = dict(view._context)
+        new_context.pop(
+            "install_filename", None
+        )  # don't set arch_fs for this computed view
+        new_context["lang"] = None
+        view.with_context(new_context).write({"arch": xml_content})
+        # end of fix ---->
         nou = self.env["operating.unit"].search(
             [
                 "|",
                 ("company_id", "=", False),
                 ("company_id", "in", self.user1.company_ids.ids),
-            ]
+            ],
+            limit=1,
         )
         partner = self.env["res.partner"].search([], limit=1)
         with Form(self.env["res.users"], view="base.view_users_form") as user_form:
