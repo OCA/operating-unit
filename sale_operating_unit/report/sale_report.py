@@ -1,5 +1,4 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0).
-# Copyright 2022 Dm Integrations - Carlos Ramos
 
 from odoo import fields, models
 
