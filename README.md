@@ -27,12 +27,12 @@ addon | version | maintainers | summary
 [crm_operating_unit](crm_operating_unit/) | 13.0.1.0.0 |  | Operating Unit in CRM
 [hr_contract_operating_unit](hr_contract_operating_unit/) | 13.0.1.0.0 |  | HR Contract Operating Unit
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 13.0.1.0.3 |  | HR Expense Operating Unit
-[mis_builder_budget_operating_unit](mis_builder_budget_operating_unit/) | 13.0.1.0.0 |  | MIS Builder Budget with Operating Unit
-[mis_builder_operating_unit](mis_builder_operating_unit/) | 13.0.1.0.0 |  | MIS Builder with Operating Unit
-[mrp_operating_unit](mrp_operating_unit/) | 13.0.1.0.0 |  | Operating Unit in MRP
+[mis_builder_budget_operating_unit](mis_builder_budget_operating_unit/) | 13.0.1.0.1 |  | MIS Builder Budget with Operating Unit
+[mis_builder_operating_unit](mis_builder_operating_unit/) | 13.0.1.0.1 |  | MIS Builder with Operating Unit
+[mrp_operating_unit](mrp_operating_unit/) | 13.0.1.0.1 |  | Operating Unit in MRP
 [operating_unit](operating_unit/) | 13.0.2.1.0 |  | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 13.0.1.0.1 |  | Adds the concecpt of operating unit (OU) in purchase order management
-[report_qweb_operating_unit](report_qweb_operating_unit/) | 13.0.1.0.0 |  | Qweb Report With Operating Unit
+[report_qweb_operating_unit](report_qweb_operating_unit/) | 13.0.1.0.1 |  | Qweb Report With Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 13.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_operating_unit_sequence](sale_operating_unit_sequence/) | 13.0.1.0.0 |  | Sale Order Sequence by Operating Unit
 [sales_team_operating_unit](sales_team_operating_unit/) | 13.0.1.0.0 |  | Sales Team Operating Unit
