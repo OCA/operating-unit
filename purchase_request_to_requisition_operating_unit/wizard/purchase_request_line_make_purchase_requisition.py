@@ -36,8 +36,10 @@ class PurchaseRequestLineMakePurchaseRequisition(models.TransientModel):
             )
             if operating_unit_id and line_operating_unit_id != operating_unit_id:
                 raise UserError(
-                    _("Could not process !"),
-                    _("You have to select lines from the same operating unit."),
+                    _(
+                        "Could not process!\
+                    \nYou have to select lines from the same operating unit."
+                    ),
                 )
             else:
                 operating_unit_id = line_operating_unit_id
