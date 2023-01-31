@@ -1,6 +1,7 @@
-# © 2016 ForgeFlow S.L. (https://www.forgeflow.com)
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo.exceptions import UserError
 from odoo.tests import Form, common
 
@@ -20,6 +21,7 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
         self.po_model = self.env["purchase.order"]
         # company
         self.company = self.env.ref("base.main_company")
+        self.new_company = self.env["res.company"].create({"name": "New Company Test"})
         self.grp_acc_manager = self.env.ref("account.group_account_manager")
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
@@ -27,6 +29,10 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
         self.b2b = self.env.ref("operating_unit.b2b_operating_unit")
         # B2C Operating Unit
         self.b2c = self.env.ref("operating_unit.b2c_operating_unit")
+        # Test new Operating Unit
+        self.new_ou = self.env["operating.unit"].create(
+            {"name": "Test OU", "code": "T_Ou", "partner_id": self.company.id}
+        )
         # Partner
         self.partner1 = self.env.ref("base.res_partner_1")
         # Products
@@ -59,6 +65,17 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
         # Change OU, result in warning
         with self.assertRaises(UserError):
             self.pr.operating_unit_id = self.b2c
+
+        # Change OU with diff company, result in warning
+        self.b2b.company_id = self.new_company.id
+        with self.assertRaises(UserError):
+            self.pr.operating_unit_id = self.b2b
+
+        # Change OU with diff warehouse, result in warning
+        with self.assertRaises(UserError):
+            with Form(self.pr) as pr:
+                pr.operating_unit_id = self.new_ou
+
         # on_change OU
         pr_mock = self.pr_model.new()
         pr_mock.operating_unit_id = self.b2c
@@ -85,7 +102,7 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
         ctx = {"default_requisition_id": self.pr.id, "default_user_id": False}
         view_id = "purchase.purchase_order_form"
         with Form(
-            self.env["purchase.order"].with_context(ctx), view=view_id
+            self.env["purchase.order"].with_context(**ctx), view=view_id
         ) as purchase:
             purchase.partner_id = self.partner1
         self.po = purchase.save()
