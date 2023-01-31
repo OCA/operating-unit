@@ -3,7 +3,7 @@
 
 {
     "name": "Access all OUs' Purchase Requests",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "Ecosoft,Odoo Community Association (OCA)",
     "category": "Purchase Management",
     "license": "AGPL-3",
