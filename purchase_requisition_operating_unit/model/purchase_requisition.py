@@ -1,6 +1,7 @@
-# © 2016 ForgeFlow S.L. (https://www.forgeflow.com)
-# © 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2016 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -25,9 +26,8 @@ class PurchaseRequisition(models.Model):
         default=lambda self: self._get_picking_in(),
     )
 
-    @api.model
     def _get_picking_in(self):
-        res = super(PurchaseRequisition, self)._get_picking_in()
+        res = super()._get_picking_in()
         type_obj = self.env["stock.picking.type"]
         operating_unit = self.env["res.users"].operating_unit_default_get(self.env.uid)
         types = type_obj.search(
@@ -85,9 +85,7 @@ class PurchaseRequisition(models.Model):
                     ("warehouse_id.operating_unit_id", "=", self.operating_unit_id.id),
                 ]
             )
-            if types:
-                self.picking_type_id = types[:1]
-            else:
+            if not types:
                 raise UserError(
                     _(
                         "No Warehouse found with the "
@@ -95,6 +93,7 @@ class PurchaseRequisition(models.Model):
                         "Purchase Requisition!"
                     )
                 )
+            self.picking_type_id = types[:1]
 
 
 class PurchaseRequisitionLine(models.Model):
