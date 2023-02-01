@@ -26,7 +26,7 @@ class AssetReportXlsx(models.AbstractModel):
         return asset_template
 
     def _get_assets(self, wiz, data):
-        super()._get_assets(wiz, data)
+        res = super()._get_assets(wiz, data)
         if wiz.operating_unit_id:
             assets = data["assets"]
             assets_by_ou = assets.filtered(
@@ -40,3 +40,4 @@ class AssetReportXlsx(models.AbstractModel):
                     "grouped_assets": grouped_assets,
                 }
             )
+        return res

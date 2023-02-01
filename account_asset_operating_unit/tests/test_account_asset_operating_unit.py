@@ -3,19 +3,20 @@
 
 import time
 
-from odoo import fields
-from odoo.tests import common
+from odoo import Command, fields
+from odoo.tests.common import TransactionCase
 
 
-class TestAccountAssetOperatingUnit(common.TransactionCase):
+class TestAccountAssetOperatingUnit(TransactionCase):
     def setUp(self):
-        super(TestAccountAssetOperatingUnit, self).setUp()
+        super().setUp()
         self.AccountAccount = self.env["account.account"]
         self.AccountAsset = self.env["account.asset"]
         self.ResUsers = self.env["res.users"]
         self.product_id = self.env["product.template"].search(
             [("type", "=", "service")], limit=1
         )
+        self.partner = self.env["res.partner"].create({"name": "Test Partner"})
         # Groups
         self.grp_account_manager = self.env.ref("account.group_account_manager")
         self.group_user = self.env.ref("base.group_user")
@@ -89,6 +90,35 @@ class TestAccountAssetOperatingUnit(common.TransactionCase):
         )
         self.asset1 = self._create_asset(self.user1.id, self.main_OU)
         self.asset2 = self._create_asset(self.user2.id, self.b2c_OU)
+        self.invoice = (
+            self.env["account.move"]
+            .with_context(check_move_validity=False)
+            .create(
+                {
+                    "move_type": "in_invoice",
+                    "invoice_date": fields.Date.context_today(self.env.user),
+                    "partner_id": self.partner.id,
+                    "invoice_line_ids": [
+                        Command.create(
+                            {
+                                "name": "test 2",
+                                "product_id": self.product_id.id,
+                                "price_unit": 10000.00,
+                                "quantity": 1,
+                            }
+                        ),
+                        Command.create(
+                            {
+                                "name": "test 3",
+                                "product_id": self.product_id.id,
+                                "price_unit": 20000.00,
+                                "quantity": 1,
+                            }
+                        ),
+                    ],
+                }
+            )
+        )
 
     def _create_user(self, login, groups, company, operating_units):
         """Create a user."""
@@ -122,6 +152,33 @@ class TestAccountAssetOperatingUnit(common.TransactionCase):
             }
         )
         return asset
+
+    def test_create_asset_from_move(self):
+        all_assets = self.env["account.asset"].search([])
+        ctx = dict(self.invoice._context)
+        invoice = self.invoice.with_context(**ctx)
+        self.profile_id.asset_product_item = True
+        # Compute depreciation lines on invoice validation
+        self.profile_id.open_asset = True
+        self.assertTrue(len(invoice.invoice_line_ids) == 2)
+        invoice.invoice_line_ids.write(
+            {"quantity": 1, "asset_profile_id": self.profile_id.id}
+        )
+        invoice.action_post()
+        # Retrieve all assets after invoice validation
+        current_assets = self.env["account.asset"].search([])
+        new_assets = current_assets - all_assets
+        self.assertEqual(len(new_assets), 2)
+        for asset in new_assets:
+            dlines = asset.depreciation_line_ids.filtered(
+                lambda l: l.type == "depreciate"
+            )
+            dlines = dlines.sorted(key=lambda l: l.line_date)
+            self.assertAlmostEqual(dlines[0].depreciated_value, 0.0)
+            self.assertAlmostEqual(dlines[-1].remaining_value, 0.0)
+            move = dlines[0].create_move()
+            m = self.env["account.move"].browse(move)
+            self.assertEqual(m.operating_unit_id, new_assets.operating_unit_id)
 
     def test_asset(self):
         # User 2 is only assigned to B2C Operating Unit, and cannot

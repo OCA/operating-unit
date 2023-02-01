@@ -4,7 +4,7 @@
 {
     "name": "Asset with Operating Units",
     "summary": "This module adds operating unit information to assets.",
-    "version": "14.0.1.0.1",
+    "version": "15.0.1.0.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Accounting & Finance",
