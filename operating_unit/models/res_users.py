@@ -59,16 +59,17 @@ class ResUsers(models.Model):
                     dom = []
                 user.operating_unit_ids = self.env["operating.unit"].sudo().search(dom)
             else:
+                #user.operating_unit_ids = user.assigned_operating_unit_ids
                 if user.partner_id and user.partner_id.operating_unit_ids:
-                    user.operating_unit_ids += user.partner_id.operating_unit_ids
+                   user.operating_unit_ids += user.partner_id.operating_unit_ids
                 else :
-                    user.operating_unit_ids = user.assigned_operating_unit_ids
+                   user.operating_unit_ids = user.assigned_operating_unit_ids
 
-                @api.depends('partner_id.operating_unit_ids')
-                def _compute_operating_unit_ids(self):
-                    for rec in self:
-                        if rec.partner_id and rec.partner_id.operating_unit_ids:
-                            rec.operating_unit_ids += rec.partner_id.operating_unit_ids
+    # @api.depends('partner_id.operating_unit_ids')
+    # def _compute_operating_unit_ids(self):
+    #     for rec in self:
+    #         if rec.partner_id and rec.partner_id.operating_unit_ids:
+    #             rec.operating_unit_ids += rec.partner_id.operating_unit_ids
 
     def _inverse_operating_unit_ids(self):
         for user in self:
