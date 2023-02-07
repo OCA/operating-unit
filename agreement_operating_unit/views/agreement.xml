@@ -14,4 +14,19 @@
         </field>
     </record>
 
+    <record id="agreement_search" model="ir.ui.view">
+        <field name="name">agreement.search</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement.agreement_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='groupby']" position="inside">
+                <filter
+                    name="operating_unit_groupby"
+                    string="Operating Unit"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
