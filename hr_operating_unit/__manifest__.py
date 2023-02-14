@@ -10,7 +10,8 @@
     "depends": ["hr", "operating_unit"],
     "data": [
         "security/security.xml",
-        "views/hr_employee.xml",
+        "views/hr_department_views.xml",
+        "views/hr_employee_views.xml",
     ],
     "installable": True,
 }
