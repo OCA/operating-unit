@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-02 12:45+0000\n"
+"PO-Revision-Date: 2023-02-17 12:23+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -77,7 +77,7 @@ msgstr "Riga ordine di acquisto"
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_purchase_report
 msgid "Purchase Report"
-msgstr "Resoconto Acquisti"
+msgstr "Resoconto di acquisto"
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__requesting_operating_unit_id
