@@ -25,13 +25,6 @@ class AccountPaymentRegister(models.TransientModel):
                 )
             if reconciled_moves.operating_unit_id != payment.operating_unit_id:
                 destination_account = payment.destination_account_id
-                to_reconcile |= payment.move_id.line_ids.filtered(
-                    lambda l: l.account_id == destination_account
-                )
-                to_reconcile |= reconciled_moves.line_ids.filtered(
-                    lambda l: l.account_id == destination_account
-                )
-                payment.action_draft()
                 line = payment.move_id.line_ids.filtered(
                     lambda l: l.account_id == destination_account
                 )
@@ -40,6 +33,13 @@ class AccountPaymentRegister(models.TransientModel):
                         "operating_unit_id": reconciled_moves.operating_unit_id.id,
                     }
                 )
-                payment.action_post()
-                to_reconcile.filtered(lambda r: not r.reconciled).reconcile()
+                # reconcile with case self balanced only
+                if payment.move_id.company_id.ou_is_self_balanced:
+                    to_reconcile |= line
+                    to_reconcile |= reconciled_moves.line_ids.filtered(
+                        lambda l: l.account_id == destination_account
+                    )
+                    payment.action_draft()
+                    payment.action_post()
+                    to_reconcile.filtered(lambda r: not r.reconciled).reconcile()
         return payments
