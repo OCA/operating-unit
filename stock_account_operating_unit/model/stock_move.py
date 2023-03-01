@@ -121,4 +121,4 @@ class StockMove(models.Model):
                         )
                     )
                     am.post()
-            return res
+        return res
