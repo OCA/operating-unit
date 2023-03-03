@@ -9,8 +9,8 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     operating_unit_id = fields.Many2one(
-        "operating.unit",
-        "Requesting Operating Unit",
+        comodel_name="operating.unit",
+        string="Requesting Operating Unit",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )

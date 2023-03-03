@@ -12,8 +12,7 @@
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"
-                    domain="[('company_id','=', company_id),
-                       ('user_ids', 'in', uid)]"
+                    domain="[('company_id','=', company_id)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -27,7 +26,6 @@
             <field name="partner_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -42,8 +40,7 @@
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"
-                    domain="[('company_id','=', company_id),
-                       ('user_ids', 'in', uid)]"
+                    domain="[('company_id','=', company_id)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -57,7 +54,6 @@
             <field name="usage" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -71,7 +67,6 @@
             <field name="location_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -85,7 +80,6 @@
             <field name="origin" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -103,8 +97,7 @@
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"
-                    domain="[('company_id','=', company_id),
-                       ('user_ids', 'in', uid)]"
+                    domain="[('company_id','=', company_id)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </xpath>
@@ -123,7 +116,6 @@
             <field name="product_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -145,14 +137,12 @@
             <field name="location_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
             <field name="location_dest_id" position="after">
                 <field
                     name="operating_unit_dest_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -166,14 +156,12 @@
             <field name="location_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
             <field name="location_dest_id" position="after">
                 <field
                     name="operating_unit_dest_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -187,14 +175,12 @@
             <field name="location_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
             <field name="location_dest_id" position="after">
                 <field
                     name="operating_unit_dest_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -208,14 +194,12 @@
             <field name="location_id" position="after">
                 <field
                     name="operating_unit_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
             <field name="location_dest_id" position="after">
                 <field
                     name="operating_unit_dest_id"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
