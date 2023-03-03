@@ -9,7 +9,6 @@ class StockRule(models.Model):
     _inherit = "stock.rule"
 
     operating_unit_id = fields.Many2one(
-        "operating.unit",
+        comodel_name="operating.unit",
         related="warehouse_id.operating_unit_id",
-        domain="[('user_ids', '=', uid)]",
     )
