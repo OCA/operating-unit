@@ -47,10 +47,10 @@ class PurchaseRequestLineMakePurchaseRequisition(models.TransientModel):
         return res
 
     @api.model
-    def _prepare_purchase_requisition(self, picking_type_id, company_id):
+    def _prepare_purchase_requisition(self, item, picking_type_id, company_id):
         res = super(
             PurchaseRequestLineMakePurchaseRequisition, self
-        )._prepare_purchase_requisition(picking_type_id, company_id)
+        )._prepare_purchase_requisition(item, picking_type_id, company_id)
         if self.operating_unit_id:
             res.update({"operating_unit_id": self.operating_unit_id.id})
         return res
