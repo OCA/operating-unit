@@ -23,7 +23,8 @@ class AccountPayment(models.Model):
         lines = super()._prepare_move_line_default_vals(write_off_line_vals)
         for line in lines:
             line["operating_unit_id"] = self.operating_unit_id.id
-        if not self._context.get("active_model"):
+        active_model = self._context.get("active_model", False)
+        if not active_model or active_model != "account.move":
             return lines
         invoices = self.env[self._context.get("active_model")].browse(
             self._context.get("active_ids")
