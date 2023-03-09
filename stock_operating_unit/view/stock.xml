@@ -101,11 +101,6 @@
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </xpath>
-            <field name="picking_type_id" position="attributes">
-                <attribute
-                    name="domain"
-                >[('warehouse_id.operating_unit_id.user_ids', 'in', uid)]</attribute>
-            </field>
         </field>
     </record>
     <record id="view_picking_internal_search" model="ir.ui.view">
