@@ -32,7 +32,7 @@ addon | version | maintainers | summary
 [purchase_operating_unit](purchase_operating_unit/) | 15.0.1.0.0 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [sales_team_operating_unit](sales_team_operating_unit/) | 15.0.1.0.0 |  | Sales Team Operating Unit
 [stock_account_operating_unit](stock_account_operating_unit/) | 15.0.1.0.0 |  | Create journal entries in moves between internal locations with different operating units.
-[stock_operating_unit](stock_operating_unit/) | 15.0.1.1.0 |  | Adds the concept of operating unit (OU) in stock management
+[stock_operating_unit](stock_operating_unit/) | 15.0.1.2.0 |  | Adds the concept of operating unit (OU) in stock management
 
 [//]: # (end addons)
 
