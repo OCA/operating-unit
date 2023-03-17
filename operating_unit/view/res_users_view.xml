@@ -6,12 +6,11 @@
         <field name="inherit_id" ref="base.view_users_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='access_rights']/group[1]" position="after">
-                <group string="Operating Units">
-                    <field
-                        name="operating_unit_ids"
-                        groups="operating_unit.group_multi_operating_unit"
-                        widget="many2many_tags"
-                    />
+                <group
+                    string="Operating Units"
+                    groups="operating_unit.group_multi_operating_unit"
+                >
+                    <field name="operating_unit_ids" widget="many2many_tags" />
 
                     <field
                         name="default_operating_unit_id"
