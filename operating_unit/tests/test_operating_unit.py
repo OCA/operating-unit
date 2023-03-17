@@ -7,35 +7,33 @@ from odoo.tests.common import Form
 
 
 class TestOperatingUnit(common.TransactionCase):
-    def setUp(self):
-        super(TestOperatingUnit, self).setUp()
-        self.res_users_model = self.env["res.users"].with_context(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.res_users_model = cls.env["res.users"].with_context(
             tracking_disable=True, no_reset_password=True
         )
 
         # Groups
-        self.grp_ou_mngr = self.env.ref("operating_unit.group_manager_operating_unit")
-        self.grp_ou_multi = self.env.ref("operating_unit.group_multi_operating_unit")
+        cls.grp_ou_mngr = cls.env.ref("operating_unit.group_manager_operating_unit")
+        cls.grp_ou_multi = cls.env.ref("operating_unit.group_multi_operating_unit")
         # Company
-        self.company = self.env.ref("base.main_company")
+        cls.company = cls.env.ref("base.main_company")
         # Main Operating Unit
-        self.ou1 = self.env.ref("operating_unit.main_operating_unit")
+        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
-        self.b2c = self.env.ref("operating_unit.b2c_operating_unit")
+        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit")
         # B2B Operating Unit
-        self.b2b = self.env.ref("operating_unit.b2b_operating_unit")
+        cls.b2b = cls.env.ref("operating_unit.b2b_operating_unit")
         # Create User 1 with Main OU
-        self.user1 = self._create_user(
-            "user_1", self.grp_ou_mngr, self.company, self.ou1
-        )
+        cls.user1 = cls._create_user("user_1", cls.grp_ou_mngr, cls.company, cls.ou1)
         # Create User 2 with B2C OU
-        self.user2 = self._create_user(
-            "user_2", self.grp_ou_multi, self.company, self.b2c
-        )
+        cls.user2 = cls._create_user("user_2", cls.grp_ou_multi, cls.company, cls.b2c)
 
-    def _create_user(self, login, group, company, operating_units, context=None):
+    @classmethod
+    def _create_user(cls, login, group, company, operating_units, context=None):
         """Create a user."""
-        user = self.res_users_model.create(
+        user = cls.res_users_model.create(
             {
                 "name": "Test User",
                 "login": login,
@@ -138,3 +136,27 @@ class TestOperatingUnit(common.TransactionCase):
                 line.code = "007"
             user_form.name = "Test Customer"
             user_form.login = "test2"
+
+    def test_find_operating_unit_by_name_or_code(self):
+        ou = self._create_operating_unit(self.user1.id, "name", "code")
+        expected_result = [(ou.id, "[code] name")]
+        self.assertEqual(ou.name_search("nam"), expected_result)
+        self.assertEqual(ou.name_search("cod"), expected_result)
+        self.assertEqual(ou.name_search("dummy"), [])
+
+    def test_create_multi_operating_unit(self):
+        res = (
+            self.env["operating.unit"]
+            .with_user(self.user1.id)
+            .create(
+                [
+                    {"name": "Test 0", "code": "TEST0", "partner_id": self.company.id},
+                    {"name": "Test 1", "code": "TEST1", "partner_id": self.company.id},
+                    {"name": "Test 2", "code": "TEST2", "partner_id": self.company.id},
+                ]
+            )
+        )
+        self.assertEqual(len(res), 3)
+        self.assertEqual(res[0].user_ids, self.user1)
+        self.assertEqual(res[1].user_ids, self.user1)
+        self.assertEqual(res[2].user_ids, self.user1)

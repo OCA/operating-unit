@@ -9,6 +9,7 @@ class OperatingUnit(models.Model):
 
     _name = "operating.unit"
     _description = "Operating Unit"
+    _rec_names_search = ["name", "code"]
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)
@@ -41,22 +42,6 @@ class OperatingUnit(models.Model):
         ),
     ]
 
-    @api.model
-    def name_search(self, name="", args=None, operator="ilike", limit=100):
-        # Make a search with default criteria
-        names1 = super(models.Model, self).name_search(
-            name=name, args=args, operator=operator, limit=limit
-        )
-        # Make the other search
-        names2 = []
-        if name:
-            domain = [("code", "=ilike", name + "%")]
-            if args:
-                domain.extend(list(args))
-            names2 = self.search(domain, limit=limit).name_get()
-        # Merge both results
-        return list(set(names1) | set(names2))[:limit]
-
     def name_get(self):
         res = []
         for ou in self:
@@ -66,13 +51,13 @@ class OperatingUnit(models.Model):
             res.append((ou.id, name))
         return res
 
-    @api.model
-    def create(self, values):
-        res = super(OperatingUnit, self).create(values)
-        res.user_ids += self.env.user
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        res.write({"user_ids": [fields.Command.link(self.env.user.id)]})
         self.clear_caches()
         return res
 
     def write(self, vals):
         self.clear_caches()
-        return super(OperatingUnit, self).write(vals)
+        return super().write(vals)
