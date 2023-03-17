@@ -1,74 +1,85 @@
 # Copyright (C) 2019 Open Source Integrators
 # Copyright (C) 2019 Serpent Consulting Services
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo import fields
 from odoo.tests import common
 
 
 class TestProject(common.TransactionCase):
-    def setUp(self):
-        super(TestProject, self).setUp()
-        self.project_obj = self.env["project.project"]
-        self.task_obj = self.env["project.task"]
-        self.res_users_model = self.env["res.users"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.project_obj = cls.env["project.project"]
+        cls.task_obj = cls.env["project.task"]
+        cls.res_users_model = cls.env["res.users"]
 
-        self.partner_1 = self.env["res.partner"].create(
+        cls.partner_1 = cls.env["res.partner"].create(
             {"name": "SERPENTCS ", "email": "serpentcs@gmail.com"}
         )
 
         # Groups
-        self.grp_mngr = self.env.ref("project.group_project_manager")
-        self.grp_user = self.env.ref("project.group_project_user")
+        cls.grp_mngr = cls.env.ref("project.group_project_manager")
+        cls.grp_user = cls.env.ref("project.group_project_user")
         # Company
-        self.company = self.env.ref("base.main_company")
+        cls.company = cls.env.ref("base.main_company")
         # Main Operating Unit
-        self.main_OU = self.env.ref("operating_unit.main_operating_unit")
+        cls.main_OU = cls.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
-        self.b2c_OU = self.env.ref("operating_unit.b2c_operating_unit")
+        cls.b2c_OU = cls.env.ref("operating_unit.b2c_operating_unit")
         # Create User 1 with Main OU
-        self.user1 = self._create_user(
-            "user_1", [self.grp_mngr, self.grp_user], self.company, [self.main_OU]
+        cls.user1 = cls._create_user(
+            "user_1", [cls.grp_mngr, cls.grp_user], cls.company, [cls.main_OU]
         )
         # Create User 2 with B2C OU
-        self.user2 = self._create_user(
-            "user_2", [self.grp_mngr, self.grp_user], self.company, [self.b2c_OU]
+        cls.user2 = cls._create_user(
+            "user_2", [cls.grp_mngr, cls.grp_user], cls.company, [cls.b2c_OU]
         )
 
-        self.project1 = self._create_project(self.user1, self.main_OU)
-        self.project2 = self._create_project(self.user2, self.b2c_OU)
-        self.task1 = self._create_task(self.user1, self.project1)
-        self.task2 = self._create_task(self.user2, self.project2)
+        cls.project1 = cls._create_project(cls.user1, cls.main_OU)
+        cls.project2 = cls._create_project(cls.user2, cls.b2c_OU)
+        cls.task1 = cls._create_task(cls.user1, cls.project1)
+        cls.task2 = cls._create_task(cls.user2, cls.project2)
 
-    def _create_user(self, login, groups, company, operating_units):
+    @classmethod
+    def _create_user(cls, login, groups, company, operating_units):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.create(
+        user = cls.res_users_model.create(
             {
                 "name": login,
                 "login": login,
                 "password": "demo",
                 "email": "test@yourcompany.com",
                 "company_id": company.id,
-                "company_ids": [(4, company.id)],
-                "operating_unit_ids": [(4, ou.id) for ou in operating_units],
-                "groups_id": [(6, 0, group_ids)],
+                "company_ids": [fields.Command.link(company.id)],
+                "operating_unit_ids": [
+                    fields.Command.link(ou.id) for ou in operating_units
+                ],
+                "groups_id": [fields.Command.set(group_ids)],
             }
         )
         return user
 
-    def _create_project(self, uid, operating_unit):
-        project = self.project_obj.with_user(uid).create(
+    @classmethod
+    def _create_project(cls, uid, operating_unit):
+        project = cls.project_obj.with_user(uid).create(
             {
                 "name": "Test Project",
                 "operating_unit_id": operating_unit.id,
                 "privacy_visibility": "employees",
-                "partner_id": self.partner_1.id,
+                "partner_id": cls.partner_1.id,
             }
         )
         return project
 
-    def _create_task(self, uid, project):
-        task = self.task_obj.create(
-            {"name": "Test Task", "user_id": uid.id, "project_id": project.id}
+    @classmethod
+    def _create_task(cls, uid, project):
+        task = cls.task_obj.create(
+            {
+                "name": "Test Task",
+                "user_ids": [fields.Command.link(uid.id)],
+                "project_id": project.id,
+            }
         )
         return task
 
