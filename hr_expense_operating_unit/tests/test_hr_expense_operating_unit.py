@@ -2,11 +2,12 @@
 # Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests import common
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestHrExpenseOperatingUnit(common.TransactionCase):
+class TestHrExpenseOperatingUnit(TransactionCase):
     def setUp(self):
         super(TestHrExpenseOperatingUnit, self).setUp()
 
@@ -103,6 +104,20 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
             expense_sheet.operating_unit_id,
         )
 
+    def _register_payment(self, move_id, amount, ctx=False):
+        if not ctx:
+            ctx = {
+                "active_ids": [move_id.id],
+                "active_id": move_id.id,
+                "active_model": "account.move",
+            }
+        PaymentWizard = self.env["account.payment.register"]
+        with Form(PaymentWizard.with_context(**ctx)) as f:
+            f.payment_date = fields.Date.today()
+            f.amount = amount
+        payment_wizard = f.save()
+        payment_wizard.action_create_payments()
+
     def test_security(self):
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Expenses of Main Operating Unit.
@@ -130,6 +145,7 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
             self.hr_expense_sheet1.account_move_id.line_ids.mapped("operating_unit_id"),
             "Expense OU should match with accounting entries OU",
         )
+        self._register_payment(self.hr_expense_sheet1.account_move_id, 50.0)
 
     def test_constrains_error(self):
         with self.assertRaises(ValidationError):
@@ -147,14 +163,6 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
                 {"operating_unit_id": self.b2c.id}
             )
 
-        company_id = self.env["res.company"].create(
-            {
-                "name": "My Company",
-                "partner_id": self.partner1.id,
-                "currency_id": self.env.ref("base.EUR").id,
-            }
-        )
-
         with self.assertRaises(ValidationError):
             hr_expense_dict2 = self.hr_expense2.action_submit_expenses()
             sheet_context = hr_expense_dict2.get("context")
@@ -166,7 +174,6 @@ class TestHrExpenseOperatingUnit(common.TransactionCase):
                 "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
             }
             self.hr_expense_sheet2 = self.hr_expense_sheet_model.create(sheet_dict)
-            self.hr_expense_sheet2.expense_line_ids.write({"company_id": company_id.id})
 
         with self.assertRaises(ValidationError):
             self.hr_expense3 = self.hr_expense_model.create(

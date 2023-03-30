@@ -7,7 +7,6 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class HrExpenseExpense(models.Model):
-
     _inherit = "hr.expense"
 
     operating_unit_id = fields.Many2one(
@@ -80,13 +79,6 @@ class HrExpenseExpense(models.Model):
         sheet.update({"operating_unit_id": self.mapped("operating_unit_id").id})
         return sheet
 
-    def _get_account_move_line_values(self):
-        res = super()._get_account_move_line_values()
-        for expense in self:
-            res[expense.id][0].update({"operating_unit_id": self.operating_unit_id.id})
-            res[expense.id][1].update({"operating_unit_id": self.operating_unit_id.id})
-        return res
-
     def _prepare_move_values(self):
         move_values = super()._prepare_move_values()
         move_values["operating_unit_id"] = self.operating_unit_id.id
@@ -94,7 +86,6 @@ class HrExpenseExpense(models.Model):
 
 
 class HrExpenseSheet(models.Model):
-
     _inherit = "hr.expense.sheet"
 
     operating_unit_id = fields.Many2one(
