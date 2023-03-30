@@ -8,15 +8,16 @@ from odoo.exceptions import UserError
 class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
+    def _get_reconciled_moves(self, payment):
+        return payment.reconciled_bill_ids + payment.reconciled_invoice_ids
+
     def _create_payments(self):
         payments = super()._create_payments()
         if self.group_payment and len(payments) > 1:
             return payments
         for payment in payments:
             to_reconcile = self.env["account.move.line"]
-            reconciled_moves = (
-                payment.reconciled_bill_ids + payment.reconciled_invoice_ids
-            )
+            reconciled_moves = self._get_reconciled_moves(payment)
             if len(reconciled_moves.operating_unit_id) > 1:
                 raise UserError(
                     _(
