@@ -31,8 +31,13 @@ class AccountPayment(models.Model):
         )
         invoices_ou = invoices.operating_unit_id
         if invoices and len(invoices_ou) == 1 and invoices_ou != self.operating_unit_id:
+            self_balanced = self.env.company.ou_is_self_balanced
             destination_account_id = self.destination_account_id.id
             for line in lines:
-                if line["account_id"] == destination_account_id:
+                if (
+                    not self_balanced
+                    and not line.get("operating_unit_id", False)
+                    or (line["account_id"] == destination_account_id)
+                ):
                     line["operating_unit_id"] = invoices_ou.id
         return lines
