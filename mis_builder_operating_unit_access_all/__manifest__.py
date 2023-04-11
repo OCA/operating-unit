@@ -3,7 +3,7 @@
 
 {
     "name": "Access all OUs' MIS Builder",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "category": "Reporting",
     "license": "AGPL-3",
@@ -13,5 +13,5 @@
         "security/mis_builder_security.xml",
     ],
     "installable": True,
-    "maintainers": ["kittiu"],
+    "maintainers": ["ps-tubtim"],
 }
