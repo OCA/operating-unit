@@ -139,10 +139,13 @@ msgstr "¡El nombre de la unidad operativa debe ser único por compañía!"
 
 #. module: operating_unit
 #: model:ir.model,name:operating_unit.model_res_users
-msgid "Users"
-msgstr "Usuarios"
+msgid "User"
+msgstr ""
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__user_ids
 msgid "Users Allowed"
 msgstr "Usuarios Permitidos"
+
+#~ msgid "Users"
+#~ msgstr "Usuarios"
