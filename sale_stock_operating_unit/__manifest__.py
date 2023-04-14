@@ -1,7 +1,5 @@
-# Copyright 2015-19 Eficent Business and IT Consulting Services S.L. -
-# Jordi Ballester Alomar
+# Copyright 2015-19 ForgeFlow S.L.
 # Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
-# Rujia Liu
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
@@ -9,7 +7,7 @@
     "summary": "An operating unit (OU) is an organizational entity part of a "
     "company",
     "version": "14.0.1.0.0",
-    "author": "Eficent, Serpent Consulting Services Pvt. Ltd., "
+    "author": "ForgeFlow, Serpent Consulting Services Pvt. Ltd., "
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
