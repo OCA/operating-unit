@@ -58,6 +58,7 @@ addon | version | maintainers | summary
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 14.0.1.0.0 |  | Qweb Report With Operating Unit
 [sale_crm_operating_unit](sale_crm_operating_unit/) | 14.0.1.0.0 |  | Sale CRM Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 14.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
+[sale_stock_operating_unit](sale_stock_operating_unit/) | 14.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_template_operating_unit](sale_template_operating_unit/) | 14.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 |  | Sales Team Operating Unit
 [stock_operating_unit](stock_operating_unit/) | 14.0.1.0.2 |  | Adds the concept of operating unit (OU) in stock management
