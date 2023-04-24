@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-01-28 16:31+0000\n"
-"Last-Translator: Samuele Mariani <samuele@ooops404.com>\n"
+"PO-Revision-Date: 2023-04-07 13:23+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
@@ -131,12 +131,12 @@ msgstr "Registro"
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_move
 msgid "Journal Entry"
-msgstr "Registrazione Contabile"
+msgstr "Registrazione contabile"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_move_line
 msgid "Journal Item"
-msgstr "Movimento Contabile"
+msgstr "Movimento contabile"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_invoice_report____last_update
@@ -161,20 +161,20 @@ msgstr "Ultima modifica il"
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_move_line_filter
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_payment_search
 msgid "Operating Unit"
-msgstr "Unità Operativa"
+msgstr "Unità operativa"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_journal__operating_unit_id
 msgid ""
 "Operating Unit that will be used in payments, when this journal is used."
 msgstr ""
-"L'Unità operativa che verrà utilizzata nei pagamenti, quando viene "
+"L'unità operativa che verrà utilizzata nei pagamenti, quando viene "
 "utilizzato questo Registro."
 
 #. module: account_operating_unit
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_company_form
 msgid "Operating Units"
-msgstr "Unità Operative"
+msgstr "Unità operative"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__ou_is_self_balanced

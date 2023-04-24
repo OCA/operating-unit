@@ -28,20 +28,15 @@ class AssetReportXlsx(models.AbstractModel):
     def _get_assets(self, wiz, data):
         super()._get_assets(wiz, data)
         if wiz.operating_unit_id:
-            # Filter asset by operating unit
             assets = data["assets"]
             assets_by_ou = assets.filtered(
-                lambda a: not a.operating_unit_id
-                or a.operating_unit_id == wiz.operating_unit_id
+                lambda a: a.operating_unit_id == wiz.operating_unit_id
             )
-            data["assets"] = assets_by_ou
-            # Filter group asset by operating unit
-            grouped_assets = data["grouped_assets"]
-            for k in grouped_assets.keys():
-                grouped_asset = grouped_assets[k]
-                assets_by_group = grouped_asset["assets"]
-                grouped_asset_by_ou = assets_by_group.filtered(
-                    lambda a: not a.operating_unit_id
-                    or a.operating_unit_id == wiz.operating_unit_id
-                )
-                grouped_assets[k] = {"assets": grouped_asset_by_ou}
+            grouped_assets = {}
+            self._group_assets(assets_by_ou, wiz.asset_group_id, grouped_assets)
+            data.update(
+                {
+                    "assets": assets_by_ou,
+                    "grouped_assets": grouped_assets,
+                }
+            )

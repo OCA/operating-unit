@@ -87,7 +87,7 @@
                 </attribute>
             </xpath>
             <xpath
-                expr="//field[@name='invoice_line_ids']/form/sheet/group/field[@name='analytic_account_id']"
+                expr="//field[@name='invoice_line_ids']//form//field[@name='analytic_account_id']"
                 position="attributes"
             >
                 <attribute name="domain">

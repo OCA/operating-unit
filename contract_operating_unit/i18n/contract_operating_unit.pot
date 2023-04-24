@@ -35,5 +35,6 @@ msgstr ""
 
 #. module: contract_operating_unit
 #: model:ir.model.fields,field_description:contract_operating_unit.field_contract_contract__operating_unit_id
+#: model_terms:ir.ui.view,arch_db:contract_operating_unit.contract_contract_search_view
 msgid "Operating Unit"
 msgstr ""

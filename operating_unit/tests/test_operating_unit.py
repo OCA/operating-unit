@@ -3,6 +3,7 @@
 
 from odoo.exceptions import AccessError
 from odoo.tests import common
+from odoo.tests.common import Form
 
 
 class TestOperatingUnit(common.TransactionCase):
@@ -43,6 +44,7 @@ class TestOperatingUnit(common.TransactionCase):
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
                 "operating_unit_ids": [(4, ou.id) for ou in operating_units],
+                "default_operating_unit_id": False,
                 "sel_groups_13_14": group.id,
             }
         )
@@ -106,3 +108,33 @@ class TestOperatingUnit(common.TransactionCase):
             "B2C",
             "User 2 should have access to " "%s" % self.b2c.name,
         )
+
+    def test_02_operating_unit(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "base_setup.default_user_rights", "True"
+        )
+        user_form = Form(self.env["res.users"])
+        user_form.name = "Test Customer"
+        user_form.login = "test"
+        user = user_form.save()
+        default_user = self.env.ref("base.default_user")
+        self.assertEqual(
+            user.default_operating_unit_id, default_user.default_operating_unit_id
+        )
+        nou = self.env["operating.unit"].search(
+            [
+                "|",
+                ("company_id", "=", False),
+                ("company_id", "in", self.user1.company_ids.ids),
+            ],
+            limit=1,
+        )
+        partner = self.env["res.partner"].search([], limit=1)
+        with Form(self.env["res.users"], view="base.view_users_form") as user_form:
+            user_form.default_operating_unit_id = nou[0]
+            with user_form.operating_unit_ids.new() as line:
+                line.partner_id = partner
+                line.name = "Test Unit"
+                line.code = "007"
+            user_form.name = "Test Customer"
+            user_form.login = "test2"
