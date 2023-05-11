@@ -9,3 +9,4 @@
 * Saran Lim. <saranl@ecosoft.co.th>
 * Pimolnat Suntian <pimolnats@ecosoft.co.th>
 * Hieu, Vo Minh Bao <hieu.vmb@komit-consulting.com>
+* Alejandro Leonard <alejandro.leonard@braintec.com>

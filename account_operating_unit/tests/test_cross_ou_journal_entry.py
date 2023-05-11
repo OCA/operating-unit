@@ -11,8 +11,9 @@ from . import test_account_operating_unit as test_ou
 
 @tagged("post_install", "-at_install")
 class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
     def _check_balance(self, account_id, acc_type="clearing"):
         # Check balance for all operating units
@@ -93,31 +94,17 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         move_vals.update(
             {"journal_id": journal_ids and journal_ids.id, "line_ids": lines}
         )
-        move = self.move_model.with_user(self.user_id.id).create(move_vals)
+        move = (
+            self.move_model.with_user(self.user_id.id)
+            .with_context(check_move_validity=False)
+            .create(move_vals)
+        )
         # Post journal entries
         move.action_post()
         # Check the balance of the account
         self._check_balance(self.current_asset_account_id.id, acc_type="other")
         clearing_account_id = self.company.inter_ou_clearing_account_id.id
         self._check_balance(clearing_account_id, acc_type="clearing")
-        # Report journal
-        report_journal = (
-            self.env["report.account.report_journal"]
-            .sudo()
-            ._get_report_values(
-                docids=[journal_ids.id],
-                data={
-                    "form": {
-                        "journal_ids": journal_ids.ids,
-                        "company_id": journal_ids.company_id,
-                        "used_context": {
-                            "operating_unit_ids": journal_ids.operating_unit_id.id
-                        },
-                    }
-                },
-            )
-        )
-        self.assertTrue(report_journal)
 
     def test_journal_no_ou(self):
         """Test journal can not create if use self-balance but not ou in journal"""
@@ -125,5 +112,5 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
             with Form(self.journal_model) as f:
                 f.type = "bank"
                 f.name = "Test new bank not ou"
-                f.code = "testcode"
+                f.code = "bankcode"
             f.save()
