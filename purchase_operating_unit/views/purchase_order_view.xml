@@ -27,6 +27,10 @@
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
                 />
+                <field name="operating_unit_id" invisible="1" />
+            </field>
+            <field name="order_line" position="before">
+                <field name="operating_unit_id" invisible="1" />
             </field>
             <field name="order_line" position="attributes">
                 <attribute
