@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,34 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
-msgstr ""
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
-msgstr ""
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website\"/>"
-msgstr ""
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
-msgstr ""
-
-#. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Email:"
 msgstr ""
 
 #. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_clean_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Logo"
 msgstr ""
@@ -52,13 +30,17 @@ msgid "Mail:"
 msgstr ""
 
 #. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Phone:"
 msgstr ""
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_clean_ou
 msgid "Tel:"
 msgstr ""
 
