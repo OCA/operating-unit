@@ -3,7 +3,7 @@
 
 {
     "name": "Access all OUs' Expenses",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "Ecosoft,Odoo Community Association (OCA)",
     "category": "Generic Modules/Human Resources",
     "license": "AGPL-3",
