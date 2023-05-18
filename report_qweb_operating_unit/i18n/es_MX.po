@@ -17,40 +17,12 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
-msgstr ""
-"<i class=\"fa fa-at\" role=\"img\" aria-label=\"Correo electrónico\" title=\""
-"Correo electrónico\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
-msgstr "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"RFC\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website\"/>"
-msgstr ""
-"<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Sitio Web\" title=\"Sitio "
-"Web\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
-msgstr ""
-"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Teléfono\" title=\""
-"Teléfono\"/>"
-
-#. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Email:"
 msgstr "Correo electrónico:"
 
 #. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_clean_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Logo"
 msgstr "Logo"
@@ -61,13 +33,17 @@ msgid "Mail:"
 msgstr "Correo electrónico:"
 
 #. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Phone:"
 msgstr "Teléfono:"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_clean_ou
 msgid "Tel:"
 msgstr "Tel:"
 
@@ -76,3 +52,27 @@ msgstr "Tel:"
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Web:"
 msgstr "Web:"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Correo electrónico\" "
+#~ "title=\"Correo electrónico\"/>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
+#~ msgstr "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"RFC\"/>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title="
+#~ "\"Website\"/>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Sitio Web\" title="
+#~ "\"Sitio Web\"/>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone"
+#~ "\"/>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Teléfono\" title="
+#~ "\"Teléfono\"/>"
