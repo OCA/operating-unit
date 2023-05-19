@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo-addon-sales_team_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-stock_account_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-stock_operating_unit>=15.0dev,<15.1dev',
+        'odoo-addon-stock_operating_unit_access_all>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
