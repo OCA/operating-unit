@@ -11,6 +11,6 @@ def migrate(cr, installed_version):
         UPDATE stock_quant
         SET operating_unit_id = sl.operating_unit_id
         FROM stock_location sl
-        WHERE sl.id=location_id AND sl.operating_unit_id IS NOT NULL;
+        WHERE sl.id=stock_quant.location_id AND sl.operating_unit_id IS NOT NULL;
     """
     )
