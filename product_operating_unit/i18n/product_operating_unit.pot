@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,27 +14,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_operating_unit
-#: model:ir.model.fields,field_description:product_operating_unit.field_product_category__display_name
-#: model:ir.model.fields,field_description:product_operating_unit.field_product_template__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: product_operating_unit
+#. odoo-python
 #: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
 msgid "Go to Product Categories"
-msgstr ""
-
-#. module: product_operating_unit
-#: model:ir.model.fields,field_description:product_operating_unit.field_product_category__id
-#: model:ir.model.fields,field_description:product_operating_unit.field_product_template__id
-msgid "ID"
-msgstr ""
-
-#. module: product_operating_unit
-#: model:ir.model.fields,field_description:product_operating_unit.field_product_category____last_update
-#: model:ir.model.fields,field_description:product_operating_unit.field_product_template____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: product_operating_unit
@@ -45,15 +28,15 @@ msgid "Operating Units"
 msgstr ""
 
 #. module: product_operating_unit
+#: model:ir.model,name:product_operating_unit.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: product_operating_unit
 #: model:ir.model,name:product_operating_unit.model_product_category
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_product__categ_id
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_template__categ_id
 msgid "Product Category"
-msgstr ""
-
-#. module: product_operating_unit
-#: model:ir.model,name:product_operating_unit.model_product_template
-msgid "Product Template"
 msgstr ""
 
 #. module: product_operating_unit
@@ -63,6 +46,7 @@ msgid "Select category for the current product"
 msgstr ""
 
 #. module: product_operating_unit
+#. odoo-python
 #: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
 msgid ""
@@ -70,6 +54,7 @@ msgid ""
 msgstr ""
 
 #. module: product_operating_unit
+#. odoo-python
 #: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
 msgid ""

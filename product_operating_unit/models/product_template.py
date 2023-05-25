@@ -70,7 +70,7 @@ class ProductTemplate(models.Model):
                     self.env.ref(
                         "product.product_category_all", raise_if_not_found=False
                     ).name
-                except AccessError:
+                except AccessError as exc:
                     err_msg = _(
                         "You must define at least one product \
                         category within your Operating Unit in order to be \
@@ -81,7 +81,7 @@ class ProductTemplate(models.Model):
                         err_msg,
                         self.env.ref("product.product_category_action_form").id,
                         redir_msg,
-                    )
+                    ) from exc
                 return super()._get_default_category_id()
 
     categ_id = fields.Many2one(
