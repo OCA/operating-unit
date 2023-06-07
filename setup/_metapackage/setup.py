@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-account_financial_report_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-account_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-analytic_operating_unit>=15.0dev,<15.1dev',
+        'odoo-addon-analytic_operating_unit_access_all>=15.0dev,<15.1dev',
         'odoo-addon-crm_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-hr_contract_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-hr_expense_operating_unit>=15.0dev,<15.1dev',
