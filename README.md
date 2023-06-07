@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [account_financial_report_operating_unit](account_financial_report_operating_unit/) | 15.0.1.0.0 |  | Introduces Operating Unit (OU) in financial reports
 [account_operating_unit](account_operating_unit/) | 15.0.1.1.2 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [analytic_operating_unit](analytic_operating_unit/) | 15.0.1.0.1 |  | Analytic Operating Unit
+[analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Analytics
 [crm_operating_unit](crm_operating_unit/) | 15.0.1.0.0 |  | Operating Unit in CRM
 [hr_contract_operating_unit](hr_contract_operating_unit/) | 15.0.1.0.1 |  | HR Contract Operating Unit
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 15.0.1.0.0 |  | HR Expense Operating Unit
