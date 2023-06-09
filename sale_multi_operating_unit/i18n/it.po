@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-05-17 03:50+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-06-09 12:08+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model,name:sale_multi_operating_unit.model_res_company
@@ -208,7 +208,7 @@ msgstr ""
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__price_unit
 msgid "Unit Price"
-msgstr "Prezzo Unitario"
+msgstr "Prezzo unitario"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,field_description:sale_multi_operating_unit.field_sale_order_quote_line__uom_id
