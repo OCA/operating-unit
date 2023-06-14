@@ -20,11 +20,9 @@ msgstr ""
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
 #, python-format
 msgid ""
-"Configuration error. The Purchase Request and theWarehouse of picking type "
+"Configuration error. The Purchase Request and the Warehouse of picking type "
 "must belong to the same Operating Unit."
 msgstr ""
-"Erreur de configuration. La demande d'achat et l'entrepôt de prélèvement "
-"doivent appartenir à la même unité opérationnelle."
 
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
@@ -42,27 +40,6 @@ msgid ""
 msgstr ""
 "Impossible de traiter ! Vous devez sélectionner les lignes de la même unité "
 "opérationnelle."
-
-#. module: purchase_request_operating_unit
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request__display_name
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request_line__display_name
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request_line_make_purchase_order__display_name
-msgid "Display Name"
-msgstr "Nom affiché"
-
-#. module: purchase_request_operating_unit
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request__id
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request_line__id
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request_line_make_purchase_order__id
-msgid "ID"
-msgstr "ID"
-
-#. module: purchase_request_operating_unit
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request____last_update
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request_line____last_update
-#: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request_line_make_purchase_order____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: purchase_request_operating_unit
 #: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request__operating_unit_id
@@ -90,6 +67,11 @@ msgid "Purchase Request Line Make Purchase Order"
 msgstr "Ligne de demande d'achat fait Bon de commande"
 
 #. module: purchase_request_operating_unit
+#: model:ir.model,name:purchase_request_operating_unit.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
 #, python-format
 msgid ""
@@ -98,3 +80,20 @@ msgid ""
 msgstr ""
 "La société sur la demande d'achat et sur l'unité opérationnelle doit être la "
 "même."
+
+#, python-format
+#~ msgid ""
+#~ "Configuration error. The Purchase Request and theWarehouse of picking "
+#~ "type must belong to the same Operating Unit."
+#~ msgstr ""
+#~ "Erreur de configuration. La demande d'achat et l'entrepôt de prélèvement "
+#~ "doivent appartenir à la même unité opérationnelle."
+
+#~ msgid "Display Name"
+#~ msgstr "Nom affiché"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
