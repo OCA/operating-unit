@@ -17,7 +17,7 @@ msgstr ""
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
 #, python-format
 msgid ""
-"Configuration error. The Purchase Request and theWarehouse of picking type "
+"Configuration error. The Purchase Request and the Warehouse of picking type "
 "must belong to the same Operating Unit."
 msgstr ""
 
@@ -56,6 +56,11 @@ msgstr ""
 #. module: purchase_request_operating_unit
 #: model:ir.model,name:purchase_request_operating_unit.model_purchase_request_line_make_purchase_order
 msgid "Purchase Request Line Make Purchase Order"
+msgstr ""
+
+#. module: purchase_request_operating_unit
+#: model:ir.model,name:purchase_request_operating_unit.model_stock_rule
+msgid "Stock Rule"
 msgstr ""
 
 #. module: purchase_request_operating_unit
