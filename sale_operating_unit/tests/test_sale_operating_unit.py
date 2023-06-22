@@ -123,15 +123,14 @@ class TestSaleOperatingUnit(common.TransactionCase):
 
     def _confirm_sale(self, sale):
         sale.action_confirm()
-        payment = self.payment_model.create({"advance_payment_method": "delivered"})
-        sale_context = {
-            "active_id": sale.id,
-            "active_ids": sale.ids,
-            "active_model": "sale.order",
-            "open_invoices": True,
-        }
-        res = payment.with_context(**sale_context).create_invoices()
-        invoice_id = res["res_id"]
+        adv_wiz = self.payment_model.with_context(active_ids=[sale.id]).create(
+            {
+                "advance_payment_method": "percentage",
+                "amount": 100.0,
+            }
+        )
+        act = adv_wiz.with_context(open_invoices=True).create_invoices()
+        invoice_id = act["res_id"]
         return invoice_id
 
     def test_security(self):
