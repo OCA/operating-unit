@@ -30,27 +30,9 @@ msgid "Default Operating Unit"
 msgstr "Unidad Operativa Actual"
 
 #. module: hr_operating_unit
-#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_base__display_name
-#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: hr_operating_unit
 #: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__employee_ids
 msgid "Employees Allowed"
 msgstr "Empleados Permitidos"
-
-#. module: hr_operating_unit
-#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_base__id
-#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__id
-msgid "ID"
-msgstr ""
-
-#. module: hr_operating_unit
-#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_base____last_update
-#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit____last_update
-msgid "Last Modified on"
-msgstr ""
 
 #. module: hr_operating_unit
 #: model:ir.model,name:hr_operating_unit.model_operating_unit
