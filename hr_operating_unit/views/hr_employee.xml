@@ -25,9 +25,10 @@
                     name="default_operating_unit_id"
                     domain="[('id', 'in', operating_unit_ids)]"
                     options="{'no_create': True}"
+                    groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
-            <field name="company_id" position="after">
+            <xpath expr="//group/field[@name='company_id']" position="after">
                 <field
                     name="operating_unit_ids"
                     domain="[('user_ids', 'in', uid)]"
@@ -35,7 +36,7 @@
                     widget="many2many_tags"
                     options="{'no_create': True}"
                 />
-            </field>
+            </xpath>
         </field>
     </record>
 
