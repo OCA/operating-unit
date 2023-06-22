@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
@@ -22,6 +23,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
@@ -30,6 +32,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
 #, python-format
 msgid ""
@@ -38,6 +41,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
@@ -46,6 +50,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
 #, python-format
 msgid ""
@@ -54,6 +59,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
@@ -62,6 +68,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_move.py:0
 #, python-format
 msgid ""
@@ -70,6 +77,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
@@ -79,6 +87,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
