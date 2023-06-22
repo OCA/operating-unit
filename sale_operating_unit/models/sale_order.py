@@ -33,6 +33,10 @@ class SaleOrder(models.Model):
     def onchange_operating_unit_id(self):
         if self.team_id and self.team_id.operating_unit_id != self.operating_unit_id:
             self.team_id = False
+        if self.operating_unit_id:
+            self.team_id = self.env["crm.team"].search(
+                [("operating_unit_id", "=", self.operating_unit_id.id)], limit=1
+            )
 
     @api.constrains("team_id", "operating_unit_id")
     def _check_team_operating_unit(self):
