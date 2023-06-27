@@ -8,5 +8,5 @@ class SaleAdvancePaymentInv(models.TransientModel):
         invoice = super(SaleAdvancePaymentInv, self)._create_invoice(
             order, so_line, amount
         )
-        invoice.operating_unit_id = order.operating_unit_id.id
+        invoice.sudo().write({"operating_unit_id": order.operating_unit_id.id})
         return invoice
