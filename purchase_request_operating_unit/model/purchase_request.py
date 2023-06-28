@@ -53,7 +53,7 @@ class PurchaseRequest(models.Model):
                 ):
                     raise ValidationError(
                         _(
-                            "Configuration error. The Purchase Request and the"
+                            "Configuration error. The Purchase Request and the "
                             "Warehouse of picking type must belong to the same "
                             "Operating Unit."
                         )
