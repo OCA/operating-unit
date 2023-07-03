@@ -64,7 +64,7 @@ class ProductTemplate(models.Model):
             _logger.info("%s" % (ou_id.name))
             category = self.env["product.category"].search([], limit=1)
             if category:
-                return category.id
+                return category
             else:
                 try:
                     self.env.ref(
