@@ -23,7 +23,10 @@
         />
         <value
             eval="{'domain_force': &quot;[
-                '|','|',(1, '=', 1) if user.has_group('stock_operating_unit_access_all.group_all_ou_stock') else (0, '=', 1),
+                '|',(1, '=', 1) if user.has_group('stock_operating_unit_access_all.group_all_ou_stock') else (0, '=', 1),
+                '|',
+                ('warehouse_id','=',False),
+                '|',
                 ('warehouse_id.operating_unit_id','=', False),
                 ('warehouse_id.operating_unit_id','in',user.operating_unit_ids.ids)]&quot;}"
         />
@@ -37,6 +40,7 @@
         <value
             eval="{'domain_force': &quot;[
                 '|',(1, '=', 1) if user.has_group('stock_operating_unit_access_all.group_all_ou_stock') else (0, '=', 1),
+                '&amp;',
                 '|',('location_id.operating_unit_id','=',False),
                 ('location_id.operating_unit_id','in',user.operating_unit_ids.ids),
                 '|',('location_dest_id.operating_unit_id','=',False),
