@@ -33,7 +33,7 @@ addon | version | maintainers | summary
 [operating_unit](operating_unit/) | 13.0.2.1.1 |  | An operating unit (OU) is an organizational entity part of a company
 [purchase_operating_unit](purchase_operating_unit/) | 13.0.1.0.1 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 13.0.1.0.1 |  | Qweb Report With Operating Unit
-[sale_operating_unit](sale_operating_unit/) | 13.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
+[sale_operating_unit](sale_operating_unit/) | 13.0.1.1.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_operating_unit_sequence](sale_operating_unit_sequence/) | 13.0.1.0.0 |  | Sale Order Sequence by Operating Unit
 [sales_team_operating_unit](sales_team_operating_unit/) | 13.0.1.0.0 |  | Sales Team Operating Unit
 [stock_account_operating_unit](stock_account_operating_unit/) | 13.0.1.0.0 |  | Create journal entries in moves between internal locations with different operating units.
