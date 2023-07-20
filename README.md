@@ -57,7 +57,7 @@ addon | version | maintainers | summary
 [purchase_requisition_operating_unit_access_all](purchase_requisition_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Agreement
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 14.0.1.0.0 |  | Qweb Report With Operating Unit
 [sale_crm_operating_unit](sale_crm_operating_unit/) | 14.0.1.0.0 |  | Sale CRM Operating Unit
-[sale_operating_unit](sale_operating_unit/) | 14.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
+[sale_operating_unit](sale_operating_unit/) | 14.0.1.1.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_stock_operating_unit](sale_stock_operating_unit/) | 14.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_template_operating_unit](sale_template_operating_unit/) | 14.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 |  | Sales Team Operating Unit
