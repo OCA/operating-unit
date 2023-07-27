@@ -17,11 +17,12 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: sales_team_operating_unit
+#. odoo-python
 #: code:addons/sales_team_operating_unit/models/crm_team.py:0
 #, python-format
 msgid ""
-"Configuration error, The Company in the Sales Team and in the Operating Unit"
-" must be the same."
+"Configuration error, The Company in the Sales Team and in the Operating Unit "
+"must be the same."
 msgstr ""
 "Error de configuración, La Compañía en el Equipo de Ventas y en la Unidad "
 "Operativa debe ser la misma."
