@@ -4,7 +4,7 @@
 {
     "name": "Purchase Stock Operating Unit",
     "summary": "Copies the operating unit of purchase picking to the stock picking",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Purchase Management",

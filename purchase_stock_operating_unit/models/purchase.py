@@ -8,6 +8,22 @@ from odoo.exceptions import UserError
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    @api.onchange("operating_unit_id")
+    def _onchange_operating_unit_id(self):
+        if self.operating_unit_id:
+            self.picking_type_id = self.env["stock.picking.type"].search(
+                [
+                    ("warehouse_id.operating_unit_id", "=", self.operating_unit_id.id),
+                    ("code", "=", "incoming"),
+                ],
+                limit=1,
+            )
+
+    @api.onchange("picking_type_id")
+    def _onchange_picking_type_id(self):
+        if self.picking_type_id:
+            self.operating_unit_id = self.picking_type_id.warehouse_id.operating_unit_id
+
     @api.constrains("operating_unit_id", "picking_type_id")
     def _check_operating_unit_picking_type(self):
         for rec in self:

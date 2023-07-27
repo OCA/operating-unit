@@ -10,20 +10,21 @@ from odoo.addons.purchase_operating_unit.tests.test_purchase_operating_unit impo
 
 
 class TestPurchaseStockOperatingUnit(TestPurchaseOperatingUnit):
-    def setUp(self):
-        super().setUp()
-        self.warehouse_b2b = self.env.ref("stock_operating_unit.stock_warehouse_b2b")
-        self.picking_type2 = self.env["stock.picking.type"].search(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.warehouse_b2b = cls.env.ref("stock_operating_unit.stock_warehouse_b2b")
+        cls.picking_type2 = cls.env["stock.picking.type"].search(
             [
                 ("code", "=", "incoming"),
-                ("warehouse_id", "=", self.warehouse_b2b.id),
+                ("warehouse_id", "=", cls.warehouse_b2b.id),
             ],
             limit=1,
         )
         # Add permission b2b operating unit in user1
-        self.b2b = self.env.ref("operating_unit.b2b_operating_unit")
-        user = self.env["res.users"].browse(self.user1_id)
-        user.operating_unit_ids = [(4, self.b2b.id)]
+        cls.b2b = cls.env.ref("operating_unit.b2b_operating_unit")
+        user = cls.env["res.users"].browse(cls.user1_id)
+        user.operating_unit_ids = [(4, cls.b2b.id)]
 
     def test_01_purchase_stock_operating_unit(self):
         self.assertEqual(self.purchase1.state, "purchase")

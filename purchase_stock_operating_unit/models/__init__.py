@@ -2,3 +2,4 @@
 
 from . import purchase_order_line
 from . import purchase
+from . import stock_rule
