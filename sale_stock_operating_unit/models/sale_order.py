@@ -2,38 +2,15 @@
 # Jordi Ballester Alomar
 # Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import SUPERUSER_ID, _, api, fields, models
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.model
-    def _default_warehouse_id(self):
-        res = super(SaleOrder, self)._default_warehouse_id()
-        team = self._get_default_team()
-        warehouses = self.env["stock.warehouse"].search(
-            [
-                (
-                    "operating_unit_id",
-                    "=",
-                    team.with_user(SUPERUSER_ID).operating_unit_id.id,
-                )
-            ],
-            limit=1,
-        )
-        if warehouses:
-            return warehouses
-        return res
-
-    warehouse_id = fields.Many2one(
-        comodel_name="stock.warehouse", default=_default_warehouse_id
-    )
-
     @api.onchange("team_id")
-    def onchange_team_id(self):
-        res = super(SaleOrder, self).onchange_team_id()
+    def _onchange_team_id(self):
         if (
             self.team_id
             and self.team_id.operating_unit_id
@@ -46,10 +23,8 @@ class SaleOrder(models.Model):
             if warehouses:
                 self.warehouse_id = warehouses[0]
 
-        return res
-
     @api.onchange("operating_unit_id")
-    def onchange_operating_unit_id(self):
+    def _onchange_operating_unit_id(self):
         if (
             self.operating_unit_id
             and self.operating_unit_id.id != self.warehouse_id.operating_unit_id.id
@@ -61,7 +36,7 @@ class SaleOrder(models.Model):
                 self.warehouse_id = warehouses[0]
 
     @api.onchange("warehouse_id")
-    def onchange_warehouse_id(self):
+    def _onchange_warehouse_id(self):
         if self.warehouse_id:
             self.operating_unit_id = self.warehouse_id.operating_unit_id
             if (
