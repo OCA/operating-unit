@@ -15,7 +15,6 @@ class ProductProduct(models.Model):
                 if operating_unit_id
                 else True
             )
-            and r.company_id.id in [self.env.company.id, False]
         )
         return sellers
 
