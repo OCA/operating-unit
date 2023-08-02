@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2016-17 ForgeFlow S.L.
+     Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="crm_team_view_search" model="ir.ui.view">
+        <field name="name">Case Teams - Search</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_search" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="crm_team_view_form" model="ir.ui.view">
+        <field name="name">crm.team.form</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="before">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    domain="[('user_ids', 'in', uid)]"
+                    options="{'no_create': True}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="crm_team_view_tree" model="ir.ui.view">
+        <field name="name">crm.team.tree</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_tree" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

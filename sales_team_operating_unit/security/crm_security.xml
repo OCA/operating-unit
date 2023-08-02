@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-17 ForgeFlow S.L.
+     Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="ir_rule_crm_team_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="sales_team.model_crm_team" />
+        <field name="domain_force">
+            ['|',('operating_unit_id','=',False),('operating_unit_id','in',
+            user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Sales Teams from allowed operating units</field>
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+        <field name="global" eval="True" />
+    </record>
+</odoo>
