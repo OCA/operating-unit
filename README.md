@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [analytic_operating_unit](analytic_operating_unit/) | 16.0.1.0.0 |  | Analytic Operating Unit
 [operating_unit](operating_unit/) | 16.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
+[sales_team_operating_unit](sales_team_operating_unit/) | 16.0.1.0.0 |  | Sales Team Operating Unit
 
 [//]: # (end addons)
 
