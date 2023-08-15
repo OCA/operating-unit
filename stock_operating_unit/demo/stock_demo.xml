@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L.
+     Copyright 2019 Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo noupdate="1">
+    <!-- Shelf 2 stock location -->
+    <record id="stock.stock_location_14" model="stock.location">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit" />
+    </record>
+    <!-- Shelf 1 stock location -->
+    <record id="stock.stock_location_components" model="stock.location">
+        <field name="operating_unit_id" ref="operating_unit.main_operating_unit" />
+    </record>
+    <!-- Multi Company -->
+    <!-- Child Company 1-->
+    <record id="stock.res_company_1" model="res.company">
+        <field name="name">Your company child</field>
+    </record>
+    <record id="operating_unit_shop0" model="operating.unit">
+        <field name="name">Chicago</field>
+        <field name="code">CH</field>
+        <field name="partner_id" ref="stock.res_partner_company_1" />
+        <field name="company_id" ref="stock.res_company_1" />
+    </record>
+    <!-- Chicago Warehouse -->
+    <record id="stock.stock_warehouse_shop0" model="stock.warehouse">
+        <field name="operating_unit_id" ref="operating_unit_shop0" />
+    </record>
+    <!-- Your Company, Chicago shop -->
+    <record id="stock.stock_location_shop0" model="stock.location">
+        <field name="operating_unit_id" ref="operating_unit_shop0" />
+    </record>
+    <!--B2B-->
+    <record id="stock_warehouse_b2b" model="stock.warehouse">
+        <field name="name">B2B Warehouse</field>
+        <field name="code">B2B</field>
+        <field name="partner_id" ref="base.main_partner" />
+        <field name="company_id" ref="base.main_company" />
+        <field name="operating_unit_id" ref="operating_unit.b2b_operating_unit" />
+    </record>
+    <!-- B2C -->
+    <record id="stock_warehouse_b2c" model="stock.warehouse">
+        <field name="name">B2C Warehouse</field>
+        <field name="code">B2C</field>
+        <field name="partner_id" ref="base.main_partner" />
+        <field name="company_id" ref="base.main_company" />
+        <field name="operating_unit_id" ref="operating_unit.b2c_operating_unit" />
+    </record>
+</odoo>
