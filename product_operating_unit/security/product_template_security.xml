@@ -1,0 +1,33 @@
+<!--
+    Copyright (c) 2019 brain-tec AG (http://www.braintec-group.com)
+    Copyright (C) 2019 Open Source Integrators
+    Copyright (C) 2019 Serpent Consulting Services
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+-->
+<odoo>
+
+    <record id="ir_rule_product_template_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="domain_force">['|', ('operating_unit_ids', '=', False),
+            ('operating_unit_ids', 'in', user.operating_unit_ids.ids)]</field>
+        <field name="name">Product Templates from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_product_category_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="product.model_product_category" />
+        <field name="domain_force">['|', ('operating_unit_ids', '=', False),
+            ('operating_unit_ids', 'in', user.operating_unit_ids.ids)]</field>
+        <field name="name">Product Category from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+</odoo>
