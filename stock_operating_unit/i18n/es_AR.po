@@ -17,6 +17,7 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
@@ -27,6 +28,7 @@ msgstr ""
 "ser la misma. "
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
@@ -37,6 +39,7 @@ msgstr ""
 "Unidad Operativa debe ser la misma."
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
 #, python-format
 msgid ""
@@ -47,16 +50,18 @@ msgstr ""
 "la Unidad Operativa debe ser la misma."
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
-"Configuration error. The Company in the Stock Warehouse and in the Operating"
-" Unit must be the same."
+"Configuration error. The Company in the Stock Warehouse and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Error de Configuración. La Compañía en el Almacén de Inventario y en la "
 "Unidad Operativa debe ser la misma."
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
 #, python-format
 msgid ""
@@ -67,6 +72,7 @@ msgstr ""
 "misma que la del almacén del Tipo de Transferencia."
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
@@ -77,6 +83,7 @@ msgstr ""
 "a la misma Unidad Operativa."
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_move.py:0
 #, python-format
 msgid ""
@@ -88,7 +95,7 @@ msgstr ""
 "Operativa solicitada."
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:0
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
@@ -99,6 +106,7 @@ msgstr ""
 "ubicaciones internas."
 
 #. module: stock_operating_unit
+#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
