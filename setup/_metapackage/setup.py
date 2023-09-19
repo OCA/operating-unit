@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo-addon-mis_builder_operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-mis_builder_operating_unit_access_all>=15.0dev,<15.1dev',
         'odoo-addon-mrp_operating_unit>=15.0dev,<15.1dev',
+        'odoo-addon-mrp_operating_unit_access_all>=15.0dev,<15.1dev',
         'odoo-addon-operating_unit>=15.0dev,<15.1dev',
         'odoo-addon-operating_unit_access_all>=15.0dev,<15.1dev',
         'odoo-addon-project_operating_unit>=15.0dev,<15.1dev',
