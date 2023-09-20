@@ -36,14 +36,17 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <xpath
+                expr="//group[@name='additional_info']/field[@name='company_id']"
+                position="after"
+            >
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"
                     domain="[('company_id','=', company_id)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
-            </field>
+            </xpath>
         </field>
     </record>
     <record id="view_location_tree2" model="ir.ui.view">
