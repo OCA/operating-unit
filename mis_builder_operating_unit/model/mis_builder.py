@@ -11,14 +11,20 @@ class MisReportInstance(models.Model):
 
     _inherit = "mis.report.instance"
 
-    operating_unit_ids = fields.Many2many("operating.unit", string="Operating Unit",)
+    operating_unit_ids = fields.Many2many(
+        "operating.unit",
+        string="Operating Unit",
+    )
 
 
 class MisReportInstancePeriod(models.Model):
 
     _inherit = "mis.report.instance.period"
 
-    operating_unit_ids = fields.Many2many("operating.unit", string="Operating Unit",)
+    operating_unit_ids = fields.Many2many(
+        "operating.unit",
+        string="Operating Unit",
+    )
 
     def _get_additional_move_line_filter(self):
         aml_domain = super(

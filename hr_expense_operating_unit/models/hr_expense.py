@@ -14,7 +14,7 @@ class HrExpenseExpense(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=lambda self: self.env["res.users"].operating_unit_default_get(),
-        index=True
+        index=True,
     )
 
     def action_submit_expenses(self):
@@ -99,7 +99,7 @@ class HrExpenseSheet(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=lambda self: self.env["res.users"].operating_unit_default_get(),
-        index=True
+        index=True,
     )
 
     @api.onchange("operating_unit_id")

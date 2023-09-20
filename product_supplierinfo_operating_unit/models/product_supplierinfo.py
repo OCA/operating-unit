@@ -23,5 +23,7 @@ class SupplierInfo(models.Model):
     _inherit = "product.supplierinfo"
 
     operating_unit_id = fields.Many2one(
-        comodel_name="operating.unit", string="Operating Unit", index=True,
+        comodel_name="operating.unit",
+        string="Operating Unit",
+        index=True,
     )

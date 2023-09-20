@@ -36,7 +36,7 @@ class TestOperatingUnit(common.TransactionCase):
         )
 
     def _create_user(self, login, group, company, operating_units, context=None):
-        """ Create a user. """
+        """Create a user."""
         user = self.res_users_model.create(
             {
                 "name": "Test User",
@@ -53,7 +53,7 @@ class TestOperatingUnit(common.TransactionCase):
         return user
 
     def _create_operating_unit(self, uid, name, code):
-        """ Create Operating Unit"""
+        """Create Operating Unit"""
         ou = (
             self.env["operating.unit"]
             .with_user(uid)

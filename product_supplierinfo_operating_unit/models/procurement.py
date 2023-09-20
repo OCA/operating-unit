@@ -21,5 +21,6 @@ class StockRule(models.Model):
 
     def _run_buy(self, procurements):
         return super(
-            StockRule, self.with_context(operating_unit_id=self.operating_unit_id.id),
+            StockRule,
+            self.with_context(operating_unit_id=self.operating_unit_id.id),
         )._run_buy(procurements)
