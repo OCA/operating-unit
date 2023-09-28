@@ -117,6 +117,7 @@ class AccountMove(models.Model):
 
     @api.onchange("journal_id")
     def _onchange_journal(self):
+        super()._onchange_journal()
         if (
             self.journal_id
             and self.journal_id.operating_unit_id
