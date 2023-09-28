@@ -20,5 +20,5 @@ msgstr ""
 
 #. module: hr_contract_operating_unit
 #: model:ir.model.fields,field_description:hr_contract_operating_unit.field_hr_contract__operating_unit_id
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""

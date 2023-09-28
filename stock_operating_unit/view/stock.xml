@@ -129,7 +129,7 @@
             </field>
             <filter name="picking_type" position="before">
                 <filter
-                    string="Operating Unit"
+                    string="Management ID"
                     name="operating_unit_grouped"
                     domain="[('user_ids', 'in', uid)]"
                     context="{'group_by':'operating_unit_id'}"

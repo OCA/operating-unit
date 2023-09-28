@@ -32,7 +32,7 @@ class PurchaseOrder(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
+        string="Management ID",
         states=READONLY_STATES,
         default=lambda self: (
             self.env["res.users"].operating_unit_default_get(self.env.uid)
@@ -41,7 +41,7 @@ class PurchaseOrder(models.Model):
 
     requesting_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Requesting Operating Unit",
+        string="Requesting Management ID",
         states=READONLY_STATES,
         default=lambda self: (
             self.env["res.users"].operating_unit_default_get(self.env.uid)
@@ -74,7 +74,7 @@ class PurchaseOrder(models.Model):
                     _(
                         "Configuration error. The Quotation / Purchase Order "
                         "and the Warehouse of picking type must belong to the "
-                        "same Operating Unit."
+                        "same Management ID."
                     )
                 )
 
@@ -89,7 +89,7 @@ class PurchaseOrder(models.Model):
                 raise ValidationError(
                     _(
                         "Configuration error. The Company in the Purchase Order "
-                        "and in the Operating Unit must be the same."
+                        "and in the Management ID must be the same."
                     )
                 )
 
@@ -108,7 +108,7 @@ class PurchaseOrder(models.Model):
             else:
                 raise UserError(
                     _(
-                        "No Warehouse found with the Operating Unit indicated "
+                        "No Warehouse found with the Management ID indicated "
                         "in the Purchase Order"
                     )
                 )
@@ -124,5 +124,5 @@ class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     operating_unit_id = fields.Many2one(
-        related="order_id.operating_unit_id", string="Operating Unit"
+        related="order_id.operating_unit_id", string="Management ID"
     )

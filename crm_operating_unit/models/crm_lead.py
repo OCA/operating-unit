@@ -17,7 +17,7 @@ class CRMLead(models.Model):
 
     operating_unit_id = fields.Many2one(
         "operating.unit",
-        "Operating Unit",
+        "Management ID",
         related="team_id.operating_unit_id",
         default=_get_default_operating_unit,
     )

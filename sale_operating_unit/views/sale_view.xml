@@ -53,7 +53,7 @@
         <field name="arch" type="xml">
             <filter name="my_sale_orders_filter" position="after">
                 <filter
-                    string="Operating Unit"
+                    string="Management ID"
                     name="operating_unit_grouped"
                     groups="operating_unit.group_multi_operating_unit"
                     context="{'group_by':'operating_unit_id'}"

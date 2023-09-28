@@ -10,7 +10,7 @@ class StockPicking(models.Model):
 
     operating_unit_id = fields.Many2one(
         "operating.unit",
-        "Requesting Operating Unit",
+        "Requesting Management ID",
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
@@ -34,7 +34,7 @@ class StockPicking(models.Model):
                 raise UserError(
                     _(
                         "Configuration error. The Company in the Stock Picking "
-                        "and in the Operating Unit must be the same."
+                        "and in the Management ID must be the same."
                     )
                 )
 
@@ -49,7 +49,7 @@ class StockPicking(models.Model):
             ):
                 raise UserError(
                     _(
-                        "Configuration error. The Operating Unit of the picking "
+                        "Configuration error. The Management ID of the picking "
                         "must be the same as that of the warehouse of the "
                         "Picking Type."
                     )

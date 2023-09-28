@@ -9,11 +9,11 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     operating_unit_id = fields.Many2one(
-        related="location_id.operating_unit_id", string="Source Location Operating Unit"
+        related="location_id.operating_unit_id", string="Source Location Management ID"
     )
     operating_unit_dest_id = fields.Many2one(
         related="location_dest_id.operating_unit_id",
-        string="Dest. Location Operating Unit",
+        string="Dest. Location Management ID",
     )
 
     @api.constrains("picking_id", "location_id", "location_dest_id")
@@ -27,6 +27,6 @@ class StockMove(models.Model):
                     _(
                         "Configuration error. The Stock moves must "
                         "be related to a location (source or destination) "
-                        "that belongs to the requesting Operating Unit."
+                        "that belongs to the requesting Management ID."
                     )
                 )

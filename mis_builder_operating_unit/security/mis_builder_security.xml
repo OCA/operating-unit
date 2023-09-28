@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
+<odoo noupdate="1">
     <!--Copyright 2015-19 Eficent Business and IT Consulting Services S.L. - -->
     <!--Jordi Ballester Alomar-->
     <!--Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya-->
@@ -9,7 +9,7 @@
         <field
             name="domain_force"
         >['|',('operating_unit_ids','=',False),('operating_unit_ids','in',[g.id for g in user.operating_unit_ids])]</field>
-        <field name="name">MIS Reports from allowed operating units</field>
+        <field name="name">MIS Reports from allowed management IDs</field>
         <field name="global" eval="True" />
         <field eval="1" name="perm_unlink" />
         <field eval="1" name="perm_write" />

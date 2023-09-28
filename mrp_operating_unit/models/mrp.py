@@ -12,7 +12,7 @@ class MrpProduction(models.Model):
 
     operating_unit_id = fields.Many2one(
         "operating.unit",
-        "Operating Unit",
+        "Management ID",
         readonly=True,
         states={"confirmed": [("readonly", False)], "draft": [("readonly", False)]},
         default=lambda self: self.env["res.users"].operating_unit_default_get(
@@ -23,12 +23,12 @@ class MrpProduction(models.Model):
     @api.constrains("operating_unit_id", "location_src_id", "location_dest_id")
     def _check_location_operating_unit(self):
         for mo in self:
-            # no operating unit on mo but on locations
+            # no management ID on mo but on locations
             no_mo_ou = not mo.operating_unit_id and (
                 mo.location_src_id.operating_unit_id
                 or mo.location_dest_id.operating_unit_id
             )
-            # operating unit on mo but not on locations
+            # management ID on mo but not on locations
             different_ou = mo.operating_unit_id and (
                 mo.operating_unit_id != mo.location_src_id.operating_unit_id
                 or mo.operating_unit_id != mo.location_dest_id.operating_unit_id
@@ -37,7 +37,7 @@ class MrpProduction(models.Model):
             if no_mo_ou or different_ou:
                 raise ValidationError(
                     _(
-                        "The Operating Unit of the Manufacturing Order must match "
+                        "The Management ID of the Manufacturing Order must match "
                         "with that of the Raw Materials and Finished Product "
                         "Locations."
                     )
@@ -46,11 +46,11 @@ class MrpProduction(models.Model):
 
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit_id(self):
-        """Change locations according to the warehouse of the operating unit"""
+        """Change locations according to the warehouse of the management ID"""
         if not self.operating_unit_id:
             return
 
-        # Take first warehouse with the current operating unit
+        # Take first warehouse with the current management ID
         wh = self.env["stock.warehouse"].search(
             [("operating_unit_id", "=", self.operating_unit_id.id)], limit=1
         )

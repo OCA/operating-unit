@@ -45,7 +45,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@expand='0']" position="after">
                 <filter
-                    string="Operating Unit"
+                    string="Management ID"
                     name="operating_unit_grouped"
                     context="{'group_by': 'operating_unit_id'}"
                     groups="operating_unit.group_multi_operating_unit"

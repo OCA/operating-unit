@@ -26,7 +26,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. The Quotation / Purchase Order and the Warehouse of "
-"picking type must belong to the same Operating Unit."
+"picking type must belong to the same Management ID."
 msgstr ""
 
 #. module: purchase_operating_unit
@@ -48,7 +48,7 @@ msgstr ""
 #: code:addons/purchase_operating_unit/models/purchase_order.py:0
 #, python-format
 msgid ""
-"No Warehouse found with the Operating Unit indicated in the Purchase Order"
+"No Warehouse found with the Management ID indicated in the Purchase Order"
 msgstr ""
 
 #. module: purchase_operating_unit
@@ -56,7 +56,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.purchase_order_line_search
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_filter
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: purchase_operating_unit
@@ -71,14 +71,14 @@ msgstr ""
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__requesting_operating_unit_id
-msgid "Requesting Operating Unit"
+msgid "Requesting Management ID"
 msgstr ""
 
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/account_invoice.py:0
 #, python-format
 msgid ""
-"The operating unit of the purchase order must be the same as in the "
+"The management ID of the purchase order must be the same as in the "
 "associated invoices."
 msgstr ""
 

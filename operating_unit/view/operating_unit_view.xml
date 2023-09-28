@@ -4,7 +4,7 @@
         <field name="name">operating.unit.form</field>
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
-            <form string="Operating Unit">
+            <form string="Management ID">
                 <group name="main_group">
                     <field name="name" />
                     <field name="code" />
@@ -19,7 +19,7 @@
         <field name="name">operating.unit.tree</field>
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
-            <tree string="Operating Unit">
+            <tree string="Management ID">
                 <field name="code" />
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
@@ -30,19 +30,19 @@
         <field name="name">operating.unit.search</field>
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
-            <search string="Search Operating Unit">
-                <field name="name" string="Operating Unit" />
+            <search string="Search Management ID">
+                <field name="name" string="Management ID" />
                 <field name="code" string="Code" />
             </search>
         </field>
     </record>
     <record id="action_operating_unit_tree" model="ir.actions.act_window">
-        <field name="name">Operating Units</field>
+        <field name="name">Management IDs</field>
         <field name="res_model">operating.unit</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-            Click to start a new Operating Unit.
+            Click to start a new Management ID.
           </p>
         </field>
     </record>

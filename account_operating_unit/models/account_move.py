@@ -10,7 +10,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     operating_unit_id = fields.Many2one(
-        comodel_name="operating.unit", domain="[('user_ids', '=', uid)]"
+        comodel_name="operating.unit", domain="[('user_ids', '=', uid)]", string="Management ID",
     )
 
     @api.model_create_multi
@@ -43,7 +43,7 @@ class AccountMoveLine(models.Model):
                 raise UserError(
                     _(
                         "Configuration error. The Company in the"
-                        " Move Line and in the Operating Unit must "
+                        " Move Line and in the Management ID must "
                         "be the same."
                     )
                 )
@@ -59,7 +59,7 @@ class AccountMoveLine(models.Model):
             ):
                 raise UserError(
                     _(
-                        "Configuration error. The Operating Unit in"
+                        "Configuration error. The Management ID in"
                         " the Move Line and in the Move must be the"
                         " same."
                     )
@@ -82,9 +82,10 @@ class AccountMove(models.Model):
         comodel_name="operating.unit",
         default=_default_operating_unit_id,
         domain="[('user_ids', '=', uid)]",
-        help="This operating unit will be defaulted in the move lines.",
+        help="This management ID will be defaulted in the move lines.",
         readonly=True,
         states={"draft": [("readonly", False)]},
+        string="Management ID",
     )
 
     @api.onchange("invoice_line_ids")
@@ -130,7 +131,7 @@ class AccountMove(models.Model):
             raise UserError(
                 _(
                     "Configuration error. You need to define an"
-                    "inter-operating unit clearing account in the "
+                    "inter-management ID clearing account in the "
                     "company settings"
                 )
             )
@@ -165,7 +166,7 @@ class AccountMove(models.Model):
             if not move.company_id.ou_is_self_balanced:
                 continue
 
-            # If all move lines point to the same operating unit, there's no
+            # If all move lines point to the same management ID, there's no
             # need to create a balancing move line
             ou_list_ids = {
                 line.operating_unit_id and line.operating_unit_id.id
@@ -181,7 +182,7 @@ class AccountMove(models.Model):
                 # If the OU is already balanced, then do not continue
                 if move.company_id.currency_id.is_zero(ou_balances[ou_id]):
                     continue
-                # Create a balancing move line in the operating unit
+                # Create a balancing move line in the management ID
                 # clearing account
                 line_data = self._prepare_inter_ou_balancing_move_line(
                     move, ou_id, ou_balances
@@ -209,8 +210,8 @@ class AccountMove(models.Model):
                 if not line.operating_unit_id:
                     raise UserError(
                         _(
-                            "Configuration error. The operating unit is "
-                            "mandatory for each line as the operating unit "
+                            "Configuration error. The management ID is "
+                            "mandatory for each line as the management ID "
                             "has been defined as self-balanced at company "
                             "level."
                         )
@@ -255,7 +256,7 @@ class AccountMove(models.Model):
                 raise UserError(
                     _(
                         "The Company in the Move and in "
-                        "Operating Unit must be the same."
+                        "Management ID must be the same."
                     )
                 )
         return True

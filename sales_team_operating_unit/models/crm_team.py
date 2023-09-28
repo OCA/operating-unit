@@ -13,6 +13,7 @@ class CrmTeam(models.Model):
     operating_unit_id = fields.Many2one(
         "operating.unit",
         default=lambda self: self.env["res.users"].operating_unit_default_get(),
+        string="Management ID",
     )
 
     @api.constrains("operating_unit_id", "company_id")
@@ -27,6 +28,6 @@ class CrmTeam(models.Model):
                     _(
                         "Configuration error, "
                         "The Company in the Sales Team and in the "
-                        "Operating Unit must be the same."
+                        "Management ID must be the same."
                     )
                 )

@@ -28,7 +28,7 @@ class ResUsers(models.Model):
         comodel_name="operating.unit",
         compute="_compute_operating_unit_ids",
         inverse="_inverse_operating_unit_ids",
-        string="Allowed Operating Units",
+        string="Management IDs",
         compute_sudo=True,
     )
 
@@ -37,13 +37,17 @@ class ResUsers(models.Model):
         relation="operating_unit_users_rel",
         column1="user_id",
         column2="operating_unit_id",
-        string="Operating Units",
+        string="Assigned Management IDs",
         default=lambda self: self._default_operating_units(),
     )
 
+    def _accessible_operating_units(self):
+        """Return the OUs the user can access"""
+        return self.mapped("operating_unit_ids")
+
     default_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Default Operating Unit",
+        string="Default Management ID",
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
     )

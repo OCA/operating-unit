@@ -8,7 +8,7 @@ from odoo import api, fields, models
 class OperatingUnit(models.Model):
 
     _name = "operating.unit"
-    _description = "Operating Unit"
+    _description = "Management ID"
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)
@@ -32,12 +32,12 @@ class OperatingUnit(models.Model):
         (
             "code_company_uniq",
             "unique (code,company_id)",
-            "The code of the operating unit must " "be unique per company!",
+            "The code of the management ID must " "be unique per company!",
         ),
         (
             "name_company_uniq",
             "unique (name,company_id)",
-            "The name of the operating unit must " "be unique per company!",
+            "The name of the management ID must " "be unique per company!",
         ),
     ]
 

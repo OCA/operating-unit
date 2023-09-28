@@ -12,7 +12,7 @@ class HrExpenseExpense(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
+        string="Management ID",
         default=lambda self: self.env["res.users"].operating_unit_default_get(),
     )
 
@@ -71,8 +71,8 @@ class HrExpenseExpense(models.Model):
             raise ValidationError(
                 _(
                     "You cannot submit the Expenses having "
-                    "different Operating Units or with "
-                    "no Operating Unit"
+                    "different Management IDs or with "
+                    "no Management ID"
                 )
             )
         sheet.write({"operating_unit_id": self.mapped("operating_unit_id").id})
@@ -96,7 +96,7 @@ class HrExpenseSheet(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
+        string="Management ID",
         default=lambda self: self.env["res.users"].operating_unit_default_get(),
     )
 
@@ -118,6 +118,6 @@ class HrExpenseSheet(models.Model):
                 raise ValidationError(
                     _(
                         """Configuration error. The company in
-                the Expense and in the Operating Unit must be the same"""
+                the Expense and in the Management ID must be the same"""
                     )
                 )

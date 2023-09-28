@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="base.view_company_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook/page/group" position="after">
-                <group string="Operating Units">
+                <group string="Management IDs">
                     <field name="ou_is_self_balanced" />
                     <field name="inter_ou_clearing_account_id" />
                 </group>

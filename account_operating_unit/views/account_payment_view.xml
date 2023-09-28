@@ -28,7 +28,7 @@
                     groups="operating_unit.group_multi_operating_unit"
                 />
                 <filter
-                    string="Operating Unit"
+                    string="Management ID"
                     name="operating_unit_grouped"
                     domain="[]"
                     context="{'group_by': 'operating_unit_id'}"

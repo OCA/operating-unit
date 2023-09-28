@@ -17,7 +17,7 @@ msgstr ""
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
 msgid ""
 "Activate if your company is required to generate a balanced balance sheet "
-"for each operating unit."
+"for each management ID."
 msgstr ""
 
 #. module: account_operating_unit
@@ -30,14 +30,14 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. If defined as self-balanced at company level, the "
-"operating unit is mandatory in bank journal."
+"management ID is mandatory in bank journal."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/res_company.py:0
 #, python-format
 msgid ""
-"Configuration error. Please provide an Inter-operating unit clearing "
+"Configuration error. Please provide an Inter-management ID clearing "
 "account."
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid ""
-"Configuration error. The Company in the Move Line and in the Operating Unit "
+"Configuration error. The Company in the Move Line and in the Management ID "
 "must be the same."
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid ""
-"Configuration error. The Operating Unit in the Move Line and in the Move "
+"Configuration error. The Management ID in the Move Line and in the Move "
 "must be the same."
 msgstr ""
 
@@ -61,21 +61,21 @@ msgstr ""
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid ""
-"Configuration error. The operating unit is mandatory for each line as the "
-"operating unit has been defined as self-balanced at company level."
+"Configuration error. The management ID is mandatory for each line as the "
+"management ID has been defined as self-balanced at company level."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid ""
-"Configuration error. You need to define aninter-operating unit clearing "
+"Configuration error. You need to define aninter-management ID clearing "
 "account in the company settings"
 msgstr ""
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__inter_ou_clearing_account_id
-msgid "Inter-operating unit clearing account"
+msgid "Inter-management ID clearing account"
 msgstr ""
 
 #. module: account_operating_unit
@@ -109,24 +109,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_invoice_report_search
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_move_line_filter
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_payment_search
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_bank_statement_import_journal_creation__operating_unit_id
 #: model:ir.model.fields,help:account_operating_unit.field_account_journal__operating_unit_id
 msgid ""
-"Operating Unit that will be used in payments, when this journal is used."
+"Management ID that will be used in payments, when this journal is used."
 msgstr ""
 
 #. module: account_operating_unit
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_company_form
-msgid "Operating Units"
+msgid "Management IDs"
 msgstr ""
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__ou_is_self_balanced
-msgid "Operating Units are self-balanced"
+msgid "Management IDs are self-balanced"
 msgstr ""
 
 #. module: account_operating_unit
@@ -137,7 +137,7 @@ msgstr ""
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
-msgid "The Company in the Move and in Operating Unit must be the same."
+msgid "The Company in the Move and in Management ID must be the same."
 msgstr ""
 
 #. module: account_operating_unit
@@ -149,5 +149,5 @@ msgstr ""
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_move__operating_unit_id
-msgid "This operating unit will be defaulted in the move lines."
+msgid "This management ID will be defaulted in the move lines."
 msgstr ""

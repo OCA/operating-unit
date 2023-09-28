@@ -17,7 +17,7 @@ msgstr ""
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:0
 #, python-format
 msgid ""
-"Configuration error. The Company in the Expense and in the Operating Unit "
+"Configuration error. The Company in the Expense and in the Management ID "
 "must be the same."
 msgstr ""
 
@@ -26,7 +26,7 @@ msgstr ""
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:0
 #, python-format
 msgid ""
-"Configuration error. The Operating Unit in the Expense sheet and in the "
+"Configuration error. The Management ID in the Expense sheet and in the "
 "Expense must be the same."
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. The company in\n"
-"                the Expense and in the Operating Unit must be the same"
+"                the Expense and in the Management ID must be the same"
 msgstr ""
 
 #. module: hr_expense_operating_unit
@@ -51,13 +51,13 @@ msgstr ""
 #. module: hr_expense_operating_unit
 #: model:ir.model.fields,field_description:hr_expense_operating_unit.field_hr_expense__operating_unit_id
 #: model:ir.model.fields,field_description:hr_expense_operating_unit.field_hr_expense_sheet__operating_unit_id
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: hr_expense_operating_unit
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:0
 #, python-format
 msgid ""
-"You cannot submit the Expenses having different Operating Units or with no "
-"Operating Unit"
+"You cannot submit the Expenses having different Management IDs or with no "
+"Management ID"
 msgstr ""

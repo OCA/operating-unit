@@ -17,7 +17,7 @@ msgstr ""
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
-"Configuration Error. The Operating Unit of the Warehouse and the Location "
+"Configuration Error. The Management ID of the Warehouse and the Location "
 "must be the same. "
 msgstr ""
 
@@ -49,7 +49,7 @@ msgstr ""
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
 #, python-format
 msgid ""
-"Configuration error. The Operating Unit of the picking must be the same as "
+"Configuration error. The Management ID of the picking must be the same as "
 "that of the warehouse of the Picking Type."
 msgstr ""
 
@@ -58,7 +58,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. The Parent Stock Location must belong to the same "
-"Operating Unit."
+"Management ID."
 msgstr ""
 
 #. module: stock_operating_unit
@@ -66,7 +66,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. The Stock moves must be related to a location (source "
-"or destination) that belongs to the requesting Operating Unit."
+"or destination) that belongs to the requesting Management ID."
 msgstr ""
 
 #. module: stock_operating_unit
@@ -74,7 +74,7 @@ msgstr ""
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
-"Configuration error. The operating unit should be assigned to internal "
+"Configuration error. The management ID should be assigned to internal "
 "locations only."
 msgstr ""
 
@@ -83,12 +83,12 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. This location is assigned to a warehouse that belongs "
-"to a different operating unit."
+"to a different management ID."
 msgstr ""
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_dest_id
-msgid "Dest. Location Operating Unit"
+msgid "Dest. Location Management ID"
 msgstr ""
 
 #. module: stock_operating_unit
@@ -106,17 +106,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_rule__operating_unit_id
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:stock_operating_unit.view_picking_internal_search
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__operating_unit_id
-msgid "Requesting Operating Unit"
+msgid "Requesting Management ID"
 msgstr ""
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_id
-msgid "Source Location Operating Unit"
+msgid "Source Location Management ID"
 msgstr ""
 
 #. module: stock_operating_unit

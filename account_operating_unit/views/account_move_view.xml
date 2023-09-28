@@ -44,7 +44,7 @@
             </field>
             <filter name="group_by_account" position="after">
                 <filter
-                    string="Operating Unit"
+                    string="Management ID"
                     name="operating_unit_grouped"
                     icon="terp-folder-green"
                     context="{'group_by':'operating_unit_id'}"
@@ -151,7 +151,7 @@
             </field>
             <filter name="salesperson" position="after">
                 <filter
-                    string="Operating Unit"
+                    string="Management ID"
                     name="operating_unit_grouped"
                     icon="terp-folder-orange"
                     domain="[]"

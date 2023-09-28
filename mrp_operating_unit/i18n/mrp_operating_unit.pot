@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: mrp_operating_unit
 #: model:ir.model.fields,field_description:mrp_operating_unit.field_mrp_production__operating_unit_id
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: mrp_operating_unit
@@ -32,6 +32,6 @@ msgstr ""
 #: code:addons/mrp_operating_unit/models/mrp.py:0
 #, python-format
 msgid ""
-"The Operating Unit of the Manufacturing Order must match with that of the "
+"The Management ID of the Manufacturing Order must match with that of the "
 "Raw Materials and Finished Product Locations."
 msgstr ""

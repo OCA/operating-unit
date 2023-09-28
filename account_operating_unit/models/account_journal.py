@@ -12,8 +12,9 @@ class AccountJournal(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         domain="[('user_ids', '=', uid)]",
-        help="Operating Unit that will be used in payments, "
+        help="Management ID that will be used in payments, "
         "when this journal is used.",
+        string="Management ID",
     )
 
     @api.constrains("type")
@@ -28,7 +29,7 @@ class AccountJournal(models.Model):
                     _(
                         "Configuration error. If defined as "
                         "self-balanced at company level, the "
-                        "operating unit is mandatory in bank "
+                        "management ID is mandatory in bank "
                         "journal."
                     )
                 )

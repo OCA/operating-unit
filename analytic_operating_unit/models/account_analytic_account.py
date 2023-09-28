@@ -9,7 +9,7 @@ class AccountAnalyticAccount(models.Model):
 
     operating_unit_ids = fields.Many2many(
         comodel_name="operating.unit",
-        string="Operating Units",
+        string="Management IDs",
         relation="analytic_account_operating_unit_rel",
         column1="analytic_account_id",
         column2="operating_unit_id",

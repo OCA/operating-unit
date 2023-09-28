@@ -18,7 +18,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Configuration error. It is not possible to change this team. There are sale "
-"orders referencing it in other operating units"
+"orders referencing it in other management IDs"
 msgstr ""
 
 #. module: sale_operating_unit
@@ -33,7 +33,7 @@ msgstr ""
 #: code:addons/sale_operating_unit/models/sale_order.py:0
 #, python-format
 msgid ""
-"Configuration error. The Operating Unit of the sales team must match with "
+"Configuration error. The Management ID of the sales team must match with "
 "that of the quote/sales order."
 msgstr ""
 
@@ -43,7 +43,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale_operating_unit.field_sale_report__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:sale_operating_unit.view_sale_report_search
 #: model_terms:ir.ui.view,arch_db:sale_operating_unit.view_sales_order_filter
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: sale_operating_unit

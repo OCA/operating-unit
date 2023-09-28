@@ -19,7 +19,7 @@ class StockWarehouse(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
+        string="Management ID",
         default=_default_operating_unit,
     )
 
@@ -34,7 +34,7 @@ class StockWarehouse(models.Model):
                 raise UserError(
                     _(
                         "Configuration error. The Company in the Stock Warehouse"
-                        " and in the Operating Unit must be the same."
+                        " and in the Management ID must be the same."
                     )
                 )
 
@@ -53,7 +53,7 @@ class StockWarehouseOrderPoint(models.Model):
             ):
                 raise UserError(
                     _(
-                        "Configuration Error. The Operating Unit of the "
+                        "Configuration Error. The Management ID of the "
                         "Warehouse and the Location must be the same. "
                     )
                 )

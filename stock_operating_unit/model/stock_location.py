@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
-    operating_unit_id = fields.Many2one("operating.unit", "Operating Unit")
+    operating_unit_id = fields.Many2one("operating.unit", "Management ID")
 
     @api.constrains("operating_unit_id")
     def _check_warehouse_operating_unit(self):
@@ -29,7 +29,7 @@ class StockLocation(models.Model):
                         _(
                             "Configuration error. This location is "
                             "assigned to a warehouse that belongs to"
-                            " a different operating unit."
+                            " a different management ID."
                         )
                     )
 
@@ -39,14 +39,14 @@ class StockLocation(models.Model):
             if rec.usage not in ("supplier", "customer") and not rec.operating_unit_id:
                 raise UserError(
                     _(
-                        "Configuration error. The operating unit should be "
+                        "Configuration error. The management ID should be "
                         "assigned to internal locations only."
                     )
                 )
             if rec.usage in ("supplier", "customer") and rec.operating_unit_id:
                 raise UserError(
                     _(
-                        "Configuration error. The operating unit should be "
+                        "Configuration error. The management ID should be "
                         "assigned to internal locations only."
                     )
                 )
@@ -62,7 +62,7 @@ class StockLocation(models.Model):
                 raise UserError(
                     _(
                         "Configuration error. The Company in the Stock Location "
-                        "and in the Operating Unit must be the same."
+                        "and in the Management ID must be the same."
                     )
                 )
 
@@ -78,6 +78,6 @@ class StockLocation(models.Model):
                 raise UserError(
                     _(
                         "Configuration error. The Parent Stock Location "
-                        "must belong to the same Operating Unit."
+                        "must belong to the same Management ID."
                     )
                 )

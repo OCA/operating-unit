@@ -18,7 +18,7 @@ class SaleOrder(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
+        string="Management ID",
         default=_default_operating_unit,
         readonly=True,
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
@@ -73,5 +73,5 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     operating_unit_id = fields.Many2one(
-        related="order_id.operating_unit_id", string="Operating Unit", store=True,
+        related="order_id.operating_unit_id", string="Management ID", store=True,
     )

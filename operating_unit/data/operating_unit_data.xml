@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <!-- Basic Operating Unit  -->
+    <!-- Basic Management ID  -->
     <record id="main_operating_unit" model="operating.unit">
-        <field name="name">Main Operating Unit</field>
+        <field name="name">Main Management ID</field>
         <field name="code">OU1</field>
         <field name="partner_id" ref="base.main_partner" />
     </record>

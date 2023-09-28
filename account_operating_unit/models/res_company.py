@@ -11,14 +11,14 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     inter_ou_clearing_account_id = fields.Many2one(
-        comodel_name="account.account", string="Inter-operating unit clearing account",
+        comodel_name="account.account", string="Inter-management ID clearing account",
     )
     ou_is_self_balanced = fields.Boolean(
-        string="Operating Units are self-balanced",
+        string="Management IDs are self-balanced",
         help="Activate if your company is "
         "required to generate a balanced"
         " balance sheet for each "
-        "operating unit.",
+        "management ID.",
     )
 
     @api.constrains("ou_is_self_balanced", "inter_ou_clearing_account_id")
@@ -28,6 +28,6 @@ class ResCompany(models.Model):
                 raise UserError(
                     _(
                         "Configuration error. Please provide an "
-                        "Inter-operating unit clearing account."
+                        "Inter-management ID clearing account."
                     )
                 )

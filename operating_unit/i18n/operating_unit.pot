@@ -19,13 +19,13 @@ msgid "Active"
 msgstr ""
 
 #. module: operating_unit
-#: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
-msgid "Allowed Operating Units"
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
+msgid "Allowed Management IDs"
 msgstr ""
 
 #. module: operating_unit
 #: model_terms:ir.actions.act_window,help:operating_unit.action_operating_unit_tree
-msgid "Click to start a new Operating Unit."
+msgid "Click to start a new Management ID."
 msgstr ""
 
 #. module: operating_unit
@@ -51,7 +51,7 @@ msgstr ""
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_res_users__default_operating_unit_id
-msgid "Default Operating Unit"
+msgid "Default Management ID"
 msgstr ""
 
 #. module: operating_unit
@@ -81,12 +81,12 @@ msgstr ""
 
 #. module: operating_unit
 #: model:res.groups,name:operating_unit.group_manager_operating_unit
-msgid "Manager of Operating Units"
+msgid "Manager of Management IDs"
 msgstr ""
 
 #. module: operating_unit
 #: model:res.groups,name:operating_unit.group_multi_operating_unit
-msgid "Multiple Operating Unit"
+msgid "Multiple Management ID"
 msgstr ""
 
 #. module: operating_unit
@@ -99,20 +99,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_form
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_tree
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
 
 #. module: operating_unit
 #: model:ir.actions.act_window,name:operating_unit.action_operating_unit_tree
 #: model:ir.model.fields,field_description:operating_unit.field_res_users__assigned_operating_unit_ids
 #: model:ir.ui.menu,name:operating_unit.menu_action_operating_unit_tree
-#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
-msgid "Operating Units"
+msgid "Management IDs"
 msgstr ""
 
 #. module: operating_unit
 #: model:ir.module.category,name:operating_unit.module_operating_units
-msgid "Operating Units Group"
+msgid "Management IDs Group"
 msgstr ""
 
 #. module: operating_unit
@@ -122,17 +121,17 @@ msgstr ""
 
 #. module: operating_unit
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
-msgid "Search Operating Unit"
+msgid "Search Management ID"
 msgstr ""
 
 #. module: operating_unit
 #: model:ir.model.constraint,message:operating_unit.constraint_operating_unit_code_company_uniq
-msgid "The code of the operating unit must be unique per company!"
+msgid "The code of the management ID must be unique per company!"
 msgstr ""
 
 #. module: operating_unit
 #: model:ir.model.constraint,message:operating_unit.constraint_operating_unit_name_company_uniq
-msgid "The name of the operating unit must be unique per company!"
+msgid "The name of the management ID must be unique per company!"
 msgstr ""
 
 #. module: operating_unit

@@ -2,13 +2,13 @@
 <!-- Copyright 2019 ForgeFlow S.L.
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
-<odoo>
+<odoo noupdate="1">
     <record id="ir_rule_sale_order_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="sale.model_sale_order" />
         <field
             name="domain_force"
-        >['|',('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]</field>
-        <field name="name">Sales Orders from allowed operating units</field>
+        >['|',('operating_unit_id','=',False),('operating_unit_id','in', user._accessible_operating_units().ids)]</field>
+        <field name="name">Sales Orders from allowed management IDs</field>
         <field name="global" eval="True" />
         <field eval="0" name="perm_unlink" />
         <field eval="0" name="perm_write" />
@@ -19,8 +19,8 @@
         <field name="model_id" ref="sale.model_sale_order_line" />
         <field
             name="domain_force"
-        >['|',('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]</field>
-        <field name="name">Sales Order lines from allowed operating units</field>
+        >['|',('operating_unit_id','=',False),('operating_unit_id','in', user._accessible_operating_units().ids)]</field>
+        <field name="name">Sales Order lines from allowed management IDs</field>
         <field name="global" eval="True" />
         <field eval="0" name="perm_unlink" />
         <field eval="0" name="perm_write" />
@@ -31,8 +31,8 @@
         <field name="model_id" ref="sale.model_sale_report" />
         <field
             name="domain_force"
-        >['|',('operating_unit_id','=',False),('operating_unit_id','in', user.operating_unit_ids.ids)]</field>
-        <field name="name">Sales Report from allowed operating units</field>
+        >['|',('operating_unit_id','=',False),('operating_unit_id','in', user._accessible_operating_units().ids)]</field>
+        <field name="name">Sales Report from allowed management IDs</field>
         <field name="global" eval="True" />
         <field eval="0" name="perm_unlink" />
         <field eval="0" name="perm_write" />

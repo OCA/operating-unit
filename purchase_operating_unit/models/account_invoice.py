@@ -12,7 +12,7 @@ class AccountMove(models.Model):
     @api.onchange("purchase_vendor_bill_id", "purchase_id")
     def _onchange_purchase_auto_complete(self):
         """
-        Override to add Operating Unit from Purchase Order to Invoice.
+        Override to add Management ID from Purchase Order to Invoice.
         """
         purchase_id = self.purchase_id
         if self.purchase_vendor_bill_id.purchase_order_id:
@@ -25,7 +25,7 @@ class AccountMove(models.Model):
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit_id(self):
         """
-        Show only the purchase orders that have the same operating unit
+        Show only the purchase orders that have the same management ID
         """
         return {
             "domain": {
@@ -46,7 +46,7 @@ class AccountMoveLine(models.Model):
             ):
                 raise exceptions.ValidationError(
                     _(
-                        "The operating unit of the purchase order must "
+                        "The management ID of the purchase order must "
                         "be the same as in the associated invoices."
                     )
                 )

@@ -20,5 +20,5 @@ msgstr ""
 
 #. module: crm_operating_unit
 #: model:ir.model.fields,field_description:crm_operating_unit.field_crm_lead__operating_unit_id
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""

@@ -20,5 +20,5 @@ msgstr ""
 
 #. module: analytic_operating_unit
 #: model:ir.model.fields,field_description:analytic_operating_unit.field_account_analytic_account__operating_unit_ids
-msgid "Operating Units"
+msgid "Management IDs"
 msgstr ""

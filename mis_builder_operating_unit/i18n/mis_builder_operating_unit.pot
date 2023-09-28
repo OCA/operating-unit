@@ -26,5 +26,6 @@ msgstr ""
 #. module: mis_builder_operating_unit
 #: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance__operating_unit_ids
 #: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance_period__operating_unit_ids
-msgid "Operating Unit"
+msgid "Management ID"
 msgstr ""
+

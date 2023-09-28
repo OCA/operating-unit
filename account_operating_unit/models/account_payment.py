@@ -19,6 +19,7 @@ class AccountPayment(models.Model):
         domain="[('user_ids', '=', uid)]",
         compute="_compute_operating_unit_id",
         store=True,
+        string="Management ID",
     )
 
     def _prepare_payment_moves(self):
