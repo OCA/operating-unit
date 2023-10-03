@@ -14,7 +14,11 @@ class ResUsers(models.Model):
         if not uid2:
             uid2 = self.env.user.id
         user = self.env["res.users"].browse(uid2)
-        return user.default_operating_unit_id
+        return (
+            user.default_operating_unit_id
+            if (user.sudo().default_operating_unit_id.company_id == self.env.company)
+            else False
+        )
 
     @api.model
     def _default_operating_unit(self):
