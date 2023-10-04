@@ -1,0 +1,52 @@
+<odoo>
+    <record id="work_acceptance_evaluation_report_tree_view" model="ir.ui.view">
+        <field name="name">work.acceptance.evaluation.report.tree.view</field>
+        <field name="model">work.acceptance.evaluation.report</field>
+        <field
+            name="inherit_id"
+            ref="purchase_work_acceptance_evaluation.work_acceptance_evaluation_report_tree_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='note']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    optional="hide"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="work_acceptance_evaluation_report_form_view" model="ir.ui.view">
+        <field name="name">work.acceptance.evaluation.report.form.view</field>
+        <field name="model">work.acceptance.evaluation.report</field>
+        <field
+            name="inherit_id"
+            ref="purchase_work_acceptance_evaluation.work_acceptance_evaluation_report_form_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='note']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="work_acceptance_evaluation_report_search_view" model="ir.ui.view">
+        <field name="name">work.acceptance.evaluation.report.search.view</field>
+        <field name="model">work.acceptance.evaluation.report</field>
+        <field
+            name="inherit_id"
+            ref="purchase_work_acceptance_evaluation.work_acceptance_evaluation_report_search_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                 <filter
+                    name="group_operating_unit_id"
+                    string="Operating Unit"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
