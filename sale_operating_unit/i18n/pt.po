@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_operating_unit
+# 	* sale_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,9 @@ msgstr ""
 #. module: sale_operating_unit
 #: code:addons/sale_operating_unit/models/crm_team.py:20
 #, python-format
-msgid "Configuration error. It is not possible to change this team. There are sale orders referencing it in other operating units"
+msgid ""
+"Configuration error. It is not possible to change this team. There are sale "
+"orders referencing it in other operating units"
 msgstr ""
 "Erro de configuração. Não é possível alterar esta equipa. Há encomendas de "
 "vendas a referenciá-la noutra unidades operacionais"
@@ -27,7 +29,9 @@ msgstr ""
 #. module: sale_operating_unit
 #: code:addons/sale_operating_unit/models/sale_order.py:55
 #, python-format
-msgid "Configuration error. The Company in the Sales Order and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Sales Order and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Erro de configuração. A Empresa na Encomenda de Venda e na Unidade "
 "Operacional tem que ser a mesma."
@@ -35,7 +39,9 @@ msgstr ""
 #. module: sale_operating_unit
 #: code:addons/sale_operating_unit/models/sale_order.py:45
 #, python-format
-msgid "Configuration error. The Operating Unit of the sales team must match with that of the quote/sales order."
+msgid ""
+"Configuration error. The Operating Unit of the sales team must match with "
+"that of the quote/sales order."
 msgstr ""
 "Erro de configuração. A Unidade Operacional da equipa de vendas tem que "
 "corresponder à da cotação / encomenda de venda."
