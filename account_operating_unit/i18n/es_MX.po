@@ -49,8 +49,7 @@ msgstr ""
 #: code:addons/account_operating_unit/models/res_company.py:0
 #, python-format
 msgid ""
-"Configuration error. Please provide an Inter-operating unit clearing "
-"account."
+"Configuration error. Please provide an Inter-operating unit clearing account."
 msgstr ""
 "Error de configuración. Proporcione una cuenta de compensación de unidades "
 "interoperativas."
@@ -178,7 +177,8 @@ msgstr "Registrar pago"
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The Company in the Move and in Operating Unit must be the same."
-msgstr "La Empresa en el movimiento y en la Unidad Operativa debe ser la misma."
+msgstr ""
+"La Empresa en el movimiento y en la Unidad Operativa debe ser la misma."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/wizards/account_payment_register.py:0
