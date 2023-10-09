@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sales_team_operating_unit
+# 	* sales_team_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,9 @@ msgstr ""
 #. module: sales_team_operating_unit
 #: code:addons/sales_team_operating_unit/models/crm_team.py:25
 #, python-format
-msgid "Configuration error, The Company in the Sales Team and in the Operating Unit must be the same."
+msgid ""
+"Configuration error, The Company in the Sales Team and in the Operating Unit "
+"must be the same."
 msgstr ""
 "Erro de configuração. A Empresa na Equipa de Vendas e na Unidade Operacional "
 "tem que ser a mesma."
