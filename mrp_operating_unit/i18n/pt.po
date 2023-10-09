@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mrp_operating_unit
+# 	* mrp_operating_unit
 #
 msgid ""
 msgstr ""
@@ -36,7 +36,9 @@ msgstr "Regra de Stock"
 #: code:addons/mrp_operating_unit/models/mrp.py:37
 #: code:addons/mrp_operating_unit/models/mrp.py:45
 #, python-format
-msgid "The Operating Unit of the Manufacturing Order must match with that of the Raw Materials and Finished Product Locations."
+msgid ""
+"The Operating Unit of the Manufacturing Order must match with that of the "
+"Raw Materials and Finished Product Locations."
 msgstr ""
 "A Unidade Operacional da Ordem de Produção tem que corresponder à das "
 "Localizações das Matérias-Primas e dos Produtos Acabados."
