@@ -54,15 +54,16 @@ msgstr "Seleccione la categoría para el producto actual"
 #, python-format
 msgid ""
 "The operating units of the product must include the ones from the category."
-msgstr "Las unidades operativas del producto deben incluir las de la categoría."
+msgstr ""
+"Las unidades operativas del producto deben incluir las de la categoría."
 
 #. module: product_operating_unit
 #. odoo-python
 #: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
 msgid ""
-"You must define at least one product                         category within"
-" your Operating Unit in order to be                         able to create "
+"You must define at least one product                         category within "
+"your Operating Unit in order to be                         able to create "
 "products."
 msgstr ""
 "Debe definir al menos una categoría de "
