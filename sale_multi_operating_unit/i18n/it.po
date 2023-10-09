@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_multi_operating_unit
+# 	* sale_multi_operating_unit
 #
 msgid ""
 msgstr ""
@@ -196,7 +196,9 @@ msgstr "Subtotale"
 
 #. module: sale_multi_operating_unit
 #: model:ir.model.fields,help:sale_multi_operating_unit.field_res_company__lead_description_template
-msgid "Template used to provide the information for an operating unit to quote another."
+msgid ""
+"Template used to provide the information for an operating unit to quote "
+"another."
 msgstr ""
 
 #. module: sale_multi_operating_unit
@@ -225,5 +227,7 @@ msgstr ""
 #. module: sale_multi_operating_unit
 #: code:addons/sale_multi_operating_unit/models/sale_order_quote.py:52
 #, python-format
-msgid "You cannot create an internal quote for the same operating unit as the sale order!"
+msgid ""
+"You cannot create an internal quote for the same operating unit as the sale "
+"order!"
 msgstr ""
