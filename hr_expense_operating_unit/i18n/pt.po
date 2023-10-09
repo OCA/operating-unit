@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* hr_expense_operating_unit
+# 	* hr_expense_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,19 +19,24 @@ msgstr ""
 #. module: hr_expense_operating_unit
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:24
 #, python-format
-msgid "Configuration error. The Company in the Expense and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Expense and in the Operating Unit "
+"must be the same."
 msgstr ""
 
 #. module: hr_expense_operating_unit
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:35
 #, python-format
-msgid "Configuration error. The Operating Unit in the Expense sheet and in the Expense must be the same."
+msgid ""
+"Configuration error. The Operating Unit in the Expense sheet and in the "
+"Expense must be the same."
 msgstr ""
 
 #. module: hr_expense_operating_unit
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:80
 #, python-format
-msgid "Configuration error. The company in\n"
+msgid ""
+"Configuration error. The company in\n"
 "                the Expense and in the Operating Unit must be the same"
 msgstr ""
 
@@ -54,5 +59,7 @@ msgstr "Unidade Operacional"
 #. module: hr_expense_operating_unit
 #: code:addons/hr_expense_operating_unit/models/hr_expense.py:44
 #, python-format
-msgid "You cannot submit the Expenses having different Operating Units or with no Operating Unit"
+msgid ""
+"You cannot submit the Expenses having different Operating Units or with no "
+"Operating Unit"
 msgstr ""
