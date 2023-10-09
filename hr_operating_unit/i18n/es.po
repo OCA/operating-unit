@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* hr_operating_unit
+# 	* hr_operating_unit
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2019-05-13 11:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -40,4 +41,3 @@ msgstr "Unidad Operativa"
 #: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee__operating_unit_ids
 msgid "Operating Units"
 msgstr "Unidades Operativas"
-
