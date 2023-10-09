@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_operating_unit
+# 	* purchase_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,9 @@ msgstr ""
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:84
 #, python-format
-msgid "Configuration error. The Company in the Purchase Order and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Purchase Order and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Errore di configurazione. L'azienda nell'Ordine di Acquisto e nell'Unità "
 "Operativa deve essere la stessa."
@@ -27,7 +29,9 @@ msgstr ""
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:73
 #, python-format
-msgid "Configuration error. The Quotation / Purchase Order and the Warehouse of picking type must belong to the same Operating Unit."
+msgid ""
+"Configuration error. The Quotation / Purchase Order and the Warehouse of "
+"picking type must belong to the same Operating Unit."
 msgstr ""
 "Errore di configurazione. La RdP / Ordine di Acquisto e il Magazzino del "
 "tipo di operazione devono appartenere alla stessa Unità Operativa."
@@ -50,7 +54,8 @@ msgstr "Riga fattura"
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:100
 #, python-format
-msgid "No Warehouse found with the Operating Unit indicated in the Purchase Order"
+msgid ""
+"No Warehouse found with the Operating Unit indicated in the Purchase Order"
 msgstr ""
 "Non è stato trovato un Magazzino con l'Unità Operativa indicata nell'Ordine "
 "di Acquisto"
@@ -88,7 +93,9 @@ msgstr "Unità Operativa Richiedente"
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/account_invoice.py:43
 #, python-format
-msgid "The operating unit of the purchase order must be the same as in the associated invoices."
+msgid ""
+"The operating unit of the purchase order must be the same as in the "
+"associated invoices."
 msgstr ""
 "L'unità operativa dell'ordine di acquisto deve essere la stessa delle "
 "fatture associate."
