@@ -50,8 +50,8 @@ msgstr ""
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
-"Configuration error. The Company in the Stock Warehouse and in the Operating"
-" Unit must be the same."
+"Configuration error. The Company in the Stock Warehouse and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Errore di Configurazione. L'Azienda nel Magazzino di Stoccaggio e nell'Unità "
 "Operativa devono essere uguali."
@@ -88,7 +88,6 @@ msgstr ""
 "richiedente."
 
 #. module: stock_operating_unit
-#: code:addons/stock_operating_unit/model/stock_location.py:0
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
