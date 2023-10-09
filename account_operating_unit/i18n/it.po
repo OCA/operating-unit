@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_operating_unit
+# 	* account_operating_unit
 #
 msgid ""
 msgstr ""
@@ -18,7 +18,9 @@ msgstr ""
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
-msgid "Activate if your company is required to generate a balanced balance sheet for each operating unit."
+msgid ""
+"Activate if your company is required to generate a balanced balance sheet "
+"for each operating unit."
 msgstr ""
 "Da attivare se la tua azienda è tenuta a generare un bilancio in pareggio "
 "per ogni Unità Operativa."
@@ -31,37 +33,50 @@ msgstr "Aziende"
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_journal.py:26
 #, python-format
-msgid "Configuration error. If defined as self-balanced at company level, the operating unit is mandatory in bank journal."
+msgid ""
+"Configuration error. If defined as self-balanced at company level, the "
+"operating unit is mandatory in bank journal."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/res_company.py:30
 #, python-format
-msgid "Configuration error. Please provide an                Inter-operating unit clearing account."
+msgid ""
+"Configuration error. Please provide an                Inter-operating unit "
+"clearing account."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:40
 #, python-format
-msgid "Configuration error. The Company in the Move Line and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Move Line and in the Operating Unit "
+"must be the same."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:51
 #, python-format
-msgid "Configuration error. The Operating Unit in the Move Line and in the Move must be the same."
+msgid ""
+"Configuration error. The Operating Unit in the Move Line and in the Move "
+"must be the same."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:146
 #, python-format
-msgid "Configuration error. The operating                    unit is mandatory for each line as the operating                    unit has been defined as self-balanced at company level."
+msgid ""
+"Configuration error. The operating                    unit is mandatory for "
+"each line as the operating                    unit has been defined as self-"
+"balanced at company level."
 msgstr ""
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:70
 #, python-format
-msgid "Configuration error. You need to define an             inter-operating unit clearing account in the company settings"
+msgid ""
+"Configuration error. You need to define an             inter-operating unit "
+"clearing account in the company settings"
 msgstr ""
 
 #. module: account_operating_unit
@@ -71,7 +86,9 @@ msgstr ""
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__inter_ou_clearing_account_id
-msgid "Inter-operating unit                                                   clearing account"
+msgid ""
+"Inter-operating unit                                                   "
+"clearing account"
 msgstr ""
 
 #. module: account_operating_unit
@@ -122,7 +139,8 @@ msgstr ""
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_bank_statement_import_journal_creation__operating_unit_id
 #: model:ir.model.fields,help:account_operating_unit.field_account_journal__operating_unit_id
-msgid "Operating Unit that will be used in payments, when this journal is used."
+msgid ""
+"Operating Unit that will be used in payments, when this journal is used."
 msgstr ""
 
 #. module: account_operating_unit
