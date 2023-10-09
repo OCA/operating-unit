@@ -44,8 +44,7 @@ msgstr ""
 #: code:addons/account_operating_unit/models/res_company.py:0
 #, python-format
 msgid ""
-"Configuration error. Please provide an Inter-operating unit clearing "
-"account."
+"Configuration error. Please provide an Inter-operating unit clearing account."
 msgstr ""
 "Errore di configurazione. Per favore Fornisci un conto di compensazione tra "
 "unità operative."
@@ -198,7 +197,6 @@ msgid "The Company in the Move and in Operating Unit must be the same."
 msgstr "L'azienda nei movimenti e nelle unità operativa deve essere la stessa."
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:0
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The OU in the Move and in Journal must be the same."
