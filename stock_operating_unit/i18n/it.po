@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_operating_unit
+# 	* stock_operating_unit
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_warehouse.py:51
 #, python-format
-msgid "Configuration Error. The Operating Unit of the Warehouse and the Location must be the same. "
+msgid ""
+"Configuration Error. The Operating Unit of the Warehouse and the Location "
+"must be the same. "
 msgstr ""
 "Errore di Configurazione. l'Unità operativa del Magazzino e la Sede devono "
 "essere uguali. "
@@ -27,7 +29,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_location.py:46
 #, python-format
-msgid "Configuration error. The Company in the Stock Location and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Stock Location and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Errore di Configurazione. L'Azienda nella Sede del Magazzino e nell'Unità "
 "Operativa devono essere uguali."
@@ -35,7 +39,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_picking.py:35
 #, python-format
-msgid "Configuration error. The Company in the Stock Picking and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Stock Picking and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Errore di Configurazione. L'Azienda nel Magazzino di Prelievo e nell'Unità "
 "Operativa devono essere uguali."
@@ -43,7 +49,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_warehouse.py:34
 #, python-format
-msgid "Configuration error. The Company in the Stock Warehouse and in the Operating Unit must be the same."
+msgid ""
+"Configuration error. The Company in the Stock Warehouse and in the Operating "
+"Unit must be the same."
 msgstr ""
 "Errore di Configurazione. L'Azienda nel Magazzino di Stoccaggio e nell'Unità "
 "Operativa devono essere uguali."
@@ -51,7 +59,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_picking.py:47
 #, python-format
-msgid "Configuration error. The Operating Unit of the picking must be the same as that of the warehouse of the Picking Type."
+msgid ""
+"Configuration error. The Operating Unit of the picking must be the same as "
+"that of the warehouse of the Picking Type."
 msgstr ""
 "Errore di Configurazione. L'Unità Operativa del prelievo deve essere uguale "
 "a quella nel magazzino della Tipologia prelievo."
@@ -59,7 +69,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_location.py:60
 #, python-format
-msgid "Configuration error. The Parent Stock Location must belong to the same Operating Unit."
+msgid ""
+"Configuration error. The Parent Stock Location must belong to the same "
+"Operating Unit."
 msgstr ""
 "Errore di Configurazione. La Sede del Magazzino Principale deve appartenere "
 "alla stessa Unità Operativa."
@@ -67,7 +79,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_location.py:35
 #, python-format
-msgid "Configuration error. The operating unit should be assigned to internal locations only."
+msgid ""
+"Configuration error. The operating unit should be assigned to internal "
+"locations only."
 msgstr ""
 "Errore di Configurazione. L'Unità Operativa dovrebbe essere assegnata solo a "
 "postazioni interne."
@@ -75,7 +89,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_move.py:29
 #, python-format
-msgid "Configuration error. The stock move must be related to a location (source or destination) that belongs to the requesting Operating Unit."
+msgid ""
+"Configuration error. The stock move must be related to a location (source or "
+"destination) that belongs to the requesting Operating Unit."
 msgstr ""
 "Errore di Configurazione. Il movimento di Magazzino deve essere collegato "
 "alla sede ( fonte o destinazione ) che appartiene all'Unità Operativa "
@@ -84,7 +100,9 @@ msgstr ""
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/models/stock_location.py:25
 #, python-format
-msgid "Configuration error. This location is assigned to a warehouse that belongs to a different operating unit."
+msgid ""
+"Configuration error. This location is assigned to a warehouse that belongs "
+"to a different operating unit."
 msgstr ""
 "Errore di Configurazione. Questa sede è assegnata ad un magazzino che "
 "appartiene a diverse unità operative."
