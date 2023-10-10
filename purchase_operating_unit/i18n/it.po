@@ -46,6 +46,7 @@ msgstr "Consegna a"
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__display_name
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__display_name
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
@@ -54,6 +55,7 @@ msgstr "Nome visualizzato"
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move_line__id
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__id
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__id
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__id
 msgid "ID"
 msgstr "ID"
 
@@ -72,6 +74,7 @@ msgstr "Movimento contabile"
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move_line____last_update
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order____last_update
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line____last_update
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
@@ -87,8 +90,10 @@ msgstr ""
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__operating_unit_id
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__operating_unit_id
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.purchase_order_line_search
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_filter
+#: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_search
 msgid "Operating Unit"
 msgstr "Unità operativa"
 
@@ -101,6 +106,11 @@ msgstr "Ordine di acquisto"
 #: model:ir.model,name:purchase_operating_unit.model_purchase_order_line
 msgid "Purchase Order Line"
 msgstr "Riga ordine di acquisto"
+
+#. module: purchase_operating_unit
+#: model:ir.model,name:purchase_operating_unit.model_purchase_report
+msgid "Purchase Report"
+msgstr ""
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__requesting_operating_unit_id
