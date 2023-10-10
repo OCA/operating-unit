@@ -17,6 +17,7 @@
     "license": "LGPL-3",
     "data": [
         "security/purchase_security.xml",
+        "report/purchase_report_view.xml",
         "views/purchase_order_view.xml",
         "views/purchase_order_line_view.xml",
     ],
