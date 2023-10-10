@@ -7,7 +7,7 @@
     "name": "Operating Unit in Purchase Orders",
     "summary": "Adds the concecpt of operating unit (OU) in purchase order "
     "management",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.1.0",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
