@@ -34,8 +34,10 @@ msgstr ""
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__operating_unit_id
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__operating_unit_id
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.purchase_order_line_search
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_filter
+#: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_search
 msgid "Operating Unit"
 msgstr ""
 
@@ -47,6 +49,11 @@ msgstr ""
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_purchase_order_line
 msgid "Purchase Order Line"
+msgstr ""
+
+#. module: purchase_operating_unit
+#: model:ir.model,name:purchase_operating_unit.model_purchase_report
+msgid "Purchase Report"
 msgstr ""
 
 #. module: purchase_operating_unit
