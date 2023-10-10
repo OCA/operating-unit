@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* product_operating_unit
+# 	* product_operating_unit
 #
 msgid ""
 msgstr ""
@@ -48,11 +48,15 @@ msgstr ""
 #. module: product_operating_unit
 #: code:addons/product_operating_unit/models/product_template.py:34
 #, python-format
-msgid "The operating units of the product must include the ones from the category."
+msgid ""
+"The operating units of the product must include the ones from the category."
 msgstr ""
 
 #. module: product_operating_unit
 #: code:addons/product_operating_unit/models/product_template.py:57
 #, python-format
-msgid "You must define at least one product                         category within your Operating Unit in order to be                         able to create products."
+msgid ""
+"You must define at least one product                         category within "
+"your Operating Unit in order to be                         able to create "
+"products."
 msgstr ""
