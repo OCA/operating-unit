@@ -17,11 +17,7 @@ class PurchaseOrder(models.Model):
         types = type_obj.search(
             [
                 ("code", "=", "incoming"),
-                (
-                    "warehouse_id.operating_unit_id",
-                    "=",
-                    operating_unit and operating_unit.id,
-                ),
+                ("warehouse_id.operating_unit_id", "=", operating_unit.id),
             ]
         )
         if types:
