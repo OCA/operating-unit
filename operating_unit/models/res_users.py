@@ -17,7 +17,7 @@ class ResUsers(models.Model):
         return (
             user.default_operating_unit_id
             if (user.sudo().default_operating_unit_id.company_id == self.env.company)
-            else False
+            else self.env["operating.unit"]
         )
 
     @api.model
