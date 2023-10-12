@@ -2,12 +2,10 @@
 <odoo>
 
     <!--FORM view-->
-    <record id="contract_contract_customer_form_view" model="ir.ui.view">
-        <field
-            name="name"
-        >contract.contract form view (in contract_payment_mode)</field>
+    <record id="contract_contract_form_view" model="ir.ui.view">
+        <field name="name">contract.contract.form.view</field>
         <field name="model">contract.contract</field>
-        <field name="inherit_id" ref="contract.contract_contract_customer_form_view" />
+        <field name="inherit_id" ref="contract.contract_contract_form_view" />
         <field name="arch" type="xml">
             <field name="tag_ids" position="after">
                 <field
@@ -58,24 +56,5 @@
             </xpath>
         </field>
     </record>
-
-
-        <!--Supplier FORM view-->
-    <record id="contract_contract_supplier_form_view" model="ir.ui.view">
-        <field
-            name="name"
-        >contract.contract supplier form view (in contract_payment_mode)</field>
-        <field name="model">contract.contract</field>
-        <field name="priority">18</field>
-        <field name="inherit_id" ref="contract.contract_contract_supplier_form_view" />
-        <field name="arch" type="xml">
-            <field name="tag_ids" position="after">
-                <field
-                    name="operating_unit_id"
-                    groups="operating_unit.group_multi_operating_unit"
-                />
-            </field>
-        </field>
-        </record>
 
 </odoo>
