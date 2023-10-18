@@ -26,6 +26,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
+msgid "Configuration error. Internal locations should have an operating unit"
+msgstr ""
+
+#. module: stock_operating_unit
+#. odoo-python
+#: code:addons/stock_operating_unit/model/stock_location.py:0
+#, python-format
 msgid ""
 "Configuration error. The Company in the Stock Location and in the Operating "
 "Unit must be the same."
@@ -78,7 +85,6 @@ msgstr ""
 
 #. module: stock_operating_unit
 #. odoo-python
-#: code:addons/stock_operating_unit/model/stock_location.py:0
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid ""
