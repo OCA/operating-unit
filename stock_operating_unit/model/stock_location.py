@@ -42,8 +42,7 @@ class StockLocation(models.Model):
             if rec.usage not in ("supplier", "customer") and not rec.operating_unit_id:
                 raise UserError(
                     _(
-                        "Configuration error. The operating unit should be "
-                        "assigned to internal locations only."
+                        "Configuration error. Internal locations should have an operating unit"
                     )
                 )
             if rec.usage in ("supplier", "customer") and rec.operating_unit_id:
