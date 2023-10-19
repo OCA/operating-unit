@@ -61,7 +61,7 @@ addon | version | maintainers | summary
 [sale_stock_operating_unit](sale_stock_operating_unit/) | 14.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_template_operating_unit](sale_template_operating_unit/) | 14.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 14.0.1.0.0 |  | Sales Team Operating Unit
-[stock_operating_unit](stock_operating_unit/) | 14.0.1.0.2 |  | Adds the concept of operating unit (OU) in stock management
+[stock_operating_unit](stock_operating_unit/) | 14.0.1.0.3 |  | Adds the concept of operating unit (OU) in stock management
 [stock_operating_unit_access_all](stock_operating_unit_access_all/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Stock
 
 [//]: # (end addons)
