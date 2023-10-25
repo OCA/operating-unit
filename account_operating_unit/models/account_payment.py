@@ -33,6 +33,8 @@ class AccountPayment(models.Model):
         if invoices and len(invoices_ou) == 1 and invoices_ou != self.operating_unit_id:
             destination_account_id = self.destination_account_id.id
             for line in lines:
-                if line["account_id"] == destination_account_id:
+                if not line.get("operating_unit_id", False) or (
+                    line["account_id"] == destination_account_id
+                ):
                     line["operating_unit_id"] = invoices_ou.id
         return lines

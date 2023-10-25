@@ -105,27 +105,16 @@
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </xpath>
-<!--            <xpath-->
-<!--                expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']"-->
-<!--                position="attributes"-->
-<!--            >-->
-<!--                <attribute name="domain">-->
-<!--                    ['|', ('company_id', '=', parent.company_id), ('company_id', '=',-->
-<!--                    False), '|', ('operating_unit_ids', '=',-->
-<!--                    context.get('default_operating_unit_id', False)),-->
-<!--                    ('operating_unit_ids', '=', False)]-->
-<!--                </attribute>-->
-<!--            </xpath>-->
-<!--            <xpath-->
-<!--                expr="//field[@name='line_ids']/form/group/field[@name='analytic_account_id']"-->
-<!--                position="attributes"-->
-<!--            >-->
-<!--                <attribute name="domain">-->
-<!--                    ['|', ('operating_unit_ids', '=',-->
-<!--                    context.get('default_operating_unit_id', False)),-->
-<!--                    ('operating_unit_ids', '=', False)]-->
-<!--                </attribute>-->
-<!--            </xpath>-->
+            <xpath
+                expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']"
+                position="attributes"
+            >
+                <attribute name="domain">
+                    ['|', ('company_id', '=', parent.company_id), ('company_id', '=',
+                    False), '|', '|', ('operating_unit_ids', '=', operating_unit_id),
+                    ('operating_unit_ids', '=', False)]
+                </attribute>
+            </xpath>
         </field>
     </record>
     <record id="view_invoice_tree" model="ir.ui.view">
