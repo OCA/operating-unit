@@ -4,12 +4,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-29 23:46+0000\n"
-"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"PO-Revision-Date: 2024-01-19 10:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
-"Language: es_AR\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,8 +24,8 @@ msgid ""
 "Configuration Error. The Operating Unit of the Warehouse and the Location "
 "must be the same. "
 msgstr ""
-"Error de Configuración. La Unidad Operativa del Almacén y la Ubicación debe "
-"ser la misma. "
+"Errore di configurazione. l'Unità operativa del magazzino e dell'ubicazione "
+"devono essere uguali. "
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -33,7 +33,7 @@ msgstr ""
 #, python-format
 msgid "Configuration error. Internal locations should have an operating unit"
 msgstr ""
-"Error de configuración. Las Ubicaciones internas deben tener una unidad "
+"Errore di configurazione. Le ubicazioni interne devono avere un'unità "
 "operativa"
 
 #. module: stock_operating_unit
@@ -44,8 +44,8 @@ msgid ""
 "Configuration error. The Company in the Stock Location and in the Operating "
 "Unit must be the same."
 msgstr ""
-"Error de Configuración. La Compañía en la Ubicación de Inventario y en la "
-"Unidad Operativa debe ser la misma."
+"Errore di configurazione. L'Azienda nell'ubicazione di magazzino e "
+"nell'unità operativa devono essere uguali."
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -55,19 +55,19 @@ msgid ""
 "Configuration error. The Company in the Stock Picking and in the Operating "
 "Unit must be the same."
 msgstr ""
-"Error de Configuración. La Compañía en la Transferencia de Inventario y en "
-"la Unidad Operativa debe ser la misma."
+"Errore di configurazione. L'Azienda nel prelievo di magazzino e nell'unità "
+"operativa devono essere uguali."
 
 #. module: stock_operating_unit
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
 #, python-format
 msgid ""
-"Configuration error. The Company in the Stock Warehouse and in the Operating "
-"Unit must be the same."
+"Configuration error. The Company in the Stock Warehouse and in the Operating"
+" Unit must be the same."
 msgstr ""
-"Error de Configuración. La Compañía en el Almacén de Inventario y en la "
-"Unidad Operativa debe ser la misma."
+"Errore di configurazione. L'Azienda nel magazzino di stoccaggio e nell'unità "
+"operativa devono essere uguali."
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -77,8 +77,8 @@ msgid ""
 "Configuration error. The Operating Unit of the picking must be the same as "
 "that of the warehouse of the Picking Type."
 msgstr ""
-"Error de Configuración. La Unidad Operativa de la transferencia debe ser la "
-"misma que la del almacén del Tipo de Transferencia."
+"Errore di configurazione. L'Unità operativa del prelievo deve essere uguale "
+"a quella nel magazzino del tipo prelievo."
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -88,8 +88,8 @@ msgid ""
 "Configuration error. The Parent Stock Location must belong to the same "
 "Operating Unit."
 msgstr ""
-"Error de Configuración. La Ubicación de Inventario principal debe pertenecer "
-"a la misma Unidad Operativa."
+"Errore di configurazione. L'ubicazione del magazzino principale deve "
+"appartenere alla stessa nità operativa."
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -99,9 +99,9 @@ msgid ""
 "Configuration error. The Stock moves must be related to a location (source "
 "or destination) that belongs to the requesting Operating Unit."
 msgstr ""
-"Error de Configuración. Los Movimientos de Inventario debe estar "
-"relacionados a una ubicación (origen o destino) que pertenezca a la Unidad "
-"Operativa solicitada."
+"Errore di configurazione. I movimenti di magazzino devono essere relazionati "
+"ad una ubicazione (origine o destinazione) che appartiene all'unità perativa "
+"richiedente."
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -111,8 +111,8 @@ msgid ""
 "Configuration error. The operating unit should be assigned to internal "
 "locations only."
 msgstr ""
-"Error de Configuración. La unidad operativa debe ser asignada solo a "
-"ubicaciones internas."
+"Errore di configurazione. L'unità operativa dovrebbe essere assegnata solo a "
+"ubicazioni interne."
 
 #. module: stock_operating_unit
 #. odoo-python
@@ -122,23 +122,23 @@ msgid ""
 "Configuration error. This location is assigned to a warehouse that belongs "
 "to a different operating unit."
 msgstr ""
-"Error de Configuración. Esta ubicación es asignada al almacén que pertenece "
-"a una unidad operativa diferente."
+"Errore di configurazione. Questa ubicazione è assegnata ad un magazzino che "
+"appartiene a diverse unità operative."
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_dest_id
 msgid "Dest. Location Operating Unit"
-msgstr "Ubicación de Destino de la Unidad Operativa"
+msgstr "Unità operativa dell'ubicazione di destinazione"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_location
 msgid "Inventory Locations"
-msgstr "Ubicaciones de Inventario"
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr "Regla de Inventario Mínimo"
+msgstr "Regola giacenza minima"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__operating_unit_id
@@ -147,39 +147,39 @@ msgstr "Regla de Inventario Mínimo"
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:stock_operating_unit.view_picking_internal_search
 msgid "Operating Unit"
-msgstr "Unidad Operativa"
+msgstr "Unità operativa"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_quant
 msgid "Quants"
-msgstr "Cantidades"
+msgstr "Quanti"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__operating_unit_id
 msgid "Requesting Operating Unit"
-msgstr "Unidad Operativa Solicitante"
+msgstr "Unità operativa richiedente"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_id
 msgid "Source Location Operating Unit"
-msgstr "Ubicación de Origen de la Unidad Operativa"
+msgstr "Unità operativa dell'ubicazione sorgente"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de Inventario"
+msgstr "Movimento di magazzino"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_rule
 msgid "Stock Rule"
-msgstr "Regla de Inventario"
+msgstr "Regola di giacenza"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_picking
 msgid "Transfer"
-msgstr "Transferir"
+msgstr "Trasferimento"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_warehouse
 msgid "Warehouse"
-msgstr "Almacén"
+msgstr "Magazzino"
