@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-08-06 20:07+0000\n"
+"PO-Revision-Date: 2023-10-29 23:41+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es_AR\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
@@ -31,6 +31,8 @@ msgstr ""
 #, python-format
 msgid "Configuration error. Internal locations should have an operating unit"
 msgstr ""
+"Error de configuración. Las Ubicaciones internas deben tener una unidad "
+"operativa"
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
