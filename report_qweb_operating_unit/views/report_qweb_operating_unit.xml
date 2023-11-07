@@ -6,6 +6,8 @@
     <template
         id="external_layout_standard_ou"
         inherit_id="web.external_layout_standard"
+        primary="True"
+        priority="99"
     >
         <xpath expr="//img" position="replace">
             <t t-if="'operating_unit_id' in o.fields_get()">
@@ -86,6 +88,8 @@
     <template
         id="external_layout_background_ou"
         inherit_id="web.external_layout_background"
+        primary="True"
+        priority="99"
     >
         <xpath expr="//img[hasclass('float-left')]" position="replace">
             <t t-if="'operating_unit_id' in o.fields_get()">
@@ -216,7 +220,12 @@
             </ul>
         </xpath>
     </template>
-    <template id="external_layout_boxed_ou" inherit_id="web.external_layout_boxed">
+    <template
+        id="external_layout_boxed_ou"
+        inherit_id="web.external_layout_boxed"
+        primary="True"
+        priority="99"
+    >
         <xpath expr="//img" position="replace">
             <t t-if="'operating_unit_id' in o.fields_get()">
                 <img
@@ -288,7 +297,12 @@
             </ul>
         </xpath>
     </template>
-    <template id="external_layout_clean_ou" inherit_id="web.external_layout_clean">
+    <template
+        id="external_layout_clean_ou"
+        inherit_id="web.external_layout_clean"
+        primary="True"
+        priority="99"
+    >
         <xpath expr="//img" position="replace">
             <t t-if="'operating_unit_id' in o.fields_get()">
                 <img
