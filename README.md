@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_asset_operating_unit](account_asset_operating_unit/) | 15.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | This module adds operating unit information to assets.
+[account_asset_transfer_operating_unit](account_asset_transfer_operating_unit/) | 15.0.1.0.0 | [![Saran440](https://github.com/Saran440.png?size=30px)](https://github.com/Saran440) | Add operating unit to asset transfer
 [account_financial_report_operating_unit](account_financial_report_operating_unit/) | 15.0.1.0.0 |  | Introduces Operating Unit (OU) in financial reports
 [account_operating_unit](account_operating_unit/) | 15.0.1.2.1 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [account_operating_unit_access_all](account_operating_unit_access_all/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Accounting
