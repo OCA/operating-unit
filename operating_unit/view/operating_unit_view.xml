@@ -19,7 +19,7 @@
         <field name="name">operating.unit.tree</field>
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
-            <tree string="Operating Unit">
+            <tree>
                 <field name="code" />
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
