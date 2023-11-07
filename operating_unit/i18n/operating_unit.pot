@@ -101,7 +101,6 @@ msgstr ""
 #: model:ir.model,name:operating_unit.model_operating_unit
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_form
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
-#: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_tree
 msgid "Operating Unit"
 msgstr ""
 
