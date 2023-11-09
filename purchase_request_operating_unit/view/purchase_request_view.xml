@@ -26,8 +26,12 @@
             <field name="company_id" position="after">
                 <field
                     name="operating_unit_id"
+                    readonly="1"
+                    groups="!operating_unit.group_multi_operating_unit"
+                />
+                <field
+                    name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
-                    domain="[('company_id','=', company_id)]"
                 />
             </field>
             <field name="line_ids" position="attributes">
@@ -89,7 +93,7 @@
         <field name="model">purchase.request.line</field>
         <field name="inherit_id" ref="purchase_request.purchase_request_line_search" />
         <field name="arch" type="xml">
-            <field name="analytic_account_id" position="after">
+            <field name="analytic_distribution" position="after">
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
