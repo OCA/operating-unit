@@ -15,6 +15,7 @@ class ProductCategory(models.Model):
 
     def write(self, vals):
         res = super(ProductCategory, self).write(vals)
+
         product_template_obj = self.env["product.template"]
         if vals.get("operating_unit_ids"):
             for rec in self:
@@ -25,4 +26,5 @@ class ProductCategory(models.Model):
                     ou_ids = product.operating_unit_ids.ids
                     ou_ids.extend(vals.get("operating_unit_ids")[0][2])
                     product.operating_unit_ids = [(6, 0, ou_ids)]
+
         return res
