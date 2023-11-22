@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="operating_unit_validity_date/static/src/js/relational_fields.js"
+            />
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/operating_unit_validity_date/static/src/scss/relational_fields.scss"
+            />
+        </xpath>
+    </template>
+</odoo>
