@@ -76,18 +76,20 @@ odoo.define("operating_unit_validity_date.relational_fields", function(require) 
         },
         _updateOperatingUnitValidityWarning: function(ids) {
             var self = this;
-            this._rpc({
-                model: "operating.unit",
-                method: "read",
-                args: [ids, ["validity_state"]],
-            }).then(function(result) {
-                result.forEach(data => {
-                    updateSpan(
-                        self.operatingUnitValidityWarnings[data.id],
-                        data.validity_state
-                    );
+            if (ids.length) {
+                this._rpc({
+                    model: "operating.unit",
+                    method: "read",
+                    args: [ids, ["validity_state"]],
+                }).then(function(result) {
+                    result.forEach(data => {
+                        updateSpan(
+                            self.operatingUnitValidityWarnings[data.id],
+                            data.validity_state
+                        );
+                    });
                 });
-            });
+            }
         },
     });
 
