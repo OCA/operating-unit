@@ -1,0 +1,33 @@
+.o_form_view {
+    .o_validity_date_icon {
+        cursor: help;
+        position: absolute;
+        margin-left: 10px;
+        margin-top: 5px;
+        top: 0;
+        right: 20px;
+    }
+    .o_form_uri .o_validity_date_icon {
+        position: static;
+        margin-left: 10px;
+        margin-top: 5px;
+        top: 0;
+        right: 20px;
+    }
+    .o_field_many2manytags .o_validity_date_icon {
+        position: static;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-right: 2px;
+    }
+    .o_validity_date_warning,
+    .o_form_uri .o_validity_date_warning,
+    .o_form_uri:hover .o_validity_date_warning {
+        color: theme-color("warning");
+    }
+    .o_validity_date_error,
+    .o_form_uri .o_validity_date_error,
+    .o_form_uri:hover .o_validity_date_error {
+        color: theme-color("danger");
+    }
+}
