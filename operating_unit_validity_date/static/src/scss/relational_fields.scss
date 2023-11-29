@@ -1,16 +1,12 @@
 .o_form_view {
     .o_validity_date_icon {
         cursor: help;
-        position: absolute;
-        margin-left: 10px;
-        margin-top: 5px;
-        top: 0;
-        right: 20px;
-    }
-    .o_form_uri .o_validity_date_icon {
         position: static;
         margin-left: 10px;
         margin-top: 5px;
+    }
+    .o_input_dropdown .o_validity_date_icon {
+        position: absolute;
         top: 0;
         right: 20px;
     }

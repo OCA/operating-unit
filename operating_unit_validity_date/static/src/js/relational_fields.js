@@ -45,7 +45,7 @@ odoo.define("operating_unit_validity_date.relational_fields", function(require) 
             this._super.apply(this, arguments);
             this.checkOperatingUnitValidity =
                 this.field.relation === "operating.unit" &&
-                this.formatType === "one2many";
+                (this.formatType === "one2many" || this.formatType === "many2many");
             this.operatingUnitValidityWarnings = {};
             if (this.checkOperatingUnitValidity) {
                 this._updateOperatingUnitValidityWarning(this.value.res_ids);
