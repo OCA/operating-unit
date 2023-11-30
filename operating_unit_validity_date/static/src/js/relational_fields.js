@@ -135,8 +135,8 @@ odoo.define("operating_unit_validity_date.relational_fields", function(require) 
                 });
             }
         },
-        _onFieldChanged: function() {
-            this._super();
+        _onFieldChanged: function(event) {
+            this._super.apply(this, arguments);
             if (this.checkOperatingUnitValidity) {
                 this._updateOperatingUnitValidityWarning(this.lastSetValue.id);
             }
