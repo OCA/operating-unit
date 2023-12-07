@@ -22,9 +22,9 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             {
                 "name": "Test OU",
                 "code": "PDE1204",
-                "partner_id": self.env["res.partner"].create(
-                    {"name": "Test Partner"}
-                ).id,
+                "partner_id": self.env["res.partner"]
+                .create({"name": "Test Partner"})
+                .id,
                 "valid_from": date_yesterday,
                 "valid_until": date_3_years_later,
             }
@@ -33,9 +33,9 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             {
                 "name": "Non-existing OU",
                 "code": "UNKNOWN",
-                "partner_id": self.env["res.partner"].create(
-                    {"name": "Unknown Partner"}
-                ).id,
+                "partner_id": self.env["res.partner"]
+                .create({"name": "Unknown Partner"})
+                .id,
                 "valid_from": date_3_years_ago,
                 "valid_until": False,
             }
@@ -60,7 +60,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": None,
             "l8_operating_unit_management_id": None,
             "l5_branch": None,
-            "l5_branch_management_id": None
+            "l5_branch_management_id": None,
         }
 
         # MID active in the past, to be created
@@ -82,7 +82,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": "Freiburg",
             "l8_operating_unit_management_id": "PDE1100",
             "l5_branch": "Villingen-Schwenningen",
-            "l5_branch_management_id": "PDE1101"
+            "l5_branch_management_id": "PDE1101",
         }
 
         # MID active in the future, to be created
@@ -104,7 +104,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": "Freiburg",
             "l8_operating_unit_management_id": "PDE1100",
             "l5_branch": "Villingen-Schwenningen",
-            "l5_branch_management_id": "PDE1102"
+            "l5_branch_management_id": "PDE1102",
         }
 
         # MID active today, to be created
@@ -126,7 +126,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": "Fulda",
             "l8_operating_unit_management_id": "PDE1200",
             "l5_branch": "Fulda",
-            "l5_branch_management_id": "PDE1201"
+            "l5_branch_management_id": "PDE1201",
         }
 
         # MID active since today, to be created
@@ -148,7 +148,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": "Fulda",
             "l8_operating_unit_management_id": "PDE1200",
             "l5_branch": "Fulda",
-            "l5_branch_management_id": "PDE1202"
+            "l5_branch_management_id": "PDE1202",
         }
 
         # MID without operational dates, to be created
@@ -170,7 +170,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": "Fulda",
             "l8_operating_unit_management_id": "PDE1200",
             "l5_branch": "Fulda",
-            "l5_branch_management_id": "PDE1203"
+            "l5_branch_management_id": "PDE1203",
         }
 
         # MID with updated operational dates, to be updated
@@ -192,7 +192,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             "l8_operating_unit": "Fulda",
             "l8_operating_unit_management_id": "PDE1200",
             "l5_branch": "Fulda",
-            "l5_branch_management_id": "PDE1204"
+            "l5_branch_management_id": "PDE1204",
         }
 
         self.sample_response_data = [
@@ -202,7 +202,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
             self.mid_to_create_3_data,
             self.mid_to_create_4_data,
             self.mid_to_create_5_data,
-            self.mid_to_update_1_data
+            self.mid_to_update_1_data,
         ]
 
     def test_01_create_operating_unit(self):
@@ -210,61 +210,104 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
         api_data = self.sample_response_data
         self.env["operating.unit"]._process_grt_branch_data(api_data)
 
-        ou_1 = self.OperatingUnit.search([("code", "=", self.mid_to_create_1_data["l5_branch_management_id"])])
+        ou_1 = self.OperatingUnit.search(
+            [("code", "=", self.mid_to_create_1_data["l5_branch_management_id"])]
+        )
         self.assertTrue(
-            ou_1, f"MID with code {self.mid_to_create_1_data['l5_branch_management_id']} should have been created."
+            ou_1,
+            f"MID with code {self.mid_to_create_1_data['l5_branch_management_id']} should have been created.",
         )
         ou_1_name = f"{self.mid_to_create_1_data['l5_branch_management_id']} - OU {self.mid_to_create_1_data['l8_operating_unit']}, Branch {self.mid_to_create_1_data['l5_branch']}"
         ou_1_partner_name = f"OU {self.mid_to_create_1_data['l8_operating_unit']}, Branch {self.mid_to_create_1_data['l5_branch']}"
-        self.assertEqual(ou_1.name, ou_1_name, "Name of OU 1 should be of the following format: code - OU branch, OU Office")
-        ou_1_partner_created = self.env["res.partner"].search([("name", "=", ou_1_partner_name)])
+        self.assertEqual(
+            ou_1.name,
+            ou_1_name,
+            "Name of OU 1 should be of the following format: code - OU branch, OU Office",
+        )
+        ou_1_partner_created = self.env["res.partner"].search(
+            [("name", "=", ou_1_partner_name)]
+        )
         self.assertTrue(
             ou_1_partner_created,
-            f"Partner with name {self.mid_to_create_1_data['simple_name']} should have been created."
+            f"Partner with name {self.mid_to_create_1_data['simple_name']} should have been created.",
         )
         self.assertTrue(
-            datetime.strftime(ou_1.valid_from, "%Y-%m-%d") == self.mid_to_create_1_data["operational_from"],
-            "Valid from date should be the same as the one in the API response."
+            datetime.strftime(ou_1.valid_from, "%Y-%m-%d")
+            == self.mid_to_create_1_data["operational_from"],
+            "Valid from date should be the same as the one in the API response.",
         )
         self.assertTrue(
-            datetime.strftime(ou_1.valid_until, "%Y-%m-%d") == self.mid_to_create_1_data["operational_until"],
-            "Valid until date should be the same as the one in the API response."
+            datetime.strftime(ou_1.valid_until, "%Y-%m-%d")
+            == self.mid_to_create_1_data["operational_until"],
+            "Valid until date should be the same as the one in the API response.",
         )
-        self.assertEqual(ou_1.validity_state, "expired", "OU1: Validity state should be set to 'expired'.")
-        self.assertEqual(ou_1.synced_with_grt, True, "OU1: Should be flagged as synced with the API.")
+        self.assertEqual(
+            ou_1.validity_state,
+            "expired",
+            "OU1: Validity state should be set to 'expired'.",
+        )
+        self.assertEqual(
+            ou_1.synced_with_grt, True, "OU1: Should be flagged as synced with the API."
+        )
 
-        ou_2 = self.OperatingUnit.search([("code", "=", self.mid_to_create_2_data["l5_branch_management_id"])])
+        ou_2 = self.OperatingUnit.search(
+            [("code", "=", self.mid_to_create_2_data["l5_branch_management_id"])]
+        )
         self.assertTrue(
             ou_2,
-            f"MID with code {self.mid_to_create_2_data['l5_branch_management_id']} should have been created."
+            f"MID with code {self.mid_to_create_2_data['l5_branch_management_id']} should have been created.",
         )
-        self.assertEqual(ou_2.validity_state, "not_valid_yet", "OU2: Validity state should be set to 'not_valid_yet'.")
+        self.assertEqual(
+            ou_2.validity_state,
+            "not_valid_yet",
+            "OU2: Validity state should be set to 'not_valid_yet'.",
+        )
 
-        ou_3 = self.OperatingUnit.search([("code", "=", self.mid_to_create_3_data["l5_branch_management_id"])])
+        ou_3 = self.OperatingUnit.search(
+            [("code", "=", self.mid_to_create_3_data["l5_branch_management_id"])]
+        )
         self.assertTrue(
             ou_3,
-            f"MID with code {self.mid_to_create_3_data['l5_branch_management_id']} should have been created."
+            f"MID with code {self.mid_to_create_3_data['l5_branch_management_id']} should have been created.",
         )
-        self.assertEqual(ou_3.validity_state, "valid", "OU3: Validity state should be set to 'valid'.")
+        self.assertEqual(
+            ou_3.validity_state,
+            "valid",
+            "OU3: Validity state should be set to 'valid'.",
+        )
 
-        ou_4 = self.OperatingUnit.search([("code", "=", self.mid_to_create_4_data["l5_branch_management_id"])])
+        ou_4 = self.OperatingUnit.search(
+            [("code", "=", self.mid_to_create_4_data["l5_branch_management_id"])]
+        )
         self.assertTrue(
             ou_4,
-            f"MID with code {self.mid_to_create_4_data['l5_branch_management_id']} should have been created."
+            f"MID with code {self.mid_to_create_4_data['l5_branch_management_id']} should have been created.",
         )
-        self.assertEqual(ou_4.validity_state, "valid", "OU4: Validity state should be set to 'valid'.")
+        self.assertEqual(
+            ou_4.validity_state,
+            "valid",
+            "OU4: Validity state should be set to 'valid'.",
+        )
 
-        ou_5 = self.OperatingUnit.search([("code", "=", self.mid_to_create_5_data["l5_branch_management_id"])])
+        ou_5 = self.OperatingUnit.search(
+            [("code", "=", self.mid_to_create_5_data["l5_branch_management_id"])]
+        )
         self.assertTrue(
             ou_5,
-            f"MID with code {self.mid_to_create_5_data['l5_branch_management_id']} should have been created."
+            f"MID with code {self.mid_to_create_5_data['l5_branch_management_id']} should have been created.",
         )
-        self.assertEqual(ou_5.validity_state, "valid", "OU5: Validity state should be set to 'valid'.")
+        self.assertEqual(
+            ou_5.validity_state,
+            "valid",
+            "OU5: Validity state should be set to 'valid'.",
+        )
 
-        ou_to_skip = self.OperatingUnit.search([("code", "=", self.mid_to_skip_data["management_id"])])
+        ou_to_skip = self.OperatingUnit.search(
+            [("code", "=", self.mid_to_skip_data["management_id"])]
+        )
         self.assertFalse(
             ou_to_skip,
-            f"MID with code {self.mid_to_skip_data['management_id']} should not have been created."
+            f"MID with code {self.mid_to_skip_data['management_id']} should not have been created.",
         )
 
     def test_02_update_operating_unit(self):
@@ -272,12 +315,14 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
         self.env["operating.unit"]._process_grt_branch_data([self.mid_to_update_1_data])
 
         self.assertEqual(
-            datetime.strftime(self.ou_to_update.valid_from, "%Y-%m-%d"), self.mid_to_update_1_data["operational_from"],
-            "Valid from date should have been updated to the date received from the API."
+            datetime.strftime(self.ou_to_update.valid_from, "%Y-%m-%d"),
+            self.mid_to_update_1_data["operational_from"],
+            "Valid from date should have been updated to the date received from the API.",
         )
         self.assertEqual(
-            datetime.strftime(self.ou_to_update.valid_until, "%Y-%m-%d"), self.mid_to_update_1_data["operational_until"],
-            "Valid until date should have been updated to the date received from the API."
+            datetime.strftime(self.ou_to_update.valid_until, "%Y-%m-%d"),
+            self.mid_to_update_1_data["operational_until"],
+            "Valid until date should have been updated to the date received from the API.",
         )
 
     def test_03_mark_mid_as_not_synced_with_api(self):
@@ -285,6 +330,7 @@ class TestOperatingUnitGrtApiSync(common.TransactionCase):
         self.env["operating.unit"]._process_grt_branch_data(self.sample_response_data)
 
         self.assertEqual(
-            self.ou_not_present_in_api.synced_with_grt, False,
-            "OU should be flagged as not synced with the API."
+            self.ou_not_present_in_api.synced_with_grt,
+            False,
+            "OU should be flagged as not synced with the API.",
         )

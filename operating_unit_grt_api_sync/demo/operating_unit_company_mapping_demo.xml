@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="pde_operating_unit_company_mapping" model="operating.unit.company.mapping">
+    <record
+        id="pde_operating_unit_company_mapping"
+        model="operating.unit.company.mapping"
+    >
         <field name="name">PDE</field>
         <field name="code_prefix">PDE</field>
-        <field name="company_id" ref="base.main_company"/>
+        <field name="company_id" ref="base.main_company" />
     </record>
 </odoo>

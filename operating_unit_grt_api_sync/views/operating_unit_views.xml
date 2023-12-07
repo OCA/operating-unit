@@ -6,9 +6,9 @@
         <field name="model">operating.unit.company.mapping</field>
         <field name="arch" type="xml">
             <tree editable="bottom" string="Operating Unit Company Mapping">
-                <field name="name"/>
-                <field name="code_prefix"/>
-                <field name="company_id"/>
+                <field name="name" />
+                <field name="code_prefix" />
+                <field name="company_id" />
             </tree>
         </field>
     </record>
@@ -17,10 +17,14 @@
         <field name="name">Operating Unit Company Mapping</field>
         <field name="res_model">operating.unit.company.mapping</field>
         <field name="view_mode">tree</field>
-        <field name="view_id" ref="operating_unit_code_prefix_company_mapping_view"/>
+        <field name="view_id" ref="operating_unit_code_prefix_company_mapping_view" />
     </record>
 
-    <menuitem id="menu_operating_unit_technical" name="Operating Unit" parent="base.menu_custom"/>
+    <menuitem
+        id="menu_operating_unit_technical"
+        name="Operating Unit"
+        parent="base.menu_custom"
+    />
     <menuitem
         id="menu_operating_unit_code_prefix_company_mapping"
         name="Operating Unit Code Company Mapping"

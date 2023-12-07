@@ -1,8 +1,9 @@
-import os
-import requests
 import logging
+import os
 
-from odoo import api, fields, models
+import requests
+
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -10,10 +11,11 @@ _logger = logging.getLogger(__name__)
 class OperatingUnit(models.Model):
     _inherit = "operating.unit"
 
-    synced_with_grt = fields.Boolean("Is Synced with GRT API", default=False, readonly=True)
+    synced_with_grt = fields.Boolean(
+        "Is Synced with GRT API", default=False, readonly=True
+    )
 
     def _sync_branches_data_with_grt(self):
-
         def _fetch_grt_data():
             api_key = os.environ.get("GRT_API_KEY")
             if not api_key:
@@ -30,21 +32,29 @@ class OperatingUnit(models.Model):
                 else:
                     error_message = r.json().get("detail")
                     _logger.error(
-                        f"GRT API Sync: Request to GRT API failed with status code {r.status_code}: {error_message}."
+                        f"GRT API Sync: Request to GRT API failed with "
+                        f"status code {r.status_code}: {error_message}."
                     )
             except Exception as e:
-                _logger.error(f"GRT API Sync: Request to GRT API failed with error {e}.")
+                _logger.error(
+                    f"GRT API Sync: Request to GRT API failed with error {e}."
+                )
 
-        if data := _fetch_grt_data():
+        if data := _fetch_grt_data():  # noqa: E231 E701
             self._process_grt_branch_data(data)
 
     def _create_new_branches(self, branches_data, ou_code_company_mappings):
-
         def _prepare_vals(data):
-            branch = data['l5_branch'] if data['l5_branch'] == "OU Office" else f"Branch {data['l5_branch']}"
+            branch = (
+                data["l5_branch"]
+                if data["l5_branch"] == "OU Office"
+                else f"Branch {data['l5_branch']}"
+            )
             name = f"{data['management_id']} - OU {data['l8_operating_unit']}, {branch}"
             code_prefix = data["management_id"][:3]
-            company = ou_code_company_mappings.filtered(lambda m: m.code_prefix == code_prefix).company_id
+            company = ou_code_company_mappings.filtered(
+                lambda m: m.code_prefix == code_prefix
+            ).company_id
             return {
                 "name": name,
                 "code": data["management_id"],
@@ -55,8 +65,14 @@ class OperatingUnit(models.Model):
             }
 
         def _prepare_partner_vals(data):
-            branch = data['l5_branch'] if data['l5_branch'] == "OU Office" else f"Branch {data['l5_branch']}"
-            country = self.env["res.country"].search([("name", "=", data["l10_operating_country"])])
+            branch = (
+                data["l5_branch"]
+                if data["l5_branch"] == "OU Office"
+                else f"Branch {data['l5_branch']}"
+            )
+            country = self.env["res.country"].search(
+                [("name", "=", data["l10_operating_country"])]
+            )
             return {
                 "name": f"OU {data['l8_operating_unit']}, {branch}",
                 "city": data["l5_branch"],
@@ -84,14 +100,18 @@ class OperatingUnit(models.Model):
         def _filter_branches_data():
             available_prefixes = ou_code_company_mappings.mapped("code_prefix")
             return [
-                d for d in data if d["management_id"][:3] in available_prefixes and d["management_id_level"] == "Branch"
+                d
+                for d in data
+                if d["management_id"][:3] in available_prefixes
+                and d["management_id_level"] == "Branch"
             ]
 
         def _filter_branches_to_update(recs, data):
             """Filter the recordset to only include records that need to be updated."""
             return recs.filtered(
-                lambda mid: mid.valid_from != data[mid.code]["operational_from"] or mid.valid_until != data[mid.code][
-                    "operational_until"] or not mid.synced_with_grt
+                lambda mid: mid.valid_from != data[mid.code]["operational_from"]
+                or mid.valid_until != data[mid.code]["operational_until"]
+                or not mid.synced_with_grt
             )
 
         def _update_branch(recs, branch_data):
@@ -107,23 +127,35 @@ class OperatingUnit(models.Model):
                 if vals:
                     rec.write(vals)
 
-        if data := _filter_branches_data(): # mappings for received branches data exist, we can proceed with creating/updating MIDs
+        if data := _filter_branches_data():  # noqa: E231 E701
 
             branches_codes = [d["management_id"] for d in data]
             branches = self.search([("code", "in", branches_codes)])
             branch_codes = branches.mapped("code")
 
-            if branches_create_data := [d for d in data if d["management_id"] not in branch_codes]:
-                self._create_new_branches(branches_create_data, ou_code_company_mappings)
+            if branches_create_data := [  # noqa: E231 E701
+                d for d in data if d["management_id"] not in branch_codes
+            ]:
+                self._create_new_branches(
+                    branches_create_data, ou_code_company_mappings
+                )
 
             if data != branches_create_data:
-                branches_to_update_data = {d["management_id"]: d for d in data if d not in branches_create_data}
+                branches_to_update_data = {
+                    d["management_id"]: d for d in data if d not in branches_create_data
+                }
 
-                if branches_to_unsync := branches.filtered(lambda mid: mid.code not in branches_to_update_data):
-                    branches_to_unsync.filtered(lambda b: b.synced_with_grt).write({"synced_with_grt": False})
+                if branches_to_unsync := branches.filtered(  # noqa: E231 E701
+                    lambda mid: mid.code not in branches_to_update_data
+                ):
+                    branches_to_unsync.filtered(lambda b: b.synced_with_grt).write(
+                        {"synced_with_grt": False}
+                    )
                     branches_to_update = branches - branches_to_unsync
                 else:
                     branches_to_update = branches
 
-                branches_to_update = _filter_branches_to_update(branches_to_update, branches_to_update_data)
+                branches_to_update = _filter_branches_to_update(
+                    branches_to_update, branches_to_update_data
+                )
                 _update_branch(branches_to_update, branches_to_update_data)
