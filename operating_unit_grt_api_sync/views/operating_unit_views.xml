@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="operating_unit_code_prefix_company_mapping_view" model="ir.ui.view">
+        <field name="name">operating.unit.company.mapping.tree</field>
+        <field name="model">operating.unit.company.mapping</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" string="Operating Unit Company Mapping">
+                <field name="name"/>
+                <field name="code_prefix"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="operating_unit_company_mapping_action" model="ir.actions.act_window">
+        <field name="name">Operating Unit Company Mapping</field>
+        <field name="res_model">operating.unit.company.mapping</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="operating_unit_code_prefix_company_mapping_view"/>
+    </record>
+
+    <menuitem id="menu_operating_unit_technical" name="Operating Unit" parent="base.menu_custom"/>
+    <menuitem
+        id="menu_operating_unit_code_prefix_company_mapping"
+        name="Operating Unit Code Company Mapping"
+        parent="menu_operating_unit_technical"
+        action="operating_unit_company_mapping_action"
+    />
+
+</odoo>

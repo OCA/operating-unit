@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pde1301_operating_unit" model="operating.unit">
+        <field name="name">PDE1301</field>
+        <field name="code">PDE1301</field>
+        <field name="partner_id" ref="base.main_partner" />
+    </record>
+    <record id="pde1302_operating_unit" model="operating.unit">
+        <field name="name">PDE1302</field>
+        <field name="code">PDE1302</field>
+        <field name="partner_id" ref="base.main_partner" />
+    </record>
+    <record id="nde1401_operating_unit" model="operating.unit">
+        <field name="name">NDE1401</field>
+        <field name="code">NDE1401</field>
+        <field name="partner_id" ref="base.main_partner" />
+    </record>
+    <record id="nde1402_operating_unit" model="operating.unit">
+        <field name="name">NDE1402</field>
+        <field name="code">NDE1402</field>
+        <field name="partner_id" ref="base.main_partner" />
+    </record>
+</odoo>
