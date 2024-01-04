@@ -19,6 +19,7 @@ class TestOperatingUnit(common.TransactionCase):
         cls.grp_ou_multi = cls.env.ref("operating_unit.group_multi_operating_unit")
         # Company
         cls.company = cls.env.ref("base.main_company")
+        cls.company_2 = cls.env["res.company"].create({"name": "Second company"})
         # Main Operating Unit
         cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
@@ -48,12 +49,21 @@ class TestOperatingUnit(common.TransactionCase):
         )
         return user
 
-    def _create_operating_unit(self, uid, name, code):
+    def _create_operating_unit(self, uid, name, code, company_id=None):
         """Create Operating Unit"""
+        if company_id is None:
+            company_id = self.company
         ou = (
             self.env["operating.unit"]
             .with_user(uid)
-            .create({"name": name, "code": code, "partner_id": self.company.id})
+            .create(
+                {
+                    "name": name,
+                    "code": code,
+                    "partner_id": company_id.partner_id.id,
+                    "company_id": company_id.id,
+                }
+            )
         )
         return ou
 
@@ -143,6 +153,34 @@ class TestOperatingUnit(common.TransactionCase):
         self.assertEqual(ou.name_search("nam"), expected_result)
         self.assertEqual(ou.name_search("cod"), expected_result)
         self.assertEqual(ou.name_search("dummy"), [])
+
+    def test_03_operating_unit(self):
+        """
+        The method operating_unit_default_get should not return
+        operating units belonging to a company that is not active
+        """
+        self.assertEqual(
+            self.res_users_model.operating_unit_default_get(uid2=self.user1.id),
+            self.ou1,
+        )
+        self.assertEqual(
+            self.res_users_model.with_company(
+                self.company_2
+            ).operating_unit_default_get(uid2=self.user1.id),
+            False,
+        )
+
+        self.user1.company_ids += self.company_2
+        ou_company_2 = self._create_operating_unit(
+            self.user1.id, "Test Company", "TESTC", self.company_2
+        )
+        self.user1.assigned_operating_unit_ids += ou_company_2
+        self.assertEqual(
+            self.res_users_model.with_company(
+                self.company_2
+            ).operating_unit_default_get(uid2=self.user1.id),
+            ou_company_2,
+        )
 
     def test_create_multi_operating_unit(self):
         res = (
