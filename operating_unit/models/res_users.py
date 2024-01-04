@@ -14,7 +14,19 @@ class ResUsers(models.Model):
         if not uid2:
             uid2 = self.env.user.id
         user = self.env["res.users"].browse(uid2)
-        return user.default_operating_unit_id
+        # check if the company of the default OU is active
+        if user.default_operating_unit_id.sudo().company_id in self.env.companies:
+            return user.default_operating_unit_id
+        else:
+            # find an OU of the main active company
+            for ou in user.assigned_operating_unit_ids:
+                if ou.sudo().company_id in self.env.company:
+                    return ou
+            # find an OU of any active company
+            for ou in user.assigned_operating_unit_ids:
+                if ou.sudo().company_id in self.env.companies:
+                    return ou
+        return False
 
     @api.model
     def _default_operating_unit(self):
