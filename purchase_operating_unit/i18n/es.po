@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-11 19:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:0
@@ -21,6 +23,8 @@ msgid ""
 "Configuration error. The Company in the Purchase Order and in the Operating "
 "Unit must be the same."
 msgstr ""
+"Error de configuración. La Compañía en la Orden de Compra y en la Unidad "
+"Operativa debe ser la misma."
 
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:0
@@ -29,11 +33,13 @@ msgid ""
 "Configuration error. The Quotation / Purchase Order and the Warehouse of "
 "picking type must belong to the same Operating Unit."
 msgstr ""
+"Error de configuración. El presupuesto/pedido de compra y el almacén del "
+"tipo de operación debe pertenecer a la misma unidad operacional."
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__picking_type_id
 msgid "Deliver To"
-msgstr ""
+msgstr "Entregar a"
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move__display_name
@@ -42,7 +48,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__display_name
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move__id
@@ -51,17 +57,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line__id
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Entrada en Diario"
 
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Artículo del Diario"
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move____last_update
@@ -70,7 +76,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order_line____last_update
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_report____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/purchase_order.py:0
@@ -78,6 +84,8 @@ msgstr ""
 msgid ""
 "No Warehouse found with the Operating Unit indicated in the Purchase Order"
 msgstr ""
+"No se ha encontrado ningún Almacén con la Unidad Operativa indicada en la "
+"Orden de Compra"
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__operating_unit_id
@@ -87,27 +95,27 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_filter
 #: model_terms:ir.ui.view,arch_db:purchase_operating_unit.view_purchase_order_search
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa"
 
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
+msgstr "Orden de Compra"
 
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr ""
+msgstr "Línea de Orden de Compra"
 
 #. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_purchase_report
 msgid "Purchase Report"
-msgstr ""
+msgstr "Informe de Compra"
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,field_description:purchase_operating_unit.field_purchase_order__requesting_operating_unit_id
 msgid "Requesting Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa Solicitante"
 
 #. module: purchase_operating_unit
 #: code:addons/purchase_operating_unit/models/account_invoice.py:0
@@ -116,8 +124,10 @@ msgid ""
 "The operating unit of the purchase order must be the same as in the "
 "associated invoices."
 msgstr ""
+"La unidad operativa de la orden de compra debe ser la misma que la de las "
+"facturas asociadas."
 
 #. module: purchase_operating_unit
 #: model:ir.model.fields,help:purchase_operating_unit.field_purchase_order__picking_type_id
 msgid "This will determine operation type of incoming shipment"
-msgstr ""
+msgstr "Esto determinará el tipo de operación del envío entrante"
