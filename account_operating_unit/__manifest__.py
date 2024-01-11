@@ -5,7 +5,7 @@
     "name": "Accounting with Operating Units",
     "summary": "Introduces Operating Unit (OU) in invoices and "
     "Accounting Entries with clearing account",
-    "version": "13.0.1.3.0",
+    "version": "13.0.1.3.1",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "WilldooIT Pty Ltd,"

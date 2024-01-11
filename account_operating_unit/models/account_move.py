@@ -102,9 +102,15 @@ class AccountMove(models.Model):
             not self.journal_id
             or self.journal_id.operating_unit_id != self.operating_unit_id
         ):
-            journal = self.env["account.journal"].search(
-                [("type", "=", self.journal_id.type)]
-            )
+            domain = []
+            if self.company_id:
+                domain = [
+                    "|",
+                    ("company_id", "=", False),
+                    ("company_id", "=", self.company_id.id),
+                ]
+            domain.append(("type", "=", self.journal_id.type))
+            journal = self.env["account.journal"].search(domain)
             jf = journal.filtered(
                 lambda aj: aj.operating_unit_id == self.operating_unit_id
             )
