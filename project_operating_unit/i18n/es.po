@@ -6,45 +6,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-11 23:48+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: project_operating_unit
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_project__display_name
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_task__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: project_operating_unit
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_project__id
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_task__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: project_operating_unit
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_project____last_update
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_task____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: project_operating_unit
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_project__operating_unit_id
 #: model:ir.model.fields,field_description:project_operating_unit.field_project_task__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:project_operating_unit.project_group_by_ou
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa"
 
 #. module: project_operating_unit
 #: model:ir.model,name:project_operating_unit.model_project_project
 msgid "Project"
-msgstr ""
+msgstr "Proyecto"
 
 #. module: project_operating_unit
 #: model:ir.model,name:project_operating_unit.model_project_task
 msgid "Task"
-msgstr ""
+msgstr "Tarea"
