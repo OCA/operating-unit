@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-11 19:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
@@ -21,12 +23,16 @@ msgid ""
 "Configuration Error. The Operating Unit of the Warehouse and the Location "
 "must be the same. "
 msgstr ""
+"Error de configuración. La unidad operacuinal del almacén y de la ubicación "
+"debe ser la misma "
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
 #, python-format
 msgid "Configuration error. Internal locations should have an operating unit"
 msgstr ""
+"Error de configuración. Las ubicaciones internas deben tener una unidad "
+"operativa"
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
@@ -35,6 +41,8 @@ msgid ""
 "Configuration error. The Company in the Stock Location and in the Operating "
 "Unit must be the same."
 msgstr ""
+"Error de configuración. La Compañía en la Ubicación de Existencias y en la "
+"Unidad Operativa debe ser la misma."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
@@ -43,6 +51,8 @@ msgid ""
 "Configuration error. The Company in the Stock Picking and in the Operating "
 "Unit must be the same."
 msgstr ""
+"Error de configuración. La Compañía en el Inventario y en la Unidad "
+"Operativa debe ser la misma."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
@@ -51,6 +61,8 @@ msgid ""
 "Configuration error. The Company in the Stock Warehouse and in the Operating"
 " Unit must be the same."
 msgstr ""
+"Error de configuración. La compañía en el almacén y en la unidad operacional "
+"debe ser la misma."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
@@ -59,6 +71,8 @@ msgid ""
 "Configuration error. The Operating Unit of the picking must be the same as "
 "that of the warehouse of the Picking Type."
 msgstr ""
+"Error de configuración. La unidad operacional en el albarán debe de ser la "
+"misma que la del almacén del tipo de operación."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
@@ -67,6 +81,8 @@ msgid ""
 "Configuration error. The Parent Stock Location must belong to the same "
 "Operating Unit."
 msgstr ""
+"Error de configuración. La ubicación padre debe pertenecer a la misma unidad "
+"operacional."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_move.py:0
@@ -75,6 +91,9 @@ msgid ""
 "Configuration error. The Stock moves must be related to a location (source "
 "or destination) that belongs to the requesting Operating Unit."
 msgstr ""
+"Error de configuración. Los movimientos de existencias deben estar asociados "
+"a una ubicación (de origen o de destino) que pertenezca a la unidad "
+"operacional solicitante."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
@@ -83,6 +102,8 @@ msgid ""
 "Configuration error. The operating unit should be assigned to internal "
 "locations only."
 msgstr ""
+"Error de configuración. La unidad operacional solo puede ser asignada a "
+"ubicaciones internas."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
@@ -91,11 +112,13 @@ msgid ""
 "Configuration error. This location is assigned to a warehouse that belongs "
 "to a different operating unit."
 msgstr ""
+"Error de configuración. Esta ubicación está asignada a un almacén que "
+"pertenece a una unidad operacional diferente."
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_dest_id
 msgid "Dest. Location Operating Unit"
-msgstr ""
+msgstr "Unidad Operacional Ubicación Destino"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__display_name
@@ -105,7 +128,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__display_name
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse_orderpoint__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__id
@@ -115,12 +138,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__id
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse_orderpoint__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Localización de Inventarios"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location____last_update
@@ -130,12 +153,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse____last_update
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse_orderpoint____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr ""
+msgstr "Regla de inventario Mínimo"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__operating_unit_id
@@ -143,34 +166,34 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_warehouse__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:stock_operating_unit.view_picking_internal_search
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__operating_unit_id
 msgid "Requesting Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa Solicitante"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_id
 msgid "Source Location Operating Unit"
-msgstr ""
+msgstr "Unidad Operacional Ubicación Destino"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimiento de Existencias"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regla de Existencias"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transferencia"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_warehouse
 msgid "Warehouse"
-msgstr ""
+msgstr "Almacén"
