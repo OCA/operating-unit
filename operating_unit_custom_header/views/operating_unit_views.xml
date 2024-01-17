@@ -1,0 +1,46 @@
+<odoo>
+
+    <record id="view_op_default_header_form" model="ir.ui.view">
+      <field name="name">op.default_header.form</field>
+      <field name="model">operating.unit</field>
+      <field name="inherit_id" ref="operating_unit.view_operating_unit_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//group" position="after">
+          <notebook>
+            <page string="Header" name="header_page">
+              <field name="header_view_id" invisible="1" />
+              <button
+                            type="object"
+                            name="open_translations_header"
+                            string="Edit Translations"
+                            class="oe_link oe_right"
+                        />
+              <field
+                            name="header"
+                            widget="ace"
+                            options="{'mode': 'xml'}"
+                            readonly="0"
+                        />
+
+            </page>
+            <page string="Footer" name="footer_page">
+              <field name="footer_view_id" invisible="1" />
+              <button
+                            type="object"
+                            name="open_translations_footer"
+                            string="Edit Translations"
+                            class="oe_link oe_right"
+                        />
+              <field
+                            name="footer"
+                            widget="ace"
+                            options="{'mode': 'xml'}"
+                            readonly="0"
+                        />
+            </page>
+          </notebook>
+        </xpath>
+      </field>
+    </record>
+
+</odoo>
