@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-18 07:36+0000\n"
+"PO-Revision-Date: 2024-01-19 10:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -23,7 +23,7 @@ msgid ""
 "Configuration Error. The Operating Unit of the Warehouse and the Location "
 "must be the same. "
 msgstr ""
-"Errore di Configurazione. l'Unità operativa del Magazzino e dell'ubicazione "
+"Errore di configurazione. l'Unità operativa del magazzino e dell'ubicazione "
 "devono essere uguali. "
 
 #. module: stock_operating_unit
@@ -41,8 +41,8 @@ msgid ""
 "Configuration error. The Company in the Stock Location and in the Operating "
 "Unit must be the same."
 msgstr ""
-"Errore di Configurazione. L'Azienda nell'ubicazione di giacenza e nell'Unità "
-"Operativa devono essere uguali."
+"Errore di configurazione. L'Azienda nell'ubicazione di magazzino e "
+"nell'unità operativa devono essere uguali."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
@@ -51,8 +51,8 @@ msgid ""
 "Configuration error. The Company in the Stock Picking and in the Operating "
 "Unit must be the same."
 msgstr ""
-"Errore di Configurazione. L'Azienda nel Magazzino di Prelievo e nell'Unità "
-"Operativa devono essere uguali."
+"Errore di configurazione. L'Azienda nel prelievo di magazzino e nell'unità "
+"operativa devono essere uguali."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
@@ -61,8 +61,8 @@ msgid ""
 "Configuration error. The Company in the Stock Warehouse and in the Operating "
 "Unit must be the same."
 msgstr ""
-"Errore di Configurazione. L'Azienda nel Magazzino di Stoccaggio e nell'Unità "
-"Operativa devono essere uguali."
+"Errore di configurazione. L'Azienda nel magazzino di stoccaggio e nell'unità "
+"operativa devono essere uguali."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
@@ -71,8 +71,8 @@ msgid ""
 "Configuration error. The Operating Unit of the picking must be the same as "
 "that of the warehouse of the Picking Type."
 msgstr ""
-"Errore di Configurazione. L'unità operativa del prelievo deve essere la "
-"stessa come quella del magazzino della Tipologia prelievo."
+"Errore di configurazione. L'Unità operativa del prelievo deve essere uguale "
+"a quella nel magazzino del tipo prelievo."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_location.py:0
@@ -81,8 +81,8 @@ msgid ""
 "Configuration error. The Parent Stock Location must belong to the same "
 "Operating Unit."
 msgstr ""
-"Errore di Configurazione. L'ubicazione del Magazzino Principale deve "
-"appartenere alla stessa Unità Operativa."
+"Errore di configurazione. L'ubicazione del magazzino principale deve "
+"appartenere alla stessa nità operativa."
 
 #. module: stock_operating_unit
 #: code:addons/stock_operating_unit/model/stock_move.py:0
@@ -91,8 +91,8 @@ msgid ""
 "Configuration error. The Stock moves must be related to a location (source "
 "or destination) that belongs to the requesting Operating Unit."
 msgstr ""
-"Errore di configurazione. i movimento di magazzino devono essere relazionati "
-"all'ubicazione (origine o destinazione) che appartiene all'Unità Operativa "
+"Errore di configurazione. I movimenti di magazzino devono essere relazionati "
+"ad una ubicazione (origine o destinazione) che appartiene all'unità perativa "
 "richiedente."
 
 #. module: stock_operating_unit
@@ -102,7 +102,7 @@ msgid ""
 "Configuration error. The operating unit should be assigned to internal "
 "locations only."
 msgstr ""
-"Errore di Configurazione. L'Unità Operativa dovrebbe essere assegnata solo a "
+"Errore di configurazione. L'unità operativa dovrebbe essere assegnata solo a "
 "ubicazioni interne."
 
 #. module: stock_operating_unit
@@ -112,13 +112,13 @@ msgid ""
 "Configuration error. This location is assigned to a warehouse that belongs "
 "to a different operating unit."
 msgstr ""
-"Errore di Configurazione. Questa ubicazione è assegnata ad un magazzino che "
+"Errore di configurazione. Questa ubicazione è assegnata ad un magazzino che "
 "appartiene a diverse unità operative."
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_dest_id
 msgid "Dest. Location Operating Unit"
-msgstr "Unità Operativa dell'ubicazione di Destinazione"
+msgstr "Unità operativa dell'ubicazione di destinazione"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_location__display_name
@@ -171,12 +171,12 @@ msgstr "Unità operativa"
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_picking__operating_unit_id
 msgid "Requesting Operating Unit"
-msgstr "Unità Operativa Richiedente"
+msgstr "Unità operativa richiedente"
 
 #. module: stock_operating_unit
 #: model:ir.model.fields,field_description:stock_operating_unit.field_stock_move__operating_unit_id
 msgid "Source Location Operating Unit"
-msgstr "Unità Operativa dell'ubicazione Sorgente"
+msgstr "Unità operativa dell'ubicazione sorgente"
 
 #. module: stock_operating_unit
 #: model:ir.model,name:stock_operating_unit.model_stock_move
