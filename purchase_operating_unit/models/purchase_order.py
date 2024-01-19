@@ -14,14 +14,15 @@ class PurchaseOrder(models.Model):
         res = super(PurchaseOrder, self)._default_picking_type()
         type_obj = self.env["stock.picking.type"]
         operating_unit = self.env["res.users"].operating_unit_default_get(self.env.uid)
-        types = type_obj.search(
-            [
-                ("code", "=", "incoming"),
-                ("warehouse_id.operating_unit_id", "=", operating_unit.id),
-            ]
-        )
-        if types:
-            res = types[:1].id
+        if operating_unit:
+            types = type_obj.search(
+                [
+                    ("code", "=", "incoming"),
+                    ("warehouse_id.operating_unit_id", "=", operating_unit.id),
+                ]
+            )
+            if types:
+                res = types[:1].id
         return res
 
     READONLY_STATES = {
