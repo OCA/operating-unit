@@ -28,7 +28,7 @@
             <field name="purchase_order_id" position="attributes">
                 <attribute
                     name="domain"
-                >['|', ('operating_unit_id', '=', False), ('operating_unit_id', '=', operating_unit_id)]</attribute>
+                >['&amp;', ('partner_id', '=', supplier_id), '|', ('operating_unit_id', '=', False), ('operating_unit_id', '=', operating_unit_id)]</attribute>
             </field>
         </field>
     </record>
