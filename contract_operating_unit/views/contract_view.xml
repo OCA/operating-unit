@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--FORM view-->
+    <record id="contract_contract_customer_form_view" model="ir.ui.view">
+        <field
+            name="name"
+        >contract.contract form view (in contract_payment_mode)</field>
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_customer_form_view" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!--TREE view-->
+    <record id="contract_contract_tree_view" model="ir.ui.view">
+        <field
+            name="name"
+        >contract.contract tree view (in contract_payment_mode)</field>
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_tree_view" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!--Search view-->
+    <record id="contract_contract_search_view" model="ir.ui.view">
+        <field
+            name="name"
+        >contract.contract search view (in contract_payment_mode)</field>
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_search_view" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="group_by_operating_unit"
+                    string="Operating Unit"
+                    context="{'group_by':'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+
+        <!--Supplier FORM view-->
+    <record id="contract_contract_supplier_form_view" model="ir.ui.view">
+        <field
+            name="name"
+        >contract.contract supplier form view (in contract_payment_mode)</field>
+        <field name="model">contract.contract</field>
+        <field name="priority">18</field>
+        <field name="inherit_id" ref="contract.contract_contract_supplier_form_view" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+        </record>
+
+</odoo>
