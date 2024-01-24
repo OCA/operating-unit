@@ -44,7 +44,7 @@ addon | version | maintainers | summary
 [operating_unit_access_all](operating_unit_access_all/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all Operating Units
 [project_operating_unit](project_operating_unit/) | 15.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to projects and tasks.
 [purchase_operating_unit](purchase_operating_unit/) | 15.0.1.1.0 |  | Adds the concecpt of operating unit (OU) in purchase order management
-[purchase_request_operating_unit](purchase_request_operating_unit/) | 15.0.1.0.1 |  | Operating Unit in Purchase Requests
+[purchase_request_operating_unit](purchase_request_operating_unit/) | 15.0.1.1.0 |  | Operating Unit in Purchase Requests
 [purchase_request_operating_unit_access_all](purchase_request_operating_unit_access_all/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Requests
 [purchase_requisition_operating_unit](purchase_requisition_operating_unit/) | 15.0.1.0.0 |  | Operating Unit in Purchase Requisitions
 [purchase_stock_operating_unit](purchase_stock_operating_unit/) | 15.0.1.0.0 | [![Saran440](https://github.com/Saran440.png?size=30px)](https://github.com/Saran440) | Copies the operating unit of purchase picking to the stock picking
