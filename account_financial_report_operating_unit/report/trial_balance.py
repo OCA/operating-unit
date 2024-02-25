@@ -86,3 +86,27 @@ class TrialBalanceReport(models.AbstractModel):
         if operating_unit_ids:
             domain.append(("operating_unit_id", "in", operating_unit_ids))
         return domain
+
+    def _get_initial_balance_fy_pl_ml_domain(
+        self,
+        account_ids,
+        journal_ids,
+        partner_ids,
+        company_id,
+        fy_start_date,
+        only_posted_moves,
+        show_partner_details,
+    ):
+        domain = super()._get_initial_balance_fy_pl_ml_domain(
+            account_ids,
+            journal_ids,
+            partner_ids,
+            company_id,
+            fy_start_date,
+            only_posted_moves,
+            show_partner_details,
+        )
+        operating_unit_ids = self.env.context.get("operating_unit_ids", [])
+        if operating_unit_ids:
+            domain.append(("operating_unit_id", "in", operating_unit_ids))
+        return domain
