@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="ir_rule_spread_cost_revenue_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="account_spread_cost_revenue.model_account_spread" />
+        <field
+            name="domain_force"
+        >['|', ('operating_unit_id','=',False), ('operating_unit_id','in',user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Cost-Revenue Spread Operating Unit</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+</odoo>
