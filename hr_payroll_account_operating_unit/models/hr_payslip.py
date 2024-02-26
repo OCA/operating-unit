@@ -22,3 +22,73 @@ class HrPayslip(models.Model):
                             {"operating_unit_id": slip.operating_unit_id.id}
                         )
         return res
+
+    def _prepare_debit_line(
+        self,
+        line,
+        slip,
+        amount,
+        date,
+        debit_account_id,
+        analytic_salary_id,
+        tax_ids,
+        tax_tag_ids,
+        tax_repartition_line_id,
+    ):
+        res = super()._prepare_debit_line(
+            line,
+            slip,
+            amount,
+            date,
+            debit_account_id,
+            analytic_salary_id,
+            tax_ids,
+            tax_tag_ids,
+            tax_repartition_line_id,
+        )
+        res.update(operating_unit_id=slip.operating_unit_id.id)
+        return res
+
+    def _prepare_credit_line(
+        self,
+        line,
+        slip,
+        amount,
+        date,
+        credit_account_id,
+        analytic_salary_id,
+        tax_ids,
+        tax_tag_ids,
+        tax_repartition_line_id,
+    ):
+        res = super()._prepare_credit_line(
+            line,
+            slip,
+            amount,
+            date,
+            credit_account_id,
+            analytic_salary_id,
+            tax_ids,
+            tax_tag_ids,
+            tax_repartition_line_id,
+        )
+        res.update(operating_unit_id=slip.operating_unit_id.id)
+        return res
+
+    def _prepare_adjust_credit_line(
+        self, currency, credit_sum, debit_sum, journal, date
+    ):
+        res = super()._prepare_adjust_credit_line(
+            currency, credit_sum, debit_sum, journal, date
+        )
+        res.update(operating_unit_id=self.operating_unit_id.id)
+        return res
+
+    def _prepare_adjust_debit_line(
+        self, currency, credit_sum, debit_sum, journal, date
+    ):
+        res = super()._prepare_adjust_debit_line(
+            currency, credit_sum, debit_sum, journal, date
+        )
+        res.update(operating_unit_id=self.operating_unit_id.id)
+        return res
