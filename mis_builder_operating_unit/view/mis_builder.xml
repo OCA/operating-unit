@@ -22,9 +22,14 @@
         <field name="arch" type="xml">
             <field name="target_move" position="after">
                 <field
+                    name="has_no_operating_unit"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+                <field
                     name="operating_unit_ids"
                     widget="many2many_tags"
                     groups="operating_unit.group_multi_operating_unit"
+                    attrs="{'readonly': [('has_no_operating_unit', '=', True)]}"
                 />
             </field>
         </field>
@@ -40,10 +45,15 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='source_data']" position="inside">
                 <field
+                    name="has_no_operating_unit"
+                    groups="operating_unit.group_multi_operating_unit"
+                    attrs="{'invisible': [('source', 'not in', ('actuals', 'actuals_alt'))]}"
+                />
+                <field
                     name="operating_unit_ids"
                     widget="many2many_tags"
                     groups="operating_unit.group_multi_operating_unit"
-                    attrs="{'invisible': [('source', 'not in', ('actuals', 'actuals_alt'))]}"
+                    attrs="{'invisible': [('source', 'not in', ('actuals', 'actuals_alt'))], 'readonly': [('has_no_operating_unit', '=', True)]}"
                 />
             </xpath>
         </field>
