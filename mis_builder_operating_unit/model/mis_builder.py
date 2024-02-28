@@ -4,7 +4,7 @@
 # Copyright 2018-19 ACSONE SA/NV
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class MisReportInstance(models.Model):
@@ -26,6 +26,13 @@ class MisReportInstancePeriod(models.Model):
         string="Operating Unit",
     )
 
+    has_no_operating_unit = fields.Boolean("Has No Operating Unit")
+
+    @api.onchange("has_no_operating_unit")
+    def onchange_has_no_operating_unit(self):
+        if self.has_no_operating_unit:
+            self.operating_unit_ids = False
+
     def _get_additional_move_line_filter(self):
         aml_domain = super(
             MisReportInstancePeriod, self
@@ -38,16 +45,20 @@ class MisReportInstancePeriod(models.Model):
         # for OU A only). So the report would display values
         # for OU A in all 3 columns.
         sudoself = self.sudo()
-        if sudoself.report_instance_id.operating_unit_ids:
-            aml_domain.append(
-                (
-                    "operating_unit_id",
-                    "in",
-                    sudoself.report_instance_id.operating_unit_ids.ids,
+
+        if sudoself.has_no_operating_unit:
+            aml_domain.append(("operating_unit_id", "=", False,))
+        else:
+            if sudoself.report_instance_id.operating_unit_ids:
+                aml_domain.append(
+                    (
+                        "operating_unit_id",
+                        "in",
+                        sudoself.report_instance_id.operating_unit_ids.ids,
+                    )
                 )
-            )
-        if sudoself.operating_unit_ids:
-            aml_domain.append(
-                ("operating_unit_id", "in", sudoself.operating_unit_ids.ids)
-            )
+            if sudoself.operating_unit_ids:
+                aml_domain.append(
+                    ("operating_unit_id", "in", sudoself.operating_unit_ids.ids)
+                )
         return aml_domain
