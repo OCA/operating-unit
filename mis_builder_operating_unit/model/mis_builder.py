@@ -12,9 +12,14 @@ class MisReportInstance(models.Model):
     _inherit = "mis.report.instance"
 
     operating_unit_ids = fields.Many2many(
-        "operating.unit",
         string="Operating Unit",
     )
+    has_no_operating_unit = fields.Boolean()
+
+    @api.onchange("has_no_operating_unit")
+    def onchange_has_no_operating_unit(self):
+        if self.has_no_operating_unit:
+            self.operating_unit_ids = False
 
 
 class MisReportInstancePeriod(models.Model):
@@ -22,11 +27,10 @@ class MisReportInstancePeriod(models.Model):
     _inherit = "mis.report.instance.period"
 
     operating_unit_ids = fields.Many2many(
-        "operating.unit",
         string="Operating Unit",
     )
 
-    has_no_operating_unit = fields.Boolean("Has No Operating Unit")
+    has_no_operating_unit = fields.Boolean()
 
     @api.onchange("has_no_operating_unit")
     def onchange_has_no_operating_unit(self):
@@ -46,8 +50,22 @@ class MisReportInstancePeriod(models.Model):
         # for OU A in all 3 columns.
         sudoself = self.sudo()
 
-        if sudoself.has_no_operating_unit:
-            aml_domain.append(("operating_unit_id", "=", False,))
+        if sudoself.report_instance_id.has_no_operating_unit:
+            aml_domain.append(
+                (
+                    "operating_unit_id",
+                    "=",
+                    False,
+                )
+            )
+            if sudoself.has_no_operating_unit:
+                aml_domain.append(
+                    (
+                        "operating_unit_id",
+                        "=",
+                        False,
+                    )
+                )
         else:
             if sudoself.report_instance_id.operating_unit_ids:
                 aml_domain.append(
