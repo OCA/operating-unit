@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--© 2016-17 ForgeFlow S.L.-->
+<!--© 2016 Serpent Consulting Services Pvt. Ltd.-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page/group" position="after">
+                <group string="Operating Units">
+                    <field name="ou_is_self_balanced" />
+                    <field name="inter_ou_clearing_account_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
