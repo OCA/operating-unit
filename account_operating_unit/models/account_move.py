@@ -22,16 +22,6 @@ class AccountMoveLine(models.Model):
                     vals["operating_unit_id"] = move.operating_unit_id.id
         return super().create(vals_list)
 
-    @api.model
-    def _query_get(self, domain=None):
-        if domain is None:
-            domain = []
-        if self._context.get("operating_unit_ids", False):
-            domain.append(
-                ("operating_unit_id", "in", self._context.get("operating_unit_ids"))
-            )
-        return super()._query_get(domain)
-
     @api.constrains("operating_unit_id", "company_id")
     def _check_company_operating_unit(self):
         for rec in self:
@@ -85,14 +75,6 @@ class AccountMove(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
     )
-
-    @api.onchange("invoice_line_ids")
-    def _onchange_invoice_line_ids(self):
-        res = super()._onchange_invoice_line_ids()
-        if self.operating_unit_id:
-            for line in self.line_ids:
-                line.operating_unit_id = self.operating_unit_id
-        return res
 
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit(self):
@@ -182,18 +164,15 @@ class AccountMove(models.Model):
                     move, ou_id, ou_balances
                 )
                 if line_data:
-                    amls.append(ml_obj.with_context(wip=True).create(line_data))
+                    amls.append(
+                        ml_obj.with_context(check_move_validity=False).create(line_data)
+                    )
             if amls:
-                move.with_context(wip=False).write(
+                move.with_context(check_move_validity=True).write(
                     {"line_ids": [(4, aml.id) for aml in amls]}
                 )
 
         return super()._post(soft)
-
-    def _check_balanced(self):
-        if self.env.context.get("wip"):
-            return True
-        return super()._check_balanced()
 
     @api.constrains("line_ids")
     def _check_ou(self):

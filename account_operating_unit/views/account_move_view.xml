@@ -32,21 +32,6 @@
             </xpath>
         </field>
     </record>
-    <record id="view_move_line_tree_grouped" model="ir.ui.view">
-        <field name="name">account.move.line.tree.grouped</field>
-        <field name="model">account.move.line</field>
-        <field name="inherit_id" ref="account.view_move_line_tree_grouped" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='account_id']" position="after">
-                <field
-                    name="operating_unit_id"
-                    options="{'no_create': True}"
-                    optional="show"
-                    groups="operating_unit.group_multi_operating_unit"
-                />
-            </xpath>
-        </field>
-    </record>
     <record id="view_account_move_line_filter" model="ir.ui.view">
         <field name="name">Journal Items</field>
         <field name="model">account.move.line</field>
@@ -80,16 +65,17 @@
                     options="{'no_create': True}"
                     groups="operating_unit.group_multi_operating_unit"
                 />
+                <field name="operating_unit_id" invisible="1" />
             </xpath>
             <field name="invoice_line_ids" position="attributes">
-                <attribute name="context">
-                    {'default_move_type': context.get('default_move_type'),
-                    'journal_id':
-                    journal_id, 'default_partner_id': commercial_partner_id,
-                    'default_currency_id': currency_id or company_currency_id,
-                    'operating_unit_id': operating_unit_id}
+                <attribute name="context" operation="update">
+                    {
+                        'operating_unit_id': operating_unit_id,
+                        'default_operating_unit_id': operating_unit_id
+                    }
                 </attribute>
             </field>
+            <!-- TODO: this needs a patch in the analytic distribution widget to pick up the OU from context
             <xpath
                 expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']"
                 position="attributes"
@@ -110,19 +96,14 @@
                     False)), ('operating_unit_ids', '=', False)]
                 </attribute>
             </xpath>
+            -->
             <field name="line_ids" position="attributes">
-                <attribute name="context">
-                    {
-                    'default_move_type': context.get('default_move_type'),
-                    'line_ids': line_ids,
-                    'journal_id': journal_id,
-                    'default_partner_id': commercial_partner_id,
-                    'default_currency_id': currency_id or company_currency_id,
-                    'default_operating_unit_id': operating_unit_id}
+                <attribute name="context" operation="update">
+                    {'default_operating_unit_id': operating_unit_id}
                 </attribute>
             </field>
             <xpath
-                expr="//field[@name='line_ids']/tree//field[@name='account_id']"
+                expr="//field[@name='invoice_line_ids']/tree//field[@name='account_id']"
                 position="after"
             >
                 <field
@@ -132,6 +113,7 @@
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </xpath>
+            <!-- TODO: this needs a patch in the analytic distribution widget to pick up the OU from context
             <xpath
                 expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']"
                 position="attributes"
@@ -142,6 +124,7 @@
                     ('operating_unit_ids', '=', False)]
                 </attribute>
             </xpath>
+            -->
         </field>
     </record>
     <record id="view_invoice_tree" model="ir.ui.view">
