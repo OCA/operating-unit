@@ -37,7 +37,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         payment = self.payment_model.search([], order="id desc", limit=1)
         # Validate that inter OU balance move lines are created
         self.assertEqual(len(payment.move_id.line_ids), 4)
-        self.assertAlmostEqual(payment.amount, 115000)
+        self.assertAlmostEqual(payment.amount, self.invoice.amount_total)
         self.assertEqual(payment.state, "posted")
         self.assertEqual(self.invoice.payment_state, "paid")
 
@@ -71,7 +71,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         for payment in payments:
             # Validate that inter OU balance move lines are created
             self.assertEqual(len(payment.move_id.line_ids), 4)
-            self.assertAlmostEqual(payment.amount, 115000)
+            self.assertEqual(payment.amount, invoices[0].amount_total)
             self.assertEqual(payment.state, "posted")
         for invoice in invoices:
             self.assertEqual(invoice.payment_state, "paid")
