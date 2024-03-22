@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <template id="operating_unit_layout" inherit_id="web.external_layout_standard">
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="after">
+      <div
+                class="header"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+                t-att-style="report_header_style"
+            >
+        <t
+                    t-set="header_id"
+                    t-value="'operating_unit_custom_header.header_%s' % o.operating_unit_id.code"
+                />
+        <div t-call="{{header_id}}" />
+      </div>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="after">
+      <div
+                t-attf-class="footer o_standard_footer o_company_#{company.id}_layout"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+            >
+        <t
+                    t-set="footer_id"
+                    t-value="'operating_unit_custom_header.footer_%s' % o.operating_unit_id.code"
+                />
+        <div t-call="{{footer_id}}" />
+      </div>
+    </xpath>
+  </template>
+
+  <template id="operating_unit_layout_boxed" inherit_id="web.external_layout_boxed">
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="after">
+      <div
+                class="header"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+                t-att-style="report_header_style"
+            >
+        <t
+                    t-set="header_id"
+                    t-value="'operating_unit_custom_header.header_%s' % o.operating_unit_id.code"
+                />
+        <div class="o_boxed_header">
+          <div t-call="{{header_id}}" />
+        </div>
+      </div>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="after">
+      <div
+                t-attf-class="footer o_report_layout_boxed o_company_#{company.id}_layout"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+            >
+        <t
+                    t-set="footer_id"
+                    t-value="'operating_unit_custom_header.footer_%s' % o.operating_unit_id.code"
+                />
+        <div t-call="{{footer_id}}" />
+      </div>
+    </xpath>
+  </template>
+
+  <template id="operating_unit_layout_clean" inherit_id="web.external_layout_clean">
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="after">
+      <div
+                class="header"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+                t-att-style="report_header_style"
+            >
+        <t
+                    t-set="header_id"
+                    t-value="'operating_unit_custom_header.header_%s' % o.operating_unit_id.code"
+                />
+        <div class="o_clean_header">
+          <div t-call="{{header_id}}" />
+        </div>
+      </div>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="after">
+      <div
+                t-attf-class="footer o_clean_footer o_company_#{company.id}_layout"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+            >
+        <t
+                    t-set="footer_id"
+                    t-value="'operating_unit_custom_header.footer_%s' % o.operating_unit_id.code"
+                />
+        <div t-call="{{footer_id}}" />
+      </div>
+    </xpath>
+  </template>
+
+  <template
+        id="operating_unit_layout_background"
+        inherit_id="web.external_layout_background"
+    >
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'header')]" position="after">
+      <div
+                class="header"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+                t-att-style="report_header_style"
+            >
+        <t
+                    t-set="header_id"
+                    t-value="'operating_unit_custom_header.header_%s' % o.operating_unit_id.code"
+                />
+        <div class="o_background_header">
+          <div t-call="{{header_id}}" />
+        </div>
+      </div>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="attributes">
+      <attribute
+                name="t-if"
+            >not o or o and ('operating_unit_id' not in o.fields_get() or not o.operating_unit_id)</attribute>
+    </xpath>
+    <xpath expr="//div[contains(@t-attf-class, 'footer')]" position="after">
+      <div
+                t-attf-class="footer o_background_footer o_company_#{company.id}_layout"
+                t-if="o and 'operating_unit_id' in o.fields_get() and o.operating_unit_id"
+            >
+        <t
+                    t-set="footer_id"
+                    t-value="'operating_unit_custom_header.footer_%s' % o.operating_unit_id.code"
+                />
+        <div t-call="{{footer_id}}" />
+      </div>
+    </xpath>
+  </template>
+
+  <template id="op_header">
+    <div class="row">
+      <div class="col-3 mb4">
+        <img
+                    t-if="company.logo"
+                    t-att-src="image_data_uri(company.logo)"
+                    style="max-height: 45px;"
+                    alt="Logo"
+                />
+      </div>
+      <div
+                class="col-9 text-right"
+                style="margin-top:22px;"
+                t-field="company.report_header"
+                name="moto"
+            />
+    </div>
+    <div t-if="company.logo or company.report_header" class="row zero_min_height">
+      <div class="col-12">
+        <div style="border-bottom: 1px solid black;" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6" name="company_address">
+        <div
+                    t-field="company.partner_id"
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                />
+      </div>
+    </div>
+  </template>
+
+  <template id="op_footer">
+    <div class="text-center" style="border-top: 1px solid black;">
+      <ul class="list-inline mb4">
+        <li t-if="company.phone" class="list-inline-item d-inline">
+          <span class="o_force_ltr" t-field="company.phone" />
+        </li>
+        <li t-if="company.email" class="list-inline-item d-inline">
+          <span t-field="company.email" />
+        </li>
+        <li t-if="company.website" class="list-inline-item d-inline">
+          <span t-field="company.website" />
+        </li>
+        <li t-if="company.vat" class="list-inline-item d-inline">
+          <t t-esc="company.country_id.vat_label or 'Tax ID'" />:
+          <span t-field="company.vat" />
+        </li>
+      </ul>
+
+      <div name="financial_infos">
+        <span t-field="company.report_footer" />
+      </div>
+
+      <div t-if="report_type == 'pdf'" class="text-muted">
+        Page:
+        <span class="page" />
+        /
+        <span class="topage" />
+      </div>
+    </div>
+  </template>
+
+</odoo>
