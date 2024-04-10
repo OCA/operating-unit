@@ -6,3 +6,4 @@
 * Darshan Patel <darshan.patel.serpencs@gmail.com>
 * Alan Ramos <alan.ramos@jarsa.com.mx>
 * Jorge Alberto Olvera Cuenca <jorge.olvera@jarsa.com>
+* Alexei Rivera <arivera@archeti.com>
