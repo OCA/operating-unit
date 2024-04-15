@@ -46,7 +46,7 @@ addon | version | maintainers | summary
 [operating_unit](operating_unit/) | 14.0.1.1.1 |  | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all Operating Units
 [pos_operating_unit](pos_operating_unit/) | 14.0.1.0.0 |  | POS Operating Unit Access
-[product_operating_unit](product_operating_unit/) | 14.0.1.0.2 |  | Adds the concept of operating unit (OU) in products
+[product_operating_unit](product_operating_unit/) | 14.0.1.0.3 |  | Adds the concept of operating unit (OU) in products
 [project_operating_unit](project_operating_unit/) | 14.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to projects and tasks.
 [purchase_operating_unit](purchase_operating_unit/) | 14.0.1.1.1 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [purchase_operating_unit_access_all](purchase_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Purchase Orders
