@@ -94,7 +94,9 @@ class AccountMove(models.Model):
     def _post(self, soft=True):
         ml_obj = self.env["account.move.line"]
         for move in self:
-            if not move.company_id.ou_is_self_balanced:
+            if not move.company_id.ou_is_self_balanced or self.env.context.get(
+                "inter_ou_balance_entry", False
+            ):
                 continue
 
             # If all move lines point to the same operating unit, there's no
