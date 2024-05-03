@@ -35,7 +35,7 @@ addon | version | maintainers | summary
 [hr_expense_operating_unit_access_all](hr_expense_operating_unit_access_all/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Expenses
 [hr_operating_unit](hr_operating_unit/) | 15.0.1.0.0 |  | HR Operating Unit
 [hr_operating_unit_access_all](hr_operating_unit_access_all/) | 15.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Access all OUs' Employees
-[hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 15.0.1.0.0 |  | HR Payroll Account Operating Unit
+[hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 15.0.1.0.1 |  | HR Payroll Account Operating Unit
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 15.0.1.0.0 |  | MIS Builder with Operating Unit
 [mis_builder_operating_unit_access_all](mis_builder_operating_unit_access_all/) | 15.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Access all OUs' MIS Builder
 [mrp_operating_unit](mrp_operating_unit/) | 15.0.1.0.0 |  | Operating Unit in MRP
