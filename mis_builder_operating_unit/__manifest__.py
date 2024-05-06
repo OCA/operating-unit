@@ -5,7 +5,7 @@
 
 {
     "name": "MIS Builder with Operating Unit",
-    "version": "13.0.1.0.1",
+    "version": "13.0.1.1.0",
     "category": "Reporting",
     "author": "Eficent Business and IT Consulting Services S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
