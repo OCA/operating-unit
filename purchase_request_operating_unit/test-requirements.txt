@@ -1,1 +1,0 @@
-odoo-addon-purchase_operating_unit @ git+https://github.com/OCA/operating-unit@refs/pull/443/head#subdirectory=setup/purchase_operating_unit
