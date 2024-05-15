@@ -20,6 +20,7 @@
         "report/purchase_report_view.xml",
         "views/purchase_order_view.xml",
         "views/purchase_order_line_view.xml",
+        "views/account_move_view.xml",
     ],
     "demo": ["demo/purchase_order_demo.xml"],
     "installable": True,
