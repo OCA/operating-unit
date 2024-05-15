@@ -30,9 +30,9 @@ class AccountMove(models.Model):
     def _compute_purchase_ou_domain(self):
         for rec in self:
             rec.purchase_ou_domain = (
-                self.env['purchase.order']
+                self.env["purchase.order"]
                 .sudo()
-                .search([('operating_unit_id', '=', rec.operating_unit_id.id)])
+                .search([("operating_unit_id", "=", rec.operating_unit_id.id)])
             )
 
 
