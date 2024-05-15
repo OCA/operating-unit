@@ -2,12 +2,12 @@
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, exceptions, models
+from odoo import _, api, exceptions, models, fields
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
-    
+
     purchase_ou_domain = fields.Many2many(
         comodel_name='purchase.order',
         compute='_compute_purchase_ou_domain'
@@ -33,18 +33,6 @@ class AccountMove(models.Model):
             rec.purchase_ou_domain = self.env['purchase.order'].sudo().search([
                 ('operating_unit_id', '=', rec.operating_unit_id.id)
             ])
-            
-    # DEPRECATED - Odoo 14 create a warning when onchange return domain.
-    # @api.onchange("operating_unit_id")
-    # def _onchange_operating_unit_id(self):
-    #     """
-    #     Show only the purchase orders that have the same operating unit
-    #     """
-    #     return {
-    #         "domain": {
-    #             "purchase_id": [("operating_unit_id", "=", self.operating_unit_id.id)]
-    #         }
-    #     }
 
 
 class AccountMoveLine(models.Model):
