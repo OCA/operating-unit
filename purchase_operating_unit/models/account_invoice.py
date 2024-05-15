@@ -2,15 +2,14 @@
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, exceptions, models, fields
+from odoo import _, api, exceptions, fields, models
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     purchase_ou_domain = fields.Many2many(
-        comodel_name='purchase.order',
-        compute='_compute_purchase_ou_domain'
+        comodel_name="purchase.order", compute="_compute_purchase_ou_domain"
     )
 
     # Load all unsold PO lines
@@ -27,12 +26,14 @@ class AccountMove(models.Model):
             self.operating_unit_id = purchase_id.operating_unit_id.id
         return super()._onchange_purchase_auto_complete()
 
-    @api.depends('operating_unit_id')
+    @api.depends("operating_unit_id")
     def _compute_purchase_ou_domain(self):
         for rec in self:
-            rec.purchase_ou_domain = self.env['purchase.order'].sudo().search([
-                ('operating_unit_id', '=', rec.operating_unit_id.id)
-            ])
+            rec.purchase_ou_domain = (
+                self.env['purchase.order']
+                .sudo()
+                .search([('operating_unit_id', '=', rec.operating_unit_id.id)])
+            )
 
 
 class AccountMoveLine(models.Model):
