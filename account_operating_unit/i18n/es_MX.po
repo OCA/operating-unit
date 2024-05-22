@@ -169,22 +169,11 @@ msgid "Payments"
 msgstr "Pagos"
 
 #. module: account_operating_unit
-#: model:ir.model,name:account_operating_unit.model_account_payment_register
-msgid "Register Payment"
-msgstr "Registrar pago"
-
-#. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The Company in the Move and in Operating Unit must be the same."
 msgstr ""
 "La Empresa en el movimiento y en la Unidad Operativa debe ser la misma."
-
-#. module: account_operating_unit
-#: code:addons/account_operating_unit/wizards/account_payment_register.py:0
-#, python-format
-msgid "The OU in the Bills/Invoices to register payment must be the same."
-msgstr "La OU en las Facturas para registrar el pago debe ser la misma."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
@@ -197,3 +186,10 @@ msgstr "La OU en el movimiento y en diario debe ser la misma."
 #: model:ir.model.fields,help:account_operating_unit.field_account_move__operating_unit_id
 msgid "This operating unit will be defaulted in the move lines."
 msgstr "Esta unidad operativa estará por defecto en las líneas de movimiento."
+
+#~ msgid "Register Payment"
+#~ msgstr "Registrar pago"
+
+#, python-format
+#~ msgid "The OU in the Bills/Invoices to register payment must be the same."
+#~ msgstr "La OU en las Facturas para registrar el pago debe ser la misma."
