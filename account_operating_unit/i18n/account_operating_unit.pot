@@ -150,20 +150,9 @@ msgid "Payments"
 msgstr ""
 
 #. module: account_operating_unit
-#: model:ir.model,name:account_operating_unit.model_account_payment_register
-msgid "Register Payment"
-msgstr ""
-
-#. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The Company in the Move and in Operating Unit must be the same."
-msgstr ""
-
-#. module: account_operating_unit
-#: code:addons/account_operating_unit/wizards/account_payment_register.py:0
-#, python-format
-msgid "The OU in the Bills/Invoices to register payment must be the same."
 msgstr ""
 
 #. module: account_operating_unit
