@@ -108,6 +108,13 @@ msgid "Purchase Order Line"
 msgstr "Línea de Orden de Compra"
 
 #. module: purchase_operating_unit
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_account_bank_statement_line__purchase_ou_domain
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_account_move__purchase_ou_domain
+#: model:ir.model.fields,field_description:purchase_operating_unit.field_account_payment__purchase_ou_domain
+msgid "Purchase Ou Domain"
+msgstr ""
+
+#. module: purchase_operating_unit
 #: model:ir.model,name:purchase_operating_unit.model_purchase_report
 msgid "Purchase Report"
 msgstr "Informe de Compra"
