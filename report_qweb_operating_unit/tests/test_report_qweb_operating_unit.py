@@ -1,18 +1,17 @@
 from unittest.mock import MagicMock
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
 
-class TestReportQwebOperatingUnit(TransactionCase):
+class TestReportQwebOperatingUnit(OperatingUnitCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.ou = cls.env.ref("operating_unit.b2b_operating_unit")
         cls.env.company.report_header = "Company report header"
-        cls.ou.report_header = "OU report header"
+        cls.ou1.report_header = "OU report header"
         cls.mock_user = MagicMock(wraps=cls.env.user)
         cls.mock_user.__contains__ = lambda self, other: True
-        cls.mock_user.operating_unit_id = cls.ou
+        cls.mock_user.operating_unit_id = cls.ou1
 
     def test_rendering(self):
         for layout in ("standard", "striped", "bold", "boxed"):
@@ -38,4 +37,4 @@ class TestReportQwebOperatingUnit(TransactionCase):
                 )
                 .decode("utf8")
             )
-            self.assertIn(self.ou.report_header, html)
+            self.assertIn(self.ou1.report_header, html)
