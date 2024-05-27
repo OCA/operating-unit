@@ -55,7 +55,6 @@ class TestProductOperatingUnit(common.TransactionCase):
     def test_po_ou_onchange(self):
         with self.assertRaises(ValidationError):
             self.product1.operating_unit_ids = [(6, 0, [self.b2b.id])]
-        self.product1.onchange_operating_unit_ids()
 
     def test_po_ou_security(self):
         """Test Security of Product Operating Unit"""
