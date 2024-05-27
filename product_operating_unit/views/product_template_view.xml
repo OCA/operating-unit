@@ -13,9 +13,13 @@
         <field name="arch" type="xml">
             <field name="categ_id" position="after">
                 <field
+                    name="company_id"
+                    groups="!base.group_multi_company"
+                    column_invisible="True"
+                />
+                <field
                     name="operating_unit_ids"
                     widget="many2many_tags"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
@@ -33,7 +37,6 @@
             >
                 <field
                     name="operating_unit_ids"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                     widget="many2many_tags"
                 />

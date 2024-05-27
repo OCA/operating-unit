@@ -13,7 +13,6 @@
             <field name="parent_id" position="after">
                 <field
                     name="operating_unit_ids"
-                    domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
                     widget="many2many_tags"
                 />
