@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class OperatingUnit(models.Model):
-
     _name = "operating.unit"
     _description = "Operating Unit"
     _rec_names_search = ["name", "code"]
@@ -47,7 +46,7 @@ class OperatingUnit(models.Model):
         for ou in self:
             name = ou.name
             if ou.code:
-                name = "[{}] {}".format(ou.code, name)
+                name = f"[{ou.code}] {name}"
             res.append((ou.id, name))
         return res
 
