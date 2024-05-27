@@ -4,3 +4,7 @@
 * Nicola Studer <nicola.studer@braintec-group.com>
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
 * Kitti U. <kittiu@ecosoft.co.th>
+
+* `Ooops <https://www.ooops404.com/>`_:
+
+  * Giovanni Serra <giovanni@gslab.it>
