@@ -8,7 +8,7 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <field name="country_code" position="before">
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"

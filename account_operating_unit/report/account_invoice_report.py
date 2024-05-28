@@ -19,10 +19,3 @@ class AccountInvoiceReport(models.Model):
             ,line.operating_unit_id
         """
         return select_str
-
-    def _group_by(self):
-        group_by_str = super()._group_by()
-        group_by_str += """
-            ,line.operating_unit_id
-        """
-        return group_by_str
