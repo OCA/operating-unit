@@ -13,4 +13,5 @@ class AccountAnalyticAccount(models.Model):
         relation="analytic_account_operating_unit_rel",
         column1="analytic_account_id",
         column2="operating_unit_id",
+        check_company=True,
     )
