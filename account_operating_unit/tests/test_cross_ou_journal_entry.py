@@ -11,9 +11,6 @@ from . import test_account_operating_unit as test_ou
 
 @tagged("post_install", "-at_install")
 class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
-    def setUp(self):
-        super().setUp()
-
     def _check_balance(self, account_id, acc_type="clearing"):
         # Check balance for all operating units
         domain = [("account_id", "=", account_id)]
@@ -44,10 +41,10 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         """
         Call read_group method and return the balance of particular account.
         """
-        aml_rec = self.aml_model.with_user(self.user_id.id).read_group(
-            domain, ["debit", "credit", "account_id"], ["account_id"]
+        aml_rec = self.aml_model.with_user(self.user1.id)._read_group(
+            domain, ["account_id"], ["debit:sum", "credit:sum"]
         )[0]
-        return aml_rec.get("debit", 0) - aml_rec.get("credit", 0)
+        return aml_rec[1] - aml_rec[2]
 
     def test_cross_ou_journal_entry(self):
         """Test balance of cross OU journal entries.
@@ -93,36 +90,22 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         move_vals.update(
             {"journal_id": journal_ids and journal_ids.id, "line_ids": lines}
         )
-        move = self.move_model.with_user(self.user_id.id).create(move_vals)
+        move = (
+            self.move_model.with_user(self.user1.id)
+            .with_context(check_move_validity=False)
+            .create(move_vals)
+        )
         # Post journal entries
         move.action_post()
         # Check the balance of the account
         self._check_balance(self.current_asset_account_id.id, acc_type="other")
         clearing_account_id = self.company.inter_ou_clearing_account_id.id
         self._check_balance(clearing_account_id, acc_type="clearing")
-        # Report journal
-        report_journal = (
-            self.env["report.account.report_journal"]
-            .sudo()
-            ._get_report_values(
-                docids=[journal_ids.id],
-                data={
-                    "form": {
-                        "journal_ids": journal_ids.ids,
-                        "company_id": journal_ids.company_id,
-                        "used_context": {
-                            "operating_unit_ids": journal_ids.operating_unit_id.id
-                        },
-                    }
-                },
-            )
-        )
-        self.assertTrue(report_journal)
 
     def test_journal_no_ou(self):
         """Test journal can not create if use self-balance but not ou in journal"""
         with self.assertRaises(UserError):
-            with Form(self.journal_model) as f:
+            with Form(self.journal_model.with_company(self.company)) as f:
                 f.type = "bank"
                 f.name = "Test new bank not ou"
                 f.code = "testcode"

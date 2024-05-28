@@ -15,12 +15,12 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         """Create and invoice and a subsquent payment, in another OU"""
 
         # Create invoice for B2B operating unit
-        self.invoice = self.move_model.with_user(self.user_id.id).create(
+        self.invoice = self.move_model.with_user(self.user1.id).create(
             self._prepare_invoice(self.b2b.id)
         )
         self.invoice.invoice_date = self.invoice.date
         # Validate the invoice
-        self.invoice.with_user(self.user_id.id).action_post()
+        self.invoice.with_user(self.user1.id).action_post()
 
         # Pay the invoice using a cash journal associated to the main company
         ctx = {"active_model": "account.move", "active_ids": [self.invoice.id]}
@@ -37,7 +37,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         payment = self.payment_model.search([], order="id desc", limit=1)
         # Validate that inter OU balance move lines are created
         self.assertEqual(len(payment.move_id.line_ids), 4)
-        self.assertAlmostEqual(payment.amount, 115000)
+        self.assertAlmostEqual(payment.amount, self.invoice.amount_total)
         self.assertEqual(payment.state, "posted")
         self.assertEqual(self.invoice.payment_state, "paid")
 
@@ -49,24 +49,24 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             self._prepare_invoice(self.b2b.id, "SUPP/B2B/01"),
             self._prepare_invoice(self.b2c.id, "SUPP/B2C/02"),
         ]
-        invoices = self.move_model.with_user(self.user_id.id).create(to_create)
+        invoices = self.move_model.with_user(self.user1.id).create(to_create)
         for invoice in invoices:
             invoice.invoice_date = invoice.date
         # Validate the invoices
-        invoices.with_user(self.user_id.id).action_post()
+        invoices.with_user(self.user1.id).action_post()
 
         # Pay the invoices using a cash journal associated to the main company
-        ctx = {"active_model": "account.move", "active_ids": invoices.ids}
         payment_method_id = self.cash_journal_ou1.outbound_payment_method_line_ids[0]
-        register_payments = self.register_payments_model.with_context(**ctx).create(
+        self.register_payments_model.with_context(
+            active_model="account.move", active_ids=invoices.ids
+        ).create(
             {
                 "payment_date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.cash_journal_ou1.id,
                 "payment_method_line_id": payment_method_id.id,
             }
-        )
+        )._create_payments()
 
-        register_payments.action_create_payments()
         payments = self.payment_model.search([], order="id desc", limit=2)
         inter_ou_moves = self.move_model.search(
             [("ref", "=", "Inter OU Balancing")], order="id desc", limit=2
@@ -76,7 +76,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         for payment in payments:
             # Validate that inter OU balance move lines are created
             self.assertEqual(len(payment.move_id.line_ids), 2)
-            self.assertAlmostEqual(payment.amount, 115000)
+            self.assertEqual(payment.amount, invoices[0].amount_total)
             self.assertEqual(payment.state, "posted")
         for invoice in invoices:
             self.assertEqual(invoice.payment_state, "paid")

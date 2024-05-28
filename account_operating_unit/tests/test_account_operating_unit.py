@@ -2,154 +2,144 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo.models import Command
 from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
 
 @tagged("post_install", "-at_install")
-class TestAccountOperatingUnit(AccountTestInvoicingCommon):
-    def setUp(self):
-        super().setUp()
-        self.res_users_model = self.env["res.users"]
-        self.aml_model = self.env["account.move.line"]
-        self.move_model = self.env["account.move"]
-        self.account_model = self.env["account.account"]
-        self.journal_model = self.env["account.journal"]
-        self.product_model = self.env["product.product"]
-        self.payment_model = self.env["account.payment"]
-        self.register_payments_model = self.env["account.payment.register"]
+class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
+    @classmethod
+    def setUpClass(cls, chart_template_ref=None):
+        super().setUpClass(chart_template_ref=chart_template_ref)
+        cls.aml_model = cls.env["account.move.line"]
+        cls.move_model = cls.env["account.move"]
+        cls.account_model = cls.env["account.account"]
+        cls.journal_model = cls.env["account.journal"]
+        cls.product_model = cls.env["product.product"]
+        cls.payment_model = cls.env["account.payment"]
+        cls.register_payments_model = cls.env["account.payment.register"]
 
         # company
-        self.company = self.env.user.company_id
-        self.grp_acc_manager = self.env.ref("account.group_account_manager")
+        cls.grp_acc_manager = cls.env.ref("account.group_account_manager")
+        cls.grp_acc_config = cls.env.ref("account.group_account_user")
         # Main Operating Unit
-        self.ou1 = self.env.ref("operating_unit.main_operating_unit")
+        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
         # B2B Operating Unit
-        self.b2b = self.env.ref("operating_unit.b2b_operating_unit")
+        cls.b2b = cls.env.ref("operating_unit.b2b_operating_unit")
         # B2C Operating Unit
-        self.b2c = self.env.ref("operating_unit.b2c_operating_unit")
+        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit")
         # Assign user to main company to allow to write OU
-        self.env.user.write(
+        cls.env.user.write(
             {
-                "company_ids": [(4, self.env.ref("base.main_company").id)],
                 "operating_unit_ids": [
-                    (4, self.b2b.id),
-                    (4, self.b2c.id),
+                    Command.link(cls.b2b.id),
+                    Command.link(cls.b2c.id),
                 ],
+                "company_ids": [Command.link(cls.company.id)],
             }
         )
-        # Assign company to OU
-        (self.ou1 + self.b2b + self.b2c).write({"company_id": self.company.id})
-        # Partner
-        self.partner1 = self.env.ref("base.res_partner_1")
         # Products
-        self.product1 = self.env.ref("product.product_product_7")
-        self.product2 = self.env.ref("product.product_product_9")
-        self.product3 = self.env.ref("product.product_product_11")
+        cls.product1 = cls.env.ref("product.product_product_7")
+        cls.product2 = cls.env.ref("product.product_product_9")
+        cls.product3 = cls.env.ref("product.product_product_11")
 
         # Payment methods
-        self.payment_method_manual_in = self.env.ref(
+        cls.payment_method_manual_in = cls.env.ref(
             "account.account_payment_method_manual_in"
         )
 
-        # Create user1
-        self.user_id = self.res_users_model.with_context(no_reset_password=True).create(
+        cls.user1.write(
             {
-                "name": "Test Account User",
-                "login": "user_1",
-                "password": "demo",
-                "email": "example@yourcompany.com",
-                "company_id": self.company.id,
-                "company_ids": [(4, self.company.id)],
-                "operating_unit_ids": [(4, self.b2b.id), (4, self.b2c.id)],
-                "groups_id": [(6, 0, [self.grp_acc_manager.id])],
+                "groups_id": [
+                    Command.link(cls.grp_acc_manager.id),
+                    Command.link(cls.grp_acc_config.id),
+                ],
+                "operating_unit_ids": [
+                    Command.link(cls.b2b.id),
+                    Command.link(cls.b2c.id),
+                ],
             }
         )
         # Create cash - test account
-        user_type = self.env.ref("account.data_account_type_current_assets")
-        self.current_asset_account_id = self.account_model.create(
+        cls.current_asset_account_id = cls.account_model.create(
             {
                 "name": "Current asset - Test",
-                "code": "test_current_asset",
-                "user_type_id": user_type.id,
-                "company_id": self.company.id,
+                "code": "test.current.asset",
+                "account_type": "asset_current",
+                "company_id": cls.company.id,
             }
         )
         # Create Inter-OU Clearing - test account
-        user_type = self.env.ref("account.data_account_type_equity")
-        self.inter_ou_account_id = self.account_model.create(
+        cls.inter_ou_account_id = cls.account_model.create(
             {
                 "name": "Inter-OU Clearing",
-                "code": "test_inter_ou",
-                "user_type_id": user_type.id,
-                "company_id": self.company.id,
+                "code": "test.inter.ou",
+                "account_type": "equity",
+                "company_id": cls.company.id,
             }
         )
         # Assign the Inter-OU Clearing account to the company
-        self.company.inter_ou_clearing_account_id = self.inter_ou_account_id.id
-        self.company.ou_is_self_balanced = True
+        cls.company.inter_ou_clearing_account_id = cls.inter_ou_account_id.id
+        cls.company.ou_is_self_balanced = True
 
         # Create user2
-        self.user2_id = self.res_users_model.with_context(
-            no_reset_password=True
-        ).create(
+        cls.user2.write(
             {
-                "name": "Test Account User",
-                "login": "user_2",
-                "password": "demo",
-                "email": "example@yourcompany.com",
-                "company_id": self.company.id,
-                "company_ids": [(4, self.company.id)],
-                "operating_unit_ids": [(4, self.b2c.id)],
-                "groups_id": [(6, 0, [self.grp_acc_manager.id])],
+                "groups_id": [
+                    Command.link(cls.grp_acc_manager.id),
+                    Command.link(cls.grp_acc_config.id),
+                ],
+                "operating_unit_ids": [
+                    Command.link(cls.b2c.id),
+                ],
             }
         )
 
         # Create a cash account 1
-        user_type = self.env.ref("account.data_account_type_liquidity")
-        self.cash1_account_id = self.account_model.create(
+        cls.cash1_account_id = cls.account_model.create(
             {
                 "name": "Cash 1 - Test",
-                "code": "test_cash_1",
-                "user_type_id": user_type.id,
-                "company_id": self.company.id,
+                "code": "test.cash.1",
+                "account_type": "asset_current",
+                "company_id": cls.company.id,
             }
         )
 
         # Create a journal for cash account 1, associated to the main
         # operating unit
-        self.cash_journal_ou1 = self.journal_model.create(
+        cls.cash_journal_ou1 = cls.journal_model.create(
             {
                 "name": "Cash Journal 1 - Test",
                 "code": "cash1",
                 "type": "cash",
-                "company_id": self.company.id,
-                "default_account_id": self.cash1_account_id.id,
-                "operating_unit_id": self.ou1.id,
+                "company_id": cls.company.id,
+                "default_account_id": cls.cash1_account_id.id,
+                "operating_unit_id": cls.ou1.id,
             }
         )
         # Create a cash account 2
-        user_type = self.env.ref("account.data_account_type_liquidity")
-        self.cash2_account_id = self.account_model.create(
+        cls.cash2_account_id = cls.account_model.create(
             {
                 "name": "Cash 2 - Test",
                 "code": "cash2",
-                "user_type_id": user_type.id,
-                "company_id": self.company.id,
+                "account_type": "asset_current",
+                "company_id": cls.company.id,
             }
         )
 
         # Create a journal for cash account 2, associated to the operating
         # unit B2B
-        self.cash2_journal_b2b = self.journal_model.create(
+        cls.cash2_journal_b2b = cls.journal_model.create(
             {
                 "name": "Cash Journal 2 - Test",
                 "code": "test_cash_2",
                 "type": "cash",
-                "company_id": self.company.id,
-                "default_account_id": self.cash2_account_id.id,
-                "operating_unit_id": self.b2b.id,
+                "company_id": cls.company.id,
+                "default_account_id": cls.cash2_account_id.id,
+                "operating_unit_id": cls.b2b.id,
             }
         )
 
@@ -161,7 +151,6 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
         ]
         # Prepare invoice lines
         lines = []
-        acc_type = self.env.ref("account.data_account_type_expenses")
         for product, qty in line_products:
             line_values = {
                 "name": product.name,
@@ -169,8 +158,16 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
                 "quantity": qty,
                 "price_unit": 50,
                 "account_id": self.env["account.account"]
-                .search([("user_type_id", "=", acc_type.id)], limit=1)
+                .search(
+                    [
+                        ("account_type", "=", "expense"),
+                        ("company_id", "=", self.company.id),
+                    ],
+                    limit=1,
+                )
                 .id,
+                # Adding this line so the taxes are explicitly excluded from the lines
+                "tax_ids": [],
             }
             lines.append((0, 0, line_values))
         inv_vals = {
