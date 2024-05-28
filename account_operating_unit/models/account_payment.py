@@ -9,6 +9,7 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     operating_unit_id = fields.Many2one(
+        check_company=True,
         comodel_name="operating.unit",
         compute="_compute_operating_unit_id",
         store=True,
@@ -19,8 +20,12 @@ class AccountPayment(models.Model):
         for payment in self.filtered("journal_id"):
             payment.operating_unit_id = payment.journal_id.operating_unit_id
 
-    def _prepare_move_line_default_vals(self, write_off_line_vals=None):
-        lines = super()._prepare_move_line_default_vals(write_off_line_vals)
+    def _prepare_move_line_default_vals(
+        self, write_off_line_vals=None, force_balance=None
+    ):
+        lines = super()._prepare_move_line_default_vals(
+            write_off_line_vals, force_balance
+        )
         for line in lines:
             line["operating_unit_id"] = self.operating_unit_id.id
         active_model = self._context.get("active_model", False)
