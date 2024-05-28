@@ -16,12 +16,12 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         passed to the accounting journal items.
         """
         # Create invoice
-        self.invoice = self.move_model.with_user(self.user_id.id).create(
+        self.invoice = self.move_model.with_user(self.user1.id).create(
             self._prepare_invoice(self.b2b.id)
         )
         self.invoice.invoice_date = self.invoice.date
         # Validate the invoice
-        self.invoice.with_user(self.user_id.id).action_post()
+        self.invoice.with_user(self.user1.id).action_post()
         # Check Operating Units in journal entries
         all_op_units = all(
             move_line.operating_unit_id.id == self.b2b.id
