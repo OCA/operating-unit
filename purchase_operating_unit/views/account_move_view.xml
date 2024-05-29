@@ -7,10 +7,9 @@
         <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='purchase_id']" position="attributes">
-                <attribute name="domain">[('id', 'in', purchase_ou_domain)]</attribute>
-            </xpath>
-            <xpath expr="//field[@name='purchase_id']" position="after">
-                <field name="purchase_ou_domain" invisible="1" />
+                <attribute
+                    name="domain"
+                >['|',('operating_unit_id', '=', operating_unit_id),('operating_unit_id', '=', False)]</attribute>
             </xpath>
         </field>
     </record>
