@@ -11,6 +11,7 @@ class StockLocation(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Operating Unit",
+        check_company=True,
     )
 
     @api.constrains("operating_unit_id")
@@ -39,32 +40,11 @@ class StockLocation(models.Model):
     @api.constrains("operating_unit_id")
     def _check_required_operating_unit(self):
         for rec in self:
-            if rec.usage not in ("supplier", "customer") and not rec.operating_unit_id:
-                raise UserError(
-                    _(
-                        "Configuration error. Internal locations should have an operating unit"
-                    )
-                )
             if rec.usage in ("supplier", "customer") and rec.operating_unit_id:
                 raise UserError(
                     _(
                         "Configuration error. The operating unit should be "
                         "assigned to internal locations only."
-                    )
-                )
-
-    @api.constrains("operating_unit_id", "company_id")
-    def _check_company_operating_unit(self):
-        for rec in self:
-            if (
-                rec.company_id
-                and rec.operating_unit_id
-                and rec.company_id != rec.operating_unit_id.company_id
-            ):
-                raise UserError(
-                    _(
-                        "Configuration error. The Company in the Stock Location "
-                        "and in the Operating Unit must be the same."
                     )
                 )
 
