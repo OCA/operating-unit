@@ -22,10 +22,18 @@
                 <field
                     name="requesting_operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['cancel', 'done', 'purchase']"
                 />
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['cancel', 'done', 'purchase']"
+                />
+                <field
+                    name="operating_unit_id"
+                    groups="!operating_unit.group_multi_operating_unit"
+                    invisible="1"
+                    readonly="state in ['cancel', 'done', 'purchase']"
                 />
             </field>
             <field name="order_line" position="attributes">
