@@ -12,7 +12,7 @@ class StockMove(models.Model):
         """
         Override to add Operating Units to Picking.
         """
-        values = super(StockMove, self)._get_new_picking_values()
+        values = super()._get_new_picking_values()
 
         values.update(
             {
