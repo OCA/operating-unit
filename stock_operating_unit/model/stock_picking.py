@@ -11,31 +11,18 @@ class StockPicking(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Requesting Operating Unit",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        readonly=False,
+        compute="_compute_operating_unit_id",
+        store=True,
+        check_company=True,
     )
 
-    @api.onchange("picking_type_id", "partner_id")
-    def _onchange_picking_type(self):
-        res = super()._onchange_picking_type()
-        if self.picking_type_id:
-            self.operating_unit_id = self.picking_type_id.warehouse_id.operating_unit_id
-        return res
-
-    @api.constrains("operating_unit_id", "company_id")
-    def _check_company_operating_unit(self):
-        for rec in self:
-            if (
-                rec.company_id
-                and rec.operating_unit_id
-                and rec.company_id != rec.operating_unit_id.company_id
-            ):
-                raise UserError(
-                    _(
-                        "Configuration error. The Company in the Stock Picking "
-                        "and in the Operating Unit must be the same."
-                    )
-                )
+    @api.depends("picking_type_id")
+    def _compute_operating_unit_id(self):
+        for picking in self:
+            if picking.picking_type_id:
+                warehouse = picking.picking_type_id.warehouse_id
+                picking.operating_unit_id = warehouse.operating_unit_id
 
     @api.constrains("operating_unit_id", "picking_type_id")
     def _check_picking_type_operating_unit(self):

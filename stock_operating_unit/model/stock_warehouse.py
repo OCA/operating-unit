@@ -21,23 +21,8 @@ class StockWarehouse(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=_default_operating_unit,
+        check_company=True,
     )
-
-    @api.constrains("operating_unit_id", "company_id")
-    def _check_company_operating_unit(self):
-        for rec in self:
-            if (
-                rec.operating_unit_id
-                and rec.company_id
-                and rec.operating_unit_id
-                and rec.company_id != rec.operating_unit_id.company_id
-            ):
-                raise UserError(
-                    _(
-                        "Configuration error. The Company in the Stock Warehouse"
-                        " and in the Operating Unit must be the same."
-                    )
-                )
 
 
 class StockWarehouseOrderPoint(models.Model):

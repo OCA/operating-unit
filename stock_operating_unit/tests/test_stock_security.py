@@ -14,7 +14,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         # User 1 can list the warehouses assigned to
         # Main and B2C OU
         wh_ids = (
-            self.WarehouseObj.with_user(self.user1_id)
+            self.WarehouseObj.with_user(self.user1)
             .search([("operating_unit_id", "in", [self.ou1.id, self.b2c.id])])
             .ids
         )
@@ -27,7 +27,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         )
         # User 1 can list the locations assigned to Main and b2c OU
         location_ids = (
-            self.LocationObj.with_user(self.user1_id)
+            self.LocationObj.with_user(self.user1)
             .search([("operating_unit_id", "in", [self.ou1.id, self.b2c.id])])
             .ids
         )
@@ -40,7 +40,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         )
         # User 2 cannot list the warehouses assigned to Main OU
         wh_ids = (
-            self.WarehouseObj.with_user(self.user2_id)
+            self.WarehouseObj.with_user(self.user2)
             .search([("operating_unit_id", "=", self.ou1.id)])
             .ids
         )
@@ -52,7 +52,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         )
         # User 2 cannot list the locations assigned to Main OU
         location_ids = (
-            self.LocationObj.with_user(self.user2_id)
+            self.LocationObj.with_user(self.user2)
             .search([("operating_unit_id", "in", [self.ou1.id])])
             .ids
         )
@@ -64,9 +64,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         pickings = [self.picking_in1.id, self.picking_in2.id, self.picking_int.id]
         # User 1 can list the pickings 1, 2, 3
         picking_ids = (
-            self.PickingObj.with_user(self.user1_id)
-            .search([("id", "in", pickings)])
-            .ids
+            self.PickingObj.with_user(self.user1).search([("id", "in", pickings)]).ids
         )
         self.assertNotEqual(
             picking_ids,
@@ -75,7 +73,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         )
         # User 1 can list the stock moves assigned to pickings 1, 2, 3
         move_ids = (
-            self.MoveObj.with_user(self.user1_id)
+            self.MoveObj.with_user(self.user1)
             .search([("picking_id", "in", pickings)])
             .ids
         )
@@ -86,7 +84,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         )
         # User 2 cannot list the the stock moves assigned to picking 1
         move_ids = (
-            self.MoveObj.with_user(self.user2_id)
+            self.MoveObj.with_user(self.user2)
             .search([("picking_id", "=", self.picking_in1.id)])
             .ids
         )
@@ -98,7 +96,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         )
         # User 2 can list the picking 1
         picking_ids = (
-            self.PickingObj.with_user(self.user2_id)
+            self.PickingObj.with_user(self.user2)
             .search([("id", "=", self.picking_in1.id)])
             .ids
         )

@@ -9,4 +9,5 @@ class StockQuant(models.Model):
     operating_unit_id = fields.Many2one(
         related="location_id.operating_unit_id",
         store=True,
+        check_company=True,
     )
