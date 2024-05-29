@@ -7,7 +7,7 @@
         <field name="model_id" ref="sales_team.model_crm_team" />
         <field name="domain_force">
             ['|',('operating_unit_id','=',False),('operating_unit_id','in',
-            user.operating_unit_ids.ids)]
+            operating_unit_ids)]
         </field>
         <field name="name">Sales Teams from allowed operating units</field>
         <field eval="0" name="perm_unlink" />

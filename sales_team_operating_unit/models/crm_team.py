@@ -2,8 +2,7 @@
 # Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import fields, models
 
 
 class CrmTeam(models.Model):
@@ -11,21 +10,6 @@ class CrmTeam(models.Model):
 
     operating_unit_id = fields.Many2one(
         "operating.unit",
-        default=lambda self: self.env["res.users"].operating_unit_default_get(),
+        default=lambda self: self.env["res.users"]._get_default_operating_unit(),
+        check_company=True,
     )
-
-    @api.constrains("operating_unit_id", "company_id")
-    def _check_company_operating_unit(self):
-        for team in self:
-            if (
-                team.company_id
-                and team.operating_unit_id
-                and team.company_id != team.operating_unit_id.company_id
-            ):
-                raise UserError(
-                    _(
-                        "Configuration error, "
-                        "The Company in the Sales Team and in the "
-                        "Operating Unit must be the same."
-                    )
-                )
