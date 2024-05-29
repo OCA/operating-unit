@@ -16,7 +16,8 @@ class StockWarehouse(models.Model):
                 [
                     ("warehouse_id", "=", rec.id),
                     ("operating_unit_id", "!=", rec.operating_unit_id.id),
-                ]
+                ],
+                limit=1,
             )
             if sales:
                 raise ValidationError(
