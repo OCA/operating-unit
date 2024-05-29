@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 
 
 class CrmTeam(models.Model):
-
     _inherit = "crm.team"
 
     operating_unit_id = fields.Many2one(
