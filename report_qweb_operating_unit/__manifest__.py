@@ -4,7 +4,7 @@
 
 {
     "name": "Qweb Report With Operating Unit",
-    "version": "14.0.1.1.0",
+    "version": "17.0.1.0.0",
     "category": "Reports/Qweb",
     "license": "LGPL-3",
     "author": "ForgeFlow S.L., "
@@ -12,6 +12,6 @@
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "depends": ["operating_unit"],
-    "data": ["views/report_qweb_operating_unit.xml"],
+    "data": ["views/operating_unit_view.xml", "views/report_qweb_operating_unit.xml"],
     "installable": True,
 }
