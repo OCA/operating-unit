@@ -71,6 +71,7 @@ Contributors
 
 -  Kitti U. <kittiu@ecosoft.co.th>
 -  Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  Tran Thanh Trai <traitt@trobz.com>
 
 Maintainers
 -----------
