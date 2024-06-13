@@ -4,7 +4,7 @@
     'name': 'MIS Builder Budget with Operating Unit',
     'version': '12.0.1.0.0',
     'category': 'Reporting',
-    'author': 'Camptocamp SA, '
+    'author': 'Camptocamp, '
               'Odoo Community Association (OCA)',
     'license': 'LGPL-3',
     'website': 'https://github.com/OCA/operating-unit',
