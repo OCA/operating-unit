@@ -16,6 +16,12 @@ class AccountPartialReconcile(models.Model):
         return res
 
     @api.model
+    def _prepare_cash_basis_counterpart_base_line_vals(self, cb_base_line_vals):
+        res = super()._prepare_cash_basis_counterpart_base_line_vals(cb_base_line_vals)
+        res.update({"operating_unit_id": cb_base_line_vals.get("operating_unit_id")})
+        return res
+
+    @api.model
     def _prepare_cash_basis_tax_line_vals(self, tax_line, balance, amount_currency):
         res = super()._prepare_cash_basis_tax_line_vals(
             tax_line, balance, amount_currency
