@@ -8,12 +8,15 @@
         <field name="arch" type="xml">
             <xpath expr="/form/div/notebook/page[last()]" position="before">
                 <page string="Operating Units">
-                    <field
-                        name="operating_unit_ids"
-                        widget="many2many_tags"
-                        nolabel="1"
-                        options="{'no_create': True}"
-                    />
+                    <group col="4">
+                        <field
+                            name="operating_unit_ids"
+                            widget="many2many_tags"
+                            nolabel="1"
+                            options="{'no_create': True}"
+                            colspan="4"
+                        />
+                    </group>
                 </page>
             </xpath>
         </field>

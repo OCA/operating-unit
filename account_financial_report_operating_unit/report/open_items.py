@@ -13,10 +13,10 @@ class OpenItemsReport(models.AbstractModel):
 
     @api.model
     def _get_move_lines_domain_not_reconciled(
-        self, company_id, account_ids, partner_ids, target_move, date_from
+        self, company_id, account_ids, partner_ids, only_posted_moves, date_from
     ):
         domain = super()._get_move_lines_domain_not_reconciled(
-            company_id, account_ids, partner_ids, target_move, date_from
+            company_id, account_ids, partner_ids, only_posted_moves, date_from
         )
         operating_unit_ids = self.env.context.get("operating_unit_ids", [])
         if operating_unit_ids:
@@ -25,10 +25,10 @@ class OpenItemsReport(models.AbstractModel):
 
     @api.model
     def _get_new_move_lines_domain(
-        self, new_ml_ids, account_ids, company_id, partner_ids, target_moves
+        self, new_ml_ids, account_ids, company_id, partner_ids, only_posted_moves
     ):
         domain = super()._get_new_move_lines_domain(
-            new_ml_ids, account_ids, company_id, partner_ids, target_moves
+            new_ml_ids, account_ids, company_id, partner_ids, only_posted_moves
         )
         operating_unit_ids = self.env.context.get("operating_unit_ids", [])
         if operating_unit_ids:

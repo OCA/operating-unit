@@ -53,7 +53,6 @@ class GeneralLedgerReport(models.AbstractModel):
         only_posted_moves,
         date_to,
         date_from,
-        analytic_tag_ids,
         cost_center_ids,
     ):
         domain = super()._get_period_domain(
@@ -63,7 +62,6 @@ class GeneralLedgerReport(models.AbstractModel):
             only_posted_moves,
             date_to,
             date_from,
-            analytic_tag_ids,
             cost_center_ids,
         )
         operating_unit_ids = self.env.context.get("operating_unit_ids", [])
