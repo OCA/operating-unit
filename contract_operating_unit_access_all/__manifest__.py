@@ -3,7 +3,7 @@
 
 {
     "name": "Access all OUs' Contracts",
-    "version": "15.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "category": "Invoicing",
     "license": "AGPL-3",
