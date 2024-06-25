@@ -31,27 +31,9 @@ msgid "Default Operating Unit"
 msgstr "Unité opérationnelle par défaut"
 
 #. module: hr_operating_unit
-#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_base__display_name
-#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__display_name
-msgid "Display Name"
-msgstr "Nom affiché"
-
-#. module: hr_operating_unit
 #: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__employee_ids
 msgid "Employees Allowed"
 msgstr "Employés autorisés"
-
-#. module: hr_operating_unit
-#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_base__id
-#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit__id
-msgid "ID"
-msgstr "ID"
-
-#. module: hr_operating_unit
-#: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_base____last_update
-#: model:ir.model.fields,field_description:hr_operating_unit.field_operating_unit____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: hr_operating_unit
 #: model:ir.model,name:hr_operating_unit.model_operating_unit
@@ -64,3 +46,12 @@ msgstr "Unité opérationnelle"
 #: model:ir.model.fields,field_description:hr_operating_unit.field_hr_employee_public__operating_unit_ids
 msgid "Operating Units"
 msgstr "Unités opérationnelles"
+
+#~ msgid "Display Name"
+#~ msgstr "Nom affiché"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
