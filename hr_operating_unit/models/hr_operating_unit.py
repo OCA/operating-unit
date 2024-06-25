@@ -7,9 +7,9 @@ class OperatingUnit(models.Model):
     _inherit = "operating.unit"
 
     employee_ids = fields.Many2many(
-        "hr.employee",
-        "operating_unit_employees_rel",
-        "operating_unit_id",
-        "employee_id",
-        "Employees Allowed",
+        comodel_name="hr.employee",
+        relation="operating_unit_employees_rel",
+        column1="operating_unit_id",
+        column2="employee_id",
+        string="Employees Allowed",
     )

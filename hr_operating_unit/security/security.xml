@@ -5,7 +5,7 @@
         <field name="model_id" ref="hr.model_hr_employee" />
         <field
             name="domain_force"
-        >['|',('default_operating_unit_id','=',False),('default_operating_unit_id','in', user.operating_unit_ids.ids)]</field>
+        >['|',('default_operating_unit_id','=',False),('default_operating_unit_id','in', operating_unit_ids)]</field>
         <field name="name">Allowed Operating Units for Employee</field>
         <field eval="0" name="perm_unlink" />
         <field eval="0" name="perm_write" />
