@@ -9,7 +9,21 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='team_id']" position="after">
+            <xpath
+                expr="//field[@name='tag_ids']/../field[@name='user_id']"
+                position="after"
+            >
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    domain="[('company_id','=', company_id), ('user_ids', 'in', uid)]"
+                    options="{'no_create': True}"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='team_id']/../field[@name='user_id']"
+                position="after"
+            >
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"

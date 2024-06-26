@@ -6,7 +6,7 @@ from odoo.tests import common
 
 class TestCrmOperatingUnit(common.TransactionCase):
     def setUp(self):
-        super(TestCrmOperatingUnit, self).setUp()
+        super().setUp()
         self.res_users_model = self.env["res.users"]
         self.crm_lead_model = self.env["crm.lead"]
         self.crm_team_model = self.env["crm.team"]
