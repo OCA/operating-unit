@@ -17,13 +17,13 @@ Project with Operating Units
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Foperating--unit-lightgray.png?logo=github
-    :target: https://github.com/OCA/operating-unit/tree/16.0/project_operating_unit
+    :target: https://github.com/OCA/operating-unit/tree/17.0/project_operating_unit
     :alt: OCA/operating-unit
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/operating-unit-16-0/operating-unit-16-0-project_operating_unit
+    :target: https://translation.odoo-community.org/projects/operating-unit-17-0/operating-unit-17-0-project_operating_unit
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/operating-unit&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/operating-unit&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -38,10 +38,11 @@ This module adds operating unit information to projects and tasks.
 Usage
 =====
 
-* Go to Project
-* You only see the projects and tasks of your operating units
-* Create a new project. It is assigned to your default operating unit.
-* Create a task within a project. It inherits the operating unit of the project.
+-  Go to Project
+-  You only see the projects and tasks of your operating units
+-  Create a new project. It is assigned to your default operating unit.
+-  Create a task within a project. It inherits the operating unit of the
+   project.
 
 Bug Tracker
 ===========
@@ -49,7 +50,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/operating-unit/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/operating-unit/issues/new?body=module:%20project_operating_unit%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/operating-unit/issues/new?body=module:%20project_operating_unit%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -57,26 +58,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Open Source Integrators
 * Serpent Consulting Services Pvt. Ltd.
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
-* Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
-* Murtaza Mithaiwala <mmithaiwala@opensourceintegrators.com>
+-  Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
+-  Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+-  Murtaza Mithaiwala <mmithaiwala@opensourceintegrators.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-* Open Source Integrators
-* Serpent Consulting Services Pvt. Ltd.
+-  Open Source Integrators
+-  Serpent Consulting Services Pvt. Ltd.
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -96,6 +97,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-max3903| 
 
-This module is part of the `OCA/operating-unit <https://github.com/OCA/operating-unit/tree/16.0/project_operating_unit>`_ project on GitHub.
+This module is part of the `OCA/operating-unit <https://github.com/OCA/operating-unit/tree/17.0/project_operating_unit>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
