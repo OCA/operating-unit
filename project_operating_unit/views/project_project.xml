@@ -17,7 +17,7 @@
         <field name="model">project.project</field>
         <field name="inherit_id" ref="project.view_project_project_filter" />
         <field name="arch" type="xml">
-            <filter name="Partner" position="after">
+            <filter name="Manager" position="after">
                 <filter
                     string="Operating Unit"
                     name="operating_unit_grouped"
