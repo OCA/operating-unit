@@ -4,7 +4,7 @@
 {
     "name": "Partner with Operating Unit",
     "summary": "Introduces Operating Unit fields in Partner",
-    "version": "14.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Edi Santoso, "
     "Niaga Solution, "
     "Serpent Consulting Services Pvt. Ltd., "

@@ -2,9 +2,9 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 
-def pre_init_hook(cr):
+def pre_init_hook(env):
     # Add new table and columns to hold values
-    cr.execute(
+    env.cr.execute(
         """
         CREATE TABLE operating_unit_partner_rel (
             partner_id INTEGER NOT NULL
@@ -14,7 +14,7 @@ def pre_init_hook(cr):
     """
     )
     # Add the values
-    cr.execute(
+    env.cr.execute(
         """
         INSERT INTO operating_unit_partner_rel
             (partner_id, operating_unit_id)

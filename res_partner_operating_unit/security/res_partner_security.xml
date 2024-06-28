@@ -8,13 +8,13 @@
         <field name="model_id" ref="base.model_res_partner" />
         <field
             name="domain_force"
-        >[('operating_unit_ids', 'in', user.operating_unit_ids.ids)]</field>
+        >['|', ('operating_unit_ids', '=', False), ('operating_unit_ids', 'in', operating_unit_ids)]</field>
         <field name="name">Partner from allowed operating units</field>
         <field name="global" eval="True" />
-        <field eval="0" name="perm_unlink" />
-        <field eval="0" name="perm_write" />
-        <field eval="1" name="perm_read" />
-        <field eval="0" name="perm_create" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="True" />
     </record>
 
 </odoo>
