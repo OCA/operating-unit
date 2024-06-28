@@ -51,14 +51,16 @@ repos:
         args: ["https://github.com/OCA/operating-unit"]
       - id: oca-gen-addon-readme
         args:
-          - --expand-star-imports
-          - --ignore-init-module-imports
-          - --in-place
-          - --remove-all-unused-imports
-          - --remove-duplicate-keys
-          - --remove-unused-variables
-  - repo: https://github.com/psf/black
-    rev: 22.3.0
+          - --addons-dir=.
+          - --branch=17.0
+          - --org-name=OCA
+          - --repo-name=operating-unit
+          - --if-source-changed
+          - --keep-source-digest
+          - --convert-fragments-to-markdown
+      - id: oca-gen-external-dependencies
+  - repo: https://github.com/OCA/odoo-pre-commit-hooks
+    rev: v0.0.25
     hooks:
       - id: oca-checks-odoo-module
       - id: oca-checks-po
