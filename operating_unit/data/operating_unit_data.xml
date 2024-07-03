@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Basic Operating Unit  -->
+    <record id="main_operating_unit" model="operating.unit">
+        <field name="name">Main Operating Unit</field>
+        <field name="code">OU1</field>
+        <field name="partner_id" ref="base.main_partner" />
+    </record>
+    <record model="res.users" id="base.user_root">
+        <field name="default_operating_unit_id" ref="main_operating_unit" />
+        <field
+            name="assigned_operating_unit_ids"
+            eval="[(4, ref('main_operating_unit'))]"
+        />
+    </record>
+    <record model="res.users" id="base.user_admin">
+        <field name="default_operating_unit_id" ref="main_operating_unit" />
+        <field
+            name="assigned_operating_unit_ids"
+            eval="[(4, ref('main_operating_unit'))]"
+        />
+    </record>
+</odoo>
