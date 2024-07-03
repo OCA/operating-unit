@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -65,11 +65,6 @@ msgid "ID"
 msgstr ""
 
 #. module: operating_unit
-#: model:ir.model.fields,field_description:operating_unit.field_operating_unit____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -117,6 +112,11 @@ msgstr ""
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__partner_id
 msgid "Partner"
+msgstr ""
+
+#. module: operating_unit
+#: model:ir.model,name:operating_unit.model_ir_rule
+msgid "Record Rule"
 msgstr ""
 
 #. module: operating_unit
