@@ -70,6 +70,7 @@ Contributors
 ------------
 
 -  Kitti U. <kittiu@ecosoft.co.th>
+-  Tran Thanh Trai <traitt@trobz.com>
 
 Maintainers
 -----------
