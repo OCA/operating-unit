@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sales_team_operating_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-08-06 20:07+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: none\n"
+"Language: es_AR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: sales_team_operating_unit
+#. odoo-python
+#: code:addons/sales_team_operating_unit/models/crm_team.py:0
+#, python-format
+msgid ""
+"Configuration error, The Company in the Sales Team and in the Operating Unit "
+"must be the same."
+msgstr ""
+"Error de configuración, La Compañía en el Equipo de Ventas y en la Unidad "
+"Operativa debe ser la misma."
+
+#. module: sales_team_operating_unit
+#: model:ir.model.fields,field_description:sales_team_operating_unit.field_crm_team__operating_unit_id
+msgid "Operating Unit"
+msgstr "Unidad Operativa"
+
+#. module: sales_team_operating_unit
+#: model:ir.model,name:sales_team_operating_unit.model_crm_team
+msgid "Sales Team"
+msgstr "Equipo de Ventas"
