@@ -12,5 +12,10 @@
         "security/analytic_account_security.xml",
         "views/analytic_account_view.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "analytic_operating_unit/static/src/components/analytic_distribution.esm.js",
+        ],
+    },
     "installable": True,
 }
