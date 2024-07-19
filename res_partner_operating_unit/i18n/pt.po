@@ -22,14 +22,13 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: res_partner_operating_unit
-#: model:ir.model.fields,field_description:res_partner_operating_unit.field_fsm_location__operating_unit_ids
-#: model:ir.model.fields,field_description:res_partner_operating_unit.field_fsm_person__operating_unit_ids
 #: model:ir.model.fields,field_description:res_partner_operating_unit.field_res_partner__operating_unit_ids
 msgid "Operating Units"
 msgstr "Unidades Operacionais"
 
 #. module: res_partner_operating_unit
-#: code:addons/res_partner_operating_unit/models/res_users.py:34
+#. odoo-python
+#: code:addons/res_partner_operating_unit/models/res_users.py:0
 #, python-format
 msgid ""
 "The operating units of the partner must include the default one of the user."
@@ -39,5 +38,8 @@ msgstr ""
 
 #. module: res_partner_operating_unit
 #: model:ir.model,name:res_partner_operating_unit.model_res_users
-msgid "Users"
-msgstr "Utilizadores"
+msgid "User"
+msgstr ""
+
+#~ msgid "Users"
+#~ msgstr "Utilizadores"
