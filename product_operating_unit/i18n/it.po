@@ -17,13 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: product_operating_unit
-#. odoo-python
-#: code:addons/product_operating_unit/models/product_template.py:0
-#, python-format
-msgid "Go to Product Categories"
-msgstr "Vai alle categorie prodotto"
-
-#. module: product_operating_unit
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_category__operating_unit_ids
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_product__operating_unit_ids
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_template__operating_unit_ids
@@ -43,12 +36,6 @@ msgid "Product Category"
 msgstr "Categoria prodotto"
 
 #. module: product_operating_unit
-#: model:ir.model.fields,help:product_operating_unit.field_product_product__categ_id
-#: model:ir.model.fields,help:product_operating_unit.field_product_template__categ_id
-msgid "Select category for the current product"
-msgstr "Selezionare una categoria per il prodotto corrente"
-
-#. module: product_operating_unit
 #. odoo-python
 #: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
@@ -57,15 +44,19 @@ msgid ""
 msgstr ""
 "Le unità operative del prodotto devono includere quelle della categoria."
 
-#. module: product_operating_unit
-#. odoo-python
-#: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
-msgid ""
-"You must define at least one product                         category within"
-" your Operating Unit in order to be                         able to create "
-"products."
-msgstr ""
-"Bisogna indicare almeno una categoria                         prodotto "
-"all'interno della tua unità operativa                         per poter "
-"creare nuovi prodotti."
+#~ msgid "Go to Product Categories"
+#~ msgstr "Vai alle categorie prodotto"
+
+#~ msgid "Select category for the current product"
+#~ msgstr "Selezionare una categoria per il prodotto corrente"
+
+#, python-format
+#~ msgid ""
+#~ "You must define at least one product                         category "
+#~ "within your Operating Unit in order to be                         able to "
+#~ "create products."
+#~ msgstr ""
+#~ "Bisogna indicare almeno una categoria                         prodotto "
+#~ "all'interno della tua unità operativa                         per poter "
+#~ "creare nuovi prodotti."

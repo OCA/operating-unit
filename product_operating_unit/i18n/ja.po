@@ -17,13 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: product_operating_unit
-#. odoo-python
-#: code:addons/product_operating_unit/models/product_template.py:0
-#, python-format
-msgid "Go to Product Categories"
-msgstr "プロダクトカテゴリに移動"
-
-#. module: product_operating_unit
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_category__operating_unit_ids
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_product__operating_unit_ids
 #: model:ir.model.fields,field_description:product_operating_unit.field_product_template__operating_unit_ids
@@ -43,12 +36,6 @@ msgid "Product Category"
 msgstr ""
 
 #. module: product_operating_unit
-#: model:ir.model.fields,help:product_operating_unit.field_product_product__categ_id
-#: model:ir.model.fields,help:product_operating_unit.field_product_template__categ_id
-msgid "Select category for the current product"
-msgstr ""
-
-#. module: product_operating_unit
 #. odoo-python
 #: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
@@ -56,12 +43,6 @@ msgid ""
 "The operating units of the product must include the ones from the category."
 msgstr ""
 
-#. module: product_operating_unit
-#. odoo-python
-#: code:addons/product_operating_unit/models/product_template.py:0
 #, python-format
-msgid ""
-"You must define at least one product                         category within"
-" your Operating Unit in order to be                         able to create "
-"products."
-msgstr ""
+#~ msgid "Go to Product Categories"
+#~ msgstr "プロダクトカテゴリに移動"
