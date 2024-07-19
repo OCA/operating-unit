@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [analytic_operating_unit](analytic_operating_unit/) | 17.0.1.0.0 |  | Analytic Operating Unit
+[analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 17.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' Analytics
 [operating_unit](operating_unit/) | 17.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [product_operating_unit](product_operating_unit/) | 17.0.1.0.0 |  | Adds the concept of operating unit (OU) in products
 [res_partner_operating_unit](res_partner_operating_unit/) | 17.0.1.0.0 |  | Introduces Operating Unit fields in Partner
