@@ -46,8 +46,8 @@
                 >Company tagline</div>
             </t>
         </xpath>
-        <xpath expr="//ul[@name='company_address_list']" position="replace">
-            <ul class="list-unstyled" name="company_address_list">
+        <xpath expr="//div[@name='company_address']/ul" position="replace">
+            <ul class="list-unstyled">
                 <t t-if="o and 'operating_unit_id' in o">
                     <li t-if="o.operating_unit_id.is_operating_unit_details_empty"><span
                             t-field="o.operating_unit_id.partner_id"
@@ -72,27 +72,11 @@
                     </li>
                 </t>
                 <t t-else="">
-                    <li t-if="company.is_company_details_empty"><span
-                            t-field="company.partner_id"
+                    <li t-if="company.is_company_details_empty"><t
+                            t-esc="company.partner_id"
                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                        >
-                        <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                            <strong>Company address block</strong>
-                            <div>Contains the company address.</div>
-                        </div>
-                    </span></li>
-                    <li t-else="">
-                        <span t-field="company.company_details">
-                            <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                <strong>Company details block</strong>
-                                <div>Contains the company details.</div>
-                            </div>
-                        </span>
-                    </li>
+                        /></li>
+                    <li t-else=""><t t-esc="company.company_details" /></li>
                 </t>
                 <li t-if="not forced_vat" />
                 <li t-else="">
@@ -148,8 +132,8 @@
                 >Company tagline</div>
             </t>
         </xpath>
-        <xpath expr="//ul[@name='company_address_list']" position="replace">
-            <ul class="list-unstyled" name="company_address_list">
+        <xpath expr="//div[@name='company_address']/ul" position="replace">
+            <ul class="list-unstyled">
                     <t t-if="o and 'operating_unit_id' in o">
                         <li
                         t-if="o.operating_unit_id.is_operating_unit_details_empty"
@@ -176,27 +160,11 @@
                         </li>
                     </t>
                     <t t-else="">
-                        <li t-if="company.is_company_details_empty"><span
-                            t-field="company.partner_id"
+                        <li t-if="company.is_company_details_empty"><t
+                            t-esc="company.partner_id"
                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                        >
-                            <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                <strong>Company address block</strong>
-                                <div>Contains the company address.</div>
-                            </div>
-                        </span></li>
-                        <li t-else="">
-                            <span t-field="company.company_details">
-                                <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                    <strong>Company details block</strong>
-                                    <div>Contains the company details.</div>
-                                </div>
-                            </span>
-                        </li>
+                        /></li>
+                        <li t-else=""><t t-esc="company.company_details" /></li>
                     </t>
                     <li t-if="not forced_vat" />
                     <li t-else="">
@@ -254,8 +222,8 @@
                 >Company tagline</div>
             </t>
         </xpath>
-        <xpath expr="//ul[@name='company_address_list']" position="replace">
-            <ul class="list-unstyled" name="company_address_list">
+        <xpath expr="//div[hasclass('company_address')]/ul" position="replace">
+            <ul class="list-unstyled">
                     <t t-if="o and 'operating_unit_id' in o">
                         <li
                         t-if="o.operating_unit_id.is_operating_unit_details_empty"
@@ -282,27 +250,11 @@
                         </li>
                     </t>
                     <t t-else="">
-                        <li t-if="company.is_company_details_empty"><span
-                            t-field="company.partner_id"
+                        <li t-if="company.is_company_details_empty"><t
+                            t-esc="company.partner_id"
                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                        >
-                            <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                <strong>Company address block</strong>
-                                <div>Contains the company address.</div>
-                            </div>
-                        </span></li>
-                        <li t-else="">
-                            <span t-field="company.company_details">
-                                <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                    <strong>Company details block</strong>
-                                    <div>Contains the company details.</div>
-                                </div>
-                            </span>
-                        </li>
+                        /></li>
+                        <li t-else=""><t t-esc="company.company_details" /></li>
                     </t>
                     <li t-if="not forced_vat" />
                     <li t-else="">
@@ -358,8 +310,8 @@
                 >Company tagline</div>
             </t>
         </xpath>
-        <xpath expr="//ul[@name='company_address_list']" position="replace">
-            <ul class="list-unstyled" name="company_address_list">
+        <xpath expr="//div[@name='company_address']/ul" position="replace">
+            <ul class="list-unstyled">
                     <t t-if="o and 'operating_unit_id' in o">
                         <li
                         t-if="o.operating_unit_id.is_operating_unit_details_empty"
@@ -386,27 +338,11 @@
                         </li>
                     </t>
                     <t t-else="">
-                        <li t-if="company.is_company_details_empty"><span
-                            t-field="company.partner_id"
+                        <li t-if="company.is_company_details_empty"><t
+                            t-esc="company.partner_id"
                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                        >
-                            <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                <strong>Company address block</strong>
-                                <div>Contains the company address.</div>
-                            </div>
-                        </span></li>
-                        <li t-else="">
-                            <span t-field="company.company_details">
-                                <div
-                                class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center"
-                            >
-                                    <strong>Company details block</strong>
-                                    <div>Contains the company details.</div>
-                                </div>
-                            </span>
-                        </li>
+                        /></li>
+                        <li t-else=""><t t-esc="company.company_details" /></li>
                     </t>
                     <li t-if="not forced_vat" />
                     <li t-else="">
