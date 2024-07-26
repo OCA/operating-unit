@@ -1,72 +1,47 @@
 # Copyright 2020 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests import common
+from odoo.addons.contract.tests.test_contract import TestContractBase
 
 
-class TestContractOperatingUnit(common.TransactionCase):
-    def setUp(self):
-        super(TestContractOperatingUnit, self).setUp()
+class TestContractOperatingUnit(TestContractBase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.res_users_model = self.env["res.users"]
-        self.contract_model = self.env["contract.contract"]
+        cls.res_users_model = cls.env["res.users"]
 
-        self.company = self.env.ref("base.main_company")
-        self.grp_contract_manager = self.env.ref("account.group_account_manager")
-        self.group_user = self.env.ref("base.group_user")
+        cls.company = cls.env.ref("base.main_company")
+        cls.grp_contract_manager = cls.env.ref("account.group_account_manager")
+        cls.contract_model = cls.env["contract.contract"]
+        cls.group_user = cls.env.ref("base.group_user")
 
         # Main Operating Unit
-        self.ou1 = self.env.ref("operating_unit.main_operating_unit")
+        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
-        self.b2c = self.env.ref("operating_unit.b2c_operating_unit")
+        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit")
 
         # Create Users
-        self.user1 = self._create_user(
+        cls.user1 = cls._create_user(
             "User_1",
-            [self.grp_contract_manager, self.group_user],
-            self.company,
-            [self.ou1, self.b2c],
+            [cls.grp_contract_manager, cls.group_user],
+            cls.company,
+            [cls.ou1, cls.b2c],
         )
-        self.user2 = self._create_user(
+        cls.user2 = cls._create_user(
             "User_2",
-            [self.grp_contract_manager, self.group_user],
-            self.company,
-            [self.b2c],
+            [cls.grp_contract_manager, cls.group_user],
+            cls.company,
+            [cls.b2c],
         )
+        cls.contract.operating_unit_id = cls.ou1
+        cls.contract2.operating_unit_id = cls.b2c
 
-        self.partner = self.env["res.partner"].create(
-            {
-                "name": "Test contract partner",
-            }
-        )
-
-        self.contract1 = (
-            self.env["contract.contract"]
-            .with_user(self.user1.id)
-            .create(
-                {
-                    "name": "Maintenance of Servers",
-                    "partner_id": self.partner.id,
-                    "operating_unit_id": self.ou1.id,
-                }
-            )
-        )
-        self.contract2 = (
-            self.env["contract.contract"]
-            .with_user(self.user2.id)
-            .create(
-                {
-                    "name": "Maintenance of Servers",
-                    "partner_id": self.partner.id,
-                    "operating_unit_id": self.b2c.id,
-                }
-            )
-        )
-
-    def _create_user(self, login, groups, company, operating_units, context=None):
+    @classmethod
+    def _create_user(cls, login, groups, company, operating_units, context=None):
         """Creates a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.create(
+        user = cls.res_users_model.create(
             {
                 "name": "Test Contract User",
                 "login": login,
@@ -86,12 +61,32 @@ class TestContractOperatingUnit(common.TransactionCase):
         # Access Contract records of Main Operating Unit.
         record = self.contract_model.with_user(self.user2.id).search(
             [
-                ("id", "=", self.contract1.id),
+                ("id", "=", self.contract.id),
                 ("operating_unit_id", "=", self.ou1.id),
             ]
         )
-        self.assertEqual(
-            record.ids,
-            [],
-            "User 2 should not have access to " "OU %s" % self.ou1.name,
+        self.assertFalse(
+            record,
+            "User 2 should not have access to OU %s" % self.ou1.name,
         )
+
+    def test_default(self):
+        """Test that the user's OU is used when creating a contract"""
+        contract = (
+            self.env["contract.contract"]
+            .with_user(self.user1)
+            .create(
+                {
+                    "name": "A contract",
+                    "partner_id": self.env["res.partner"]
+                    .search([], order="customer_rank desc", limit=1)
+                    .id,
+                }
+            )
+        )
+        self.assertEqual(contract.operating_unit_id, self.ou1)
+
+    def test_contract_invoice(self):
+        """Test that invoices from contracts get the contract's OU assigned"""
+        invoice = self.contract2._recurring_create_invoice()
+        self.assertEqual(invoice.operating_unit_id, self.b2c)
