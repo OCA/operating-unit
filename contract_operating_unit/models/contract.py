@@ -11,15 +11,11 @@ class ContractContract(models.Model):
     operating_unit_id = fields.Many2one(
         "operating.unit",
         "Operating Unit",
-        default=lambda self: self.env["res.users"].operating_unit_default_get(
-            self._uid
-        ),
+        default=lambda self: self.env["res.users"].operating_unit_default_get(),
     )
 
     def _prepare_invoice(self, date_invoice, journal=None):
-        (invoice_vals, move_form) = super()._prepare_invoice(
-            date_invoice, journal=journal
-        )
+        invoice_vals = super()._prepare_invoice(date_invoice, journal=journal)
         if self.operating_unit_id:
             invoice_vals["operating_unit_id"] = self.operating_unit_id.id
-        return (invoice_vals, move_form)
+        return invoice_vals
