@@ -36,6 +36,7 @@ msgid "Companies"
 msgstr "Empresas"
 
 #. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/account_journal.py:0
 #, python-format
 msgid ""
@@ -46,6 +47,7 @@ msgstr ""
 "empresa, la unidad operativa es obligatoria en el diario bancario."
 
 #. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/res_company.py:0
 #, python-format
 msgid ""
@@ -55,7 +57,8 @@ msgstr ""
 "interoperativas."
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:0
+#. odoo-python
+#: code:addons/account_operating_unit/models/account_move_line.py:0
 #, python-format
 msgid ""
 "Configuration error. The Company in the Move Line and in the Operating Unit "
@@ -65,7 +68,8 @@ msgstr ""
 "Operativa debe ser la misma."
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/models/account_move.py:0
+#. odoo-python
+#: code:addons/account_operating_unit/models/account_move_line.py:0
 #, python-format
 msgid ""
 "Configuration error. The Operating Unit in the Move Line and in the Move "
@@ -75,6 +79,7 @@ msgstr ""
 "el Movimiento debe ser la misma."
 
 #. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid ""
@@ -86,6 +91,7 @@ msgstr ""
 "empresa."
 
 #. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid ""
@@ -121,6 +127,7 @@ msgid "Journal Item"
 msgstr "Apunte de diario"
 
 #. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "OU-Balancing"
@@ -169,11 +176,7 @@ msgid "Payments"
 msgstr "Pagos"
 
 #. module: account_operating_unit
-#: model:ir.model,name:account_operating_unit.model_account_payment_register
-msgid "Register Payment"
-msgstr "Registrar pago"
-
-#. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The Company in the Move and in Operating Unit must be the same."
@@ -181,12 +184,7 @@ msgstr ""
 "La Empresa en el movimiento y en la Unidad Operativa debe ser la misma."
 
 #. module: account_operating_unit
-#: code:addons/account_operating_unit/wizards/account_payment_register.py:0
-#, python-format
-msgid "The OU in the Bills/Invoices to register payment must be the same."
-msgstr "La OU en las Facturas para registrar el pago debe ser la misma."
-
-#. module: account_operating_unit
+#. odoo-python
 #: code:addons/account_operating_unit/models/account_move.py:0
 #, python-format
 msgid "The OU in the Move and in Journal must be the same."
@@ -197,3 +195,10 @@ msgstr "La OU en el movimiento y en diario debe ser la misma."
 #: model:ir.model.fields,help:account_operating_unit.field_account_move__operating_unit_id
 msgid "This operating unit will be defaulted in the move lines."
 msgstr "Esta unidad operativa estará por defecto en las líneas de movimiento."
+
+#~ msgid "Register Payment"
+#~ msgstr "Registrar pago"
+
+#, python-format
+#~ msgid "The OU in the Bills/Invoices to register payment must be the same."
+#~ msgstr "La OU en las Facturas para registrar el pago debe ser la misma."
