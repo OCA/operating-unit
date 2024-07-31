@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-10 10:12+0000\n"
+"PO-Revision-Date: 2024-07-31 15:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
@@ -37,8 +37,8 @@ msgid ""
 "Configuration error. If defined as self-balanced at company level, the "
 "operating unit is mandatory in bank journal."
 msgstr ""
-"Errore di configurazione. Se definito come autobilanciata a livello "
-"aziendale, l'unità operativa è obbligatoria nel Registro banca."
+"Errore di configurazione. Se definita come autobilanciata a livello "
+"aziendale, l'unità operativa è obbligatoria nel registro banca."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/res_company.py:0
@@ -46,8 +46,8 @@ msgstr ""
 msgid ""
 "Configuration error. Please provide an Inter-operating unit clearing account."
 msgstr ""
-"Errore di configurazione. Per favore Fornisci un conto di compensazione tra "
-"unità operative."
+"Errore di configurazione. Fornire un conto di compensazione tra unità "
+"operative."
 
 #. module: account_operating_unit
 #: code:addons/account_operating_unit/models/account_move.py:0
@@ -66,7 +66,7 @@ msgid ""
 "Configuration error. The Operating Unit in the Move Line and in the Move "
 "must be the same."
 msgstr ""
-"Errore di configurazione. L'Unità Operativa nella riga di movimento e e nel "
+"Errore di configurazione. L'unità operativa nella riga di movimento e e nel "
 "movimento deve essere la stessa."
 
 #. module: account_operating_unit
@@ -168,7 +168,7 @@ msgid ""
 "Operating Unit that will be used in payments, when this journal is used."
 msgstr ""
 "L'unità operativa che verrà utilizzata nei pagamenti, quando viene "
-"utilizzato questo Registro."
+"utilizzato questo registro."
 
 #. module: account_operating_unit
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_company_form
