@@ -1,0 +1,2 @@
+odoo-addon-purchase_operating_unit @ git+https://github.com/OCA/operating-unit.git@refs/pull/674/head#subdirectory=purchase_operating_unit
+odoo-addon-account_operating_unit @ git+https://github.com/OCA/operating-unit.git@refs/pull/670/head#subdirectory=account_operating_unit
