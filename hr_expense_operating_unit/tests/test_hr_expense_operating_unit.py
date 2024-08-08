@@ -2,65 +2,67 @@
 # Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields
+from odoo import fields, tools
 from odoo.exceptions import ValidationError
 from odoo.tests.common import Form, TransactionCase
 
 
 class TestHrExpenseOperatingUnit(TransactionCase):
-    def setUp(self):
-        super(TestHrExpenseOperatingUnit, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.res_users_model = self.env["res.users"]
-        self.hr_expense_model = self.env["hr.expense"]
-        self.hr_expense_sheet_model = self.env["hr.expense.sheet"]
-        self.hr_employee_model = self.env["hr.employee"]
+        cls.res_users_model = cls.env["res.users"]
+        cls.hr_expense_model = cls.env["hr.expense"]
+        cls.hr_expense_sheet_model = cls.env["hr.expense.sheet"]
+        cls.hr_employee_model = cls.env["hr.employee"]
 
-        self.company = self.env.ref("base.main_company")
-        self.partner1 = self.env.ref("base.res_partner_1")
-        self.partner2 = self.env.ref("base.res_partner_2")
+        cls.company = cls.env.ref("base.main_company")
+        cls.partner1 = cls.env.ref("base.res_partner_1")
+        cls.partner2 = cls.env.ref("base.res_partner_2")
 
         # Expense Product
-        self.product1 = self.env.ref("hr_expense.trans_expense_product")
+        cls.product1 = cls.env.ref("hr_expense.expense_product_mileage")
 
-        self.grp_hr_user = self.env.ref("hr.group_hr_user")
-        self.grp_accou_mng = self.env.ref("account.group_account_manager")
-        self.grp_account_invoice = self.env.ref("account.group_account_invoice")
+        cls.grp_hr_user = cls.env.ref("hr.group_hr_user")
+        cls.grp_accou_mng = cls.env.ref("account.group_account_manager")
+        cls.grp_account_invoice = cls.env.ref("account.group_account_invoice")
 
         # Main Operating Unit
-        self.ou1 = self.env.ref("operating_unit.main_operating_unit")
+        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
-        self.b2c = self.env.ref("operating_unit.b2c_operating_unit")
+        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit")
 
-        self.user1 = self._create_user(
+        cls.user1 = cls._create_user(
             "Test HR User 1",
             "user_1",
             "demo1",
-            [self.grp_hr_user, self.grp_accou_mng, self.grp_account_invoice],
-            self.company,
-            [self.ou1, self.b2c],
+            [cls.grp_hr_user, cls.grp_accou_mng, cls.grp_account_invoice],
+            cls.company,
+            [cls.ou1, cls.b2c],
         )
-        self.user2 = self._create_user(
+        cls.user2 = cls._create_user(
             "Test HR User 2",
             "user_2",
             "demo2",
-            [self.grp_hr_user, self.grp_accou_mng, self.grp_account_invoice],
-            self.company,
-            [self.b2c],
+            [cls.grp_hr_user, cls.grp_accou_mng, cls.grp_account_invoice],
+            cls.company,
+            [cls.b2c],
         )
 
-        self.emp = self._create_hr_employee()
+        cls.emp = cls._create_hr_employee()
 
-        self.hr_expense1 = self._create_hr_expense(self.ou1, self.emp)
+        cls.hr_expense1 = cls._create_hr_expense(cls.ou1, cls.emp)
 
-        self.hr_expense2 = self._create_hr_expense(self.b2c, self.emp)
+        cls.hr_expense2 = cls._create_hr_expense(cls.b2c, cls.emp)
 
+    @classmethod
     def _create_user(
-        self, name, login, pwd, groups, company, operating_units, context=None
+        cls, name, login, pwd, groups, company, operating_units, context=None
     ):
         """Creates a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.create(
+        user = cls.res_users_model.create(
             {
                 "name": name,
                 "login": login,
@@ -74,19 +76,21 @@ class TestHrExpenseOperatingUnit(TransactionCase):
         )
         return user
 
-    def _create_hr_employee(self):
+    @classmethod
+    def _create_hr_employee(cls):
         """Creates an Employee."""
-        emp = self.hr_employee_model.create(
-            {"name": "Test Employee", "address_home_id": self.partner1.id}
+        emp = cls.hr_employee_model.create(
+            {"name": "Test Employee", "address_home_id": cls.partner1.id}
         )
         return emp
 
-    def _create_hr_expense(self, operating_unit, emp):
+    @classmethod
+    def _create_hr_expense(cls, operating_unit, emp):
         """Creates Expense for employee."""
-        hr_expense = self.hr_expense_model.create(
+        hr_expense = cls.hr_expense_model.create(
             {
                 "name": "Traveling Expense",
-                "product_id": self.product1.id,
+                "product_id": cls.product1.id,
                 "operating_unit_id": operating_unit.id,
                 "unit_amount": "10.0",
                 "quantity": "5",
@@ -147,44 +151,47 @@ class TestHrExpenseOperatingUnit(TransactionCase):
         )
         self._register_payment(self.hr_expense_sheet1.account_move_id, 50.0)
 
+    @tools.mute_logger(
+        "odoo.addons.hr_expense_operating_unit.tests.test_hr_expense_operating_unit"
+    )
     def test_constrains_error(self):
+        hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
+        sheet_context = hr_expense_dict1.get("context")
+        sheet_dict = {
+            "name": sheet_context.get("default_name", ""),
+            "employee_id": sheet_context.get("default_employee_id", False),
+            "company_id": sheet_context.get("default_company_id", False),
+            "state": sheet_context.get("default_state", ""),
+            "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+        }
+        self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(sheet_dict)
         with self.assertRaises(ValidationError):
-            hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
-            sheet_context = hr_expense_dict1.get("context")
-            sheet_dict = {
-                "name": sheet_context.get("default_name", ""),
-                "employee_id": sheet_context.get("default_employee_id", False),
-                "company_id": sheet_context.get("default_company_id", False),
-                "state": sheet_context.get("default_state", ""),
-                "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
-            }
-            self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(sheet_dict)
             self.hr_expense_sheet1.expense_line_ids.write(
                 {"operating_unit_id": self.b2c.id}
             )
 
+        hr_expense_dict2 = self.hr_expense2.action_submit_expenses()
+        sheet_context = hr_expense_dict2.get("context")
+        sheet_dict = {
+            "name": sheet_context.get("default_name", ""),
+            "employee_id": sheet_context.get("default_employee_id", False),
+            "company_id": sheet_context.get("default_company_id", False),
+            "state": sheet_context.get("default_state", ""),
+            "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+        }
         with self.assertRaises(ValidationError):
-            hr_expense_dict2 = self.hr_expense2.action_submit_expenses()
-            sheet_context = hr_expense_dict2.get("context")
-            sheet_dict = {
-                "name": sheet_context.get("default_name", ""),
-                "employee_id": sheet_context.get("default_employee_id", False),
-                "company_id": sheet_context.get("default_company_id", False),
-                "state": sheet_context.get("default_state", ""),
-                "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
-            }
             self.hr_expense_sheet2 = self.hr_expense_sheet_model.create(sheet_dict)
 
-        with self.assertRaises(ValidationError):
-            self.hr_expense3 = self.hr_expense_model.create(
-                {
-                    "name": "Traveling Expense",
-                    "product_id": self.product1.id,
-                    "unit_amount": "10.0",
-                    "quantity": "5",
-                    "operating_unit_id": False,
-                    "employee_id": self.emp.id,
-                }
-            )
+        self.hr_expense3 = self.hr_expense_model.create(
+            {
+                "name": "Traveling Expense",
+                "product_id": self.product1.id,
+                "unit_amount": "10.0",
+                "quantity": "5",
+                "operating_unit_id": False,
+                "employee_id": self.emp.id,
+            }
+        )
 
+        with self.assertRaises(ValidationError):
             self.hr_expense3.action_submit_expenses()

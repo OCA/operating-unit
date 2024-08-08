@@ -65,10 +65,9 @@ class HrExpenseExpense(models.Model):
                 )
 
     def _get_default_expense_sheet_values(self):
-        sheet = super()._get_default_expense_sheet_values()
-        if len(self.mapped("operating_unit_id")) != 1 or any(
-            not expense.operating_unit_id for expense in self
-        ):
+        sheet_values = super()._get_default_expense_sheet_values()
+        ous = self.mapped("operating_unit_id")
+        if len(ous) != 1 or any(not expense.operating_unit_id for expense in self):
             raise ValidationError(
                 _(
                     "You cannot submit the Expenses having "
@@ -76,13 +75,19 @@ class HrExpenseExpense(models.Model):
                     "no Operating Unit"
                 )
             )
-        sheet.update({"operating_unit_id": self.mapped("operating_unit_id").id})
-        return sheet
+        for sheet in sheet_values:
+            sheet.update({"operating_unit_id": ous.id})
+        return sheet_values
 
-    def _prepare_move_values(self):
-        move_values = super()._prepare_move_values()
+    def _prepare_move_vals(self):
+        move_values = super()._prepare_move_vals()
         move_values["operating_unit_id"] = self.operating_unit_id.id
         return move_values
+
+    def _prepare_move_line_vals(self):
+        move_line_values = super()._prepare_move_line_vals()
+        move_line_values["operating_unit_id"] = self.operating_unit_id.id
+        return move_line_values
 
 
 class HrExpenseSheet(models.Model):
