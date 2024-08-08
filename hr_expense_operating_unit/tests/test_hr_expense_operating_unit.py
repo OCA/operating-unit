@@ -195,3 +195,26 @@ class TestHrExpenseOperatingUnit(TransactionCase):
 
         with self.assertRaises(ValidationError):
             self.hr_expense3.action_submit_expenses()
+
+    def test_onchange(self):
+        """Test that onchange works as expected"""
+        hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
+        sheet_context = hr_expense_dict1.get("context")
+        sheet_dict = {
+            "name": sheet_context.get("default_name", ""),
+            "employee_id": sheet_context.get("default_employee_id", False),
+            "company_id": sheet_context.get("default_company_id", False),
+            "state": sheet_context.get("default_state", ""),
+            "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+        }
+        sheet = self.hr_expense_sheet_model.create(sheet_dict)
+        self.assertEqual(sheet.operating_unit_id, self.ou1)
+        self.assertEqual(sheet.expense_line_ids.operating_unit_id, self.ou1)
+        sheet.operating_unit_id = self.env["operating.unit"]
+        sheet.env.flush_all()
+        self.assertEqual(sheet.expense_line_ids.operating_unit_id, self.ou1)
+        sheet.expense_line_ids.operating_unit_id = self.env["operating.unit"]
+        sheet.env.flush_all()
+        sheet.operating_unit_id = self.b2c
+        sheet._onchange_operating_unit_id()
+        self.assertEqual(sheet.expense_line_ids.operating_unit_id, self.b2c)
