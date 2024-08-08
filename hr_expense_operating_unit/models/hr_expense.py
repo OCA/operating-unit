@@ -102,7 +102,7 @@ class HrExpenseSheet(models.Model):
     @api.onchange("operating_unit_id")
     def _onchange_operating_unit_id(self):
         if self.operating_unit_id:
-            self.expense_line_ids.write(
+            self.expense_line_ids.update(
                 {"operating_unit_id": self.operating_unit_id.id}
             )
 
