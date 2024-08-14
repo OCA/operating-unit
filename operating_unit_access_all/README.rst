@@ -61,7 +61,7 @@ Credits
 Authors
 ~~~~~~~
 
-* Aginix Techologies
+* Ecosoft
 
 Contributors
 ~~~~~~~~~~~~
@@ -83,13 +83,14 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-.. |maintainer-nopparuts| image:: https://github.com/nopparuts.png?size=40px
-    :target: https://github.com/nopparuts
-    :alt: nopparuts
+.. |maintainer-kittiu| image:: https://github.com/kittiu.png?size=40px
+    :target: https://github.com/kittiu
+    :alt: kittiu
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-nopparuts| 
+|maintainer-kittiu| 
+
 
 This module is part of the `OCA/operating-unit <https://github.com/OCA/operating-unit/tree/16.0/operating_unit_access_all>`_ project on GitHub.
 
