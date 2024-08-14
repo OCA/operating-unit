@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+    <record id="ou_alias_domain" model="mail.alias.domain">
+        <field name="name">main_operating_unit.com</field>
+    </record>
+    <record id="b2b_alias_domain" model="mail.alias.domain">
+        <field name="name">b2b_operating_unit.com</field>
+    </record>
+    <record id="b2c_alias_domain" model="mail.alias.domain">
+        <field name="name">b2c_operating_unit.com</field>
+    </record>
+    <record id="operating_unit.main_operating_unit" model="operating.unit">
+        <field name="alias_domain_id" ref="mail_operating_unit.ou_alias_domain" />
+    </record>
+    <record id="operating_unit.b2b_operating_unit" model="operating.unit">
+        <field name="alias_domain_id" ref="mail_operating_unit.b2b_alias_domain" />
+    </record>
+    <record id="operating_unit.b2c_operating_unit" model="operating.unit">
+        <field name="alias_domain_id" ref="mail_operating_unit.b2c_alias_domain" />
+    </record>
+</odoo>
