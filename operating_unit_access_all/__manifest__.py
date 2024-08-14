@@ -13,5 +13,5 @@
         "security/operating_unit_security.xml",
     ],
     "installable": True,
-    "maintainers": ["nopparuts"],
+    "maintainers": ["kittiu"],
 }
