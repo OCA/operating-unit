@@ -40,7 +40,7 @@ addon | version | maintainers | summary
 [hr_payroll_account_operating_unit](hr_payroll_account_operating_unit/) | 14.0.1.0.0 |  | HR Payroll Account Operating Unit
 [mail_template_operating_unit](mail_template_operating_unit/) | 14.0.1.0.0 | [![patrickrwilson](https://github.com/patrickrwilson.png?size=30px)](https://github.com/patrickrwilson) | Mail Template Operating Unit
 [mis_builder_budget_operating_unit](mis_builder_budget_operating_unit/) | 14.0.1.0.0 |  | MIS Builder Budget with Operating Unit
-[mis_builder_operating_unit](mis_builder_operating_unit/) | 14.0.1.0.0 |  | MIS Builder with Operating Unit
+[mis_builder_operating_unit](mis_builder_operating_unit/) | 14.0.1.1.0 |  | MIS Builder with Operating Unit
 [mis_builder_operating_unit_access_all](mis_builder_operating_unit_access_all/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Access all OUs' MIS Builder
 [mrp_operating_unit](mrp_operating_unit/) | 14.0.1.1.0 |  | Operating Unit in MRP
 [operating_unit](operating_unit/) | 14.0.1.1.1 |  | An operating unit (OU) is an organizational entity part of a company

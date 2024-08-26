@@ -5,7 +5,7 @@
 
 {
     "name": "MIS Builder with Operating Unit",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Reporting",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
