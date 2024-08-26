@@ -23,6 +23,12 @@ msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: mis_builder_operating_unit
+#: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance__has_no_operating_unit
+#: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance_period__has_no_operating_unit
+msgid "Has No Operating Unit"
+msgstr ""
+
+#. module: mis_builder_operating_unit
 #: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance__id
 #: model:ir.model.fields,field_description:mis_builder_operating_unit.field_mis_report_instance_period__id
 msgid "ID"
