@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-account_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-analytic_operating_unit>=16.0dev,<16.1dev',
+        'odoo-addon-contract_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-hr_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-product_operating_unit>=16.0dev,<16.1dev',
