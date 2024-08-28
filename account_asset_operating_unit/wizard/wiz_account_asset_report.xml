@@ -8,12 +8,12 @@
             ref="account_asset_management.wiz_account_asset_report_view_form"
         />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
+            <xpath expr="//group" position="inside">
                 <field
                     name="operating_unit_id"
                     options="{'no_create_edit': True, 'no_create': True}"
                 />
-            </field>
+            </xpath>
         </field>
     </record>
 </odoo>
