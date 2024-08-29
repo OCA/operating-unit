@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-operating-unit"
-version = "17.0.20240826.0"
+version = "17.0.20240829.0"
 dependencies = [
     "odoo-addon-account_financial_report_operating_unit>=17.0dev,<17.1dev",
     "odoo-addon-account_operating_unit>=17.0dev,<17.1dev",
@@ -14,6 +14,7 @@ dependencies = [
     "odoo-addon-mail_operating_unit>=17.0dev,<17.1dev",
     "odoo-addon-operating_unit>=17.0dev,<17.1dev",
     "odoo-addon-operating_unit_access_all>=17.0dev,<17.1dev",
+    "odoo-addon-pos_operating_unit>=17.0dev,<17.1dev",
     "odoo-addon-product_operating_unit>=17.0dev,<17.1dev",
     "odoo-addon-project_operating_unit>=17.0dev,<17.1dev",
     "odoo-addon-res_partner_operating_unit>=17.0dev,<17.1dev",
