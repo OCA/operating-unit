@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,30 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: pos_operating_unit
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_config__display_name
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order__display_name
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order_line__display_name
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_payment__display_name
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_session__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: pos_operating_unit
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_config__id
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order__id
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order_line__id
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_payment__id
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_session__id
-msgid "ID"
-msgstr ""
-
-#. module: pos_operating_unit
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_config____last_update
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order____last_update
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order_line____last_update
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_payment____last_update
-#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_session____last_update
-msgid "Last Modified on"
+#: model:ir.model,name:pos_operating_unit.model_res_config_settings
+msgid "Config Settings"
 msgstr ""
 
 #. module: pos_operating_unit
@@ -46,7 +24,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order_line__operating_unit_ids
 #: model:ir.model.fields,field_description:pos_operating_unit.field_pos_payment__operating_unit_ids
 #: model:ir.model.fields,field_description:pos_operating_unit.field_pos_session__operating_unit_ids
+#: model:ir.model.fields,field_description:pos_operating_unit.field_res_config_settings__pos_operating_unit_ids
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.pos_config_view_form_inherit_ou
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.res_config_settings_view_form
 msgid "Operating Units"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.pos_config_view_form_inherit_ou
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.res_config_settings_view_form
+msgid "Operating units used for this POS"
 msgstr ""
 
 #. module: pos_operating_unit
@@ -78,10 +65,4 @@ msgstr ""
 #. module: pos_operating_unit
 #: model:ir.model,name:pos_operating_unit.model_pos_session
 msgid "Point of Sale Session"
-msgstr ""
-
-#. module: pos_operating_unit
-#: model:ir.model.fields,help:pos_operating_unit.field_pos_order__config_id
-#: model:ir.model.fields,help:pos_operating_unit.field_pos_payment__config_id
-msgid "The physical point of sale you will use."
 msgstr ""
