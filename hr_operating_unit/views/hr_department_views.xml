@@ -8,7 +8,6 @@
                 <field
                     name="operating_unit_id"
                     options="{'no_create': True}"
-                    domain="[('company_id','=', company_id)]"
                     groups="operating_unit.group_multi_operating_unit"
                 />
             </field>
