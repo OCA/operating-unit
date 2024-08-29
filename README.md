@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [operating_unit](operating_unit/) | 16.0.1.0.2 |  | An operating unit (OU) is an organizational entity part of a company
 [product_operating_unit](product_operating_unit/) | 16.0.1.0.1 |  | Adds the concept of operating unit (OU) in products
 [project_operating_unit](project_operating_unit/) | 16.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | This module adds operating unit information to projects and tasks.
+[report_qweb_operating_unit](report_qweb_operating_unit/) | 16.0.1.0.0 |  | Qweb Report With Operating Unit
 [sales_team_operating_unit](sales_team_operating_unit/) | 16.0.1.0.0 |  | Sales Team Operating Unit
 [stock_operating_unit](stock_operating_unit/) | 16.0.1.2.1 |  | Adds the concept of operating unit (OU) in stock management
 

@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo-addon-operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-product_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-project_operating_unit>=16.0dev,<16.1dev',
+        'odoo-addon-report_qweb_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-sales_team_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-stock_operating_unit>=16.0dev,<16.1dev',
     ],
