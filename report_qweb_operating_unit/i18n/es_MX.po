@@ -17,67 +17,165 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid ""
-"<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
-msgstr ""
-"<i class=\"fa fa-at\" role=\"img\" aria-label=\"Correo electrónico\" title="
-"\"Correo electrónico\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid ""
-"<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
-msgstr "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"RFC\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid ""
-"<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" title=\"Website"
-"\"/>"
-msgstr ""
-"<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Sitio Web\" title=\"Sitio "
-"Web\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
-msgid ""
-"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" title=\"Phone\"/>"
-msgstr ""
-"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Teléfono\" title="
-"\"Teléfono\"/>"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
-msgid "Email:"
-msgstr "Correo electrónico:"
-
-#. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_background_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_clean_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "<strong>Operating Unit address block</strong>"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "<strong>Operating unit details block</strong>"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "Company tagline"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "Contains the operating unit address."
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "Contains the operating unit details."
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model:ir.model.fields,help:report_qweb_operating_unit.field_operating_unit__report_footer
+msgid "Footer text displayed at the bottom of all reports."
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model:ir.model.fields,help:report_qweb_operating_unit.field_operating_unit__operating_unit_details
+msgid "Header text displayed at the top of all reports."
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__is_operating_unit_details_empty
+msgid "Is Operating Unit Details Empty"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "Logo"
 msgstr "Logo"
 
 #. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-msgid "Mail:"
-msgstr "Correo electrónico:"
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid ""
+"Operating\n"
+"                    Unit tagline"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model:ir.model,name:report_qweb_operating_unit.model_operating_unit
+msgid "Operating Unit"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__operating_unit_details
+msgid "Operating Unit Details"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__report_header
+msgid "Operating Unit Tagline"
+msgstr ""
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
-msgid "Phone:"
-msgstr "Teléfono:"
+msgid "Operating Unit tagline"
+msgstr ""
 
 #. module: report_qweb_operating_unit
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
-#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_clean_ou
-msgid "Tel:"
-msgstr "Tel:"
+#: model:ir.model.fields,help:report_qweb_operating_unit.field_operating_unit__report_header
+msgid ""
+"Operating Unit tagline, which is included in a printed document's header or "
+"footer (depending on the selected layout)."
+msgstr ""
 
 #. module: report_qweb_operating_unit
+#: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__report_footer
+msgid "Report Footer"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.view_operating_unit_form
+msgid "Report Layout"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
-msgid "Web:"
-msgstr "Web:"
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "Tax ID"
+msgstr ""
+
+#. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+msgid "US12345671"
+msgstr ""
+
+#~ msgid ""
+#~ "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Email\" title=\"Email\"/>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-at\" role=\"img\" aria-label=\"Correo electrónico\" "
+#~ "title=\"Correo electrónico\"/>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"Fiscal number\"/>"
+#~ msgstr "<i class=\"fa fa-building-o\" role=\"img\" aria-label=\"RFC\"/>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Website\" "
+#~ "title=\"Website\"/>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-globe\" role=\"img\" aria-label=\"Sitio Web\" "
+#~ "title=\"Sitio Web\"/>"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Phone\" "
+#~ "title=\"Phone\"/>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Teléfono\" "
+#~ "title=\"Teléfono\"/>"
+
+#~ msgid "Email:"
+#~ msgstr "Correo electrónico:"
+
+#~ msgid "Mail:"
+#~ msgstr "Correo electrónico:"
+
+#~ msgid "Phone:"
+#~ msgstr "Teléfono:"
+
+#~ msgid "Tel:"
+#~ msgstr "Tel:"
+
+#~ msgid "Web:"
+#~ msgstr "Web:"
