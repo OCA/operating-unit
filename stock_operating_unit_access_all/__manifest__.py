@@ -3,7 +3,7 @@
 
 {
     "name": "Access all OUs' Stock",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "author": "Ecosoft,Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "license": "AGPL-3",
