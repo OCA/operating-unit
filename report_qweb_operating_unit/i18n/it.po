@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-08-31 12:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -20,7 +22,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "<strong>Operating Unit address block</strong>"
-msgstr ""
+msgstr "<strong>Blocco indirizzo unità operativa</strong>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -28,7 +30,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "<strong>Operating unit details block</strong>"
-msgstr ""
+msgstr "<strong>Blocco dettagli unità operativa</strong>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -36,7 +38,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "Company tagline"
-msgstr ""
+msgstr "Slogan azienda"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -44,7 +46,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "Contains the operating unit address."
-msgstr ""
+msgstr "Contiene l'indirizzo dell'unità operativa."
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -52,22 +54,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "Contains the operating unit details."
-msgstr ""
+msgstr "Contiene i dettagli dell'unità operativa."
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,help:report_qweb_operating_unit.field_operating_unit__report_footer
 msgid "Footer text displayed at the bottom of all reports."
-msgstr ""
+msgstr "Testo in calce visualizzato in fondo al resoconto."
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,help:report_qweb_operating_unit.field_operating_unit__operating_unit_details
 msgid "Header text displayed at the top of all reports."
-msgstr ""
+msgstr "Testo testata visualizzato sulla sommità di ogni resoconto."
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__is_operating_unit_details_empty
 msgid "Is Operating Unit Details Empty"
-msgstr ""
+msgstr "I dettagli dell'unità operativa sono vuoti"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -75,7 +77,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -85,26 +87,28 @@ msgid ""
 "Operating\n"
 "                    Unit tagline"
 msgstr ""
+"Slogan\n"
+"                    unità operativa"
 
 #. module: report_qweb_operating_unit
 #: model:ir.model,name:report_qweb_operating_unit.model_operating_unit
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unità operativa"
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__operating_unit_details
 msgid "Operating Unit Details"
-msgstr ""
+msgstr "Dettagli unità operativa"
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__report_header
 msgid "Operating Unit Tagline"
-msgstr ""
+msgstr "Slogan unità operativa"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 msgid "Operating Unit tagline"
-msgstr ""
+msgstr "Slogan unità operativa"
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,help:report_qweb_operating_unit.field_operating_unit__report_header
@@ -112,16 +116,18 @@ msgid ""
 "Operating Unit tagline, which is included in a printed document's header or "
 "footer (depending on the selected layout)."
 msgstr ""
+"Slogan unità operativa, che è inclusa nella testata o a piè pagina del "
+"documento stampato (in funzione del layout selezionato)."
 
 #. module: report_qweb_operating_unit
 #: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__report_footer
 msgid "Report Footer"
-msgstr ""
+msgstr "Piè pagina resoconto"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.view_operating_unit_form
 msgid "Report Layout"
-msgstr ""
+msgstr "Layout resoconto"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -129,7 +135,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "Tax ID"
-msgstr ""
+msgstr "Partita IVA"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
@@ -137,4 +143,4 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
 msgid "US12345671"
-msgstr ""
+msgstr "US12345671"
