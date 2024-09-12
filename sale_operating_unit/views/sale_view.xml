@@ -12,6 +12,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    optional="show"
                 />
             </field>
         </field>
@@ -25,6 +26,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    optional="show"
                 />
             </field>
         </field>
