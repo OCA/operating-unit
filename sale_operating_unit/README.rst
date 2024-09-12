@@ -85,6 +85,7 @@ Contributors
 * Alan Ramos <alan.ramos@jarsa.com.mx>
 * Jorge Alberto Olvera Cuenca <jorge.olvera@jarsa.com>
 * Alejandro Padrón <alejandro.padron@bt-group.com>
+* Alexei Rivera <arivera@archeti.com>
 
 Maintainers
 ~~~~~~~~~~~
