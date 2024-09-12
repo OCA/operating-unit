@@ -15,6 +15,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         """Create and invoice and a subsquent payment, in another OU"""
 
         # Create invoice for B2B operating unit
+        self.partner1.operating_unit_ids = self.user_id.operating_unit_ids
         self.invoice = self.move_model.with_user(self.user_id.id).create(
             self._prepare_invoice(self.b2b.id)
         )
@@ -48,6 +49,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             self._prepare_invoice(self.b2b.id, "SUPP/B2B/01"),
             self._prepare_invoice(self.b2c.id, "SUPP/B2C/02"),
         ]
+        self.partner1.operating_unit_ids = self.user_id.operating_unit_ids
         invoices = self.move_model.with_user(self.user_id.id).create(to_create)
         for invoice in invoices:
             invoice.invoice_date = invoice.date

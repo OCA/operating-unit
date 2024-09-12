@@ -15,6 +15,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         passed to the accounting journal items.
         """
         # Create invoice
+        self.partner1.operating_unit_ids = self.user_id.operating_unit_ids
         self.invoice = self.move_model.with_user(self.user_id.id).create(
             self._prepare_invoice(self.b2b.id)
         )
