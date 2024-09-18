@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-09-18 12:06+0000\n"
+"Last-Translator: Bastian Günther <mail@bastian-guenther.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
@@ -29,7 +31,7 @@ msgstr ""
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Unternehmen"
 
 #. module: account_operating_unit
 #. odoo-python
@@ -98,17 +100,17 @@ msgstr ""
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Journalbuchung"
 
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Buchungszeile"
 
 #. module: account_operating_unit
 #. odoo-python
@@ -129,7 +131,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_move_line_filter
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_account_payment_search
 msgid "Operating Unit"
-msgstr ""
+msgstr "Filiale"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_account_journal__operating_unit_id
@@ -140,7 +142,7 @@ msgstr ""
 #. module: account_operating_unit
 #: model_terms:ir.ui.view,arch_db:account_operating_unit.view_company_form
 msgid "Operating Units"
-msgstr ""
+msgstr "Filialen"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__ou_is_self_balanced
@@ -155,7 +157,7 @@ msgstr ""
 #. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Zahlungen"
 
 #. module: account_operating_unit
 #. odoo-python
