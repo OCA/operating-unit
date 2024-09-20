@@ -89,6 +89,11 @@ msgid "Invoices Statistics"
 msgstr ""
 
 #. module: account_operating_unit
+#: model:ir.model.fields,field_description:account_operating_unit.field_account_move_line__is_ou_balance
+msgid "Is Ou Balance"
+msgstr ""
+
+#. module: account_operating_unit
 #: model:ir.model,name:account_operating_unit.model_account_journal
 msgid "Journal"
 msgstr ""
