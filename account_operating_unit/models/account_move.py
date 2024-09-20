@@ -12,6 +12,7 @@ class AccountMoveLine(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
     )
+    is_ou_balance = fields.Boolean(readonly=True)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -199,6 +200,8 @@ class AccountMove(models.Model):
             "operating_unit_id": ou_id,
             "partner_id": move.partner_id and move.partner_id.id or False,
             "account_id": move.company_id.inter_ou_clearing_account_id.id,
+            "is_ou_balance": True,
+            "exclude_from_invoice_tab": True,
         }
 
         if ou_balances[ou_id] < 0.0:
@@ -298,3 +301,9 @@ class AccountMove(models.Model):
                     )
                 )
         return True
+
+    def button_draft(self):
+        res = super().button_draft()
+        for rec in self:
+            rec.line_ids.filtered(lambda l: l.is_ou_balance).unlink()
+        return res
