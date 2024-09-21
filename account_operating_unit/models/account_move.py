@@ -10,8 +10,15 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     operating_unit_id = fields.Many2one(
-        check_company=True,
         comodel_name="operating.unit",
+        check_company=True,
+    )
+
+    display_type = fields.Selection(
+        selection_add=[("ou_balance", "OU Balancing")],
+        ondelete={
+            "ou_balance": lambda records: records.write({"display_type": "product"})
+        },
     )
 
     @api.model_create_multi
@@ -168,6 +175,7 @@ class AccountMove(models.Model):
             "operating_unit_id": ou_id,
             "partner_id": move.partner_id and move.partner_id.id or False,
             "account_id": move.company_id.inter_ou_clearing_account_id.id,
+            "display_type": "ou_balance",
         }
 
         if ou_balances[ou_id] < 0.0:
@@ -249,3 +257,11 @@ class AccountMove(models.Model):
                     _("The OU in the Move and in Journal must be the same.")
                 )
         return True
+
+    def button_draft(self):
+        res = super().button_draft()
+        for rec in self:
+            rec.line_ids.filtered(
+                lambda line: line.display_type == "ou_balance"
+            ).unlink()
+        return res
