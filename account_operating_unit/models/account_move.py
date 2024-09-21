@@ -74,6 +74,7 @@ class AccountMove(models.Model):
             "operating_unit_id": ou_id,
             "partner_id": move.partner_id and move.partner_id.id or False,
             "account_id": move.company_id.inter_ou_clearing_account_id.id,
+            "display_type": "ou_balance",
         }
 
         if ou_balances[ou_id] < 0.0:
@@ -170,3 +171,9 @@ class AccountMove(models.Model):
                     )
                 )
         return True
+
+    def button_draft(self):
+        res = super().button_draft()
+        for rec in self:
+            rec.line_ids.filtered(lambda l: l.display_type == "ou_balance").unlink()
+        return res
