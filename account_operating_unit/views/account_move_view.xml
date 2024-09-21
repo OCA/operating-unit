@@ -103,6 +103,17 @@
                 </attribute>
             </field>
             <xpath
+                expr="//field[@name='line_ids']/tree//field[@name='account_id']"
+                position="after"
+            >
+                <field
+                    name="operating_unit_id"
+                    options="{'no_create': True}"
+                    optional="show"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+            <xpath
                 expr="//field[@name='invoice_line_ids']/tree//field[@name='account_id']"
                 position="after"
             >

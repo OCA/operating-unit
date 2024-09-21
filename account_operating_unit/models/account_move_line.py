@@ -12,6 +12,10 @@ class AccountMoveLine(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
     )
+    display_type = fields.Selection(
+        selection_add=[("ou_balance", "OU Balance")],
+        ondelete={"ou_balance": "set product"},
+    )
 
     @api.model_create_multi
     def create(self, vals_list):
