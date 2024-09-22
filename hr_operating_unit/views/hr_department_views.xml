@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_department_form" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    options="{'no_create': True}"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_department_tree" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree" />
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_department_filter" model="ir.ui.view">
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_filter" />
+        <field name="arch" type="xml">
+            <field name="manager_id" position="after">
+                <field name="operating_unit_id" />
+            </field>
+            <filter name="inactive" position="after">
+                <filter
+                    string="Operating Unit"
+                    name="operating_unit_id"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
