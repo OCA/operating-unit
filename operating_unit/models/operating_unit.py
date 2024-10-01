@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class OperatingUnit(models.Model):
     _name = "operating.unit"
+    _order = "sequence, name"
     _description = "Operating Unit"
     _rec_names_search = ["name", "code"]
 
@@ -27,6 +28,7 @@ class OperatingUnit(models.Model):
         "user_id",
         "Users Allowed",
     )
+    sequence = fields.Integer(default=10)
 
     _sql_constraints = [
         (

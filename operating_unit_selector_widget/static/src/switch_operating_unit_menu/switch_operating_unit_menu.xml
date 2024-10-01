@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+<t t-name="operating_unit_selector_widget.SwitchOuMenu">
+    <Dropdown class="'o_switch_ou_menu d-none d-md-block'" position="'bottom-end'">
+        <t t-set-slot="toggler">
+            <i class="fa fa-building d-lg-none" />
+            <span
+                    class="oe_topbar_name d-none d-lg-block"
+                    t-esc="ouService.currentOu.name"
+                />
+        </t>
+        <t
+                t-foreach="Object.values(ouService.allowedOus)
+                      .sort((ou1, ou2) => ou1.sequence - ou2.sequence)
+                     "
+                t-as="ou"
+                t-key="ou.id"
+            >
+            <SwitchOuItem ou="ou" level="0" />
+        </t>
+    </Dropdown>
+</t>
+
+
+<t t-name="operating_unit_selector_widget.SwitchOuItem">
+    <DropdownItem class="'p-0'" parentClosingMode="!isOuAllowed ? 'none' : 'all'">
+        <div
+                class="d-flex"
+                t-att-class="{ 'disabled': !isOuAllowed }"
+                data-menu="ou"
+                t-att-data-ou-id="props.ou.id"
+            >
+            <div
+                    role="menuitemcheckbox"
+                    t-att-aria-checked="isOuSelected ? 'true' : 'false'"
+                    t-att-aria-label="props.ou.name"
+                    t-att-title="(isOuSelected ? 'Hide ' : 'Show ') + props.ou.name + ' content.'"
+                    tabindex="0"
+                    class="border-end toggle_ou"
+                    t-att-class="{ 'border-primary': isCurrent, 'disabled': !isOuAllowed }"
+                    t-on-click.stop="() => this.toggleOu()"
+                >
+
+                <span
+                        class="btn border-0 p-2"
+                        t-att-class="isOuAllowed ? 'btn-link text-primary' : 'disabled'"
+                    >
+                    <i
+                            class="fa fa-fw py-2"
+                            t-att-class="isOuSelected ? 'fa-check-square text-primary' : 'fa-square-o'"
+                        />
+                </span>
+            </div>
+
+            <div
+                    role="button"
+                    t-att-aria-pressed="isCurrent ? 'true' : 'false'"
+                    t-att-aria-label="'Switch to ' + props.ou.name "
+                    t-att-title="'Switch to ' + props.ou.name "
+                    tabindex="0"
+                    class="d-flex flex-grow-1 align-items-center py-0 log_into ps-2"
+                    t-att-class="isCurrent ? 'alert-primary' : 'btn fw-normal border-0 ' + (isOuAllowed ? 'btn-link text-primary' : 'disabled')"
+                    t-on-click="() => this.logIntoOu()"
+                >
+
+                <span
+                        class='ou_label pe-3'
+                        t-att-class="isCurrent ? 'text-900 fw-bold' : ''"
+                        t-attf-style="padding-left:{{props.level * 20}}px;"
+                    >
+                    <t t-out="props.ou.name" />
+                </span>
+            </div>
+        </div>
+    </DropdownItem>
+</t>
+
+</templates>
