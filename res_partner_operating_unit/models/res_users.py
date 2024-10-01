@@ -14,6 +14,9 @@ class ResUsers(models.Model):
         users = super().create(vals_list)
         for user in users:
             user_ou = user.default_operating_unit_id or user._default_operating_unit()
+            if not user_ou:
+                user.check_partner_operating_unit()
+                continue
             user.partner_id.operating_unit_ids = [Command.link(user_ou.id)]
             user.check_partner_operating_unit()
         return users
