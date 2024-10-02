@@ -30,6 +30,9 @@
             </field>
             <field name="order_line" position="attributes">
                 <attribute
+                    name="groups"
+                >operating_unit.group_multi_operating_unit</attribute>
+                <attribute
                     name="context"
                 >{'default_state': 'draft', 'operating_unit_id': operating_unit_id}</attribute>
             </field>

@@ -5,3 +5,4 @@
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
 * Kitti U. <kittiu@ecosoft.co.th>
 * Alan Ramos <alan.ramos@jarsa.com>
+* Nopparit S. <nopparut.s@aginix.tech>
