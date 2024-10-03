@@ -2,7 +2,11 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 
+import logging
+
 from odoo import api, models
+
+_logger = logging.getLogger(__name__)
 
 
 class IrRule(models.Model):
@@ -17,4 +21,8 @@ class IrRule(models.Model):
                 "operating_unit_id": self.env.user.default_operating_unit_id.id,
             }
         )
+        _logger.warning("eval_context")
+        _logger.warning(res)
+        _logger.warning(self.env.user.operating_units())
+        _logger.warning(self.env.user.operating_units().ids)
         return res

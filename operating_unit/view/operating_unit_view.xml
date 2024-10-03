@@ -20,6 +20,7 @@
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="sequence" widget="handle" />
                 <field name="code" />
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
