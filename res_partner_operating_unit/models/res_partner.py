@@ -19,6 +19,5 @@ class ResPartner(models.Model):
         "partner_id",
         "operating_unit_id",
         "Operating Units",
-        required=True,
         default=lambda self: self._default_operating_unit(),
     )
