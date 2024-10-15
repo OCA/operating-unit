@@ -28,12 +28,16 @@ class TestCrmOperatingUnit(common.TransactionCase):
             "user_2", [self.grp_sale_mngr, self.grp_user], self.company, [self.b2c_OU]
         )
 
-        self.team1 = self._create_crm_team(self.user1.id, self.main_OU)
-        self.team2 = self._create_crm_team(self.user2.id, self.b2c_OU)
+        self.team1 = self._create_crm_team(
+            uid=self.user1.id, operating_unit=self.main_OU
+        )
+        self.team2 = self._create_crm_team(
+            uid=self.user2.id, operating_unit=self.b2c_OU
+        )
 
         # Create CRM Leads
-        self.lead1 = self._create_crm_lead(self.user1.id, self.team1)
-        self.lead2 = self._create_crm_lead(self.user2.id, self.team2)
+        self.lead1 = self._create_crm_lead(uid=self.user1.id, team=self.team1)
+        self.lead2 = self._create_crm_lead(uid=self.user2.id, team=self.team2)
 
     def _create_user(self, login, groups, company, operating_units):
         """Create a user."""
@@ -63,14 +67,10 @@ class TestCrmOperatingUnit(common.TransactionCase):
 
     def _create_crm_lead(self, uid, team):
         """Create a sale order."""
-        operating_unit_id = self.crm_lead_model.with_user(
-            uid
-        )._get_default_operating_unit()
         crm = self.crm_lead_model.create(
             {
                 "name": "CRM LEAD",
                 "user_id": uid,
-                "operating_unit_id": operating_unit_id.id,
                 "team_id": team.id,
             }
         )
@@ -79,7 +79,6 @@ class TestCrmOperatingUnit(common.TransactionCase):
     def test_crm_lead(self):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access CRM leads for Main Operating Unit.
-
         lead = self.crm_lead_model.with_user(self.user2.id).search(
             [("id", "=", self.lead1.id), ("operating_unit_id", "=", self.main_OU.id)]
         )
