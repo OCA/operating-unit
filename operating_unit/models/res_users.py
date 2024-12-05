@@ -65,9 +65,9 @@ class ResUsers(models.Model):
             == "True"
         ):
             default_user = self.env.ref("base.default_user")
-            vals[
-                "default_operating_unit_id"
-            ] = default_user.default_operating_unit_id.id
+            vals["default_operating_unit_id"] = (
+                default_user.default_operating_unit_id.id
+            )
             vals["operating_unit_ids"] = [(6, 0, default_user.operating_unit_ids.ids)]
         return vals
 
