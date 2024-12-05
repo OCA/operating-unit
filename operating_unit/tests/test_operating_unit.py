@@ -57,7 +57,7 @@ class TestOperatingUnit(OperatingUnitCommon):
         self.assertEqual(
             operating_unit_list_2[0],
             "B2C",
-            "User 2 should have access to " "%s" % self.b2c.name,
+            f"User 2 should have access to {self.b2c.name}",
         )
 
     def test_02_operating_unit(self):
