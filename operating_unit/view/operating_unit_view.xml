@@ -19,11 +19,11 @@
         <field name="name">operating.unit.tree</field>
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="code" />
                 <field name="name" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_operating_unit_search" model="ir.ui.view">
@@ -39,7 +39,7 @@
     <record id="action_operating_unit_tree" model="ir.actions.act_window">
         <field name="name">Operating Units</field>
         <field name="res_model">operating.unit</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">Click to start a new Operating Unit.</p>
         </field>
