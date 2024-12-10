@@ -19,7 +19,6 @@ msgstr ""
 #. module: stock_operating_unit
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_warehouse.py:0
-#, python-format
 msgid ""
 "Configuration Error. The Operating Unit of the Warehouse and the Location "
 "must be the same. "
@@ -29,50 +28,7 @@ msgstr ""
 
 #. module: stock_operating_unit
 #. odoo-python
-#: code:addons/stock_operating_unit/model/stock_location.py:0
-#, python-format
-msgid "Configuration error. Internal locations should have an operating unit"
-msgstr ""
-"Errore di configurazione. Le ubicazioni interne devono avere un'unità "
-"operativa"
-
-#. module: stock_operating_unit
-#. odoo-python
-#: code:addons/stock_operating_unit/model/stock_location.py:0
-#, python-format
-msgid ""
-"Configuration error. The Company in the Stock Location and in the Operating "
-"Unit must be the same."
-msgstr ""
-"Errore di configurazione. L'Azienda nell'ubicazione di magazzino e "
-"nell'unità operativa devono essere uguali."
-
-#. module: stock_operating_unit
-#. odoo-python
 #: code:addons/stock_operating_unit/model/stock_picking.py:0
-#, python-format
-msgid ""
-"Configuration error. The Company in the Stock Picking and in the Operating "
-"Unit must be the same."
-msgstr ""
-"Errore di configurazione. L'Azienda nel prelievo di magazzino e nell'unità "
-"operativa devono essere uguali."
-
-#. module: stock_operating_unit
-#. odoo-python
-#: code:addons/stock_operating_unit/model/stock_warehouse.py:0
-#, python-format
-msgid ""
-"Configuration error. The Company in the Stock Warehouse and in the Operating"
-" Unit must be the same."
-msgstr ""
-"Errore di configurazione. L'Azienda nel magazzino di stoccaggio e nell'unità "
-"operativa devono essere uguali."
-
-#. module: stock_operating_unit
-#. odoo-python
-#: code:addons/stock_operating_unit/model/stock_picking.py:0
-#, python-format
 msgid ""
 "Configuration error. The Operating Unit of the picking must be the same as "
 "that of the warehouse of the Picking Type."
@@ -83,7 +39,6 @@ msgstr ""
 #. module: stock_operating_unit
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
-#, python-format
 msgid ""
 "Configuration error. The Parent Stock Location must belong to the same "
 "Operating Unit."
@@ -94,7 +49,6 @@ msgstr ""
 #. module: stock_operating_unit
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_move.py:0
-#, python-format
 msgid ""
 "Configuration error. The Stock moves must be related to a location (source "
 "or destination) that belongs to the requesting Operating Unit."
@@ -106,7 +60,6 @@ msgstr ""
 #. module: stock_operating_unit
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
-#, python-format
 msgid ""
 "Configuration error. The operating unit should be assigned to internal "
 "locations only."
@@ -117,7 +70,6 @@ msgstr ""
 #. module: stock_operating_unit
 #. odoo-python
 #: code:addons/stock_operating_unit/model/stock_location.py:0
-#, python-format
 msgid ""
 "Configuration error. This location is assigned to a warehouse that belongs "
 "to a different operating unit."
@@ -183,3 +135,34 @@ msgstr "Trasferimento"
 #: model:ir.model,name:stock_operating_unit.model_stock_warehouse
 msgid "Warehouse"
 msgstr "Magazzino"
+
+#, python-format
+#~ msgid ""
+#~ "Configuration error. Internal locations should have an operating unit"
+#~ msgstr ""
+#~ "Errore di configurazione. Le ubicazioni interne devono avere un'unità "
+#~ "operativa"
+
+#, python-format
+#~ msgid ""
+#~ "Configuration error. The Company in the Stock Location and in the "
+#~ "Operating Unit must be the same."
+#~ msgstr ""
+#~ "Errore di configurazione. L'Azienda nell'ubicazione di magazzino e "
+#~ "nell'unità operativa devono essere uguali."
+
+#, python-format
+#~ msgid ""
+#~ "Configuration error. The Company in the Stock Picking and in the "
+#~ "Operating Unit must be the same."
+#~ msgstr ""
+#~ "Errore di configurazione. L'Azienda nel prelievo di magazzino e "
+#~ "nell'unità operativa devono essere uguali."
+
+#, python-format
+#~ msgid ""
+#~ "Configuration error. The Company in the Stock Warehouse and in the "
+#~ "Operating Unit must be the same."
+#~ msgstr ""
+#~ "Errore di configurazione. L'Azienda nel magazzino di stoccaggio e "
+#~ "nell'unità operativa devono essere uguali."

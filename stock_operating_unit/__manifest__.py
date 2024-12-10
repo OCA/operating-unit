@@ -5,7 +5,7 @@
 {
     "name": "Stock with Operating Units",
     "summary": "Adds the concept of operating unit (OU) in stock management",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd., "
