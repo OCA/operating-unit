@@ -4,3 +4,4 @@
 - Nicola Studer \<<nicola.studer@braintec-group.com>\>
 - Kitti U. \<<kittiu@ecosoft.co.th>\>
 - Alan Ramos \<<alan.ramos@jarsa.com>\>
+- Daniel Lagin \<<daniel.lagin@braintec.com>\>
