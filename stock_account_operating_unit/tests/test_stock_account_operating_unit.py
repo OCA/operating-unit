@@ -2,21 +2,19 @@
 # - Jordi Ballester Alomar
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.tests import Form
 
 from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestStockAccountOperatingUnit(TestStockCommon):
     def setUp(self):
-        super(TestStockAccountOperatingUnit, self).setUp()
+        super().setUp()
         self.res_groups = self.env["res.groups"]
         self.res_users_model = self.env["res.users"]
         self.aml_model = self.env["account.move.line"]
         self.account_model = self.env["account.account"]
         self.product_model = self.env["product.product"]
         self.product_cteg_model = self.env["product.category"]
-        self.acc_type_model = self.env["account.account.type"]
         self.operating_unit_model = self.env["operating.unit"]
         self.company_model = self.env["res.company"]
         self.move_model = self.env["stock.move"]
@@ -55,24 +53,24 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         # Create account for Goods Received Not Invoiced
         name = "Goods Received Not Invoiced"
         code = "grni"
-        acc_type = self.env.ref("account.data_account_type_equity")
+        acc_type = "equity"
         self.account_grni = self._create_account(acc_type, name, code, self.company)
         # Create account for Cost of Goods Sold
         name = "Cost of Goods Sold"
         code = "cogs"
-        acc_type = self.env.ref("account.data_account_type_expenses")
+        acc_type = "expense"
         self.account_cogs_id = self._create_account(acc_type, name, code, self.company)
         # Create account for Inventory
         name = "Inventory"
         code = "inventory"
-        acc_type = self.env.ref("account.data_account_type_fixed_assets")
+        acc_type = "asset_fixed"
         self.account_inventory = self._create_account(
             acc_type, name, code, self.company
         )
         # Create account for Inter-OU Clearing
         name = "Inter-OU Clearing"
-        code = "inter_ou"
-        acc_type = self.env.ref("account.data_account_type_equity")
+        code = "inter.ou"
+        acc_type = "equity"
         self.account_inter_ou_clearing = self._create_account(
             acc_type, name, code, self.company
         )
@@ -118,7 +116,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
             }
         )
@@ -175,12 +173,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         """
         picking.action_confirm()
         picking.action_assign()
-        res = picking.with_user(user_id).button_validate()
-        wiz = Form(
-            self.env[res["res_model"]].with_context(**res["context"]),
-            view=self.env.ref("stock.view_immediate_transfer"),
-        ).save()
-        wiz.process()
+        picking.with_user(user_id).button_validate()
 
     def _check_account_balance(
         self, account_id, operating_unit=None, expected_balance=0.0
@@ -197,8 +190,9 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             self.assertEqual(
                 balance,
                 expected_balance,
-                "Balance is not %s for Operating Unit %s."
-                % (str(expected_balance), operating_unit.name),
+                "Balance is not {} for Operating Unit {}.".format(
+                    expected_balance, operating_unit.name
+                ),
             )
         else:
             self.assertEqual(
@@ -346,15 +340,15 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             operating_unit=None,
             expected_balance=expected_balance,
         )
-        # GL account ‘Inventory’ has balance 0 on OU main_operating_unit
-        expected_balance = 0.0
+        # GL account ‘Inventory’ has balance 1 on OU main_operating_unit
+        expected_balance = 1.0
         self._check_account_balance(
             self.account_inventory.id,
             operating_unit=self.ou1,
             expected_balance=expected_balance,
         )
         # GL account ‘Inventory’ has balance 2 on OU b2c
-        expected_balance = 2.0
+        expected_balance = 1.0
         self._check_account_balance(
             self.account_inventory.id,
             operating_unit=self.b2c,

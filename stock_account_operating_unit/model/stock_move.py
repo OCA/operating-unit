@@ -16,15 +16,17 @@ class StockMove(models.Model):
         credit_value,
         debit_account_id,
         credit_account_id,
+        svl_id,
         description,
     ):
-        res = super(StockMove, self)._generate_valuation_lines_data(
+        res = super()._generate_valuation_lines_data(
             partner_id,
             qty,
             debit_value,
             credit_value,
             debit_account_id,
             credit_account_id,
+            svl_id,
             description,
         )
         if res:
@@ -70,54 +72,3 @@ class StockMove(models.Model):
                 rslt["price_diff_line_vals"] = price_diff_line_vals
             return rslt
         return res
-
-    def _action_done(self, cancel_backorder=False):
-        """
-        Generate accounting moves if the product being moved is subject
-        to real_time valuation tracking,
-        and the source or destination location are
-        a transit location or is outside of the company or the source or
-        destination locations belong to different operating units.
-        """
-        res = super(StockMove, self)._action_done(cancel_backorder)
-        for move in self:
-            if move.product_id.valuation == "real_time":
-                # Inter-operating unit moves do not accept to
-                # from/to non-internal location
-                if (
-                    move.location_id.company_id
-                    and move.location_id.company_id == move.location_dest_id.company_id
-                    and move.operating_unit_id != move.operating_unit_dest_id
-                ):
-                    (
-                        journal_id,
-                        acc_src,
-                        acc_dest,
-                        acc_valuation,
-                    ) = move._get_accounting_data_for_valuation()
-
-                    move_lines = move._prepare_account_move_line(
-                        move.product_qty,
-                        move.product_id.standard_price,
-                        acc_valuation,
-                        acc_valuation,
-                        _("%s - OU Move") % move.product_id.display_name,
-                    )
-                    am = (
-                        self.env["account.move"]
-                        .with_context(
-                            company_id=move.company_id.id,
-                        )
-                        .create(
-                            {
-                                "journal_id": journal_id,
-                                "line_ids": move_lines,
-                                "company_id": move.company_id.id,
-                                "ref": move.picking_id and move.picking_id.name,
-                                "stock_move_id": move.id,
-                            }
-                        )
-                        .with_company(move.location_id.company_id.id)
-                    )
-                    am.action_post()
-            return res

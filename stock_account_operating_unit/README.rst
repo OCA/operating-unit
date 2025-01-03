@@ -71,6 +71,7 @@ Contributors
    <contact@eficent.com>
 -  Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 -  Jarsa Sistemas <info@jarsa.com.mx>
+-  Daniel Herreros <daniel.herreros@braintec.com>
 
 Maintainers
 -----------
