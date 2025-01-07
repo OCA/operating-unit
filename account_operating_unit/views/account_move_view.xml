@@ -89,7 +89,7 @@
                 </attribute>
             </field>
             <xpath
-                expr="//field[@name='invoice_line_ids']/tree//field[@name='account_id']"
+                expr="//field[@name='invoice_line_ids']/list//field[@name='account_id']"
                 position="after"
             >
                 <field
@@ -105,7 +105,7 @@
                 />
             </xpath>
             <xpath
-                expr="//field[@name='line_ids']/tree//field[@name='account_id']"
+                expr="//field[@name='line_ids']/list//field[@name='account_id']"
                 position="after"
             >
                 <field

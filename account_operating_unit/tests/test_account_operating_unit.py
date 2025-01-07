@@ -12,8 +12,15 @@ from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 @tagged("post_install", "-at_install")
 class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
+
+        # Get the Operating Unit Manager group
+        cls.ou_manager_group = cls.env.ref(
+            "operating_unit.group_manager_operating_unit"
+        )
+
+        # Models
         cls.aml_model = cls.env["account.move.line"]
         cls.move_model = cls.env["account.move"]
         cls.account_model = cls.env["account.account"]
@@ -22,126 +29,122 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
         cls.payment_model = cls.env["account.payment"]
         cls.register_payments_model = cls.env["account.payment.register"]
 
-        # company
+        # Groups
         cls.grp_acc_manager = cls.env.ref("account.group_account_manager")
         cls.grp_acc_config = cls.env.ref("account.group_account_user")
-        # Main Operating Unit
-        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
-        # B2B Operating Unit
-        cls.b2b = cls.env.ref("operating_unit.b2b_operating_unit")
-        # B2C Operating Unit
-        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit")
-        # Assign user to main company to allow to write OU
-        cls.env.user.write(
-            {
-                "operating_unit_ids": [
-                    Command.link(cls.b2b.id),
-                    Command.link(cls.b2c.id),
-                ],
-                "company_ids": [Command.link(cls.company.id)],
-            }
-        )
-        # Products
+
         cls.product1 = cls.env.ref("product.product_product_7")
         cls.product2 = cls.env.ref("product.product_product_9")
         cls.product3 = cls.env.ref("product.product_product_11")
 
-        # Payment methods
-        cls.payment_method_manual_in = cls.env.ref(
-            "account.account_payment_method_manual_in"
+        # Add Operating Unit Manager group to env.user
+        cls.env.user.write(
+            {
+                "groups_id": [(4, cls.ou_manager_group.id)],
+                "company_ids": [Command.link(cls.company.id)],
+                "company_id": cls.company.id,
+            }
         )
 
+        # Set up operating units with sudo()
+        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit").sudo()
+        cls.b2b = cls.env.ref("operating_unit.b2b_operating_unit").sudo()
+        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit").sudo()
+
+        # Update operating units' company with sudo()
+        operating_units = cls.ou1 | cls.b2b | cls.b2c
+        operating_units.write({"company_id": cls.company.id})
+
+        # Setup user1 with all required groups
         cls.user1.write(
             {
                 "groups_id": [
                     Command.link(cls.grp_acc_manager.id),
                     Command.link(cls.grp_acc_config.id),
+                    Command.link(cls.ou_manager_group.id),
                 ],
                 "operating_unit_ids": [
                     Command.link(cls.b2b.id),
                     Command.link(cls.b2c.id),
                 ],
+                "company_id": cls.company.id,
+                "company_ids": [Command.link(cls.company.id)],
             }
         )
-        # Create cash - test account
+
+        # Create accounts
         cls.current_asset_account_id = cls.account_model.create(
             {
                 "name": "Current asset - Test",
                 "code": "test.current.asset",
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
             }
         )
-        # Create Inter-OU Clearing - test account
+
         cls.inter_ou_account_id = cls.account_model.create(
             {
                 "name": "Inter-OU Clearing",
                 "code": "test.inter.ou",
                 "account_type": "equity",
-                "company_id": cls.company.id,
             }
         )
+
         # Assign the Inter-OU Clearing account to the company
         cls.company.inter_ou_clearing_account_id = cls.inter_ou_account_id.id
         cls.company.ou_is_self_balanced = True
 
-        # Create user2
+        # Setup user2 with all required groups
         cls.user2.write(
             {
                 "groups_id": [
                     Command.link(cls.grp_acc_manager.id),
                     Command.link(cls.grp_acc_config.id),
+                    Command.link(cls.ou_manager_group.id),
                 ],
-                "operating_unit_ids": [
-                    Command.link(cls.b2c.id),
-                ],
+                "operating_unit_ids": [Command.link(cls.b2c.id)],
+                "company_id": cls.company.id,
+                "company_ids": [Command.link(cls.company.id)],
             }
         )
 
-        # Create a cash account 1
+        # Create cash accounts
         cls.cash1_account_id = cls.account_model.create(
             {
                 "name": "Cash 1 - Test",
                 "code": "test.cash.1",
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
             }
         )
 
-        # Create a journal for cash account 1, associated to the main
-        # operating unit
-        cls.cash_journal_ou1 = cls.journal_model.create(
-            {
-                "name": "Cash Journal 1 - Test",
-                "code": "cash1",
-                "type": "cash",
-                "company_id": cls.company.id,
-                "default_account_id": cls.cash1_account_id.id,
-                "operating_unit_id": cls.ou1.id,
-            }
-        )
-        # Create a cash account 2
         cls.cash2_account_id = cls.account_model.create(
             {
                 "name": "Cash 2 - Test",
                 "code": "cash2",
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
             }
         )
 
-        # Create a journal for cash account 2, associated to the operating
-        # unit B2B
-        cls.cash2_journal_b2b = cls.journal_model.create(
-            {
-                "name": "Cash Journal 2 - Test",
-                "code": "test_cash_2",
-                "type": "cash",
-                "company_id": cls.company.id,
-                "default_account_id": cls.cash2_account_id.id,
-                "operating_unit_id": cls.b2b.id,
-            }
-        )
+        # Create journals with proper company consistency
+        ou1_journal_vals = {
+            "name": "Cash Journal 1 - Test",
+            "code": "cash1",
+            "type": "cash",
+            "company_id": cls.company.id,
+            "default_account_id": cls.cash1_account_id.id,
+            "operating_unit_id": cls.ou1.id,
+        }
+
+        b2b_journal_vals = {
+            "name": "Cash Journal 2 - Test",
+            "code": "test_cash_2",
+            "type": "cash",
+            "company_id": cls.company.id,
+            "default_account_id": cls.cash2_account_id.id,
+            "operating_unit_id": cls.b2b.id,
+        }
+
+        cls.cash_journal_ou1 = cls.journal_model.sudo().create(ou1_journal_vals)
+        cls.cash2_journal_b2b = cls.journal_model.sudo().create(b2b_journal_vals)
 
     def _prepare_invoice(self, operating_unit_id, name="Test Supplier Invoice"):
         line_products = [
@@ -161,7 +164,7 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
                 .search(
                     [
                         ("account_type", "=", "expense"),
-                        ("company_id", "=", self.company.id),
+                        ("company_ids", "in", self.company.ids),
                     ],
                     limit=1,
                 )
