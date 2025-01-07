@@ -11,10 +11,10 @@ class AccountBankStatementLine(models.Model):
         result = super()._prepare_move_line_default_vals(
             counterpart_account_id=counterpart_account_id
         )
-        result[0][
-            "operating_unit_id"
-        ] = self.statement_id.journal_id.operating_unit_id.id
-        result[1][
-            "operating_unit_id"
-        ] = self.statement_id.journal_id.operating_unit_id.id
+        result[0]["operating_unit_id"] = (
+            self.statement_id.journal_id.operating_unit_id.id
+        )
+        result[1]["operating_unit_id"] = (
+            self.statement_id.journal_id.operating_unit_id.id
+        )
         return result
