@@ -84,7 +84,9 @@ class TestCrmOperatingUnit(common.TransactionCase):
             [("id", "=", self.lead1.id), ("operating_unit_id", "=", self.main_OU.id)]
         )
         self.assertEqual(
-            lead.ids, [], "User 2 should not have access to " "%s" % self.main_OU.name
+            lead.ids,
+            [],
+            f"User 2 should not have access to {self.main_OU.name}",
         )
 
     def test_team_ou(self):
@@ -92,5 +94,5 @@ class TestCrmOperatingUnit(common.TransactionCase):
         self.assertEqual(
             new_lead.operating_unit_id,
             self.b2c_OU,
-            "User 2 lead should have %s as operating unit" % self.b2c_OU.name,
+            f"User 2 lead should have {self.b2c_OU.name} as operating unit",
         )
