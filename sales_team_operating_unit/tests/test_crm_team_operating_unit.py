@@ -72,5 +72,5 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
             [("id", "=", self.team1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
-            team.ids, [], "User 2 should not have access to " "%s" % self.ou1.name
+            team.ids, [], f"User 2 should not have access to {self.ou1.name}"
         )
