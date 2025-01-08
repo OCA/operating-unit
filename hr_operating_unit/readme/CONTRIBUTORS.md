@@ -1,3 +1,4 @@
 - Gonzalo González Domínguez \<<meigallo@meigallodixital.com>\>
 - Murtaza Mithaiwala \<<mmithaiwala@opensourceintegrators.com>\>
 - Tran Thanh Trai \<<traitt@trobz.com>\>
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`_
