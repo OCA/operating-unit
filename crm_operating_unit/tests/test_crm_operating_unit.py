@@ -1,76 +1,89 @@
 # © 2015-19 ForgeFlow S.L. - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.tests import common
+from odoo import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCrmOperatingUnit(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.res_users_model = self.env["res.users"]
-        self.crm_lead_model = self.env["crm.lead"]
-        self.crm_team_model = self.env["crm.team"]
+class TestCrmOperatingUnit(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.res_users_model = cls.env["res.users"]
+        cls.crm_lead_model = cls.env["crm.lead"]
+        cls.crm_team_model = cls.env["crm.team"]
         # Groups
-        self.grp_sale_mngr = self.env.ref("sales_team.group_sale_manager")
-        self.grp_user = self.env.ref("base.group_user")
+        cls.grp_sale_mngr = cls.env.ref("sales_team.group_sale_manager")
+        cls.grp_user = cls.env.ref("base.group_user")
         # Company
-        self.company = self.env.ref("base.main_company")
+        cls.company = cls.env.ref("base.main_company")
         # Main Operating Unit
-        self.main_OU = self.env.ref("operating_unit.main_operating_unit")
+        cls.main_OU = cls.env.ref("operating_unit.main_operating_unit")
         # B2C Operating Unit
-        self.b2c_OU = self.env.ref("operating_unit.b2c_operating_unit")
+        cls.b2c_OU = cls.env.ref("operating_unit.b2c_operating_unit")
         # Create User 1 with Main OU
-        self.user1 = self._create_user(
-            "user_1", [self.grp_sale_mngr, self.grp_user], self.company, [self.main_OU]
+        cls.user1 = cls._create_user(
+            "user_1", [cls.grp_sale_mngr, cls.grp_user], cls.company, [cls.main_OU]
         )
         # Create User 2 with B2C OU
-        self.user2 = self._create_user(
-            "user_2", [self.grp_sale_mngr, self.grp_user], self.company, [self.b2c_OU]
+        cls.user2 = cls._create_user(
+            "user_2", [cls.grp_sale_mngr, cls.grp_user], cls.company, [cls.b2c_OU]
         )
-
-        self.team1 = self._create_crm_team(self.user1.id, self.main_OU)
-        self.team2 = self._create_crm_team(self.user2.id, self.b2c_OU)
-
+        cls.team1 = cls._create_crm_team(cls.user1.id, cls.main_OU)
+        cls.team2 = cls._create_crm_team(cls.user2.id, cls.b2c_OU)
         # Create CRM Leads
-        self.lead1 = self._create_crm_lead(self.user1.id, self.team1)
-        self.lead2 = self._create_crm_lead(self.user2.id, self.team2)
+        cls.lead1 = cls._create_crm_lead(cls.user1.id, cls.team1)
+        cls.lead2 = cls._create_crm_lead(cls.user2.id, cls.team2)
 
-    def _create_user(self, login, groups, company, operating_units):
+    @classmethod
+    def _create_user(cls, login, groups, company, operating_units):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.create(
+        user = cls.res_users_model.create(
             {
                 "name": login,
                 "login": login,
                 "password": "demo",
                 "email": "test@yourcompany.com",
                 "company_id": company.id,
-                "company_ids": [(4, company.id)],
-                "operating_unit_ids": [(4, ou.id) for ou in operating_units],
-                "groups_id": [(6, 0, group_ids)],
+                "company_ids": [Command.link(company.id)],
+                "operating_unit_ids": [Command.link(ou.id) for ou in operating_units],
+                "groups_id": [Command.set(group_ids)],
             }
         )
         return user
 
-    def _create_crm_team(self, uid, operating_unit):
-        """Create a sale order."""
-        crm = self.crm_team_model.with_context(
+    @classmethod
+    def _create_crm_team(cls, uid, operating_unit):
+        """Create a CRM team."""
+        crm = cls.crm_team_model.with_context(
             mail_create_nosubscribe=True, mail_create_nolog=True
         ).create(
-            {"name": "CRM team", "operating_unit_id": operating_unit.id, "user_id": uid}
+            {
+                "name": "CRM team",
+                "operating_unit_id": operating_unit.id,
+                "user_id": uid,
+                "company_id": operating_unit.company_id.id,
+            }
         )
         return crm
 
-    def _create_crm_lead(self, uid, team):
-        """Create a sale order."""
-        operating_unit_id = self.crm_lead_model.with_user(
-            uid
-        )._get_default_operating_unit()
-        crm = self.crm_lead_model.create(
+    @classmethod
+    def _create_crm_lead(cls, uid, team):
+        """Create a CRM lead."""
+        # Get the default operating unit for the user
+        user = cls.env["res.users"].browse(uid)
+        default_ou = (
+            user.operating_unit_ids[0]
+            if user.operating_unit_ids
+            else team.operating_unit_id
+        )
+        crm = cls.crm_lead_model.create(
             {
                 "name": "CRM LEAD",
                 "user_id": uid,
-                "operating_unit_id": operating_unit_id.id,
+                "operating_unit_id": default_ou.id,
                 "team_id": team.id,
             }
         )
