@@ -92,7 +92,7 @@ class TestProject(common.TransactionCase):
         self.assertEqual(
             projects.ids,
             [],
-            "User 2 should not have access to " "%s" % self.main_OU.name,
+            f"User 2 should not have access to {self.main_OU.name}",
         )
         self.assertEqual(self.project1.operating_unit_id.id, self.main_OU.id)
 
@@ -103,7 +103,9 @@ class TestProject(common.TransactionCase):
             [("id", "=", self.task2.id), ("operating_unit_id", "=", self.main_OU.id)]
         )
         self.assertEqual(
-            tasks.ids, [], "User 2 should not have access to " "%s" % self.main_OU.name
+            tasks.ids,
+            [],
+            f"User 2 should not have access to {self.main_OU.name}",
         )
         self.assertEqual(
             self.task1.operating_unit_id.id, self.project1.operating_unit_id.id
