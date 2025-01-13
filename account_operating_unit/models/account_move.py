@@ -100,6 +100,16 @@ class AccountMoveLine(models.Model):
         }
         return move_vals
 
+    def _prepare_analytic_distribution_line(
+        self, distribution, account_ids, distribution_on_each_plan
+    ):
+        res = super()._prepare_analytic_distribution_line(
+            distribution, account_ids, distribution_on_each_plan
+        )
+        if self.operating_unit_id:
+            res["operating_unit_id"] = self.operating_unit_id.id
+        return res
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"

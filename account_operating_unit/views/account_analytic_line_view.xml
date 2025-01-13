@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--© 2025 Jarsa-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+
+    <record id="account_analytic_line_view_form" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.form</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='analytic_item']" position="inside">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_analytic_line_view_tree" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.tree</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    optional="show"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_analytic_line_view_search" model="ir.ui.view">
+        <field name="name">account.analytic.line.view.search</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='month']" position="after">
+                <field
+                    name="operating_unit_id"
+                    string="Operating Unit"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+            <xpath expr="//group[@name='groupby']" position="inside">
+                <separator />
+                <filter
+                    name="operating_unit_id"
+                    string="Operating Unit"
+                    context="{'group_by':'operating_unit_id'}"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
