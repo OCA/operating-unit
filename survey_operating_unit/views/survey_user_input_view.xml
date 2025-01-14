@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Giuseppe Borruso - Dinamiche Aziendali srl
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="survey_user_input_view_form" model="ir.ui.view">
+        <field name="name">survey.user_input.form.inherit.view</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='survey_id']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_user_input_view_tree" model="ir.ui.view">
+        <field name="name">survey.user_input.tree.inherit.view</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='survey_id']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_user_input_viuew_kanban" model="ir.ui.view">
+        <field name="name">survey.user_input.kanban.inherit.view</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_viuew_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban/field[@name='survey_id']" position="before">
+                <field name="operating_unit_id" />
+            </xpath>
+            <xpath expr="//div/div[hasclass('o_kanban_record_top')]" position="inside">
+                <field name="operating_unit_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

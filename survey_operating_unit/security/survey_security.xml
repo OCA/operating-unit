@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Giuseppe Borruso - Dinamiche Aziendali srl
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="ir_rule_survey_survey_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="survey.model_survey_survey" />
+        <field name="domain_force">['|',
+            ('operating_unit_id', '=', False),
+            ('operating_unit_id', 'in', user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Surveys from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_survey_question_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="survey.model_survey_question" />
+        <field name="domain_force">['|',
+            ('operating_unit_id', '=', False),
+            ('operating_unit_id', 'in', user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Survey Question from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_survey_question_answer_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="survey.model_survey_question_answer" />
+        <field name="domain_force">['|',
+            ('operating_unit_id', '=', False),
+            ('operating_unit_id', 'in', user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Survey Question Answer from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_survey_user_input_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="survey.model_survey_user_input" />
+        <field name="domain_force">['|',
+            ('operating_unit_id', '=', False),
+            ('operating_unit_id', 'in', user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Survey User Input from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_survey_user_input_line_allowed_operating_units" model="ir.rule">
+        <field name="model_id" ref="survey.model_survey_user_input_line" />
+        <field name="domain_force">['|',
+            ('operating_unit_id', '=', False),
+            ('operating_unit_id', 'in', user.operating_unit_ids.ids)]
+        </field>
+        <field name="name">Survey User Input Line from allowed operating units</field>
+        <field name="global" eval="True" />
+        <field eval="0" name="perm_unlink" />
+        <field eval="0" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="0" name="perm_create" />
+    </record>
+</odoo>

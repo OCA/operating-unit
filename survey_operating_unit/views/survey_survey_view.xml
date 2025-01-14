@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Giuseppe Borruso - Dinamiche Aziendali srl
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="survey_survey_view_form" model="ir.ui.view">
+        <field name="name">survey.survey.form.inherit.view</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='user_id']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_survey_view_tree" model="ir.ui.view">
+        <field name="name">survey.survey.tree.inherit.view</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='user_id']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    optional="show"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_survey_view_kanban" model="ir.ui.view">
+        <field name="name">survey.survey.kanban.inherit.view</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='question_count']/../.." position="before">
+                <div t-if="!selection_mode" class="col-lg-1 col-sm-4 col-6 py-0 my-2">
+                    <span class="fw-bold">
+                        <field name="operating_unit_id" /> <br />
+                    </span>
+                    <span class="text-muted">Operating Unit</span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

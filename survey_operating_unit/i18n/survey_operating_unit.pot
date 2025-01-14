@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* survey_operating_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-14 12:13+0000\n"
+"PO-Revision-Date: 2025-01-14 12:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: survey_operating_unit
+#: model_terms:ir.ui.view,arch_db:survey_operating_unit.survey_survey_view_kanban
+msgid "<span class=\"text-muted\">Operating Unit</span>"
+msgstr ""
+
+#. module: survey_operating_unit
+#. odoo-python
+#: code:addons/survey_operating_unit/models/survey_question.py:0
+#: code:addons/survey_operating_unit/models/survey_question_answer.py:0
+#: code:addons/survey_operating_unit/models/survey_user_input.py:0
+#: code:addons/survey_operating_unit/models/survey_user_input_line.py:0
+#, python-format
+msgid "Changing the Operating Unit is not allowed."
+msgstr ""
+
+#. module: survey_operating_unit
+#: model:ir.model.fields,field_description:survey_operating_unit.field_survey_question__operating_unit_id
+#: model:ir.model.fields,field_description:survey_operating_unit.field_survey_question_answer__operating_unit_id
+#: model:ir.model.fields,field_description:survey_operating_unit.field_survey_survey__operating_unit_id
+#: model:ir.model.fields,field_description:survey_operating_unit.field_survey_user_input__operating_unit_id
+#: model:ir.model.fields,field_description:survey_operating_unit.field_survey_user_input_line__operating_unit_id
+msgid "Operating Unit"
+msgstr ""
+
+#. module: survey_operating_unit
+#: model:ir.model,name:survey_operating_unit.model_survey_survey
+msgid "Survey"
+msgstr ""
+
+#. module: survey_operating_unit
+#: model:ir.model,name:survey_operating_unit.model_survey_question_answer
+msgid "Survey Label"
+msgstr ""
+
+#. module: survey_operating_unit
+#: model:ir.model,name:survey_operating_unit.model_survey_question
+msgid "Survey Question"
+msgstr ""
+
+#. module: survey_operating_unit
+#: model:ir.model,name:survey_operating_unit.model_survey_user_input
+msgid "Survey User Input"
+msgstr ""
+
+#. module: survey_operating_unit
+#: model:ir.model,name:survey_operating_unit.model_survey_user_input_line
+msgid "Survey User Input Line"
+msgstr ""
