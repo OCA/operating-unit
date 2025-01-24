@@ -11,6 +11,7 @@ class ContractContract(models.Model):
     operating_unit_id = fields.Many2one(
         "operating.unit",
         "Operating Unit",
+        check_company=True,
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self._uid
         ),

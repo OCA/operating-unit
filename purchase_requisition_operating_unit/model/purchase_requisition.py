@@ -13,6 +13,7 @@ class PurchaseRequisition(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         readonly=True,
+        check_company=True,
         states={"draft": [("readonly", False)]},
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self.env.uid

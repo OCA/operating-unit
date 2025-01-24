@@ -20,6 +20,7 @@ class StockWarehouse(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Operating Unit",
+        check_company=True,
         default=_default_operating_unit,
     )
 

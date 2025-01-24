@@ -19,6 +19,7 @@ class PurchaseOrder(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         states=READONLY_STATES,
+        check_company=True,
         default=lambda self: (
             self.env["res.users"].operating_unit_default_get(self.env.uid)
         ),
@@ -28,6 +29,7 @@ class PurchaseOrder(models.Model):
         comodel_name="operating.unit",
         string="Requesting Operating Unit",
         states=READONLY_STATES,
+        check_company=True,
         default=lambda self: (
             self.env["res.users"].operating_unit_default_get(self.env.uid)
         ),
@@ -58,5 +60,7 @@ class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
     operating_unit_id = fields.Many2one(
-        related="order_id.operating_unit_id", string="Operating Unit"
+        related="order_id.operating_unit_id",
+        string="Operating Unit",
+        check_company=True,
     )

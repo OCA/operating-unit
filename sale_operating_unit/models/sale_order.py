@@ -20,6 +20,7 @@ class SaleOrder(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         default=_default_operating_unit,
+        check_company=True,
         readonly=True,
         states={"draft": [("readonly", False)], "sent": [("readonly", False)]},
     )

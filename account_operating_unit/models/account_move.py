@@ -11,6 +11,7 @@ class AccountMoveLine(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
+        check_company=True,
     )
     is_ou_balance = fields.Boolean(readonly=True)
 
@@ -141,6 +142,7 @@ class AccountMove(models.Model):
         default=_default_operating_unit_id,
         help="This operating unit will be defaulted in the move lines.",
         readonly=True,
+        check_company=True,
         states={"draft": [("readonly", False)]},
     )
 

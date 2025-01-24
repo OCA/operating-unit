@@ -12,6 +12,7 @@ class StockPicking(models.Model):
         comodel_name="operating.unit",
         string="Requesting Operating Unit",
         readonly=True,
+        check_company=True,
         states={"draft": [("readonly", False)]},
     )
 

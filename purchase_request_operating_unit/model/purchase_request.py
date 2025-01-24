@@ -18,6 +18,7 @@ class PurchaseRequest(models.Model):
             "approved": [("readonly", True)],
             "done": [("readonly", True)],
         },
+        check_company=True,
         default=lambda self: self.env["res.users"].operating_unit_default_get(
             self._uid
         ),
@@ -83,4 +84,5 @@ class PurchaseRequestLine(models.Model):
         related="request_id.operating_unit_id",
         string="Operating Unit",
         store=True,
+        check_company=True,
     )
