@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-02-12 16:06+0000\n"
+"Last-Translator: Anna Martínez <anna080678@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: purchase_requisition_operating_unit
 #: code:addons/purchase_requisition_operating_unit/model/purchase_requisition.py:0
@@ -21,6 +23,9 @@ msgid ""
 "Configuration error!\n"
 "The Operating Unit in Purchase Requisition and the Warehouse of picking type must belong to the same Operating Unit."
 msgstr ""
+"¡Error de configuración!\n"
+"La unidad operativa en los acuerdos de compra y el almacén del tipo de "
+"operación debería ser la misma."
 
 #. module: purchase_requisition_operating_unit
 #: code:addons/purchase_requisition_operating_unit/model/purchase_requisition.py:0
@@ -29,33 +34,35 @@ msgid ""
 "No Warehouse found with the Operating Unit indicated in the Purchase "
 "Requisition!"
 msgstr ""
+"¡No se encontró un almacén con la unidad operativa indicada en el acuerdo de "
+"compra!"
 
 #. module: purchase_requisition_operating_unit
 #: model:ir.model.fields,field_description:purchase_requisition_operating_unit.field_purchase_requisition__operating_unit_id
 #: model:ir.model.fields,field_description:purchase_requisition_operating_unit.field_purchase_requisition_line__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:purchase_requisition_operating_unit.view_purchase_requisition_filter
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa"
 
 #. module: purchase_requisition_operating_unit
 #: model:ir.model.fields,field_description:purchase_requisition_operating_unit.field_purchase_requisition__picking_type_id
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo de operación"
 
 #. module: purchase_requisition_operating_unit
 #: model:ir.model,name:purchase_requisition_operating_unit.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
+msgstr "Pedido de compra"
 
 #. module: purchase_requisition_operating_unit
 #: model:ir.model,name:purchase_requisition_operating_unit.model_purchase_requisition
 msgid "Purchase Requisition"
-msgstr ""
+msgstr "Acuerdo de compra"
 
 #. module: purchase_requisition_operating_unit
 #: model:ir.model,name:purchase_requisition_operating_unit.model_purchase_requisition_line
 msgid "Purchase Requisition Line"
-msgstr ""
+msgstr "Línea del acuerdo de compra"
 
 #. module: purchase_requisition_operating_unit
 #: code:addons/purchase_requisition_operating_unit/model/purchase_requisition.py:0
@@ -64,3 +71,5 @@ msgid ""
 "The Company in the Purchase Requisition and in the Operating Unit must be "
 "the same."
 msgstr ""
+"La compañía en el acuerdo de compra y en la unidad operativa debe ser la "
+"misma."
