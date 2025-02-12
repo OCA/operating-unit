@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-02-12 16:06+0000\n"
+"Last-Translator: Anna Martínez <anna080678@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
@@ -21,12 +23,16 @@ msgid ""
 "Configuration error. The Purchase Request and the Warehouse of picking type "
 "must belong to the same Operating Unit."
 msgstr ""
+"Error de configuración. La solicitud de compra y el almacén del tipo de "
+"operación deben pertenecer a la misma Unidad Operativa."
 
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
 #, python-format
 msgid "Configuration error. The approver has not the indicated Operating Unit"
 msgstr ""
+"Error de configuración. El autorizador no pertenece a la unidad operativa "
+"indicada"
 
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/wizard/purchase_request_line_make_purchase_order.py:0
@@ -34,6 +40,8 @@ msgstr ""
 msgid ""
 "Could not process !You have to select linesfrom the same operating unit."
 msgstr ""
+"¡No se ha podido procesar!. Tiene que seleccionar líneas de la misma unidad "
+"operativa."
 
 #. module: purchase_request_operating_unit
 #: model:ir.model.fields,field_description:purchase_request_operating_unit.field_purchase_request__operating_unit_id
@@ -42,27 +50,27 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:purchase_request_operating_unit.purchase_request_line_search
 #: model_terms:ir.ui.view,arch_db:purchase_request_operating_unit.view_purchase_request_search
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unidad Operativa"
 
 #. module: purchase_request_operating_unit
 #: model:ir.model,name:purchase_request_operating_unit.model_purchase_request
 msgid "Purchase Request"
-msgstr ""
+msgstr "Solicitud de compra"
 
 #. module: purchase_request_operating_unit
 #: model:ir.model,name:purchase_request_operating_unit.model_purchase_request_line
 msgid "Purchase Request Line"
-msgstr ""
+msgstr "Línea de la solicitud de compra"
 
 #. module: purchase_request_operating_unit
 #: model:ir.model,name:purchase_request_operating_unit.model_purchase_request_line_make_purchase_order
 msgid "Purchase Request Line Make Purchase Order"
-msgstr ""
+msgstr "Línea de solicitud de compra realiza pedido de compra"
 
 #. module: purchase_request_operating_unit
 #: model:ir.model,name:purchase_request_operating_unit.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regla de stock"
 
 #. module: purchase_request_operating_unit
 #: code:addons/purchase_request_operating_unit/model/purchase_request.py:0
@@ -71,3 +79,5 @@ msgid ""
 "The Company in the Purchase Request and in the Operating Unit must bethe "
 "same."
 msgstr ""
+"La compañía en la solicitud de compra y en la unidad operativa tiene que ser "
+"la misma."
