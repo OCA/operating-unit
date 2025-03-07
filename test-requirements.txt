@@ -1,1 +1,2 @@
 odoo-test-helper
+odoo-addon-product_pricelist_operating_unit @ git+https://github.com/OCA/operating-unit.git@refs/pull/748/head#subdirectory=product_pricelist_operating_unit
