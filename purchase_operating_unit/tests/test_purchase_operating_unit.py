@@ -106,3 +106,20 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
         with self.assertRaises(ValidationError):
             with Form(invoice.invoice_line_ids[0]) as line:
                 line.operating_unit_id = self.b2b
+
+    def test_02_purchase_report(self):
+        """Test the purchase report with operating unit."""
+        # Generate the report to trigger the _select and _group_by methods
+        report = self.env["purchase.report"]
+        # Read records with a filter on operating unit to force using the custom methods
+        report_records = report.search([("operating_unit_id", "=", self.ou1.id)])
+
+        # Verify that records exist with the correct operating unit
+        self.assertTrue(report_records, "Purchase report should contain records")
+        # If records exist, verify at least one has the expected operating unit
+        if report_records:
+            self.assertEqual(
+                report_records[0].operating_unit_id,
+                self.ou1,
+                "Purchase report record should have the correct operating unit",
+            )

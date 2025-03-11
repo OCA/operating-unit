@@ -5,3 +5,5 @@
 - Nikul Chaudhary \<<nikul.chaudhary.serpentcs@gmail.com>\>
 - Kitti U. \<<kittiu@ecosoft.co.th>\>
 - Alan Ramos \<<alan.ramos@jarsa.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia

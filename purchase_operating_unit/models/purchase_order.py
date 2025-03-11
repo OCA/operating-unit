@@ -2,7 +2,7 @@
 # - Jordi Ballester Alomar
 # Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -36,7 +36,7 @@ class PurchaseOrder(models.Model):
                 and record.company_id != record.operating_unit_id.company_id
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Configuration error. The Company in the Purchase Order "
                         "and in the Operating Unit must be the same."
                     )
