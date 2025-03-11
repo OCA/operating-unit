@@ -2,7 +2,7 @@
 # - Jordi Ballester Alomar
 # Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
@@ -35,7 +35,7 @@ class AccountMoveLine(models.Model):
                 and line.operating_unit_id != line.purchase_line_id.operating_unit_id
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The operating unit of the purchase order must "
                         "be the same as in the associated invoices."
                     )

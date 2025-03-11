@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import fields, models
+from odoo.tools import SQL
 
 
 class PurchaseReport(models.Model):
@@ -15,10 +16,8 @@ class PurchaseReport(models.Model):
 
     def _select(self):
         select_str = super()._select()
-        select_str += """, po.operating_unit_id"""
-        return select_str
+        return SQL("%s, po.operating_unit_id", select_str)
 
     def _group_by(self):
         group_by_str = super()._group_by()
-        group_by_str += """, po.operating_unit_id"""
-        return group_by_str
+        return SQL("%s, po.operating_unit_id", group_by_str)
