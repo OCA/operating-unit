@@ -1,3 +1,5 @@
 - Kitti U. \<<kittiu@ecosoft.co.th>\>
 - Pablo Cavero Perez \<<pablo.cavero@braintec.com>\>
 - Tran Thanh Trai \<<traitt@trobz.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
