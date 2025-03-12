@@ -136,7 +136,7 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
             [("id", "=", self.sale1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
-            sale.ids, [], "User 2 should not have access to " "OU %s" % self.ou1.name
+            sale.ids, [], f"User 2 should not have access to OU {self.ou1.name}"
         )
         # Confirm Sale1
         self._confirm_sale(self.sale1)
@@ -156,7 +156,7 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
             [("id", "=", self.sale1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
-            sale.ids, [], "User 2 should not have access to " "OU %s" % self.ou1.name
+            sale.ids, [], f"User 2 should not have access to OU {self.ou1.name}"
         )
 
         sale = self.sale_model.with_user(self.user2.id).search(
@@ -164,5 +164,5 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
         )
 
         self.assertEqual(
-            len(sale.ids), 1, "User 1 should have access to " "OU %s" % self.b2c.name
+            len(sale.ids), 1, f"User 1 should have access to OU {self.b2c.name}"
         )
