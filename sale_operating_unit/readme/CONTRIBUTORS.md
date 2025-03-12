@@ -7,3 +7,5 @@
 - Alan Ramos \<<alan.ramos@jarsa.com.mx>\>
 - Jorge Alberto Olvera Cuenca \<<jorge.olvera@jarsa.com>\>
 - Alejandro Padrón \<<alejandro.padron@bt-group.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
