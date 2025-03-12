@@ -3,6 +3,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from odoo.exceptions import ValidationError
 from odoo.models import Command
 
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
@@ -83,7 +84,11 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
             cls.sale_team_model.with_user(uid)
             .with_context(mail_create_nosubscribe=True)
             .create(
-                {"name": operating_unit.name, "operating_unit_id": operating_unit.id}
+                {
+                    "name": operating_unit.name,
+                    "operating_unit_id": operating_unit.id,
+                    "company_id": operating_unit.company_id.id,
+                }
             )
         )
         return team
@@ -166,3 +171,49 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
         self.assertEqual(
             len(sale.ids), 1, f"User 1 should have access to OU {self.b2c.name}"
         )
+
+    def test_check_sales_order_operating_unit(self):
+        """Test that changing the operating unit of a sales team
+        with existing sale orders raises an error."""
+        with self.assertRaises(ValidationError):
+            self.sale_team_ou1.operating_unit_id = self.b2c.id
+
+    def test_compute_operating_unit_id(self):
+        """Test that changing the sales team updates the
+        operating unit in sale order."""
+        sale_order = self.sale_model.create(
+            {
+                "partner_id": self.customer.id,
+                "team_id": self.sale_team_ou1.id,
+            }
+        )
+        self.assertEqual(sale_order.operating_unit_id, self.ou1)
+        sale_order.team_id = self.sale_team_b2c.id
+        self.assertEqual(sale_order.operating_unit_id, self.b2c)
+
+    def test_compute_team_id(self):
+        """Test that sales team resets if its operating unit does not match."""
+        sale_order = self.sale_model.create(
+            {
+                "partner_id": self.customer.id,
+                "operating_unit_id": self.ou1.id,
+                "team_id": self.sale_team_ou1.id,
+            }
+        )
+        self.assertEqual(sale_order.team_id, self.sale_team_ou1)
+        sale_order.operating_unit_id = self.b2c.id
+        self.assertFalse(
+            sale_order.team_id, "Team should reset when operating unit mismatches"
+        )
+
+    def test_check_team_operating_unit_violation(self):
+        """Test that a ValidationError is raised when the team
+        and operating unit do not match."""
+        with self.assertRaises(ValidationError):
+            self.sale_model.create(
+                {
+                    "partner_id": self.customer.id,
+                    "operating_unit_id": self.ou1.id,
+                    "team_id": self.sale_team_b2c.id,
+                }
+            )
