@@ -2,7 +2,7 @@
 # Jordi Ballester Alomar
 # Copyright 2015-19 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
@@ -37,7 +37,7 @@ class SaleOrder(models.Model):
                 and rec.operating_unit_id != rec.warehouse_id.operating_unit_id
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Configuration error!\nThe Operating"
                         "Unit in the Sales Order and in the"
                         " Warehouse must be the same."
