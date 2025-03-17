@@ -2,7 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -106,6 +106,27 @@ class AccountMoveLine(models.Model):
             "company_id": journal.company_id.id,
         }
         return move_vals
+
+    def _prepare_exchange_difference_move_vals(
+        self, amounts_list, company=None, exchange_date=None, **kwargs
+    ):
+        result = super()._prepare_exchange_difference_move_vals(
+            amounts_list, company=company, exchange_date=exchange_date, **kwargs
+        )
+        result["move_values"]["operating_unit_id"] = self.move_id.operating_unit_id[
+            :1
+        ].id
+        for line, sequence in result["to_reconcile"]:
+            for index, command in enumerate(result["move_values"]["line_ids"]):
+                if isinstance(command, tuple) and command[0] == Command.create:
+                    line_data = command[1]
+                    if line_data.get("sequence") == sequence:
+                        line_data["operating_unit_id"] = line.operating_unit_id.id
+                        result["move_values"]["line_ids"][index] = Command.create(
+                            line_data
+                        )
+                        break
+        return result
 
 
 class AccountMove(models.Model):
