@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-05 09:58+0000\n"
+"PO-Revision-Date: 2025-03-18 13:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.2\n"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,help:account_operating_unit.field_res_company__ou_is_self_balanced
@@ -93,7 +93,7 @@ msgstr ""
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_account_move_line__display_type
 msgid "Display Type"
-msgstr ""
+msgstr "Tipo visualizzazione"
 
 #. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__inter_ou_clearing_account_id
@@ -123,7 +123,7 @@ msgstr "Movimento contabile"
 #. module: account_operating_unit
 #: model:ir.model.fields.selection,name:account_operating_unit.selection__account_move_line__display_type__ou_balance
 msgid "OU Balancing"
-msgstr ""
+msgstr "Bilanciamento unità operativa"
 
 #. module: account_operating_unit
 #. odoo-python
