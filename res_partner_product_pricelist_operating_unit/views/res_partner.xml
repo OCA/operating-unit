@@ -39,6 +39,13 @@
                     ]
                 </attribute>
             </field>
+            <field name="property_product_pricelist" position="after">
+                <field
+                    name="operating_unit_ids"
+                    groups="!operating_unit.group_multi_operating_unit"
+                    invisible="1"
+                />
+            </field>
         </field>
     </record>
 
