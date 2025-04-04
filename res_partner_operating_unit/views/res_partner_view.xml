@@ -15,6 +15,11 @@
                     widget="many2many_tags"
                     readonly="user_ids"
                 />
+                <field
+                    name="operating_unit_ids"
+                    groups="!operating_unit.group_multi_operating_unit"
+                    invisible="1"
+                />
             </field>
         </field>
     </record>
@@ -28,6 +33,11 @@
                     name="operating_unit_ids"
                     groups="operating_unit.group_multi_operating_unit"
                     widget="many2many_tags"
+                />
+                <field
+                    name="operating_unit_ids"
+                    groups="!operating_unit.group_multi_operating_unit"
+                    column_invisible="1"
                 />
             </field>
         </field>
