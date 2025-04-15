@@ -17,15 +17,14 @@
                         they will always have all OUs assigned
                     </span>
                     <field
-                        name="operating_unit_ids"
-                        groups="operating_unit.group_multi_operating_unit"
+                        name="readable_operating_unit_ids"
                         widget="many2many_tags"
                         attrs="{'readonly': [('operating_unit_readonly', '=', True)]}"
+                        groups="operating_unit.group_multi_operating_unit"
                     />
-
                     <field
                         name="default_operating_unit_id"
-                        domain="[('id','in',operating_unit_ids)]"
+                        domain="[('id','in',readable_operating_unit_ids)]"
                     />
                 </group>
             </xpath>

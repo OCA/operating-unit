@@ -3,6 +3,7 @@
 # Copyright 2015-TODAY Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
+from odoo.exceptions import AccessError
 
 
 class OperatingUnit(models.Model):
@@ -76,3 +77,14 @@ class OperatingUnit(models.Model):
     def write(self, vals):
         self.clear_caches()
         return super(OperatingUnit, self).write(vals)
+
+    def readable_operating_units(self):
+        to_return = self.browse()
+        for ou in self:
+            try:
+                ou.read()
+            except AccessError:
+                continue
+            else:
+                to_return += ou
+        return to_return

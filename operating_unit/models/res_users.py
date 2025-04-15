@@ -63,6 +63,24 @@ class ResUsers(models.Model):
     )
     operating_unit_readonly = fields.Boolean(compute="_compute_operating_unit_readonly")
 
+    @api.depends("operating_unit_ids")
+    def _compute_readable_operating_unit_ids(self):
+        for user in self:
+            readable_operating_units = (
+                user.operating_unit_ids.readable_operating_units()
+            )
+            user.readable_operating_unit_ids = readable_operating_units
+
+    readable_operating_unit_ids = fields.Many2many(
+        "operating.unit",
+        "operating_unit_users_visible_rel",
+        column1="user_id",
+        column2="operating_unit_id",
+        string="Operating Units",
+        compute="_compute_readable_operating_unit_ids",
+        readonly=False,
+    )
+
     @api.onchange("operating_unit_ids")
     def _onchange_operating_unit_ids(self):
         for record in self:
@@ -84,11 +102,16 @@ class ResUsers(models.Model):
                         ("company_id", "=", False),
                         ("company_id", "in", self.env.context["allowed_company_ids"]),
                     ]
-                else:
-                    dom = []
                 user.operating_unit_ids = self.env["operating.unit"].sudo().search(dom)
             else:
-                user.operating_unit_ids = user.assigned_operating_unit_ids
+                old_readable_operating_units = (
+                    user.operating_unit_ids.readable_operating_units()
+                )
+                user.operating_unit_ids = (
+                    user.assigned_operating_unit_ids
+                    - old_readable_operating_units
+                    + user.readable_operating_unit_ids
+                )
 
     @api.depends("groups_id")
     def _compute_operating_unit_readonly(self):

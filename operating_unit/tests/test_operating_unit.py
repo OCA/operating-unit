@@ -140,7 +140,13 @@ class TestOperatingUnit(common.TransactionCase):
             limit=1,
         )
         partner = self.env["res.partner"].search([], limit=1)
-
+        new_line = self.env["operating.unit"].create(
+            {
+                "partner_id": partner.id,
+                "name": "Test Unit",
+                "code": "007",
+            }
+        )
         with Form(self.env["res.users"], view="base.view_users_form") as user_form:
             user_form.default_operating_unit_id = nou[0]
             user_form.name = "Test Customer"
@@ -148,20 +154,20 @@ class TestOperatingUnit(common.TransactionCase):
 
             # Initially operating_unit_ids is not editable
             with self.assertRaises(AssertionError):
-                user_form.operating_unit_ids._assert_editable()
+                user_form.readable_operating_unit_ids._assert_editable()
 
             # The field is only editable after saving
             user_form.save()
-            with user_form.operating_unit_ids.new() as line:
-                line.partner_id = partner
-                line.name = "Test Unit"
-                line.code = "007"
+            user_form.readable_operating_unit_ids.add(new_line)
 
         self.env["res.users"].browse(user_form.id).groups_id += self.grp_ou_mngr
         user_form = Form(self.env["res.users"], view="base.view_users_form")
         # operating_unit_ids is pre-filled and readonly if the user is OU manager
         with self.assertRaises(AssertionError):
-            user_form.operating_unit_ids._assert_editable()
+            user_form.readable_operating_unit_ids._assert_editable()
+            user_form.readable_operating_unit_ids.add(new_line)
+            user_form.name = "Test Customer"
+            user_form.login = "test2"
 
     def test_03_operating_unit(self):
         """
