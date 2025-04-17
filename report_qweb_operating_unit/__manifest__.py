@@ -9,6 +9,7 @@
     "license": "LGPL-3",
     "author": "ForgeFlow S.L., "
     "Serpent Consulting Services Pvt. Ltd.,"
+    "Onestein,"
     "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "depends": ["operating_unit"],
