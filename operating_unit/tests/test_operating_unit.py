@@ -89,6 +89,20 @@ class TestOperatingUnit(OperatingUnitCommon):
             user_form.name = "Test Customer"
             user_form.login = "test2"
 
+        # operating_unit_ids is pre-filled and readonly if the user is OU manager
+        user = self.env["res.users"].browse(user_form.id)
+        user.groups_id += self.grp_ou_mngr
+        user_form = Form(user, view="base.view_users_form")
+        with self.assertRaises(AssertionError):
+            user_form.operating_unit_ids._assert_editable()
+        # and editable again without it
+        user.groups_id -= self.grp_ou_mngr
+        with Form(user, view="base.view_users_form") as user_form:
+            with user_form.operating_unit_ids.new() as line:
+                line.partner_id = partner
+                line.name = "Test Unit 2"
+                line.code = "008"
+
     def test_find_operating_unit_by_name_or_code(self):
         ou = self._create_operating_unit(self.user1.id, "name", "code")
         expected_result = [(ou.id, "[code] name")]
@@ -116,7 +130,7 @@ class TestOperatingUnit(OperatingUnitCommon):
         ou_company_2 = self._create_operating_unit(
             self.user1.id, "Test Company", "TESTC", self.company_2
         )
-        self.user1.assigned_operating_unit_ids += ou_company_2
+        self.user1.operating_unit_ids += ou_company_2
         self.assertEqual(
             self.res_users_model.with_company(
                 self.company_2

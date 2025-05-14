@@ -23,6 +23,8 @@ class ResUsers(models.Model):
         column2="operating_unit_id",
         string="Operating Units",
         default=lambda self: self._default_operating_unit(),
+        help="Technical field. Refer to `operating_unit_ids` if you need to "
+        "check if an OU is assigned to a user.",
     )
 
     default_operating_unit_id = fields.Many2one(
@@ -31,6 +33,7 @@ class ResUsers(models.Model):
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
     )
+    operating_unit_readonly = fields.Boolean(compute="_compute_operating_unit_readonly")
 
     @api.model
     def _get_default_operating_unit(self, uid2=False):
@@ -42,11 +45,11 @@ class ResUsers(models.Model):
             return user.default_operating_unit_id
         else:
             # find an OU of the main active company
-            for ou in user.assigned_operating_unit_ids:
+            for ou in user.operating_unit_ids:
                 if ou.sudo().company_id in self.env.company:
                     return ou
             # find an OU of any active company
-            for ou in user.assigned_operating_unit_ids:
+            for ou in user.operating_unit_ids:
                 if ou.sudo().company_id in self.env.companies:
                     return ou
         return False
@@ -70,6 +73,13 @@ class ResUsers(models.Model):
             )
             vals["operating_unit_ids"] = [(6, 0, default_user.operating_unit_ids.ids)]
         return vals
+
+    @api.depends("groups_id")
+    def _compute_operating_unit_readonly(self):
+        for user in self:
+            user.operating_unit_readonly = user.has_group(
+                "operating_unit.group_manager_operating_unit"
+            )
 
     @api.depends("groups_id", "assigned_operating_unit_ids")
     def _compute_operating_unit_ids(self):
