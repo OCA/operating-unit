@@ -10,7 +10,20 @@
                     string="Operating Units"
                     groups="operating_unit.group_multi_operating_unit"
                 >
-                    <field name="operating_unit_ids" widget="many2many_tags" />
+                    <field name="operating_unit_readonly" invisible="0" />
+                    <span
+                        class="fa fa-warning"
+                        colspan="2"
+                        invisible="not operating_unit_readonly"
+                    >
+                        If the user is Manager of Operating Units
+                        they will always have all OUs assigned
+                    </span>
+                    <field
+                        name="operating_unit_ids"
+                        widget="many2many_tags"
+                        readonly="operating_unit_readonly"
+                    />
 
                     <field
                         name="default_operating_unit_id"
