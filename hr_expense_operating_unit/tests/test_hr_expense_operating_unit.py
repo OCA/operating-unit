@@ -2,7 +2,7 @@
 # Copyright 2016-19 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import fields
+from odoo import _, fields
 from odoo.exceptions import ValidationError
 from odoo.tests.common import Form, TransactionCase
 
@@ -25,7 +25,9 @@ class TestHrExpenseOperatingUnit(TransactionCase):
 
         self.grp_hr_user = self.env.ref("hr.group_hr_user")
         self.grp_accou_mng = self.env.ref("account.group_account_manager")
-        self.grp_account_invoice = self.env.ref("account.group_account_invoice")
+        self.grp_account_invoice = self.env.ref(
+            "account.group_account_invoice"
+        )
 
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
@@ -122,10 +124,15 @@ class TestHrExpenseOperatingUnit(TransactionCase):
         # User 2 is only assigned to Operating Unit B2C, and cannot
         # Access Expenses of Main Operating Unit.
         record = self.hr_expense_model.with_user(self.user2.id).search(
-            [("id", "=", self.hr_expense1.id), ("operating_unit_id", "=", self.ou1.id)]
+            [
+                ("id", "=", self.hr_expense1.id),
+                ("operating_unit_id", "=", self.ou1.id),
+            ]
         )
         self.assertEqual(
-            record.ids, [], "User 2 should not have access to %s" % self.ou1.name
+            record.ids,
+            [],
+            _("User 2 should not have access to %s") % self.ou1.name,
         )
         # Create the expense sheet
         hr_expense_dict1 = self.hr_expense1.action_submit_expenses()
@@ -135,14 +142,18 @@ class TestHrExpenseOperatingUnit(TransactionCase):
             "employee_id": sheet_context.get("default_employee_id", False),
             "company_id": sheet_context.get("default_company_id", False),
             "state": sheet_context.get("default_state", ""),
-            "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+            "expense_line_ids": sheet_context.get(
+                "default_expense_line_ids", []
+            ),
         }
         self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(sheet_dict)
         self._post_journal_entries(self.hr_expense_sheet1)
         # Expense OU should have same OU of its accounting entries
         self.assertEqual(
             self.hr_expense_sheet1.expense_line_ids.operating_unit_id,
-            self.hr_expense_sheet1.account_move_id.line_ids.mapped("operating_unit_id"),
+            self.hr_expense_sheet1.account_move_id.line_ids.mapped(
+                "operating_unit_id"
+            ),
             "Expense OU should match with accounting entries OU",
         )
         self._register_payment(self.hr_expense_sheet1.account_move_id, 50.0)
@@ -156,9 +167,13 @@ class TestHrExpenseOperatingUnit(TransactionCase):
                 "employee_id": sheet_context.get("default_employee_id", False),
                 "company_id": sheet_context.get("default_company_id", False),
                 "state": sheet_context.get("default_state", ""),
-                "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+                "expense_line_ids": sheet_context.get(
+                    "default_expense_line_ids", []
+                ),
             }
-            self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(sheet_dict)
+            self.hr_expense_sheet1 = self.hr_expense_sheet_model.create(
+                sheet_dict
+            )
             self.hr_expense_sheet1.expense_line_ids.write(
                 {"operating_unit_id": self.b2c.id}
             )
@@ -171,9 +186,13 @@ class TestHrExpenseOperatingUnit(TransactionCase):
                 "employee_id": sheet_context.get("default_employee_id", False),
                 "company_id": sheet_context.get("default_company_id", False),
                 "state": sheet_context.get("default_state", ""),
-                "expense_line_ids": sheet_context.get("default_expense_line_ids", []),
+                "expense_line_ids": sheet_context.get(
+                    "default_expense_line_ids", []
+                ),
             }
-            self.hr_expense_sheet2 = self.hr_expense_sheet_model.create(sheet_dict)
+            self.hr_expense_sheet2 = self.hr_expense_sheet_model.create(
+                sheet_dict
+            )
 
         with self.assertRaises(ValidationError):
             self.hr_expense3 = self.hr_expense_model.create(
