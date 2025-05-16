@@ -9,7 +9,7 @@ from odoo.tests.common import Form, TransactionCase
 
 class TestHrExpenseOperatingUnit(TransactionCase):
     def setUp(self):
-        super(TestHrExpenseOperatingUnit, self).setUp()
+        super().setUp()
 
         self.res_users_model = self.env["res.users"]
         self.hr_expense_model = self.env["hr.expense"]
