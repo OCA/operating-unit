@@ -74,7 +74,7 @@
                 />
             </field>
             <xpath
-                expr="//field[@name='expense_line_ids']/tree/field[@name='name']"
+                expr="//field[@name='expense_line_ids']/list/field[@name='name']"
                 position="after"
             >
                 <field

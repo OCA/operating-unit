@@ -12,7 +12,9 @@ class HrExpenseExpense(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Operating Unit",
-        default=lambda self: self.env["res.users"].operating_unit_default_get(),
+        default=lambda self: self.env[
+            "res.users"
+        ]._get_default_operating_unit(),
     )
 
     def action_submit_expenses(self):
@@ -76,7 +78,9 @@ class HrExpenseExpense(models.Model):
                     "no Operating Unit"
                 )
             )
-        sheet.update({"operating_unit_id": self.mapped("operating_unit_id").id})
+        sheet[0].update(
+            {"operating_unit_id": self.mapped("operating_unit_id").id}
+        )
         return sheet
 
     def _prepare_move_values(self):
@@ -91,7 +95,9 @@ class HrExpenseSheet(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Operating Unit",
-        default=lambda self: self.env["res.users"].operating_unit_default_get(),
+        default=lambda self: self.env[
+            "res.users"
+        ]._get_default_operating_unit(),
     )
 
     @api.onchange("operating_unit_id")
