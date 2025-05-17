@@ -7,7 +7,6 @@ from odoo.tests import Form, common
 
 
 class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
-
     # Test Cases:
     # - Create Purchase Requisition
     #   - Change operating_unit_id will change picking_type_id correctly
@@ -15,7 +14,7 @@ class TestPurchaseRequisitionOperatingUnit(common.TransactionCase):
     # - When create PO, the OU and picking_type_id will be pass correctly
 
     def setUp(self):
-        super(TestPurchaseRequisitionOperatingUnit, self).setUp()
+        super().setUp()
         self.pr_model = self.env["purchase.requisition"]
         self.pr_line_model = self.env["purchase.requisition.line"]
         self.po_model = self.env["purchase.order"]
