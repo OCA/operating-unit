@@ -14,7 +14,7 @@ class PurchaseRequisition(models.Model):
         string="Operating Unit",
         readonly=True,
         states={"draft": [("readonly", False)]},
-        default=lambda self: self.env["res.users"].operating_unit_default_get(
+        default=lambda self: self.env["res.users"]._get_default_operating_unit(
             self.env.uid
         ),
     )
@@ -29,7 +29,9 @@ class PurchaseRequisition(models.Model):
     def _get_picking_in(self):
         res = super()._get_picking_in()
         type_obj = self.env["stock.picking.type"]
-        operating_unit = self.env["res.users"].operating_unit_default_get(self.env.uid)
+        operating_unit = self.env["res.users"]._get_default_operating_unit(
+            self.env.uid
+        )
         types = type_obj.search(
             [
                 ("code", "=", "incoming"),
@@ -82,7 +84,11 @@ class PurchaseRequisition(models.Model):
             types = type_obj.search(
                 [
                     ("code", "=", "incoming"),
-                    ("warehouse_id.operating_unit_id", "=", self.operating_unit_id.id),
+                    (
+                        "warehouse_id.operating_unit_id",
+                        "=",
+                        self.operating_unit_id.id,
+                    ),
                 ]
             )
             if not types:
