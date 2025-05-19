@@ -8,8 +8,8 @@ from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestStockAccountOperatingUnit(TestStockCommon):
-    def setUp(self):
-        super().setUp()
+    def setUpClass(self):
+        super().setUpClass()
         self.res_groups = self.env["res.groups"]
         self.res_users_model = self.env["res.users"]
         self.aml_model = self.env["account.move.line"]
@@ -56,12 +56,16 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         name = "Goods Received Not Invoiced"
         code = "grni"
         acc_type = self.env.ref("account.data_account_type_equity")
-        self.account_grni = self._create_account(acc_type, name, code, self.company)
+        self.account_grni = self._create_account(
+            acc_type, name, code, self.company
+        )
         # Create account for Cost of Goods Sold
         name = "Cost of Goods Sold"
         code = "cogs"
         acc_type = self.env.ref("account.data_account_type_expenses")
-        self.account_cogs_id = self._create_account(acc_type, name, code, self.company)
+        self.account_cogs_id = self._create_account(
+            acc_type, name, code, self.company
+        )
         # Create account for Inventory
         name = "Inventory"
         code = "inventory"
@@ -146,7 +150,9 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         )
         return product
 
-    def _create_picking(self, user, ou_id, picking_type, src_loc_id, dest_loc_id):
+    def _create_picking(
+        self, user, ou_id, picking_type, src_loc_id, dest_loc_id
+    ):
         """Create a Picking."""
         picking = self.picking_model.with_user(user.id).create(
             {
@@ -204,7 +210,8 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             self.assertEqual(
                 balance,
                 expected_balance,
-                "Balance is not %s for all Operating Units." % str(expected_balance),
+                "Balance is not %s for all Operating Units."
+                % str(expected_balance),
             )
 
     def _get_balance(self, domain):
@@ -258,7 +265,9 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         # irrespective of the OU
         expected_balance = -1.0
         self._check_account_balance(
-            self.account_grni.id, operating_unit=None, expected_balance=expected_balance
+            self.account_grni.id,
+            operating_unit=None,
+            expected_balance=expected_balance,
         )
         # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
         expected_balance = -1.0
@@ -312,7 +321,9 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         # irrespective of the OU
         expected_balance = -2.0
         self._check_account_balance(
-            self.account_grni.id, operating_unit=None, expected_balance=expected_balance
+            self.account_grni.id,
+            operating_unit=None,
+            expected_balance=expected_balance,
         )
         # GL account ‘Goods Received Not Invoiced’ has balance -1 on Main OU
         expected_balance = -1.0
