@@ -9,7 +9,7 @@ from odoo.addons.stock.tests.common import TestStockCommon
 
 class TestStockAccountOperatingUnit(TestStockCommon):
     def setUp(self):
-        super(TestStockAccountOperatingUnit, self).setUp()
+        super().setUp()
         self.res_groups = self.env["res.groups"]
         self.res_users_model = self.env["res.users"]
         self.aml_model = self.env["account.move.line"]

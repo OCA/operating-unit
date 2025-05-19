@@ -18,7 +18,7 @@ class StockMove(models.Model):
         credit_account_id,
         description,
     ):
-        res = super(StockMove, self)._generate_valuation_lines_data(
+        res = super()._generate_valuation_lines_data(
             partner_id,
             qty,
             debit_value,
@@ -79,9 +79,8 @@ class StockMove(models.Model):
         a transit location or is outside of the company or the source or
         destination locations belong to different operating units.
         """
-        res = super(StockMove, self)._action_done(cancel_backorder)
+        res = super()._action_done(cancel_backorder)
         for move in self:
-
             if move.product_id.valuation == "real_time":
                 # Inter-operating unit moves do not accept to
                 # from/to non-internal location
