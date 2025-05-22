@@ -38,22 +38,19 @@ class OperatingUnit(models.Model):
     @api.depends("company_id")
     def _compute_report_header(self):
         for operating_unit in self:
-            if operating_unit.company_id:
-                operating_unit.report_header = operating_unit.company_id.report_header
+            operating_unit.report_header = operating_unit.company_id.report_header
 
     @api.depends("company_id")
     def _compute_report_footer(self):
         for operating_unit in self:
-            if operating_unit.company_id:
-                operating_unit.report_footer = operating_unit.company_id.report_footer
+            operating_unit.report_footer = operating_unit.company_id.report_footer
 
     @api.depends("company_id")
     def _compute_operating_unit_details(self):
         for operating_unit in self:
-            if operating_unit.company_id:
-                operating_unit.operating_unit_details = (
-                    operating_unit.company_id.company_details
-                )
+            operating_unit.operating_unit_details = (
+                operating_unit.company_id.company_details
+            )
 
     @api.depends("operating_unit_details")
     def _compute_empty_operating_unit_details(self):

@@ -1,5 +1,7 @@
 from unittest.mock import MagicMock
 
+from odoo.tools import is_html_empty
+
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
 
@@ -15,10 +17,11 @@ class TestReportQwebOperatingUnit(OperatingUnitCommon):
 
     def test_rendering(self):
         for layout in ("standard", "striped", "bold", "boxed"):
-            xmlid = "web.external_layout_%s" % layout
+            xmlid = f"web.external_layout_{layout}"
             render_context = dict(
                 company=self.env.company,
                 o=self.env.user,
+                is_html_empty=is_html_empty,
             )
             html = (
                 self.env["ir.actions.report"]
