@@ -9,7 +9,7 @@ class StockRule(models.Model):
 
     @api.model
     def _prepare_purchase_request(self, origin, values):
-        res = super(StockRule, self)._prepare_purchase_request(origin, values)
+        res = super()._prepare_purchase_request(origin, values)
         if self.warehouse_id.operating_unit_id:
             res.update({"operating_unit_id": self.warehouse_id.operating_unit_id.id})
         return res
