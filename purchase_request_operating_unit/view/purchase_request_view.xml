@@ -89,7 +89,7 @@
         <field name="model">purchase.request.line</field>
         <field name="inherit_id" ref="purchase_request.purchase_request_line_search" />
         <field name="arch" type="xml">
-            <field name="analytic_account_id" position="after">
+            <field name="analytic_distribution" position="after">
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"

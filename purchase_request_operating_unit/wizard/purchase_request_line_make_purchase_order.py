@@ -3,7 +3,7 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -37,7 +37,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             )
             if operating_unit_id and line_operating_unit_id != operating_unit_id:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Could not process !"
                         "You have to select lines"
                         "from the same operating unit."

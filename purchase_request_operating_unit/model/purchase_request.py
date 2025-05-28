@@ -3,7 +3,7 @@
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -18,7 +18,7 @@ class PurchaseRequest(models.Model):
             "approved": [("readonly", True)],
             "done": [("readonly", True)],
         },
-        default=lambda self: self.env["res.users"].operating_unit_default_get(
+        default=lambda self: self.env["res.users"]._get_default_operating_unit(
             self._uid
         ),
     )
@@ -32,7 +32,7 @@ class PurchaseRequest(models.Model):
                 and rec.company_id != rec.operating_unit_id.company_id
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The Company in the Purchase Request "
                         "and in the Operating Unit must be"
                         "the same."
@@ -52,7 +52,7 @@ class PurchaseRequest(models.Model):
                     != rec.operating_unit_id
                 ):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "Configuration error. The Purchase Request and the "
                             "Warehouse of picking type must belong to the same "
                             "Operating Unit."
@@ -68,7 +68,7 @@ class PurchaseRequest(models.Model):
                 and rec.operating_unit_id not in rec.assigned_to.operating_unit_ids
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Configuration error. The approver has not "
                         "the indicated Operating Unit"
                     )
