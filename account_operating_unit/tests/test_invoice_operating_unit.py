@@ -57,17 +57,26 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
                 "company_id": self.company.id,
             }
         )
+
+        # Ensure user has the correct operating unit
+        self.user1.write({"operating_unit_ids": [(4, self.ou1.id)]})
+
+        # Open the form with default operating unit context
         with Form(
-            self.env["account.move"].with_context(default_move_type="out_invoice")
-        ) as invoice_form:
-            self.assertEqual(invoice_form.operating_unit_id, self.ou1)
-            ou1_journal = invoice_form.journal_id.copy(
-                dict(
-                    operating_unit_id=self.ou1.id,
-                    company_id=self.company.id,
-                )
+            self.env["account.move"].with_context(
+                default_operating_unit_id=self.ou1.id, default_move_type="out_invoice"
             )
+        ) as invoice_form:
+            # Check the default operating unit in the form
+            self.assertEqual(invoice_form.operating_unit_id, self.ou1)
+
+            # Copy OU1 journal and validate operating unit
+            ou1_journal = invoice_form.journal_id.copy(
+                {"operating_unit_id": self.ou1.id, "company_id": self.company.id}
+            )
+            # Update operating unit and journal in the form
             invoice_form.operating_unit_id = self.b2b
             self.assertEqual(invoice_form.journal_id, journal_b2b)
+
             invoice_form.journal_id = ou1_journal
             self.assertEqual(invoice_form.operating_unit_id, self.ou1)

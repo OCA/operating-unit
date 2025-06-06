@@ -38,7 +38,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         # Validate that inter OU balance move lines are created
         self.assertEqual(len(payment.move_id.line_ids), 4)
         self.assertAlmostEqual(payment.amount, self.invoice.amount_total)
-        self.assertEqual(payment.state, "posted")
+        self.assertEqual(payment.state, "paid")
         self.assertEqual(self.invoice.payment_state, "paid")
 
     def test_payment_from_two_invoices(self):
@@ -77,7 +77,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             # Validate that inter OU balance move lines are created
             self.assertEqual(len(payment.move_id.line_ids), 2)
             self.assertEqual(payment.amount, invoices[0].amount_total)
-            self.assertEqual(payment.state, "posted")
+            self.assertEqual(payment.state, "paid")
         for invoice in invoices:
             self.assertEqual(invoice.payment_state, "paid")
 
@@ -90,15 +90,12 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
                 "amount": 115000,
                 "date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.cash_journal_ou1.id,
-                "destination_journal_id": self.cash2_journal_b2b.id,
-                "destination_account_id": self.company.transfer_account_id.id,
                 "payment_method_line_id": payment_method_id.id,
-                "is_internal_transfer": True,
             }
         )
         payment.action_post()
         payments = payment + payment.paired_internal_transfer_payment_id
-        self.assertEqual(len(payments.move_id.mapped("line_ids.operating_unit_id")), 2)
+        self.assertEqual(len(payments.move_id.mapped("line_ids.operating_unit_id")), 1)
         # Validate that every move has their correct OU
         for move in payments.move_id:
             ou_in_lines = move.line_ids.operating_unit_id

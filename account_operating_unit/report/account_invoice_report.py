@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo import fields, models
+from odoo.tools import SQL
 
 
 class AccountInvoiceReport(models.Model):
@@ -14,8 +15,4 @@ class AccountInvoiceReport(models.Model):
     )
 
     def _select(self):
-        select_str = super()._select()
-        select_str += """
-            ,line.operating_unit_id
-        """
-        return select_str
+        return SQL("%s, line.operating_unit_id", super()._select())
