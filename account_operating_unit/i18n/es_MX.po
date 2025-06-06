@@ -91,11 +91,6 @@ msgstr ""
 "unidades operativas en la configuración de la empresa."
 
 #. module: account_operating_unit
-#: model:ir.model.fields,field_description:account_operating_unit.field_account_move_line__display_type
-msgid "Display Type"
-msgstr ""
-
-#. module: account_operating_unit
 #: model:ir.model.fields,field_description:account_operating_unit.field_res_company__inter_ou_clearing_account_id
 msgid "Inter-operating unit clearing account"
 msgstr "Cuenta de compensación de unidades interoperativas"
@@ -119,11 +114,6 @@ msgstr "Asiento de diario"
 #: model:ir.model,name:account_operating_unit.model_account_move_line
 msgid "Journal Item"
 msgstr "Apunte de diario"
-
-#. module: account_operating_unit
-#: model:ir.model.fields.selection,name:account_operating_unit.selection__account_move_line__display_type__ou_balance
-msgid "OU Balancing"
-msgstr ""
 
 #. module: account_operating_unit
 #. odoo-python

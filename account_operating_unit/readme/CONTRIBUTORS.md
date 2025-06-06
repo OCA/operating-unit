@@ -9,3 +9,5 @@
 - Saran Lim. \<<saranl@ecosoft.co.th>\>
 - Pimolnat Suntian \<<pimolnats@ecosoft.co.th>\>
 - Hieu, Vo Minh Bao \<<hieu.vmb@komit-consulting.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia

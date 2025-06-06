@@ -2,7 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import Command, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -10,15 +10,8 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     operating_unit_id = fields.Many2one(
-        comodel_name="operating.unit",
         check_company=True,
-    )
-
-    display_type = fields.Selection(
-        selection_add=[("ou_balance", "OU Balancing")],
-        ondelete={
-            "ou_balance": lambda records: records.write({"display_type": "product"})
-        },
+        comodel_name="operating.unit",
     )
 
     @api.model_create_multi
@@ -104,30 +97,8 @@ class AccountMoveLine(models.Model):
             "date": max(self.mapped("date")),
             "ref": "Inter OU Balancing",
             "company_id": journal.company_id.id,
-            "move_type": "entry",
         }
         return move_vals
-
-    def _prepare_exchange_difference_move_vals(
-        self, amounts_list, company=None, exchange_date=None, **kwargs
-    ):
-        result = super()._prepare_exchange_difference_move_vals(
-            amounts_list, company=company, exchange_date=exchange_date, **kwargs
-        )
-        result["move_values"]["operating_unit_id"] = self.move_id.operating_unit_id[
-            :1
-        ].id
-        for line, sequence in result["to_reconcile"]:
-            for index, command in enumerate(result["move_values"]["line_ids"]):
-                if isinstance(command, tuple) and command[0] == Command.create:
-                    line_data = command[1]
-                    if line_data.get("sequence") == sequence:
-                        line_data["operating_unit_id"] = line.operating_unit_id.id
-                        result["move_values"]["line_ids"][index] = Command.create(
-                            line_data
-                        )
-                        break
-        return result
 
 
 class AccountMove(models.Model):
@@ -197,18 +168,12 @@ class AccountMove(models.Model):
             "operating_unit_id": ou_id,
             "partner_id": move.partner_id and move.partner_id.id or False,
             "account_id": move.company_id.inter_ou_clearing_account_id.id,
-            "display_type": "ou_balance",
         }
-        # total_balance_to_match is the minimim of the abs of the values
-        total_balance_to_match = min(
-            abs(ou_balances[ou])
-            for ou in list(ou_balances.keys())
-            if ou_balances[ou] != 0.0
-        )
+
         if ou_balances[ou_id] < 0.0:
-            res["debit"] = total_balance_to_match
+            res["debit"] = abs(ou_balances[ou_id])
         else:
-            res["credit"] = total_balance_to_match
+            res["credit"] = ou_balances[ou_id]
         return res
 
     def _check_ou_balance(self, move):
@@ -284,11 +249,3 @@ class AccountMove(models.Model):
                     _("The OU in the Move and in Journal must be the same.")
                 )
         return True
-
-    def button_draft(self):
-        res = super().button_draft()
-        for rec in self:
-            rec.line_ids.filtered(
-                lambda line: line.display_type == "ou_balance"
-            ).unlink()
-        return res
