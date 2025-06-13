@@ -14,6 +14,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['to_approve', 'approved', 'done']"
                 />
             </field>
         </field>
@@ -28,6 +29,7 @@
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
                     domain="[('company_id','=', company_id)]"
+                    readonly="state in ['to_approve', 'approved', 'done']"
                 />
             </field>
             <field name="line_ids" position="attributes">
@@ -54,6 +56,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['to_approve', 'approved', 'done']"
                 />
             </field>
         </field>
@@ -67,6 +70,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['to_approve', 'approved', 'done']"
                 />
             </field>
         </field>
@@ -80,6 +84,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['to_approve', 'approved', 'done']"
                 />
             </field>
         </field>
@@ -93,6 +98,7 @@
                 <field
                     name="operating_unit_id"
                     groups="operating_unit.group_multi_operating_unit"
+                    readonly="state in ['to_approve', 'approved', 'done']"
                 />
             </field>
             <group position="inside">

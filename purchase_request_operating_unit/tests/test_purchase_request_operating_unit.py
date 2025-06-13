@@ -88,9 +88,8 @@ class TestPurchaseRequestOperatingUnit(TransactionCase):
             [("id", "=", self.request1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
         self.assertEqual(
-            record.ids, [], "User 2 should not have access to OU %s" % self.ou1.name
+            record.ids, [], f"User 2 should not have access to OU {self.ou1.name}"
         )
-
         # Check company in OU and operating unit must be equal
         with self.assertRaises(ValidationError):
             with Form(self.request1) as pr:

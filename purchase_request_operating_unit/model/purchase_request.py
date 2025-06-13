@@ -13,11 +13,6 @@ class PurchaseRequest(models.Model):
     operating_unit_id = fields.Many2one(
         "operating.unit",
         string="Operating Unit",
-        states={
-            "to_approve": [("readonly", True)],
-            "approved": [("readonly", True)],
-            "done": [("readonly", True)],
-        },
         default=lambda self: self.env["res.users"]._get_default_operating_unit(
             self._uid
         ),
