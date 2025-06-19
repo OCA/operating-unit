@@ -59,6 +59,7 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
+            <!-- Form view header -->
             <xpath expr="//group[@id='header_right_group']" position="inside">
                 <field
                     name="operating_unit_id"
@@ -73,6 +74,7 @@
                     readonly="state != 'draft'"
                 />
             </xpath>
+            <!-- Move lines (invoices) -->
             <field name="invoice_line_ids" position="attributes">
                 <attribute name="context" operation="update">
                     {
@@ -81,6 +83,23 @@
                     }
                 </attribute>
             </field>
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree//field[@name='account_id']"
+                position="after"
+            >
+                <field
+                    name="operating_unit_id"
+                    options="{'no_create': True}"
+                    optional="show"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+                <field
+                    name="operating_unit_id"
+                    column_invisible="True"
+                    groups="!operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+            <!-- Move lines (all) -->
             <field name="line_ids" position="attributes">
                 <attribute name="context" operation="update">
                     {
@@ -98,32 +117,10 @@
                     optional="show"
                     groups="operating_unit.group_multi_operating_unit"
                 />
-            </xpath>
-            <xpath
-                expr="//field[@name='invoice_line_ids']/tree//field[@name='account_id']"
-                position="after"
-            >
-                <field
-                    name="operating_unit_id"
-                    options="{'no_create': True}"
-                    optional="show"
-                    groups="operating_unit.group_multi_operating_unit"
-                />
                 <field
                     name="operating_unit_id"
                     column_invisible="True"
                     groups="!operating_unit.group_multi_operating_unit"
-                />
-            </xpath>
-            <xpath
-                expr="//field[@name='line_ids']/tree//field[@name='account_id']"
-                position="after"
-            >
-                <field
-                    name="operating_unit_id"
-                    options="{'no_create': True}"
-                    optional="show"
-                    groups="operating_unit.group_multi_operating_unit"
                 />
             </xpath>
         </field>
