@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [mrp_operating_unit](mrp_operating_unit/) | 18.0.1.0.0 |  | Operating Unit in MRP
 [operating_unit](operating_unit/) | 18.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 18.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all Operating Units
+[purchase_operating_unit](purchase_operating_unit/) | 18.0.1.0.0 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [sales_team_operating_unit](sales_team_operating_unit/) | 18.0.1.0.0 |  | Sales Team Operating Unit
 [stock_operating_unit](stock_operating_unit/) | 18.0.1.0.0 |  | Adds the concept of operating unit (OU) in stock management
 [stock_operating_unit_access_all](stock_operating_unit_access_all/) | 18.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' Stock
