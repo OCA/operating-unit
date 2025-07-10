@@ -32,7 +32,7 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
         partner = self.res_partner_model.create(
             {
                 "name": name,
-                "operating_unit_id": operating_unit.id,
+                "operating_unit_ids": [(4, operating_unit.id)],
             }
         )
         return partner
@@ -51,3 +51,62 @@ class TestResPartnerOperatingUnit(common.TransactionCase):
             }
         )
         return user
+
+    def test_create_user_adds_ou_to_partner(self):
+        new_user = self._create_user("new_user_ou", self.company, [self.ou1])
+        self.assertIn(self.ou1, new_user.partner_id.operating_unit_ids)
+
+    def test_write_user_adds_new_ou_to_partner(self):
+        new_user = self._create_user("edit_user_ou", self.company, [self.ou1])
+        self.assertIn(self.ou1, new_user.partner_id.operating_unit_ids)
+
+        new_user.write(
+            {
+                "default_operating_unit_id": self.b2c.id,
+                "operating_unit_ids": [(4, self.b2c.id)],
+            }
+        )
+
+        self.assertIn(self.b2c, new_user.partner_id.operating_unit_ids)
+
+    def test_search_partner_with_operating_unit(self):
+        partners = self.res_partner_model.with_user(self.user1).search(
+            [("name", "!=", "")]
+        )
+        self.assertIn(self.partner1, partners)
+        self.assertNotIn(self.partner2, partners)
+
+    def test_search_count_partner_with_operating_unit(self):
+        count = self.res_partner_model.with_user(self.user2).search_count(
+            [("name", "!=", "")]
+        )
+        self.assertGreaterEqual(count, 1)
+
+    def test_create_user_with_default_operating_unit(self):
+        new_user = self.res_users_model.create(
+            {
+                "name": "Create With Default OU",
+                "login": "user_with_default_ou",
+                "password": "demo",
+                "email": "user@default.com",
+                "company_id": self.company.id,
+                "company_ids": [(4, self.company.id)],
+                "operating_unit_ids": [(4, self.ou1.id)],
+                "default_operating_unit_id": self.ou1.id,
+            }
+        )
+
+        self.assertIn(self.ou1, new_user.partner_id.operating_unit_ids)
+
+    def test_write_user_sets_default_operating_unit(self):
+        user = self._create_user("write_user_default_ou", self.company, [self.ou1])
+        self.assertIn(self.ou1, user.partner_id.operating_unit_ids)
+
+        user.write(
+            {
+                "default_operating_unit_id": self.b2c.id,
+                "operating_unit_ids": [(4, self.ou1.id), (4, self.b2c.id)],
+            }
+        )
+
+        self.assertIn(self.b2c, user.partner_id.operating_unit_ids)

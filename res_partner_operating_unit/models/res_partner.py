@@ -34,7 +34,7 @@ class ResPartner(models.Model):
     # Extending methods to replace a record rule.
     # Ref: https://github.com/OCA/operating-unit/issues/258
     @api.model
-    def search(self, args, offset=0, limit=None, order=None, count=False):
+    def search(self, args, offset=0, limit=None, order=None):
         # Get the OUs of the user
         ou_ids = self.env.user.operating_unit_ids.ids
         domain = [
@@ -42,12 +42,10 @@ class ResPartner(models.Model):
             ("operating_unit_ids", "in", ou_ids),
             ("operating_unit_ids", "=", False),
         ]
-        return super().search(
-            domain + args, offset=offset, limit=limit, order=order, count=count
-        )
+        return super().search(domain + args, offset=offset, limit=limit, order=order)
 
     @api.model
-    def search_count(self, args):
+    def search_count(self, args, limit=None):
         # Get the OUs of the user
         ou_ids = self.env.user.operating_unit_ids.ids
         domain = [
@@ -55,4 +53,4 @@ class ResPartner(models.Model):
             ("operating_unit_ids", "in", ou_ids),
             ("operating_unit_ids", "=", False),
         ]
-        return super().search_count(domain + args)
+        return super().search_count(domain + args, limit=limit)
