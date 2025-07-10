@@ -73,6 +73,9 @@ Contributors
 - Edi Santoso <repodevs@gmail.com>
 - Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
 - Hiren Dangar <hiren.dangar.serpentcs@gmail.com>
+- `Komit <https://komit-consulting.com>`__:
+
+  - Cai Hoang Huynh
 
 Other credits
 -------------
