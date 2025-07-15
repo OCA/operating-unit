@@ -2,3 +2,5 @@
 - Nikul Chaudhary \<<nikul.chaudhary.serpentcs@gmail.com>\>
 - Maxime Chambreuil \<<mchambreuil@opensourceintegrators.com>\>
 - Jesus Alcala \<<jesus.alcala@jarsa.com.mx>\>
+- [Komit](https://komit-consulting.com):
+  - Cai Hoang Huynh
