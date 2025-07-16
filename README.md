@@ -29,7 +29,7 @@ addon | version | maintainers | summary
 [analytic_operating_unit](analytic_operating_unit/) | 15.0.1.0.1 |  | Analytic Operating Unit
 [analytic_operating_unit_access_all](analytic_operating_unit_access_all/) | 15.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' Analytics
 [contract_operating_unit](contract_operating_unit/) | 15.0.1.0.0 |  | Contract Operating Unit
-[crm_operating_unit](crm_operating_unit/) | 15.0.1.0.0 |  | Operating Unit in CRM
+[crm_operating_unit](crm_operating_unit/) | 15.0.1.1.0 |  | Operating Unit in CRM
 [hr_contract_operating_unit](hr_contract_operating_unit/) | 15.0.1.0.1 |  | HR Contract Operating Unit
 [hr_expense_operating_unit](hr_expense_operating_unit/) | 15.0.1.0.0 |  | HR Expense Operating Unit
 [hr_expense_operating_unit_access_all](hr_expense_operating_unit_access_all/) | 15.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' Expenses
