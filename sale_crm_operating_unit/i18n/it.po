@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-27 14:26+0000\n"
+"PO-Revision-Date: 2025-07-23 17:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -32,17 +32,17 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:sale_crm_operating_unit.field_crm_lead____last_update
 #: model:ir.model.fields,field_description:sale_crm_operating_unit.field_sale_order____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: sale_crm_operating_unit
 #: model:ir.model,name:sale_crm_operating_unit.model_crm_lead
 msgid "Lead/Opportunity"
-msgstr ""
+msgstr "Contatto/Opportunità"
 
 #. module: sale_crm_operating_unit
 #: model:ir.model,name:sale_crm_operating_unit.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: sale_crm_operating_unit
 #: code:addons/sale_crm_operating_unit/models/sale.py:0
@@ -51,3 +51,5 @@ msgid ""
 "The Operating Unit of Sales Order does\n"
 "                not match to that of the Opportunity."
 msgstr ""
+"L'unità operativa dell'ordine di vendita non\n"
+"                corrisponde con quello dell'opportunità."
