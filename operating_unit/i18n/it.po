@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-09 09:58+0000\n"
+"PO-Revision-Date: 2025-07-23 17:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: operating_unit
 #: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
@@ -25,6 +25,11 @@ msgid ""
 "                        they will always have all OUs assigned\n"
 "                    </span>"
 msgstr ""
+"<span class=\"fa fa-warning\" colspan=\"2\" attrs="
+"\"{'invisible': [('operating_unit_readonly', '=', False)]}\">\n"
+"                Se l'utente è responsabile delle unità operative\n"
+"                avrà sempre tutte le UO assegnate\n"
+"                </span>"
 
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_operating_unit__active
@@ -120,7 +125,7 @@ msgstr "Unità operativa"
 #. module: operating_unit
 #: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_readonly
 msgid "Operating Unit Readonly"
-msgstr ""
+msgstr "Unità operativa solo lettura"
 
 #. module: operating_unit
 #: model:ir.actions.act_window,name:operating_unit.action_operating_unit_tree
@@ -151,6 +156,8 @@ msgid ""
 "Technical field. Refer to `operating_unit_ids` if you need to check if an OU "
 "is assigned to a user."
 msgstr ""
+"Campo tecnico. Fare riferimento a `operating_unit_ids` se si deve "
+"controllare se una UO è assegnata ad un utente."
 
 #. module: operating_unit
 #: model:ir.model.constraint,message:operating_unit.constraint_operating_unit_code_company_uniq
