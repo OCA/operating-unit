@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [mis_builder_operating_unit](mis_builder_operating_unit/) | 14.0.1.1.0 |  | MIS Builder with Operating Unit
 [mis_builder_operating_unit_access_all](mis_builder_operating_unit_access_all/) | 14.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' MIS Builder
 [mrp_operating_unit](mrp_operating_unit/) | 14.0.1.1.0 |  | Operating Unit in MRP
-[operating_unit](operating_unit/) | 14.0.1.2.0 |  | An operating unit (OU) is an organizational entity part of a company
+[operating_unit](operating_unit/) | 14.0.1.2.1 |  | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 14.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all Operating Units
 [pos_operating_unit](pos_operating_unit/) | 14.0.1.0.0 |  | POS Operating Unit Access
 [product_operating_unit](product_operating_unit/) | 14.0.1.0.3 |  | Adds the concept of operating unit (OU) in products
