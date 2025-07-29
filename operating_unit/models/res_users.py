@@ -72,21 +72,23 @@ class ResUsers(models.Model):
         return vals
 
     @api.depends("groups_id", "assigned_operating_unit_ids")
+    @api.depends_context("allowed_company_ids")
     def _compute_operating_unit_ids(self):
+        if self.env.context.get("allowed_company_ids"):
+            dom = [
+                "|",
+                ("company_id", "=", False),
+                ("company_id", "in", self.env.context["allowed_company_ids"]),
+            ]
+        else:
+            dom = []
         for user in self:
-            if user._origin.has_group("operating_unit.group_manager_operating_unit"):
-                if self.env.context.get("allowed_company_ids"):
-                    dom = [
-                        "|",
-                        ("company_id", "=", False),
-                        ("company_id", "in", self.env.context["allowed_company_ids"]),
-                    ]
-                else:
-                    dom = []
-
-                user.operating_unit_ids = self.env["operating.unit"].sudo().search(dom)
+            if user.has_group("operating_unit.group_manager_operating_unit"):
+                user.operating_unit_ids = self.env["operating.unit"].search(dom)
             else:
-                user.operating_unit_ids = user.assigned_operating_unit_ids
+                user.operating_unit_ids = (
+                    user.assigned_operating_unit_ids.filtered_domain(dom)
+                )
 
     def _inverse_operating_unit_ids(self):
         for user in self:
