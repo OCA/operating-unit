@@ -43,6 +43,7 @@ addon | version | maintainers | summary
 [operating_unit](operating_unit/) | 15.0.1.1.1 |  | An operating unit (OU) is an organizational entity part of a company
 [operating_unit_access_all](operating_unit_access_all/) | 15.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all Operating Units
 [project_operating_unit](project_operating_unit/) | 15.0.1.0.0 | <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> | This module adds operating unit information to projects and tasks.
+[purchase_deposit_operating_unit](purchase_deposit_operating_unit/) | 15.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Adds the concecpt of operating unit (OU) when create purchase deposit
 [purchase_operating_unit](purchase_operating_unit/) | 15.0.1.2.0 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [purchase_operating_unit_access_all](purchase_operating_unit_access_all/) | 15.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' Purchase Orders
 [purchase_request_operating_unit](purchase_request_operating_unit/) | 15.0.1.1.0 |  | Operating Unit in Purchase Requests
