@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo-addon-contract_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-hr_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-operating_unit>=16.0dev,<16.1dev',
+        'odoo-addon-operating_unit_access_all>=16.0dev,<16.1dev',
         'odoo-addon-product_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-project_operating_unit>=16.0dev,<16.1dev',
         'odoo-addon-report_qweb_operating_unit>=16.0dev,<16.1dev',
