@@ -8,6 +8,7 @@ from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestStockAccountOperatingUnit(TestStockCommon):
+    @classmethod
     def setUpClass(self):
         super().setUpClass()
         self.res_groups = self.env["res.groups"]
@@ -56,16 +57,12 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         name = "Goods Received Not Invoiced"
         code = "grni"
         acc_type = self.env.ref("account.data_account_type_equity")
-        self.account_grni = self._create_account(
-            acc_type, name, code, self.company
-        )
+        self.account_grni = self._create_account(acc_type, name, code, self.company)
         # Create account for Cost of Goods Sold
         name = "Cost of Goods Sold"
         code = "cogs"
         acc_type = self.env.ref("account.data_account_type_expenses")
-        self.account_cogs_id = self._create_account(
-            acc_type, name, code, self.company
-        )
+        self.account_cogs_id = self._create_account(acc_type, name, code, self.company)
         # Create account for Inventory
         name = "Inventory"
         code = "inventory"
@@ -150,9 +147,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         )
         return product
 
-    def _create_picking(
-        self, user, ou_id, picking_type, src_loc_id, dest_loc_id
-    ):
+    def _create_picking(self, user, ou_id, picking_type, src_loc_id, dest_loc_id):
         """Create a Picking."""
         picking = self.picking_model.with_user(user.id).create(
             {
