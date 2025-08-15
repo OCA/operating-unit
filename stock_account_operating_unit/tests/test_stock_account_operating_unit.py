@@ -8,6 +8,7 @@ from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestStockAccountOperatingUnit(TestStockCommon):
+    @classmethod
     def setUpClass(self):
         super().setUpClass()
         self.res_groups = self.env["res.groups"]
