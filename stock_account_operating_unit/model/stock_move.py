@@ -50,7 +50,13 @@ class StockMove(models.Model):
                 )
 
             if not self.operating_unit_dest_id and not self.operating_unit_id:
-                ou_id = self.picking_id.picking_type_id.warehouse_id.operating_unit_id.id
+                ou_id = (
+                    self.picking_id
+                    .picking_type_id
+                    .warehouse_id
+                    .operating_unit_id
+                    .id
+                )
             else:
                 ou_id = False
 
@@ -109,6 +115,7 @@ class StockMove(models.Model):
                         move.product_id.standard_price,
                         acc_valuation,
                         acc_valuation,
+                        False,
                         self.env._("%s - OU Move")
                         % move.product_id.display_name,
                     )

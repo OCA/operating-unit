@@ -203,15 +203,13 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             self.assertEqual(
                 balance,
                 expected_balance,
-                "Balance is not %s for Operating Unit %s."
-                % (str(expected_balance), operating_unit.name),
+                f"Balance is not {expected_balance} for Operating Unit {operating_unit.name}.",
             )
         else:
             self.assertEqual(
                 balance,
                 expected_balance,
-                "Balance is not %s for all Operating Units."
-                % str(expected_balance),
+                f"Balance is not {expected_balance} for all Operating Units.",
             )
 
     def _get_balance(self, domain):
