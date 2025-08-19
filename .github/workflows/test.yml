@@ -36,8 +36,17 @@ jobs:
       matrix:
         include:
           - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            include: "res_partner_operating_unit"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            include: "res_partner_operating_unit"
+            name: test with OCB
+            makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            exclude: "res_partner_operating_unit"
+            name: test with Odoo
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            exclude: "res_partner_operating_unit"
             name: test with OCB
             makepot: "true"
     services:
@@ -49,6 +58,10 @@ jobs:
           POSTGRES_DB: odoo
         ports:
           - 5432:5432
+    env:
+      INCLUDE: "${{ matrix.include }}"
+      EXCLUDE: "${{ matrix.exclude }}"
+      OCA_ENABLE_CHECKLOG_ODOO: "1"
     steps:
       - uses: actions/checkout@v4
         with:
