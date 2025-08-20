@@ -60,6 +60,7 @@ class ResUsers(models.Model):
         string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
+        company_dependent=True,
     )
     operating_unit_readonly = fields.Boolean(compute="_compute_operating_unit_readonly")
 
