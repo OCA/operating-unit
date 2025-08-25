@@ -16,6 +16,7 @@ class AccountAssetLine(models.Model):
     def create_move(self):
         created_move_ids = super().create_move()
         moves = self.env["account.move"].browse(created_move_ids)
+        moves = moves.with_context(skip_onchange_invoice_line=True)
         for move in moves:
             move._onchange_invoice_line_ids()
         return created_move_ids
