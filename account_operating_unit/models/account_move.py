@@ -148,6 +148,8 @@ class AccountMove(models.Model):
     @api.onchange("invoice_line_ids")
     def _onchange_invoice_line_ids(self):
         res = super()._onchange_invoice_line_ids()
+        if self.env.context.get("skip_onchange_invoice_line", False):
+            return res
         if self.operating_unit_id:
             for line in self.line_ids:
                 line.operating_unit_id = self.operating_unit_id
