@@ -9,10 +9,14 @@ from odoo.exceptions import ValidationError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    user_id = fields.Many2one(
+        default=lambda self: self.env.user,
+    )
+
     @api.model
     def _default_warehouse_id(self):
-        res = super(SaleOrder, self)._default_warehouse_id()
-        team = self._get_default_team()
+        warehouse_id = self.env.user._get_default_warehouse_id()
+        team = self.env["crm.team"]._get_default_team_id()
         warehouses = self.env["stock.warehouse"].search(
             [
                 (
@@ -25,15 +29,15 @@ class SaleOrder(models.Model):
         )
         if warehouses:
             return warehouses
-        return res
+        return warehouse_id
 
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse", default=_default_warehouse_id
     )
 
-    @api.onchange("team_id")
-    def onchange_team_id(self):
-        res = super(SaleOrder, self).onchange_team_id()
+    @api.depends("team_id")
+    def _compute_team_id(self):
+        res = super()._compute_team_id()
         if (
             self.team_id
             and self.team_id.operating_unit_id
