@@ -1,6 +1,6 @@
 {
     "name": "POS with Operating Units",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "Ilyas, Ooops404, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Point of sale",
