@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="pos_config_view_form_inherit_ou" model="ir.ui.view">
         <field name="name">pos.config.form.inherit.ou</field>
         <field name="model">pos.config</field>
@@ -92,5 +91,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
