@@ -3,7 +3,7 @@
 
 {
     "name": "Mail Template Operating Unit",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "author": "Pavlov Media, " "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
