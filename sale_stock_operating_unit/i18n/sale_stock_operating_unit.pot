@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_stock_operating_unit
+#. odoo-python
 #: code:addons/sale_stock_operating_unit/models/sale_order.py:0
 #, python-format
 msgid ""
@@ -27,10 +28,16 @@ msgid "Sales Order"
 msgstr ""
 
 #. module: sale_stock_operating_unit
+#. odoo-python
 #: code:addons/sale_stock_operating_unit/models/stock_warehouse.py:0
 #, python-format
 msgid ""
 "Sales Order records already exist(s) for this warehouse and operating unit."
+msgstr ""
+
+#. module: sale_stock_operating_unit
+#: model:ir.model.fields,field_description:sale_stock_operating_unit.field_sale_order__user_id
+msgid "Salesperson"
 msgstr ""
 
 #. module: sale_stock_operating_unit
