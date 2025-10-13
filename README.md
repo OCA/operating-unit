@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_operating_unit](account_operating_unit/) | 18.0.1.0.0 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
+[account_operating_unit](account_operating_unit/) | 18.0.1.0.1 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [analytic_operating_unit](analytic_operating_unit/) | 18.0.1.0.0 |  | Analytic Operating Unit
 [mrp_operating_unit](mrp_operating_unit/) | 18.0.1.0.0 |  | Operating Unit in MRP
 [operating_unit](operating_unit/) | 18.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
