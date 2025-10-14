@@ -8,8 +8,8 @@
 {
     "name": "Purchase Request to RFQ with Operating Units",
     "version": "10.0.1.0.0",
-    "author": "Eficent"
-              "Serpent Consulting Services Pvt. Ltd.,"
+    "author": "Eficent, "
+              "Serpent Consulting Services Pvt. Ltd., "
               "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "http://www.eficent.com",
