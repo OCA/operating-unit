@@ -1,2 +1,2 @@
-* ForgeFlow S.L. <contact@eficent.com>
+* ForgeFlow S.L. <contact@forgeflow.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
