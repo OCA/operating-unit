@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-10-24 10:42+0000\n"
+"Last-Translator: Bastian Günther <mail@bastian-guenther.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: sale_stock_operating_unit
 #. odoo-python
@@ -22,11 +24,13 @@ msgid ""
 "Configuration error!\n"
 "The OperatingUnit in the Sales Order and in the Warehouse must be the same."
 msgstr ""
+"Konfigurationsfehler!\n"
+"Die Filiale im Verkaufsauftrag und im Lager müssen übereinstimmen."
 
 #. module: sale_stock_operating_unit
 #: model:ir.model,name:sale_stock_operating_unit.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Verkaufsauftrag"
 
 #. module: sale_stock_operating_unit
 #. odoo-python
@@ -35,19 +39,21 @@ msgstr ""
 msgid ""
 "Sales Order records already exist(s) for this warehouse and operating unit."
 msgstr ""
+"Die Filiale kann auf dem Lager nicht mehr geändert werden, da bereits "
+"entsprechende Verkaufsaufträge existieren."
 
 #. module: sale_stock_operating_unit
 #: model:ir.model.fields,field_description:sale_stock_operating_unit.field_sale_order__user_id
 msgid "Salesperson"
-msgstr ""
+msgstr "Verkäufer"
 
 #. module: sale_stock_operating_unit
 #: model:ir.model,name:sale_stock_operating_unit.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Lagerbewegung"
 
 #. module: sale_stock_operating_unit
 #: model:ir.model,name:sale_stock_operating_unit.model_stock_warehouse
 #: model:ir.model.fields,field_description:sale_stock_operating_unit.field_sale_order__warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "Lager"
