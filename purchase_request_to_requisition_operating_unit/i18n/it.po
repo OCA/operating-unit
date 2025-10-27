@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-27 14:26+0000\n"
+"PO-Revision-Date: 2025-10-27 16:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: code:addons/purchase_request_to_requisition_operating_unit/wizard/purchase_request_line_make_purchase_requisition.py:0
 #, python-format
 msgid "Could not process !"
-msgstr ""
+msgstr "Impossibile elaborare!"
 
 #. module: purchase_request_to_requisition_operating_unit
 #: model:ir.model.fields,field_description:purchase_request_to_requisition_operating_unit.field_purchase_request_line_make_purchase_requisition__display_name
@@ -35,20 +35,20 @@ msgstr "ID"
 #. module: purchase_request_to_requisition_operating_unit
 #: model:ir.model.fields,field_description:purchase_request_to_requisition_operating_unit.field_purchase_request_line_make_purchase_requisition____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: purchase_request_to_requisition_operating_unit
 #: model:ir.model.fields,field_description:purchase_request_to_requisition_operating_unit.field_purchase_request_line_make_purchase_requisition__operating_unit_id
 msgid "Operating Unit"
-msgstr ""
+msgstr "Unità operativa"
 
 #. module: purchase_request_to_requisition_operating_unit
 #: model:ir.model,name:purchase_request_to_requisition_operating_unit.model_purchase_request_line_make_purchase_requisition
 msgid "Purchase Request Line Make Purchase Agreement"
-msgstr ""
+msgstr "La riga richiesta di acquisto genera il contratto di acquisto"
 
 #. module: purchase_request_to_requisition_operating_unit
 #: code:addons/purchase_request_to_requisition_operating_unit/wizard/purchase_request_line_make_purchase_requisition.py:0
 #, python-format
 msgid "You have to select lines from the same operating unit."
-msgstr ""
+msgstr "Bisogna selezionare righe dalla stessa unità operativa."
