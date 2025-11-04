@@ -41,3 +41,17 @@ class TestReportQwebOperatingUnit(OperatingUnitCommon):
                 .decode("utf8")
             )
             self.assertIn(self.ou1.report_header, html)
+
+    def test_compute_partner_image(self):
+        empty_image = (
+            b"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC"
+            b"0lEQVR42mP8/x8AAwMCAO5WCKsAAAAASUVORK5CYII="
+        )
+        other_image = (
+            b"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC"
+            b"0lEQVR42mNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
+        )
+        self.ou1.partner_image = empty_image
+        self.assertEqual(self.ou1.partner_id.image_1920, empty_image)
+        self.ou1.partner_id.image_1920 = other_image
+        self.assertEqual(self.ou1.partner_image, other_image)

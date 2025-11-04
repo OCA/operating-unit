@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===============================
 Qweb Report With Operating Unit
 ===============================
@@ -17,7 +13,7 @@ Qweb Report With Operating Unit
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Foperating--unit-lightgray.png?logo=github
@@ -58,6 +54,7 @@ Authors
 
 * ForgeFlow S.L.
 * Serpent Consulting Services Pvt. Ltd.
+* Onestein
 
 Contributors
 ------------
@@ -66,6 +63,7 @@ Contributors
 - Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 - Jarsa Sistemas <info@jarsa.com.mx>
 - Juany Davila <juany.davila@forgeflow.com>
+- Dennis Sluijk <d.sluijk@onestein.nl>
 
 Maintainers
 -----------
