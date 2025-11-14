@@ -35,9 +35,9 @@ class SaleOrder(models.Model):
         comodel_name="stock.warehouse", default=_default_warehouse_id
     )
 
-    @api.depends("team_id")
-    def _compute_team_id(self):
-        res = super()._compute_team_id()
+    @api.onchange("team_id")
+    def onchange_team_id(self):
+        res = super(SaleOrder, self).onchange_team_id()
         if (
             self.team_id
             and self.team_id.operating_unit_id
