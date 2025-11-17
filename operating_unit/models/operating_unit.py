@@ -32,12 +32,12 @@ class OperatingUnit(models.Model):
         (
             "code_company_uniq",
             "unique (code,company_id)",
-            "The code of the operating unit must " "be unique per company!",
+            "The code of the operating unit must be unique per company!",
         ),
         (
             "name_company_uniq",
             "unique (name,company_id)",
-            "The name of the operating unit must " "be unique per company!",
+            "The name of the operating unit must be unique per company!",
         ),
     ]
 

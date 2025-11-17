@@ -4,8 +4,7 @@
 # License: LGPL-3 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Operating Unit",
-    "summary": "An operating unit (OU) is an organizational entity part of a "
-    "company",
+    "summary": "An operating unit (OU) is an organizational entity part of a company",
     "version": "18.0.1.0.1",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd., "
