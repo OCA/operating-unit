@@ -28,18 +28,14 @@ class OperatingUnit(models.Model):
         "Users Allowed",
     )
 
-    _sql_constraints = [
-        (
-            "code_company_uniq",
-            "unique (code,company_id)",
-            "The code of the operating unit must be unique per company!",
-        ),
-        (
-            "name_company_uniq",
-            "unique (name,company_id)",
-            "The name of the operating unit must be unique per company!",
-        ),
-    ]
+    _code_company_uniq = models.Constraint(
+        "unique (code,company_id)",
+        "The code of the operating unit must be unique per company!",
+    )
+    _name_company_uniq = models.Constraint(
+        "unique (name,company_id)",
+        "The name of the operating unit must be unique per company!",
+    )
 
     @api.depends("name", "code")
     def _compute_display_name(self):

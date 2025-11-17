@@ -10,14 +10,14 @@
         <field name="default_operating_unit_id" ref="main_operating_unit" />
         <field
             name="assigned_operating_unit_ids"
-            eval="[(4, ref('main_operating_unit'))]"
+            eval="[Command.link(ref('main_operating_unit'))]"
         />
     </record>
     <record model="res.users" id="base.user_admin">
         <field name="default_operating_unit_id" ref="main_operating_unit" />
         <field
             name="assigned_operating_unit_ids"
-            eval="[(4, ref('main_operating_unit'))]"
+            eval="[Command.link(ref('main_operating_unit'))]"
         />
     </record>
 </odoo>

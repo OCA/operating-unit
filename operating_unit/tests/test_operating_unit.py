@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
 from odoo.exceptions import AccessError
+from odoo.fields import Domain
 from odoo.tests import Form, tagged
 
 from .common import OperatingUnitCommon
@@ -19,15 +20,16 @@ class TestOperatingUnit(OperatingUnitCommon):
         operating_unit_list_1 = (
             self.env["operating.unit"]
             .with_user(self.user1.id)
-            .search([])
+            .search(Domain.TRUE)
             .mapped("code")
         )
         nou = self.env["operating.unit"].search(
-            [
-                "|",
-                ("company_id", "=", False),
-                ("company_id", "in", self.user1.company_ids.ids),
-            ]
+            Domain.OR(
+                [
+                    Domain("company_id", "=", False),
+                    Domain("company_id", "in", self.user1.company_ids.ids),
+                ]
+            )
         )
         self.assertEqual(
             len(operating_unit_list_1),
@@ -47,7 +49,7 @@ class TestOperatingUnit(OperatingUnitCommon):
         operating_unit_list_2 = (
             self.env["operating.unit"]
             .with_user(self.user2.id)
-            .search([])
+            .search(Domain.TRUE)
             .mapped("code")
         )
         self.assertEqual(
@@ -60,26 +62,23 @@ class TestOperatingUnit(OperatingUnitCommon):
         )
 
     def test_02_operating_unit(self):
-        self.env["ir.config_parameter"].sudo().set_param(
-            "base_setup.default_user_rights", "True"
-        )
         user_form = Form(self.env["res.users"])
         user_form.name = "Test Customer"
         user_form.login = "test"
         user = user_form.save()
-        default_user = self.env.ref("base.default_user")
         self.assertEqual(
-            user.default_operating_unit_id, default_user.default_operating_unit_id
+            user.default_operating_unit_id, self.env.user.default_operating_unit_id
         )
         nou = self.env["operating.unit"].search(
-            [
-                "|",
-                ("company_id", "=", False),
-                ("company_id", "in", self.user1.company_ids.ids),
-            ],
+            Domain.OR(
+                [
+                    Domain("company_id", "=", False),
+                    Domain("company_id", "in", self.user1.company_ids.ids),
+                ]
+            ),
             limit=1,
         )
-        partner = self.env["res.partner"].search([], limit=1)
+        partner = self.env["res.partner"].search(Domain.TRUE, limit=1)
         with Form(self.env["res.users"], view="base.view_users_form") as user_form:
             user_form.default_operating_unit_id = nou[0]
             with user_form.operating_unit_ids.new() as line:
