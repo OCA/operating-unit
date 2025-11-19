@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import UserError
+from odoo.fields import Command, Domain
 from odoo.tests import Form, tagged
 
 from . import test_account_operating_unit as test_ou
@@ -42,8 +43,8 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         with self.assertRaises(UserError):
             self.invoice.line_ids[0].company_id = new_company.id
         # Check report invoice
-        self.env["account.invoice.report"].sudo().read_group(
-            [], ["operating_unit_id"], ["operating_unit_id"]
+        self.env["account.invoice.report"].sudo()._read_group(
+            Domain.TRUE, ["operating_unit_id"], ["operating_unit_id:array_agg"]
         )
 
     def test_form(self):
@@ -59,7 +60,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         )
 
         # Ensure user has the correct operating unit
-        self.user1.write({"operating_unit_ids": [(4, self.ou1.id)]})
+        self.user1.write({"operating_unit_ids": [Command.link(self.ou1.id)]})
 
         # Open the form with default operating unit context
         with Form(

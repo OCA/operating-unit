@@ -1,4 +1,6 @@
-from odoo.addons.base.tests.common import BaseCommon, Command
+from odoo.fields import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestAccountBankStatementLine(BaseCommon):
@@ -76,7 +78,7 @@ class TestAccountBankStatementLine(BaseCommon):
                 "name": "Cash Basis Base Account",
                 "code": "CBBA",
                 "account_type": "liability_current",
-                "reconcile": False,
+                "reconcile": True,
             }
         )
 

@@ -11,3 +11,4 @@
 - Hieu, Vo Minh Bao \<<hieu.vmb@komit-consulting.com>\>
 - [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
   - Bhavesh Heliconia
+- Julien Coux \<<julien.coux@camptocamp.com>\>

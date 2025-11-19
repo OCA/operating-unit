@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import UserError
+from odoo.fields import Command, Domain
 from odoo.tests import Form, tagged
 
 from . import test_account_operating_unit as test_ou
@@ -12,24 +13,28 @@ from . import test_account_operating_unit as test_ou
 class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
     def _check_balance(self, account_id, acc_type="clearing"):
         # Check balance for all operating units
-        domain = [("account_id", "=", account_id)]
+        domain = Domain("account_id", "=", account_id)
         balance = self._get_balance(domain)
         self.assertEqual(balance, 0.0, "Balance is 0 for all Operating Units.")
         # Check balance for operating B2B units
-        domain = [
-            ("account_id", "=", account_id),
-            ("operating_unit_id", "=", self.b2b.id),
-        ]
+        domain = Domain.AND(
+            [
+                Domain("account_id", "=", account_id),
+                Domain("operating_unit_id", "=", self.b2b.id),
+            ]
+        )
         balance = self._get_balance(domain)
         if acc_type == "other":
             self.assertEqual(balance, -100, "Balance is -100 for Operating Unit B2B.")
         else:
             self.assertEqual(balance, 100, "Balance is 100 for Operating Unit B2B.")
         # Check balance for operating B2C units
-        domain = [
-            ("account_id", "=", account_id),
-            ("operating_unit_id", "=", self.b2c.id),
-        ]
+        domain = Domain.AND(
+            [
+                Domain("account_id", "=", account_id),
+                Domain("operating_unit_id", "=", self.b2c.id),
+            ]
+        )
         balance = self._get_balance(domain)
         if acc_type == "other":
             self.assertEqual(balance, 100.0, "Balance is 100 for Operating Unit B2C.")
@@ -38,7 +43,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
 
     def _get_balance(self, domain):
         """
-        Call read_group method and return the balance of particular account.
+        Call _read_group method and return the balance of particular account.
         """
         aml_rec = self.aml_model.with_user(self.user1.id)._read_group(
             domain, ["account_id"], ["debit:sum", "credit:sum"]
@@ -58,14 +63,18 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
         )
         # Create Journal Entries
         journal_ids = self.journal_model.search(
-            [("code", "=", "MISC"), ("company_id", "=", self.company.id)], limit=1
+            Domain.AND(
+                [
+                    Domain("code", "=", "MISC"),
+                    Domain("company_id", "=", self.company.id),
+                ]
+            ),
+            limit=1,
         )
         # get default values of account move
         move_vals = self.move_model.default_get([])
         lines = [
-            (
-                0,
-                0,
+            Command.create(
                 {
                     "name": "Test",
                     "account_id": self.current_asset_account_id.id,
@@ -74,9 +83,7 @@ class TestCrossOuJournalEntry(test_ou.TestAccountOperatingUnit):
                     "operating_unit_id": self.b2b.id,
                 },
             ),
-            (
-                0,
-                0,
+            Command.create(
                 {
                     "name": "Test",
                     "account_id": self.current_asset_account_id.id,
