@@ -2,7 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.models import Command
+from odoo.fields import Command, Domain
 from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
@@ -33,23 +33,44 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
         cls.grp_acc_manager = cls.env.ref("account.group_account_manager")
         cls.grp_acc_config = cls.env.ref("account.group_account_user")
 
-        cls.product1 = cls.env.ref("product.product_product_7")
-        cls.product2 = cls.env.ref("product.product_product_9")
-        cls.product3 = cls.env.ref("product.product_product_11")
+        cls.product1 = cls.env["product.product"].create(
+            {
+                "name": "Storage Box",
+                "type": "consu",
+                "standard_price": 14.0,
+                "list_price": 15.8,
+            }
+        )
+        cls.product2 = cls.env["product.product"].create(
+            {
+                "name": "Pedal Bin",
+                "type": "consu",
+                "standard_price": 10.0,
+                "list_price": 47.0,
+            }
+        )
+        cls.product3 = cls.env["product.product"].create(
+            {
+                "name": "Conference Chair",
+                "type": "consu",
+                "standard_price": 28.0,
+                "list_price": 33.0,
+            }
+        )
 
         # Add Operating Unit Manager group to env.user
         cls.env.user.write(
             {
-                "groups_id": [(4, cls.ou_manager_group.id)],
+                "group_ids": [Command.link(cls.ou_manager_group.id)],
                 "company_ids": [Command.link(cls.company.id)],
                 "company_id": cls.company.id,
             }
         )
 
         # Set up operating units with sudo()
-        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit").sudo()
-        cls.b2b = cls.env.ref("operating_unit.b2b_operating_unit").sudo()
-        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit").sudo()
+        cls.ou1 = cls.ou1.sudo()
+        cls.b2b = cls.b2b.sudo()
+        cls.b2c = cls.b2c.sudo()
 
         # Update operating units' company with sudo()
         operating_units = cls.ou1 | cls.b2b | cls.b2c
@@ -58,7 +79,7 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
         # Setup user1 with all required groups
         cls.user1.write(
             {
-                "groups_id": [
+                "group_ids": [
                     Command.link(cls.grp_acc_manager.id),
                     Command.link(cls.grp_acc_config.id),
                     Command.link(cls.ou_manager_group.id),
@@ -96,7 +117,7 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
         # Setup user2 with all required groups
         cls.user2.write(
             {
-                "groups_id": [
+                "group_ids": [
                     Command.link(cls.grp_acc_manager.id),
                     Command.link(cls.grp_acc_config.id),
                     Command.link(cls.ou_manager_group.id),
@@ -162,19 +183,21 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
                 "price_unit": 50,
                 "account_id": self.env["account.account"]
                 .search(
-                    [
-                        ("account_type", "=", "expense"),
-                        ("company_ids", "in", self.company.ids),
-                    ],
+                    Domain.AND(
+                        [
+                            Domain("account_type", "=", "expense"),
+                            Domain("company_ids", "in", self.company.ids),
+                        ]
+                    ),
                     limit=1,
                 )
                 .id,
                 # Adding this line so the taxes are explicitly excluded from the lines
                 "tax_ids": [],
             }
-            lines.append((0, 0, line_values))
+            lines.append(Command.create(line_values))
         inv_vals = {
-            "partner_id": self.partner1.id,
+            "partner_id": self.partner.id,
             "operating_unit_id": operating_unit_id,
             "name": name,
             "move_type": "in_invoice",

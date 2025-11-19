@@ -2,7 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -24,7 +24,7 @@ class AccountJournal(models.Model):
                 and not journal.operating_unit_id
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration error. If defined as "
                         "self-balanced at company level, the "
                         "operating unit is mandatory in bank "

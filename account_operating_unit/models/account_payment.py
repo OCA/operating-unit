@@ -28,11 +28,11 @@ class AccountPayment(models.Model):
         )
         for line in lines:
             line["operating_unit_id"] = self.operating_unit_id.id
-        active_model = self._context.get("active_model", False)
+        active_model = self.env.context.get("active_model", False)
         if not active_model or active_model != "account.move":
             return lines
-        invoices = self.env[self._context.get("active_model")].browse(
-            self._context.get("active_ids")
+        invoices = self.env[self.env.context.get("active_model")].browse(
+            self.env.context.get("active_ids")
         )
         invoices_ou = invoices.operating_unit_id
         if invoices and len(invoices_ou) == 1 and invoices_ou != self.operating_unit_id:

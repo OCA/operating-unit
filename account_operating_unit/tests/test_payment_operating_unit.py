@@ -4,6 +4,7 @@
 
 import time
 
+from odoo.fields import Domain
 from odoo.tests import tagged
 
 from . import test_account_operating_unit as test_ou
@@ -34,7 +35,7 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         )
 
         register_payments.action_create_payments()
-        payment = self.payment_model.search([], order="id desc", limit=1)
+        payment = self.payment_model.search(Domain.TRUE, order="id desc", limit=1)
         # Validate that inter OU balance move lines are created
         self.assertEqual(len(payment.move_id.line_ids), 4)
         self.assertAlmostEqual(payment.amount, self.invoice.amount_total)
@@ -67,9 +68,9 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             }
         )._create_payments()
 
-        payments = self.payment_model.search([], order="id desc", limit=2)
+        payments = self.payment_model.search(Domain.TRUE, order="id desc", limit=2)
         inter_ou_moves = self.move_model.search(
-            [("ref", "=", "Inter OU Balancing")], order="id desc", limit=2
+            Domain("ref", "=", "Inter OU Balancing"), order="id desc", limit=2
         )
         self.assertEqual(sum(inter_ou_moves[0].mapped("line_ids.debit")), 115000)
         self.assertEqual(sum(inter_ou_moves[1].mapped("line_ids.debit")), 115000)

@@ -2,8 +2,9 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.fields import Command, Domain
 
 
 class AccountMoveLine(models.Model):
@@ -33,7 +34,7 @@ class AccountMoveLine(models.Model):
                 and rec.move_id.operating_unit_id != rec.operating_unit_id
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration error. The Operating Unit in"
                         " the Move Line and in the Move must be the"
                         " same."
@@ -86,7 +87,7 @@ class AccountMoveLine(models.Model):
             amls = self.with_context(check_move_validity=False).create(line_datas)
         if amls:
             move.with_context(check_move_validity=True).write(
-                {"line_ids": [(4, aml.id) for aml in amls]}
+                {"line_ids": [Command.link(aml.id) for aml in amls]}
             )
         move.with_context(inter_ou_balance_entry=True).action_post()
         return super().reconcile()
@@ -117,9 +118,8 @@ class AccountMove(models.Model):
     @api.model
     def _default_operating_unit_id(self):
         if (
-            self._context.get("default_move_type", False)
-            and self._context.get("default_move_type") != "entry"
-        ):
+            default_type := self.env.context.get("default_move_type")
+        ) and default_type != "entry":
             return self.env["res.users"]._get_default_operating_unit()
         return False
 
@@ -130,7 +130,7 @@ class AccountMove(models.Model):
             or self.journal_id.operating_unit_id != self.operating_unit_id
         ):
             journal = self.env["account.journal"].search(
-                [("type", "=", self.journal_id.type)]
+                Domain("type", "=", self.journal_id.type)
             )
             jf = journal.filtered(
                 lambda aj: aj.operating_unit_id == self.operating_unit_id
@@ -153,7 +153,7 @@ class AccountMove(models.Model):
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id, ou_balances):
         if not move.company_id.inter_ou_clearing_account_id:
             raise UserError(
-                _(
+                self.env._(
                     "Configuration error. You need to define an"
                     "inter-operating unit clearing account in the "
                     "company settings"
@@ -161,7 +161,7 @@ class AccountMove(models.Model):
             )
 
         res = {
-            "name": _("OU-Balancing"),
+            "name": self.env._("OU-Balancing"),
             "move_id": move.id,
             "journal_id": move.journal_id.id,
             "date": move.date,
@@ -216,7 +216,7 @@ class AccountMove(models.Model):
                 amls = ml_obj.with_context(check_move_validity=False).create(line_datas)
             if amls:
                 move.with_context(check_move_validity=True).write(
-                    {"line_ids": [(4, aml.id) for aml in amls]}
+                    {"line_ids": [Command.link(aml.id) for aml in amls]}
                 )
 
         return super()._post(soft)
@@ -229,7 +229,7 @@ class AccountMove(models.Model):
             for line in move.line_ids:
                 if not line.operating_unit_id:
                     raise UserError(
-                        _(
+                        self.env._(
                             "Configuration error. The operating unit is "
                             "mandatory for each line as the operating unit "
                             "has been defined as self-balanced at company "
@@ -246,6 +246,6 @@ class AccountMove(models.Model):
                 and move.operating_unit_id != move.journal_id.operating_unit_id
             ):
                 raise UserError(
-                    _("The OU in the Move and in Journal must be the same.")
+                    self.env._("The OU in the Move and in Journal must be the same.")
                 )
         return True

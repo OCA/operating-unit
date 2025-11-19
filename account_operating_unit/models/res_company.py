@@ -4,7 +4,6 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools.translate import _
 
 
 class ResCompany(models.Model):
@@ -27,7 +26,7 @@ class ResCompany(models.Model):
         for rec in self:
             if rec.ou_is_self_balanced and not rec.inter_ou_clearing_account_id:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration error. Please provide an "
                         "Inter-operating unit clearing account."
                     )
