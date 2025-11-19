@@ -12,8 +12,7 @@ class AccountJournal(models.Model):
     operating_unit_id = fields.Many2one(
         check_company=True,
         comodel_name="operating.unit",
-        help="Operating Unit that will be used in payments, "
-        "when this journal is used.",
+        help="Operating Unit that will be used in payments, when this journal is used.",
     )
 
     @api.constrains("type")
