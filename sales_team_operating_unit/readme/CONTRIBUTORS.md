@@ -2,3 +2,4 @@
 - Serpent Consulting Services Pvt. Ltd. \<<support@serpentcs.com>\>
 - Jarsa Sistemas \<<info@jarsa.com.mx>\>
 - `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`_
+- Julien Coux \<<julien.coux@camptocamp.com>\>
