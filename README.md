@@ -17,7 +17,11 @@ operating-unit
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[operating_unit](operating_unit/) | 19.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
 
 [//]: # (end addons)
 
