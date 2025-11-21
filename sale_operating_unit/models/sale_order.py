@@ -4,6 +4,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 
 class SaleOrder(models.Model):
@@ -48,15 +49,35 @@ class SaleOrder(models.Model):
                 sale.journal_id = (
                     self.env["account.journal"]
                     .search(
-                        [
-                            "|",
-                            ("operating_unit_id", "=", sale.operating_unit_id.id),
-                            ("operating_unit_id", "=", False),
-                            "|",
-                            ("company_id", "=", sale.company_id.id),
-                            ("company_id", "=", False),
-                            ("type", "=", "sale"),
-                        ],
+                        Domain.AND(
+                            [
+                                Domain.AND(
+                                    [
+                                        Domain.OR(
+                                            [
+                                                Domain(
+                                                    "operating_unit_id",
+                                                    "=",
+                                                    sale.operating_unit_id.id,
+                                                ),
+                                                Domain("operating_unit_id", "=", False),
+                                            ]
+                                        ),
+                                        Domain.OR(
+                                            [
+                                                Domain(
+                                                    "company_id",
+                                                    "=",
+                                                    sale.company_id.id,
+                                                ),
+                                                Domain("company_id", "=", False),
+                                            ]
+                                        ),
+                                    ]
+                                ),
+                                Domain("type", "=", "sale"),
+                            ]
+                        ),
                         limit=1,
                     )
                     .id
