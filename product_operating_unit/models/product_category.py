@@ -2,15 +2,15 @@
 # Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import fields, models
-from odoo.models import Command
+from odoo.fields import Command, Domain
 
 
 class ProductCategory(models.Model):
     _inherit = "product.category"
 
     operating_unit_ids = fields.Many2many(
-        "operating.unit",
-        "product_category_operating_unit_rel",
+        comodel_name="operating.unit",
+        relation="product_category_operating_unit_rel",
         string="Operating Units",
     )
 
@@ -20,7 +20,7 @@ class ProductCategory(models.Model):
         if vals.get("operating_unit_ids"):
             for rec in self:
                 products = product_template_obj.search(
-                    [("categ_id", "child_of", rec.id)]
+                    Domain("categ_id", "child_of", rec.id)
                 )
                 category_ou_ids = rec.operating_unit_ids
                 for product in products:

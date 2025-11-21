@@ -5,7 +5,7 @@
 {
     "name": "Operating Unit in Products",
     "summary": "Adds the concept of operating unit (OU) in products",
-    "version": "17.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "brain-tec AG, "
     "Open Source Integrators, "
     "Serpent Consulting Services Pvt. Ltd.,"
