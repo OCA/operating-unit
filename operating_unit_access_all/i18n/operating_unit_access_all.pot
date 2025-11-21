@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,4 +16,9 @@ msgstr ""
 #. module: operating_unit_access_all
 #: model:res.groups,name:operating_unit_access_all.group_all_operating_unit
 msgid "Access all Operating Units"
+msgstr ""
+
+#. module: operating_unit_access_all
+#: model:res.groups.privilege,name:operating_unit_access_all.res_groups_privilege_all_operating_units
+msgid "All Operating Units"
 msgstr ""
