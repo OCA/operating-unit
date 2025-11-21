@@ -3,3 +3,4 @@
 - Tran Thanh Trai \<<traitt@trobz.com>\>
 - [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
   - Bhavesh Heliconia
+- Julien Coux \<<julien.coux@camptocamp.com>\>
