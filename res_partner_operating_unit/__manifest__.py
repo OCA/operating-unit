@@ -4,7 +4,7 @@
     "name": "Partner with Operating Unit",
     "summary": "Introduces Operating Unit fields in Partner",
     "version": "18.0.1.1.1",
-    "author": "Edi Santoso, " "Niaga Solution, " "Odoo Community Association (OCA)",
+    "author": "Edi Santoso, Niaga Solution, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Generic",
     "depends": ["operating_unit"],
