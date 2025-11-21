@@ -4,6 +4,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import SUPERUSER_ID, api, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 
 class CrmTeam(models.Model):
@@ -16,10 +17,12 @@ class CrmTeam(models.Model):
                 self.with_user(SUPERUSER_ID)
                 .env["sale.order"]
                 .search(
-                    [
-                        ("team_id", "=", rec.id),
-                        ("operating_unit_id", "!=", rec.operating_unit_id.id),
-                    ]
+                    Domain.AND(
+                        [
+                            Domain("team_id", "=", rec.id),
+                            Domain("operating_unit_id", "!=", rec.operating_unit_id.id),
+                        ]
+                    )
                 )
             )
             if orders:
