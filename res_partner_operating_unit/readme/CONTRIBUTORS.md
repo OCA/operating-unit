@@ -3,3 +3,5 @@
 - Hiren Dangar \<hiren.dangar.serpentcs@gmail.com\>
 - [Komit](https://komit-consulting.com):
   - Cai Hoang Huynh
+- [Camptocamp](https://www.camptocamp.com):
+  - Maksym Yankin \<maksym.yankin@camptocamp.com\>
