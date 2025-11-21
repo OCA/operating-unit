@@ -94,6 +94,10 @@ Contributors
 
   - Bhavesh Heliconia
 
+- `Camptocamp <https://www.camptocamp.com>`__:
+
+  - Maksym Yankin <maksym.yankin@camptocamp.com>
+
 Maintainers
 -----------
 
