@@ -2,6 +2,8 @@
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from odoo.tests.common import Form
+
 from . import test_purchase_operating_unit as test_po_ou  # noqa
 
 
@@ -52,3 +54,17 @@ class TestPoSecurity(test_po_ou.TestPurchaseOperatingUnit):
             .ids
         )
         self.assertNotEqual(invoice_ids, [])
+
+    def test_create_po_warehouse_ou(self):
+        # create a PO with warehouse with OU
+        warehouse = self.env.ref("stock.warehouse0")
+        self.assertEqual(warehouse.operating_unit_id, self.ou1)
+        with Form(self.PurchaseOrder.with_user(self.user1_id)) as f:
+            f.partner_id = self.partner1
+        self.assertEqual(f.picking_type_id.warehouse_id, warehouse)
+
+        # create a PO with warehouse without OU
+        warehouse.operating_unit_id = False
+        with Form(self.PurchaseOrder.with_user(self.user1_id)) as f:
+            f.partner_id = self.partner1
+        self.assertEqual(f.picking_type_id.warehouse_id, warehouse)

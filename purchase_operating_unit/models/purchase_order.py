@@ -101,11 +101,18 @@ class PurchaseOrder(models.Model):
             types = type_obj.search(
                 [
                     ("code", "=", "incoming"),
-                    ("warehouse_id.operating_unit_id", "=", self.operating_unit_id.id),
-                ]
+                    (
+                        "warehouse_id.operating_unit_id",
+                        "in",
+                        [self.operating_unit_id.id, False],
+                    ),
+                ],
             )
             if types:
-                self.picking_type_id = types[:1]
+                # Prefer types with an operating unit, if multiple are available
+                self.picking_type_id = types.sorted(
+                    lambda x: x.warehouse_id.operating_unit_id
+                )[:1]
             else:
                 raise UserError(
                     _(
