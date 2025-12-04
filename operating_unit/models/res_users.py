@@ -2,6 +2,7 @@
 # - Jordi Ballester Alomar
 # Copyright 2015-TODAY Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo import api, fields, models
 
 
@@ -13,18 +14,20 @@ class ResUsers(models.Model):
     def operating_unit_default_get(self, uid2=False):
         if not uid2:
             uid2 = self.env.user.id
-        user = self.env["res.users"].browse(uid2)
+        # Grant sudo for the user to avoid access rights issues while checking
+        # access to operating units.
+        user = self.env["res.users"].sudo().browse(uid2)
         # check if the company of the default OU is active
-        if user.default_operating_unit_id.sudo().company_id in self.env.companies:
+        if user.default_operating_unit_id.company_id in self.env.companies:
             return user.default_operating_unit_id
         else:
             # find an OU of the main active company
             for ou in user.operating_unit_ids:
-                if ou.sudo().company_id in self.env.company:
+                if ou.company_id == self.env.company:
                     return ou
             # find an OU of any active company
             for ou in user.operating_unit_ids:
-                if ou.sudo().company_id in self.env.companies:
+                if ou.company_id in self.env.companies:
                     return ou
         return False
 
