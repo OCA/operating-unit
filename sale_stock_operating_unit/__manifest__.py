@@ -7,7 +7,7 @@
     "name": "Operating Unit in Sales Stock",
     "summary": "An operating unit (OU) is an organizational entity part of a "
     "company",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "ForgeFlow, Serpent Consulting Services Pvt. Ltd., "
     "Odoo Community Association (OCA)",
     "license": "LGPL-3",
