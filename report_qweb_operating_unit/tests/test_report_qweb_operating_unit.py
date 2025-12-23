@@ -16,7 +16,7 @@ class TestReportQwebOperatingUnit(OperatingUnitCommon):
         cls.mock_user.operating_unit_id = cls.ou1
 
     def test_rendering(self):
-        for layout in ("standard", "striped", "bold", "boxed"):
+        for layout in ("standard", "striped", "bold", "boxed", "bubble"):
             xmlid = f"web.external_layout_{layout}"
             render_context = dict(
                 company=self.env.company,

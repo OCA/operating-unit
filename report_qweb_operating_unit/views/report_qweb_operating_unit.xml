@@ -685,22 +685,25 @@
                 />
             </t>
         </xpath>
-        <xpath expr="//div[@t-field='company.report_header']" position="replace">
+        <xpath expr="//td[@t-if='company.report_header']" position="replace">
             <t t-if="o and 'operating_unit_id' in o">
-                <div
-                    class="o_company_tagline fw-bold"
+                <td
                     t-if="o.operating_unit_id.report_header"
-                    t-field="o.operating_unit_id.report_header"
-                >Operating
-                    Unit tagline</div>
+                    class="o_company_tagline fw-bold p-0 pe-2"
+                >
+                    <span t-field="o.operating_unit_id.report_header">
+                        Operating Unit tagline
+                    </span>
+                </td>
             </t>
-            <t t-else="">
-                <div
-                    class="o_company_tagline fw-bold"
-                    t-if="company.report_header"
-                    t-field="company.report_header"
-                >Company tagline</div>
-            </t>
+            <td
+                t-elif="company.report_header"
+                class="o_company_tagline fw-bold p-0 pe-2"
+            >
+                <span t-field="company.report_header">
+                    Company tagline
+                </span>
+            </td>
         </xpath>
         <xpath expr="//ul[@name='company_address_list']" position="replace">
             <ul class="list-unstyled" name="company_address_list">
