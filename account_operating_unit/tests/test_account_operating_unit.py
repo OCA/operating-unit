@@ -5,6 +5,7 @@
 import odoo.tests
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.mail.tests.common import mail_new_test_user
 
 
 @odoo.tests.tagged("post_install", "-at_install")
@@ -22,6 +23,7 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
 
         # company
         self.company = self.env.user.company_id
+        self.grp_ou_manager_xmlid = "operating_unit.group_manager_operating_unit"
         self.grp_acc_manager = self.env.ref("account.group_account_manager")
         # Main Operating Unit
         self.ou1 = self.env.ref("operating_unit.main_operating_unit")
@@ -68,6 +70,18 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon):
                 "groups_id": [(6, 0, [self.grp_acc_manager.id])],
             }
         )
+        admin_groups = self.env.ref("base.user_admin").groups_id
+        self.ou_manager_user = mail_new_test_user(
+            self.env,
+            login="OU Manager",
+            groups=",".join(
+                [xmlid for gid, xmlid in admin_groups.get_external_id().items()]
+                + [
+                    self.grp_ou_manager_xmlid,
+                ]
+            ),
+        )
+
         # Create cash - test account
         user_type = self.env.ref("account.data_account_type_current_assets")
         self.current_asset_account_id = self.account_model.create(
