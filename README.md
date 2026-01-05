@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_operating_unit](account_operating_unit/) | 19.0.1.0.0 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [analytic_operating_unit](analytic_operating_unit/) | 19.0.1.0.0 |  | Analytic Operating Unit
 [crm_operating_unit](crm_operating_unit/) | 19.0.1.0.0 |  | Operating Unit in CRM
 [operating_unit](operating_unit/) | 19.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
