@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--© 2016-17 ForgeFlow S.L.-->
+<!--© 2016 Serpent Consulting Services Pvt. Ltd.-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+    <record id="view_account_invoice_report_search" model="ir.ui.view">
+        <field name="name">account.invoice.report.search</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search" />
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+            <xpath expr="//filter[1]" position="after">
+                <filter
+                    name='group_by_operating_unit'
+                    string="Operating Unit"
+                    context="{'group_by':'operating_unit_id'}"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
