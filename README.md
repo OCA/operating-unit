@@ -24,7 +24,7 @@ addon | version | maintainers | summary
 [account_asset_operating_unit](account_asset_operating_unit/) | 14.0.1.0.2 | <a href='https://github.com/ps-tubtim'><img src='https://github.com/ps-tubtim.png' width='32' height='32' style='border-radius:50%;' alt='ps-tubtim'/></a> | This module adds operating unit information to assets.
 [account_asset_operating_unit_access_all](account_asset_operating_unit_access_all/) | 14.0.1.0.0 | <a href='https://github.com/ps-tubtim'><img src='https://github.com/ps-tubtim.png' width='32' height='32' style='border-radius:50%;' alt='ps-tubtim'/></a> | Access all OUs' Assets
 [account_financial_report_operating_unit](account_financial_report_operating_unit/) | 14.0.1.0.2 |  | Introduces Operating Unit (OU) in financial reports
-[account_operating_unit](account_operating_unit/) | 14.0.1.1.0 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
+[account_operating_unit](account_operating_unit/) | 14.0.1.2.0 |  | Introduces Operating Unit (OU) in invoices and Accounting Entries with clearing account
 [account_operating_unit_access_all](account_operating_unit_access_all/) | 14.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' Accounting
 [agreement_operating_unit](agreement_operating_unit/) | 14.0.1.0.0 | <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> | This module adds operating unit information to agreements and service profiles.
 [analytic_operating_unit](analytic_operating_unit/) | 14.0.1.0.1 |  | Analytic Operating Unit
