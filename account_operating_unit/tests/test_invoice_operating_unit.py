@@ -2,12 +2,13 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-import odoo.tests
+from odoo import tests
+from odoo.tools.safe_eval import safe_eval
 
 from . import test_account_operating_unit as test_ou
 
 
-@odoo.tests.tagged("post_install", "-at_install")
+@tests.tagged("post_install", "-at_install")
 class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
     def test_create_invoice_validate(self):
         """Create & Validate the invoice.
@@ -33,3 +34,32 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             False,
             "Journal Entries have different Operating Units.",
         )
+
+    def test_manager_select_operating_unit(self):
+        """A Manager of Operating Units can
+        assign any Operating Unit to an invoice."""
+        # Arrange
+        manager_user = self.ou_manager_user
+        # pre-condition
+        self.assertTrue(manager_user.has_group(self.grp_ou_manager_xmlid))
+
+        # Act
+        invoice_form = tests.Form(self.move_model.with_user(manager_user.id))
+        invoice = invoice_form.save()
+
+        # Assert
+        invoice_form_OU_field = invoice_form._view["fields"]["operating_unit_id"]
+        selectable_OUs_domain = safe_eval(
+            invoice_form_OU_field.get("domain") or "[]",
+            globals_dict=dict(
+                invoice.read()[0],
+                uid=invoice.env.uid,
+            ),
+        )
+        selectable_OUs = (
+            self.env["operating.unit"]
+            .with_user(manager_user.id)
+            .search(selectable_OUs_domain)
+        )
+        manager_OUs = manager_user.with_company(invoice.company_id).operating_unit_ids
+        self.assertEqual(manager_OUs, selectable_OUs)

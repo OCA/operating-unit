@@ -128,6 +128,9 @@ Contributors
 * Jarsa Sistemas <info@jarsa.com.mx>
 * Alan Ramos <alan.ramos@jarsa.com.mx>
 * Hieu, Vo Minh Bao <hieu.vmb@komit-consulting.com>
+* `PyTech <https://www.pytech.it>`_:
+
+  * Simone Rubino <simone.rubino@pytech.it>
 
 Maintainers
 ~~~~~~~~~~~

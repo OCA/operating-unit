@@ -16,7 +16,6 @@ class AccountPayment(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        domain="[('user_ids', '=', uid)]",
         compute="_compute_operating_unit_id",
         store=True,
     )
