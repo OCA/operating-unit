@@ -67,7 +67,7 @@ class TestContractOperatingUnit(TestContractBase):
         )
         self.assertFalse(
             record,
-            "User 2 should not have access to OU %s" % self.ou1.name,
+            f"User 2 should not have access to OU {self.ou1.name}",
         )
 
     def test_default(self):
