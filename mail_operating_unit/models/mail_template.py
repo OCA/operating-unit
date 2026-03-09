@@ -10,7 +10,12 @@ class MailTemplate(models.Model):
     operating_unit_id = fields.Many2one("operating.unit", string="Operating Unit")
 
     def send_mail(
-        self, res_id, force_send=False, raise_exception=False, email_values=None
+        self,
+        res_id,
+        force_send=False,
+        raise_exception=False,
+        email_values=None,
+        email_layout_xmlid=False,
     ):
         # Include in the email values the alias domain ID of the current OU if any
         email_values = email_values or {}
@@ -23,4 +28,5 @@ class MailTemplate(models.Model):
             force_send=force_send,
             raise_exception=raise_exception,
             email_values=email_values,
+            email_layout_xmlid=email_layout_xmlid,
         )
