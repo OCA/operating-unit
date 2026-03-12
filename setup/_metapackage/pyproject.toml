@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-operating-unit"
-version = "19.0.20260312.0"
+version = "19.0.20260312.1"
 dependencies = [
     "odoo-addon-account_operating_unit==19.0.*",
     "odoo-addon-analytic_operating_unit==19.0.*",
@@ -9,6 +9,7 @@ dependencies = [
     "odoo-addon-operating_unit_access_all==19.0.*",
     "odoo-addon-product_operating_unit==19.0.*",
     "odoo-addon-res_partner_operating_unit==19.0.*",
+    "odoo-addon-sale_operating_unit==19.0.*",
     "odoo-addon-sales_team_operating_unit==19.0.*",
 ]
 classifiers=[
