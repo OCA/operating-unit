@@ -8,17 +8,34 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
     _check_company_auto = True
 
-    @api.model
-    def _default_operating_unit(self):
-        user = self.env["res.users"].browse(self.env.user.id)
-        return user.default_operating_unit_id
-
     operating_unit_ids = fields.Many2many(
-        "operating.unit",
-        "operating_unit_partner_rel",
-        "partner_id",
-        "operating_unit_id",
-        "Operating Units",
-        required=True,
-        default=lambda self: self._default_operating_unit(),
+        comodel_name="operating.unit",
+        relation="operating_unit_partner_rel",
+        column1="partner_id",
+        column2="operating_unit_id",
+        string="Operating Units",
     )
+
+    @api.model
+    def _user_ous_domain(self):
+        ou_ids = self.env.user.operating_unit_ids.ids
+        domain = [
+            "|",
+            ("operating_unit_ids", "in", ou_ids),
+            ("operating_unit_ids", "=", False),
+        ]
+        return domain
+
+    # Extending methods to replace a record rule.
+    # Ref: https://github.com/OCA/operating-unit/issues/258
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None):
+        # Get the OUs of the user
+        domain = self._user_ous_domain()
+        return super().search(domain + args, offset=offset, limit=limit, order=order)
+
+    @api.model
+    def search_count(self, args, limit=None):
+        # Get the OUs of the user
+        domain = self._user_ous_domain()
+        return super().search_count(domain + args, limit=limit)

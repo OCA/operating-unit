@@ -9,42 +9,39 @@ from odoo.exceptions import UserError
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        users = super().create(vals_list)
-        for user in users:
-            user_ou = user.default_operating_unit_id or user._default_operating_unit()
-            if not user_ou:
-                user.check_partner_operating_unit()
-                continue
-            user.partner_id.operating_unit_ids = [Command.link(user_ou.id)]
-            user.check_partner_operating_unit()
-        return users
-
-    def write(self, vals):
+    def _sync_partner_default_operating_unit(self):
         for user in self:
-            res = super().write(vals)
-            if vals.get("default_operating_unit_id"):
-                # Add the new OU
+            if user.default_operating_unit_id:
                 user.partner_id.operating_unit_ids = [
                     Command.link(user.default_operating_unit_id.id)
                 ]
                 user.check_partner_operating_unit()
-            return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        users = super().create(vals_list)
+        for user in users:
+            user._sync_partner_default_operating_unit()
+        return users
+
+    def write(self, vals):
+        res = super().write(vals)
+        if vals.get("default_operating_unit_id"):
+            for user in self:
+                user._sync_partner_default_operating_unit()
+        return res
 
     def check_partner_operating_unit(self):
-        self.ensure_one()
-        if (
-            self.partner_id.operating_unit_ids
-            and self.default_operating_unit_id
-            and (
-                self.default_operating_unit_id.id
-                not in self.partner_id.operating_unit_ids.ids
-            )
-        ):
-            raise UserError(
-                _(
-                    "The operating units of the partner must include the default "
-                    "one of the user."
+        for user in self:
+            if (
+                user.partner_id.operating_unit_ids
+                and user.default_operating_unit_id
+                and user.default_operating_unit_id.id
+                not in user.partner_id.operating_unit_ids.ids
+            ):
+                raise UserError(
+                    _(
+                        "The operating units of the partner must include the default "
+                        "one of the user."
+                    )
                 )
-            )
