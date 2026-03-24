@@ -56,3 +56,9 @@ class OperatingUnit(models.Model):
     def write(self, vals):
         self.env.registry.clear_cache()
         return super().write(vals)
+
+    def button_open_linked_users(self):
+        self.ensure_one()
+        action = self.env["ir.actions.actions"]._for_xml_id("base.action_res_users")
+        action["domain"] = [("id", "in", self.user_ids.ids)]
+        return action
