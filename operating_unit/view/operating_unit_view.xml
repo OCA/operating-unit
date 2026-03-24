@@ -5,13 +5,27 @@
         <field name="model">operating.unit</field>
         <field name="arch" type="xml">
             <form string="Operating Unit">
-                <group name="main_group">
-                    <field name="name" />
-                    <field name="code" />
-                    <field name="active" />
-                    <field name="partner_id" />
-                    <field name="company_id" groups="base.group_multi_company" />
-                </group>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="button_open_linked_users"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-users"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Users</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group name="main_group">
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="active" />
+                        <field name="partner_id" />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
