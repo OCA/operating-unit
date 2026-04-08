@@ -17,6 +17,7 @@ class SaleOrder(models.Model):
         precompute=True,
         check_company=True,
         compute="_compute_operating_unit_id",
+        index=True,
     )
 
     @api.depends("team_id")
@@ -89,4 +90,5 @@ class SaleOrderLine(models.Model):
         related="order_id.operating_unit_id",
         string="Operating Unit",
         store=True,
+        index=True,
     )
