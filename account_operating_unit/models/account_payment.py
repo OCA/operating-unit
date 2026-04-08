@@ -13,6 +13,7 @@ class AccountPayment(models.Model):
         comodel_name="operating.unit",
         compute="_compute_operating_unit_id",
         store=True,
+        index=True,
     )
 
     @api.depends("journal_id")
