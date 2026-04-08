@@ -10,4 +10,5 @@ class StockQuant(models.Model):
         related="location_id.operating_unit_id",
         store=True,
         check_company=True,
+        index=True,
     )

@@ -15,6 +15,7 @@ class StockPicking(models.Model):
         compute="_compute_operating_unit_id",
         store=True,
         check_company=True,
+        index=True,
     )
 
     @api.depends("picking_type_id")
