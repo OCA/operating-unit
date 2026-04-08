@@ -10,6 +10,7 @@
     "category": "Productivity/Discuss",
     "depends": ["mail", "operating_unit"],
     "data": [
+        # Views
         "views/mail_template.xml",
         "views/operating_unit.xml",
     ],

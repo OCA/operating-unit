@@ -17,7 +17,8 @@ class MailTemplate(models.Model):
         email_values=None,
         email_layout_xmlid=False,
     ):
-        # Include in the email values the alias domain ID of the current OU if any
+        # OVERRIDE: to include in the email values
+        # the alias domain ID of the current OU if any
         email_values = email_values or {}
         if self.operating_unit_id and self.operating_unit_id.alias_domain_id:
             email_values["record_alias_domain_id"] = (

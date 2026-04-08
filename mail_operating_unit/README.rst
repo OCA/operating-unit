@@ -32,7 +32,23 @@ Mail Operating Unit
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to link an Email Domain to an Operating Unit.
+This module allows companies working with multiple Operating Units to
+send emails with the appropriate email domain and, optionally, the
+appropriate outgoing mail server depending on the Operating Unit
+context.
+
+It lets you define an Alias Domain on an Operating Unit and use that
+domain automatically when emails are generated from templates or records
+linked to that Operating Unit.
+
+It also allows you to define an Outgoing Mail Server on an Operating
+Unit and automatically route emails through that server when no mail
+server is explicitly defined on the email template.
+
+This is especially useful in multi-brand or multi-entity environments
+where each Operating Unit must send emails using its own domain and SMTP
+server, while still keeping the standard Odoo behavior as a fallback
+when no specific Operating Unit configuration can be determined.
 
 **Table of contents**
 
@@ -44,8 +60,18 @@ Configuration
 
 To configure this module, you need to:
 
-- Assign *Alias Domain* to an Operating Unit.
-- Assign *Operating Unit* to an Email Template
+- Assign an *Alias Domain* to each Operating Unit that should use a
+  specific email domain.
+- Assign an *Operating Unit* to an Email Template when emails sent from
+  that template must use the alias domain of that operating unit.
+- Optionally assign an *Outgoing Mail Server* to an Operating Unit when
+  emails should be routed through a specific SMTP server.
+
+When no operating unit is defined on the template or on the target
+record, the standard Odoo alias domain behavior is applied.
+
+When no unambiguous Operating Unit mail server can be determined, the
+standard Odoo outgoing mail server selection is applied.
 
 Bug Tracker
 ===========
@@ -70,6 +96,7 @@ Contributors
 
 - Vincent Van Rossem <vincent.vanrossem@camptocamp.com>
 - Italo Lopes <italo.lopes@camptocamp.com>
+- Maksym Yankin <maksym.yankin@camptocamp.com>
 
 Maintainers
 -----------
