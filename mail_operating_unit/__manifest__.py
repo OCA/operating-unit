@@ -3,13 +3,14 @@
 
 {
     "name": "Mail Operating Unit",
-    "version": "17.0.1.0.1",
+    "version": "17.0.2.0.0",
     "author": "Camptocamp, " "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Productivity/Discuss",
     "depends": ["mail", "operating_unit"],
     "data": [
+        # Views
         "views/mail_template.xml",
         "views/operating_unit.xml",
     ],
