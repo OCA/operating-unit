@@ -12,6 +12,7 @@ class StockLocation(models.Model):
         comodel_name="operating.unit",
         string="Operating Unit",
         check_company=True,
+        index=True,
     )
 
     @api.constrains("operating_unit_id")
