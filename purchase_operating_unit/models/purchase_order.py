@@ -16,6 +16,7 @@ class PurchaseOrder(models.Model):
             self.env["res.users"]._get_default_operating_unit(self.env.uid)
         ),
         check_company=True,
+        index=True,
     )
 
     requesting_operating_unit_id = fields.Many2one(
