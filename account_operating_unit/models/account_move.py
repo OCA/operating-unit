@@ -12,6 +12,7 @@ class AccountMoveLine(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         check_company=True,
+        index=True,
     )
 
     display_type = fields.Selection(
@@ -141,6 +142,7 @@ class AccountMove(models.Model):
         compute="_compute_operating_unit",
         store=True,
         check_company=True,
+        index=True,
     )
 
     @api.model
