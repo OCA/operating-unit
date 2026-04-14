@@ -11,4 +11,6 @@ class ProjectTask(models.Model):
         comodel_name="operating.unit",
         related="project_id.operating_unit_id",
         string="Operating Unit",
+        store=True,
+        index=True,
     )

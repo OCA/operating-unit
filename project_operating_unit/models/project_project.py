@@ -13,4 +13,5 @@ class ProjectProject(models.Model):
         default=lambda self: self.env["res.users"]._get_default_operating_unit(
             self._uid
         ),
+        index=True,
     )
