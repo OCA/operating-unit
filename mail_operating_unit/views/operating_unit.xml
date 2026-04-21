@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="alias_domain_id" />
+                <field name="mail_server_id" />
             </xpath>
         </field>
     </record>
@@ -17,6 +18,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="alias_domain_id" optional="show" />
+                <field name="mail_server_id" optional="show" />
             </xpath>
         </field>
     </record>
@@ -26,6 +28,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='code']" position="after">
                 <field name="alias_domain_id" string="Email Domain" />
+                <field name="mail_server_id" string="Outgoing Mail Server" />
             </xpath>
         </field>
     </record>
