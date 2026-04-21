@@ -35,7 +35,26 @@ msgstr ""
 
 #. module: mail_operating_unit
 #: model:ir.model,name:mail_operating_unit.model_operating_unit
+#: model:ir.model.fields,field_description:mail_operating_unit.field_mail_mail__operating_unit_id
 #: model:ir.model.fields,field_description:mail_operating_unit.field_mail_template__operating_unit_id
 #: model_terms:ir.ui.view,arch_db:mail_operating_unit.view_email_template_search
 msgid "Operating Unit"
+msgstr ""
+
+#. module: mail_operating_unit
+#: model:ir.model.fields,field_description:mail_operating_unit.field_operating_unit__mail_server_id
+#: model_terms:ir.ui.view,arch_db:mail_operating_unit.view_operating_unit_search
+msgid "Outgoing Mail Server"
+msgstr ""
+
+#. module: mail_operating_unit
+#: model:ir.model,name:mail_operating_unit.model_mail_mail
+msgid "Outgoing Mails"
+msgstr ""
+
+#. module: mail_operating_unit
+#: model:ir.model.fields,help:mail_operating_unit.field_operating_unit__mail_server_id
+msgid ""
+"Preferred outgoing mail server for emails sent for records belonging to this"
+" operating unit."
 msgstr ""
