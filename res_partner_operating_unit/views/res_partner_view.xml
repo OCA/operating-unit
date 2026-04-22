@@ -16,6 +16,7 @@
                     domain="[('company_id','=', company_id)]"
                     options="{'no_create': True}"
                     widget="many2many_tags"
+                    readonly="user_ids"
                 />
             </field>
         </field>
