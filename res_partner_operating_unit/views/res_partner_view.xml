@@ -13,6 +13,7 @@
                     groups="operating_unit.group_multi_operating_unit"
                     options="{'no_create': True}"
                     widget="many2many_tags"
+                    readonly="user_ids"
                 />
             </field>
         </field>
