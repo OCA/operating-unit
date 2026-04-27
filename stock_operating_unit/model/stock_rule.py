@@ -11,5 +11,4 @@ class StockRule(models.Model):
     operating_unit_id = fields.Many2one(
         "operating.unit",
         related="warehouse_id.operating_unit_id",
-        domain="[('user_ids', '=', uid)]",
     )
