@@ -12,3 +12,10 @@ class OperatingUnit(models.Model):
         string="Sale Order Sequence",
         help="Sequence of sale order with this operating unit",
     )
+
+    def _get_next_sale_order_number(self):
+        """Return the next sequence number for the operating unit's sale sequence."""
+        self.ensure_one()
+        if self.sale_sequence_id:
+            return self.sale_sequence_id.next_by_id()
+        return ""

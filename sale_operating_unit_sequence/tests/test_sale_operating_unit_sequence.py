@@ -7,15 +7,15 @@ from odoo.tests.common import TransactionCase
 class TestSaleOperatingUnitSequence(TransactionCase):
     @classmethod
     def setUpClass(cls):
+        """Set up test data for sale operating unit sequence tests."""
         super(TestSaleOperatingUnitSequence, cls).setUpClass()
         cls.sale_model = cls.env["sale.order"]
         cls.customer = cls.env["res.partner"].create({"name": "Customer"})
 
     def test_create_sequence(self):
-        # Test name != '/'
+        """Test that sale order creation uses and increments sequences correctly."""
         so1 = self.sale_model.create({"partner_id": self.customer.id})
         self.assertNotEqual(so1.name, "/", "Sequence created")
-        # Test name 1 != name 2
         so1_sequence = so1.name
         so2 = so1.copy()
         so2_sequence = so2.name

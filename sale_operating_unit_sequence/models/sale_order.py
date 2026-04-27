@@ -9,8 +9,18 @@ class SaleOrder(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get("name", "/") == "/" and vals.get("operating_unit_id", False):
-            ou_id = self.env["operating.unit"].browse(vals["operating_unit_id"])
-            if ou_id.sale_sequence_id:
-                vals["name"] = ou_id.sale_sequence_id.next_by_id()
+        """Override create to update name based on operating unit sequence."""
+        if vals.get("name", "/") == "/":
+            vals = self._update_sale_order_name(vals)
         return super().create(vals)
+
+    @api.model
+    def _update_sale_order_name(self, vals):
+        """Update sale order name in vals if operating unit has a sequence."""
+        operating_unit_id = vals.get("operating_unit_id")
+        if operating_unit_id:
+            ou_id = self.env["operating.unit"].browse(operating_unit_id)
+            name = ou_id._get_next_sale_order_number()
+            if name:
+                vals["name"] = name
+        return vals
