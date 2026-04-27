@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_location_form_all_ou" model="ir.ui.view">
+        <field name="name">stock.location.form.all.ou</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock_operating_unit.view_location_form" />
+        <field name="priority" eval="99" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_location_tree_all_ou" model="ir.ui.view">
+        <field name="name">stock.location.tree.all.ou</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock_operating_unit.view_location_tree2" />
+        <field name="priority" eval="99" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_location_search_all_ou" model="ir.ui.view">
+        <field name="name">stock.location.search.all.ou</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock_operating_unit.view_location_search" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_warehouse_form_all_ou" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.all.ou</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock_operating_unit.view_warehouse" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_warehouse_tree_all_ou" model="ir.ui.view">
+        <field name="name">stock.warehouse.tree.all.ou</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock_operating_unit.view_warehouse_tree" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_form_all_ou" model="ir.ui.view">
+        <field name="name">stock.picking.form.all.ou</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_operating_unit.view_picking_form" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="vpicktree_all_ou" model="ir.ui.view">
+        <field name="name">stock.picking.tree.all.ou</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_operating_unit.vpicktree" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock_operating_unit_access_all.group_all_ou_stock'))]"
+        />
+        <field name="priority" eval="99" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operating_unit_id']" position="replace">
+                <field
+                    name="operating_unit_id"
+                    domain="[('company_id','=', company_id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

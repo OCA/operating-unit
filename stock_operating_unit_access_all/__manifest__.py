@@ -11,6 +11,7 @@
     "depends": ["stock_operating_unit"],
     "data": [
         "security/stock_security.xml",
+        "views/stock_views.xml",
     ],
     "installable": True,
     "maintainers": ["kittiu"],
