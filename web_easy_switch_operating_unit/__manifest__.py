@@ -11,10 +11,10 @@
     "website": "https://github.com/OCA/operating-unit",
     "depends": ["web", "operating_unit"],
     "data": ["views/res_users_views.xml"],
-    'assets': {
-        'web.assets_backend': [
-            'web_easy_switch_operating_unit/static/src/js/*',
-            'web_easy_switch_operating_unit/static/src/xml/switch_operating_unit.xml',
+    "assets": {
+        "web.assets_backend": [
+            "web_easy_switch_operating_unit/static/src/js/*",
+            "web_easy_switch_operating_unit/static/src/xml/switch_operating_unit.xml",
         ],
-    }
+    },
 }
