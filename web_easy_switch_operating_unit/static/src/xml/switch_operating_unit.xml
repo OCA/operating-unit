@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+
+    <t t-name="SwitchOperatingUnitMenu">
+        <li class="o_switch_company_menu">
+            <a role="button" class="dropdown-toggle" data-toggle="dropdown" data-display="static" aria-expanded="false" href="#" title="Dropdown menu">
+                <span t-attf-class="#{widget.isMobile ? 'fa fa-building-o' : 'oe_topbar_name'}">
+                    <t t-if="!widget.isMobile">
+                        <t t-if="widget.current_operating_unit_name"><t t-esc="widget.current_operating_unit_name"/></t>
+                        <t t-if="!widget.current_operating_unit_name">No OU</t>
+                    </t>
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <div class="dropdown-item d-flex py-0 px-0" data-menu="operating_unit" data-operating-unit-id="0">
+                    <t t-set="is_current" t-value="0 === widget.current_operating_unit_id"/>
+                    <div role="button" t-att-aria-pressed="is_current" aria-label="Switch to this operating unit" tabindex="0" class="d-flex flex-grow-1 align-items-center py-0 log_into pl-3 o_py" t-att-style="is_current ? 'background-color: lightgrey;' : ''">
+                        <span class='mr-3 company_label'>
+                            Clear Operating Unit
+                        </span>
+                    </div>
+                </div>
+                <t t-foreach="widget.user_operating_units" t-as="operating_unit">
+                    <div class="dropdown-item d-flex py-0 px-0" data-menu="operating_unit" t-att-data-operating-unit-id="operating_unit[0]">
+                        <t t-set="is_allowed" t-value="widget.allowed_operating_unit_ids.includes(operating_unit[0])"/>
+                        <t t-set="is_current" t-value="operating_unit[0] === widget.current_operating_unit_id"/>
+                        <div role="button" t-att-aria-pressed="is_current" aria-label="Switch to this operating unit" tabindex="0" class="d-flex flex-grow-1 align-items-center py-0 log_into pl-3 o_py" t-att-style="is_current ? 'background-color: lightgrey;' : ''">
+                            <t t-if="is_allowed">
+                                <span class='mr-3 company_label'>
+                                    <t t-esc="operating_unit[1]"/>
+                                </span>
+                            </t>
+                            <t t-if="!is_allowed">
+                                <span class='mr-3 company_label text-muted'>
+                                    <t t-esc="operating_unit[1]"/>
+                                </span>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </li>
+    </t>
+
+</template>
