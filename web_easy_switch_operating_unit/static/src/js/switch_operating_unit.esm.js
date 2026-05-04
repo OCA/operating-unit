@@ -1,5 +1,6 @@
+/* eslint-disable jsdoc/check-tag-names */
 /** @odoo-module **/
-/* eslint parserOptions: { sourceType: "module" } */ 
+/* global window */
 
 import {Component} from "@odoo/owl";
 import {registry} from "@web/core/registry";
@@ -42,7 +43,7 @@ export class SwitchOperatingUnitMenu extends Component {
 
 const systrayItem = {
     Component: SwitchOperatingUnitMenu,
-    isDisplayed(env) {
+    isDisplayed() {
         return (
             session.user_operating_units &&
             session.user_operating_units.allowed_operating_units.length > 0
