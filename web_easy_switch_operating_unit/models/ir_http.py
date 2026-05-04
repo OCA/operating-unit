@@ -1,5 +1,4 @@
-# Copyright (C) 2016 ICTSTUDIO (<http://www.ictstudio.eu>).
-# Copyright (C) Startx 2021
+# Copyright (C) 2026 CIT-Services <https://cit-services.eu/>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import models
