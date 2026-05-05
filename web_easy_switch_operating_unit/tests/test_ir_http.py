@@ -1,7 +1,7 @@
 # Copyright (C) 2026 CIT-Services <https://cit-services.eu/>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
@@ -52,17 +52,12 @@ class TestIrHttp(TransactionCase):
         mock_request = MagicMock()
         mock_request.env.user = self.user
         mock_request.session.uid = self.user.id
+        mock_request.cookies = {}
 
-        with (
-            patch(
-                "odoo.addons.web_easy_switch_operating_unit.models.ir_http.request",
-                mock_request,
-            ),
-            patch(
-                "odoo.addons.web.models.ir_http.request",
-                mock_request,
-            ),
-        ):
+        import odoo.http
+
+        odoo.http._request_stack.push(mock_request)
+        try:
             info = self.env["ir.http"].with_user(self.user).session_info()
             self.assertIn("user_operating_units", info)
             ou_data = info["user_operating_units"]
@@ -79,22 +74,21 @@ class TestIrHttp(TransactionCase):
             self.assertIn(
                 (self.operating_unit_2.id, self.operating_unit_2.code), allowed_ous
             )
+        finally:
+            odoo.http._request_stack.pop()
 
     def test_session_info_portal_user(self):
         """Test session_info for portal user does not include operating unit data."""
         mock_request = MagicMock()
         mock_request.env.user = self.portal_user
         mock_request.session.uid = self.portal_user.id
+        mock_request.cookies = {}
 
-        with (
-            patch(
-                "odoo.addons.web_easy_switch_operating_unit.models.ir_http.request",
-                mock_request,
-            ),
-            patch(
-                "odoo.addons.web.models.ir_http.request",
-                mock_request,
-            ),
-        ):
+        import odoo.http
+
+        odoo.http._request_stack.push(mock_request)
+        try:
             info = self.env["ir.http"].with_user(self.portal_user).session_info()
             self.assertNotIn("user_operating_units", info)
+        finally:
+            odoo.http._request_stack.pop()
