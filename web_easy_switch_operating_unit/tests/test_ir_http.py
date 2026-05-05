@@ -2,10 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from unittest.mock import MagicMock, patch
-from odoo.tests import HttpCase, tagged
+
+from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
-@tagged('-at_install', 'post_install')
+
+@tagged("-at_install", "post_install")
 class TestIrHttp(TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -51,12 +53,15 @@ class TestIrHttp(TransactionCase):
         mock_request.env.user = self.user
         mock_request.session.uid = self.user.id
 
-        with patch(
-            "odoo.addons.web_easy_switch_operating_unit.models.ir_http.request",
-            mock_request,
-        ), patch(
-            "odoo.addons.web.models.ir_http.request",
-            mock_request,
+        with (
+            patch(
+                "odoo.addons.web_easy_switch_operating_unit.models.ir_http.request",
+                mock_request,
+            ),
+            patch(
+                "odoo.addons.web.models.ir_http.request",
+                mock_request,
+            ),
         ):
             info = self.env["ir.http"].with_user(self.user).session_info()
             self.assertIn("user_operating_units", info)
@@ -81,12 +86,15 @@ class TestIrHttp(TransactionCase):
         mock_request.env.user = self.portal_user
         mock_request.session.uid = self.portal_user.id
 
-        with patch(
-            "odoo.addons.web_easy_switch_operating_unit.models.ir_http.request",
-            mock_request,
-        ), patch(
-            "odoo.addons.web.models.ir_http.request",
-            mock_request,
+        with (
+            patch(
+                "odoo.addons.web_easy_switch_operating_unit.models.ir_http.request",
+                mock_request,
+            ),
+            patch(
+                "odoo.addons.web.models.ir_http.request",
+                mock_request,
+            ),
         ):
             info = self.env["ir.http"].with_user(self.portal_user).session_info()
             self.assertNotIn("user_operating_units", info)
