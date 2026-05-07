@@ -58,6 +58,13 @@ msgid "<strong>Operating unit details block</strong>"
 msgstr ""
 
 #. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.view_operating_unit_form
+msgid ""
+"Address and other information that appear on the report can be changed on "
+"the partner form"
+msgstr ""
+
+#. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
@@ -128,6 +135,7 @@ msgid "Is Operating Unit Details Empty"
 msgstr ""
 
 #. module: report_qweb_operating_unit
+#: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__partner_image
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
