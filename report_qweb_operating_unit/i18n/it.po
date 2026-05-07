@@ -19,72 +19,106 @@ msgstr ""
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "<strong>Company address block</strong>"
 msgstr "<strong>Blocco indirizzo azienda</strong>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "<strong>Company details block</strong>"
 msgstr "<strong>Blocco dettagli azienda</strong>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "<strong>Operating Unit address block</strong>"
 msgstr "<strong>Blocco indirizzo unità operativa</strong>"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "<strong>Operating unit details block</strong>"
 msgstr "<strong>Blocco dettagli unità operativa</strong>"
 
 #. module: report_qweb_operating_unit
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.view_operating_unit_form
+msgid ""
+"Address and other information that appear on the report can be changed on "
+"the partner form"
+msgstr ""
+
+#. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Company tagline"
 msgstr "Slogan azienda"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Contains the company address."
 msgstr "Contiene l'indirizzo dell'azienda."
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Contains the company details."
 msgstr "Contiene i dettagli dell'azienda."
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Contains the operating unit address."
 msgstr "Contiene l'indirizzo dell'unità operativa."
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Contains the operating unit details."
 msgstr "Contiene i dettagli dell'unità operativa."
 
@@ -104,17 +138,24 @@ msgid "Is Operating Unit Details Empty"
 msgstr "I dettagli dell'unità operativa sono vuoti"
 
 #. module: report_qweb_operating_unit
+#: model:ir.model.fields,field_description:report_qweb_operating_unit.field_operating_unit__partner_image
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Logo"
 msgstr "Logo"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid ""
 "Operating\n"
 "                    Unit tagline"
@@ -164,15 +205,21 @@ msgstr "Schema resoconto"
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "Tax ID"
 msgstr "Partita IVA"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_boxed_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bubble_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_folder_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_standard_ou
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_striped_ou
+#: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_wave_ou
 msgid "US12345671"
 msgstr "US12345671"
