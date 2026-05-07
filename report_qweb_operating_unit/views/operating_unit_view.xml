@@ -9,6 +9,16 @@
                 <notebook>
                     <page string="Report Layout">
                         <group>
+                            <field
+                                name="partner_image"
+                                widget="image"
+                                options="{'size': [100, 100]}"
+                            />
+                            <p
+                                class="alert alert-info"
+                                colspan="2"
+                                role="alert"
+                            >Address and other information that appear on the report can be changed on the partner form</p>
                             <field name="report_header" />
                             <field name="report_footer" />
                             <field name="operating_unit_details" />
