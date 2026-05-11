@@ -2,6 +2,7 @@
 # Copyright (C) 2019 Serpent Consulting Services
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 from odoo.fields import Domain
 
 
@@ -14,7 +15,33 @@ class ResPartner(models.Model):
         column1="partner_id",
         column2="operating_unit_id",
         string="Operating Units",
+        compute="_compute_operating_unit_ids",
+        readonly=False,
+        store=True,
     )
+
+    @api.depends("user_ids.assigned_operating_unit_ids")
+    def _compute_operating_unit_ids(self):
+        for partner in self:
+            if partner.user_ids:
+                partner.operating_unit_ids = (
+                    partner.user_ids.assigned_operating_unit_ids
+                )
+
+    @api.constrains("operating_unit_ids")
+    def _check_operating_unit_ids(self):
+        for partner in self:
+            if partner.user_ids:
+                expected = partner.user_ids.mapped("assigned_operating_unit_ids")
+                if partner.operating_unit_ids != expected:
+                    raise UserError(
+                        self.env._(
+                            "Operating units on a partner linked to a user must match "
+                            "the user's operating units. "
+                            "Please update the operating units "
+                            "on the related user(s) instead."
+                        )
+                    )
 
     @api.model
     def _user_ous_domain(self):
