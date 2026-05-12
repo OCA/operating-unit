@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-02-17 08:00+0000\n"
+"PO-Revision-Date: 2026-05-12 06:47+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -66,6 +66,8 @@ msgid ""
 "Address and other information that appear on the report can be changed on "
 "the partner form"
 msgstr ""
+"L'indirizzo e altre informazioni che compaiono nel resoconto possono essere "
+"modificate nel modulo partner"
 
 #. module: report_qweb_operating_unit
 #: model_terms:ir.ui.view,arch_db:report_qweb_operating_unit.external_layout_bold_ou
