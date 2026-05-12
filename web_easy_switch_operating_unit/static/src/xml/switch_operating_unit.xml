@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="web_easy_switch_operating_unit.SwitchOperatingUnitMenu">
+        <div class="o_switch_company_menu dropdown">
+            <a
+                role="button"
+                class="dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                href="#"
+            >
+                <span class="oe_topbar_name">
+                    <i class="fa fa-building-o d-md-none" />
+                    <span class="d-none d-md-inline-block">
+                        <t
+                            t-if="current_operating_unit_name"
+                            t-esc="current_operating_unit_name"
+                        />
+                        <t t-else="">No OU</t>
+                    </span>
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" role="menu">
+                <div
+                    class="dropdown-item d-flex py-0 px-0"
+                    role="button"
+                    t-on-click="() => this.onSwitchOperatingUnitClick(0)"
+                >
+                    <div
+                        t-attf-class="d-flex flex-grow-1 align-items-center py-2 px-3 {{ current_operating_unit_id === 0 ? 'bg-100' : '' }}"
+                    >
+                        <span class="company_label">Clear Operating Unit</span>
+                    </div>
+                </div>
+
+                <t
+                    t-foreach="user_operating_units"
+                    t-as="operating_unit"
+                    t-key="operating_unit[0]"
+                >
+                    <t
+                        t-set="is_allowed"
+                        t-value="allowed_operating_unit_ids.includes(operating_unit[0])"
+                    />
+                    <t
+                        t-set="is_current"
+                        t-value="operating_unit[0] === current_operating_unit_id"
+                    />
+
+                    <div
+                        class="dropdown-item d-flex py-0 px-0"
+                        role="button"
+                        t-on-click="() => this.onSwitchOperatingUnitClick(operating_unit[0])"
+                    >
+                        <div
+                            t-attf-class="d-flex flex-grow-1 align-items-center py-2 px-3 {{ is_current ? 'bg-100' : '' }}"
+                        >
+                            <span
+                                t-attf-class="company_label {{ is_allowed ? '' : 'text-muted' }}"
+                            >
+                                <t t-esc="operating_unit[1]" />
+                            </span>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+</templates>
