@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "MIS Builder Budget with Operating Unit",
-    "version": "14.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Reporting",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
