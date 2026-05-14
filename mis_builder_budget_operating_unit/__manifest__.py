@@ -1,4 +1,5 @@
 # Copyright (C) 2018 by Camptocamp
+# Copyright (C) 2026 by CIT-Services
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "MIS Builder Budget with Operating Unit",
