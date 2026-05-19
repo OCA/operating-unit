@@ -39,28 +39,39 @@ class SaleOrder(models.Model):
     @api.depends("operating_unit_id")
     def _compute_journal_id(self):
         res = super()._compute_journal_id()
+        Journal = self.env["account.journal"]
         for sale in self:
             if not sale.journal_id or (
                 sale.journal_id
                 and sale.operating_unit_id
                 and sale.journal_id.operating_unit_id != sale.operating_unit_id
             ):
-                sale.journal_id = (
-                    self.env["account.journal"]
-                    .search(
-                        [
-                            "|",
-                            ("operating_unit_id", "=", sale.operating_unit_id.id),
-                            ("operating_unit_id", "=", False),
-                            "|",
-                            ("company_id", "=", sale.company_id.id),
-                            ("company_id", "=", False),
-                            ("type", "=", "sale"),
-                        ],
+                base_domain = [
+                    ("type", "=", "sale"),
+                    "|",
+                    ("company_id", "=", sale.company_id.id),
+                    ("company_id", "=", False),
+                ]
+                # Strict: prefer a journal whose OU matches. Only fall
+                # back to a no-OU journal if no matching one exists.
+                # The previous OR-based domain mixed both and could
+                # pick a no-OU journal even when a matching one
+                # existed, which then trips
+                # account_operating_unit._check_journal_operating_unit
+                # downstream when the invoice is created.
+                journal = Journal
+                if sale.operating_unit_id:
+                    journal = Journal.search(
+                        base_domain
+                        + [("operating_unit_id", "=", sale.operating_unit_id.id)],
                         limit=1,
                     )
-                    .id
-                )
+                if not journal:
+                    journal = Journal.search(
+                        base_domain + [("operating_unit_id", "=", False)],
+                        limit=1,
+                    )
+                sale.journal_id = journal.id
         return res
 
     @api.constrains("team_id", "operating_unit_id")
