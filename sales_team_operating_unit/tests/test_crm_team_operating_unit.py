@@ -2,7 +2,7 @@
 # Copyright 2017-TODAY Serpent Consulting Services Pvt. Ltd.
 #   (<http://www.serpentcs.com>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestSaleTeamOperatingUnit(common.TransactionCase):
@@ -68,6 +68,18 @@ class TestSaleTeamOperatingUnit(common.TransactionCase):
     def test_crm_team(self):
         # User 2 is only assigned to B2C Operating Unit, and cannot
         # access CRM teams for Main Operating Unit.
+
+        with Form(
+            self.crm_team_model, view="sales_team.crm_team_view_form"
+        ) as crm_form:
+            crm_form.name = "Test CRM Team"
+            crm_form.operating_unit_id = self.ou1
+            self.assertEqual(
+                crm_form.company_id,
+                self.ou1.company_id,
+                "Company should be same as Operating Unit company",
+            )
+
         team = self.crm_team_model.with_user(self.user2.id).search(
             [("id", "=", self.team1.id), ("operating_unit_id", "=", self.ou1.id)]
         )
