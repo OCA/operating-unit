@@ -26,14 +26,11 @@ class IrActionsActWindow(models.Model):
             if (
                 not res_model
                 or res_model not in self.env
-                or "operating_unit_id"
-                not in self.env[res_model]._fields
+                or "operating_unit_id" not in self.env[res_model]._fields
             ):
                 continue
 
-            ou_domain = [
-                ("operating_unit_id", "in", [False, user_ou.id])
-            ]
+            ou_domain = [("operating_unit_id", "in", [False, user_ou.id])]
 
             domain = []
             if action.get("domain"):
@@ -42,8 +39,6 @@ class IrActionsActWindow(models.Model):
                 except (ValueError, SyntaxError, TypeError):
                     continue
 
-            action["domain"] = expression.AND(
-                [domain, ou_domain]
-            )
+            action["domain"] = expression.AND([domain, ou_domain])
 
         return result
