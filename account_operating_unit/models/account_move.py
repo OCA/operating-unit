@@ -130,10 +130,10 @@ class AccountMove(models.Model):
     def _onchange_operating_unit(self):
         if self.operating_unit_id and (
             not self.journal_id
-            or self.journal_id.operating_unit_id != self.operating_unit_id
+            or self.journal_id.sudo().operating_unit_id != self.operating_unit_id
         ):
             journal = self.env["account.journal"].search(
-                [("type", "=", self.journal_id.type)]
+                [("type", "=", self.journal_id.sudo().type)]
             )
             jf = journal.filtered(
                 lambda aj: aj.operating_unit_id == self.operating_unit_id
