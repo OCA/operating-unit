@@ -12,28 +12,21 @@ class MailMail(models.Model):
 
     operating_unit_id = fields.Many2one("operating.unit", string="Operating Unit")
 
-    def _send(
-        self,
-        auto_commit=False,
-        raise_exception=False,
-        smtp_session=None,
-        alias_domain_id=False,
-    ):
-        # OVERRIDE: to assign an OU mail server when no explicit mail server is set.
+    def _resolve_operating_unit_mail_server(self):
+        """Assign the OU outgoing mail server on mails that have none.
 
-        # Template mail server keeps the highest priority,
-        # because it is already stored on ``mail.mail.mail_server_id``
-        # before this method is called.
-        no_mail_server_mails = self.filtered(
+        Iterates over mails without a ``mail_server_id`` that are linked to a
+        record, and assigns the OU mail server when one can be resolved.
+        Mails that already have a server set (e.g. from a template) are left
+        untouched.
+        """
+        no_server_mails = self.filtered(
             lambda mail: not mail.mail_server_id and mail.model and mail.res_id
         )
-        for mail in no_mail_server_mails:
-            # Check if the related record actually exists,
-            # as the mail could be linked to a deleted record.
+        for mail in no_server_mails:
             record = self.env[mail.model].browse(mail.res_id).exists()
             if not record:
                 continue
-
             if mail_server := record._mail_get_operating_unit_mail_server():
                 mail.write({"mail_server_id": mail_server.id})
                 # Log the information about the resolved mail server
@@ -56,6 +49,26 @@ class MailMail(models.Model):
                     record.id,
                 )
 
+    def _split_by_mail_configuration(self):
+        # OVERRIDE: pre-assign the OU mail server before grouping so the SMTP
+        # session is opened on the correct server from the start.
+        # See ``_resolve_operating_unit_mail_server()`` for the resolution logic.
+        self._resolve_operating_unit_mail_server()
+        return super()._split_by_mail_configuration()
+
+    def _send(
+        self,
+        auto_commit=False,
+        raise_exception=False,
+        smtp_session=None,
+        alias_domain_id=False,
+    ):
+        # SAFETY NET: ``_split_by_mail_configuration()`` already pre-assigns
+        # ``mail_server_id`` from the OU before this method is called through the
+        # normal ``send()`` flow, so this will typically be a no-op.
+        # Kept as a fallback for any direct call to ``_send()`` that bypasses
+        # ``_split_by_mail_configuration()``.
+        self._resolve_operating_unit_mail_server()
         return super()._send(
             auto_commit=auto_commit,
             raise_exception=raise_exception,
