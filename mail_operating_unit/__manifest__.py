@@ -3,7 +3,7 @@
 
 {
     "name": "Mail Operating Unit",
-    "version": "17.0.2.0.0",
+    "version": "17.0.2.0.1",
     "author": "Camptocamp, " "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
