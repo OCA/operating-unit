@@ -103,3 +103,16 @@ class TestOperatingUnitIsolation(common.TransactionCase):
         self.assertIn("|", called_domain)
         self.assertIn(("operating_unit_id", "=", False), called_domain)
         self.assertIn(("operating_unit_id", "in", [self.ou1.id]), called_domain)
+
+    def test_search_isolation_automatic_fallback_parent(self):
+        called_domain = self._run_search_isolation(
+            context_record={
+                "_name": "res.partner",
+                "_field": "test_field",
+            },
+            context_parent_record={"operating_unit_id": self.ou2.id},
+            has_isolation_attr=False,
+        )
+        self.assertIn("|", called_domain)
+        self.assertIn(("operating_unit_id", "=", False), called_domain)
+        self.assertIn(("operating_unit_id", "in", [self.ou2.id]), called_domain)
