@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class BaseOperatingUnitIsolation(models.AbstractModel):
-    _name = "base_operating_unit_isolation"
+    _name = "base.operating.unit.isolation"
     _description = "Extend AbstractModel for Operation Unit Isolation"
 
     def _register_hook(self):
@@ -35,27 +35,32 @@ class BaseOperatingUnitIsolation(models.AbstractModel):
                     fld = self.env[record["_name"]]._fields[record["_field"]]
 
                     isolation_val = getattr(fld, "operating_unit_isolation", False)
-                    if not isolation_val:
-                        parent_record = self.env.context.get("parent_record", {})
-                        isolation_val = parent_record.get("operating_unit_id.name")
+                    filter_ou = False
 
                     if isolation_val:
                         isolation = isolation_val.split(".")
-                        filter_ou = False
                         if len(isolation) == 2:
                             parent_record = self.env.context.get("parent_record", {})
                             filter_ou = parent_record.get(isolation[1])
                         elif len(isolation) == 1:
                             filter_ou = record.get(isolation[0])
-                        if filter_ou:
-                            domain = list(domain) if domain else []
-                            domain.extend(
-                                [
-                                    "|",
-                                    (ou_field, "=", False),
-                                    (ou_field, "in", [filter_ou]),
-                                ]
-                            )
+                    else:
+                        if "operating_unit_id" in record:
+                            filter_ou = record.get("operating_unit_id")
+                        else:
+                            parent_record = self.env.context.get("parent_record", {})
+                            if parent_record and "operating_unit_id" in parent_record:
+                                filter_ou = parent_record.get("operating_unit_id")
+
+                    if filter_ou:
+                        domain = list(domain) if domain else []
+                        domain.extend(
+                            [
+                                "|",
+                                (ou_field, "=", False),
+                                (ou_field, "in", [filter_ou]),
+                            ]
+                        )
 
                 return origin_search(self, domain, *args, **kwargs)
 

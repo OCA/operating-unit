@@ -62,7 +62,7 @@ class SaleOrderLine(models.Model):
   - **Empty Value Handling**: Explicitly includes an `OR` condition allowing
     records with no assigned operating unit (`False`) to be universally
     selectable.
-  - **Odoo 18 Compatibility Fallback**: Automatically applies the
-    `order_id.operating_unit_id` isolation for `product_template_id` and
-    `product_id` on the `sale.order.line` model natively, without requiring
-    the property to be explicitly defined on the field.
+  - **Automatic Fallback**: Automatically applies the `operating_unit_id`
+    isolation natively, without requiring the property to be explicitly defined
+    on the field. It uses the parent model's operating unit when the child model
+    doesn't have one.

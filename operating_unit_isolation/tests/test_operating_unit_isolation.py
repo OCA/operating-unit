@@ -11,7 +11,7 @@ class TestOperatingUnitIsolation(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env["base_operating_unit_isolation"]._register_hook()
+        cls.env["base.operating.unit.isolation"]._register_hook()
         partner_id = cls.env.user.partner_id.id
 
         unique_code1 = f"OU1_{uuid.uuid4().hex[:8]}"

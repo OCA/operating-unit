@@ -459,11 +459,10 @@ model uses a Many2one (<tt class="docutils literal">operating_unit_id</tt>) or M
 <li><strong>Empty Value Handling</strong>: Explicitly includes an <tt class="docutils literal">OR</tt> condition
 allowing records with no assigned operating unit (<tt class="docutils literal">False</tt>) to be
 universally selectable.</li>
-<li><strong>Odoo 18 Compatibility Fallback</strong>: Automatically applies the
-<tt class="docutils literal">order_id.operating_unit_id</tt> isolation for <tt class="docutils literal">product_template_id</tt>
-and <tt class="docutils literal">product_id</tt> on the <tt class="docutils literal">sale.order.line</tt> model natively,
-without requiring the property to be explicitly defined on the
-field.</li>
+<li><strong>Automatic Fallback</strong>: Automatically applies the
+<tt class="docutils literal">operating_unit_id</tt> isolation natively, without requiring the
+property to be explicitly defined on the field. It uses the parent
+model’s operating unit when the child model doesn’t have one.</li>
 </ul>
 </li>
 </ul>
