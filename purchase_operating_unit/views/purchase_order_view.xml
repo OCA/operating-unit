@@ -48,7 +48,7 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@expand='0']" position="after">
+            <xpath expr="//group/filter[@name='order_date']" position="after">
                 <filter
                     string="Operating Unit"
                     name="operating_unit_grouped"
