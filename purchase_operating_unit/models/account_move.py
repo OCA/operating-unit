@@ -1,6 +1,7 @@
 # Copyright 2015-17 ForgeFlow S.L.
 # - Jordi Ballester Alomar
 # Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2026-27 CIT Services - Solomon Prabu
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import api, models
 from odoo.exceptions import ValidationError
