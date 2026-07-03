@@ -3,12 +3,10 @@
 # Copyright 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # © 2026-27 CIT Services - Solomon Prabu
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-import time
-
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.models import Command
 from odoo.tests import Form
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
@@ -67,9 +65,9 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
                 "qty_received_manual": qty,
                 "product_uom": product.uom_id.id,
                 "price_unit": 50,
-                "date_planned": time.strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+                "date_planned": fields.Datetime.now(),
             }
-            lines.append((0, 0, line_values))
+            lines.append(Command.create(line_values))
         purchase = cls.PurchaseOrder.with_user(user_id).create(
             {
                 "operating_unit_id": cls.ou1.id,
