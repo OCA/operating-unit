@@ -1,13 +1,13 @@
 # © 2015-17 ForgeFlow S.L.
 # - Jordi Ballester Alomar
 # © 2015-17 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
+# © 2026-27 CIT Services - Solomon Prabu
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 {
     "name": "Operating Unit in Purchase Orders",
-    "summary": "Adds the concecpt of operating unit (OU) in purchase order "
-    "management",
-    "version": "18.0.1.0.0",
+    "summary": "Adds the concecpt of operating unit (OU) in purchase order management",
+    "version": "19.0.1.0.0",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
