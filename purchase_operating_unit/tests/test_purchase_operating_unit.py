@@ -38,14 +38,14 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
         # Update users
         cls.user1.write(
             {
-                "groups_id": [
+                "group_ids": [
                     Command.link(cls.group_purchase_user.id),
                 ],
             }
         )
         cls.user2.write(
             {
-                "groups_id": [
+                "group_ids": [
                     Command.link(cls.group_purchase_user.id),
                 ],
                 "operating_unit_ids": [Command.set([cls.b2b.id])],
