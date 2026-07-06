@@ -70,7 +70,7 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
                 "product_id": product.id,
                 "product_qty": qty,
                 "qty_received_manual": qty,
-                "product_uom": product.uom_id.id,
+                "product_uom_id": product.uom_id.id,
                 "price_unit": 50,
                 "date_planned": fields.Datetime.now(),
             }
