@@ -21,9 +21,15 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
         # groups
         cls.group_purchase_user = cls.env.ref("purchase.group_purchase_user")
         # Products
-        cls.product1 = cls.env.ref("product.product_product_7")
-        cls.product2 = cls.env.ref("product.product_product_9")
-        cls.product3 = cls.env.ref("product.product_product_11")
+        cls.product1 = cls.env["product.product"].create(
+            {"name": "Product 1", "type": "consu"}
+        )
+        cls.product2 = cls.env["product.product"].create(
+            {"name": "Product 2", "type": "consu"}
+        )
+        cls.product3 = cls.env["product.product"].create(
+            {"name": "Product 3", "type": "consu"}
+        )
         (cls.product1 | cls.product2).write({"purchase_method": "purchase"})
         # Account
         cls.account = cls.AccountAccount.search(
