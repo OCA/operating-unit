@@ -51,6 +51,7 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
                 "operating_unit_ids": [Command.set([cls.b2b.id])],
             }
         )
+        cls.partner1 = cls.env["res.partner"].create({"name": "Partner 1"})
         cls.purchase1 = cls._create_purchase(
             cls.user1,
             [(cls.product1, 1000), (cls.product2, 500), (cls.product3, 800)],
