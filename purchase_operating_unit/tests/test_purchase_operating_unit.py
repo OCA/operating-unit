@@ -5,7 +5,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.models import Command
+from odoo.fields import Command
 from odoo.tests import Form
 
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
