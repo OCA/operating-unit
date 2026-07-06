@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_purchase_order_search" model="ir.ui.view">
+        <field name="name">report.purchase.order.search</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+            <xpath expr="//filter[@name='company']" position="after">
+                <filter
+                    string="Operating Unit"
+                    name="group_operating_unit_id"
+                    context="{'group_by': 'operating_unit_id'}"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
