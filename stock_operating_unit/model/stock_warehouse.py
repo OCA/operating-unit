@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L.
 # Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -20,7 +20,7 @@ class StockWarehouse(models.Model):
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
         string="Operating Unit",
-        default=_default_operating_unit,
+        default=lambda self: self._default_operating_unit(),
         check_company=True,
     )
 
@@ -42,7 +42,7 @@ class StockWarehouseOrderPoint(models.Model):
                 != rec.location_id.operating_unit_id
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration Error. The Operating Unit of the "
                         "Warehouse and the Location must be the same. "
                     )
