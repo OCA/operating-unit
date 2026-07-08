@@ -59,7 +59,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         self.assertEqual(
             location_ids,
             [],
-            "User 2 should not be able to list" "the locations assigned to Main OU.",
+            "User 2 should not be able to listthe locations assigned to Main OU.",
         )
         pickings = [self.picking_in1.id, self.picking_in2.id, self.picking_int.id]
         # User 1 can list the pickings 1, 2, 3
@@ -69,7 +69,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         self.assertNotEqual(
             picking_ids,
             [],
-            "User 1 cannot list the" "pickings assigned to pickings 1, 2, 3.",
+            "User 1 cannot list thepickings assigned to pickings 1, 2, 3.",
         )
         # User 1 can list the stock moves assigned to pickings 1, 2, 3
         move_ids = (
@@ -80,7 +80,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         self.assertNotEqual(
             move_ids,
             [],
-            "User 1 cannot list the" "stock moves assigned to pickings 1, 2, 3.",
+            "User 1 cannot list thestock moves assigned to pickings 1, 2, 3.",
         )
         # User 2 cannot list the the stock moves assigned to picking 1
         move_ids = (
@@ -91,8 +91,7 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
         self.assertEqual(
             move_ids,
             [],
-            "User 2 should not be able to list the "
-            "stock moves assigned to picking 1.",
+            "User 2 should not be able to list the stock moves assigned to picking 1.",
         )
         # User 2 can list the picking 1
         picking_ids = (
@@ -101,5 +100,5 @@ class TestStockPicking(test_stock_ou.TestStockOperatingUnit):
             .ids
         )
         self.assertEqual(
-            len(picking_ids), 1, "User 2 should be able to list" "the picking 1."
+            len(picking_ids), 1, "User 2 should be able to listthe picking 1."
         )
