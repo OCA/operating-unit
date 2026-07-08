@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L.
 # Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -30,7 +30,7 @@ class StockLocation(models.Model):
             for w in warehouses:
                 if w.operating_unit_id and rec.operating_unit_id != w.operating_unit_id:
                     raise UserError(
-                        _(
+                        self.env._(
                             "Configuration error. This location is "
                             "assigned to a warehouse that belongs to"
                             " a different operating unit."
@@ -42,7 +42,7 @@ class StockLocation(models.Model):
         for rec in self:
             if rec.usage in ("supplier", "customer") and rec.operating_unit_id:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration error. The operating unit should be "
                         "assigned to internal locations only."
                     )
@@ -58,7 +58,7 @@ class StockLocation(models.Model):
                 and rec.operating_unit_id != rec.location_id.operating_unit_id
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration error. The Parent Stock Location "
                         "must belong to the same Operating Unit."
                     )

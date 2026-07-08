@@ -17,7 +17,6 @@
         <field name="code">B2B</field>
         <field name="partner_id" ref="base.main_partner" />
         <field name="company_id" ref="base.main_company" />
-        <field name="operating_unit_id" ref="operating_unit.b2b_operating_unit" />
     </record>
     <!-- B2C -->
     <record id="stock_warehouse_b2c" model="stock.warehouse">
@@ -25,6 +24,5 @@
         <field name="code">B2C</field>
         <field name="partner_id" ref="base.main_partner" />
         <field name="company_id" ref="base.main_company" />
-        <field name="operating_unit_id" ref="operating_unit.b2c_operating_unit" />
     </record>
 </odoo>

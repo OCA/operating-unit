@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L.
 # Copyright 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -27,7 +27,7 @@ class StockMove(models.Model):
             ou_dest = stock_move.operating_unit_dest_id or False
             if ou_src and ou_pick and (ou_src != ou_pick) and (ou_dest != ou_pick):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Configuration error. The Stock moves must "
                         "be related to a location (source or destination) "
                         "that belongs to the requesting Operating Unit."
