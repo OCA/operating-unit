@@ -3,7 +3,7 @@
 
 {
     "name": "Sale Order Sequence by Operating Unit",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "category": "Sale",
     "author": "Ecosoft, Odoo Community Association (OCA)",
