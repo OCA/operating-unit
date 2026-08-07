@@ -56,3 +56,60 @@ class OperatingUnit(models.Model):
     def write(self, vals):
         self.env.registry.clear_cache()
         return super().write(vals)
+
+    def button_open_linked_users(self):
+        self.ensure_one()
+        action = self.env.ref(
+            "base.action_res_users",
+            raise_if_not_found=False,
+        )
+        if not action:
+            return False
+        action_vals = action.read()[0]
+
+        user_ids = set(self.user_ids.ids)
+        group = self.env.ref(
+            "operating_unit.group_manager_operating_unit",
+            raise_if_not_found=False,
+        )
+        if group:
+            user_ids.update(group.users.ids)
+
+        user_ids = list(user_ids)
+
+        context = action_vals.get("context", {})
+        if isinstance(context, str):
+            from odoo.tools.safe_eval import safe_eval
+
+            context = safe_eval(context)
+
+        context.update(
+            {
+                "create": False,
+                "edit": False,
+                "delete": False,
+            }
+        )
+        action_vals["context"] = context
+
+        if not user_ids:
+            return action_vals
+
+        action_vals["domain"] = [("id", "in", user_ids)]
+        if len(user_ids) == 1:
+            form_view = self.env.ref("base.view_users_form")
+            action_vals.update(
+                {
+                    "views": [(form_view.id, "form")],
+                    "view_mode": "form",
+                    "res_id": user_ids[0],
+                }
+            )
+        else:
+            action_vals.update(
+                {
+                    "views": [(False, "list"), (False, "form")],
+                    "view_mode": "list,form",
+                }
+            )
+        return action_vals
