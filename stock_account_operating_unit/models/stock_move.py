@@ -16,6 +16,7 @@ class StockMove(models.Model):
         credit_value,
         debit_account_id,
         credit_account_id,
+        svl_id,
         description,
     ):
         res = super(StockMove, self)._generate_valuation_lines_data(
@@ -25,6 +26,7 @@ class StockMove(models.Model):
             credit_value,
             debit_account_id,
             credit_account_id,
+            svl_id,
             description,
         )
         if res:
@@ -102,13 +104,12 @@ class StockMove(models.Model):
                         move.product_id.standard_price,
                         acc_valuation,
                         acc_valuation,
+                        False,
                         _("%s - OU Move") % move.product_id.display_name,
                     )
                     am = (
                         self.env["account.move"]
-                        .with_context(
-                            company_id=move.company_id.id,
-                        )
+                        .with_company(move.company_id)
                         .create(
                             {
                                 "journal_id": journal_id,
@@ -118,7 +119,6 @@ class StockMove(models.Model):
                                 "stock_move_id": move.id,
                             }
                         )
-                        .with_company(move.location_id.company_id.id)
                     )
-                    am.action_post()
-            return res
+                    am._post()
+        return res

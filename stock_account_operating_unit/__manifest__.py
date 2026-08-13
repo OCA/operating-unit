@@ -7,7 +7,7 @@
     "name": "Stock account moves with Operating Unit",
     "summary": "Create journal entries in moves between internal locations "
     "with different operating units.",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
