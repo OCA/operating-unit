@@ -16,7 +16,6 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         self.account_model = self.env["account.account"]
         self.product_model = self.env["product.product"]
         self.product_cteg_model = self.env["product.category"]
-        self.acc_type_model = self.env["account.account.type"]
         self.operating_unit_model = self.env["operating.unit"]
         self.company_model = self.env["res.company"]
         self.move_model = self.env["stock.move"]
@@ -55,24 +54,24 @@ class TestStockAccountOperatingUnit(TestStockCommon):
         # Create account for Goods Received Not Invoiced
         name = "Goods Received Not Invoiced"
         code = "grni"
-        acc_type = self.env.ref("account.data_account_type_equity")
+        acc_type = "equity"
         self.account_grni = self._create_account(acc_type, name, code, self.company)
         # Create account for Cost of Goods Sold
         name = "Cost of Goods Sold"
         code = "cogs"
-        acc_type = self.env.ref("account.data_account_type_expenses")
+        acc_type = "expense"
         self.account_cogs_id = self._create_account(acc_type, name, code, self.company)
         # Create account for Inventory
         name = "Inventory"
         code = "inventory"
-        acc_type = self.env.ref("account.data_account_type_fixed_assets")
+        acc_type = "asset_fixed"
         self.account_inventory = self._create_account(
             acc_type, name, code, self.company
         )
         # Create account for Inter-OU Clearing
         name = "Inter-OU Clearing"
-        code = "inter_ou"
-        acc_type = self.env.ref("account.data_account_type_equity")
+        code = "inter.ou"
+        acc_type = "equity"
         self.account_inter_ou_clearing = self._create_account(
             acc_type, name, code, self.company
         )
@@ -118,7 +117,7 @@ class TestStockAccountOperatingUnit(TestStockCommon):
             {
                 "name": name,
                 "code": code,
-                "user_type_id": acc_type.id,
+                "account_type": acc_type,
                 "company_id": company.id,
             }
         )
@@ -135,15 +134,20 @@ class TestStockAccountOperatingUnit(TestStockCommon):
                 "property_stock_account_output_categ_id": self.account_cogs_id,
             }
         )
-        product = self.product_model.create(
-            {
-                "name": "test_product",
-                "categ_id": product_cteg.id,
-                "type": "product",
-                "list_price": 1.0,
-                "standard_price": 1.0,
-            }
-        )
+        product_vals = {
+            "name": "test_product",
+            "categ_id": product_cteg.id,
+            "type": "product",
+            "list_price": 1.0,
+            "standard_price": 1.0,
+        }
+        if "operating_unit_ids" in self.product_model._fields:
+            # When product_operating_unit is installed, product.template
+            # defaults operating_unit_ids to the creating user's own OU,
+            # which would make the product inaccessible to test users
+            # scoped to a different OU. Keep it unrestricted for this test.
+            product_vals["operating_unit_ids"] = [(6, 0, [])]
+        product = self.product_model.create(product_vals)
         return product
 
     def _create_picking(self, user, ou_id, picking_type, src_loc_id, dest_loc_id):
