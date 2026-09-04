@@ -3,21 +3,53 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import Command
 from odoo.exceptions import UserError
+from odoo.tests import common
 
-from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
-
-class TestResPartnerOperatingUnit(OperatingUnitCommon):
+class TestResPartnerOperatingUnit(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(
             context=dict(cls.env.context, tracking_disable=True, no_reset_password=True)
         )
+        cls.res_users_model = cls.env["res.users"]
+        # Groups
+        cls.grp_ou_mngr = cls.env.ref("operating_unit.group_manager_operating_unit")
+        # Company: reuse the existing demo company instead of creating a new
+        # one, since res.company.create() can hit a NOT NULL constraint from
+        # a field (e.g. account's fiscalyear_last_day) added by a module
+        # that hasn't loaded yet at this point in a wide multi-module test run.
+        cls.company = cls.env.ref("base.main_company")
+        # Main Operating Unit
+        cls.ou1 = cls.env.ref("operating_unit.main_operating_unit")
+        # B2C Operating Unit
+        cls.b2c = cls.env.ref("operating_unit.b2c_operating_unit")
+        # Create User 1 with Main OU
+        cls.user1 = cls._create_user("user_1", cls.grp_ou_mngr, cls.company, cls.ou1)
+        # Create User 2 with B2C OU
+        cls.user2 = cls._create_user("user_2", cls.grp_ou_mngr, cls.company, cls.b2c)
         # Create Partner 1 with Main OU
         cls.partner1 = cls._create_partner("Test Partner 1", cls.ou1)
         # Create Partner 2 with B2C OU
         cls.partner2 = cls._create_partner("Test Partner 2", cls.b2c)
+
+    @classmethod
+    def _create_user(cls, login, group, company, operating_units):
+        """Create a user."""
+        user = cls.res_users_model.create(
+            {
+                "name": "Test User",
+                "login": login,
+                "password": "demo",
+                "email": "test@yourcompany.com",
+                "company_id": company.id,
+                "company_ids": [Command.link(company.id)],
+                "operating_unit_ids": [Command.link(ou.id) for ou in operating_units],
+                "groups_id": [Command.link(group.id)],
+            }
+        )
+        return user
 
     @classmethod
     def _create_partner(cls, name, operating_units):
