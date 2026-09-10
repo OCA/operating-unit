@@ -28,13 +28,20 @@ msgstr "Unidades Operativas"
 
 #. module: res_partner_operating_unit
 #. odoo-python
-#: code:addons/res_partner_operating_unit/models/res_users.py:0
+#: code:addons/res_partner_operating_unit/models/res_partner.py:0
 #, python-format
 msgid ""
-"The operating units of the partner must include the default one of the user."
-msgstr "Las unidades operativas del usuario deben incluir la predeterminada."
+"Operating units on a partner linked to a user must match the user's "
+"operating units. Please update the operating units on the related user(s) "
+"instead."
+msgstr ""
 
-#. module: res_partner_operating_unit
-#: model:ir.model,name:res_partner_operating_unit.model_res_users
-msgid "User"
-msgstr "Usuario"
+#, python-format
+#~ msgid ""
+#~ "The operating units of the partner must include the default one of the "
+#~ "user."
+#~ msgstr ""
+#~ "Las unidades operativas del usuario deben incluir la predeterminada."
+
+#~ msgid "User"
+#~ msgstr "Usuario"
