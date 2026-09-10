@@ -4,7 +4,7 @@
 {
     "name": "Partner with Operating Unit",
     "summary": "Introduces Operating Unit fields in Partner",
-    "version": "17.0.1.1.0",
+    "version": "17.0.1.2.0",
     "author": "Edi Santoso, "
     "Niaga Solution, "
     "Serpent Consulting Services Pvt. Ltd., "
@@ -13,7 +13,7 @@
     "category": "Generic",
     "depends": ["operating_unit"],
     "license": "LGPL-3",
-    "data": ["security/res_partner_security.xml", "views/res_partner_view.xml"],
+    "data": ["views/res_partner_view.xml"],
     "installable": True,
     "pre_init_hook": "pre_init_hook",
 }
