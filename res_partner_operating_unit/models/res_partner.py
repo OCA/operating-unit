@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.osv import expression
 
 
 class ResPartner(models.Model):
@@ -56,10 +57,10 @@ class ResPartner(models.Model):
 
     @api.model
     def search(self, domain, offset=0, limit=None, order=None):
-        domain = self._user_ous_domain() + domain
+        domain = expression.AND([self._user_ous_domain(), domain])
         return super().search(domain, offset=offset, limit=limit, order=order)
 
     @api.model
     def search_count(self, domain, limit=None):
-        domain = self._user_ous_domain() + domain
+        domain = expression.AND([self._user_ous_domain(), domain])
         return super().search_count(domain, limit=limit)
