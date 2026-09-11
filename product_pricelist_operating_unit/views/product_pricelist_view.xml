@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2025 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl) -->
+<odoo>
+    <record id="product_pricelist_view_search" model="ir.ui.view">
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view_search" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="product_pricelist_view" model="ir.ui.view">
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field
+                    name="company_id"
+                    groups="!base.group_multi_company"
+                    invisible="True"
+                />
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                    options="{'no_create': True}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="product_pricelist_view_tree" model="ir.ui.view">
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view_tree" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field
+                    name="company_id"
+                    groups="!base.group_multi_company"
+                    column_invisible="True"
+                />
+                <field
+                    name="operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
