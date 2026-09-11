@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="res_partner_operating_unit.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="operating_unit_ids" position="attributes">
+                <attribute name="readonly">not is_company and parent_id</attribute>
+            </field>
+            <field name="operating_unit_ids" position="after">
+                <div
+                    name="parent_operating_units"
+                    groups="operating_unit.group_multi_operating_unit"
+                    colspan="2"
+                    invisible="is_company or not parent_id"
+                >
+                    <p>Operating Units are managed on <button
+                            name="open_commercial_entity"
+                            type="object"
+                            string="the parent company"
+                            class="oe_link"
+                        /></p>
+                </div>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="product.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <field name="property_product_pricelist" position="attributes">
+                <attribute name="domain">
+                    [
+                        '|',
+                        ('operating_unit_id', 'in', operating_unit_ids),
+                        ('operating_unit_id', '=', False),
+                    ]
+                </attribute>
+            </field>
+            <field name="property_product_pricelist" position="after">
+                <field
+                    name="operating_unit_ids"
+                    groups="!operating_unit.group_multi_operating_unit"
+                    invisible="1"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
