@@ -140,3 +140,12 @@ class TestOperatingUnit(OperatingUnitCommon):
         self.assertEqual(res[0].user_ids, self.user1)
         self.assertEqual(res[1].user_ids, self.user1)
         self.assertEqual(res[2].user_ids, self.user1)
+
+    def test_button_open_linked_users(self):
+        """Test the Stat Button that opens linked users."""
+        # Add another user to ou1
+        self._create_user("user_extra", self.grp_ou_multi, self.company, [self.ou1])
+        action = self.ou1.button_open_linked_users()
+        self.assertEqual(action["res_model"], "res.users")
+        self.assertEqual(action.get("view_mode"), "list,form")
+        self.assertIn("domain", action)

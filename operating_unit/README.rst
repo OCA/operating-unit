@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==============
 Operating Unit
 ==============
@@ -17,7 +13,7 @@ Operating Unit
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Foperating--unit-lightgray.png?logo=github
@@ -32,14 +28,24 @@ Operating Unit
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-An operating unit (OU) is an organizational entity part of a company,
-with separate management ownership. Management by OU is aimed to
-introduce the following features:
+AnThis module maintains the administrative units (Operating Units) to
+which resources can be associated. An Operating Unit (OU) is a child of
+a Company.
+
+**Improvements in this version:**
+
+- Added a Stat Button on Operating Units to easily view and manage
+  linked users. with separate management ownership. Management by OU is
+  aimed to introduce the following features:
 
 - Data partitioning from other OU.
+
 - Own sequencing schemes.
+
 - User access administration for data processing and reporting.
+
 - Product and customer independence of OU.
+
 - OU specific P&L and Balance sheet.
 
 **Table of contents**
@@ -61,6 +67,12 @@ Usage
 
 This module defines the operating unit entity and the user's security
 rules. Other modules extend the standard Odoo apps with the OU.
+
+**Stat Button for Linked Users**
+
+On the Operating Unit form, a Stat Button "Users" is available to
+quickly access all users linked to that unit, including managers of the
+unit.
 
 Known issues / Roadmap
 ======================
@@ -95,6 +107,9 @@ Contributors
 - Andrea Stirpe <a.stirpe@onestein.nl>
 - Ooops, Ashish Hirpara <ashish.hirapara1995@gmail.com>
 - Daniel Lagin <daniel.lagin@braintec.com>
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
 
 Maintainers
 -----------

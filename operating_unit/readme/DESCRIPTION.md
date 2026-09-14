@@ -1,4 +1,9 @@
-An operating unit (OU) is an organizational entity part of a company,
+AnThis module maintains the administrative units (Operating Units) to which
+resources can be associated. An Operating Unit (OU) is a child of a
+Company.
+
+**Improvements in this version:**
+- Added a Stat Button on Operating Units to easily view and manage linked users.
 with separate management ownership. Management by OU is aimed to
 introduce the following features:
 
