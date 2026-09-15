@@ -2,6 +2,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
+from odoo import fields
 from odoo.models import Command
 from odoo.tests import tagged
 
@@ -181,3 +182,43 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
             "invoice_line_ids": lines,
         }
         return inv_vals
+
+    def test_payment_register_journals_filtered_by_ou(self):
+        """Payment register wizard should only show journals matching the
+        invoice's operating unit. A user with access to a single OU must
+        not see journals from other OUs, and creating a payment must not
+        raise AccessError."""
+        inv_vals = self._prepare_invoice(self.b2b.id, name="Test B2B Invoice")
+        inv_vals["invoice_date"] = fields.Date.today()
+        invoice = (
+            self.move_model.with_user(self.user1)
+            .with_context(default_move_type="in_invoice")
+            .create(inv_vals)
+        )
+        invoice.action_post()
+
+        ctx = {
+            "active_model": "account.move",
+            "active_ids": invoice.ids,
+        }
+        wizard = (
+            self.register_payments_model.with_user(self.user1)
+            .with_context(**ctx)
+            .create({"journal_id": self.cash2_journal_b2b.id})
+        )
+
+        available_journals = wizard.available_journal_ids
+        for journal in available_journals:
+            self.assertTrue(
+                not journal.operating_unit_id or journal.operating_unit_id == self.b2b,
+                f"Journal '{journal.name}' (OU={journal.operating_unit_id.name})"
+                f" should not be available for OU {self.b2b.name}",
+            )
+
+        self.assertNotIn(
+            self.cash_journal_ou1,
+            available_journals,
+            "OU1 journal should not be available when paying a B2B invoice",
+        )
+
+        wizard.action_create_payments()
