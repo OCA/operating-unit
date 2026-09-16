@@ -40,6 +40,7 @@ addon | version | maintainers | summary
 [purchase_operating_unit](purchase_operating_unit/) | 17.0.1.1.0 |  | Adds the concecpt of operating unit (OU) in purchase order management
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 17.0.1.0.0 |  | Qweb Report With Operating Unit
 [res_partner_operating_unit](res_partner_operating_unit/) | 17.0.1.2.1 |  | Introduces Operating Unit fields in Partner
+[res_partner_product_pricelist_operating_unit](res_partner_product_pricelist_operating_unit/) | 17.0.1.0.0 |  | Partner Product Pricelist Operating Unit
 [sale_operating_unit](sale_operating_unit/) | 17.0.1.1.0 |  | An operating unit (OU) is an organizational entity part of a company
 [sale_partner_operating_unit](sale_partner_operating_unit/) | 17.0.1.0.0 |  | Sale Partner Operating Unit
 [sale_product_pricelist_operating_unit](sale_product_pricelist_operating_unit/) | 17.0.1.0.0 |  | Sale Product Pricelist Operating Unit
