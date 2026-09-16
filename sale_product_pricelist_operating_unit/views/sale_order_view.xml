@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2025 Camptocamp SA
+     License: LGPL-3 or later (https://www.gnu.org/licenses/lgpl.html) -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="pricelist_id" position="attributes">
+                <attribute name="domain">
+                    [
+                        '|',
+                        ('operating_unit_id', '=', operating_unit_id),
+                        ('operating_unit_id', '=', False),
+                    ]
+                </attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
