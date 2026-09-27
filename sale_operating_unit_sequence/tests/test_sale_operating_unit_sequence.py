@@ -121,3 +121,34 @@ class TestSaleOperatingUnitSequence(TransactionCase):
         )
         self.assertFalse(so.operating_unit_id)
         self.assertFalse(so.name.startswith("OUFALSE-"))
+
+    def test_create_sequences_in_batch(self):
+        """Orders created together draw their numbers in order."""
+        sequence = self.env["ir.sequence"].create(
+            {
+                "name": "OU Sale Batch Sequence",
+                "code": "sale.order.ou.batch.test",
+                "prefix": "OUSB-",
+                "padding": 3,
+            }
+        )
+        operating_unit = self.env["operating.unit"].create(
+            {
+                "name": "Batch OU",
+                "code": "BATCHOU",
+                "partner_id": self.customer.id,
+                "sale_sequence_id": sequence.id,
+            }
+        )
+        orders = self.sale_model.create(
+            [
+                {
+                    "partner_id": self.customer.id,
+                    "operating_unit_id": ou_id,
+                    "team_id": False,
+                }
+                for ou_id in (operating_unit.id, operating_unit.id, False)
+            ]
+        )
+        self.assertEqual(orders[:2].mapped("name"), ["OUSB-001", "OUSB-002"])
+        self.assertFalse(orders[2].name.startswith("OUSB-"))
