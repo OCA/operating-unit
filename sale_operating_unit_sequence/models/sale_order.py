@@ -7,12 +7,14 @@ from odoo import api, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Override create to update name based on operating unit sequence."""
-        if vals.get("name", "/") == "/":
-            vals = self._update_sale_order_name(vals)
-        return super().create(vals)
+        vals_list = [
+            self._update_sale_order_name(vals) if vals.get("name", "/") == "/" else vals
+            for vals in vals_list
+        ]
+        return super().create(vals_list)
 
     @api.model
     def _get_sequence_operating_unit_id(self, vals):
