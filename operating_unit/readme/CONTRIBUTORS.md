@@ -4,3 +4,5 @@
 - Andrea Stirpe \<<a.stirpe@onestein.nl>\>
 - Ooops, Ashish Hirpara \<<ashish.hirapara1995@gmail.com>\>
 - Daniel Lagin \<<daniel.lagin@braintec.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia
