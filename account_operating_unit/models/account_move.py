@@ -118,8 +118,7 @@ class AccountMove(models.Model):
     def _default_operating_unit_id(self):
         if journal_id := self._context.get("default_journal_id"):
             journal = self.env["account.journal"].browse(journal_id)
-            if journal_ou := journal.operating_unit_id:
-                return journal_ou
+            return journal.operating_unit_id
         if (
             move_type := self._context.get("default_move_type")
         ) and move_type != "entry":

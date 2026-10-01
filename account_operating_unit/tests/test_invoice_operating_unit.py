@@ -80,3 +80,23 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
 
             invoice_form.journal_id = ou1_journal
             self.assertEqual(invoice_form.operating_unit_id, self.ou1)
+
+    def test_default_from_journal(self):
+        """Default Journal passed in context is not changed even if no ou
+        is assigned to journal"""
+        journal_without_ou = self.env["account.journal"].create(
+            {
+                "name": "B2B journal",
+                "code": "B2B",
+                "type": "sale",
+                "company_id": self.company.id,
+            }
+        )
+        with Form(
+            self.env["account.move"].with_context(
+                default_journal_id=journal_without_ou.id,
+                default_move_type="out_invoice",
+            )
+        ) as invoice_form:
+            # Check the default journal in the form
+            self.assertEqual(invoice_form.journal_id, journal_without_ou)
