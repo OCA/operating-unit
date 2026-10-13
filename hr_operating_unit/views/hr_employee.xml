@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--- Operating Unit views -->
+    <record id="view_employee_tree" model="ir.ui.view">
+        <field name="name">hr.employee_tree</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree" />
+        <field name="arch" type="xml">
+            <field name="department_id" position="before">
+                <field
+                    name="default_operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee_form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <field name="department_id" position="before">
+                <field
+                    name="default_operating_unit_id"
+                    domain="[('id', 'in', operating_unit_ids)]"
+                    options="{'no_create': True}"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+            <xpath expr="//group/field[@name='company_id']" position="after">
+                <field
+                    name="operating_unit_ids"
+                    domain="[('user_ids', 'in', uid)]"
+                    groups="operating_unit.group_multi_operating_unit"
+                    widget="many2many_tags"
+                    options="{'no_create': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee_filter" model="ir.ui.view">
+        <field name="name">hr.employee_filter</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter" />
+        <field name="arch" type="xml">
+            <field name="department_id" position="before">
+                <field
+                    name="default_operating_unit_id"
+                    groups="operating_unit.group_multi_operating_unit"
+                />
+            </field>
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="group_default_operating_unit"
+                    groups="operating_unit.group_multi_operating_unit"
+                    string="Default Operating Unit"
+                    context="{'group_by':'default_operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
