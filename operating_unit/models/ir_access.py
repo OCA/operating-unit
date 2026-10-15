@@ -5,8 +5,8 @@
 from odoo import api, models
 
 
-class IrRule(models.Model):
-    _inherit = "ir.rule"
+class IrAccess(models.Model):
+    _inherit = "ir.access"
 
     @api.model
     def _eval_context(self):

@@ -105,8 +105,8 @@ class TestOperatingUnit(OperatingUnitCommon):
             self.ou1,
         )
         self.assertEqual(
-            self.res_users_model.with_company(
-                self.company_2
+            self.res_users_model.with_context(
+                allowed_company_ids=[self.company_2.id]
             )._get_default_operating_unit(uid2=self.user1.id),
             False,
         )
@@ -117,8 +117,8 @@ class TestOperatingUnit(OperatingUnitCommon):
         )
         self.user1.assigned_operating_unit_ids += ou_company_2
         self.assertEqual(
-            self.res_users_model.with_company(
-                self.company_2
+            self.res_users_model.with_context(
+                allowed_company_ids=[self.company_2.id]
             )._get_default_operating_unit(uid2=self.user1.id),
             ou_company_2,
         )
@@ -139,3 +139,15 @@ class TestOperatingUnit(OperatingUnitCommon):
         self.assertEqual(res[0].user_ids, self.user1)
         self.assertEqual(res[1].user_ids, self.user1)
         self.assertEqual(res[2].user_ids, self.user1)
+
+    def test_04_operating_unit_assignment_applies_immediately(self):
+        """An admin grants then revokes an OU directly on the user record:
+        the user sees the change right away."""
+        ou_as_user2 = self.env["operating.unit"].with_user(self.user2)
+        self.assertEqual(ou_as_user2.search(Domain.TRUE), self.b2c)
+        self.user2.assigned_operating_unit_ids += self.b2b
+        self.assertEqual(ou_as_user2.search(Domain.TRUE), self.b2c | self.b2b)
+        self.user2.assigned_operating_unit_ids -= self.b2b
+        self.assertEqual(ou_as_user2.search(Domain.TRUE), self.b2c)
+        with self.assertRaises(AccessError):
+            self.b2b.with_user(self.user2).check_access("read")

@@ -14,6 +14,7 @@ class OperatingUnitCommon(common.TransactionCase):
         # Groups
         cls.grp_ou_mngr = cls.env.ref("operating_unit.group_manager_operating_unit")
         cls.grp_ou_multi = cls.env.ref("operating_unit.group_multi_operating_unit")
+        cls.grp_user = cls.env.ref("base.group_user")
         # Company
         cls.company = cls.env.ref("base.main_company")
         cls.company_2 = cls.env["res.company"].create({"name": "Second company"})
@@ -46,7 +47,10 @@ class OperatingUnitCommon(common.TransactionCase):
                 "company_id": company.id,
                 "company_ids": [Command.link(company.id)],
                 "operating_unit_ids": [Command.link(ou.id) for ou in operating_units],
-                "group_ids": [Command.link(group.id)],
+                "group_ids": [
+                    Command.link(cls.grp_user.id),
+                    Command.link(group.id),
+                ],
             }
         )
         return user

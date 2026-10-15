@@ -28,7 +28,6 @@ class ResUsers(models.Model):
 
     default_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
     )
@@ -56,24 +55,6 @@ class ResUsers(models.Model):
     def _default_operating_unit(self):
         return self._get_default_operating_unit()
 
-    @api.model
-    def default_get(self, fields):
-        vals = super().default_get(fields)
-        if (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("base_setup.default_user_rights", "False")
-            == "True"
-        ):
-            default_user = self.env.ref("base.default_user")
-            vals["default_operating_unit_id"] = (
-                default_user.default_operating_unit_id.id
-            )
-            vals["operating_unit_ids"] = [
-                fields.Command.set(default_user.operating_unit_ids.ids)
-            ]
-        return vals
-
     @api.depends("group_ids", "assigned_operating_unit_ids")
     @api.depends_context("allowed_company_ids")
     def _compute_operating_unit_ids(self):
@@ -97,7 +78,6 @@ class ResUsers(models.Model):
     def _inverse_operating_unit_ids(self):
         for user in self:
             user.assigned_operating_unit_ids = user.operating_unit_ids
-        self.env.registry.clear_cache()
 
     @api.onchange("operating_unit_ids")
     def _onchange_operating_unit_ids(self):
@@ -108,6 +88,12 @@ class ResUsers(models.Model):
                 not in record.operating_unit_ids._origin
             ):
                 record.default_operating_unit_id = False
+
+    def _get_invalidation_fields(self):
+        return super()._get_invalidation_fields() | {
+            "assigned_operating_unit_ids",
+            "default_operating_unit_id",
+        }
 
     def operating_units(self):
         return self.env.user.operating_unit_ids

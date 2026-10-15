@@ -8,7 +8,8 @@ from odoo import api, fields, models
 class OperatingUnit(models.Model):
     _name = "operating.unit"
     _description = "Operating Unit"
-    _rec_names_search = ["name", "code"]
+    _rec_names_search = ("name", "code")
+    _clear_cache_name = "default"
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)
@@ -19,7 +20,7 @@ class OperatingUnit(models.Model):
         readonly=True,
         default=lambda self: self.env.company,
     )
-    partner_id = fields.Many2one("res.partner", "Partner", required=True)
+    partner_id = fields.Many2one("res.partner", required=True)
     user_ids = fields.Many2many(
         "res.users",
         "operating_unit_users_rel",
@@ -46,9 +47,4 @@ class OperatingUnit(models.Model):
     def create(self, vals_list):
         res = super().create(vals_list)
         res.write({"user_ids": [fields.Command.link(self.env.user.id)]})
-        self.env.registry.clear_cache()
         return res
-
-    def write(self, vals):
-        self.env.registry.clear_cache()
-        return super().write(vals)

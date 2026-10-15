@@ -5,3 +5,4 @@
 - Ooops, Ashish Hirpara \<<ashish.hirapara1995@gmail.com>\>
 - Daniel Lagin \<<daniel.lagin@braintec.com>\>
 - Julien Coux \<<julien.coux@camptocamp.com>\>
+- Panithan k. \<<panithank@ecosoft.co.th>\>
