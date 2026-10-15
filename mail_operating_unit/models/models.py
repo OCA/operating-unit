@@ -46,7 +46,8 @@ class BaseModel(models.AbstractModel):
         """
         self.ensure_one()
 
-        operating_unit = self._mail_get_operating_unit()
+        # The user may not have access to the record's OU
+        operating_unit = self.sudo()._mail_get_operating_unit()
         if operating_unit:
             return operating_unit
 
