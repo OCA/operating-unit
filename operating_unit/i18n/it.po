@@ -1,0 +1,148 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* operating_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-07-09 09:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__active
+msgid "Active"
+msgstr "Attiva"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_res_users__operating_unit_ids
+msgid "Allowed Operating Units"
+msgstr "Unità operative ammesse"
+
+#. module: operating_unit
+#: model_terms:ir.actions.act_window,help:operating_unit.action_operating_unit_tree
+msgid "Click to start a new Operating Unit."
+msgstr "Clicca per iniziare una nuova unità operativa."
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__code
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
+msgid "Code"
+msgstr "Codice"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_res_users__default_operating_unit_id
+msgid "Default Operating Unit"
+msgstr "Unità operativa predefinita"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__id
+msgid "ID"
+msgstr "ID"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: operating_unit
+#: model:res.groups,name:operating_unit.group_manager_operating_unit
+msgid "Manager of Operating Units"
+msgstr "Responsabile delle unità operative"
+
+#. module: operating_unit
+#: model:res.groups,name:operating_unit.group_multi_operating_unit
+msgid "Multiple Operating Unit"
+msgstr "Unità operativa multipla"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: operating_unit
+#: model:ir.model,name:operating_unit.model_operating_unit
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_form
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
+msgid "Operating Unit"
+msgstr "Unità operativa"
+
+#. module: operating_unit
+#: model:ir.actions.act_window,name:operating_unit.action_operating_unit_tree
+#: model:ir.model.fields,field_description:operating_unit.field_res_users__assigned_operating_unit_ids
+#: model:ir.ui.menu,name:operating_unit.menu_action_operating_unit_tree
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_users_form
+msgid "Operating Units"
+msgstr "Unità operative"
+
+#. module: operating_unit
+#: model:ir.module.category,name:operating_unit.module_operating_units
+msgid "Operating Units Group"
+msgstr "Gruppo unità operative"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: operating_unit
+#: model:ir.model,name:operating_unit.model_ir_rule
+msgid "Record Rule"
+msgstr "Regola su record"
+
+#. module: operating_unit
+#: model_terms:ir.ui.view,arch_db:operating_unit.view_operating_unit_search
+msgid "Search Operating Unit"
+msgstr "Cerca unità operativa"
+
+#. module: operating_unit
+#: model:ir.model.constraint,message:operating_unit.constraint_operating_unit_code_company_uniq
+msgid "The code of the operating unit must be unique per company!"
+msgstr "Il codice dell'unità operativa dev'essere univoco per azienda!"
+
+#. module: operating_unit
+#: model:ir.model.constraint,message:operating_unit.constraint_operating_unit_name_company_uniq
+msgid "The name of the operating unit must be unique per company!"
+msgstr "Il nome dell'unità operativa dev'essere univoco per azienda!"
+
+#. module: operating_unit
+#: model:ir.model,name:operating_unit.model_res_users
+msgid "User"
+msgstr "Utente"
+
+#. module: operating_unit
+#: model:ir.model.fields,field_description:operating_unit.field_operating_unit__user_ids
+msgid "Users Allowed"
+msgstr "Utenti ammessi"
