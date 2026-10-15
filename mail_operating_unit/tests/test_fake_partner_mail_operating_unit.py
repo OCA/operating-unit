@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.models import Command
+from odoo.tests import new_test_user
 
 from .common import FakePartnerMailOperatingUnitCommon
 
@@ -186,3 +187,57 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
         # the default OU of the current user is used.
         mail.send()
         self.assertEqual(mail.mail_server_id, self.mail_server_2)
+
+    def _create_user_outside_operating_unit(self):
+        user = new_test_user(
+            self.env,
+            login="user_other_ou",
+            groups="base.group_user,base.group_partner_manager",
+        )
+        user.write(
+            {
+                "assigned_operating_unit_ids": [
+                    Command.set([self.other_operating_unit.id])
+                ],
+                "default_operating_unit_id": self.other_operating_unit.id,
+            }
+        )
+        return user
+
+    def test_10_user_without_access_to_record_operating_unit(self):
+        """Test a user outside the record's operating_unit_id.
+
+        The user can't read the record's OU, yet a notification they send
+        from the record must use that OU's alias domain, without AccessError.
+        """
+        user = self._create_user_outside_operating_unit()
+        self.fake_partner.write({"operating_unit_id": self.operating_unit.id})
+        self.env.invalidate_all()
+        message = self.fake_partner.with_user(user).message_notify(
+            body="Test", partner_ids=self.env.user.partner_id.ids
+        )
+        self.assertEqual(
+            message.record_alias_domain_id, self.operating_unit_alias_domain
+        )
+
+    def test_11_user_without_access_to_record_operating_unit_ids(self):
+        """Test a user outside the record's operating_unit_ids.
+
+        Read as the user, operating_unit_ids leaves out the OU they can't
+        access, so the user's own OU (other.com) would be used silently.
+        The notification must use the record's OU alias domain instead.
+        """
+        user = self._create_user_outside_operating_unit()
+        self.fake_partner.write(
+            {
+                "operating_unit_id": False,
+                "operating_unit_ids": [Command.set([self.operating_unit.id])],
+            }
+        )
+        self.env.invalidate_all()
+        message = self.fake_partner.with_user(user).message_notify(
+            body="Test", partner_ids=self.env.user.partner_id.ids
+        )
+        self.assertEqual(
+            message.record_alias_domain_id, self.operating_unit_alias_domain
+        )
