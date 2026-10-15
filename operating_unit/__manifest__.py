@@ -12,7 +12,7 @@
     "website": "https://github.com/OCA/operating-unit",
     "category": "Generic",
     "depends": [
-        "web",
+        "base_setup",
     ],
     "license": "LGPL-3",
     "data": [
@@ -21,5 +21,6 @@
         "data/operating_unit_data.xml",
         "view/operating_unit_view.xml",
         "view/res_users_view.xml",
+        "view/res_config_settings_view.xml",
     ],
 }

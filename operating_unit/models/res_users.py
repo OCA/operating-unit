@@ -23,12 +23,12 @@ class ResUsers(models.Model):
         column1="user_id",
         column2="operating_unit_id",
         string="Operating Units",
-        default=lambda self: self._default_operating_unit(),
+        default=lambda self: self._get_new_user_operating_units()[0],
     )
 
     default_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        default=lambda self: self._default_operating_unit(),
+        default=lambda self: self._get_new_user_operating_units()[1],
         domain="[('company_id', '=', current_company_id)]",
     )
 
@@ -74,6 +74,41 @@ class ResUsers(models.Model):
                 user.operating_unit_ids = (
                     user.assigned_operating_unit_ids.filtered_domain(dom)
                 )
+
+    @api.model
+    def _get_new_user_operating_units(self, company=None):
+        """(allowed OUs, default OU) for a new user: company defaults if set,
+        else the OU of the creating user."""
+        company = (company or self.env.company).sudo()
+        default_ou = company.new_user_default_operating_unit_id
+        if company.new_user_operating_unit_ids or default_ou:
+            return company.new_user_operating_unit_ids | default_ou, default_ou
+        default_ou = self._default_operating_unit() or self.env["operating.unit"]
+        return default_ou, default_ou
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        ou_fields = {
+            "assigned_operating_unit_ids",
+            "operating_unit_ids",
+            "default_operating_unit_id",
+        }
+        for vals in vals_list:
+            # field defaults use env.company, not the company of the new user
+            if vals.get("company_id") and ou_fields.isdisjoint(vals):
+                allowed, default = self._get_new_user_operating_units(
+                    self.env["res.company"].browse(vals["company_id"])
+                )
+                vals["assigned_operating_unit_ids"] = [fields.Command.set(allowed.ids)]
+                vals["default_operating_unit_id"] = default.id
+        return super().create(vals_list)
+
+    @api.onchange("company_id")
+    def _onchange_company_id_operating_units(self):
+        for user in self.filtered(lambda u: not u._origin and u.company_id):
+            allowed, default = self._get_new_user_operating_units(user.company_id)
+            user.operating_unit_ids = allowed
+            user.default_operating_unit_id = default
 
     def _inverse_operating_unit_ids(self):
         for user in self:
