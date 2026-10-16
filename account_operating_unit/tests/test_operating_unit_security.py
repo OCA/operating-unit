@@ -4,11 +4,11 @@
 
 from odoo.tests import tagged
 
-from . import test_account_operating_unit as test_ou
+from .common import TestAccountOperatingUnitCommon
 
 
 @tagged("post_install", "-at_install")
-class TestOuSecurity(test_ou.TestAccountOperatingUnit):
+class TestOuSecurity(TestAccountOperatingUnitCommon):
     def test_security(self):
         """Test Security of Account Operating Unit"""
         # User 2 is only assigned to Operating Unit B2C, and cannot list
