@@ -1,120 +1,106 @@
-from odoo import fields
 from odoo.exceptions import AccessError
-from odoo.models import Command
+from odoo.fields import Command
+from odoo.tests import tagged
 
-from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
+from odoo.addons.point_of_sale.tests.common import TestPoSCommon
 
 
-class TestPOSOperatingUnit(OperatingUnitCommon):
+@tagged("post_install", "-at_install")
+class TestPOSOperatingUnit(TestPoSCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.PosOrder = cls.env["pos.order"]
-        cls.pos_product = cls.env.ref("point_of_sale.whiteboard_pen")
-        cls.pricelist = cls.env["product.pricelist"].search([], limit=1)
+        cls.config = cls.basic_config
+        # TestPoSCommon runs as the admin user, not as superuser
+        cls.env.user.group_ids |= cls.env.ref(
+            "operating_unit.group_manager_operating_unit"
+        ) | cls.env.ref("operating_unit.group_multi_operating_unit")
+        cls.product = cls.create_product("Product OU", cls.categ_basic, 10.0)
 
-        # Create a new pos config and open it
-        cls.pos_config = cls.env.ref("point_of_sale.pos_config_main").copy()
-        cls.group_pos_manager = cls.env.ref("point_of_sale.group_pos_manager")
-        cls.group_account_invoice = cls.env.ref("account.group_account_invoice")
-
-        cls.pos_config.operating_unit_ids = [Command.set([cls.ou1.id])]
-        cls.pos_config.open_ui()
-
-        cls.user1.write(
+        OperatingUnit = cls.env["operating.unit"]
+        cls.ou1 = OperatingUnit.create(
             {
-                "groups_id": [
-                    Command.link(cls.group_pos_manager.id),
-                    Command.link(cls.group_account_invoice.id),
-                ],
-                "operating_unit_ids": [Command.link(cls.b2b.id)],
+                "name": "Main OU",
+                "code": "MAIN",
+                "company_id": cls.company.id,
+                "partner_id": cls.company.partner_id.id,
             }
         )
-        cls.user2.write(
+        cls.b2b = OperatingUnit.create(
             {
-                "groups_id": [
-                    Command.link(cls.group_pos_manager.id),
-                    Command.link(cls.group_account_invoice.id),
-                ],
-                "operating_unit_ids": [Command.set([cls.b2b.id])],
+                "name": "B2B OU",
+                "code": "B2B",
+                "company_id": cls.company.id,
+                "partner_id": cls.company.partner_id.id,
             }
         )
+        cls.config.operating_unit_ids = [Command.set(cls.ou1.ids)]
+
+        groups = [
+            Command.link(cls.env.ref("base.group_user").id),
+            Command.link(cls.env.ref("point_of_sale.group_pos_manager").id),
+            Command.link(cls.env.ref("account.group_account_invoice").id),
+            Command.link(cls.env.ref("operating_unit.group_multi_operating_unit").id),
+        ]
+        # user1 belongs to the OU of the POS config, user2 does not
+        cls.user1 = cls.env["res.users"].create(
+            {
+                "name": "User 1",
+                "login": "pos_ou_user_1",
+                "company_id": cls.company.id,
+                "company_ids": [Command.set(cls.company.ids)],
+                "group_ids": groups,
+                "operating_unit_ids": [Command.set([cls.ou1.id, cls.b2b.id])],
+                "default_operating_unit_id": cls.ou1.id,
+            }
+        )
+        cls.user2 = cls.env["res.users"].create(
+            {
+                "name": "User 2",
+                "login": "pos_ou_user_2",
+                "company_id": cls.company.id,
+                "company_ids": [Command.set(cls.company.ids)],
+                "group_ids": groups,
+                "operating_unit_ids": [Command.set(cls.b2b.ids)],
+                "default_operating_unit_id": cls.b2b.id,
+            }
+        )
+
+    def setUp(self):
+        super().setUp()
+        self.open_new_session()
 
     def test_operating_unit_access_config(self):
-        config1_ids = self.env["pos.config"].with_user(self.user1).search([])
-        self.assertIn(self.pos_config, config1_ids)
-        config2_ids = self.env["pos.config"].with_user(self.user2).search([])
-        self.assertNotIn(self.pos_config, config2_ids)
+        configs_user1 = self.env["pos.config"].with_user(self.user1).search([])
+        self.assertIn(self.config, configs_user1)
+        configs_user2 = self.env["pos.config"].with_user(self.user2).search([])
+        self.assertNotIn(self.config, configs_user2)
 
     def test_operating_unit_access_session(self):
-        self.pos_config.current_session_id.with_user(self.user1).read()
+        self.assertEqual(self.pos_session.operating_unit_ids, self.ou1)
+        self.pos_session.with_user(self.user1).read()
         with self.assertRaises(AccessError):
-            self.pos_config.current_session_id.with_user(self.user2).read()
+            self.pos_session.with_user(self.user2).read()
 
     def test_operating_unit_access_order_and_line_and_payment(self):
-        order = self._create_order()
+        orders = self._create_orders(
+            [
+                {
+                    "pos_order_lines_ui_args": [(self.product, 1)],
+                    "payments": [(self.cash_pm1, 10.0)],
+                }
+            ]
+        )
+        order = list(orders.values())[0]
+        self.assertEqual(order.operating_unit_ids, self.ou1)
+        self.assertEqual(order.lines.operating_unit_ids, self.ou1)
+        self.assertEqual(order.payment_ids.operating_unit_ids, self.ou1)
         order.with_user(self.user1).read()
         order.lines.with_user(self.user1).read()
+        order.payment_ids.with_user(self.user1).read()
         with self.assertRaises(AccessError):
             order.with_user(self.user2).read()
         with self.assertRaises(AccessError):
             order.lines.with_user(self.user2).read()
-        order.payment_ids.with_user(self.user1).read()
         with self.assertRaises(AccessError):
             order.payment_ids.with_user(self.user2).read()
-
-    def _create_order(self):
-        # Create order
-        account_id = self.env.user.partner_id.property_account_receivable_id.id
-        order_data = {
-            "id": "0006-001-0010",
-            "to_invoice": False,
-            "data": {
-                "date_order": fields.Datetime.to_string(fields.Datetime.now()),
-                "pricelist_id": self.pricelist.id,
-                "user_id": 1,
-                "name": "Order 0006-001-0010",
-                "partner_id": False,
-                "amount_paid": 1000,
-                "pos_session_id": self.pos_config.current_session_id.id,
-                "lines": [
-                    [
-                        0,
-                        0,
-                        {
-                            "product_id": self.pos_product.id,
-                            "qty": 1,
-                            "price_unit": 1000,
-                            "price_subtotal": 1000,
-                            "price_subtotal_incl": 1000,
-                        },
-                    ]
-                ],
-                "statement_ids": [
-                    [
-                        0,
-                        0,
-                        {
-                            "payment_method_id": self.pos_config.payment_method_ids[
-                                0
-                            ].id,
-                            "amount": 1000,
-                            "name": fields.Datetime.now(),
-                            "account_id": account_id,
-                            "session_id": self.pos_config.current_session_id.id,
-                        },
-                    ]
-                ],
-                "creation_date": "2022-11-27 15:51:03",
-                "amount_tax": 0,
-                "fiscal_position_id": False,
-                "uid": "00001-001-0001",
-                "amount_return": 0,
-                "sequence_number": 1,
-                "amount_total": 1000.0,
-                "session_id": self.pos_config.current_session_id.id,
-            },
-        }
-        result = self.PosOrder.create_from_ui([order_data])
-        order = self.PosOrder.browse(result[0].get("id"))
-        return order
