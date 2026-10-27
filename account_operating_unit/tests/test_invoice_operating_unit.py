@@ -46,6 +46,24 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
             [], ["operating_unit_id"], ["operating_unit_id"]
         )
 
+    def test_operating_unit_lock_date(self):
+        """The operating unit of a posted entry can't change in a locked period."""
+        invoice = self.move_model.with_user(self.user1.id).create(
+            self._prepare_invoice(self.b2b.id)
+        )
+        invoice.invoice_date = "2019-01-15"
+        invoice.action_post()
+
+        def write_operating_unit(operating_unit):
+            invoice.operating_unit_id = operating_unit
+            invoice.line_ids.operating_unit_id = operating_unit
+
+        write_operating_unit(self.b2c)
+        self.assertEqual(invoice.line_ids.operating_unit_id, self.b2c)
+        self.company.fiscalyear_lock_date = "2019-01-31"
+        with self.assertRaisesRegex(UserError, "prior to and inclusive of"):
+            write_operating_unit(self.b2b)
+
     def test_form(self):
         """Test that the UI behaves as expected"""
         journal_b2b = self.env["account.journal"].create(
