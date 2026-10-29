@@ -46,12 +46,11 @@
     </record>
     <record id="ir_rule_stock_move_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="stock.model_stock_move" />
-        <field name="domain_force">['|',
-            ('location_id.operating_unit_id','=',False),
-            ('location_id.operating_unit_id','in',user.operating_unit_ids.ids),
-            '|',
-            ('location_dest_id.operating_unit_id','=',False),
-            ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids)]
+        <!-- same form as the rule on move lines; stock.move joins its
+             locations (auto_join), so here it is only kept alike -->
+        <field name="domain_force">[
+            ('location_id.operating_unit_id','in',user.operating_unit_ids.ids + [False]),
+            ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids + [False])]
         </field>
         <field name="name">Stock moves from allowed operating units</field>
         <field name="global" eval="True" />
@@ -62,12 +61,12 @@
     </record>
     <record id="ir_rule_stock_move_line_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="stock.model_stock_move_line" />
-        <field name="domain_force">['|',
-            ('location_id.operating_unit_id','=',False),
-            ('location_id.operating_unit_id','in',user.operating_unit_ids.ids),
-            '|',
-            ('location_dest_id.operating_unit_id','=',False),
-            ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids)]
+        <!-- "in" with False keeps one stock_location subquery per location
+             field: two conditions joined by OR give two subqueries, and
+             PostgreSQL reads all locations for them on every query -->
+        <field name="domain_force">[
+            ('location_id.operating_unit_id','in',user.operating_unit_ids.ids + [False]),
+            ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids + [False])]
         </field>
         <field name="name">Product moves from allowed operating units</field>
         <field name="global" eval="True" />

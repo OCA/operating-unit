@@ -33,6 +33,8 @@
         />
     </function>
 
+    <!-- "in" with False keeps one stock_location subquery per location field,
+         as in stock_operating_unit -->
     <function model="ir.rule" name="write">
         <value
             eval="[ref('stock_operating_unit.ir_rule_stock_move_allowed_operating_units'),
@@ -42,10 +44,8 @@
             eval="{'domain_force': &quot;[
                 '|',(1, '=', 1) if user.has_group('stock_operating_unit_access_all.group_all_ou_stock') else (0, '=', 1),
                 '&amp;',
-                '|',('location_id.operating_unit_id','=',False),
-                ('location_id.operating_unit_id','in',user.operating_unit_ids.ids),
-                '|',('location_dest_id.operating_unit_id','=',False),
-                ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids)]&quot;}"
+                ('location_id.operating_unit_id','in',user.operating_unit_ids.ids + [False]),
+                ('location_dest_id.operating_unit_id','in',user.operating_unit_ids.ids + [False])]&quot;}"
         />
     </function>
 
