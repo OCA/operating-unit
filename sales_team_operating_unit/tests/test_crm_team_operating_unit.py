@@ -4,6 +4,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.fields import Command, Domain
+from odoo.tests import Form
 
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
@@ -70,3 +71,13 @@ class TestSaleTeamOperatingUnit(OperatingUnitCommon):
         self.assertEqual(
             team.ids, [], f"User 2 should not have access to {self.ou1.name}"
         )
+
+    def test_create_team_single_company_user(self):
+        # The company is not shown to users without multi-company access,
+        # but the default operating unit has a company
+        self.assertFalse(self.user1.has_group("base.group_multi_company"))
+        with Form(self.crm_team_model.with_user(self.user1)) as team_form:
+            team_form.name = "Team created from the form"
+        team = team_form.record
+        self.assertEqual(team.operating_unit_id, self.user1.default_operating_unit_id)
+        self.assertEqual(team.company_id, team.operating_unit_id.company_id)
