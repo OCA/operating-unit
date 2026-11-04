@@ -2,14 +2,14 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Analytic Operating Unit",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "category": "Sales",
     "depends": ["analytic", "operating_unit"],
     "data": [
-        "security/analytic_account_security.xml",
+        "security/ir.access.csv",
         "views/analytic_account_view.xml",
     ],
     "assets": {

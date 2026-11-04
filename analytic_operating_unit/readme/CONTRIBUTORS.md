@@ -3,3 +3,4 @@
 - Alan Ramos \<<alan.ramos@jarsa.com.mx>\>
 - Alejandro Leonard \<<alejandro.leonard@braintec.com>\>
 - Julien Coux \<<julien.coux@camptocamp.com>\>
+- Hector Meraz \<<hector.meraz@jarsa.com>\>
