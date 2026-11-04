@@ -5,11 +5,11 @@
 from odoo.exceptions import UserError
 from odoo.tests import Form, tagged
 
-from . import test_account_operating_unit as test_ou
+from .common import TestAccountOperatingUnitCommon
 
 
 @tagged("post_install", "-at_install")
-class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
+class TestInvoiceOperatingUnit(TestAccountOperatingUnitCommon):
     def test_create_invoice_validate(self):
         """Create & Validate the invoice.
         Test that when an invoice is created, the operating unit is
