@@ -1,1 +1,1 @@
-from . import fake_partner
+from . import fake_thread

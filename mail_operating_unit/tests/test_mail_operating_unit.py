@@ -22,7 +22,7 @@ class TestMailOperatingUnit(MailOperatingUnitCommon):
                 "operating_unit_id": self.ou1.id,
             }
         )
-        mail_id = template.send_mail(self.partner1.id)
+        mail_id = template.send_mail(self.partner.id)
         mail = self.env["mail.mail"].browse(mail_id)
         self.assertEqual(mail.record_alias_domain_id, self.ou_alias_domain)
 
