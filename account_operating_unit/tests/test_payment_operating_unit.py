@@ -39,7 +39,7 @@ class TestInvoiceOperatingUnit(TestAccountOperatingUnitCommon):
         # Validate that inter OU balance move lines are created
         self.assertEqual(len(payment.move_id.line_ids), 4)
         self.assertAlmostEqual(payment.amount, self.invoice.amount_total)
-        self.assertIn(payment.state, ["paid", "in_process"])
+        self.assertIn(payment.state, ["paid", "reconciled"])
         self.assertEqual(self.invoice.payment_state, "paid")
 
     def test_payment_from_two_invoices(self):
@@ -78,7 +78,7 @@ class TestInvoiceOperatingUnit(TestAccountOperatingUnitCommon):
             # Validate that inter OU balance move lines are created
             self.assertEqual(len(payment.move_id.line_ids), 2)
             self.assertEqual(payment.amount, invoices[0].amount_total)
-            self.assertIn(payment.state, ["paid", "in_process"])
+            self.assertIn(payment.state, ["paid", "reconciled"])
         for invoice in invoices:
             self.assertEqual(invoice.payment_state, "paid")
 
