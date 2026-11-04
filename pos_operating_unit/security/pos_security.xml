@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="ir_rule_pos_config_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="point_of_sale.model_pos_config" />
         <field name="domain_force">['|', ('operating_unit_ids', '=', False),
@@ -36,7 +35,7 @@
         <field eval="0" name="perm_create" />
     </record>
 
-     <record id="ir_rule_pos_order_line_allowed_operating_units" model="ir.rule">
+    <record id="ir_rule_pos_order_line_allowed_operating_units" model="ir.rule">
         <field name="model_id" ref="point_of_sale.model_pos_order_line" />
         <field name="domain_force">['|', ('operating_unit_ids', '=', False),
             ('operating_unit_ids', 'in', operating_unit_ids)]</field>
@@ -71,5 +70,4 @@
         <field eval="1" name="perm_read" />
         <field eval="0" name="perm_create" />
     </record>
-
 </odoo>
