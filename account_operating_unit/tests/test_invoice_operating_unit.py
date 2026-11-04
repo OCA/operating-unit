@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import UserError
+from odoo.models import Command
 from odoo.tests import Form, tagged
 
 from .common import TestAccountOperatingUnitCommon
@@ -45,6 +46,33 @@ class TestInvoiceOperatingUnit(TestAccountOperatingUnitCommon):
         self.env["account.invoice.report"].sudo().read_group(
             [], ["operating_unit_id"], ["operating_unit_id"]
         )
+
+    def test_operating_unit_lock_date(self):
+        """The operating unit of a posted entry can't change in a locked period."""
+        invoice = self.move_model.with_user(self.user1.id).create(
+            self._prepare_invoice(self.b2b.id)
+        )
+        invoice.invoice_date = "2019-01-15"
+        invoice.action_post()
+
+        def write_operating_unit(operating_unit):
+            invoice.write(
+                {
+                    "operating_unit_id": operating_unit.id,
+                    "line_ids": [
+                        Command.update(
+                            line.id, {"operating_unit_id": operating_unit.id}
+                        )
+                        for line in invoice.line_ids
+                    ],
+                }
+            )
+
+        write_operating_unit(self.b2c)
+        self.assertEqual(invoice.line_ids.operating_unit_id, self.b2c)
+        self.company.fiscalyear_lock_date = "2019-01-31"
+        with self.assertRaisesRegex(UserError, "lock date"):
+            write_operating_unit(self.b2b)
 
     def test_form(self):
         """Test that the UI behaves as expected"""
