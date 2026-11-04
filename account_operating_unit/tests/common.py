@@ -10,7 +10,7 @@ from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
 
 @tagged("post_install", "-at_install")
-class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
+class TestAccountOperatingUnitCommon(AccountTestInvoicingCommon, OperatingUnitCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
