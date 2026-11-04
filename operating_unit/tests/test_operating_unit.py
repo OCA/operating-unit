@@ -141,3 +141,13 @@ class TestOperatingUnit(OperatingUnitCommon):
         self.assertEqual(res[0].user_ids, self.user1)
         self.assertEqual(res[1].user_ids, self.user1)
         self.assertEqual(res[2].user_ids, self.user1)
+
+    def test_internal_user_reads_operating_units(self):
+        """Internal users w/o operating unit groups read their operating units"""
+        user = self._create_user(
+            "user_3", self.env.ref("base.group_user"), self.company, self.ou1
+        )
+        self.assertFalse(user.has_group("operating_unit.group_user_operating_unit"))
+        self.assertEqual(
+            self.ou1.with_user(user).read(["name"])[0]["name"], self.ou1.name
+        )
