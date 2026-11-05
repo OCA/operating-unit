@@ -1,7 +1,7 @@
 # Copyright (C) 2016-2027 CIT Services
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import SUPERUSER_ID, models
 from odoo.osv import expression
 from odoo.tools.safe_eval import safe_eval
 
@@ -13,7 +13,7 @@ class IrActionsActWindow(models.Model):
         """Restrict actions to the user's default operating unit."""
         result = super().read(fields=fields, load=load)
 
-        if self.env.is_superuser():
+        if self.env.uid == SUPERUSER_ID:
             return result
 
         user_ou = self.env.user.default_operating_unit_id
