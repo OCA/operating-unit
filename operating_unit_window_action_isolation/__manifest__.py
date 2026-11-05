@@ -10,10 +10,7 @@
     "company": "CIT Services",
     "website": "https://github.com/OCA/operating-unit",
     "license": "AGPL-3",
-    "depends": [
-        "operating_unit",
-        "sale_operating_unit",
-    ],
+    "depends": ["operating_unit"],
     "data": [],
     "installable": True,
     "application": False,
