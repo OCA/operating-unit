@@ -9,10 +9,7 @@ class ResPartner(models.Model):
 
     @api.model
     def operating_unit_default_get(self, uid2=False):
-        if not uid2:
-            uid2 = self._uid
-        user = self.env["res.users"].browse(uid2)
-        return user.default_operating_unit_id
+        return self.env["res.users"]._get_default_operating_unit(uid2=uid2)
 
     @api.model
     def _default_operating_unit(self):
