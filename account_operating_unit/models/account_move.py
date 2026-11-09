@@ -128,27 +128,10 @@ class AccountMove(models.Model):
         if (
             move_type := self._context.get("default_move_type")
         ) and move_type != "entry":
-            return self.env["res.users"]._get_default_operating_unit()
+            ou = self.env["res.users"]._get_default_operating_unit()
+            if ou and ou.company_id == self.env.company:
+                return ou
         return False
-
-    @api.onchange("operating_unit_id")
-    def _onchange_operating_unit(self):
-        if self.operating_unit_id and (
-            not self.journal_id
-            or self.journal_id.operating_unit_id != self.operating_unit_id
-        ):
-            journal = self.env["account.journal"].search(
-                [("type", "=", self.journal_id.type)]
-            )
-            jf = journal.filtered(
-                lambda aj: aj.operating_unit_id == self.operating_unit_id
-            )
-            if not jf:
-                self.journal_id = journal[0]
-            else:
-                self.journal_id = jf[0]
-            for line in self.line_ids:
-                line.operating_unit_id = self.operating_unit_id
 
     @api.depends("journal_id")
     def _compute_operating_unit(self):
@@ -157,6 +140,48 @@ class AccountMove(models.Model):
                 record.operating_unit_id = record.journal_id.operating_unit_id
                 for line in record.line_ids:
                     line.operating_unit_id = record.journal_id.operating_unit_id
+
+    @api.depends("company_id", "invoice_filter_type_domain", "operating_unit_id")
+    def _compute_suitable_journal_ids(self):
+        for m in self:
+            journal_type = m.invoice_filter_type_domain or "general"
+            company = m.company_id or self.env.company
+            domain = [
+                *self.env["account.journal"]._check_company_domain(company),
+                ("type", "=", journal_type),
+            ]
+            if m.operating_unit_id:
+                domain += [("operating_unit_id", "in", [False, m.operating_unit_id.id])]
+            m.suitable_journal_ids = self.env["account.journal"].search(domain)
+
+    def _search_default_journal(self):
+        journal = super()._search_default_journal()
+        if (
+            self.operating_unit_id
+            and journal.operating_unit_id != self.operating_unit_id
+        ):
+            company = self.company_id or self.env.company
+            ou_journal = self.env["account.journal"].search(
+                [
+                    *self.env["account.journal"]._check_company_domain(company),
+                    ("type", "in", self._get_valid_journal_types()),
+                    ("operating_unit_id", "=", self.operating_unit_id.id),
+                ],
+                limit=1,
+            )
+            if ou_journal:
+                return ou_journal
+        return journal
+
+    @api.onchange("operating_unit_id")
+    def _onchange_operating_unit(self):
+        if self.operating_unit_id and (
+            not self.journal_id
+            or self.journal_id.operating_unit_id != self.operating_unit_id
+        ):
+            self.journal_id = self._search_default_journal()
+            for line in self.line_ids:
+                line.operating_unit_id = self.operating_unit_id
 
     def _prepare_inter_ou_balancing_move_line(self, move, ou_id, ou_balances):
         if not move.company_id.inter_ou_clearing_account_id:
