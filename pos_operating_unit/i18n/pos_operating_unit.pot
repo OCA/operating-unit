@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_operating_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_operating_unit
+#: model:ir.model,name:pos_operating_unit.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_config__operating_unit_ids
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order__operating_unit_ids
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order_line__operating_unit_ids
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_payment__operating_unit_ids
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_session__operating_unit_ids
+#: model:ir.model.fields,field_description:pos_operating_unit.field_res_config_settings__pos_operating_unit_ids
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.pos_config_view_form_inherit_ou
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.res_config_settings_view_form
+msgid "Operating Units"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.pos_config_view_form_inherit_ou
+#: model_terms:ir.ui.view,arch_db:pos_operating_unit.res_config_settings_view_form
+msgid "Operating units used for this POS"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_order__config_id
+#: model:ir.model.fields,field_description:pos_operating_unit.field_pos_payment__config_id
+msgid "Point of Sale"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model,name:pos_operating_unit.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model,name:pos_operating_unit.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model,name:pos_operating_unit.model_pos_order
+msgid "Point of Sale Orders"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model,name:pos_operating_unit.model_pos_payment
+msgid "Point of Sale Payments"
+msgstr ""
+
+#. module: pos_operating_unit
+#: model:ir.model,name:pos_operating_unit.model_pos_session
+msgid "Point of Sale Session"
+msgstr ""
