@@ -101,6 +101,11 @@ class AccountMoveLine(models.Model):
         }
         return move_vals
 
+    def _get_lock_date_protected_fields(self):
+        protected_fields = super()._get_lock_date_protected_fields()
+        protected_fields["fiscal"] += ["operating_unit_id"]
+        return protected_fields
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
