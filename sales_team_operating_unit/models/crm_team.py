@@ -11,7 +11,10 @@ class CrmTeam(models.Model):
     operating_unit_id = fields.Many2one(
         "operating.unit",
         default=lambda self: self.env["res.users"]._get_default_operating_unit(),
-        check_company=True,
+        domain=(
+            "['|', ('company_id', '=', False),"
+            " ('company_id', 'in', allowed_company_ids)]"
+        ),
     )
 
     @api.model
