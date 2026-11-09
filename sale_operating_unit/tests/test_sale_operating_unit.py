@@ -27,7 +27,9 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
         # Customer
         cls.customer = cls.env.ref("base.res_partner_2")
         # Price list
-        cls.pricelist = cls.env["product.pricelist"].search([], limit=1)
+        cls.pricelist = cls.env["product.pricelist"].search(
+            [("company_id", "in", [False, cls.company.id])], limit=1
+        )
         # Products
         cls.product1 = cls.env.ref("product.product_product_2")
         cls.product1.write({"invoice_policy": "order"})
