@@ -8,6 +8,10 @@ class IrRule(models.Model):
     _inherit = "ir.rule"
 
     @api.model
+    def _compute_domain_keys(self):
+        return super()._compute_domain_keys() + ["current_operating_unit_id"]
+
+    @api.model
     def _eval_context(self):
         res = super()._eval_context()
         ou_id = (
