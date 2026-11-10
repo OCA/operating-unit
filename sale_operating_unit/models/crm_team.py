@@ -12,6 +12,8 @@ class CrmTeam(models.Model):
     @api.constrains("operating_unit_id")
     def _check_sales_order_operating_unit(self):
         for rec in self:
+            if not rec.operating_unit_id:
+                continue
             orders = (
                 self.with_user(SUPERUSER_ID)
                 .env["sale.order"]
@@ -19,6 +21,7 @@ class CrmTeam(models.Model):
                     [
                         ("team_id", "=", rec.id),
                         ("operating_unit_id", "!=", rec.operating_unit_id.id),
+                        ("operating_unit_id", "!=", False),
                     ]
                 )
             )
