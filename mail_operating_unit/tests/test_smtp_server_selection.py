@@ -1,14 +1,14 @@
 # Copyright 2026 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.models import Command
+from odoo.fields import Command
 
 from odoo.addons.base.tests.common import MockSmtplibCase
 
-from .common import FakePartnerMailOperatingUnitCommon
+from .common import FakeRecordMailOperatingUnitCommon
 
 
-class TestSmtpServerSelection(FakePartnerMailOperatingUnitCommon, MockSmtplibCase):
+class TestSmtpServerSelection(FakeRecordMailOperatingUnitCommon, MockSmtplibCase):
     """Verify which SMTP server is actually used when sending mail with an OU.
 
     Companion to ``TestFakePartnerMailOperatingUnit``, which tests the OU
@@ -37,13 +37,13 @@ class TestSmtpServerSelection(FakePartnerMailOperatingUnitCommon, MockSmtplibCas
 
     def test_00_ou_server_used_before_smtp_grouping(self):
         """When an OU is set, its mail server must be used for the SMTP session."""
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.set([self.operating_unit.id])],
             }
         )
-        mail_id = self.mail_template.send_mail(self.fake_partner.id, force_send=False)
+        mail_id = self.mail_template.send_mail(self.fake_record.id, force_send=False)
         mail = self.env["mail.mail"].browse(mail_id)
 
         with self.mock_smtplib_connection():
@@ -60,13 +60,13 @@ class TestSmtpServerSelection(FakePartnerMailOperatingUnitCommon, MockSmtplibCas
 
     def test_01_no_ou_uses_default_server_selection(self):
         """Without an OU, the standard server selection applies (catch-all wins)."""
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.clear()],
             }
         )
-        mail_id = self.mail_template.send_mail(self.fake_partner.id, force_send=False)
+        mail_id = self.mail_template.send_mail(self.fake_record.id, force_send=False)
         mail = self.env["mail.mail"].browse(mail_id)
 
         with self.mock_smtplib_connection():

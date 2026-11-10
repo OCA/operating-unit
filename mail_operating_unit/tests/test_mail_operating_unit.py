@@ -1,6 +1,6 @@
 # Copyright 2024 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.models import Command
+from odoo.fields import Command
 
 from .common import MailOperatingUnitCommon
 
@@ -14,7 +14,7 @@ class TestMailOperatingUnit(MailOperatingUnitCommon):
         the mail.alias.domain associated with that operating unit is correctly used.
         """
         self.mail_template.write({"operating_unit_id": self.ou1.id})
-        mail_id = self.mail_template.send_mail(self.partner1.id)
+        mail_id = self.mail_template.send_mail(self.partner.id)
         mail = self.env["mail.mail"].browse(mail_id)
         self.assertEqual(mail.record_alias_domain_id, self.ou_alias_domain)
 
@@ -64,5 +64,13 @@ class TestMailOperatingUnit(MailOperatingUnitCommon):
         self.user3.write(
             {"operating_unit_ids": [Command.set([self.b2b.id, self.b2c.id])]}
         )
+        message = self.channel_general.with_user(self.user3).message_post(body="Test")
+        self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)
+
+    def test_05_user_single_operating_unit_without_alias_domain(self):
+        """A user whose single operating unit has no alias domain
+        gets the default alias domain."""
+        self.b2c.alias_domain_id = False
+        self.user3.write({"operating_unit_ids": [Command.set([self.b2c.id])]})
         message = self.channel_general.with_user(self.user3).message_post(body="Test")
         self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)

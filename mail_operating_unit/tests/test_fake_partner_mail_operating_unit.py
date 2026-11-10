@@ -1,23 +1,44 @@
 # Copyright 2024 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.models import Command
+from odoo.fields import Command
 from odoo.tests import new_test_user
 
-from .common import FakePartnerMailOperatingUnitCommon
+from .common import FakeRecordMailOperatingUnitCommon
 
 
-class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
+class TestFakePartnerMailOperatingUnit(FakeRecordMailOperatingUnitCommon):
+    def _create_user_without_operating_unit(self):
+        """A user with no operating unit, so the user's OUs are no fallback.
+
+        ``base.user_admin`` is an operating unit manager: its
+        ``operating_unit_ids`` are all the operating units, so unlinking them
+        deleted the operating units the tests use.
+        """
+        user = new_test_user(
+            self.env,
+            login="user_without_ou",
+            groups="base.group_user,base.group_partner_manager",
+        )
+        user.write(
+            {
+                "assigned_operating_unit_ids": [Command.clear()],
+                "default_operating_unit_id": False,
+            }
+        )
+        self.assertFalse(user.operating_unit_ids)
+        return user
+
     def test_00_mail_thread_with_operating_unit(self):
         """Test mail.thread with operating_unit_id field set.
 
-        Ensures that when a mail.thread (represented here by a fake partner)
+        Ensures that when a mail.thread (represented here by a fake record)
         is associated with an operating unit,
         the mail sent through this thread uses the alias domain
         associated with the operating unit.
         """
-        self.fake_partner.write({"operating_unit_id": self.operating_unit.id})
-        message = self.fake_partner.message_post(body="Test")
+        self.fake_record.write({"operating_unit_id": self.operating_unit.id})
+        message = self.fake_record.message_post(body="Test")
         self.assertEqual(
             message.record_alias_domain_id,
             self.operating_unit_alias_domain,
@@ -26,32 +47,30 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
     def test_01_mail_thread_with_false_operating_unit(self):
         """Test mail.thread with operating_unit_id field set to False.
 
-        Ensures that when a mail.thread (represented here by a fake partner)
+        Ensures that when a mail.thread (represented here by a fake record)
         has no operating unit associated,
         the default mail alias domain is used for the mail sent through this thread.
         """
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.clear()],
             }
         )
-        self.assertFalse(self.fake_partner.operating_unit_id)
-        user_root = self.env.ref("base.user_admin")
-        user_root.operating_unit_ids.unlink()
-        self.assertFalse(user_root.operating_unit_ids)
-        message = self.fake_partner.message_post(body="Test")
+        self.assertFalse(self.fake_record.operating_unit_id)
+        user = self._create_user_without_operating_unit()
+        message = self.fake_record.with_user(user).message_post(body="Test")
         self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)
 
     def test_02_mail_thread_with_single_operating_unit_ids(self):
         """Use the record alias domain when one ``operating_unit_ids`` is set."""
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.set([self.operating_unit.id])],
             }
         )
-        message = self.fake_partner.message_post(body="Test")
+        message = self.fake_record.message_post(body="Test")
         self.assertEqual(
             message.record_alias_domain_id,
             self.operating_unit_alias_domain,
@@ -59,9 +78,8 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
 
     def test_03_mail_thread_with_multiple_operating_unit_ids(self):
         """Fallback when multiple ``operating_unit_ids`` are set."""
-        user_root = self.env.ref("base.user_admin")
-        user_root.operating_unit_ids.unlink()
-        self.fake_partner.write(
+        user = self._create_user_without_operating_unit()
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [
@@ -69,48 +87,47 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
                 ],
             }
         )
-        message = self.fake_partner.message_post(body="Test")
+        message = self.fake_record.with_user(user).message_post(body="Test")
         self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)
 
     def test_04_mail_thread_with_single_operating_unit_ids_without_alias_domain(self):
         """Fallback when the single record OU has no alias domain."""
-        user_root = self.env.ref("base.user_admin")
-        user_root.operating_unit_ids.unlink()
+        user = self._create_user_without_operating_unit()
         self.other_operating_unit.alias_domain_id = False
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.set([self.other_operating_unit.id])],
             }
         )
-        message = self.fake_partner.message_post(body="Test")
+        message = self.fake_record.with_user(user).message_post(body="Test")
 
         self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)
 
     def test_05_template_mail_server_keeps_priority(self):
         """Template mail server must remain the highest priority."""
         self.mail_template.write({"mail_server_id": self.mail_server_2.id})
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.set([self.operating_unit.id])],
             }
         )
-        mail_id = self.mail_template.send_mail(self.fake_partner.id, force_send=False)
+        mail_id = self.mail_template.send_mail(self.fake_record.id, force_send=False)
         mail = self.env["mail.mail"].browse(mail_id)
         self.assertEqual(mail.mail_server_id, self.mail_server_2)
 
     def test_06_record_single_operating_unit_ids_mail_server(self):
         """Use the record OU mail server when exactly one OU is set."""
         self.mail_template.write({"mail_server_id": False})
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.set([self.operating_unit.id])],
             }
         )
         mail_id = self.mail_template.send_mail(
-            self.fake_partner.id,
+            self.fake_record.id,
             force_send=False,
         )
         mail = self.env["mail.mail"].browse(mail_id)
@@ -120,7 +137,7 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
     def test_07_record_operating_unit_ids_shared_mail_server(self):
         """Use the shared server when all record OUs point to the same one."""
         self.mail_template.write({"mail_server_id": False})
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [
@@ -129,7 +146,7 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
             }
         )
         mail_id = self.mail_template.send_mail(
-            self.fake_partner.id,
+            self.fake_record.id,
             force_send=False,
         )
         mail = self.env["mail.mail"].browse(mail_id)
@@ -139,7 +156,7 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
     def test_08_record_operating_unit_ids_different_mail_servers(self):
         """Fallback when record OUs do not share the same outgoing mail server."""
         self.mail_template.write({"mail_server_id": False})
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [
@@ -147,13 +164,13 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
                 ],
             }
         )
-        mail_id = self.mail_template.send_mail(self.fake_partner.id, force_send=False)
+        mail_id = self.mail_template.send_mail(self.fake_record.id, force_send=False)
         mail = self.env["mail.mail"].browse(mail_id)
         self.assertFalse(mail.mail_server_id)
 
     def test_09_record_operating_unit_ids_different_servers_use_default_ou(self):
         """Use the current user's default OU when record OUs have different servers."""
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [
@@ -178,7 +195,7 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
             self.other_operating_unit,
         )
         mail_id = self.mail_template.send_mail(
-            self.fake_partner.id,
+            self.fake_record.id,
             force_send=False,
         )
         mail = self.env["mail.mail"].browse(mail_id)
@@ -211,9 +228,9 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
         from the record must use that OU's alias domain, without AccessError.
         """
         user = self._create_user_outside_operating_unit()
-        self.fake_partner.write({"operating_unit_id": self.operating_unit.id})
+        self.fake_record.write({"operating_unit_id": self.operating_unit.id})
         self.env.invalidate_all()
-        message = self.fake_partner.with_user(user).message_notify(
+        message = self.fake_record.with_user(user).message_notify(
             body="Test", partner_ids=self.env.user.partner_id.ids
         )
         self.assertEqual(
@@ -228,14 +245,14 @@ class TestFakePartnerMailOperatingUnit(FakePartnerMailOperatingUnitCommon):
         The notification must use the record's OU alias domain instead.
         """
         user = self._create_user_outside_operating_unit()
-        self.fake_partner.write(
+        self.fake_record.write(
             {
                 "operating_unit_id": False,
                 "operating_unit_ids": [Command.set([self.operating_unit.id])],
             }
         )
         self.env.invalidate_all()
-        message = self.fake_partner.with_user(user).message_notify(
+        message = self.fake_record.with_user(user).message_notify(
             body="Test", partner_ids=self.env.user.partner_id.ids
         )
         self.assertEqual(

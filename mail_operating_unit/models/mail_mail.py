@@ -62,6 +62,8 @@ class MailMail(models.Model):
         raise_exception=False,
         smtp_session=None,
         alias_domain_id=False,
+        mail_server=False,
+        post_send_callback=None,
     ):
         # SAFETY NET: ``_split_by_mail_configuration()`` already pre-assigns
         # ``mail_server_id`` from the OU before this method is called through the
@@ -74,4 +76,6 @@ class MailMail(models.Model):
             raise_exception=raise_exception,
             smtp_session=smtp_session,
             alias_domain_id=alias_domain_id,
+            mail_server=mail_server,
+            post_send_callback=post_send_callback,
         )
