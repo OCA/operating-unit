@@ -14,18 +14,18 @@ class CrmTeam(models.Model):
         for rec in self:
             if not rec.operating_unit_id:
                 continue
-            orders = (
+            if (
                 self.with_user(SUPERUSER_ID)
                 .env["sale.order"]
-                .search(
+                .search_count(
                     [
                         ("team_id", "=", rec.id),
                         ("operating_unit_id", "!=", rec.operating_unit_id.id),
                         ("operating_unit_id", "!=", False),
-                    ]
+                    ],
+                    limit=1,
                 )
-            )
-            if orders:
+            ):
                 raise ValidationError(
                     self.env._(
                         "Configuration error. It is not "
