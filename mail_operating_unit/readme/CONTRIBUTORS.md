@@ -1,0 +1,5 @@
+- Vincent Van Rossem \<<vincent.vanrossem@camptocamp.com>\>
+- Italo Lopes \<<italo.lopes@camptocamp.com>\>
+- Maksym Yankin \<<maksym.yankin@camptocamp.com>\>
+- [Aures TIC](https://www.aurestic.es)
+  - Jordi Aura
