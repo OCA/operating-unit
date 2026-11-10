@@ -77,9 +77,10 @@ class BaseModel(models.AbstractModel):
         alias_domains = super()._mail_get_alias_domains(default_company=default_company)
         return {
             record.id: (
-                operating_units.alias_domain_id
-                if (operating_units := record._mail_get_operating_units())
-                else alias_domains[record.id]
+                (
+                    record._mail_get_operating_units() or self.env["operating.unit"]
+                ).alias_domain_id
+                or alias_domains[record.id]
             )
             for record in self
         }

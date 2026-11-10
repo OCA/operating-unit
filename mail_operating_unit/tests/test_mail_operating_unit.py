@@ -66,3 +66,11 @@ class TestMailOperatingUnit(MailOperatingUnitCommon):
         )
         message = self.channel_general.with_user(self.user3).message_post(body="Test")
         self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)
+
+    def test_05_user_single_operating_unit_without_alias_domain(self):
+        """A user whose single operating unit has no alias domain
+        gets the default alias domain."""
+        self.b2c.alias_domain_id = False
+        self.user3.write({"operating_unit_ids": [Command.set([self.b2c.id])]})
+        message = self.channel_general.with_user(self.user3).message_post(body="Test")
+        self.assertEqual(message.record_alias_domain_id, self.default_alias_domain)
