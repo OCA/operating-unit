@@ -16,7 +16,13 @@ class IrActionsActWindow(models.Model):
         if self.env.uid == SUPERUSER_ID:
             return result
 
-        user_ou = self.env.user.default_operating_unit_id
+        context = self.env.context
+        if "current_operating_unit_id" in context:
+            user_ou = self.env["operating.unit"].browse(
+                context["current_operating_unit_id"]
+            )
+        else:
+            user_ou = self.env["res.users"]._get_default_operating_unit()
         if not user_ou:
             return result
 

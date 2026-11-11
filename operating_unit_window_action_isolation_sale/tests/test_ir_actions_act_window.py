@@ -131,11 +131,20 @@ class TestOperatingUnitWindowActionIsolation(TransactionCase):
         self.assertFalse(values.get("domain"))
 
     def test_user_without_default_ou(self):
-        """No domain must be injected."""
+        # Without switcher (cf. module web_easy_switch_operating_unit):
+        # _get_default_operating_unit finds an assigned OU
         values = self.action_without_domain.with_user(
             self.user_without_default_ou
         ).read()[0]
+        domain = self._normalize_domain(values.get("domain"))
+        self.assertIn("operating_unit_id", str(domain))
 
+        # With switcher active, No OU selected: no domain injected
+        values = (
+            self.action_without_domain.with_user(self.user_without_default_ou)
+            .with_context(current_operating_unit_id=False)
+            .read()[0]
+        )
         self.assertFalse(values.get("domain"))
 
     def test_model_without_operating_unit_field(self):
