@@ -14,10 +14,11 @@ class IrRule(models.Model):
     @api.model
     def _eval_context(self):
         res = super()._eval_context()
-        ou_id = (
-            self.env.context.get("current_operating_unit_id")
-            or self.env.user.default_operating_unit_id.id
-        )
+        context = self.env.context
+        if "current_operating_unit_id" in context:
+            ou_id = context["current_operating_unit_id"]
+        else:
+            ou_id = self.env.user.default_operating_unit_id.id
         ou_ids = self.env.user.operating_units().ids
         # When a specific OU is active, restrict the visible set to that OU
         # only — mirrors the company switcher: selected OU determines which
