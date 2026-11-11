@@ -38,9 +38,11 @@ class ResUsers(models.Model):
         Use cookie-based session OU (current_operating_unit_id in context)
         with fallback to user default?
         """
-        context_ou_id = self.env.context.get("current_operating_unit_id")
-        if context_ou_id:
-            return self.env["operating.unit"].browse(context_ou_id)
+        context = self.env.context
+        if "current_operating_unit_id" in context:
+            return self.env["operating.unit"].browse(
+                context["current_operating_unit_id"]
+            )
         if not uid2:
             uid2 = self.env.user.id
         user = self.env["res.users"].browse(uid2)
