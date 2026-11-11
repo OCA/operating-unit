@@ -11,6 +11,14 @@ class JournalLedgerReport(models.AbstractModel):
         self = self.with_context(operating_unit_ids=data["operating_unit_ids"])
         return super()._get_report_values(docids, data)
 
+    def _get_moves_domain(self, wizard, journal_ids):
+        domain = super()._get_moves_domain(wizard, journal_ids)
+        operating_unit_ids = self.env.context.get("operating_unit_ids", [])
+        if operating_unit_ids:
+            # Entries of other operating units would show up as empty headers
+            domain.append(("line_ids.operating_unit_id", "in", operating_unit_ids))
+        return domain
+
     def _get_move_lines_domain(self, move_ids, wizard, journal_ids):
         domain = super()._get_move_lines_domain(move_ids, wizard, journal_ids)
         operating_unit_ids = self.env.context.get("operating_unit_ids", [])

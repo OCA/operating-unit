@@ -140,6 +140,52 @@ class TestReportOperatingUnit(AccountTestInvoicingCommon):
                 sum(invoices.mapped("amount_total")),
             )
 
+    def test_trial_balance_unaffected_earnings(self):
+        """The P&L of previous fiscal years is filtered by operating unit."""
+        old_date = self.date_from - timedelta(days=400)
+        amounts = {self.ou_a: 1000.0, self.ou_b: 2000.0}
+        for ou, amount in amounts.items():
+            move = self.env["account.move"].create(
+                {
+                    "move_type": "entry",
+                    "date": old_date,
+                    "journal_id": self.company_data["default_journal_misc"].id,
+                    "operating_unit_id": ou.id,
+                    "line_ids": [
+                        Command.create(
+                            {
+                                "account_id": self.company_data[
+                                    "default_account_revenue"
+                                ].id,
+                                "credit": amount,
+                            }
+                        ),
+                        Command.create(
+                            {
+                                "account_id": self.company_data[
+                                    "default_account_assets"
+                                ].id,
+                                "debit": amount,
+                            }
+                        ),
+                    ],
+                }
+            )
+            move.action_post()
+        unaffected = self.company.get_unaffected_earnings_account()
+        vals = {"date_from": self.date_from, "date_to": self.today}
+        for ous, expected in (
+            (self.ou_a, 1000.0),
+            (self.ou_b, 2000.0),
+            (self.env["operating.unit"], 3000.0),
+        ):
+            res = self._report_values(
+                "trial_balance", "trial.balance.report.wizard", vals, ous
+            )
+            self.assertAlmostEqual(
+                res["total_amount"][unaffected.id]["initial_balance"], -expected
+            )
+
     def test_general_ledger(self):
         vals = {"date_from": self.date_from, "date_to": self.today}
         for ous, invoices in self.cases:
@@ -217,6 +263,11 @@ class TestReportOperatingUnit(AccountTestInvoicingCommon):
             )
             self.assertAlmostEqual(
                 journal_data["debit"], sum(invoices.mapped("amount_total"))
+            )
+            # no empty headers for entries of other operating units
+            self.assertEqual(
+                {move["move_id"] for move in journal_data["report_moves"]},
+                set(invoices.ids),
             )
 
     def test_vat_report(self):
