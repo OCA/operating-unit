@@ -81,3 +81,20 @@ class TestSaleTeamOperatingUnit(OperatingUnitCommon):
         team = team_form.record
         self.assertEqual(team.operating_unit_id, self.user1.default_operating_unit_id)
         self.assertEqual(team.company_id, team.operating_unit_id.company_id)
+
+    def test_crm_team_allowed_operating_units(self):
+        # Teams of allowed operating units and teams without operating unit
+        # are visible, teams of other operating units are not
+        team_no_ou = self.crm_team_model.create(
+            {"name": "Team without OU", "operating_unit_id": False}
+        )
+        teams = self.crm_team_model.with_user(self.user2).search(
+            [("id", "in", (self.team1 | self.team2 | team_no_ou).ids)]
+        )
+        self.assertEqual(teams, self.team2 | team_no_ou)
+
+    def test_default_operating_unit(self):
+        self.user2.default_operating_unit_id = self.b2c
+        team = self.crm_team_model.with_user(self.user2).create({"name": "Team B2C"})
+        self.assertEqual(team.operating_unit_id, self.b2c)
+        self.assertEqual(team.company_id, self.b2c.company_id)
