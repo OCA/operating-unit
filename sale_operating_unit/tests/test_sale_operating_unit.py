@@ -178,6 +178,12 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
         with self.assertRaises(ValidationError):
             self.sale_team_ou1.operating_unit_id = self.b2c.id
 
+    def test_check_sales_order_operating_unit_shared_team(self):
+        """Test that clearing the operating unit of a sales team (making it
+        shared) does not raise an error even when existing sale orders are
+        linked to it."""
+        self.sale_team_ou1.operating_unit_id = False
+
     def test_compute_operating_unit_id(self):
         """Test that changing the sales team updates the
         operating unit in sale order."""
