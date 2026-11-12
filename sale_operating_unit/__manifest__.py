@@ -4,7 +4,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Operating Unit in Sales",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "summary": "An operating unit (OU) is an organizational entity part of a company",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
@@ -14,7 +14,7 @@
     "category": "Sales Management",
     "depends": ["sale", "account_operating_unit", "sales_team_operating_unit"],
     "data": [
-        "security/sale_security.xml",
+        "security/ir.access.csv",
         "views/sale_view.xml",
         "views/sale_report_view.xml",
     ],

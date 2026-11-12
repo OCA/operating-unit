@@ -238,3 +238,53 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
                     "team_id": self.sale_team_b2c.id,
                 }
             )
+
+    def test_sale_order_line_operating_unit(self):
+        self.assertEqual(self.sale1.order_line.operating_unit_id, self.ou1)
+        self.assertEqual(self.sale2.order_line.operating_unit_id, self.b2c)
+        lines = self.sale_line_model.with_user(self.user2).search(
+            [("id", "in", (self.sale1 | self.sale2).order_line.ids)]
+        )
+        self.assertEqual(lines, self.sale2.order_line)
+
+    def test_sale_report_operating_unit(self):
+        self.env.flush_all()
+        report = self.env["sale.report"]
+        self.assertEqual(
+            report.search([("name", "=", self.sale1.name)]).operating_unit_id,
+            self.ou1,
+        )
+        groups = report._read_group(
+            [("partner_id", "=", self.customer.id)], ["operating_unit_id"]
+        )
+        self.assertEqual(
+            {operating_unit for (operating_unit,) in groups}, {self.ou1, self.b2c}
+        )
+        # User 2 only sees the report lines of the B2C operating unit
+        user2_lines = report.with_user(self.user2).search(
+            [("partner_id", "=", self.customer.id)]
+        )
+        self.assertEqual(user2_lines.operating_unit_id, self.b2c)
+
+    def test_compute_journal_id(self):
+        journal = self.env["account.journal"].create(
+            {
+                "name": "B2C Sales",
+                "code": "SB2C",
+                "type": "sale",
+                "operating_unit_id": self.b2c.id,
+                "company_id": self.company.id,
+            }
+        )
+        # Journals of other operating units are never proposed
+        journal_ou1 = journal.copy({"code": "SOU1", "operating_unit_id": self.ou1.id})
+        sale = self.sale_model.create(
+            {"partner_id": self.customer.id, "team_id": self.sale_team_b2c.id}
+        )
+        self.assertTrue(sale.journal_id)
+        self.assertNotEqual(sale.journal_id, journal_ou1)
+        self.assertIn(sale.journal_id.operating_unit_id.id, [self.b2c.id, False])
+        # A journal of another operating unit is replaced
+        sale.journal_id = journal_ou1
+        sale.operating_unit_id = self.b2c
+        self.assertNotEqual(sale.journal_id, journal_ou1)

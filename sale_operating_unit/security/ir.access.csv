@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+ir_rule_sale_order_allowed_operating_units,Sales Orders from allowed operating units,sale.order,,r,"['|',('operating_unit_id','=',False),('operating_unit_id','in',operating_unit_ids)]"
+ir_rule_sale_order_line_allowed_operating_units,Sales Order lines from allowed operating units,sale.order.line,,r,"['|',('operating_unit_id','=',False),('operating_unit_id','in',operating_unit_ids)]"
+ir_rule_sale_report_allowed_operating_units,Sales Report from allowed operating units,sale.report,,r,"['|',('operating_unit_id','=',False),('operating_unit_id','in',operating_unit_ids)]"
