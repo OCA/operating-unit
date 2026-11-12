@@ -30,12 +30,13 @@ addon | version | maintainers | summary
 [product_operating_unit](product_operating_unit/) | 18.0.1.0.0 |  | Adds the concept of operating unit (OU) in products
 [project_operating_unit](project_operating_unit/) | 18.0.1.0.0 | <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> | This module adds operating unit information to projects and tasks.
 [purchase_operating_unit](purchase_operating_unit/) | 18.0.1.0.0 |  | Adds the concecpt of operating unit (OU) in purchase order management
-[purchase_stock_operating_unit](purchase_stock_operating_unit/) | 18.0.1.0.0 | <a href='https://github.com/Saran440'><img src='https://github.com/Saran440.png' width='32' height='32' style='border-radius:50%;' alt='Saran440'/></a> | Copies the operating unit of purchase picking to the stock picking
+[purchase_stock_operating_unit](purchase_stock_operating_unit/) | 18.0.1.0.1 | <a href='https://github.com/Saran440'><img src='https://github.com/Saran440.png' width='32' height='32' style='border-radius:50%;' alt='Saran440'/></a> | Copies the operating unit of purchase picking to the stock picking
 [report_qweb_operating_unit](report_qweb_operating_unit/) | 18.0.1.1.0 |  | Qweb Report With Operating Unit
 [res_partner_operating_unit](res_partner_operating_unit/) | 18.0.1.1.1 |  | Introduces Operating Unit fields in Partner
 [sale_operating_unit](sale_operating_unit/) | 18.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
-[sale_stock_operating_unit](sale_stock_operating_unit/) | 18.0.1.0.0 |  | An operating unit (OU) is an organizational entity part of a company
+[sale_stock_operating_unit](sale_stock_operating_unit/) | 18.0.1.0.1 |  | An operating unit (OU) is an organizational entity part of a company
 [sales_team_operating_unit](sales_team_operating_unit/) | 18.0.1.0.1 |  | Sales Team Operating Unit
+[stock_dropshipping_operating_unit](stock_dropshipping_operating_unit/) | 18.0.1.0.1 |  | Propagates the Sale Order operating unit to drop-ship purchase orders
 [stock_operating_unit](stock_operating_unit/) | 18.0.1.0.0 |  | Adds the concept of operating unit (OU) in stock management
 [stock_operating_unit_access_all](stock_operating_unit_access_all/) | 18.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Access all OUs' Stock
 

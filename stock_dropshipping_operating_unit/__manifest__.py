@@ -3,7 +3,7 @@
 {
     "name": "Operating Unit in Dropshipping",
     "summary": "Propagates the Sale Order operating unit to drop-ship purchase orders",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "author": "Luc De Meyer, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/operating-unit",
