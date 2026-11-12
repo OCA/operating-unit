@@ -12,7 +12,6 @@ class SaleOrder(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
         readonly=False,
         store=True,
         precompute=True,
@@ -108,6 +107,5 @@ class SaleOrderLine(models.Model):
 
     operating_unit_id = fields.Many2one(
         related="order_id.operating_unit_id",
-        string="Operating Unit",
         store=True,
     )

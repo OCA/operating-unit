@@ -11,3 +11,4 @@
   - Bhavesh Heliconia
 - [Camptocamp](https://www.camptocamp.com):
   - Maksym Yankin \<maksym.yankin@camptocamp.com\>
+- Hector Meraz \<<hector.meraz@jarsa.com>\>
