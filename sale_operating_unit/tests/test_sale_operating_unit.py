@@ -166,3 +166,8 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
         self.assertEqual(
             len(sale.ids), 1, "User 1 should have access to " "OU %s" % self.b2c.name
         )
+
+    def test_check_sales_order_operating_unit_shared_team(self):
+        """Clearing the operating unit of a sales team (making it shared)
+        does not raise an error even when sale orders are linked to it."""
+        self.sale_team_ou1.operating_unit_id = False
