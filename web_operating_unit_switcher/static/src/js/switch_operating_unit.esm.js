@@ -12,7 +12,7 @@ import {useService} from "@web/core/utils/hooks";
  * enabling a different OU per browser tab.
  */
 export class SwitchOperatingUnitMenu extends Component {
-    static template = "web_easy_switch_operating_unit.SwitchOperatingUnitMenu";
+    static template = "web_operating_unit_switcher.SwitchOperatingUnitMenu";
     static props = {};
 
     setup() {

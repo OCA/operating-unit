@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <t t-name="web_easy_switch_operating_unit.SwitchOperatingUnitMenu">
+    <t t-name="web_operating_unit_switcher.SwitchOperatingUnitMenu">
         <div class="o_switch_company_menu dropdown">
             <a
                 role="button"
