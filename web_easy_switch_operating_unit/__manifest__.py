@@ -15,5 +15,8 @@
             "web_easy_switch_operating_unit/static/src/js/*",
             "web_easy_switch_operating_unit/static/src/xml/switch_operating_unit.xml",
         ],
+        "web.assets_unit_tests": [
+            "web_easy_switch_operating_unit/static/tests/*.test.js",
+        ],
     },
 }

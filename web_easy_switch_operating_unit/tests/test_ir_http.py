@@ -4,7 +4,7 @@
 from unittest.mock import MagicMock
 
 from odoo.tests import tagged
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import HttpCase, TransactionCase
 
 
 @tagged("-at_install", "post_install")
@@ -92,3 +92,17 @@ class TestIrHttp(TransactionCase):
             self.assertNotIn("user_operating_units", info)
         finally:
             odoo.http._request_stack.pop()
+
+
+@tagged("-at_install", "post_install")
+class TestOperatingUnitServiceJS(HttpCase):
+    def test_js(self):
+        self.browser_js(
+            "/web/tests?headless&loglevel=2&preset=desktop"
+            "&filter=OperatingUnitService",
+            "",
+            "",
+            login="admin",
+            success_signal="[HOOT] Test suite succeeded",
+            error_checker=lambda x: "[HOOT]" not in x,
+        )
