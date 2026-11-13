@@ -3,6 +3,7 @@
 # © 2019 Serpent Consulting Services Pvt. Ltd. - Sudhir Arya
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from odoo.exceptions import ValidationError
 from odoo.models import Command
 
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
@@ -166,3 +167,14 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
         self.assertEqual(
             len(sale.ids), 1, "User 1 should have access to " "OU %s" % self.b2c.name
         )
+
+    def test_check_sales_order_operating_unit_shared_team(self):
+        """Clearing the operating unit of a sales team (making it shared)
+        does not raise an error even when sale orders are linked to it."""
+        self.sale_team_ou1.operating_unit_id = False
+
+    def test_check_sales_order_operating_unit(self):
+        """Changing the operating unit of a sales team raises an error when
+        sale orders in another operating unit reference it."""
+        with self.assertRaises(ValidationError):
+            self.sale_team_ou1.operating_unit_id = self.b2c.id
