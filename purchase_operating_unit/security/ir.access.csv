@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+ir_rule_purchase_order_allowed_operating_units,PO's from allowed operating units,purchase.order,,r,"['|',('operating_unit_id','=',False),('operating_unit_id','in',operating_unit_ids)]"
+ir_rule_purchase_order_line_allowed_operating_units,PO lines from allowed operating units,purchase.order.line,,r,"['|',('operating_unit_id','=',False),('operating_unit_id','in',operating_unit_ids)]"
+ir_rule_purchase_report_allowed_operating_units,Purchase Report from allowed operating units,purchase.report,,r,"['|',('operating_unit_id','=',False),('operating_unit_id','in',operating_unit_ids)]"
