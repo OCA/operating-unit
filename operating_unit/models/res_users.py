@@ -34,6 +34,15 @@ class ResUsers(models.Model):
 
     @api.model
     def _get_default_operating_unit(self, uid2=False):
+        """
+        Use cookie-based session OU (current_operating_unit_id in context)
+        with fallback to user default?
+        """
+        context = self.env.context
+        if "current_operating_unit_id" in context:
+            return self.env["operating.unit"].browse(
+                context["current_operating_unit_id"]
+            )
         if not uid2:
             uid2 = self.env.user.id
         user = self.env["res.users"].browse(uid2)

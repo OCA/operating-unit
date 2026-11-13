@@ -124,6 +124,28 @@ class TestOperatingUnit(OperatingUnitCommon):
             ou_company_2,
         )
 
+    def test_get_default_operating_unit_from_context(self):
+        """
+        Verify that current_operating_unit_id in context overrides
+        the user's default operating unit.
+        """
+        result = self.res_users_model.with_context(
+            current_operating_unit_id=self.b2c.id
+        )._get_default_operating_unit()
+        self.assertEqual(result, self.b2c)
+
+    def test_eval_context_with_operating_unit(self):
+        """
+        Test ir.rule,_eval_context() with current_operating_unit_id in context.
+        """
+        ctx = (
+            self.env["ir.rule"]
+            .with_context(current_operating_unit_id=self.b2c.id)
+            ._eval_context()
+        )
+        self.assertEqual(ctx["operating_unit_id"], self.b2c.id)
+        self.assertEqual(ctx["operating_unit_ids"], [self.b2c.id])
+
     def test_create_multi_operating_unit(self):
         res = (
             self.env["operating.unit"]
