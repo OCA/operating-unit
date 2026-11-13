@@ -12,16 +12,15 @@ class PurchaseOrder(models.Model):
 
     operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Operating Unit",
         default=lambda self: self.env["res.users"]._get_default_operating_unit(
             self.env.uid
         ),
         check_company=True,
+        index=True,
     )
 
     requesting_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Requesting Operating Unit",
         default=lambda self: self.env["res.users"]._get_default_operating_unit(
             self.env.uid
         ),
@@ -54,6 +53,5 @@ class PurchaseOrderLine(models.Model):
 
     operating_unit_id = fields.Many2one(
         related="order_id.operating_unit_id",
-        string="Operating Unit",
         check_company=True,
     )

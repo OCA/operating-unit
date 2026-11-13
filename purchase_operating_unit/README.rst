@@ -85,6 +85,8 @@ Contributors
 
   - Bhavesh Heliconia
 
+- Hector Meraz <hector.meraz@jarsa.com>
+
 Maintainers
 -----------
 

@@ -7,7 +7,7 @@
 {
     "name": "Operating Unit in Purchase Orders",
     "summary": "Adds the concecpt of operating unit (OU) in purchase order management",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd.,"
     "Odoo Community Association (OCA)",
@@ -16,7 +16,7 @@
     "depends": ["purchase", "account_operating_unit"],
     "license": "LGPL-3",
     "data": [
-        "security/purchase_security.xml",
+        "security/ir.access.csv",
         "report/purchase_report_view.xml",
         "views/purchase_order_view.xml",
         "views/purchase_order_line_view.xml",

@@ -7,3 +7,4 @@
 - Alan Ramos \<<alan.ramos@jarsa.com>\>
 - [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
   - Bhavesh Heliconia
+- Hector Meraz \<<hector.meraz@jarsa.com>\>

@@ -7,6 +7,7 @@ from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.fields import Command
 from odoo.tests import Form
+from odoo.tools import mute_logger
 
 from odoo.addons.operating_unit.tests.common import OperatingUnitCommon
 
@@ -70,7 +71,7 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
                 "product_id": product.id,
                 "product_qty": qty,
                 "qty_received_manual": qty,
-                "product_uom_id": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "price_unit": 50,
                 "date_planned": fields.Datetime.now(),
             }
@@ -109,9 +110,11 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
         )
         # Check change operating unit in invoice line != purchase line,
         # it should error.
-        with self.assertRaises(ValidationError):
-            with Form(invoice.invoice_line_ids[0]) as line:
-                line.operating_unit_id = self.b2b
+        with (
+            self.assertRaises(ValidationError),
+            Form(invoice.invoice_line_ids[0]) as line,
+        ):
+            line.operating_unit_id = self.b2b
 
     def test_02_purchase_report(self):
         """Test the purchase report with operating unit."""
@@ -129,3 +132,46 @@ class TestPurchaseOperatingUnit(OperatingUnitCommon):
                 self.ou1,
                 "Purchase report record should have the correct operating unit",
             )
+
+    def test_03_vendor_bill_auto_complete(self):
+        """Auto-completing a draft vendor bill from a PO takes its OU."""
+        move_form = Form(
+            self.AccountInvoice.with_context(default_move_type="in_invoice")
+        )
+        move_form.partner_id = self.partner1
+        with mute_logger("odoo.tests.form.onchange"):
+            move_form.purchase_vendor_bill_id = self.env["purchase.bill.union"].browse(
+                -self.purchase1.id
+            )
+        invoice = move_form.save()
+        self.assertEqual(invoice.operating_unit_id, self.ou1)
+        self.assertEqual(
+            invoice.invoice_line_ids.purchase_line_id, self.purchase1.order_line
+        )
+        self.assertEqual(invoice.invoice_line_ids.operating_unit_id, self.ou1)
+
+    def test_04_po_line_and_report_security(self):
+        """Users only see PO lines and report rows of their OUs."""
+        domain = [("order_id", "=", self.purchase1.id)]
+        self.assertFalse(
+            self.env["purchase.order.line"].with_user(self.user2).search(domain)
+        )
+        self.assertEqual(
+            self.env["purchase.order.line"].with_user(self.user1).search(domain),
+            self.purchase1.order_line,
+        )
+        self.assertFalse(
+            self.env["purchase.report"].with_user(self.user2).search(domain)
+        )
+        self.assertTrue(
+            self.env["purchase.report"].with_user(self.user1).search(domain)
+        )
+
+    def test_05_default_operating_unit(self):
+        """A new PO takes the default OU of the user who creates it."""
+        self.user2.default_operating_unit_id = self.b2b
+        purchase = self.PurchaseOrder.with_user(self.user2).create(
+            {"partner_id": self.partner1.id}
+        )
+        self.assertEqual(purchase.operating_unit_id, self.b2b)
+        self.assertEqual(purchase.requesting_operating_unit_id, self.b2b)
