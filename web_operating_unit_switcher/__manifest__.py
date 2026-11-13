@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Easy Switch Operating Unit",
+    "name": "Operating Unit Switcher",
     "version": "18.0.1.0.0",
     "category": "web",
     "author": "CIT-Services, Odoo Community Association (OCA)",
@@ -12,11 +12,11 @@
     "data": ["views/res_users_views.xml"],
     "assets": {
         "web.assets_backend": [
-            "web_easy_switch_operating_unit/static/src/js/*",
-            "web_easy_switch_operating_unit/static/src/xml/switch_operating_unit.xml",
+            "web_operating_unit_switcher/static/src/js/*",
+            "web_operating_unit_switcher/static/src/xml/switch_operating_unit.xml",
         ],
         "web.assets_unit_tests": [
-            "web_easy_switch_operating_unit/static/tests/*.test.js",
+            "web_operating_unit_switcher/static/tests/*.test.js",
         ],
     },
 }
