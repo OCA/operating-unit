@@ -28,7 +28,6 @@ class ResUsers(models.Model):
 
     default_operating_unit_id = fields.Many2one(
         comodel_name="operating.unit",
-        string="Default Operating Unit",
         default=lambda self: self._default_operating_unit(),
         domain="[('company_id', '=', current_company_id)]",
     )
