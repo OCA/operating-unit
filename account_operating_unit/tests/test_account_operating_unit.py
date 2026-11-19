@@ -55,6 +55,20 @@ class TestAccountOperatingUnit(AccountTestInvoicingCommon, OperatingUnitCommon):
         operating_units = cls.ou1 | cls.b2b | cls.b2c
         operating_units.write({"company_id": cls.company.id})
 
+        # Create an OU for company_2
+        cls.ou_company2 = (
+            cls.env["operating.unit"]
+            .sudo()
+            .create(
+                {
+                    "name": "Company 2 OU",
+                    "code": "C2OU",
+                    "partner_id": cls.company_2.partner_id.id,
+                    "company_id": cls.company_2.id,
+                }
+            )
+        )
+
         # Setup user1 with all required groups
         cls.user1.write(
             {

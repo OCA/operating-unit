@@ -45,6 +45,11 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
         self.env["account.invoice.report"].sudo().read_group(
             [], ["operating_unit_id"], ["operating_unit_id"]
         )
+        # Invoice without OU: suitable_journal_ids returns all company journals
+        invoice_no_ou = self.move_model.create(
+            {"partner_id": self.partner1.id, "move_type": "in_invoice"}
+        )
+        self.assertTrue(invoice_no_ou.suitable_journal_ids)
 
     def test_operating_unit_lock_date(self):
         """The operating unit of a posted entry can't change in a locked period."""
@@ -98,3 +103,38 @@ class TestInvoiceOperatingUnit(test_ou.TestAccountOperatingUnit):
 
             invoice_form.journal_id = ou1_journal
             self.assertEqual(invoice_form.operating_unit_id, self.ou1)
+
+    def test_journal_auto_switches_when_ou_changes(self):
+        """
+        When the operating unit is changed on an invoice, the journal is
+        automatically replaced with one that matches the new operating unit.
+        """
+        ou1_sale_journal = self.journal_model.create(
+            {
+                "name": "OU1 Sale",
+                "code": "OU1S",
+                "type": "sale",
+                "operating_unit_id": self.ou1.id,
+                "company_id": self.company.id,
+            }
+        )
+        b2b_sale_journal = self.journal_model.create(
+            {
+                "name": "B2B Sale",
+                "code": "B2BS",
+                "type": "sale",
+                "operating_unit_id": self.b2b.id,
+                "company_id": self.company.id,
+            }
+        )
+        invoice = self.move_model.create(
+            {
+                "partner_id": self.partner1.id,
+                "move_type": "out_invoice",
+                "operating_unit_id": self.b2b.id,
+                "journal_id": b2b_sale_journal.id,
+            }
+        )
+        with Form(invoice) as inv_form:
+            inv_form.operating_unit_id = self.ou1
+            self.assertEqual(inv_form.journal_id, ou1_sale_journal)
