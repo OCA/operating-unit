@@ -6,7 +6,7 @@ from odoo import fields, models
 class SaleReport(models.Model):
     _inherit = "sale.report"
 
-    operating_unit_id = fields.Many2one("operating.unit", "Operating Unit")
+    operating_unit_id = fields.Many2one("operating.unit")
 
     def _group_by_sale(self):
         res = super()._group_by_sale()

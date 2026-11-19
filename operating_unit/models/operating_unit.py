@@ -19,7 +19,7 @@ class OperatingUnit(models.Model):
         readonly=True,
         default=lambda self: self.env.company,
     )
-    partner_id = fields.Many2one("res.partner", "Partner", required=True)
+    partner_id = fields.Many2one("res.partner", required=True)
     user_ids = fields.Many2many(
         "res.users",
         "operating_unit_users_rel",
