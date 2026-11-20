@@ -11,11 +11,29 @@ class TestStockOperatingUnit(common.TestStockCommon, OperatingUnitCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # TestStockCommon runs the tests in its own company, created after the
+        # operating units and users of OperatingUnitCommon: move them into it.
+        (cls.ou1 | cls.b2c | cls.b2b).write({"company_id": cls.company.id})
+        (cls.user1 | cls.user2).write(
+            {
+                "company_ids": [Command.link(cls.company.id)],
+                "company_id": cls.company.id,
+            }
+        )
         cls.ResUsers = cls.env["res.users"]
         cls.WarehouseObj = cls.env["stock.warehouse"]
         cls.LocationObj = cls.env["stock.location"]
         # groups
         cls.group_stock_manager = cls.env.ref("stock.group_stock_manager")
+        # The tests run as the restricted test user of BaseCommon: let it
+        # manage warehouses, in the second company too.
+        if cls._test_user:
+            cls._test_user.write(
+                {
+                    "company_ids": [Command.link(cls.company_2.id)],
+                    "group_ids": [Command.link(cls.group_stock_manager.id)],
+                }
+            )
         # Products
         cls.product1 = cls.env["product.product"].create(
             {
@@ -117,7 +135,7 @@ class TestStockOperatingUnit(common.TestStockCommon, OperatingUnitCommon):
             {
                 "product_id": cls.productA.id,
                 "product_uom_qty": 3.0,
-                "product_uom": cls.productA.uom_id.id,
+                "uom_id": cls.productA.uom_id.id,
                 "picking_id": picking.id,
                 "location_id": src_loc_id,
                 "location_dest_id": dest_loc_id,
@@ -126,7 +144,7 @@ class TestStockOperatingUnit(common.TestStockCommon, OperatingUnitCommon):
         return picking
 
     def test_create_warehouse_for_company_without_operating_unit(self):
-        warehouse = self.WarehouseObj.create(
+        warehouse = self.WarehouseObj.with_company(self.company_2).create(
             {
                 "name": "Second Company Warehouse Test",
                 "code": "SCWHT",

@@ -5,7 +5,7 @@
 {
     "name": "Stock with Operating Units",
     "summary": "Adds the concept of operating unit (OU) in stock management",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Generic Modules/Sales & Purchases",
     "author": "ForgeFlow, "
     "Serpent Consulting Services Pvt. Ltd., "
@@ -13,7 +13,11 @@
     "license": "LGPL-3",
     "website": "https://github.com/OCA/operating-unit",
     "depends": ["stock", "operating_unit"],
-    "data": ["security/stock_security.xml", "data/stock_data.xml", "view/stock.xml"],
+    "data": [
+        "security/ir.access.csv",
+        "data/stock_data.xml",
+        "view/stock.xml",
+    ],
     "demo": ["demo/stock_demo.xml"],
     "installable": True,
 }
