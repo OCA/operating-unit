@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2026 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+    <record id="ir_rule_account_analytic_line_operating_unit" model="ir.rule">
+        <field name="model_id" ref="analytic.model_account_analytic_line" />
+        <field
+            name="domain_force"
+        >["|", ("operating_unit_id", "=", False), ("operating_unit_id", "in", operating_unit_ids)]
+        </field>
+        <field name="name">Analytic Line Operating Unit</field>
+        <field name="global" eval="True" />
+        <field name="perm_unlink" eval="False" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="False" />
+    </record>
+</odoo>
