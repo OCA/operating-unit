@@ -4,3 +4,4 @@
 - Tran Thanh Trai \<<traitt@trobz.com>\>
 - `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`_
 - Julien Coux \<<julien.coux@camptocamp.com>\>
+- Hector Meraz \<<hector.meraz@jarsa.com>\>

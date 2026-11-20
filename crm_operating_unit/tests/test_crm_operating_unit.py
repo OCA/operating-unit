@@ -102,3 +102,27 @@ class TestCrmOperatingUnit(OperatingUnitCommon):
             self.b2c,
             f"User 2 lead should have {self.b2c.name} as operating unit",
         )
+
+    def test_crm_lead_allowed_operating_units(self):
+        # Leads of allowed operating units and leads without operating unit
+        # are visible, leads of other operating units are not
+        lead_no_ou = self.crm_lead_model.create(
+            {"name": "Lead without team", "user_id": False, "team_id": False}
+        )
+        self.assertFalse(lead_no_ou.operating_unit_id)
+        leads = self.crm_lead_model.with_user(self.user2).search(
+            [("id", "in", (self.lead1 | self.lead2 | lead_no_ou).ids)]
+        )
+        self.assertEqual(leads, self.lead2 | lead_no_ou)
+
+    def test_lead_operating_unit_follows_team(self):
+        self.assertEqual(self.lead1.operating_unit_id, self.ou1)
+        self.lead1.team_id = self.team2
+        self.assertEqual(self.lead1.operating_unit_id, self.b2c)
+        leads = self.crm_lead_model.search(
+            [
+                ("id", "in", (self.lead1 | self.lead2).ids),
+                ("operating_unit_id", "=", self.b2c.id),
+            ]
+        )
+        self.assertEqual(leads, self.lead1 | self.lead2)
