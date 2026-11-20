@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2024 Camptocamp SA
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl) -->
+<odoo>
+    <record id="email_template_form" model="ir.ui.view">
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <group name="operating_unit">
+                    <field name="operating_unit_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="email_template_tree" model="ir.ui.view">
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <field name="operating_unit_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_email_template_search" model="ir.ui.view">
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.view_email_template_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='model_id']" position="after">
+                <field name="operating_unit_id" />
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter
+                    string="Operating Unit"
+                    name="operating_unit"
+                    domain="[]"
+                    context="{'group_by': 'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
