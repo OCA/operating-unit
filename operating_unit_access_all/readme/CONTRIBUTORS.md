@@ -4,3 +4,5 @@
 - [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
   - Bhavesh Heliconia
 - Julien Coux \<<julien.coux@camptocamp.com>\>
+- [Jarsa](https://www.jarsa.com)
+  - Hector Meraz \<<hector.meraz@jarsa.com>\>

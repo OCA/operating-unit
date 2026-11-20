@@ -3,7 +3,7 @@
 
 {
     "name": "Access all Operating Units",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "Ecosoft,Odoo Community Association (OCA)",
     "category": "Generic",
     "license": "AGPL-3",
@@ -14,4 +14,5 @@
     ],
     "installable": True,
     "maintainers": ["kittiu"],
+    "uninstall_hook": "uninstall_hook",
 }
