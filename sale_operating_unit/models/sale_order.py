@@ -22,8 +22,12 @@ class SaleOrder(models.Model):
     @api.depends("team_id")
     def _compute_operating_unit_id(self):
         for sale in self:
-            if sale.team_id:
+            if sale.team_id and sale.team_id.operating_unit_id:
                 sale.operating_unit_id = sale.team_id.operating_unit_id
+            else:
+                sale.operating_unit_id = self.env[
+                    "res.users"
+                ]._get_default_operating_unit()
 
     @api.depends("partner_id", "user_id", "operating_unit_id")
     def _compute_team_id(self):
@@ -31,6 +35,7 @@ class SaleOrder(models.Model):
         for order in self:
             if (
                 order.team_id
+                and order.team_id.operating_unit_id
                 and order.team_id.operating_unit_id != order.operating_unit_id
             ):
                 order.team_id = False
@@ -66,7 +71,11 @@ class SaleOrder(models.Model):
     @api.constrains("team_id", "operating_unit_id")
     def _check_team_operating_unit(self):
         for rec in self:
-            if rec.team_id and rec.team_id.operating_unit_id != rec.operating_unit_id:
+            if (
+                rec.team_id
+                and rec.team_id.operating_unit_id
+                and rec.team_id.operating_unit_id != rec.operating_unit_id
+            ):
                 raise ValidationError(
                     self.env._(
                         "Configuration error. The Operating "

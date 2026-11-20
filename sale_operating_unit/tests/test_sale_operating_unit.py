@@ -189,15 +189,29 @@ class TestSaleOperatingUnit(OperatingUnitCommon):
     def test_compute_operating_unit_id(self):
         """Test that changing the sales team updates the
         operating unit in sale order."""
+        team_ou1 = self._create_sale_team(self.user1.id, self.ou1)
+        team_b2c = self._create_sale_team(self.user2.id, self.b2c)
         sale_order = self.sale_model.create(
             {
                 "partner_id": self.customer.id,
-                "team_id": self.sale_team_ou1.id,
+                "team_id": team_ou1.id,
             }
         )
         self.assertEqual(sale_order.operating_unit_id, self.ou1)
-        sale_order.team_id = self.sale_team_b2c.id
+        sale_order.team_id = team_b2c.id
         self.assertEqual(sale_order.operating_unit_id, self.b2c)
+
+    def test_compute_operating_unit_id_shared_team(self):
+        """Test that a shared team (no OU) falls back to the user default OU."""
+        shared_team = self._create_sale_team(self.user1.id, self.ou1)
+        shared_team.operating_unit_id = False
+        sale_order = self.sale_model.with_user(self.user1.id).create(
+            {
+                "partner_id": self.customer.id,
+                "team_id": shared_team.id,
+            }
+        )
+        self.assertEqual(sale_order.operating_unit_id, self.ou1)
 
     def test_compute_team_id(self):
         """Test that sales team resets if its operating unit does not match."""
