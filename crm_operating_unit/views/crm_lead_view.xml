@@ -1,10 +1,10 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2019 ForgeFlow S.L.
      Serpent Consulting Services Pvt. Ltd.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
     <!-- CRM Lead & Opportunity Form View  -->
-    <record model="ir.ui.view" id="crm_lead_view_form">
+    <record id="crm_lead_view_form" model="ir.ui.view">
         <field name="name">CRM - Leads Form</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form" />
@@ -34,7 +34,7 @@
         </field>
     </record>
     <!-- CRM Lead Tree View -->
-    <record model="ir.ui.view" id="crm_case_tree_view_leads">
+    <record id="crm_case_tree_view_leads" model="ir.ui.view">
         <field name="name">Leads</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_tree_view_leads" />
@@ -64,7 +64,7 @@
         </field>
     </record>
     <!-- Opportunities Tree View -->
-    <record model="ir.ui.view" id="crm_case_tree_view_oppor">
+    <record id="crm_case_tree_view_oppor" model="ir.ui.view">
         <field name="name">Opportunities Tree</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
