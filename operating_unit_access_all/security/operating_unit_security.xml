@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record model="res.groups.privilege" id="res_groups_privilege_all_operating_units">
+    <record id="res_groups_privilege_all_operating_units" model="res.groups.privilege">
         <field name="name">All Operating Units</field>
         <field name="category_id" ref="operating_unit.module_operating_units" />
     </record>
