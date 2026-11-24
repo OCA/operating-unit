@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+ir_rule_analytic_account_allowed_operating_units,Analytic Accounts from allowed operating units,account.analytic.account,,r,"['|',('operating_unit_ids','=',False),('operating_unit_ids','in',operating_unit_ids)]"

@@ -1,0 +1,1 @@
+This module allow to install hr_timesheet and account_operating_unit in the same database
