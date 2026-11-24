@@ -1,0 +1,13 @@
+# Copyright 2025 Jarsa
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
+from odoo import fields, models
+
+
+class AccountAnalyticLine(models.Model):
+    _inherit = "account.analytic.line"
+
+    operating_unit_id = fields.Many2one(
+        comodel_name="operating.unit",
+        check_company=True,
+    )
