@@ -1,0 +1,97 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_financial_report_operating_unit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-08-07 11:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_report_account_financial_report_aged_partner_balance
+msgid "Aged Partner Balance Report"
+msgstr "Resoconto scadenzario partner"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_aged_partner_balance_report_wizard
+msgid "Aged Partner Balance Wizard"
+msgstr "Procedura scadenzario clienti/fornitori"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_report_account_financial_report_general_ledger
+msgid "General Ledger Report"
+msgstr "Resoconto libro mastro"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_general_ledger_report_wizard
+msgid "General Ledger Report Wizard"
+msgstr "Procedura rendiconto mastrino"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_report_account_financial_report_journal_ledger
+msgid "Journal Ledger Report"
+msgstr "Resoconto mastrino"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_journal_ledger_report_wizard
+msgid "Journal Ledger Report Wizard"
+msgstr "Procedura guidata resoconto mastrino"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_report_account_financial_report_open_items
+msgid "Open Items Report"
+msgstr "Resoconto partite aperte"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_open_items_report_wizard
+msgid "Open Items Report Wizard"
+msgstr "Procedura guidata resoconto partite aperte"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model.fields,field_description:account_financial_report_operating_unit.field_aged_partner_balance_report_wizard__operating_unit_ids
+#: model:ir.model.fields,field_description:account_financial_report_operating_unit.field_general_ledger_report_wizard__operating_unit_ids
+#: model:ir.model.fields,field_description:account_financial_report_operating_unit.field_journal_ledger_report_wizard__operating_unit_ids
+#: model:ir.model.fields,field_description:account_financial_report_operating_unit.field_open_items_report_wizard__operating_unit_ids
+#: model:ir.model.fields,field_description:account_financial_report_operating_unit.field_trial_balance_report_wizard__operating_unit_ids
+#: model:ir.model.fields,field_description:account_financial_report_operating_unit.field_vat_report_wizard__operating_unit_ids
+msgid "Operating Unit"
+msgstr "Unità operativa"
+
+#. module: account_financial_report_operating_unit
+#: model_terms:ir.ui.view,arch_db:account_financial_report_operating_unit.general_ledger_wizard
+msgid "Operating Units"
+msgstr "Unità operative"
+
+#. module: account_financial_report_operating_unit
+#: model_terms:ir.ui.view,arch_db:account_financial_report_operating_unit.journal_ledger_wizard
+msgid "Operating units"
+msgstr "Unità operative"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_report_account_financial_report_trial_balance
+msgid "Trial Balance Report"
+msgstr "Resoconto bilancio di verifica"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_trial_balance_report_wizard
+msgid "Trial Balance Report Wizard"
+msgstr "Procedura guidata bilancio di verifica"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_vat_report_wizard
+msgid "VAT Report Wizard"
+msgstr "Procedura guidata resoconto IVA"
+
+#. module: account_financial_report_operating_unit
+#: model:ir.model,name:account_financial_report_operating_unit.model_report_account_financial_report_vat_report
+msgid "Vat Report Report"
+msgstr "Resoconto resoconto IVA"
