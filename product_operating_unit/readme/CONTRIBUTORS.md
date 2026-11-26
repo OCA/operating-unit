@@ -1,0 +1,6 @@
+- Raul Martin Felez \<<raul.martin@braintec-group.com>\>
+- Nikul Chaudhary \<<nikul.chaudhary.serpentcs@gmail.com>\>
+- Maxime Chambreuil \<<mchambreuil@opensourceintegrators.com>\>
+- Jesus Alcala \<<jesus.alcala@jarsa.com.mx>\>
+- [Camptocamp](https://www.camptocamp.com):
+  - Maksym Yankin \<maksym.yankin@camptocamp.com\>

@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+ir_rule_product_template_allowed_operating_units,Product Templates from allowed operating units,product.template,,r,"['|', ('operating_unit_ids', '=', False), ('operating_unit_ids', 'in', operating_unit_ids)]"
+ir_rule_product_category_allowed_operating_units,Product Category from allowed operating units,product.category,,r,"['|', ('operating_unit_ids', '=', False), ('operating_unit_ids', 'in', operating_unit_ids)]"
