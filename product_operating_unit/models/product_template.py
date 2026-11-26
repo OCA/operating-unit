@@ -5,7 +5,7 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.fields import Command, Domain
+from odoo.fields import Command
 
 
 class ProductTemplate(models.Model):
@@ -19,16 +19,31 @@ class ProductTemplate(models.Model):
         store=True,
         readonly=False,
     )
-    categ_id = fields.Many2one(
-        default=lambda self: self._get_default_category_id(),
-    )
 
-    def _get_default_category_id(self):
-        category = self.env["product.category"].search(Domain.TRUE, limit=1)
-        if category:
-            return category.id
+    @api.model
+    def default_get(self, fields):
+        defaults = super().default_get(fields)
+        if "categ_id" not in fields or "categ_id" in defaults:
+            return defaults
+
+        if "company_id" in defaults:
+            company_id = defaults["company_id"]
         else:
-            return super()._get_default_category_id()
+            company_id = super().default_get(["company_id"]).get("company_id")
+        categories = self.env["product.category"]
+        if categories.has_access("read"):
+            category = categories.search(
+                categories._check_company_domain(company_id), limit=1
+            )
+            if category:
+                defaults["categ_id"] = category.id
+        return defaults
+
+    def _add_missing_default_values(self, values):
+        if "company_id" in values and "categ_id" not in values:
+            # The ORM only asks default_get for fields absent from the create values.
+            self = self.with_context(default_company_id=values["company_id"])  # noqa: PLW0642
+        return super()._add_missing_default_values(values)
 
     @api.constrains("operating_unit_ids", "categ_id")
     def _check_operating_unit(self):
